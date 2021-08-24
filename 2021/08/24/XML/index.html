@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="了解XML文件的使用，存取数据，解析XML的方法，以及XML的DTD约束和Schema约束的作用和编写步骤">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XML">
+<meta property="og:url" content="http://example.com/2021/08/24/XML/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="了解XML文件的使用，存取数据，解析XML的方法，以及XML的DTD约束和Schema约束的作用和编写步骤">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/IdGKFNVAcg672ej.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/NlnKJZ9XGLR4q7j.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/UOj5b1paegVQFEW.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/tQj5FU92Cxu3dAm.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/BKcnLWeg1sfrQJS.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/8FfTupCy2Pb1cRq.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/6iWrgmXChHwEyeP.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/FE1cGXgaeLMyHTf.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/Xidj71oTtCWh2ED.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/P18xnRg2aoQDvOh.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/sj1SDUBed3C8zXh.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/RO2HjFenNQvaZwI.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/24/nJoPVXRwTYAq4Fj.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/CfbgayeHFuipVDG.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/sbyLZMznv7wV8CU.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/kExhSnz1X2ag7dG.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/LeljzUgWaBcvVPy.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/xwHW2MNbTEI7iUm.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/ZacsrY3f8pW7ytg.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/JMG8Y4cLbRmdgTi.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/HqatLhTz3EDm9rU.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/u8SfdJWrDX3joiA.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/qQPRY9ZOFemnSu6.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/18/YMsSDquvyfdVNC6.png">
+<meta property="article:published_time" content="2021-08-24T10:15:15.000Z">
+<meta property="article:modified_time" content="2021-08-24T10:18:20.908Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="XML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/08/18/IdGKFNVAcg672ej.png">
+
+<link rel="canonical" href="http://example.com/2021/08/24/XML/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>XML | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/24/XML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          XML
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-24 18:15:15 / 修改时间：18:18:20" itemprop="dateCreated datePublished" datetime="2021-08-24T18:15:15+08:00">2021-08-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/08/24/XML/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/08/24/XML/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">了解XML文件的使用，存取数据，解析XML的方法，以及XML的DTD约束和Schema约束的作用和编写步骤</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、XML文件-JavaEE"><a href="#一、XML文件-JavaEE" class="headerlink" title="一、XML文件(JavaEE)"></a>一、XML文件(JavaEE)</h3><ul>
+<li>存储数据的语言<ul>
+<li>Extensible：扩展</li>
+<li>Marup：标记</li>
+<li>Language：语言</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-特点"><a href="#1-特点" class="headerlink" title="1.特点"></a>1.特点</h4><ul>
+<li>作用<ul>
+<li>存储数据</li>
+<li>传输数据</li>
+</ul>
+</li>
+<li>优点<ul>
+<li>可读性好</li>
+<li>维护性好</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、XML语言的语法"><a href="#二、XML语言的语法" class="headerlink" title="二、XML语言的语法"></a>二、XML语言的语法</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><h5 id="xml语法规范"><a href="#xml语法规范" class="headerlink" title="xml语法规范"></a>xml语法规范</h5><ul>
+<li>区分大小写</li>
+<li>必须正确的嵌套</li>
+<li>必须有根元素</li>
+<li>属性值必须加引号</li>
+</ul>
+<p>例：让XML文件保存Person</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Person</span>&gt;</span> &lt;--&gt;Person根元素&lt;/--&gt;</span><br><span class="line">	<span class="tag">&lt;<span class="name">p1</span>&gt;</span>	&lt;--&gt;Person对象&lt;/--&gt;</span><br><span class="line">    	<span class="tag">&lt;<span class="name">name</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Person</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>它是一个标签语言<ul>
+<li>标签是成对出现的</li>
+</ul>
+</li>
+</ul>
+<h5 id="标签语言"><a href="#标签语言" class="headerlink" title="标签语言"></a>标签语言</h5><ul>
+<li>在标签语言中&lt;&gt;中只有一个单词，称为元素标签</li>
+<li>在标签语言中 &lt;单词&gt; 在单词后跟的所有的单词，都被称为<font color='#d15252'>属性标签</font>，它可以赋值</li>
+</ul>
+<h4 id="2-XML声明"><a href="#2-XML声明" class="headerlink" title="2.XML声明"></a>2.XML声明</h4><p><img src="https://i.loli.net/2021/08/18/IdGKFNVAcg672ej.png" alt="image-20210818113055208"></p>
+<ul>
+<li> version ：版本</li>
+<li> encoding：编码格式</li>
+<li> standalone：该xml文件是否依赖与其他文件</li>
+</ul>
+<h5 id="文档声明的注意细节"><a href="#文档声明的注意细节" class="headerlink" title="文档声明的注意细节"></a>文档声明的注意细节</h5><ul>
+<li>文档声明<font color='#d15252'>必须在第一行</font></li>
+<li>?和xml之间不能有空格</li>
+</ul>
+<h4 id="3-xml中的大于小于"><a href="#3-xml中的大于小于" class="headerlink" title="3.xml中的大于小于"></a>3.xml中的大于小于</h4><p><img src="https://i.loli.net/2021/08/18/NlnKJZ9XGLR4q7j.png" alt="image-20210818113155510"></p>
+<h3 id="三、XML的数据传输：解析XML"><a href="#三、XML的数据传输：解析XML" class="headerlink" title="三、XML的数据传输：解析XML"></a>三、XML的数据传输：解析XML</h3><p><img src="https://i.loli.net/2021/08/18/UOj5b1paegVQFEW.png" alt="img"></p>
+<p><img src="https://i.loli.net/2021/08/18/tQj5FU92Cxu3dAm.png" alt="image-20210818114104225"></p>
+<ul>
+<li><p>浏览器用<font color='#d15252'>Document</font>将整个xml封装起来</p>
+</li>
+<li><p>Java中解析XML已经由第三方做好了</p>
+<ul>
+<li>dom4j</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/BKcnLWeg1sfrQJS.png" alt="image-20210818114827519"></p>
+</li>
+<li><p>下载步骤</p>
+<ul>
+<li>下载后缀为.zip的文件解压</li>
+<li>后缀为.jar的文件就是我们要使用的</li>
+<li><font color='#d15252'>docs</font>文件夹中，是官网文档<ul>
+<li>找到index.html</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-Java中解析xml的步骤"><a href="#1-Java中解析xml的步骤" class="headerlink" title="1.Java中解析xml的步骤"></a>1.Java中解析xml的步骤</h4><ul>
+<li>第一步：导包并解压</li>
+<li>第二步：创建SAXReader对象 — 解析器</li>
+<li>第三步：使用getResource获取路径</li>
+<li>第四步： 读取文档，解析器调用read方法读取文档，并用Document保存</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/8FfTupCy2Pb1cRq.png" alt="image-20210818134337840"></p>
+<ul>
+<li>第五步：使用Document中的getRootElement()方法<font color='#d15252'>解析根目录</font></li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/6iWrgmXChHwEyeP.png" alt="image-20210818134841873"></p>
+<ul>
+<li>第六步：使用Document中的elements()方法获取每一个元素<ul>
+<li>并存入List集合，注意泛型</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/FE1cGXgaeLMyHTf.png" alt="image-20210818150624257"></p>
+<ul>
+<li>第七步：遍历List集合中的元素，拿到每一个元素<ul>
+<li>同样用元素调用<font color='#d15252'>elements()方法</font>，并带参，获取到<font color='#d15252'>具体的属性对象</font></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/Xidj71oTtCWh2ED.png" alt="image-20210818150753561"></p>
+<ul>
+<li>第八步：用每一个元素调用attribute()方法带参，可以取出所有带指定属性值，用来判断某一个具体的元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/P18xnRg2aoQDvOh.png" alt="image-20210818151242119"></p>
+<ul>
+<li>第九步：用获取到的具体对象，调用<font color='#d15252'>getText()</font>方法，获取<font color='#d15252'>具体的值</font></li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/sj1SDUBed3C8zXh.png" alt="image-20210818150854734"></p>
+<hr>
+<h4 id="2-解析XML的方法"><a href="#2-解析XML的方法" class="headerlink" title="2.解析XML的方法"></a>2.解析XML的方法</h4><h5 id="Ⅰ-getRootElement（）"><a href="#Ⅰ-getRootElement（）" class="headerlink" title="Ⅰ. getRootElement（）"></a>Ⅰ. getRootElement（）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getRootElement（）<span class="comment">//解析根目录</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>document调用，获取根目录</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/RO2HjFenNQvaZwI.png" alt="image-20210818143500082"></p>
+<h5 id="Ⅱ-getResource"><a href="#Ⅱ-getResource" class="headerlink" title="Ⅱ. getResource()"></a>Ⅱ. getResource()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getResource() <span class="comment">//获取目录路径</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/24/nJoPVXRwTYAq4Fj.png" alt="image-20210818143533544"></p>
+<h5 id="Ⅲ-elements"><a href="#Ⅲ-elements" class="headerlink" title="Ⅲ. elements()"></a>Ⅲ. elements()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">elements() 			<span class="comment">//获取所有元素</span></span><br><span class="line">elements(<span class="string">&quot;标签名&quot;</span>)	  <span class="comment">//获取指定的所有元素</span></span><br><span class="line">element() 			<span class="comment">//获取单个的元素</span></span><br><span class="line">element(String str) <span class="comment">//获取指定元素</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/18/CfbgayeHFuipVDG.png" alt="image-20210818140157107"></p>
+<ul>
+<li>获取所有的元素，并存入List数组中，注意给泛型</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/sbyLZMznv7wV8CU.png" alt="image-20210818141034352"></p>
+<ul>
+<li>返回值List集合</li>
+</ul>
+<h5 id="Ⅳ-attribute"><a href="#Ⅳ-attribute" class="headerlink" title="Ⅳ. attribute()"></a>Ⅳ. attribute()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Attribute <span class="title">attribute</span><span class="params">(<span class="string">&quot;str&quot;</span>)</span> <span class="comment">//获取属性为str的元素</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/18/kExhSnz1X2ag7dG.png" alt="image-20210818141819372"></p>
+<p><img src="https://i.loli.net/2021/08/18/LeljzUgWaBcvVPy.png" alt="image-20210818141916131"></p>
+<ul>
+<li>可以看到，获取了所有属性为id的元素<ul>
+<li>如果我们要获取其中一个指定的元素，需要对value值进行判断</li>
+</ul>
+</li>
+<li>如果有其他元素，没有带指定的标签，会返回null</li>
+<li>返回值Attribute类型</li>
+</ul>
+<h5 id="Ⅴ-getValue"><a href="#Ⅴ-getValue" class="headerlink" title="Ⅴ. getValue()"></a>Ⅴ. getValue()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getValue()	<span class="comment">//获得元素的值</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/18/xwHW2MNbTEI7iUm.png" alt="image-20210818142150055"></p>
+<p><img src="https://i.loli.net/2021/08/18/ZacsrY3f8pW7ytg.png" alt="image-20210818142339756"></p>
+<ul>
+<li>Attribute调用，获取元素的值</li>
+</ul>
+<h5 id="Ⅵ-getText"><a href="#Ⅵ-getText" class="headerlink" title="Ⅵ. getText()"></a>Ⅵ. getText()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getText()	<span class="comment">//取出数据</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/18/JMG8Y4cLbRmdgTi.png" alt="image-20210818143329102"></p>
+<ul>
+<li>Element调用</li>
+</ul>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><img src="https://i.loli.net/2021/08/18/HqatLhTz3EDm9rU.png" alt="image-20210818145833898"></p>
+<h4 id="将String类转为Int类型"><a href="#将String类转为Int类型" class="headerlink" title="将String类转为Int类型"></a>将String类转为Int类型</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer.parseInt(要转换的数据);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="四、约束XML文件"><a href="#四、约束XML文件" class="headerlink" title="四、约束XML文件"></a>四、约束XML文件</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ul>
+<li>用来限定xml文件中使用的标签以及属性</li>
+<li>约束分类<ul>
+<li>DTD</li>
+<li>Schema</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、DTD"><a href="#五、DTD" class="headerlink" title="五、DTD"></a>五、DTD</h3><h4 id="编写DTD约束的步骤"><a href="#编写DTD约束的步骤" class="headerlink" title="编写DTD约束的步骤"></a>编写DTD约束的步骤</h4><ul>
+<li><p><strong>第一步</strong>：创建一个文件，后缀为.dtd</p>
+</li>
+<li><p><strong>第二步</strong>：看xml文件中使用了哪些元素</p>
+</li>
+<li><p><strong>第三步</strong>：判断元素是 简单元素，还是 复杂元素</p>
+<ul>
+<li>简单元素：只有元素自己</li>
+<li>复杂元素：包含嵌套其他元素</li>
+</ul>
+</li>
+<li><p><font color='cornflowerblue'><strong>第四步</strong></font>：创建约束</p>
+<ul>
+<li><p>```dtd</p>
+<!ELEMENT 元素名称 类别>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    - 可以定义元素</span><br><span class="line"></span><br><span class="line">  - 简单元素：`<span class="meta">&lt;!ELEMENT 元素名称&gt;</span>`</span><br><span class="line"></span><br><span class="line">    - 可以加()标明数据类型</span><br><span class="line">    - 字符串类型：`<span class="meta">&lt;!ELEMENT <span class="meta-keyword">sid</span>(<span class="meta-keyword">#PCDATA</span>) &gt;</span>`</span><br><span class="line">    - Int类型：`<span class="meta">&lt;!ELEMENT <span class="meta-keyword">sid</span>(<span class="meta-keyword">#PCDATA</span>) &gt;</span>`</span><br><span class="line"></span><br><span class="line">  - 复杂元素：`<span class="meta">&lt;!ELEMENT 元素名称（子元素名称，子元素名称）&gt;</span>`</span><br><span class="line"></span><br><span class="line">    - 如果有多个元素的话，可以用 `,`或 `|`隔开</span><br><span class="line">    - `，`  可以出现多个，标识顺序</span><br><span class="line">    - `|` 只能写一个其中一个元素，不能写多个</span><br><span class="line"></span><br><span class="line">    可选符号</span><br><span class="line"></span><br><span class="line">    - `?`代表零次或者一次</span><br><span class="line">    - `+`一次或者多次</span><br><span class="line">    - `*`代表零次或者多次</span><br><span class="line"></span><br><span class="line">    如果不写，表示出现一次</span><br><span class="line"></span><br><span class="line">- **第五步**：在xml文件中引入约束文件</span><br><span class="line"></span><br><span class="line">  - <span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">&#x27;#d15252&#x27;</span>&gt;</span>引入本地<span class="tag">&lt;/<span class="name">font</span>&gt;</span>：</span><br><span class="line"></span><br><span class="line">    ```xml</span><br><span class="line">    <span class="meta">&lt;!DOCTYPE 根元素名称 <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&#x27;DTD文件路径&#x27;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/18/u8SfdJWrDX3joiA.png" alt="image-20210818162615097"></p>
+</li>
+<li><p>在xml文件内部引入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE 根元素名称[dtd文件内容]&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/18/qQPRY9ZOFemnSu6.png" alt="image-20210818162644301"></p>
+</li>
+<li><p>引入网络DTD</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE 根元素名称 <span class="meta-keyword">PUBLIC</span><span class="meta-string">&quot;DTD文件名称&quot;</span><span class="meta-string">&quot;DTD文档url&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>第六步</strong>：定义属性的格式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ATTLIST 元素名称 属性名称 属性类型 类型&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="作业练习"><a href="#作业练习" class="headerlink" title="作业练习"></a>作业练习</h4><p><img src="https://i.loli.net/2021/08/18/YMsSDquvyfdVNC6.png" alt="image-20210818165443886"></p>
+<h3 id="六、Schema"><a href="#六、Schema" class="headerlink" title="六、Schema"></a>六、Schema</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>schema和dtd的区别<ul>
+<li>schema的后缀是.xsd</li>
+</ul>
+</li>
+<li>一个XML文件中可以引入多个schema约束文件<ul>
+<li>多个schema之间使用名称空间来区分</li>
+</ul>
+</li>
+<li>dtd元素取值比较单一，最常见的是PCDATA类型<ul>
+<li>而Schema中，支持多个数据类型</li>
+</ul>
+</li>
+<li>语法更加复杂</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/08/24/XML/" title="XML">http://example.com/2021/08/24/XML/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/XML/" rel="tag"><i class="fa fa-tag"></i># XML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/24/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" rel="prev" title="网络编程">
+      <i class="fa fa-chevron-left"></i> 网络编程
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81XML%E6%96%87%E4%BB%B6-JavaEE"><span class="nav-number">1.</span> <span class="nav-text">一、XML文件(JavaEE)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1.特点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81XML%E8%AF%AD%E8%A8%80%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">二、XML语言的语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">1.概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#xml%E8%AF%AD%E6%B3%95%E8%A7%84%E8%8C%83"><span class="nav-number">2.1.1.</span> <span class="nav-text">xml语法规范</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E8%AF%AD%E8%A8%80"><span class="nav-number">2.1.2.</span> <span class="nav-text">标签语言</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-XML%E5%A3%B0%E6%98%8E"><span class="nav-number">2.2.</span> <span class="nav-text">2.XML声明</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E5%A3%B0%E6%98%8E%E7%9A%84%E6%B3%A8%E6%84%8F%E7%BB%86%E8%8A%82"><span class="nav-number">2.2.1.</span> <span class="nav-text">文档声明的注意细节</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-xml%E4%B8%AD%E7%9A%84%E5%A4%A7%E4%BA%8E%E5%B0%8F%E4%BA%8E"><span class="nav-number">2.3.</span> <span class="nav-text">3.xml中的大于小于</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81XML%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%9A%E8%A7%A3%E6%9E%90XML"><span class="nav-number">3.</span> <span class="nav-text">三、XML的数据传输：解析XML</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Java%E4%B8%AD%E8%A7%A3%E6%9E%90xml%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.1.</span> <span class="nav-text">1.Java中解析xml的步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%A7%A3%E6%9E%90XML%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">2.解析XML的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-getRootElement%EF%BC%88%EF%BC%89"><span class="nav-number">3.2.1.</span> <span class="nav-text">Ⅰ. getRootElement（）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-getResource"><span class="nav-number">3.2.2.</span> <span class="nav-text">Ⅱ. getResource()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-elements"><span class="nav-number">3.2.3.</span> <span class="nav-text">Ⅲ. elements()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-attribute"><span class="nav-number">3.2.4.</span> <span class="nav-text">Ⅳ. attribute()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A4-getValue"><span class="nav-number">3.2.5.</span> <span class="nav-text">Ⅴ. getValue()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A5-getText"><span class="nav-number">3.2.6.</span> <span class="nav-text">Ⅵ. getText()</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">3.3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%86String%E7%B1%BB%E8%BD%AC%E4%B8%BAInt%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.4.</span> <span class="nav-text">将String类转为Int类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%BA%A6%E6%9D%9FXML%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">四、约束XML文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">4.1.</span> <span class="nav-text">概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81DTD"><span class="nav-number">5.</span> <span class="nav-text">五、DTD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E5%86%99DTD%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-number">5.1.</span> <span class="nav-text">编写DTD约束的步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E4%B8%9A%E7%BB%83%E4%B9%A0"><span class="nav-number">5.2.</span> <span class="nav-text">作业练习</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81Schema"><span class="nav-number">6.</span> <span class="nav-text">六、Schema</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0-1"><span class="nav-number">6.1.</span> <span class="nav-text">1.概述</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/nightmare_dimple" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;nightmare_dimple" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+</div>
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共4.4k字</span>
+</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '6uDYpax5oiwmCOvB3BcAzCt8-gzGzoHsz',
+      appKey     : 'BohVEfqjWIyJ5MzTXJJv3cNw',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
