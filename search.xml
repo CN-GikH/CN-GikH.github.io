@@ -1,6 +1,335 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>XML</title>
+    <url>/2021/08/24/XML/</url>
+    <content><![CDATA[<h3 id="一、XML文件-JavaEE"><a href="#一、XML文件-JavaEE" class="headerlink" title="一、XML文件(JavaEE)"></a>一、XML文件(JavaEE)</h3><ul>
+<li>存储数据的语言<ul>
+<li>Extensible：扩展</li>
+<li>Marup：标记</li>
+<li>Language：语言</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-特点"><a href="#1-特点" class="headerlink" title="1.特点"></a>1.特点</h4><ul>
+<li>作用<ul>
+<li>存储数据</li>
+<li>传输数据</li>
+</ul>
+</li>
+<li>优点<ul>
+<li>可读性好</li>
+<li>维护性好</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、XML语言的语法"><a href="#二、XML语言的语法" class="headerlink" title="二、XML语言的语法"></a>二、XML语言的语法</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><h5 id="xml语法规范"><a href="#xml语法规范" class="headerlink" title="xml语法规范"></a>xml语法规范</h5><ul>
+<li>区分大小写</li>
+<li>必须正确的嵌套</li>
+<li>必须有根元素</li>
+<li>属性值必须加引号</li>
+</ul>
+<p>例：让XML文件保存Person</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Person</span>&gt;</span> &lt;--&gt;Person根元素&lt;/--&gt;</span><br><span class="line">	<span class="tag">&lt;<span class="name">p1</span>&gt;</span>	&lt;--&gt;Person对象&lt;/--&gt;</span><br><span class="line">    	<span class="tag">&lt;<span class="name">name</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Person</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>它是一个标签语言<ul>
+<li>标签是成对出现的</li>
+</ul>
+</li>
+</ul>
+<h5 id="标签语言"><a href="#标签语言" class="headerlink" title="标签语言"></a>标签语言</h5><ul>
+<li>在标签语言中&lt;&gt;中只有一个单词，称为元素标签</li>
+<li>在标签语言中 &lt;单词&gt; 在单词后跟的所有的单词，都被称为<font color='#d15252'>属性标签</font>，它可以赋值</li>
+</ul>
+<h4 id="2-XML声明"><a href="#2-XML声明" class="headerlink" title="2.XML声明"></a>2.XML声明</h4><p><img src="https://i.loli.net/2021/08/18/IdGKFNVAcg672ej.png" alt="image-20210818113055208"></p>
+<ul>
+<li> version ：版本</li>
+<li> encoding：编码格式</li>
+<li> standalone：该xml文件是否依赖与其他文件</li>
+</ul>
+<h5 id="文档声明的注意细节"><a href="#文档声明的注意细节" class="headerlink" title="文档声明的注意细节"></a>文档声明的注意细节</h5><ul>
+<li>文档声明<font color='#d15252'>必须在第一行</font></li>
+<li>?和xml之间不能有空格</li>
+</ul>
+<h4 id="3-xml中的大于小于"><a href="#3-xml中的大于小于" class="headerlink" title="3.xml中的大于小于"></a>3.xml中的大于小于</h4><p><img src="https://i.loli.net/2021/08/18/NlnKJZ9XGLR4q7j.png" alt="image-20210818113155510"></p>
+<h3 id="三、XML的数据传输：解析XML"><a href="#三、XML的数据传输：解析XML" class="headerlink" title="三、XML的数据传输：解析XML"></a>三、XML的数据传输：解析XML</h3><p><img src="https://i.loli.net/2021/08/18/UOj5b1paegVQFEW.png" alt="img"></p>
+<p><img src="https://i.loli.net/2021/08/18/tQj5FU92Cxu3dAm.png" alt="image-20210818114104225"></p>
+<ul>
+<li><p>浏览器用<font color='#d15252'>Document</font>将整个xml封装起来</p>
+</li>
+<li><p>Java中解析XML已经由第三方做好了</p>
+<ul>
+<li>dom4j</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/BKcnLWeg1sfrQJS.png" alt="image-20210818114827519"></p>
+</li>
+<li><p>下载步骤</p>
+<ul>
+<li>下载后缀为.zip的文件解压</li>
+<li>后缀为.jar的文件就是我们要使用的</li>
+<li><font color='#d15252'>docs</font>文件夹中，是官网文档<ul>
+<li>找到index.html</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-Java中解析xml的步骤"><a href="#1-Java中解析xml的步骤" class="headerlink" title="1.Java中解析xml的步骤"></a>1.Java中解析xml的步骤</h4><ul>
+<li>第一步：导包并解压</li>
+<li>第二步：创建SAXReader对象 — 解析器</li>
+<li>第三步：使用getResource获取路径</li>
+<li>第四步： 读取文档，解析器调用read方法读取文档，并用Document保存</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/8FfTupCy2Pb1cRq.png" alt="image-20210818134337840"></p>
+<ul>
+<li>第五步：使用Document中的getRootElement()方法<font color='#d15252'>解析根目录</font></li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/6iWrgmXChHwEyeP.png" alt="image-20210818134841873"></p>
+<ul>
+<li>第六步：使用Document中的elements()方法获取每一个元素<ul>
+<li>并存入List集合，注意泛型</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/FE1cGXgaeLMyHTf.png" alt="image-20210818150624257"></p>
+<ul>
+<li>第七步：遍历List集合中的元素，拿到每一个元素<ul>
+<li>同样用元素调用<font color='#d15252'>elements()方法</font>，并带参，获取到<font color='#d15252'>具体的属性对象</font></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/Xidj71oTtCWh2ED.png" alt="image-20210818150753561"></p>
+<ul>
+<li>第八步：用每一个元素调用attribute()方法带参，可以取出所有带指定属性值，用来判断某一个具体的元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/P18xnRg2aoQDvOh.png" alt="image-20210818151242119"></p>
+<ul>
+<li>第九步：用获取到的具体对象，调用<font color='#d15252'>getText()</font>方法，获取<font color='#d15252'>具体的值</font></li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/sj1SDUBed3C8zXh.png" alt="image-20210818150854734"></p>
+<hr>
+<h4 id="2-解析XML的方法"><a href="#2-解析XML的方法" class="headerlink" title="2.解析XML的方法"></a>2.解析XML的方法</h4><h5 id="Ⅰ-getRootElement（）"><a href="#Ⅰ-getRootElement（）" class="headerlink" title="Ⅰ. getRootElement（）"></a>Ⅰ. getRootElement（）</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getRootElement（）<span class="comment">//解析根目录</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>document调用，获取根目录</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/RO2HjFenNQvaZwI.png" alt="image-20210818143500082"></p>
+<h5 id="Ⅱ-getResource"><a href="#Ⅱ-getResource" class="headerlink" title="Ⅱ. getResource()"></a>Ⅱ. getResource()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getResource() <span class="comment">//获取目录路径</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/24/nJoPVXRwTYAq4Fj.png" alt="image-20210818143533544"></p>
+<h5 id="Ⅲ-elements"><a href="#Ⅲ-elements" class="headerlink" title="Ⅲ. elements()"></a>Ⅲ. elements()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">elements() 			<span class="comment">//获取所有元素</span></span><br><span class="line">elements(<span class="string">&quot;标签名&quot;</span>)	  <span class="comment">//获取指定的所有元素</span></span><br><span class="line">element() 			<span class="comment">//获取单个的元素</span></span><br><span class="line">element(String str) <span class="comment">//获取指定元素</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/18/CfbgayeHFuipVDG.png" alt="image-20210818140157107"></p>
+<ul>
+<li>获取所有的元素，并存入List数组中，注意给泛型</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/18/sbyLZMznv7wV8CU.png" alt="image-20210818141034352"></p>
+<ul>
+<li>返回值List集合</li>
+</ul>
+<h5 id="Ⅳ-attribute"><a href="#Ⅳ-attribute" class="headerlink" title="Ⅳ. attribute()"></a>Ⅳ. attribute()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Attribute <span class="title">attribute</span><span class="params">(<span class="string">&quot;str&quot;</span>)</span> <span class="comment">//获取属性为str的元素</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/18/kExhSnz1X2ag7dG.png" alt="image-20210818141819372"></p>
+<p><img src="https://i.loli.net/2021/08/18/LeljzUgWaBcvVPy.png" alt="image-20210818141916131"></p>
+<ul>
+<li>可以看到，获取了所有属性为id的元素<ul>
+<li>如果我们要获取其中一个指定的元素，需要对value值进行判断</li>
+</ul>
+</li>
+<li>如果有其他元素，没有带指定的标签，会返回null</li>
+<li>返回值Attribute类型</li>
+</ul>
+<h5 id="Ⅴ-getValue"><a href="#Ⅴ-getValue" class="headerlink" title="Ⅴ. getValue()"></a>Ⅴ. getValue()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getValue()	<span class="comment">//获得元素的值</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/18/xwHW2MNbTEI7iUm.png" alt="image-20210818142150055"></p>
+<p><img src="https://i.loli.net/2021/08/18/ZacsrY3f8pW7ytg.png" alt="image-20210818142339756"></p>
+<ul>
+<li>Attribute调用，获取元素的值</li>
+</ul>
+<h5 id="Ⅵ-getText"><a href="#Ⅵ-getText" class="headerlink" title="Ⅵ. getText()"></a>Ⅵ. getText()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getText()	<span class="comment">//取出数据</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/18/JMG8Y4cLbRmdgTi.png" alt="image-20210818143329102"></p>
+<ul>
+<li>Element调用</li>
+</ul>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><img src="https://i.loli.net/2021/08/18/HqatLhTz3EDm9rU.png" alt="image-20210818145833898"></p>
+<h4 id="将String类转为Int类型"><a href="#将String类转为Int类型" class="headerlink" title="将String类转为Int类型"></a>将String类转为Int类型</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Integer.parseInt(要转换的数据);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="四、约束XML文件"><a href="#四、约束XML文件" class="headerlink" title="四、约束XML文件"></a>四、约束XML文件</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ul>
+<li>用来限定xml文件中使用的标签以及属性</li>
+<li>约束分类<ul>
+<li>DTD</li>
+<li>Schema</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、DTD"><a href="#五、DTD" class="headerlink" title="五、DTD"></a>五、DTD</h3><h4 id="编写DTD约束的步骤"><a href="#编写DTD约束的步骤" class="headerlink" title="编写DTD约束的步骤"></a>编写DTD约束的步骤</h4><ul>
+<li><p><strong>第一步</strong>：创建一个文件，后缀为.dtd</p>
+</li>
+<li><p><strong>第二步</strong>：看xml文件中使用了哪些元素</p>
+</li>
+<li><p><strong>第三步</strong>：判断元素是 简单元素，还是 复杂元素</p>
+<ul>
+<li>简单元素：只有元素自己</li>
+<li>复杂元素：包含嵌套其他元素</li>
+</ul>
+</li>
+<li><p><font color='cornflowerblue'><strong>第四步</strong></font>：创建约束</p>
+<ul>
+<li><p>```dtd</p>
+<!ELEMENT 元素名称 类别>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    - 可以定义元素</span><br><span class="line"></span><br><span class="line">  - 简单元素：`<span class="meta">&lt;!ELEMENT 元素名称&gt;</span>`</span><br><span class="line"></span><br><span class="line">    - 可以加()标明数据类型</span><br><span class="line">    - 字符串类型：`<span class="meta">&lt;!ELEMENT <span class="meta-keyword">sid</span>(<span class="meta-keyword">#PCDATA</span>) &gt;</span>`</span><br><span class="line">    - Int类型：`<span class="meta">&lt;!ELEMENT <span class="meta-keyword">sid</span>(<span class="meta-keyword">#PCDATA</span>) &gt;</span>`</span><br><span class="line"></span><br><span class="line">  - 复杂元素：`<span class="meta">&lt;!ELEMENT 元素名称（子元素名称，子元素名称）&gt;</span>`</span><br><span class="line"></span><br><span class="line">    - 如果有多个元素的话，可以用 `,`或 `|`隔开</span><br><span class="line">    - `，`  可以出现多个，标识顺序</span><br><span class="line">    - `|` 只能写一个其中一个元素，不能写多个</span><br><span class="line"></span><br><span class="line">    可选符号</span><br><span class="line"></span><br><span class="line">    - `?`代表零次或者一次</span><br><span class="line">    - `+`一次或者多次</span><br><span class="line">    - `*`代表零次或者多次</span><br><span class="line"></span><br><span class="line">    如果不写，表示出现一次</span><br><span class="line"></span><br><span class="line">- **第五步**：在xml文件中引入约束文件</span><br><span class="line"></span><br><span class="line">  - <span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">&#x27;#d15252&#x27;</span>&gt;</span>引入本地<span class="tag">&lt;/<span class="name">font</span>&gt;</span>：</span><br><span class="line"></span><br><span class="line">    ```xml</span><br><span class="line">    <span class="meta">&lt;!DOCTYPE 根元素名称 <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&#x27;DTD文件路径&#x27;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/18/u8SfdJWrDX3joiA.png" alt="image-20210818162615097"></p>
+</li>
+<li><p>在xml文件内部引入</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE 根元素名称[dtd文件内容]&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/18/qQPRY9ZOFemnSu6.png" alt="image-20210818162644301"></p>
+</li>
+<li><p>引入网络DTD</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE 根元素名称 <span class="meta-keyword">PUBLIC</span><span class="meta-string">&quot;DTD文件名称&quot;</span><span class="meta-string">&quot;DTD文档url&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>第六步</strong>：定义属性的格式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!ATTLIST 元素名称 属性名称 属性类型 类型&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="作业练习"><a href="#作业练习" class="headerlink" title="作业练习"></a>作业练习</h4><p><img src="https://i.loli.net/2021/08/18/YMsSDquvyfdVNC6.png" alt="image-20210818165443886"></p>
+<h3 id="六、Schema"><a href="#六、Schema" class="headerlink" title="六、Schema"></a>六、Schema</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>schema和dtd的区别<ul>
+<li>schema的后缀是.xsd</li>
+</ul>
+</li>
+<li>一个XML文件中可以引入多个schema约束文件<ul>
+<li>多个schema之间使用名称空间来区分</li>
+</ul>
+</li>
+<li>dtd元素取值比较单一，最常见的是PCDATA类型<ul>
+<li>而Schema中，支持多个数据类型</li>
+</ul>
+</li>
+<li>语法更加复杂</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>XML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java链接数据库</title>
+    <url>/2021/08/25/Java%E9%93%BE%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h3 id="一、Java链接数据库（Mysql）步骤"><a href="#一、Java链接数据库（Mysql）步骤" class="headerlink" title="一、Java链接数据库（Mysql）步骤"></a>一、Java链接数据库（Mysql）步骤</h3><h4 id="1-第一步：创建项目，并进行测试"><a href="#1-第一步：创建项目，并进行测试" class="headerlink" title="1.第一步：创建项目，并进行测试"></a>1.第一步：创建项目，并进行测试</h4><h4 id="2-第二步：找公司（jar）压缩包-jar"><a href="#2-第二步：找公司（jar）压缩包-jar" class="headerlink" title="2.第二步：找公司（jar）压缩包.jar"></a>2.第二步：找公司（jar）压缩包.jar</h4><ul>
+<li>项目中创建lib目录，将jar包拖入<ul>
+<li><img src="https://i.loli.net/2021/07/09/dXBtUWDkVezPFoQ.png" alt="image-20210709092306325"></li>
+</ul>
+</li>
+<li>右键jar包，解压<ul>
+<li><img src="https://i.loli.net/2021/07/09/r4peszySgwOJHYV.png" alt="image-20210709092237690"></li>
+</ul>
+</li>
+</ul>
+<h4 id="3-第三步：将Java链接mysql的相关工具类加载进内存"><a href="#3-第三步：将Java链接mysql的相关工具类加载进内存" class="headerlink" title="3.第三步：将Java链接mysql的相关工具类加载进内存"></a>3.第三步：将Java链接mysql的相关工具类加载进内存</h4><ul>
+<li><p>用try{}catch(Exception e){} 或 throws Exception 处理异常</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="4-第四步：Java链接Mysql"><a href="#4-第四步：Java链接Mysql" class="headerlink" title="4.第四步：Java链接Mysql"></a>4.第四步：Java链接Mysql</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Connection root = DriverManager.getConnection(url:<span class="string">&quot;jdbc:mysql://localhost:3306/m1&quot;</span>,</span><br><span class="line">            user:<span class="string">&quot;root&quot;</span>,</span><br><span class="line">            password:<span class="string">&quot;000909&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>去除时区异常：</p>
+<p>?serverTimezone=Asia/Shanghai&amp;useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true</p>
+</blockquote>
+<h4 id="5-第五步：获取发送sql的工具"><a href="#5-第五步：获取发送sql的工具" class="headerlink" title="5.第五步：获取发送sql的工具"></a>5.第五步：获取发送sql的工具</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Statement statement = root.createStatement();</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-第六步：定义一个sql语句-查询"><a href="#6-第六步：定义一个sql语句-查询" class="headerlink" title="6.第六步：定义一个sql语句(查询)"></a>6.第六步：定义一个sql语句(查询)</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String sql = <span class="string">&quot;SELECT *FROM shop&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-第七步：发送sql语句-查询-，用resultSet保存返回值"><a href="#7-第七步：发送sql语句-查询-，用resultSet保存返回值" class="headerlink" title="7.第七步：发送sql语句(查询)，用resultSet保存返回值"></a>7.第七步：发送sql语句(查询)，用resultSet保存返回值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ResultSet resultSet = statement.executeQuery(sql);</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-第八步：调用resuleSet的next-方法，判断是否有值"><a href="#8-第八步：调用resuleSet的next-方法，判断是否有值" class="headerlink" title="8.第八步：调用resuleSet的next()方法，判断是否有值"></a>8.第八步：调用resuleSet的next()方法，判断是否有值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (resultSet.next())</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="9-第九步：调用getInt-方法，返回int类型值"><a href="#9-第九步：调用getInt-方法，返回int类型值" class="headerlink" title="9.第九步：调用getInt()方法，返回int类型值"></a>9.第九步：调用getInt()方法，返回int类型值</h4><ul>
+<li><img src="https://i.loli.net/2021/07/09/GLfpqFbu4Qg3Cx1.png" alt="image-20210709103344911"></li>
+</ul>
+<hr>
+<h4 id="链接数据库并查询—代码："><a href="#链接数据库并查询—代码：" class="headerlink" title="链接数据库并查询—代码："></a>链接数据库并查询—代码：</h4><p><img src="https://i.loli.net/2021/07/09/m9Q42OWGNr7Io3v.png" alt="image-20210709103439844"></p>
+<hr>
+<h3 id="二、更新数据库数据"><a href="#二、更新数据库数据" class="headerlink" title="二、更新数据库数据"></a>二、更新数据库数据</h3><ul>
+<li><h5 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h5><ul>
+<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
+</li>
+<li><p>创建键盘录入数据</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">           System.out.println(<span class="string">&quot;请输入要修改的学号&quot;</span>);</span><br><span class="line">           <span class="keyword">int</span> id = sc.nextInt();</span><br><span class="line">           System.out.println(<span class="string">&quot;请输入要修改的姓名&quot;</span>);</span><br><span class="line">           String name = sc.next();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>打包sql语句</li>
+</ul>
+<p><code>String sql = &quot;UPDATE student SET sname = &#39;&quot;+name+&quot;&#39; WHERE sid = &quot;+id;</code></p>
+<ul>
+<li>发送执行sql语句</li>
+</ul>
+<p><code>int i = statement.executeUpdate(sql);</code></p>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/30/fFMH28bBwjXsoSz.png" alt="image-20210630143254189"></p>
+<hr>
+<h3 id="三、添加数据库数据"><a href="#三、添加数据库数据" class="headerlink" title="三、添加数据库数据"></a>三、添加数据库数据</h3><ul>
+<li><h5 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h5><ul>
+<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
+</li>
+<li><p>创建键盘录入数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">         System.out.println(<span class="string">&quot;请输入要添加的id&quot;</span>);</span><br><span class="line">         <span class="keyword">int</span> id = sc.nextInt();</span><br><span class="line">         System.out.println(<span class="string">&quot;请输入要添加的姓名&quot;</span>);</span><br><span class="line">         String name  = sc.next();</span><br></pre></td></tr></table></figure></li>
+<li><p>打包sql语句</p>
+<p>[^sql语句]: <code>String sql = &quot;INSERT INTO student (sid,sname) VALUES (&quot;+id+&quot;,&#39;&quot;+name+&quot;&#39;)&quot;;</code></p>
+</li>
+<li><p>发送执行sql语句</p>
+<p><code>int i = statement.executeUpdate(sql);</code></p>
+</li>
+</ul>
+<p>  [^executeUpdate]: 用于添加，更新，删除数据</p>
+</li>
+<li><h5 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h5><p><img src="https://i.loli.net/2021/06/30/r93VqIyGYm1xtW8.png" alt="image-20210630140131020"></p>
+</li>
+</ul>
+<hr>
+<h3 id="四、删除数据库数据"><a href="#四、删除数据库数据" class="headerlink" title="四、删除数据库数据"></a>四、删除数据库数据</h3><ul>
+<li><h5 id="步骤：-1"><a href="#步骤：-1" class="headerlink" title="步骤："></a>步骤：</h5><ul>
+<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
+</li>
+<li><p>创建键盘录入数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">          System.out.println(<span class="string">&quot;请输入要删除的学号&quot;</span>);</span><br><span class="line">          <span class="keyword">int</span> id = sc.nextInt();</span><br></pre></td></tr></table></figure></li>
+<li><p>打包sql语句</p>
+<p><code>String sql = &quot;DELETE FROM student WHERE sid = &quot;+id;</code></p>
+</li>
+<li><p>发送执行sql语句</p>
+<p><code>int i = statement.executeUpdate(sql);</code></p>
+</li>
+</ul>
+</li>
+<li><h5 id="代码：-2"><a href="#代码：-2" class="headerlink" title="代码："></a>代码：<img src="https://i.loli.net/2021/06/30/n14xtuQb2wJVsqh.png" alt="image-20210630143508186"></h5></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>案例</tag>
+        <tag>增查删改</tag>
+        <tag>数据库</tag>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java概述和变量</title>
     <url>/2021/08/25/Java%E6%A6%82%E8%BF%B0%E5%92%8C%E5%8F%98%E9%87%8F/</url>
     <content><![CDATA[<h3 id="Java"><a href="#Java" class="headerlink" title="Java!"></a>Java!</h3><ul>
@@ -353,463 +682,6 @@
       </tags>
   </entry>
   <entry>
-    <title>XML</title>
-    <url>/2021/08/24/XML/</url>
-    <content><![CDATA[<h3 id="一、XML文件-JavaEE"><a href="#一、XML文件-JavaEE" class="headerlink" title="一、XML文件(JavaEE)"></a>一、XML文件(JavaEE)</h3><ul>
-<li>存储数据的语言<ul>
-<li>Extensible：扩展</li>
-<li>Marup：标记</li>
-<li>Language：语言</li>
-</ul>
-</li>
-</ul>
-<h4 id="1-特点"><a href="#1-特点" class="headerlink" title="1.特点"></a>1.特点</h4><ul>
-<li>作用<ul>
-<li>存储数据</li>
-<li>传输数据</li>
-</ul>
-</li>
-<li>优点<ul>
-<li>可读性好</li>
-<li>维护性好</li>
-</ul>
-</li>
-</ul>
-<h3 id="二、XML语言的语法"><a href="#二、XML语言的语法" class="headerlink" title="二、XML语言的语法"></a>二、XML语言的语法</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><h5 id="xml语法规范"><a href="#xml语法规范" class="headerlink" title="xml语法规范"></a>xml语法规范</h5><ul>
-<li>区分大小写</li>
-<li>必须正确的嵌套</li>
-<li>必须有根元素</li>
-<li>属性值必须加引号</li>
-</ul>
-<p>例：让XML文件保存Person</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Person</span>&gt;</span> &lt;--&gt;Person根元素&lt;/--&gt;</span><br><span class="line">	<span class="tag">&lt;<span class="name">p1</span>&gt;</span>	&lt;--&gt;Person对象&lt;/--&gt;</span><br><span class="line">    	<span class="tag">&lt;<span class="name">name</span>&gt;</span>xxx<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Person</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>它是一个标签语言<ul>
-<li>标签是成对出现的</li>
-</ul>
-</li>
-</ul>
-<h5 id="标签语言"><a href="#标签语言" class="headerlink" title="标签语言"></a>标签语言</h5><ul>
-<li>在标签语言中&lt;&gt;中只有一个单词，称为元素标签</li>
-<li>在标签语言中 &lt;单词&gt; 在单词后跟的所有的单词，都被称为<font color='#d15252'>属性标签</font>，它可以赋值</li>
-</ul>
-<h4 id="2-XML声明"><a href="#2-XML声明" class="headerlink" title="2.XML声明"></a>2.XML声明</h4><p><img src="https://i.loli.net/2021/08/18/IdGKFNVAcg672ej.png" alt="image-20210818113055208"></p>
-<ul>
-<li> version ：版本</li>
-<li> encoding：编码格式</li>
-<li> standalone：该xml文件是否依赖与其他文件</li>
-</ul>
-<h5 id="文档声明的注意细节"><a href="#文档声明的注意细节" class="headerlink" title="文档声明的注意细节"></a>文档声明的注意细节</h5><ul>
-<li>文档声明<font color='#d15252'>必须在第一行</font></li>
-<li>?和xml之间不能有空格</li>
-</ul>
-<h4 id="3-xml中的大于小于"><a href="#3-xml中的大于小于" class="headerlink" title="3.xml中的大于小于"></a>3.xml中的大于小于</h4><p><img src="https://i.loli.net/2021/08/18/NlnKJZ9XGLR4q7j.png" alt="image-20210818113155510"></p>
-<h3 id="三、XML的数据传输：解析XML"><a href="#三、XML的数据传输：解析XML" class="headerlink" title="三、XML的数据传输：解析XML"></a>三、XML的数据传输：解析XML</h3><p><img src="https://i.loli.net/2021/08/18/UOj5b1paegVQFEW.png" alt="img"></p>
-<p><img src="https://i.loli.net/2021/08/18/tQj5FU92Cxu3dAm.png" alt="image-20210818114104225"></p>
-<ul>
-<li><p>浏览器用<font color='#d15252'>Document</font>将整个xml封装起来</p>
-</li>
-<li><p>Java中解析XML已经由第三方做好了</p>
-<ul>
-<li>dom4j</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/18/BKcnLWeg1sfrQJS.png" alt="image-20210818114827519"></p>
-</li>
-<li><p>下载步骤</p>
-<ul>
-<li>下载后缀为.zip的文件解压</li>
-<li>后缀为.jar的文件就是我们要使用的</li>
-<li><font color='#d15252'>docs</font>文件夹中，是官网文档<ul>
-<li>找到index.html</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="1-Java中解析xml的步骤"><a href="#1-Java中解析xml的步骤" class="headerlink" title="1.Java中解析xml的步骤"></a>1.Java中解析xml的步骤</h4><ul>
-<li>第一步：导包并解压</li>
-<li>第二步：创建SAXReader对象 — 解析器</li>
-<li>第三步：使用getResource获取路径</li>
-<li>第四步： 读取文档，解析器调用read方法读取文档，并用Document保存</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/18/8FfTupCy2Pb1cRq.png" alt="image-20210818134337840"></p>
-<ul>
-<li>第五步：使用Document中的getRootElement()方法<font color='#d15252'>解析根目录</font></li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/18/6iWrgmXChHwEyeP.png" alt="image-20210818134841873"></p>
-<ul>
-<li>第六步：使用Document中的elements()方法获取每一个元素<ul>
-<li>并存入List集合，注意泛型</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/18/FE1cGXgaeLMyHTf.png" alt="image-20210818150624257"></p>
-<ul>
-<li>第七步：遍历List集合中的元素，拿到每一个元素<ul>
-<li>同样用元素调用<font color='#d15252'>elements()方法</font>，并带参，获取到<font color='#d15252'>具体的属性对象</font></li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/18/Xidj71oTtCWh2ED.png" alt="image-20210818150753561"></p>
-<ul>
-<li>第八步：用每一个元素调用attribute()方法带参，可以取出所有带指定属性值，用来判断某一个具体的元素</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/18/P18xnRg2aoQDvOh.png" alt="image-20210818151242119"></p>
-<ul>
-<li>第九步：用获取到的具体对象，调用<font color='#d15252'>getText()</font>方法，获取<font color='#d15252'>具体的值</font></li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/18/sj1SDUBed3C8zXh.png" alt="image-20210818150854734"></p>
-<hr>
-<h4 id="2-解析XML的方法"><a href="#2-解析XML的方法" class="headerlink" title="2.解析XML的方法"></a>2.解析XML的方法</h4><h5 id="Ⅰ-getRootElement（）"><a href="#Ⅰ-getRootElement（）" class="headerlink" title="Ⅰ. getRootElement（）"></a>Ⅰ. getRootElement（）</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getRootElement（）<span class="comment">//解析根目录</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>document调用，获取根目录</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/18/RO2HjFenNQvaZwI.png" alt="image-20210818143500082"></p>
-<h5 id="Ⅱ-getResource"><a href="#Ⅱ-getResource" class="headerlink" title="Ⅱ. getResource()"></a>Ⅱ. getResource()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getResource() <span class="comment">//获取目录路径</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/24/nJoPVXRwTYAq4Fj.png" alt="image-20210818143533544"></p>
-<h5 id="Ⅲ-elements"><a href="#Ⅲ-elements" class="headerlink" title="Ⅲ. elements()"></a>Ⅲ. elements()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">elements() 			<span class="comment">//获取所有元素</span></span><br><span class="line">elements(<span class="string">&quot;标签名&quot;</span>)	  <span class="comment">//获取指定的所有元素</span></span><br><span class="line">element() 			<span class="comment">//获取单个的元素</span></span><br><span class="line">element(String str) <span class="comment">//获取指定元素</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/18/CfbgayeHFuipVDG.png" alt="image-20210818140157107"></p>
-<ul>
-<li>获取所有的元素，并存入List数组中，注意给泛型</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/18/sbyLZMznv7wV8CU.png" alt="image-20210818141034352"></p>
-<ul>
-<li>返回值List集合</li>
-</ul>
-<h5 id="Ⅳ-attribute"><a href="#Ⅳ-attribute" class="headerlink" title="Ⅳ. attribute()"></a>Ⅳ. attribute()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Attribute <span class="title">attribute</span><span class="params">(<span class="string">&quot;str&quot;</span>)</span> <span class="comment">//获取属性为str的元素</span></span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/18/kExhSnz1X2ag7dG.png" alt="image-20210818141819372"></p>
-<p><img src="https://i.loli.net/2021/08/18/LeljzUgWaBcvVPy.png" alt="image-20210818141916131"></p>
-<ul>
-<li>可以看到，获取了所有属性为id的元素<ul>
-<li>如果我们要获取其中一个指定的元素，需要对value值进行判断</li>
-</ul>
-</li>
-<li>如果有其他元素，没有带指定的标签，会返回null</li>
-<li>返回值Attribute类型</li>
-</ul>
-<h5 id="Ⅴ-getValue"><a href="#Ⅴ-getValue" class="headerlink" title="Ⅴ. getValue()"></a>Ⅴ. getValue()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getValue()	<span class="comment">//获得元素的值</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/18/xwHW2MNbTEI7iUm.png" alt="image-20210818142150055"></p>
-<p><img src="https://i.loli.net/2021/08/18/ZacsrY3f8pW7ytg.png" alt="image-20210818142339756"></p>
-<ul>
-<li>Attribute调用，获取元素的值</li>
-</ul>
-<h5 id="Ⅵ-getText"><a href="#Ⅵ-getText" class="headerlink" title="Ⅵ. getText()"></a>Ⅵ. getText()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">getText()	<span class="comment">//取出数据</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/18/JMG8Y4cLbRmdgTi.png" alt="image-20210818143329102"></p>
-<ul>
-<li>Element调用</li>
-</ul>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p><img src="https://i.loli.net/2021/08/18/HqatLhTz3EDm9rU.png" alt="image-20210818145833898"></p>
-<h4 id="将String类转为Int类型"><a href="#将String类转为Int类型" class="headerlink" title="将String类转为Int类型"></a>将String类转为Int类型</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Integer.parseInt(要转换的数据);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="四、约束XML文件"><a href="#四、约束XML文件" class="headerlink" title="四、约束XML文件"></a>四、约束XML文件</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ul>
-<li>用来限定xml文件中使用的标签以及属性</li>
-<li>约束分类<ul>
-<li>DTD</li>
-<li>Schema</li>
-</ul>
-</li>
-</ul>
-<h3 id="五、DTD"><a href="#五、DTD" class="headerlink" title="五、DTD"></a>五、DTD</h3><h4 id="编写DTD约束的步骤"><a href="#编写DTD约束的步骤" class="headerlink" title="编写DTD约束的步骤"></a>编写DTD约束的步骤</h4><ul>
-<li><p><strong>第一步</strong>：创建一个文件，后缀为.dtd</p>
-</li>
-<li><p><strong>第二步</strong>：看xml文件中使用了哪些元素</p>
-</li>
-<li><p><strong>第三步</strong>：判断元素是 简单元素，还是 复杂元素</p>
-<ul>
-<li>简单元素：只有元素自己</li>
-<li>复杂元素：包含嵌套其他元素</li>
-</ul>
-</li>
-<li><p><font color='cornflowerblue'><strong>第四步</strong></font>：创建约束</p>
-<ul>
-<li><p>```dtd</p>
-<!ELEMENT 元素名称 类别>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    - 可以定义元素</span><br><span class="line"></span><br><span class="line">  - 简单元素：`<span class="meta">&lt;!ELEMENT 元素名称&gt;</span>`</span><br><span class="line"></span><br><span class="line">    - 可以加()标明数据类型</span><br><span class="line">    - 字符串类型：`<span class="meta">&lt;!ELEMENT <span class="meta-keyword">sid</span>(<span class="meta-keyword">#PCDATA</span>) &gt;</span>`</span><br><span class="line">    - Int类型：`<span class="meta">&lt;!ELEMENT <span class="meta-keyword">sid</span>(<span class="meta-keyword">#PCDATA</span>) &gt;</span>`</span><br><span class="line"></span><br><span class="line">  - 复杂元素：`<span class="meta">&lt;!ELEMENT 元素名称（子元素名称，子元素名称）&gt;</span>`</span><br><span class="line"></span><br><span class="line">    - 如果有多个元素的话，可以用 `,`或 `|`隔开</span><br><span class="line">    - `，`  可以出现多个，标识顺序</span><br><span class="line">    - `|` 只能写一个其中一个元素，不能写多个</span><br><span class="line"></span><br><span class="line">    可选符号</span><br><span class="line"></span><br><span class="line">    - `?`代表零次或者一次</span><br><span class="line">    - `+`一次或者多次</span><br><span class="line">    - `*`代表零次或者多次</span><br><span class="line"></span><br><span class="line">    如果不写，表示出现一次</span><br><span class="line"></span><br><span class="line">- **第五步**：在xml文件中引入约束文件</span><br><span class="line"></span><br><span class="line">  - <span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">&#x27;#d15252&#x27;</span>&gt;</span>引入本地<span class="tag">&lt;/<span class="name">font</span>&gt;</span>：</span><br><span class="line"></span><br><span class="line">    ```xml</span><br><span class="line">    <span class="meta">&lt;!DOCTYPE 根元素名称 <span class="meta-keyword">SYSTEM</span> <span class="meta-string">&#x27;DTD文件路径&#x27;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/18/u8SfdJWrDX3joiA.png" alt="image-20210818162615097"></p>
-</li>
-<li><p>在xml文件内部引入</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE 根元素名称[dtd文件内容]&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/18/qQPRY9ZOFemnSu6.png" alt="image-20210818162644301"></p>
-</li>
-<li><p>引入网络DTD</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE 根元素名称 <span class="meta-keyword">PUBLIC</span><span class="meta-string">&quot;DTD文件名称&quot;</span><span class="meta-string">&quot;DTD文档url&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><strong>第六步</strong>：定义属性的格式</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!ATTLIST 元素名称 属性名称 属性类型 类型&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="作业练习"><a href="#作业练习" class="headerlink" title="作业练习"></a>作业练习</h4><p><img src="https://i.loli.net/2021/08/18/YMsSDquvyfdVNC6.png" alt="image-20210818165443886"></p>
-<h3 id="六、Schema"><a href="#六、Schema" class="headerlink" title="六、Schema"></a>六、Schema</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>schema和dtd的区别<ul>
-<li>schema的后缀是.xsd</li>
-</ul>
-</li>
-<li>一个XML文件中可以引入多个schema约束文件<ul>
-<li>多个schema之间使用名称空间来区分</li>
-</ul>
-</li>
-<li>dtd元素取值比较单一，最常见的是PCDATA类型<ul>
-<li>而Schema中，支持多个数据类型</li>
-</ul>
-</li>
-<li>语法更加复杂</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>XML</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java链接数据库</title>
-    <url>/2021/08/25/Java%E9%93%BE%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h3 id="一、Java链接数据库（Mysql）步骤"><a href="#一、Java链接数据库（Mysql）步骤" class="headerlink" title="一、Java链接数据库（Mysql）步骤"></a>一、Java链接数据库（Mysql）步骤</h3><h4 id="1-第一步：创建项目，并进行测试"><a href="#1-第一步：创建项目，并进行测试" class="headerlink" title="1.第一步：创建项目，并进行测试"></a>1.第一步：创建项目，并进行测试</h4><h4 id="2-第二步：找公司（jar）压缩包-jar"><a href="#2-第二步：找公司（jar）压缩包-jar" class="headerlink" title="2.第二步：找公司（jar）压缩包.jar"></a>2.第二步：找公司（jar）压缩包.jar</h4><ul>
-<li>项目中创建lib目录，将jar包拖入<ul>
-<li><img src="https://i.loli.net/2021/07/09/dXBtUWDkVezPFoQ.png" alt="image-20210709092306325"></li>
-</ul>
-</li>
-<li>右键jar包，解压<ul>
-<li><img src="https://i.loli.net/2021/07/09/r4peszySgwOJHYV.png" alt="image-20210709092237690"></li>
-</ul>
-</li>
-</ul>
-<h4 id="3-第三步：将Java链接mysql的相关工具类加载进内存"><a href="#3-第三步：将Java链接mysql的相关工具类加载进内存" class="headerlink" title="3.第三步：将Java链接mysql的相关工具类加载进内存"></a>3.第三步：将Java链接mysql的相关工具类加载进内存</h4><ul>
-<li><p>用try{}catch(Exception e){} 或 throws Exception 处理异常</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="4-第四步：Java链接Mysql"><a href="#4-第四步：Java链接Mysql" class="headerlink" title="4.第四步：Java链接Mysql"></a>4.第四步：Java链接Mysql</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Connection root = DriverManager.getConnection(url:<span class="string">&quot;jdbc:mysql://localhost:3306/m1&quot;</span>,</span><br><span class="line">            user:<span class="string">&quot;root&quot;</span>,</span><br><span class="line">            password:<span class="string">&quot;000909&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>去除时区异常：</p>
-<p>?serverTimezone=Asia/Shanghai&amp;useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true</p>
-</blockquote>
-<h4 id="5-第五步：获取发送sql的工具"><a href="#5-第五步：获取发送sql的工具" class="headerlink" title="5.第五步：获取发送sql的工具"></a>5.第五步：获取发送sql的工具</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Statement statement = root.createStatement();</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="6-第六步：定义一个sql语句-查询"><a href="#6-第六步：定义一个sql语句-查询" class="headerlink" title="6.第六步：定义一个sql语句(查询)"></a>6.第六步：定义一个sql语句(查询)</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String sql = <span class="string">&quot;SELECT *FROM shop&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<h4 id="7-第七步：发送sql语句-查询-，用resultSet保存返回值"><a href="#7-第七步：发送sql语句-查询-，用resultSet保存返回值" class="headerlink" title="7.第七步：发送sql语句(查询)，用resultSet保存返回值"></a>7.第七步：发送sql语句(查询)，用resultSet保存返回值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ResultSet resultSet = statement.executeQuery(sql);</span><br></pre></td></tr></table></figure>
-
-<h4 id="8-第八步：调用resuleSet的next-方法，判断是否有值"><a href="#8-第八步：调用resuleSet的next-方法，判断是否有值" class="headerlink" title="8.第八步：调用resuleSet的next()方法，判断是否有值"></a>8.第八步：调用resuleSet的next()方法，判断是否有值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (resultSet.next())</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="9-第九步：调用getInt-方法，返回int类型值"><a href="#9-第九步：调用getInt-方法，返回int类型值" class="headerlink" title="9.第九步：调用getInt()方法，返回int类型值"></a>9.第九步：调用getInt()方法，返回int类型值</h4><ul>
-<li><img src="https://i.loli.net/2021/07/09/GLfpqFbu4Qg3Cx1.png" alt="image-20210709103344911"></li>
-</ul>
-<hr>
-<h4 id="链接数据库并查询—代码："><a href="#链接数据库并查询—代码：" class="headerlink" title="链接数据库并查询—代码："></a>链接数据库并查询—代码：</h4><p><img src="https://i.loli.net/2021/07/09/m9Q42OWGNr7Io3v.png" alt="image-20210709103439844"></p>
-<hr>
-<h3 id="二、更新数据库数据"><a href="#二、更新数据库数据" class="headerlink" title="二、更新数据库数据"></a>二、更新数据库数据</h3><ul>
-<li><h5 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h5><ul>
-<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
-</li>
-<li><p>创建键盘录入数据</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">           System.out.println(<span class="string">&quot;请输入要修改的学号&quot;</span>);</span><br><span class="line">           <span class="keyword">int</span> id = sc.nextInt();</span><br><span class="line">           System.out.println(<span class="string">&quot;请输入要修改的姓名&quot;</span>);</span><br><span class="line">           String name = sc.next();</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>打包sql语句</li>
-</ul>
-<p><code>String sql = &quot;UPDATE student SET sname = &#39;&quot;+name+&quot;&#39; WHERE sid = &quot;+id;</code></p>
-<ul>
-<li>发送执行sql语句</li>
-</ul>
-<p><code>int i = statement.executeUpdate(sql);</code></p>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></li>
-</ul>
-<p><img src="https://i.loli.net/2021/06/30/fFMH28bBwjXsoSz.png" alt="image-20210630143254189"></p>
-<hr>
-<h3 id="三、添加数据库数据"><a href="#三、添加数据库数据" class="headerlink" title="三、添加数据库数据"></a>三、添加数据库数据</h3><ul>
-<li><h5 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h5><ul>
-<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
-</li>
-<li><p>创建键盘录入数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">         System.out.println(<span class="string">&quot;请输入要添加的id&quot;</span>);</span><br><span class="line">         <span class="keyword">int</span> id = sc.nextInt();</span><br><span class="line">         System.out.println(<span class="string">&quot;请输入要添加的姓名&quot;</span>);</span><br><span class="line">         String name  = sc.next();</span><br></pre></td></tr></table></figure></li>
-<li><p>打包sql语句</p>
-<p>[^sql语句]: <code>String sql = &quot;INSERT INTO student (sid,sname) VALUES (&quot;+id+&quot;,&#39;&quot;+name+&quot;&#39;)&quot;;</code></p>
-</li>
-<li><p>发送执行sql语句</p>
-<p><code>int i = statement.executeUpdate(sql);</code></p>
-</li>
-</ul>
-<p>  [^executeUpdate]: 用于添加，更新，删除数据</p>
-</li>
-<li><h5 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h5><p><img src="https://i.loli.net/2021/06/30/r93VqIyGYm1xtW8.png" alt="image-20210630140131020"></p>
-</li>
-</ul>
-<hr>
-<h3 id="四、删除数据库数据"><a href="#四、删除数据库数据" class="headerlink" title="四、删除数据库数据"></a>四、删除数据库数据</h3><ul>
-<li><h5 id="步骤：-1"><a href="#步骤：-1" class="headerlink" title="步骤："></a>步骤：</h5><ul>
-<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
-</li>
-<li><p>创建键盘录入数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">          System.out.println(<span class="string">&quot;请输入要删除的学号&quot;</span>);</span><br><span class="line">          <span class="keyword">int</span> id = sc.nextInt();</span><br></pre></td></tr></table></figure></li>
-<li><p>打包sql语句</p>
-<p><code>String sql = &quot;DELETE FROM student WHERE sid = &quot;+id;</code></p>
-</li>
-<li><p>发送执行sql语句</p>
-<p><code>int i = statement.executeUpdate(sql);</code></p>
-</li>
-</ul>
-</li>
-<li><h5 id="代码：-2"><a href="#代码：-2" class="headerlink" title="代码："></a>代码：<img src="https://i.loli.net/2021/06/30/n14xtuQb2wJVsqh.png" alt="image-20210630143508186"></h5></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>案例</tag>
-        <tag>增查删改</tag>
-        <tag>数据库</tag>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数组</title>
-    <url>/2021/08/25/%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h3 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h3><h4 id="1-什么是数组"><a href="#1-什么是数组" class="headerlink" title="1.什么是数组"></a>1.什么是数组</h4><ul>
-<li>概念：数组是存储多个变量的容器（数据类型要一致）<ul>
-<li>数组可以存储基本数据类型也可以存储引用数据类型</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-定义数组"><a href="#2-定义数组" class="headerlink" title="2.定义数组"></a>2.定义数组</h4><ul>
-<li><p>第一种格式：</p>
-<ul>
-<li><p>数据类型 数组名[] ；</p>
-<p>例：<code>int arr1[]</code>；</p>
-</li>
-</ul>
-</li>
-<li><p>第二种格式：</p>
-<ul>
-<li><p>数据类型[] 数组名</p>
-<p>例：<code>int[] arr2</code>;</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-数组的定义和初始化格式"><a href="#3-数组的定义和初始化格式" class="headerlink" title="3.数组的定义和初始化格式"></a>3.数组的定义和初始化格式</h4><h5 id="①-概念："><a href="#①-概念：" class="headerlink" title="① 概念："></a>① 概念：</h5><ul>
-<li>从内存的原来看，数组是一组存储变量的容器<ul>
-<li>并且内存中，堆内存是空闲的，所以我们可以在堆内存中定义一个数组存储数据<ul>
-<li>要想在堆内存中创建数组，必须要将Cpu的执行权由栈区交给堆区<font color='#d15252'>（new）</font>关键字</li>
-</ul>
-</li>
-<li>在堆区中，开辟内存的目的是数据，而开辟内存空间，就需要用到数组类型</li>
-</ul>
-</li>
-<li>以上两步可知，在堆区创建数组  <code>new int[];</code></li>
-<li>创建数组后，需要在栈区创建一个变量，存储堆区数组的地址值，用来使用数组</li>
-</ul>
-<h5 id="②动态初始化：只指定长度，初始值默认"><a href="#②动态初始化：只指定长度，初始值默认" class="headerlink" title="②动态初始化：只指定长度，初始值默认"></a>②<font color='#d15252'>动态初始化</font>：只指定长度，初始值默认</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = <span class="keyword">new</span> <span class="keyword">int</span>[数组长度]；</span><br><span class="line"></span><br><span class="line">例：<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>系统初始默认值，int是0 ，String是null</li>
-</ul>
-<h5 id="③静态初始化：指定初始值，系统默认长度"><a href="#③静态初始化：指定初始值，系统默认长度" class="headerlink" title="③静态初始化：指定初始值，系统默认长度"></a>③静态初始化：指定初始值，系统默认长度</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="4-数组的数据操作"><a href="#4-数组的数据操作" class="headerlink" title="4.数组的数据操作"></a>4.数组的数据操作</h4><h5 id="Ⅰ-赋值操作"><a href="#Ⅰ-赋值操作" class="headerlink" title="Ⅰ.赋值操作"></a>Ⅰ.赋值操作</h5><ul>
-<li><code>数组名[索引] = 数组；</code></li>
-</ul>
-<h5 id="Ⅱ-取值操作"><a href="#Ⅱ-取值操作" class="headerlink" title="Ⅱ.取值操作"></a>Ⅱ.取值操作</h5><p>通过数组自带的索引取值</p>
-<ul>
-<li>直接取值<ul>
-<li>直接打印到控制台，比较方便，但无法对数据继续进行操作</li>
-</ul>
-</li>
-<li><font color='#d15252'>赋值取值</font><ul>
-<li>创建一个变量保存数据<ul>
-<li><code>变量名 = 数组名[索引]</code></li>
-<li>比较繁琐，但可以对数据进行多次操作</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="Ⅲ-数组的特性"><a href="#Ⅲ-数组的特性" class="headerlink" title="Ⅲ.数组的特性"></a>Ⅲ.数组的特性</h5><ul>
-<li>length表示数组的长度<ul>
-<li><code>arr.length    </code></li>
-</ul>
-</li>
-</ul>
-<h5 id="Ⅳ-练习"><a href="#Ⅳ-练习" class="headerlink" title="Ⅳ.练习"></a>Ⅳ.练习</h5><ul>
-<li>数组中存5个整数，求和，以及求平均数</li>
-<li>数组中存5个数，找出最大、最小的两个数</li>
-<li>冒泡排序：从第一个数开始，依次和后一个数比较，小的放前，大的放后</li>
-</ul>
-<h5 id="Ⅴ-数组常见异常"><a href="#Ⅴ-数组常见异常" class="headerlink" title="Ⅴ.数组常见异常"></a>Ⅴ.数组常见异常</h5><ul>
-<li><p>索引超出范围，索引越界</p>
-<ul>
-<li><code> java.lang.ArrayIndexOutOfBoundsException:</code></li>
-</ul>
-</li>
-<li><p>空指针异常</p>
-<ul>
-<li><code>java.lang.NullPointerException</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="二、二维数组"><a href="#二、二维数组" class="headerlink" title="二、二维数组"></a>二、二维数组</h3><h4 id="1-二维数组的概念"><a href="#1-二维数组的概念" class="headerlink" title="1.二维数组的概念"></a>1.二维数组的概念</h4><ul>
-<li>二维数组就是一个元素为一维数组的数组</li>
-</ul>
-<h4 id="2-二维数组的定义格式"><a href="#2-二维数组的定义格式" class="headerlink" title="2.二维数组的定义格式"></a>2.二维数组的定义格式</h4><h5 id="①动态初始化"><a href="#①动态初始化" class="headerlink" title="①动态初始化"></a>①动态初始化</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[][] 变量名 = <span class="keyword">new</span> 数据类型[m][n];</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>arr[m] [n] 表示第m+1个一维数组的第n+1个数</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[][] 变量名 = <span class="keyword">new</span> 数据类型[m][];</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>没有给出一维数组的元素个数，可以动态给出</p>
-</blockquote>
-<h5 id="②静态初始化"><a href="#②静态初始化" class="headerlink" title="②静态初始化"></a>②静态初始化</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[][] 变量名 = <span class="keyword">new</span> 数据类型[][]&#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;......&#125;;</span><br><span class="line"></span><br><span class="line">简化：</span><br><span class="line">    数据类型[][] 变量名 = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;...&#125;;</span><br><span class="line">例如：<span class="keyword">int</span>[][] arr = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;,&#123;<span class="number">6</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="3-二维数组的数据操作"><a href="#3-二维数组的数据操作" class="headerlink" title="3.二维数组的数据操作"></a>3.二维数组的数据操作</h4><h5 id="Ⅰ-取数据"><a href="#Ⅰ-取数据" class="headerlink" title="Ⅰ.取数据"></a>Ⅰ.取数据</h5><ul>
-<li><p>直接取出</p>
-<ul>
-<li>用双层嵌套循环，第一层循环取出一维数组，第二层循环取出一维数组里的数</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义一个二维数组</span></span><br><span class="line"><span class="keyword">int</span>[][] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][<span class="number">4</span>];</span><br><span class="line"><span class="comment">//外层循环取出一位数组</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">    <span class="comment">//内存循环遍历一维数组</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;arr[i].length;j++)&#123;</span><br><span class="line">		System.out.println(arr[i][j]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>赋值取</p>
-<ul>
-<li><code>int a = arr[0][1];</code>取出第一个一维数组的第二个数</li>
-</ul>
-</li>
-</ul>
-<h5 id="②赋值"><a href="#②赋值" class="headerlink" title="②赋值"></a>②赋值</h5><ul>
-<li>格式：<code>变量名[索引第几个数组][索引第几个数] = 数据</code></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-        <tag>二维数组</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>反射</title>
     <url>/2021/08/23/%E5%8F%8D%E5%B0%84/</url>
     <content><![CDATA[<h3 id="一、反射"><a href="#一、反射" class="headerlink" title="一、反射"></a>一、反射</h3><h4 id="什么是反射？"><a href="#什么是反射？" class="headerlink" title="什么是反射？"></a>什么是反射？</h4><ul>
@@ -996,68 +868,6 @@
       </tags>
   </entry>
   <entry>
-    <title>数组实现数据增查删改和数据库操作</title>
-    <url>/2021/08/25/%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%A2%9E%E6%9F%A5%E5%88%A0%E6%94%B9%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h3 id="一、综合案例：实现商品菜单，数据增查删改"><a href="#一、综合案例：实现商品菜单，数据增查删改" class="headerlink" title="一、综合案例：实现商品菜单，数据增查删改"></a>一、综合案例：实现商品菜单，数据增查删改</h3><h5 id="1-创建工程，测试环境"><a href="#1-创建工程，测试环境" class="headerlink" title="1.创建工程，测试环境"></a>1.创建工程，测试环境</h5><h5 id="2-前奏：实现数据的加载"><a href="#2-前奏：实现数据的加载" class="headerlink" title="2.前奏：实现数据的加载"></a>2.前奏：实现数据的加载</h5><ul>
-<li>变量 数组 集合 数据库 （暂时用数组）<ul>
-<li>数据类型[] 变量名 = new 数据类型[空间长度]</li>
-</ul>
-</li>
-</ul>
-<h5 id="3-需求分析："><a href="#3-需求分析：" class="headerlink" title="3.需求分析："></a>3.需求分析：</h5><ul>
-<li><p>菜单：6条输出语句</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;1.查看商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;2.修改商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;3.增加商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;4.删除商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;5.退出&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;6.请您选择1---5&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-<li><p>实现交互：即键盘录入数据，使用Scanner三个步骤</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"><span class="keyword">int</span> a = sc.nextInt();</span><br></pre></td></tr></table></figure></li>
-<li><p>实现菜单可以重复选择：利用for或者while死循环</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">for</span><span class="params">(;;)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="title">while</span><span class="params">(true)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现菜单的选择：使用if判断语句，判断录入的值</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(a==<span class="number">1</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现查看功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现修改功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">3</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现增加功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">4</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现删除功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">5</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;退出&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现查看功能：for循环实现遍历数组、if判断不是0再输出</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;	</span><br><span class="line">	<span class="keyword">if</span> (arr[i]!=<span class="number">0</span>)&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;商品的编号:&quot;</span>+arr[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现修改功能：用for循环查看数组，if判断选择要修改的数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr[i]==b)&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;请输入修改后的编号&quot;</span>);</span><br><span class="line">		arr[i]=sc.nextInt();</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现增加功能：用for+if，将录入数据增加到0上</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入要增加的商品编号&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> x = sc.nextInt();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr[i]==<span class="number">0</span>)&#123;</span><br><span class="line">		arr[i]=x;</span><br><span class="line">		i = arr.length; <span class="comment">//跳出循环</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现删除功能：用for+if，匹配和录入数据相同的索引，更改值为0</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入要删除的商品编号&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> g = sc.nextInt();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (arr[i]==g)&#123;</span><br><span class="line">			arr[i]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h4 id="4-代码："><a href="#4-代码：" class="headerlink" title="4.代码："></a>4.代码：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建工程并测试环境</span></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo1</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span></span><br><span class="line"><span class="function">	</span>&#123;	</span><br><span class="line">		<span class="comment">//实现交互效果，需要键盘录入数据</span></span><br><span class="line">		<span class="comment">//键盘录入数据三步，导包，加载进内存，保存录入数据</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="comment">//定义布尔类型变量，控制循环结束</span></span><br><span class="line">		<span class="keyword">boolean</span> f =<span class="keyword">true</span>;</span><br><span class="line">		<span class="comment">//数据加载</span></span><br><span class="line">		<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">		arr[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">		arr[<span class="number">1</span>]=<span class="number">2</span>;</span><br><span class="line">		arr[<span class="number">2</span>]=<span class="number">3</span>;</span><br><span class="line">		<span class="comment">//实现可以重复选择菜单</span></span><br><span class="line">		<span class="keyword">for</span> (;f; )</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> j =<span class="number">0</span>;</span><br><span class="line">		<span class="comment">//需求分析：菜单页面即输出语句</span></span><br><span class="line">		System.out.println(<span class="string">&quot;====================&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 1.查看商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 2.修改商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 3.增加商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 4.删除商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 5.退出系统     ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| (请您选择1-5)  ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;====================&quot;</span>);</span><br><span class="line">		<span class="keyword">int</span> a = sc.nextInt();</span><br><span class="line">		<span class="comment">//实现菜单的选择</span></span><br><span class="line">		<span class="keyword">if</span> (a==<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="comment">//循环输出遍历数组</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;	<span class="comment">//if语句判断不是0再输出</span></span><br><span class="line">					<span class="keyword">if</span> (arr[i]!=<span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;商品的编号:&quot;</span>+arr[i]);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				System.out.println(<span class="string">&quot;===查看成功===&quot;</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要修改的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> b = sc.nextInt();</span><br><span class="line">				<span class="comment">//for+if判断并选择到需要修改的数据</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (arr[i]==b)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;请输入修改后的编号&quot;</span>);</span><br><span class="line">						arr[i]=sc.nextInt();</span><br><span class="line">						i = arr.length;</span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i]!=b)</span><br><span class="line">					&#123;</span><br><span class="line">						j++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (arr.length==j)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;您要修改的编号不存在&quot;</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">3</span>)&#123;</span><br><span class="line">				<span class="comment">//实现增加功能</span></span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要增加的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> x = sc.nextInt();</span><br><span class="line">				<span class="comment">//for+if查询判断，将录入数据加载到0上</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="comment">//判断如果商品编号已存在，提示添加失败，跳出循环</span></span><br><span class="line">					<span class="keyword">if</span> (arr[i]==x)</span><br><span class="line">					&#123;</span><br><span class="line">					System.out.println(<span class="string">&quot;您输入的商品编号已存在&quot;</span>);</span><br><span class="line">					i=arr.length;<span class="comment">//跳出循环</span></span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i]==<span class="number">0</span>)   <span class="comment">//如果不存在，判断为0的数据，添加</span></span><br><span class="line">						&#123;</span><br><span class="line">							arr[i]=x;</span><br><span class="line">							i = arr.length; <span class="comment">//跳出循环</span></span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">4</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要删除的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> g = sc.nextInt();</span><br><span class="line">				<span class="comment">//实现删除功能</span></span><br><span class="line">				<span class="comment">//for+if判断</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (arr[i]==g)</span><br><span class="line">					&#123;</span><br><span class="line">						arr[i]=<span class="number">0</span>;</span><br><span class="line">						System.out.println(<span class="string">&quot;===删除成功===&quot;</span>);</span><br><span class="line">						i =arr.length;<span class="comment">//跳出循环</span></span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span>(arr[i]!=g)&#123;</span><br><span class="line">						j++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (arr.length==j)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;你要删除的商品编号不存在&quot;</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">5</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;您已成功退出&quot;</span>);</span><br><span class="line">				f = <span class="keyword">false</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;===输入错误，请选择1-5===&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="二、使用数据库-Mysql"><a href="#二、使用数据库-Mysql" class="headerlink" title="二、使用数据库(Mysql)"></a>二、使用数据库(Mysql)</h3><h4 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1. 创建数据库"></a>1. 创建数据库</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create database 数据库名称</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="2-创建表格"><a href="#2-创建表格" class="headerlink" title="2. 创建表格"></a>2. 创建表格</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">	列名 数据类型,</span><br><span class="line">	列名 数据类型,</span><br><span class="line">    ....</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-插入数据"><a href="#3-插入数据" class="headerlink" title="3. 插入数据"></a>3. 插入数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">insert into 表名 (列名,...) values(数据,数据);</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-更新数据"><a href="#4-更新数据" class="headerlink" title="4.更新数据"></a>4.更新数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">updata 表名 set 字段 = 数值;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">update 表名 set 字段 = 数值 WHERE 字段=数值（选择）;</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-删除数据"><a href="#5-删除数据" class="headerlink" title="5.删除数据"></a>5.删除数据</h4><ul>
-<li><p>删除全部数据</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Delete From 表名;</span><br></pre></td></tr></table></figure></li>
-<li><p>删除指定数据</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Delete From 表名 WHERE 字段 = 数值;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="6-查询数据"><a href="#6-查询数据" class="headerlink" title="6.查询数据"></a>6.查询数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM 表名</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>案例</tag>
-        <tag>增查删改</tag>
-        <tag>数据库</tag>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>实现前端-Web-数据库</title>
     <url>/2021/08/25/%E5%AE%9E%E7%8E%B0%E5%89%8D%E7%AB%AF-Web-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
     <content><![CDATA[<h3 id="获取前端数据"><a href="#获取前端数据" class="headerlink" title="获取前端数据"></a>获取前端数据</h3><ul>
@@ -1214,6 +1024,196 @@
         <tag>数据库</tag>
         <tag>Mysql</tag>
         <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数组</title>
+    <url>/2021/08/25/%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h3 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h3><h4 id="1-什么是数组"><a href="#1-什么是数组" class="headerlink" title="1.什么是数组"></a>1.什么是数组</h4><ul>
+<li>概念：数组是存储多个变量的容器（数据类型要一致）<ul>
+<li>数组可以存储基本数据类型也可以存储引用数据类型</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-定义数组"><a href="#2-定义数组" class="headerlink" title="2.定义数组"></a>2.定义数组</h4><ul>
+<li><p>第一种格式：</p>
+<ul>
+<li><p>数据类型 数组名[] ；</p>
+<p>例：<code>int arr1[]</code>；</p>
+</li>
+</ul>
+</li>
+<li><p>第二种格式：</p>
+<ul>
+<li><p>数据类型[] 数组名</p>
+<p>例：<code>int[] arr2</code>;</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-数组的定义和初始化格式"><a href="#3-数组的定义和初始化格式" class="headerlink" title="3.数组的定义和初始化格式"></a>3.数组的定义和初始化格式</h4><h5 id="①-概念："><a href="#①-概念：" class="headerlink" title="① 概念："></a>① 概念：</h5><ul>
+<li>从内存的原来看，数组是一组存储变量的容器<ul>
+<li>并且内存中，堆内存是空闲的，所以我们可以在堆内存中定义一个数组存储数据<ul>
+<li>要想在堆内存中创建数组，必须要将Cpu的执行权由栈区交给堆区<font color='#d15252'>（new）</font>关键字</li>
+</ul>
+</li>
+<li>在堆区中，开辟内存的目的是数据，而开辟内存空间，就需要用到数组类型</li>
+</ul>
+</li>
+<li>以上两步可知，在堆区创建数组  <code>new int[];</code></li>
+<li>创建数组后，需要在栈区创建一个变量，存储堆区数组的地址值，用来使用数组</li>
+</ul>
+<h5 id="②动态初始化：只指定长度，初始值默认"><a href="#②动态初始化：只指定长度，初始值默认" class="headerlink" title="②动态初始化：只指定长度，初始值默认"></a>②<font color='#d15252'>动态初始化</font>：只指定长度，初始值默认</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = <span class="keyword">new</span> <span class="keyword">int</span>[数组长度]；</span><br><span class="line"></span><br><span class="line">例：<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>系统初始默认值，int是0 ，String是null</li>
+</ul>
+<h5 id="③静态初始化：指定初始值，系统默认长度"><a href="#③静态初始化：指定初始值，系统默认长度" class="headerlink" title="③静态初始化：指定初始值，系统默认长度"></a>③静态初始化：指定初始值，系统默认长度</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-数组的数据操作"><a href="#4-数组的数据操作" class="headerlink" title="4.数组的数据操作"></a>4.数组的数据操作</h4><h5 id="Ⅰ-赋值操作"><a href="#Ⅰ-赋值操作" class="headerlink" title="Ⅰ.赋值操作"></a>Ⅰ.赋值操作</h5><ul>
+<li><code>数组名[索引] = 数组；</code></li>
+</ul>
+<h5 id="Ⅱ-取值操作"><a href="#Ⅱ-取值操作" class="headerlink" title="Ⅱ.取值操作"></a>Ⅱ.取值操作</h5><p>通过数组自带的索引取值</p>
+<ul>
+<li>直接取值<ul>
+<li>直接打印到控制台，比较方便，但无法对数据继续进行操作</li>
+</ul>
+</li>
+<li><font color='#d15252'>赋值取值</font><ul>
+<li>创建一个变量保存数据<ul>
+<li><code>变量名 = 数组名[索引]</code></li>
+<li>比较繁琐，但可以对数据进行多次操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅲ-数组的特性"><a href="#Ⅲ-数组的特性" class="headerlink" title="Ⅲ.数组的特性"></a>Ⅲ.数组的特性</h5><ul>
+<li>length表示数组的长度<ul>
+<li><code>arr.length    </code></li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅳ-练习"><a href="#Ⅳ-练习" class="headerlink" title="Ⅳ.练习"></a>Ⅳ.练习</h5><ul>
+<li>数组中存5个整数，求和，以及求平均数</li>
+<li>数组中存5个数，找出最大、最小的两个数</li>
+<li>冒泡排序：从第一个数开始，依次和后一个数比较，小的放前，大的放后</li>
+</ul>
+<h5 id="Ⅴ-数组常见异常"><a href="#Ⅴ-数组常见异常" class="headerlink" title="Ⅴ.数组常见异常"></a>Ⅴ.数组常见异常</h5><ul>
+<li><p>索引超出范围，索引越界</p>
+<ul>
+<li><code> java.lang.ArrayIndexOutOfBoundsException:</code></li>
+</ul>
+</li>
+<li><p>空指针异常</p>
+<ul>
+<li><code>java.lang.NullPointerException</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="二、二维数组"><a href="#二、二维数组" class="headerlink" title="二、二维数组"></a>二、二维数组</h3><h4 id="1-二维数组的概念"><a href="#1-二维数组的概念" class="headerlink" title="1.二维数组的概念"></a>1.二维数组的概念</h4><ul>
+<li>二维数组就是一个元素为一维数组的数组</li>
+</ul>
+<h4 id="2-二维数组的定义格式"><a href="#2-二维数组的定义格式" class="headerlink" title="2.二维数组的定义格式"></a>2.二维数组的定义格式</h4><h5 id="①动态初始化"><a href="#①动态初始化" class="headerlink" title="①动态初始化"></a>①动态初始化</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[][] 变量名 = <span class="keyword">new</span> 数据类型[m][n];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>arr[m] [n] 表示第m+1个一维数组的第n+1个数</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[][] 变量名 = <span class="keyword">new</span> 数据类型[m][];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>没有给出一维数组的元素个数，可以动态给出</p>
+</blockquote>
+<h5 id="②静态初始化"><a href="#②静态初始化" class="headerlink" title="②静态初始化"></a>②静态初始化</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[][] 变量名 = <span class="keyword">new</span> 数据类型[][]&#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;......&#125;;</span><br><span class="line"></span><br><span class="line">简化：</span><br><span class="line">    数据类型[][] 变量名 = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;...&#125;;</span><br><span class="line">例如：<span class="keyword">int</span>[][] arr = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;,&#123;<span class="number">6</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-二维数组的数据操作"><a href="#3-二维数组的数据操作" class="headerlink" title="3.二维数组的数据操作"></a>3.二维数组的数据操作</h4><h5 id="Ⅰ-取数据"><a href="#Ⅰ-取数据" class="headerlink" title="Ⅰ.取数据"></a>Ⅰ.取数据</h5><ul>
+<li><p>直接取出</p>
+<ul>
+<li>用双层嵌套循环，第一层循环取出一维数组，第二层循环取出一维数组里的数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义一个二维数组</span></span><br><span class="line"><span class="keyword">int</span>[][] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][<span class="number">4</span>];</span><br><span class="line"><span class="comment">//外层循环取出一位数组</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">    <span class="comment">//内存循环遍历一维数组</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;arr[i].length;j++)&#123;</span><br><span class="line">		System.out.println(arr[i][j]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>赋值取</p>
+<ul>
+<li><code>int a = arr[0][1];</code>取出第一个一维数组的第二个数</li>
+</ul>
+</li>
+</ul>
+<h5 id="②赋值"><a href="#②赋值" class="headerlink" title="②赋值"></a>②赋值</h5><ul>
+<li>格式：<code>变量名[索引第几个数组][索引第几个数] = 数据</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>二维数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数组实现数据增查删改和数据库操作</title>
+    <url>/2021/08/25/%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%A2%9E%E6%9F%A5%E5%88%A0%E6%94%B9%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h3 id="一、综合案例：实现商品菜单，数据增查删改"><a href="#一、综合案例：实现商品菜单，数据增查删改" class="headerlink" title="一、综合案例：实现商品菜单，数据增查删改"></a>一、综合案例：实现商品菜单，数据增查删改</h3><h5 id="1-创建工程，测试环境"><a href="#1-创建工程，测试环境" class="headerlink" title="1.创建工程，测试环境"></a>1.创建工程，测试环境</h5><h5 id="2-前奏：实现数据的加载"><a href="#2-前奏：实现数据的加载" class="headerlink" title="2.前奏：实现数据的加载"></a>2.前奏：实现数据的加载</h5><ul>
+<li>变量 数组 集合 数据库 （暂时用数组）<ul>
+<li>数据类型[] 变量名 = new 数据类型[空间长度]</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-需求分析："><a href="#3-需求分析：" class="headerlink" title="3.需求分析："></a>3.需求分析：</h5><ul>
+<li><p>菜单：6条输出语句</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;1.查看商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;2.修改商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;3.增加商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;4.删除商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;5.退出&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;6.请您选择1---5&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>实现交互：即键盘录入数据，使用Scanner三个步骤</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"><span class="keyword">int</span> a = sc.nextInt();</span><br></pre></td></tr></table></figure></li>
+<li><p>实现菜单可以重复选择：利用for或者while死循环</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">for</span><span class="params">(;;)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="title">while</span><span class="params">(true)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现菜单的选择：使用if判断语句，判断录入的值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(a==<span class="number">1</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现查看功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现修改功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">3</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现增加功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">4</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现删除功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">5</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;退出&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现查看功能：for循环实现遍历数组、if判断不是0再输出</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;	</span><br><span class="line">	<span class="keyword">if</span> (arr[i]!=<span class="number">0</span>)&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;商品的编号:&quot;</span>+arr[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现修改功能：用for循环查看数组，if判断选择要修改的数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr[i]==b)&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;请输入修改后的编号&quot;</span>);</span><br><span class="line">		arr[i]=sc.nextInt();</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现增加功能：用for+if，将录入数据增加到0上</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入要增加的商品编号&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> x = sc.nextInt();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr[i]==<span class="number">0</span>)&#123;</span><br><span class="line">		arr[i]=x;</span><br><span class="line">		i = arr.length; <span class="comment">//跳出循环</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现删除功能：用for+if，匹配和录入数据相同的索引，更改值为0</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入要删除的商品编号&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> g = sc.nextInt();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (arr[i]==g)&#123;</span><br><span class="line">			arr[i]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="4-代码："><a href="#4-代码：" class="headerlink" title="4.代码："></a>4.代码：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建工程并测试环境</span></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo1</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span></span><br><span class="line"><span class="function">	</span>&#123;	</span><br><span class="line">		<span class="comment">//实现交互效果，需要键盘录入数据</span></span><br><span class="line">		<span class="comment">//键盘录入数据三步，导包，加载进内存，保存录入数据</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="comment">//定义布尔类型变量，控制循环结束</span></span><br><span class="line">		<span class="keyword">boolean</span> f =<span class="keyword">true</span>;</span><br><span class="line">		<span class="comment">//数据加载</span></span><br><span class="line">		<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">		arr[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">		arr[<span class="number">1</span>]=<span class="number">2</span>;</span><br><span class="line">		arr[<span class="number">2</span>]=<span class="number">3</span>;</span><br><span class="line">		<span class="comment">//实现可以重复选择菜单</span></span><br><span class="line">		<span class="keyword">for</span> (;f; )</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> j =<span class="number">0</span>;</span><br><span class="line">		<span class="comment">//需求分析：菜单页面即输出语句</span></span><br><span class="line">		System.out.println(<span class="string">&quot;====================&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 1.查看商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 2.修改商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 3.增加商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 4.删除商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 5.退出系统     ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| (请您选择1-5)  ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;====================&quot;</span>);</span><br><span class="line">		<span class="keyword">int</span> a = sc.nextInt();</span><br><span class="line">		<span class="comment">//实现菜单的选择</span></span><br><span class="line">		<span class="keyword">if</span> (a==<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="comment">//循环输出遍历数组</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;	<span class="comment">//if语句判断不是0再输出</span></span><br><span class="line">					<span class="keyword">if</span> (arr[i]!=<span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;商品的编号:&quot;</span>+arr[i]);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				System.out.println(<span class="string">&quot;===查看成功===&quot;</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要修改的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> b = sc.nextInt();</span><br><span class="line">				<span class="comment">//for+if判断并选择到需要修改的数据</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (arr[i]==b)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;请输入修改后的编号&quot;</span>);</span><br><span class="line">						arr[i]=sc.nextInt();</span><br><span class="line">						i = arr.length;</span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i]!=b)</span><br><span class="line">					&#123;</span><br><span class="line">						j++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (arr.length==j)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;您要修改的编号不存在&quot;</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">3</span>)&#123;</span><br><span class="line">				<span class="comment">//实现增加功能</span></span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要增加的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> x = sc.nextInt();</span><br><span class="line">				<span class="comment">//for+if查询判断，将录入数据加载到0上</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="comment">//判断如果商品编号已存在，提示添加失败，跳出循环</span></span><br><span class="line">					<span class="keyword">if</span> (arr[i]==x)</span><br><span class="line">					&#123;</span><br><span class="line">					System.out.println(<span class="string">&quot;您输入的商品编号已存在&quot;</span>);</span><br><span class="line">					i=arr.length;<span class="comment">//跳出循环</span></span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i]==<span class="number">0</span>)   <span class="comment">//如果不存在，判断为0的数据，添加</span></span><br><span class="line">						&#123;</span><br><span class="line">							arr[i]=x;</span><br><span class="line">							i = arr.length; <span class="comment">//跳出循环</span></span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">4</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要删除的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> g = sc.nextInt();</span><br><span class="line">				<span class="comment">//实现删除功能</span></span><br><span class="line">				<span class="comment">//for+if判断</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (arr[i]==g)</span><br><span class="line">					&#123;</span><br><span class="line">						arr[i]=<span class="number">0</span>;</span><br><span class="line">						System.out.println(<span class="string">&quot;===删除成功===&quot;</span>);</span><br><span class="line">						i =arr.length;<span class="comment">//跳出循环</span></span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span>(arr[i]!=g)&#123;</span><br><span class="line">						j++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (arr.length==j)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;你要删除的商品编号不存在&quot;</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">5</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;您已成功退出&quot;</span>);</span><br><span class="line">				f = <span class="keyword">false</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;===输入错误，请选择1-5===&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="二、使用数据库-Mysql"><a href="#二、使用数据库-Mysql" class="headerlink" title="二、使用数据库(Mysql)"></a>二、使用数据库(Mysql)</h3><h4 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1. 创建数据库"></a>1. 创建数据库</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create database 数据库名称</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-创建表格"><a href="#2-创建表格" class="headerlink" title="2. 创建表格"></a>2. 创建表格</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">	列名 数据类型,</span><br><span class="line">	列名 数据类型,</span><br><span class="line">    ....</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-插入数据"><a href="#3-插入数据" class="headerlink" title="3. 插入数据"></a>3. 插入数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">insert into 表名 (列名,...) values(数据,数据);</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-更新数据"><a href="#4-更新数据" class="headerlink" title="4.更新数据"></a>4.更新数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">updata 表名 set 字段 = 数值;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">update 表名 set 字段 = 数值 WHERE 字段=数值（选择）;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-删除数据"><a href="#5-删除数据" class="headerlink" title="5.删除数据"></a>5.删除数据</h4><ul>
+<li><p>删除全部数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Delete From 表名;</span><br></pre></td></tr></table></figure></li>
+<li><p>删除指定数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Delete From 表名 WHERE 字段 = 数值;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="6-查询数据"><a href="#6-查询数据" class="headerlink" title="6.查询数据"></a>6.查询数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM 表名</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>案例</tag>
+        <tag>增查删改</tag>
+        <tag>数据库</tag>
+        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
