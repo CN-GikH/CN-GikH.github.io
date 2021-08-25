@@ -288,6 +288,191 @@
       </tags>
   </entry>
   <entry>
+    <title>File类和递归</title>
+    <url>/2021/08/25/File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/</url>
+    <content><![CDATA[<h3 id="一、File"><a href="#一、File" class="headerlink" title="一、File"></a>一、File</h3><ul>
+<li>Java可以操作我们的本地硬盘<ul>
+<li>文件和目录路径名的抽象表示<ul>
+<li>文件</li>
+<li>内容</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-什么是File类"><a href="#1-什么是File类" class="headerlink" title="1.什么是File类"></a>1.什么是File类</h4><ul>
+<li>就是对我们本地文件管理的类（文件夹在java中是File）</li>
+</ul>
+<h4 id="2-使用File类"><a href="#2-使用File类" class="headerlink" title="2.使用File类"></a>2.使用File类</h4><h5 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h5><ul>
+<li><h6 id="pathSeparator（了解）"><a href="#pathSeparator（了解）" class="headerlink" title="pathSeparator（了解）"></a>pathSeparator（了解）</h6><ul>
+<li> 与系统相关的路径分隔符字符，为方便起见，表示为字符串。</li>
+<li> 直接输出可以得到一个 ”；” 分号</li>
+</ul>
+</li>
+</ul>
+<h5 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h5><h6 id="Ⅰ-File-File-parent-String-child"><a href="#Ⅰ-File-File-parent-String-child" class="headerlink" title="Ⅰ.File(File parent, String child)"></a>Ⅰ.File(File parent, String child)</h6><ul>
+<li>从父抽象路径名和子路径名字符串创建新的 File实例。</li>
+</ul>
+<h6 id="Ⅱ-File-String-pathname"><a href="#Ⅱ-File-String-pathname" class="headerlink" title="Ⅱ.File(String pathname)"></a>Ⅱ.File(String pathname)</h6><ul>
+<li>通过将给定的路径名字符串转换为抽象路径名来创建新的 File实例。  </li>
+</ul>
+<h6 id="Ⅲ-File-String-parent-String-child"><a href="#Ⅲ-File-String-parent-String-child" class="headerlink" title="Ⅲ.File(String parent, String child)"></a>Ⅲ.File(String parent, String child)</h6><ul>
+<li> 从父路径名字符串和子路径名字符串创建新的 File实例。  </li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/06/2GEvFzH5uYcWSmf.png" alt="image-20210806095327726"></p>
+<blockquote>
+<p>抽象：File表示的这个目录，可能存在也可能不存在，所以被称为是抽象的</p>
+</blockquote>
+<blockquote>
+<p>三个构造方法的区别：不要从应用层，因为我们还没有遇到这样的案例。 先单独从表层考虑</p>
+</blockquote>
+<h4 id="3-成员方法-—-File类的获取方法"><a href="#3-成员方法-—-File类的获取方法" class="headerlink" title="3.成员方法 — File类的获取方法"></a>3.成员方法 — File类的获取方法</h4><ul>
+<li>getAbsolutePath()<ul>
+<li>返回此抽象路径名的绝对路径名字符串。</li>
+<li>即返回全路径（<font color='#d15252'>绝对路径</font>）</li>
+</ul>
+</li>
+<li>getName()<ul>
+<li>返回由此抽象路径名表示的文件或目录的名称</li>
+<li>即返回最后一个路径（<font color='#d15252'>相对路径</font>）</li>
+</ul>
+</li>
+<li>getPath()<ul>
+<li>将此<strong>抽象路径名</strong>转换为路径名字符串</li>
+</ul>
+</li>
+<li>length()<ul>
+<li>返回由此抽象路径名表示的文件的长度</li>
+<li>文件的长度、字节数<ul>
+<li>但当获取文件夹的大小时，通常不够准确</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-成员方法-—-文件-文件夹的创建及删除"><a href="#4-成员方法-—-文件-文件夹的创建及删除" class="headerlink" title="4.成员方法 — 文件/文件夹的创建及删除"></a>4.成员方法 — 文件/文件夹的创建及删除</h4><ul>
+<li>createNewFile<ul>
+<li>当且仅当具有该名称的文件尚不存在时，原地创建一个由该抽象路径名命名的新的空文件<ul>
+<li>简单来说就是创建一个文件</li>
+<li>创建成功的前提条件：无此文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>mkdir()<ul>
+<li>创建目录（单层）</li>
+</ul>
+</li>
+<li>mkdirs()<ul>
+<li>创建由此抽象路径名命名的目录，包括任何必需但不存在的父目录。<ul>
+<li>简单来说就是创建文件夹</li>
+<li>可以创建多个</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>isFile()<ul>
+<li>测试此抽象路径名表示的文件是否为普通文件。</li>
+</ul>
+</li>
+<li>delete()<ul>
+<li><font color='#d15252'>删除</font>由此抽象路径名表示的文件或目录</li>
+</ul>
+</li>
+<li>isDirectory()<ul>
+<li>测试此抽象路径名表示的文件是否为目录<ul>
+<li>前提条件：目录一定要存在</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>exists()<ul>
+<li>测试此抽象路径名表示的文件或目录是否存在</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-成员方法-—-获取文件目录"><a href="#5-成员方法-—-获取文件目录" class="headerlink" title="5.成员方法 — 获取文件目录"></a>5.成员方法 — 获取文件目录</h4><h5 id="Ⅰ-list"><a href="#Ⅰ-list" class="headerlink" title="Ⅰ.list()"></a>Ⅰ.list()</h5><ul>
+<li><p>返回一个字符串数组，命名由此抽象路径名表示的目录中的文件和目录</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String[] list():获取路径中的子目录/文件</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//list方法，返回绝对路径，是String字符串类型的</span></span><br><span class="line">String[] list = f.list();</span><br><span class="line"><span class="comment">//循环遍历查看结果</span></span><br><span class="line"><span class="keyword">for</span> (String i: list)&#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="Ⅱ-listFiles"><a href="#Ⅱ-listFiles" class="headerlink" title="Ⅱ.listFiles()"></a>Ⅱ.<font color='#d15252'>listFiles()</font></h5><ul>
+<li><p>与list()功能一样,但返回的是File()类型的数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">File[] listFiles()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//listFiles方法，返回File对象，更加灵活，可以再次进行操作</span></span><br><span class="line">File[] files = f.listFiles();</span><br><span class="line"><span class="keyword">for</span> (File i : files)&#123;</span><br><span class="line">    <span class="comment">//返回绝对路径是因为默认重写了toString方法</span></span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用listFiles()更加灵活，因为返回值是File类型，可继续使用File的其他功能</p>
+</li>
+</ul>
+<h5 id="Ⅲ-listFiles-FileFilter-filter-过滤文件（用的比较多）"><a href="#Ⅲ-listFiles-FileFilter-filter-过滤文件（用的比较多）" class="headerlink" title="Ⅲ.listFiles(FileFilter filter) 过滤文件（用的比较多）"></a>Ⅲ.<strong><font color='#d15252'>listFiles(FileFilter filter) </font>过滤文件</strong>（用的比较多）</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">File[] listFiles(FileFilter filter) </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>同样是listFiles，表示方法的重载，传递一个FileFilter类型的参数</p>
+</li>
+<li><p><font color='#d15252'>FileFilter</font>：由API可知FilleFilter是一个接口，而且没有已知的实现类</p>
+<ul>
+<li>所以我们要使用它，必须定义一个类，implements是西安接口FileFilter</li>
+<li>并且我们需要重写接口中的类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">accept</span><span class="params">(File dir, String name)</span></span></span><br><span class="line"><span class="function"><span class="comment">//测试指定文件是否应包含在文件列表中</span></span></span><br><span class="line"><span class="function">dir - 找到该文件的目录。 </span></span><br><span class="line"><span class="function">name - 文件的名称。 </span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/06/bTpwMFlWfIq7GLn.png" alt="image-20210806140719225"></p>
+<ul>
+<li>pahthname：传过来的参数名</li>
+<li>getName()：获取内容</li>
+<li>endsWith()：String中的成员方法<ul>
+<li><code>endsWith(String suffix)</code></li>
+<li>测试此字符串是否以指定的后缀结尾。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/06/KYSm2TRUZ4gCMJ3.png" alt="image-20210806140740062"></p>
+</li>
+<li><p>也可以直接通过匿名对象使用</p>
+<p><img src="https://i.loli.net/2021/08/06/ly1JWNortYHjh86.png" alt="image-20210806145718867"></p>
+</li>
+</ul>
+<h5 id="Ⅳ-listFiles-FilenameFilter-filter-同样是过滤文件"><a href="#Ⅳ-listFiles-FilenameFilter-filter-同样是过滤文件" class="headerlink" title="Ⅳ.listFiles(FilenameFilter filter)同样是过滤文件"></a>Ⅳ.listFiles(FilenameFilter filter)同样是过滤文件</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> File[] listFiles(FilenameFilter filter)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回一个抽象路径名数组，表示由此抽象路径名表示的满足指定过滤器的目录中的文件和目录，同样用方法重载的方法<ul>
+<li>返回值类型：File[]</li>
+<li>传递参数：FilenameFilter filter</li>
+</ul>
+</li>
+<li><font color='#d15252'>FilenameFilter</font> 同样是一个接口<ul>
+<li>成员方法：accept(File dir,String name)</li>
+<li>测试指定文件是否应包含在文件列表中</li>
+<li>返回boolean类型的值</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、递归"><a href="#二、递归" class="headerlink" title="二、递归"></a>二、递归</h3><h4 id="1-什么是递归"><a href="#1-什么是递归" class="headerlink" title="1.什么是递归"></a>1.什么是递归</h4><ul>
+<li>方法自己调用自己就是递归<ul>
+<li>要给自己设置出口</li>
+<li>构造方法不能使用</li>
+<li>不要过多的使用（百万以上最好不要用递归）</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-递归练习"><a href="#2-递归练习" class="headerlink" title="2.递归练习"></a>2.递归练习</h4><ul>
+<li>遍历文件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//判断如果是目录就继续进入并遍历</span></span><br><span class="line"><span class="keyword">for</span> (File i : files) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i.isDirectory()) &#123;</span><br><span class="line">        find(i);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//保存文件名</span></span><br><span class="line">        String name = i.getName();</span><br><span class="line">        <span class="comment">//判断文件后缀是不是.mp4文件</span></span><br><span class="line">        <span class="keyword">if</span> (name.endsWith(<span class="string">&quot;.mp4&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>File</tag>
+        <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>API的使用之Objece\String</title>
     <url>/2021/08/25/API%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B9%8BObjece-String/</url>
     <content><![CDATA[<h3 id="一、Java的API"><a href="#一、Java的API" class="headerlink" title="一、Java的API"></a>一、Java的API</h3><h4 id="1-API的概念"><a href="#1-API的概念" class="headerlink" title="1.API的概念"></a>1.API的概念</h4><ul>
@@ -655,191 +840,6 @@
       </tags>
   </entry>
   <entry>
-    <title>File类和递归</title>
-    <url>/2021/08/25/File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/</url>
-    <content><![CDATA[<h3 id="一、File"><a href="#一、File" class="headerlink" title="一、File"></a>一、File</h3><ul>
-<li>Java可以操作我们的本地硬盘<ul>
-<li>文件和目录路径名的抽象表示<ul>
-<li>文件</li>
-<li>内容</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="1-什么是File类"><a href="#1-什么是File类" class="headerlink" title="1.什么是File类"></a>1.什么是File类</h4><ul>
-<li>就是对我们本地文件管理的类（文件夹在java中是File）</li>
-</ul>
-<h4 id="2-使用File类"><a href="#2-使用File类" class="headerlink" title="2.使用File类"></a>2.使用File类</h4><h5 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h5><ul>
-<li><h6 id="pathSeparator（了解）"><a href="#pathSeparator（了解）" class="headerlink" title="pathSeparator（了解）"></a>pathSeparator（了解）</h6><ul>
-<li> 与系统相关的路径分隔符字符，为方便起见，表示为字符串。</li>
-<li> 直接输出可以得到一个 ”；” 分号</li>
-</ul>
-</li>
-</ul>
-<h5 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h5><h6 id="Ⅰ-File-File-parent-String-child"><a href="#Ⅰ-File-File-parent-String-child" class="headerlink" title="Ⅰ.File(File parent, String child)"></a>Ⅰ.File(File parent, String child)</h6><ul>
-<li>从父抽象路径名和子路径名字符串创建新的 File实例。</li>
-</ul>
-<h6 id="Ⅱ-File-String-pathname"><a href="#Ⅱ-File-String-pathname" class="headerlink" title="Ⅱ.File(String pathname)"></a>Ⅱ.File(String pathname)</h6><ul>
-<li>通过将给定的路径名字符串转换为抽象路径名来创建新的 File实例。  </li>
-</ul>
-<h6 id="Ⅲ-File-String-parent-String-child"><a href="#Ⅲ-File-String-parent-String-child" class="headerlink" title="Ⅲ.File(String parent, String child)"></a>Ⅲ.File(String parent, String child)</h6><ul>
-<li> 从父路径名字符串和子路径名字符串创建新的 File实例。  </li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/06/2GEvFzH5uYcWSmf.png" alt="image-20210806095327726"></p>
-<blockquote>
-<p>抽象：File表示的这个目录，可能存在也可能不存在，所以被称为是抽象的</p>
-</blockquote>
-<blockquote>
-<p>三个构造方法的区别：不要从应用层，因为我们还没有遇到这样的案例。 先单独从表层考虑</p>
-</blockquote>
-<h4 id="3-成员方法-—-File类的获取方法"><a href="#3-成员方法-—-File类的获取方法" class="headerlink" title="3.成员方法 — File类的获取方法"></a>3.成员方法 — File类的获取方法</h4><ul>
-<li>getAbsolutePath()<ul>
-<li>返回此抽象路径名的绝对路径名字符串。</li>
-<li>即返回全路径（<font color='#d15252'>绝对路径</font>）</li>
-</ul>
-</li>
-<li>getName()<ul>
-<li>返回由此抽象路径名表示的文件或目录的名称</li>
-<li>即返回最后一个路径（<font color='#d15252'>相对路径</font>）</li>
-</ul>
-</li>
-<li>getPath()<ul>
-<li>将此<strong>抽象路径名</strong>转换为路径名字符串</li>
-</ul>
-</li>
-<li>length()<ul>
-<li>返回由此抽象路径名表示的文件的长度</li>
-<li>文件的长度、字节数<ul>
-<li>但当获取文件夹的大小时，通常不够准确</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="4-成员方法-—-文件-文件夹的创建及删除"><a href="#4-成员方法-—-文件-文件夹的创建及删除" class="headerlink" title="4.成员方法 — 文件/文件夹的创建及删除"></a>4.成员方法 — 文件/文件夹的创建及删除</h4><ul>
-<li>createNewFile<ul>
-<li>当且仅当具有该名称的文件尚不存在时，原地创建一个由该抽象路径名命名的新的空文件<ul>
-<li>简单来说就是创建一个文件</li>
-<li>创建成功的前提条件：无此文件</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>mkdir()<ul>
-<li>创建目录（单层）</li>
-</ul>
-</li>
-<li>mkdirs()<ul>
-<li>创建由此抽象路径名命名的目录，包括任何必需但不存在的父目录。<ul>
-<li>简单来说就是创建文件夹</li>
-<li>可以创建多个</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>isFile()<ul>
-<li>测试此抽象路径名表示的文件是否为普通文件。</li>
-</ul>
-</li>
-<li>delete()<ul>
-<li><font color='#d15252'>删除</font>由此抽象路径名表示的文件或目录</li>
-</ul>
-</li>
-<li>isDirectory()<ul>
-<li>测试此抽象路径名表示的文件是否为目录<ul>
-<li>前提条件：目录一定要存在</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>exists()<ul>
-<li>测试此抽象路径名表示的文件或目录是否存在</li>
-</ul>
-</li>
-</ul>
-<h4 id="5-成员方法-—-获取文件目录"><a href="#5-成员方法-—-获取文件目录" class="headerlink" title="5.成员方法 — 获取文件目录"></a>5.成员方法 — 获取文件目录</h4><h5 id="Ⅰ-list"><a href="#Ⅰ-list" class="headerlink" title="Ⅰ.list()"></a>Ⅰ.list()</h5><ul>
-<li><p>返回一个字符串数组，命名由此抽象路径名表示的目录中的文件和目录</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String[] list():获取路径中的子目录/文件</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//list方法，返回绝对路径，是String字符串类型的</span></span><br><span class="line">String[] list = f.list();</span><br><span class="line"><span class="comment">//循环遍历查看结果</span></span><br><span class="line"><span class="keyword">for</span> (String i: list)&#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h5 id="Ⅱ-listFiles"><a href="#Ⅱ-listFiles" class="headerlink" title="Ⅱ.listFiles()"></a>Ⅱ.<font color='#d15252'>listFiles()</font></h5><ul>
-<li><p>与list()功能一样,但返回的是File()类型的数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">File[] listFiles()</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//listFiles方法，返回File对象，更加灵活，可以再次进行操作</span></span><br><span class="line">File[] files = f.listFiles();</span><br><span class="line"><span class="keyword">for</span> (File i : files)&#123;</span><br><span class="line">    <span class="comment">//返回绝对路径是因为默认重写了toString方法</span></span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>使用listFiles()更加灵活，因为返回值是File类型，可继续使用File的其他功能</p>
-</li>
-</ul>
-<h5 id="Ⅲ-listFiles-FileFilter-filter-过滤文件（用的比较多）"><a href="#Ⅲ-listFiles-FileFilter-filter-过滤文件（用的比较多）" class="headerlink" title="Ⅲ.listFiles(FileFilter filter) 过滤文件（用的比较多）"></a>Ⅲ.<strong><font color='#d15252'>listFiles(FileFilter filter) </font>过滤文件</strong>（用的比较多）</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">File[] listFiles(FileFilter filter) </span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>同样是listFiles，表示方法的重载，传递一个FileFilter类型的参数</p>
-</li>
-<li><p><font color='#d15252'>FileFilter</font>：由API可知FilleFilter是一个接口，而且没有已知的实现类</p>
-<ul>
-<li>所以我们要使用它，必须定义一个类，implements是西安接口FileFilter</li>
-<li>并且我们需要重写接口中的类</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">accept</span><span class="params">(File dir, String name)</span></span></span><br><span class="line"><span class="function"><span class="comment">//测试指定文件是否应包含在文件列表中</span></span></span><br><span class="line"><span class="function">dir - 找到该文件的目录。 </span></span><br><span class="line"><span class="function">name - 文件的名称。 </span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/06/bTpwMFlWfIq7GLn.png" alt="image-20210806140719225"></p>
-<ul>
-<li>pahthname：传过来的参数名</li>
-<li>getName()：获取内容</li>
-<li>endsWith()：String中的成员方法<ul>
-<li><code>endsWith(String suffix)</code></li>
-<li>测试此字符串是否以指定的后缀结尾。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/06/KYSm2TRUZ4gCMJ3.png" alt="image-20210806140740062"></p>
-</li>
-<li><p>也可以直接通过匿名对象使用</p>
-<p><img src="https://i.loli.net/2021/08/06/ly1JWNortYHjh86.png" alt="image-20210806145718867"></p>
-</li>
-</ul>
-<h5 id="Ⅳ-listFiles-FilenameFilter-filter-同样是过滤文件"><a href="#Ⅳ-listFiles-FilenameFilter-filter-同样是过滤文件" class="headerlink" title="Ⅳ.listFiles(FilenameFilter filter)同样是过滤文件"></a>Ⅳ.listFiles(FilenameFilter filter)同样是过滤文件</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> File[] listFiles(FilenameFilter filter)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>返回一个抽象路径名数组，表示由此抽象路径名表示的满足指定过滤器的目录中的文件和目录，同样用方法重载的方法<ul>
-<li>返回值类型：File[]</li>
-<li>传递参数：FilenameFilter filter</li>
-</ul>
-</li>
-<li><font color='#d15252'>FilenameFilter</font> 同样是一个接口<ul>
-<li>成员方法：accept(File dir,String name)</li>
-<li>测试指定文件是否应包含在文件列表中</li>
-<li>返回boolean类型的值</li>
-</ul>
-</li>
-</ul>
-<h3 id="二、递归"><a href="#二、递归" class="headerlink" title="二、递归"></a>二、递归</h3><h4 id="1-什么是递归"><a href="#1-什么是递归" class="headerlink" title="1.什么是递归"></a>1.什么是递归</h4><ul>
-<li>方法自己调用自己就是递归<ul>
-<li>要给自己设置出口</li>
-<li>构造方法不能使用</li>
-<li>不要过多的使用（百万以上最好不要用递归）</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-递归练习"><a href="#2-递归练习" class="headerlink" title="2.递归练习"></a>2.递归练习</h4><ul>
-<li>遍历文件</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//判断如果是目录就继续进入并遍历</span></span><br><span class="line"><span class="keyword">for</span> (File i : files) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i.isDirectory()) &#123;</span><br><span class="line">        find(i);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//保存文件名</span></span><br><span class="line">        String name = i.getName();</span><br><span class="line">        <span class="comment">//判断文件后缀是不是.mp4文件</span></span><br><span class="line">        <span class="keyword">if</span> (name.endsWith(<span class="string">&quot;.mp4&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>File</tag>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ArrayList集合和方法练习</title>
     <url>/2021/08/25/ArrayList%E9%9B%86%E5%90%88%E5%92%8C%E6%96%B9%E6%B3%95%E7%BB%83%E4%B9%A0/</url>
     <content><![CDATA[<h3 id="一、练习"><a href="#一、练习" class="headerlink" title="一、练习"></a>一、练习</h3><h4 id="1-编写思路"><a href="#1-编写思路" class="headerlink" title="1.编写思路"></a>1.编写思路</h4><ul>
@@ -1192,6 +1192,358 @@
       </categories>
       <tags>
         <tag>IO流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java概述和变量</title>
+    <url>/2021/08/25/Java%E6%A6%82%E8%BF%B0%E5%92%8C%E5%8F%98%E9%87%8F/</url>
+    <content><![CDATA[<h3 id="Java"><a href="#Java" class="headerlink" title="Java!"></a>Java!</h3><ul>
+<li><h4 id="什么是Java？"><a href="#什么是Java？" class="headerlink" title="什么是Java？"></a>什么是Java？</h4><ul>
+<li>编程语言</li>
+<li>开发平台（JVM）</li>
+</ul>
+</li>
+</ul>
+<h3 id="一、编程语言"><a href="#一、编程语言" class="headerlink" title="一、编程语言"></a>一、编程语言</h3><ul>
+<li><h4 id="布置平台"><a href="#布置平台" class="headerlink" title="布置平台"></a>布置平台</h4><ul>
+<li>官方文档解释：JavaSE是Java平台标准版<ul>
+<li>JDK</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="下载JDK"><a href="#下载JDK" class="headerlink" title="下载JDK"></a>下载JDK</h4></li>
+<li><h4 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h4><ul>
+<li>开发工具</li>
+<li>源代码</li>
+<li>JRE：JDK包含JRE</li>
+</ul>
+</li>
+<li><h4 id="使用JDK"><a href="#使用JDK" class="headerlink" title="使用JDK"></a>使用JDK</h4><ul>
+<li><p>JDK安装目录bin文件夹下</p>
+</li>
+<li><p>[^javac.exe]: 编译</p>
+</li>
+<li><p>[^java.exe]: 运行</p>
+</li>
+</ul>
+</li>
+<li><p>配置环境变量</p>
+<ul>
+<li>官网添加JDK路径到系统Path变量</li>
+<li>动态获取%JAVA_HOME%</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、编程语言"><a href="#二、编程语言" class="headerlink" title="二、编程语言"></a>二、编程语言</h3><ul>
+<li><p>基本单位</p>
+<ul>
+<li>class 类</li>
+</ul>
+</li>
+<li><p>最简单的java程序</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>类名要与文件名一致，后缀为.class</li>
+</ul>
+</li>
+<li><p>main方法是程序的入口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[]args)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="三、学习Java"><a href="#三、学习Java" class="headerlink" title="三、学习Java"></a>三、学习Java</h3><ul>
+<li>java语言的核心本质是对数据的操作</li>
+<li>数据的操作最基础的是存数据和取数据</li>
+</ul>
+<h3 id="四、存取数据"><a href="#四、存取数据" class="headerlink" title="四、存取数据"></a>四、存取数据</h3><ul>
+<li><p>变量</p>
+<ul>
+<li><p>一个可以变化的量</p>
+<ul>
+<li>本质：存储一个数据</li>
+</ul>
+</li>
+<li><p>格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型 变量名 = 数值 ；</span><br></pre></td></tr></table></figure></li>
+<li><p>注意事项</p>
+<ul>
+<li>使用变量时需要注意变量有没有数据<ul>
+<li>没有数据时，可以完成赋值操作</li>
+<li>但是不能完成取值操</li>
+</ul>
+</li>
+<li>变量在{ }内有效，且不能定义同名变量（作用域）</li>
+<li>{ } ：代码块，独立存在，运行结束后立即释放，提高内存使用率</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、Java的数据类型"><a href="#五、Java的数据类型" class="headerlink" title="五、Java的数据类型"></a>五、Java的数据类型</h3><ul>
+<li>每一个数据类型的存储范围都不一样，为了提高内存的使用率</li>
+</ul>
+<h4 id="1-整数"><a href="#1-整数" class="headerlink" title="1.整数"></a>1.整数</h4><table>
+<thead>
+<tr>
+<th align="left">整数</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">byte</td>
+<td>8bit</td>
+</tr>
+<tr>
+<td align="left">short</td>
+<td>16bit</td>
+</tr>
+<tr>
+<td align="left"><strong>int(默认)</strong></td>
+<td>32bit</td>
+</tr>
+<tr>
+<td align="left">long</td>
+<td>64bit</td>
+</tr>
+</tbody></table>
+<ul>
+<li>在Java中，出现的所有整数，默认都是int类型</li>
+<li>byte在存整数时，如果int类型整数在byte范围内，byte会自动完成转换 int—byte</li>
+</ul>
+<h4 id="2-小数"><a href="#2-小数" class="headerlink" title="2.小数"></a>2.小数</h4><table>
+<thead>
+<tr>
+<th>小数</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>float</td>
+<td>浮点型 32bit</td>
+</tr>
+<tr>
+<td><strong>double(默认)</strong></td>
+<td>双精度 64bit</td>
+</tr>
+</tbody></table>
+<ul>
+<li>长整型long后缀使用L标记，表明是长整型</li>
+<li>单精度float后缀使用F标记，表名是单精度</li>
+</ul>
+<h4 id="3-布尔类型"><a href="#3-布尔类型" class="headerlink" title="3.布尔类型"></a>3.布尔类型</h4><ul>
+<li>ture</li>
+<li>false</li>
+</ul>
+<h3 id="六、变量补充知识点"><a href="#六、变量补充知识点" class="headerlink" title="六、变量补充知识点"></a>六、变量补充知识点</h3><ul>
+<li><p>两个整数相除，得到的是整数部分</p>
+</li>
+<li><p>数据类型之间的转换</p>
+<ul>
+<li><p>隐式转换（小的自动转大）</p>
+</li>
+<li><p>强制转换（大转小）</p>
+<ul>
+<li><p>格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">目标类型 变量名 = （目标类型）被转换数据</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="七、进制"><a href="#七、进制" class="headerlink" title="七、进制"></a>七、进制</h3><h4 id="1-什么是进制？"><a href="#1-什么是进制？" class="headerlink" title="1.什么是进制？"></a>1.什么是进制？</h4><ul>
+<li>逢几进一</li>
+</ul>
+<h4 id="2-Java常见的进制"><a href="#2-Java常见的进制" class="headerlink" title="2.Java常见的进制"></a>2.Java常见的进制</h4><ul>
+<li>二进制：0b</li>
+<li>八进制：0</li>
+<li>十进制：默认</li>
+<li>十六进制：0x</li>
+</ul>
+<h4 id="3-进制间的转换"><a href="#3-进制间的转换" class="headerlink" title="3.进制间的转换"></a>3.进制间的转换</h4><ul>
+<li><p>任意进制到十进制</p>
+<ul>
+<li><p>系数 * 基数的权次幂相加</p>
+<ul>
+<li>系数：位数是几</li>
+<li>基数：原来的进制</li>
+<li>权：从个位开始，从0向左依次增加</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">x * y^z</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>十进制到任意进制</p>
+<ul>
+<li>除以基数，倒取余数</li>
+</ul>
+</li>
+<li><p>二进制 &lt;==&gt;八进制</p>
+<ul>
+<li>421码</li>
+</ul>
+</li>
+<li><p>二进制 &lt;==&gt; 十六进制</p>
+<ul>
+<li>8421码</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-源码、反码、补码"><a href="#4-源码、反码、补码" class="headerlink" title="4.源码、反码、补码"></a>4.源码、反码、补码</h4><ul>
+<li>在计算机中，二进制的运算，是以补码的形式进行的(0为正，1为负)</li>
+</ul>
+<ul>
+<li><p>正数：源码 = 反码 = 补码</p>
+</li>
+<li><p>负数：源码不变</p>
+<p>​            反码：符号位不变，其余按位取反</p>
+<p>​            补码：反码+1</p>
+</li>
+</ul>
+<h3 id="八、运算符"><a href="#八、运算符" class="headerlink" title="八、运算符"></a>八、运算符</h3><h4 id="1-什么是运算符"><a href="#1-什么是运算符" class="headerlink" title="1.什么是运算符"></a>1.什么是运算符</h4><ul>
+<li>运算符是对一个、两个或三个操作数执行特定操作，然后返回结果的特殊符号。</li>
+</ul>
+<h4 id="2-运算符的分类"><a href="#2-运算符的分类" class="headerlink" title="2.运算符的分类"></a>2.运算符的分类</h4><h5 id="①算数运算符"><a href="#①算数运算符" class="headerlink" title="①算数运算符"></a>①算数运算符</h5><table>
+<thead>
+<tr>
+<th>算数运算符</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+ 、 -</td>
+<td>加、减</td>
+</tr>
+<tr>
+<td>* 、/</td>
+<td>乘、除</td>
+</tr>
+<tr>
+<td>%</td>
+<td>取模（即取余）</td>
+</tr>
+</tbody></table>
+<h5 id="②一元运算符"><a href="#②一元运算符" class="headerlink" title="②一元运算符"></a>②一元运算符</h5><ul>
+<li>只需要一个操作数，就可以对其进行相应的操作</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>一元运算符</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>表示正值（可省略）</td>
+</tr>
+<tr>
+<td>-</td>
+<td>表示负值，即否定表达式</td>
+</tr>
+<tr>
+<td>++</td>
+<td>将值+1</td>
+</tr>
+<tr>
+<td>–</td>
+<td>将值-1</td>
+</tr>
+<tr>
+<td>!</td>
+<td>反转布尔值</td>
+</tr>
+</tbody></table>
+<p><img src="https://i.loli.net/2021/07/19/UKrzgyR9e5xWNfj.png" alt="image-20210719160154418"></p>
+<blockquote>
+<p>a++;        ++b;</p>
+<ul>
+<li>单独使用时，++即自加一，–即自减一，放在前后效果相同</li>
+</ul>
+<p>int b = a ++;    int c = –b;</p>
+<ul>
+<li>参与运算时，放在前即先++或–， 放在后面则先运算再++、–</li>
+</ul>
+</blockquote>
+<h5 id="③比较运算符"><a href="#③比较运算符" class="headerlink" title="③比较运算符"></a>③比较运算符</h5><ul>
+<li>返回布尔类型的值，即true，false</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>比较运算符</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>==</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>大于等于</td>
+</tr>
+</tbody></table>
+<h5 id="④条件运算符"><a href="#④条件运算符" class="headerlink" title="④条件运算符"></a>④条件运算符</h5><ul>
+<li>用来连接比较表达式（即布尔类型）表达式</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>逻辑运算符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;   AND(与)</td>
+<td>有false则false，两个true则true</td>
+</tr>
+<tr>
+<td>|    OR(或)</td>
+<td>有true则true，两个false则false</td>
+</tr>
+<tr>
+<td>^    XOR(异或)</td>
+<td>相同false，不同true</td>
+</tr>
+<tr>
+<td>!     NOT(非)</td>
+<td>结论相反</td>
+</tr>
+<tr>
+<td>&amp;&amp;  AND(短路)</td>
+<td>短路效果，即左边有false，右边不执行</td>
+</tr>
+<tr>
+<td>||   OR(短路)</td>
+<td>短路效果，即左边有true，右边不执行</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Java中，若要表达3&lt;x&lt;6 ，应写为 x&gt;3 &amp; x&lt;6</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>什么是Java</tag>
+        <tag>变量</tag>
+        <tag>数据类型</tag>
       </tags>
   </entry>
   <entry>
@@ -1574,358 +1926,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Java概述和变量</title>
-    <url>/2021/08/25/Java%E6%A6%82%E8%BF%B0%E5%92%8C%E5%8F%98%E9%87%8F/</url>
-    <content><![CDATA[<h3 id="Java"><a href="#Java" class="headerlink" title="Java!"></a>Java!</h3><ul>
-<li><h4 id="什么是Java？"><a href="#什么是Java？" class="headerlink" title="什么是Java？"></a>什么是Java？</h4><ul>
-<li>编程语言</li>
-<li>开发平台（JVM）</li>
-</ul>
-</li>
-</ul>
-<h3 id="一、编程语言"><a href="#一、编程语言" class="headerlink" title="一、编程语言"></a>一、编程语言</h3><ul>
-<li><h4 id="布置平台"><a href="#布置平台" class="headerlink" title="布置平台"></a>布置平台</h4><ul>
-<li>官方文档解释：JavaSE是Java平台标准版<ul>
-<li>JDK</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h4 id="下载JDK"><a href="#下载JDK" class="headerlink" title="下载JDK"></a>下载JDK</h4></li>
-<li><h4 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h4><ul>
-<li>开发工具</li>
-<li>源代码</li>
-<li>JRE：JDK包含JRE</li>
-</ul>
-</li>
-<li><h4 id="使用JDK"><a href="#使用JDK" class="headerlink" title="使用JDK"></a>使用JDK</h4><ul>
-<li><p>JDK安装目录bin文件夹下</p>
-</li>
-<li><p>[^javac.exe]: 编译</p>
-</li>
-<li><p>[^java.exe]: 运行</p>
-</li>
-</ul>
-</li>
-<li><p>配置环境变量</p>
-<ul>
-<li>官网添加JDK路径到系统Path变量</li>
-<li>动态获取%JAVA_HOME%</li>
-</ul>
-</li>
-</ul>
-<h3 id="二、编程语言"><a href="#二、编程语言" class="headerlink" title="二、编程语言"></a>二、编程语言</h3><ul>
-<li><p>基本单位</p>
-<ul>
-<li>class 类</li>
-</ul>
-</li>
-<li><p>最简单的java程序</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>类名要与文件名一致，后缀为.class</li>
-</ul>
-</li>
-<li><p>main方法是程序的入口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[]args)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="三、学习Java"><a href="#三、学习Java" class="headerlink" title="三、学习Java"></a>三、学习Java</h3><ul>
-<li>java语言的核心本质是对数据的操作</li>
-<li>数据的操作最基础的是存数据和取数据</li>
-</ul>
-<h3 id="四、存取数据"><a href="#四、存取数据" class="headerlink" title="四、存取数据"></a>四、存取数据</h3><ul>
-<li><p>变量</p>
-<ul>
-<li><p>一个可以变化的量</p>
-<ul>
-<li>本质：存储一个数据</li>
-</ul>
-</li>
-<li><p>格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型 变量名 = 数值 ；</span><br></pre></td></tr></table></figure></li>
-<li><p>注意事项</p>
-<ul>
-<li>使用变量时需要注意变量有没有数据<ul>
-<li>没有数据时，可以完成赋值操作</li>
-<li>但是不能完成取值操</li>
-</ul>
-</li>
-<li>变量在{ }内有效，且不能定义同名变量（作用域）</li>
-<li>{ } ：代码块，独立存在，运行结束后立即释放，提高内存使用率</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="五、Java的数据类型"><a href="#五、Java的数据类型" class="headerlink" title="五、Java的数据类型"></a>五、Java的数据类型</h3><ul>
-<li>每一个数据类型的存储范围都不一样，为了提高内存的使用率</li>
-</ul>
-<h4 id="1-整数"><a href="#1-整数" class="headerlink" title="1.整数"></a>1.整数</h4><table>
-<thead>
-<tr>
-<th align="left">整数</th>
-<th>长度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">byte</td>
-<td>8bit</td>
-</tr>
-<tr>
-<td align="left">short</td>
-<td>16bit</td>
-</tr>
-<tr>
-<td align="left"><strong>int(默认)</strong></td>
-<td>32bit</td>
-</tr>
-<tr>
-<td align="left">long</td>
-<td>64bit</td>
-</tr>
-</tbody></table>
-<ul>
-<li>在Java中，出现的所有整数，默认都是int类型</li>
-<li>byte在存整数时，如果int类型整数在byte范围内，byte会自动完成转换 int—byte</li>
-</ul>
-<h4 id="2-小数"><a href="#2-小数" class="headerlink" title="2.小数"></a>2.小数</h4><table>
-<thead>
-<tr>
-<th>小数</th>
-<th>长度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>float</td>
-<td>浮点型 32bit</td>
-</tr>
-<tr>
-<td><strong>double(默认)</strong></td>
-<td>双精度 64bit</td>
-</tr>
-</tbody></table>
-<ul>
-<li>长整型long后缀使用L标记，表明是长整型</li>
-<li>单精度float后缀使用F标记，表名是单精度</li>
-</ul>
-<h4 id="3-布尔类型"><a href="#3-布尔类型" class="headerlink" title="3.布尔类型"></a>3.布尔类型</h4><ul>
-<li>ture</li>
-<li>false</li>
-</ul>
-<h3 id="六、变量补充知识点"><a href="#六、变量补充知识点" class="headerlink" title="六、变量补充知识点"></a>六、变量补充知识点</h3><ul>
-<li><p>两个整数相除，得到的是整数部分</p>
-</li>
-<li><p>数据类型之间的转换</p>
-<ul>
-<li><p>隐式转换（小的自动转大）</p>
-</li>
-<li><p>强制转换（大转小）</p>
-<ul>
-<li><p>格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">目标类型 变量名 = （目标类型）被转换数据</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="七、进制"><a href="#七、进制" class="headerlink" title="七、进制"></a>七、进制</h3><h4 id="1-什么是进制？"><a href="#1-什么是进制？" class="headerlink" title="1.什么是进制？"></a>1.什么是进制？</h4><ul>
-<li>逢几进一</li>
-</ul>
-<h4 id="2-Java常见的进制"><a href="#2-Java常见的进制" class="headerlink" title="2.Java常见的进制"></a>2.Java常见的进制</h4><ul>
-<li>二进制：0b</li>
-<li>八进制：0</li>
-<li>十进制：默认</li>
-<li>十六进制：0x</li>
-</ul>
-<h4 id="3-进制间的转换"><a href="#3-进制间的转换" class="headerlink" title="3.进制间的转换"></a>3.进制间的转换</h4><ul>
-<li><p>任意进制到十进制</p>
-<ul>
-<li><p>系数 * 基数的权次幂相加</p>
-<ul>
-<li>系数：位数是几</li>
-<li>基数：原来的进制</li>
-<li>权：从个位开始，从0向左依次增加</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">x * y^z</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>十进制到任意进制</p>
-<ul>
-<li>除以基数，倒取余数</li>
-</ul>
-</li>
-<li><p>二进制 &lt;==&gt;八进制</p>
-<ul>
-<li>421码</li>
-</ul>
-</li>
-<li><p>二进制 &lt;==&gt; 十六进制</p>
-<ul>
-<li>8421码</li>
-</ul>
-</li>
-</ul>
-<h4 id="4-源码、反码、补码"><a href="#4-源码、反码、补码" class="headerlink" title="4.源码、反码、补码"></a>4.源码、反码、补码</h4><ul>
-<li>在计算机中，二进制的运算，是以补码的形式进行的(0为正，1为负)</li>
-</ul>
-<ul>
-<li><p>正数：源码 = 反码 = 补码</p>
-</li>
-<li><p>负数：源码不变</p>
-<p>​            反码：符号位不变，其余按位取反</p>
-<p>​            补码：反码+1</p>
-</li>
-</ul>
-<h3 id="八、运算符"><a href="#八、运算符" class="headerlink" title="八、运算符"></a>八、运算符</h3><h4 id="1-什么是运算符"><a href="#1-什么是运算符" class="headerlink" title="1.什么是运算符"></a>1.什么是运算符</h4><ul>
-<li>运算符是对一个、两个或三个操作数执行特定操作，然后返回结果的特殊符号。</li>
-</ul>
-<h4 id="2-运算符的分类"><a href="#2-运算符的分类" class="headerlink" title="2.运算符的分类"></a>2.运算符的分类</h4><h5 id="①算数运算符"><a href="#①算数运算符" class="headerlink" title="①算数运算符"></a>①算数运算符</h5><table>
-<thead>
-<tr>
-<th>算数运算符</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>+ 、 -</td>
-<td>加、减</td>
-</tr>
-<tr>
-<td>* 、/</td>
-<td>乘、除</td>
-</tr>
-<tr>
-<td>%</td>
-<td>取模（即取余）</td>
-</tr>
-</tbody></table>
-<h5 id="②一元运算符"><a href="#②一元运算符" class="headerlink" title="②一元运算符"></a>②一元运算符</h5><ul>
-<li>只需要一个操作数，就可以对其进行相应的操作</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>一元运算符</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>+</td>
-<td>表示正值（可省略）</td>
-</tr>
-<tr>
-<td>-</td>
-<td>表示负值，即否定表达式</td>
-</tr>
-<tr>
-<td>++</td>
-<td>将值+1</td>
-</tr>
-<tr>
-<td>–</td>
-<td>将值-1</td>
-</tr>
-<tr>
-<td>!</td>
-<td>反转布尔值</td>
-</tr>
-</tbody></table>
-<p><img src="https://i.loli.net/2021/07/19/UKrzgyR9e5xWNfj.png" alt="image-20210719160154418"></p>
-<blockquote>
-<p>a++;        ++b;</p>
-<ul>
-<li>单独使用时，++即自加一，–即自减一，放在前后效果相同</li>
-</ul>
-<p>int b = a ++;    int c = –b;</p>
-<ul>
-<li>参与运算时，放在前即先++或–， 放在后面则先运算再++、–</li>
-</ul>
-</blockquote>
-<h5 id="③比较运算符"><a href="#③比较运算符" class="headerlink" title="③比较运算符"></a>③比较运算符</h5><ul>
-<li>返回布尔类型的值，即true，false</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>比较运算符</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>==</td>
-<td>等于</td>
-</tr>
-<tr>
-<td>!=</td>
-<td>不等于</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td>大于</td>
-</tr>
-<tr>
-<td>&lt;</td>
-<td>小于</td>
-</tr>
-<tr>
-<td>&lt;=</td>
-<td>小于等于</td>
-</tr>
-<tr>
-<td>&gt;=</td>
-<td>大于等于</td>
-</tr>
-</tbody></table>
-<h5 id="④条件运算符"><a href="#④条件运算符" class="headerlink" title="④条件运算符"></a>④条件运算符</h5><ul>
-<li>用来连接比较表达式（即布尔类型）表达式</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>逻辑运算符</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&amp;   AND(与)</td>
-<td>有false则false，两个true则true</td>
-</tr>
-<tr>
-<td>|    OR(或)</td>
-<td>有true则true，两个false则false</td>
-</tr>
-<tr>
-<td>^    XOR(异或)</td>
-<td>相同false，不同true</td>
-</tr>
-<tr>
-<td>!     NOT(非)</td>
-<td>结论相反</td>
-</tr>
-<tr>
-<td>&amp;&amp;  AND(短路)</td>
-<td>短路效果，即左边有false，右边不执行</td>
-</tr>
-<tr>
-<td>||   OR(短路)</td>
-<td>短路效果，即左边有true，右边不执行</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>Java中，若要表达3&lt;x&lt;6 ，应写为 x&gt;3 &amp; x&lt;6</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>什么是Java</tag>
-        <tag>变量</tag>
-        <tag>数据类型</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>class中的内容</title>
     <url>/2021/08/25/class%E4%B8%AD%E7%9A%84%E5%86%85%E5%AE%B9/</url>
     <content><![CDATA[<h3 id="一、自定义的数据类型：引用类型"><a href="#一、自定义的数据类型：引用类型" class="headerlink" title="一、自定义的数据类型：引用类型"></a>一、自定义的数据类型：引用类型</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 数据类型 </span>&#123;</span><br><span class="line">	<span class="comment">//成员变量</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2128,155 +2128,6 @@
         <tag>成员变量</tag>
         <tag>成员方法</tag>
         <tag>构造方法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>private关键字和get/set方法</title>
-    <url>/2021/08/25/private%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8Cget-set%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h3 id="一、权限修饰符—Private"><a href="#一、权限修饰符—Private" class="headerlink" title="一、权限修饰符—Private"></a>一、权限修饰符—<font color='#d15252'>Private</font></h3><h4 id="1-作用："><a href="#1-作用：" class="headerlink" title="1.作用："></a>1.作用：</h4><ul>
-<li><p>private所修饰的内容，使用的时候，只能在本类中使用</p>
-</li>
-<li><p>private：私有的</p>
-<ul>
-<li><p>只能在本类中，操作private修饰的内容</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Demo1.java:7: 错误: id 在 stu 中是 private 访问控制</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h4 id="2-开发中，所有的成员变量都要加private"><a href="#2-开发中，所有的成员变量都要加private" class="headerlink" title="2.开发中，所有的成员变量都要加private"></a>2.开发中，所有的成员变量都要加private</h4><ul>
-<li><font color='#d15252'><strong>逻辑使用</strong></font>比较灵活</li>
-</ul>
-<h5 id="衍生问题：set-get方法"><a href="#衍生问题：set-get方法" class="headerlink" title="衍生问题：set/get方法"></a>衍生问题：set/get方法</h5><h3 id="二、get-set-方法"><a href="#二、get-set-方法" class="headerlink" title="二、get / set 方法"></a>二、get / set 方法</h3><ul>
-<li><p><font color='orange'><strong>赋值</strong></font>(set方法)：成员变量加上private后，其他方法（比如main方法）不能给成员变量赋值</p>
-<ul>
-<li>但是自己的方法能访问自己的私有成员变量，其他类可以访问本类的成员方法<ul>
-<li>所以用其他类访问成员方法，成员方法给成员变量修改值</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//定义一个由private修饰的成员变量</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">	<span class="comment">//完成给age的赋值功能</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.age=age;</span><br><span class="line">	&#125;</span><br><span class="line">======================================</span><br><span class="line">    <span class="comment">//在主方法中创建相应对象，调用赋值方法即可</span></span><br><span class="line">    	<span class="comment">//赋值</span></span><br><span class="line">		s.m(<span class="number">20</span>);</span><br></pre></td></tr></table></figure></li>
-<li><p><strong><font color='orange'>取值</font></strong>(get方法)：创建成员方法，通过return带回返回值给调用方法</p>
-<ul>
-<li>使用return原因：更加灵活，数据可以重复利用</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//完成取值功能</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//使用return取值更加灵活</span></span><br><span class="line">	<span class="keyword">return</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="3-private修饰成员变量细节优化"><a href="#3-private修饰成员变量细节优化" class="headerlink" title="3.private修饰成员变量细节优化"></a>3.private修饰成员变量<font color='cornflowerblue'>细节优化</font></h4><ul>
-<li>如果没有特殊的需求，在给成员变量赋值的时候，直接赋值即可</li>
-<li>给访问private修饰的成员方法<font color='#d15252'>命名规范</font><ul>
-<li>set变量名<ul>
-<li>变量名首字母大写</li>
-</ul>
-</li>
-<li>get变量名<ul>
-<li>变量名首字母大写</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="作业："><a href="#作业：" class="headerlink" title="作业："></a>作业：</h5><ul>
-<li>定义学生类<ul>
-<li>有参和空参构造</li>
-<li>private</li>
-<li>学号</li>
-<li>姓名</li>
-</ul>
-</li>
-<li>添加到数组中，并做打印</li>
-</ul>
-<h5 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h5><ul>
-<li><p>创建项目并进行测试</p>
-</li>
-<li><p>需求分析</p>
-</li>
-<li><p>创建自定义的学生类</p>
-<ul>
-<li><p>class Student</p>
-</li>
-<li><p>属性 = 成员变量 </p>
-<ul>
-<li>定义成员变量<ul>
-<li>private int id;</li>
-<li>private String name;</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>定义无参、有参构造方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义无参构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="comment">//定义带参构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(<span class="keyword">int</span> id,String name)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>定义相应的get/set方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义相应的get/set方法	=== 学号</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>创建存储学生的数组方法</p>
-<ul>
-<li>public static Student[] init(){}</li>
-<li>return返回创建的数组</li>
-</ul>
-<p><img src="https://i.loli.net/2021/07/28/r1f3Z2gm9Odok7I.png" alt="image-20210728103752639"></p>
-</li>
-<li><p>创建遍历数组学生对象的方法</p>
-<p><img src="https://i.loli.net/2021/07/28/PaCGI3pbHENkK8x.png" alt="image-20210728103827836"></p>
-<ul>
-<li>用到get方法，取出学生对象的属性</li>
-</ul>
-</li>
-<li><p>在main方法中</p>
-<ul>
-<li><p>第一步：调用init获取创建的数组</p>
-</li>
-<li><p>第二步：创建Student的无参对象，带参对象</p>
-<ul>
-<li>无参：通过.set()方法给属性赋值</li>
-<li>带参：直接在初始化值时赋值</li>
-</ul>
-</li>
-<li><p>第三步：将创建的学生对象存入数组</p>
-</li>
-<li><p>第四步：调用遍历数组学生对象的方法</p>
-<p><img src="https://i.loli.net/2021/07/28/EIKidPcfUSOTqtr.png" alt="image-20210728104038704"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="三、Java的编程规范"><a href="#三、Java的编程规范" class="headerlink" title="三、Java的编程规范"></a>三、Java的编程规范</h3><ul>
-<li>见名知意</li>
-<li>确保功能的唯一性</li>
-<li>确保逻辑的灵活性</li>
-<li>规则和代码没有关系。规则语法</li>
-</ul>
-<h3 id="四、main方法和可变参"><a href="#四、main方法和可变参" class="headerlink" title="四、main方法和可变参"></a>四、main方法和可变参</h3><h4 id="1-main方法"><a href="#1-main方法" class="headerlink" title="1.main方法"></a>1.main方法</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-可变参"><a href="#2-可变参" class="headerlink" title="2.可变参"></a>2.可变参</h4><ul>
-<li>格式：<code>数据类型 ... 变量名</code> </li>
-<li>参数最终会变为数组</li>
-<li>固定参和可变参在一起时，可变参必须写在末尾</li>
-</ul>
-<h3 id="五、方法的重载"><a href="#五、方法的重载" class="headerlink" title="五、方法的重载"></a>五、方法的重载</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><ul>
-<li><font color='#d15252'>在同一个类中</font>，方法名相同<ul>
-<li>与返回值无关，只看方法名和参数列表</li>
-<li>参数<ul>
-<li>参数个数    </li>
-<li>参数类型</li>
-</ul>
-</li>
-<li>修饰符同级</li>
-</ul>
-</li>
-<li>在调用时，Jvm通过区别参数列表的不同，调用相应的方法</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>成员方法</tag>
-        <tag>private</tag>
-        <tag>get/set</tag>
-        <tag>修饰符</tag>
       </tags>
   </entry>
   <entry>
@@ -2640,288 +2491,6 @@
       </categories>
       <tags>
         <tag>反射</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>多线程</title>
-    <url>/2021/08/25/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<p><strong>清楚三个概念</strong></p>
-<ul>
-<li>进程</li>
-<li>线程</li>
-<li>在同一个时间点，一个cpu只能支持一个线程</li>
-</ul>
-<h3 id="一、进程"><a href="#一、进程" class="headerlink" title="一、进程"></a>一、进程</h3><h4 id="1-什么是进程"><a href="#1-什么是进程" class="headerlink" title="1.什么是进程"></a>1.什么是进程</h4><ul>
-<li>程，只是一个静态的概念（内存）</li>
-<li>程，就是一个app，exe（应用角度）</li>
-<li>进程只是一个静态概念，对于java来说就是机器上的一个.class文件，机器上的.exe文件</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1:程序代码加载到代码区</span><br><span class="line">2:没有立刻执行，为进程开始做准本</span><br><span class="line">3:当jvm调用main方法时，进程开始执行</span><br><span class="line">4:真正执行的并不是进程，而是main方法</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="二、线程"><a href="#二、线程" class="headerlink" title="二、线程"></a>二、线程</h3><h4 id="1-什么是线程"><a href="#1-什么是线程" class="headerlink" title="1.什么是线程"></a>1.什么是线程</h4><ul>
-<li><p>一个进程可以有很多个分支，每一个分支就被称为线程</p>
-<ul>
-<li>Java程序，默认就有一个线程，就是main方法，也被称为main线程</li>
-</ul>
-</li>
-<li><p><strong>在同一个时间点上，一个CPU只能支持一个线程在执行</strong></p>
-<ul>
-<li>双CPU或双核，是确确实实的多线程</li>
-</ul>
-</li>
-<li><p>Java如何实现多线程(类)</p>
-<ul>
-<li><strong><font color='#d15252'>Thread类</font></strong></li>
-<li>Runnable接口</li>
-</ul>
-</li>
-</ul>
-<h3 id="三、Thread"><a href="#三、Thread" class="headerlink" title="三、Thread"></a>三、<font color='#d15252'>Thread</font></h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>包：java.lang.Thread<ul>
-<li>不需要导包</li>
-</ul>
-</li>
-<li>实现Runnable接口</li>
-<li>修饰符：public </li>
-<li>概述：管理Java中的线程</li>
-</ul>
-<h4 id="2-实现线程的步骤"><a href="#2-实现线程的步骤" class="headerlink" title="2.实现线程的步骤"></a>2.实现线程的步骤</h4><h5 id="Ⅰ-继承"><a href="#Ⅰ-继承" class="headerlink" title="Ⅰ.继承"></a>Ⅰ.继承</h5><ul>
-<li>第一步：将一个类声明为Thread的子类</li>
-<li>第二步：这个子类应该<font color='#d15252'>重写</font>Thread类的<font color='#d15252'>run方法</font></li>
-<li>第三步：创建子类实例，调用star方法启动线程</li>
-</ul>
-<h5 id="Ⅱ-实现接口"><a href="#Ⅱ-实现接口" class="headerlink" title="Ⅱ.实现接口"></a>Ⅱ.实现接口</h5><ul>
-<li>第一步：声明一个实现Runnable接口的类</li>
-<li>第二步：实现run方法</li>
-<li>第三步：创建实例</li>
-</ul>
-<h4 id="3-构造方法"><a href="#3-构造方法" class="headerlink" title="3.构造方法"></a>3.构造方法</h4><p><img src="https://i.loli.net/2021/08/12/D2KWuoqdQsXFCpH.png" alt="image-20210812095659082"></p>
-<h5 id="①-Thread-String-name"><a href="#①-Thread-String-name" class="headerlink" title="① Thread(String name)"></a>① Thread(String name)</h5><ul>
-<li>创建线程实例时，给线程名称赋值</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/12/7AS92gG3pNuYynq.png" alt="image-20210812172035560"></p>
-<h4 id="4-成员方法"><a href="#4-成员方法" class="headerlink" title="4.成员方法"></a>4.成员方法</h4><h5 id="Ⅰ-run"><a href="#Ⅰ-run" class="headerlink" title="Ⅰ. run()"></a>Ⅰ.<font color='#d15252'> run()</font></h5><ul>
-<li><p>核心</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>线程相关的代码写在该方法中，一般需要重写</li>
-</ul>
-</li>
-</ul>
-<h5 id="Ⅱ-start"><a href="#Ⅱ-start" class="headerlink" title="Ⅱ. start()"></a>Ⅱ. start()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>启动线程</li>
-</ul>
-<h5 id="Ⅲ-sleep"><a href="#Ⅲ-sleep" class="headerlink" title="Ⅲ. sleep()"></a>Ⅲ. sleep()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">(<span class="keyword">long</span> m)</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>让线程休眠x毫秒</li>
-</ul>
-<h5 id="Ⅳ-join"><a href="#Ⅳ-join" class="headerlink" title="Ⅳ. join()"></a>Ⅳ. join()</h5><ul>
-<li><pre><code class="java">优先执行调用jion方法的线程
-</code></pre>
-</li>
-</ul>
-<h5 id="Ⅴ-其他方法"><a href="#Ⅴ-其他方法" class="headerlink" title="Ⅴ.其他方法"></a>Ⅴ.其他方法</h5><ul>
-<li>getName（）获取名</li>
-<li>currentThread（）返回正在执行的对象</li>
-</ul>
-<h4 id="5-Thread实现多线程细节问题-名字"><a href="#5-Thread实现多线程细节问题-名字" class="headerlink" title="5.Thread实现多线程细节问题(名字)"></a>5.Thread实现多线程<font color='#d15252'>细节问题</font>(名字)</h4><ul>
-<li><p>同一个Thread实例对象，不能重复的调用start()方法</p>
-<ul>
-<li>重复开启线程，栈帧名一样，Jvm报异常</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/12/asy7Dlo3ICtPqEF.png" alt=" "></p>
-</li>
-<li><p><font color='#d15252'>获取</font>当前线程<font color='#d15252'>名称</font></p>
-<ul>
-<li><p>getName()方法</p>
-<p><img src="https://i.loli.net/2021/08/12/3cdECOtSqeuy1vb.png" alt="image-20210812111038274"></p>
-</li>
-<li><p>currentThread()方法</p>
-<ul>
-<li>返回对当前正在执行的对象的引用</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/12/lQSzR98PrCTkAm1.png" alt="image-20210812110957410"></p>
-</li>
-</ul>
-<ul>
-<li><p>给线程<font color='#d15252'>起名字</font></p>
-<ul>
-<li><p>setName()方法</p>
-<p><img src="https://i.loli.net/2021/08/12/C2i9ojrGXBcALJe.png" alt="image-20210812112815580"></p>
-</li>
-<li><p>带参构造</p>
-<p><img src="https://i.loli.net/2021/08/12/hI6PnxSC3L1bior.png" alt="image-20210812113153552"></p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><font color='#d15252'>匿名内部类</font>的方式实现Thread多线程</p>
-<ul>
-<li><p>自定义类</p>
-<ul>
-<li>当run方法中的线程业务复杂，或者需要多次使用该线程类时</li>
-</ul>
-</li>
-<li><p>匿名内部类</p>
-<ul>
-<li>当run方法中的线程业务只需要使用一次时</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/12/2ZDSdaAEcXPyCOL.png" alt="image-20210812113425179"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="四、Runnable接口"><a href="#四、Runnable接口" class="headerlink" title="四、Runnable接口"></a>四、Runnable接口</h3><ul>
-<li>实现多线程的第二种方法</li>
-</ul>
-<h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li><p>接口不能直接使用，需要通过子类实现</p>
-</li>
-<li><p>必须重写run方法</p>
-<ul>
-<li>run方法 — &gt; 线程业务</li>
-</ul>
-</li>
-<li><p>通过查API可知，Thread是Runnable接口的已知实现类</p>
-<ul>
-<li>Thread类的带参构造方法中，可以传递一个实现Runnable接口对象参数</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/12/wheKM691QbXLU3Y.png" alt="image-20210812135021782"></p>
-</li>
-<li><p>因为不支持多继承，所以如果我们定义的类要继承其他类的功能时，又需要具备多线程的功能</p>
-<ul>
-<li>这时就不能用继承了，可以用Runnable接口</li>
-</ul>
-</li>
-<li><p>包：java.lang包下</p>
-<ul>
-<li>不用导包就能使用 </li>
-</ul>
-</li>
-</ul>
-<h4 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><ul>
-<li>接口无构造方法</li>
-</ul>
-<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><ul>
-<li>run()方法 —-&gt; 实现类重写</li>
-</ul>
-<h4 id="4-使用"><a href="#4-使用" class="headerlink" title="4.使用"></a>4.使用</h4><ul>
-<li><p>创建自定义类，实现接口Runnable</p>
-</li>
-<li><p>重写run()方法</p>
-<p><img src="https://i.loli.net/2021/08/12/rRNX34PlcbgZK2F.png" alt="image-20210812135657924"></p>
-</li>
-<li><p>创建自定义类对象</p>
-</li>
-<li><p>调用Thread的构造方法（参数为Runnable）创建对象</p>
-</li>
-<li><p>start方法启动流</p>
-<ul>
-<li><img src="https://i.loli.net/2021/08/12/xejV7gKSTIidDah.png" alt="image-20210812135754014"></li>
-</ul>
-</li>
-</ul>
-<h4 id="5-Thread和Runnable的区别"><a href="#5-Thread和Runnable的区别" class="headerlink" title="5.Thread和Runnable的区别"></a>5.Thread和Runnable的区别</h4><ul>
-<li>实现了数据的共享</li>
-<li>避免了单继承的局限性</li>
-</ul>
-<h4 id="6-起名和获取名字"><a href="#6-起名和获取名字" class="headerlink" title="6.起名和获取名字"></a>6.起名和获取名字</h4><ul>
-<li>和Thread基本一样<ul>
-<li>SetName()设置名字</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="五、线程的特性"><a href="#五、线程的特性" class="headerlink" title="五、线程的特性"></a>五、线程的特性</h3><h4 id="1-线程的状态"><a href="#1-线程的状态" class="headerlink" title="1.线程的状态"></a>1.线程的<font color='#d15252'>状态</font></h4><h5 id="Ⅰ-新建-new"><a href="#Ⅰ-新建-new" class="headerlink" title="Ⅰ.新建(new)"></a>Ⅰ.新建(new)</h5><ul>
-<li>创建对象时，线程处于new状态</li>
-</ul>
-<h5 id="Ⅱ-可运行-Runnable"><a href="#Ⅱ-可运行-Runnable" class="headerlink" title="Ⅱ.可运行(Runnable)"></a>Ⅱ.可运行(Runnable)</h5><ul>
-<li>当调用start()方法时，进入Runnable状态<ul>
-<li>（正在执行）</li>
-</ul>
-</li>
-</ul>
-<h5 id="Ⅲ-阻塞-Blocked"><a href="#Ⅲ-阻塞-Blocked" class="headerlink" title="Ⅲ.阻塞(Blocked)"></a>Ⅲ.阻塞(Blocked)</h5><ul>
-<li><p>线程暂时停下就是 Blocaked状态</p>
-<ul>
-<li><p>可能造成线程堵塞状态</p>
-<ul>
-<li><p>IO流</p>
-<ul>
-<li>read()方法</li>
-</ul>
-</li>
-<li><p>Scanner</p>
-<p><img src="https://i.loli.net/2021/08/12/3zqxRUYo9Sj4Esd.png" alt="image-20210812154345259"></p>
-</li>
-</ul>
-</li>
-<li><p>提供造成阻塞状态的方法</p>
-<ul>
-<li>join()</li>
-<li>wait()<ul>
-<li>需要用try-catch处理异常</li>
-<li>父类没有声明式抛出异常，子类就不能抛</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>notify()和notifyall()可以从阻塞状态返回正在执行Runnable状态</p>
-</li>
-</ul>
-<h5 id="Ⅳ-等待-Waiting"><a href="#Ⅳ-等待-Waiting" class="headerlink" title="Ⅳ.等待(Waiting)"></a>Ⅳ.<font color='#d15252'>等待</font>(Waiting)</h5><ul>
-<li><p>没有时间限制的等待</p>
-</li>
-<li><p>等另一个线程执行完后再执行</p>
-</li>
-</ul>
-<h5 id="Ⅴ-休眠状态-Timed-Waiting"><a href="#Ⅴ-休眠状态-Timed-Waiting" class="headerlink" title="Ⅴ.休眠状态(Timed_Waiting)"></a>Ⅴ.<font color='#d15252'>休眠状态</font>(Timed_Waiting)</h5><ul>
-<li>休眠状态<ul>
-<li>sleep()</li>
-</ul>
-</li>
-<li>达到指定时间线程再进行运行</li>
-</ul>
-<h5 id="Ⅵ-终止-Dead"><a href="#Ⅵ-终止-Dead" class="headerlink" title="Ⅵ.终止(Dead)"></a>Ⅵ.终止(Dead)</h5><ul>
-<li>当线程运行完后自动结束<ul>
-<li>Thread提供了stop()方法，但是已经<font color='#d15252'>弃用</font>了</li>
-</ul>
-</li>
-</ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>什么是多线程？<ul>
-<li>程序的除了main方法外，还有很多个分支</li>
-</ul>
-</li>
-<li>实现多线程的两种方式？<ul>
-<li>Thread/Runable  </li>
-<li>区别：数据共享</li>
-</ul>
-</li>
-<li>生命周期<ul>
-<li>等待 wait join    </li>
-<li>休眠 sleep join()</li>
-<li>通过API提供的方法让线程声明周期的某个阶段，达到可控状态</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>多线程</tag>
       </tags>
   </entry>
   <entry>
@@ -3399,169 +2968,425 @@
       </tags>
   </entry>
   <entry>
-    <title>异常和迭代器</title>
-    <url>/2021/08/25/%E5%BC%82%E5%B8%B8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
-    <content><![CDATA[<h3 id="一、迭代器"><a href="#一、迭代器" class="headerlink" title="一、迭代器"></a>一、迭代器</h3><h4 id="1-next"><a href="#1-next" class="headerlink" title="1.next()"></a>1.next()</h4><ul>
-<li>取数</li>
-<li>先下一个</li>
-<li>一次性</li>
-</ul>
-<h4 id="2-并发修改异常ConcurrentModificationException"><a href="#2-并发修改异常ConcurrentModificationException" class="headerlink" title="2.并发修改异常ConcurrentModificationException"></a>2.并发修改异常ConcurrentModificationException</h4><ul>
-<li>当我们使用迭代器做遍历的时候，不能破坏集合的内部结构<ul>
-<li>一旦有<font color='#d15252'>破坏集合内部结构的操作就会报错</font></li>
-</ul>
+    <title>private关键字和get/set方法</title>
+    <url>/2021/08/25/private%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8Cget-set%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="一、权限修饰符—Private"><a href="#一、权限修饰符—Private" class="headerlink" title="一、权限修饰符—Private"></a>一、权限修饰符—<font color='#d15252'>Private</font></h3><h4 id="1-作用："><a href="#1-作用：" class="headerlink" title="1.作用："></a>1.作用：</h4><ul>
+<li><p>private所修饰的内容，使用的时候，只能在本类中使用</p>
 </li>
-</ul>
-<h4 id="3-练习题：斗地主"><a href="#3-练习题：斗地主" class="headerlink" title="3.练习题：斗地主"></a>3.练习题：斗地主</h4><ul>
-<li>做四个容器<ul>
-<li>分别存玩家和底牌</li>
-</ul>
-</li>
-<li>再做一个容器，存所有扑克牌</li>
-</ul>
-<h4 id="3-静态导入"><a href="#3-静态导入" class="headerlink" title="3.静态导入"></a>3.静态导入</h4><ul>
-<li>在导包过程中，我们可以直接导入静态部分，这样的话某个类的静态成员就可以直接使用了<ul>
-<li>看别人的源码时用的比较多</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/05/TdlWUHFeZVRAPLj.png" alt="image-20210805135205026"></p>
-<h3 id="二、异常"><a href="#二、异常" class="headerlink" title="二、异常"></a>二、<font color='#d15252'>异常</font></h3><h4 id="1-什么是异常"><a href="#1-什么是异常" class="headerlink" title="1.什么是异常"></a>1.什么是异常</h4><ul>
-<li>异常就是程序出现了不正常的现象</li>
-</ul>
-<h4 id="2-Java如何形容异常？"><a href="#2-Java如何形容异常？" class="headerlink" title="2.Java如何形容异常？"></a>2.Java如何形容异常？</h4><p>但凡涉及到Java内的内容，都要用类来处理，所以异常最顶层的类</p>
+<li><p>private：私有的</p>
 <ul>
-<li><font color='#d15252'><strong>Throwable</strong></font>类<ul>
-<li>是Java语言中所有错误和异常的超类</li>
+<li><p>只能在本类中，操作private修饰的内容</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Demo1.java:7: 错误: id 在 stu 中是 private 访问控制</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
-<h4 id="3-Throwable类"><a href="#3-Throwable类" class="headerlink" title="3.Throwable类"></a>3.Throwable类</h4><ul>
-<li><p><font color='#d15252'>Throwable</font></p>
+<h4 id="2-开发中，所有的成员变量都要加private"><a href="#2-开发中，所有的成员变量都要加private" class="headerlink" title="2.开发中，所有的成员变量都要加private"></a>2.开发中，所有的成员变量都要加private</h4><ul>
+<li><font color='#d15252'><strong>逻辑使用</strong></font>比较灵活</li>
+</ul>
+<h5 id="衍生问题：set-get方法"><a href="#衍生问题：set-get方法" class="headerlink" title="衍生问题：set/get方法"></a>衍生问题：set/get方法</h5><h3 id="二、get-set-方法"><a href="#二、get-set-方法" class="headerlink" title="二、get / set 方法"></a>二、get / set 方法</h3><ul>
+<li><p><font color='orange'><strong>赋值</strong></font>(set方法)：成员变量加上private后，其他方法（比如main方法）不能给成员变量赋值</p>
 <ul>
-<li>error（错误）一般不会遇到，因为它表示严重的问题</li>
-<li>exception（异常）<ul>
-<li>编译时异常<ul>
-<li>其他类都是编译时异常</li>
-</ul>
-</li>
-<li>运行时异常<ul>
-<li>RuntimeException在运行时</li>
+<li>但是自己的方法能访问自己的私有成员变量，其他类可以访问本类的成员方法<ul>
+<li>所以用其他类访问成员方法，成员方法给成员变量修改值</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/05/1BUKNkQWzOFSgA7.png" alt="image-20210805141331385"></p>
-</li>
-<li><p><code>RuntimeException</code>是在Java虚拟机的正常操作期间可以抛出的异常的超类。 </p>
-</li>
-</ul>
-<h4 id="4-编译时异常和运行时异常"><a href="#4-编译时异常和运行时异常" class="headerlink" title="4.编译时异常和运行时异常"></a>4.编译时异常和运行时异常</h4><h5 id="Ⅰ-编译时异常"><a href="#Ⅰ-编译时异常" class="headerlink" title="Ⅰ.编译时异常"></a>Ⅰ.编译时异常</h5><ul>
-<li>编译时异常都是Exception的子类，程序卡在编译阶段</li>
-<li>出现这类的异常，必须<font color='#d15252'>显示处理</font>（调试代码），否则程序就会出现问题，无法编译</li>
-</ul>
-<h5 id="Ⅱ-运行时异常"><a href="#Ⅱ-运行时异常" class="headerlink" title="Ⅱ.运行时异常"></a>Ⅱ.运行时异常</h5><ul>
-<li>都是RuntimeException的子类，卡在了程序的运行时</li>
-<li>必须得修改代码</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//运行时异常</span></span><br><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">System.out.println(arr[<span class="number">100</span>]);</span><br><span class="line"><span class="comment">//以上代码可知，编译时是没有错误的</span></span><br><span class="line"><span class="comment">//但运行时报错 : java.lang.ArrayIndexOutOfBoundsException:</span></span><br><span class="line"><span class="comment">//由查看API可知，则异常是RuntimeException下的异常，所以确定它是运行时异常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//编译时异常演示</span></span><br><span class="line">      SimpleDateFormat sim = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy年MM月dd日&quot;</span>);</span><br><span class="line">      Date date = sim.parse(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line"><span class="comment">//由以上代码可知，在编译时期就会抛出异常</span></span><br><span class="line"><span class="comment">//Demo2.java:16: 错误: 未报告的异常错误ParseException; 必须对其进行捕获或声明以便抛出</span></span><br><span class="line"><span class="comment">//并且此异常在Throwable 包下，与runtimeException无关。所以时运行时异常</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="5-异常的处理机制"><a href="#5-异常的处理机制" class="headerlink" title="5.异常的处理机制"></a>5.异常的处理机制</h4><h5 id="Ⅰ-默认处理机制（面试问）"><a href="#Ⅰ-默认处理机制（面试问）" class="headerlink" title="Ⅰ.默认处理机制（面试问）"></a>Ⅰ.<font color='#d15252'>默认处理机制</font>（面试问）</h5><ul>
-<li>当程序遇到异常时<ul>
-<li>将异常抛给调用者（jvm)<ul>
-<li>一层一层的抛，最后抛给jvm</li>
-</ul>
-</li>
-<li>jvm会默认的去做相应的处理<ul>
-<li><font color='#d15252'>new 异常对象</font> ，产生异常名称、原因，以及出现的位置等信息输出在控制台</li>
-<li>停掉程序</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="Ⅱ-throws-声明式-方式处理异常"><a href="#Ⅱ-throws-声明式-方式处理异常" class="headerlink" title="Ⅱ.throws(声明式)方式处理异常"></a>Ⅱ.throws(声明式)方式处理异常</h5><ul>
-<li><p>写在方法的声明部分()</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//定义一个由private修饰的成员变量</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">	<span class="comment">//完成给age的赋值功能</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.age=age;</span><br><span class="line">	&#125;</span><br><span class="line">======================================</span><br><span class="line">    <span class="comment">//在主方法中创建相应对象，调用赋值方法即可</span></span><br><span class="line">    	<span class="comment">//赋值</span></span><br><span class="line">		s.m(<span class="number">20</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p><strong><font color='orange'>取值</font></strong>(get方法)：创建成员方法，通过return带回返回值给调用方法</p>
 <ul>
-<li><p>```java<br>public void method()throws 异常类名</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="bullet">-</span> 给开发者看的，一般也不用</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 特点</span><br><span class="line"></span><br><span class="line"><span class="bullet">  -</span> 处理机制（还是默认的处理机制）</span><br><span class="line"><span class="bullet">  -</span> 为了给以后的调用者看（开发角度）</span><br><span class="line"><span class="bullet">  -</span> <span class="strong">**<span class="xml"><span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">&#x27;#d15252&#x27;</span>&gt;</span></span>运行时异常可以不用声明，编译时异常必须写<span class="xml"><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span>**</span>（面试）</span><br><span class="line"></span><br><span class="line"><span class="section">##### Ⅲ.throw抛异常</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> throw new 异常类 ：方法内</span><br><span class="line"><span class="bullet">  -</span> 如果是运行时异常，不用在方法上去声明异常</span><br><span class="line"><span class="bullet">  -</span> 如果是编译时异常，必须要在方法上声明</span><br><span class="line"><span class="bullet">  -</span> 从结果上看，和默认机制是一样的，原理是不一样的，throw是自己将异常抛出(直接到控制台上)</span><br><span class="line"><span class="bullet">  -</span> 没有交给jvm，直接自己就抛出异常</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; Ⅱ.throws声明式异常和Ⅲ.throw抛异常	适用于开发者的角度</span></span><br><span class="line"><span class="quote">&gt;</span></span><br><span class="line"><span class="quote">&gt; throw</span></span><br><span class="line"><span class="quote">&gt;</span></span><br><span class="line"><span class="quote">&gt; - 编译时：有声明不一定有抛出，但是有抛出必须有声明</span></span><br><span class="line"><span class="quote">&gt; - 运行时：声明，抛出</span></span><br><span class="line"></span><br><span class="line">![<span class="string">image-20210805170703594</span>](<span class="link">https://i.loli.net/2021/08/05/smAEunHvaFqhJkS.png</span>)</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 格式： throw new 异常类型（）；</span><br><span class="line"></span><br><span class="line"><span class="section">##### Ⅳ.try...catch处理异常机制</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 格式</span><br><span class="line"></span><br><span class="line">  <span class="code">```java</span></span><br><span class="line"><span class="code">  try&#123;</span></span><br><span class="line"><span class="code">  	可能出现异常的语句</span></span><br><span class="line"><span class="code">  &#125;catch(异常类类型 变量名)&#123;</span></span><br><span class="line"><span class="code">      异常的处理</span></span><br><span class="line"><span class="code">  &#125;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>以后做开发使用或测试的时候，有异常建议使用(throw/throws)</p>
+<li>使用return原因：更加灵活，数据可以重复利用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//完成取值功能</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//使用return取值更加灵活</span></span><br><span class="line">	<span class="keyword">return</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-private修饰成员变量细节优化"><a href="#3-private修饰成员变量细节优化" class="headerlink" title="3.private修饰成员变量细节优化"></a>3.private修饰成员变量<font color='cornflowerblue'>细节优化</font></h4><ul>
+<li>如果没有特殊的需求，在给成员变量赋值的时候，直接赋值即可</li>
+<li>给访问private修饰的成员方法<font color='#d15252'>命名规范</font><ul>
+<li>set变量名<ul>
+<li>变量名首字母大写</li>
+</ul>
 </li>
-<li><p>在调用方法时遇到异常，建议使用try catch</p>
+<li>get变量名<ul>
+<li>变量名首字母大写</li>
+</ul>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">       <span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">       <span class="keyword">int</span> b =i/<span class="number">0</span>;</span><br><span class="line">        System.out.println(<span class="number">111</span>);	<span class="comment">//没有执行，异常跳入catch执行完，结束</span></span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;除数为0了&quot;</span>);</span><br><span class="line">        <span class="comment">//输出异常信息</span></span><br><span class="line">        System.out.println(e.getMessage());</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">        一定会执行的代码</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>当一个程序有多个错误时</p>
+</li>
+</ul>
+<h5 id="作业："><a href="#作业：" class="headerlink" title="作业："></a>作业：</h5><ul>
+<li>定义学生类<ul>
+<li>有参和空参构造</li>
+<li>private</li>
+<li>学号</li>
+<li>姓名</li>
+</ul>
+</li>
+<li>添加到数组中，并做打印</li>
+</ul>
+<h5 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h5><ul>
+<li><p>创建项目并进行测试</p>
+</li>
+<li><p>需求分析</p>
+</li>
+<li><p>创建自定义的学生类</p>
 <ul>
-<li>catch可以写多个，但要注意异常类型，小的放上面的catch，大的放在下面</li>
-</ul>
+<li><p>class Student</p>
 </li>
-<li><p>运行步骤：</p>
+<li><p>属性 = 成员变量 </p>
 <ul>
-<li>当进入try..catch中，先执行try()中有可能出现异常的问题</li>
-<li>如果遇到异常语句<ul>
-<li>跳入catch执行处理异常语句</li>
-<li>catch语句执行完后，执行finally内的语句</li>
-<li>结束try..catch</li>
-</ul>
-</li>
-<li>执行之后的代码</li>
+<li>定义成员变量<ul>
+<li>private int id;</li>
+<li>private String name;</li>
 </ul>
 </li>
 </ul>
-<h5 id="Ⅴ-细节问题"><a href="#Ⅴ-细节问题" class="headerlink" title="Ⅴ.细节问题"></a>Ⅴ.细节问题</h5><ul>
-<li>可以多层catch，但是大的类型一定要在最底层</li>
-<li>采用try chach，异常代码处理完成后，不影响其他代码的执行</li>
-<li>如果有finally，不管异常是否触发，一定会走（IO）</li>
+</li>
+<li><p>定义无参、有参构造方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义无参构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="comment">//定义带参构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(<span class="keyword">int</span> id,String name)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>定义相应的get/set方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义相应的get/set方法	=== 学号</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="6-查看异常信息"><a href="#6-查看异常信息" class="headerlink" title="6.查看异常信息"></a>6.查看异常信息</h4><p><img src="https://i.loli.net/2021/08/05/yh1b53ZoBeH7dmE.png" alt="image-20210805144413257"></p>
+</li>
+<li><p>创建存储学生的数组方法</p>
 <ul>
-<li>第一行是异常的类名<ul>
-<li>第一行<code>：</code>后的信息是异常产生的原因</li>
+<li>public static Student[] init(){}</li>
+<li>return返回创建的数组</li>
+</ul>
+<p><img src="https://i.loli.net/2021/07/28/r1f3Z2gm9Odok7I.png" alt="image-20210728103752639"></p>
+</li>
+<li><p>创建遍历数组学生对象的方法</p>
+<p><img src="https://i.loli.net/2021/07/28/PaCGI3pbHENkK8x.png" alt="image-20210728103827836"></p>
+<ul>
+<li>用到get方法，取出学生对象的属性</li>
 </ul>
 </li>
-<li>第二行是异常产生的原始位置</li>
-<li>第三行是异常产生的位置</li>
-</ul>
-<h4 id="7-Throwable的成员方法"><a href="#7-Throwable的成员方法" class="headerlink" title="7.Throwable的成员方法"></a>7.Throwable的成员方法</h4><table>
-<thead>
-<tr>
-<th>成员方法</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><font color='#d15252'>printStackTrace()</font></td>
-<td>将此throwable和其追溯打印到标准错误流</td>
-</tr>
-<tr>
-<td>getMessage()</td>
-<td>返回此throwable的详细消息字符串</td>
-</tr>
-<tr>
-<td>toString()</td>
-<td>简短的描述信息</td>
-</tr>
-</tbody></table>
+<li><p>在main方法中</p>
 <ul>
-<li>printStackTrace() 开发中用的比较多，因为他会对异常信息进行溯源，比较详细</li>
+<li><p>第一步：调用init获取创建的数组</p>
+</li>
+<li><p>第二步：创建Student的无参对象，带参对象</p>
+<ul>
+<li>无参：通过.set()方法给属性赋值</li>
+<li>带参：直接在初始化值时赋值</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">    System.out.println(e.getMessage());</span><br><span class="line">    System.out.println(e.toString());</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="number">123</span>);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">/ by zero	<span class="comment">//getMessage</span></span><br><span class="line">java.lang.ArithmeticException: / by zero	<span class="comment">//toString</span></span><br><span class="line"><span class="number">123</span></span><br><span class="line">java.lang.ArithmeticException: / by zero	</span><br><span class="line">	at 异常.Demo7.main(Demo7.java:<span class="number">6</span>)<span class="comment">//printStackTrace</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第三步：将创建的学生对象存入数组</p>
+</li>
+<li><p>第四步：调用遍历数组学生对象的方法</p>
+<p><img src="https://i.loli.net/2021/07/28/EIKidPcfUSOTqtr.png" alt="image-20210728104038704"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、Java的编程规范"><a href="#三、Java的编程规范" class="headerlink" title="三、Java的编程规范"></a>三、Java的编程规范</h3><ul>
+<li>见名知意</li>
+<li>确保功能的唯一性</li>
+<li>确保逻辑的灵活性</li>
+<li>规则和代码没有关系。规则语法</li>
+</ul>
+<h3 id="四、main方法和可变参"><a href="#四、main方法和可变参" class="headerlink" title="四、main方法和可变参"></a>四、main方法和可变参</h3><h4 id="1-main方法"><a href="#1-main方法" class="headerlink" title="1.main方法"></a>1.main方法</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="8-自定义异常信息"><a href="#8-自定义异常信息" class="headerlink" title="8.自定义异常信息"></a>8.自定义异常信息</h4><ul>
-<li><p>步骤：</p>
+<h4 id="2-可变参"><a href="#2-可变参" class="headerlink" title="2.可变参"></a>2.可变参</h4><ul>
+<li>格式：<code>数据类型 ... 变量名</code> </li>
+<li>参数最终会变为数组</li>
+<li>固定参和可变参在一起时，可变参必须写在末尾</li>
+</ul>
+<h3 id="五、方法的重载"><a href="#五、方法的重载" class="headerlink" title="五、方法的重载"></a>五、方法的重载</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><ul>
+<li><font color='#d15252'>在同一个类中</font>，方法名相同<ul>
+<li>与返回值无关，只看方法名和参数列表</li>
+<li>参数<ul>
+<li>参数个数    </li>
+<li>参数类型</li>
+</ul>
+</li>
+<li>修饰符同级</li>
+</ul>
+</li>
+<li>在调用时，Jvm通过区别参数列表的不同，调用相应的方法</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>成员方法</tag>
+        <tag>private</tag>
+        <tag>get/set</tag>
+        <tag>修饰符</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多线程</title>
+    <url>/2021/08/25/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
+    <content><![CDATA[<p><strong>清楚三个概念</strong></p>
 <ul>
-<li><p>在有可能出现异常的方法中，实现判断，如果触发异常，就使用throw new 异常类型（） 触发异常</p>
-<p><img src="https://i.loli.net/2021/08/05/3LZyG78TbpfcEth.png" alt="image-20210805171208739"></p>
+<li>进程</li>
+<li>线程</li>
+<li>在同一个时间点，一个cpu只能支持一个线程</li>
+</ul>
+<h3 id="一、进程"><a href="#一、进程" class="headerlink" title="一、进程"></a>一、进程</h3><h4 id="1-什么是进程"><a href="#1-什么是进程" class="headerlink" title="1.什么是进程"></a>1.什么是进程</h4><ul>
+<li>程，只是一个静态的概念（内存）</li>
+<li>程，就是一个app，exe（应用角度）</li>
+<li>进程只是一个静态概念，对于java来说就是机器上的一个.class文件，机器上的.exe文件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1:程序代码加载到代码区</span><br><span class="line">2:没有立刻执行，为进程开始做准本</span><br><span class="line">3:当jvm调用main方法时，进程开始执行</span><br><span class="line">4:真正执行的并不是进程，而是main方法</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="二、线程"><a href="#二、线程" class="headerlink" title="二、线程"></a>二、线程</h3><h4 id="1-什么是线程"><a href="#1-什么是线程" class="headerlink" title="1.什么是线程"></a>1.什么是线程</h4><ul>
+<li><p>一个进程可以有很多个分支，每一个分支就被称为线程</p>
+<ul>
+<li>Java程序，默认就有一个线程，就是main方法，也被称为main线程</li>
+</ul>
 </li>
-<li><p>异常类型需要自己自定义一个类，通过继承，实现处理异常的能力</p>
-<p><img src="https://i.loli.net/2021/08/05/RgbNl7y8MALHWZX.png" alt="image-20210805171219308"></p>
+<li><p><strong>在同一个时间点上，一个CPU只能支持一个线程在执行</strong></p>
+<ul>
+<li>双CPU或双核，是确确实实的多线程</li>
+</ul>
 </li>
+<li><p>Java如何实现多线程(类)</p>
+<ul>
+<li><strong><font color='#d15252'>Thread类</font></strong></li>
+<li>Runnable接口</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、Thread"><a href="#三、Thread" class="headerlink" title="三、Thread"></a>三、<font color='#d15252'>Thread</font></h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>包：java.lang.Thread<ul>
+<li>不需要导包</li>
+</ul>
+</li>
+<li>实现Runnable接口</li>
+<li>修饰符：public </li>
+<li>概述：管理Java中的线程</li>
+</ul>
+<h4 id="2-实现线程的步骤"><a href="#2-实现线程的步骤" class="headerlink" title="2.实现线程的步骤"></a>2.实现线程的步骤</h4><h5 id="Ⅰ-继承"><a href="#Ⅰ-继承" class="headerlink" title="Ⅰ.继承"></a>Ⅰ.继承</h5><ul>
+<li>第一步：将一个类声明为Thread的子类</li>
+<li>第二步：这个子类应该<font color='#d15252'>重写</font>Thread类的<font color='#d15252'>run方法</font></li>
+<li>第三步：创建子类实例，调用star方法启动线程</li>
+</ul>
+<h5 id="Ⅱ-实现接口"><a href="#Ⅱ-实现接口" class="headerlink" title="Ⅱ.实现接口"></a>Ⅱ.实现接口</h5><ul>
+<li>第一步：声明一个实现Runnable接口的类</li>
+<li>第二步：实现run方法</li>
+<li>第三步：创建实例</li>
+</ul>
+<h4 id="3-构造方法"><a href="#3-构造方法" class="headerlink" title="3.构造方法"></a>3.构造方法</h4><p><img src="https://i.loli.net/2021/08/12/D2KWuoqdQsXFCpH.png" alt="image-20210812095659082"></p>
+<h5 id="①-Thread-String-name"><a href="#①-Thread-String-name" class="headerlink" title="① Thread(String name)"></a>① Thread(String name)</h5><ul>
+<li>创建线程实例时，给线程名称赋值</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/12/7AS92gG3pNuYynq.png" alt="image-20210812172035560"></p>
+<h4 id="4-成员方法"><a href="#4-成员方法" class="headerlink" title="4.成员方法"></a>4.成员方法</h4><h5 id="Ⅰ-run"><a href="#Ⅰ-run" class="headerlink" title="Ⅰ. run()"></a>Ⅰ.<font color='#d15252'> run()</font></h5><ul>
+<li><p>核心</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>线程相关的代码写在该方法中，一般需要重写</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-start"><a href="#Ⅱ-start" class="headerlink" title="Ⅱ. start()"></a>Ⅱ. start()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动线程</li>
+</ul>
+<h5 id="Ⅲ-sleep"><a href="#Ⅲ-sleep" class="headerlink" title="Ⅲ. sleep()"></a>Ⅲ. sleep()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">(<span class="keyword">long</span> m)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>让线程休眠x毫秒</li>
+</ul>
+<h5 id="Ⅳ-join"><a href="#Ⅳ-join" class="headerlink" title="Ⅳ. join()"></a>Ⅳ. join()</h5><ul>
+<li><pre><code class="java">优先执行调用jion方法的线程
+</code></pre>
+</li>
+</ul>
+<h5 id="Ⅴ-其他方法"><a href="#Ⅴ-其他方法" class="headerlink" title="Ⅴ.其他方法"></a>Ⅴ.其他方法</h5><ul>
+<li>getName（）获取名</li>
+<li>currentThread（）返回正在执行的对象</li>
+</ul>
+<h4 id="5-Thread实现多线程细节问题-名字"><a href="#5-Thread实现多线程细节问题-名字" class="headerlink" title="5.Thread实现多线程细节问题(名字)"></a>5.Thread实现多线程<font color='#d15252'>细节问题</font>(名字)</h4><ul>
+<li><p>同一个Thread实例对象，不能重复的调用start()方法</p>
+<ul>
+<li>重复开启线程，栈帧名一样，Jvm报异常</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/12/asy7Dlo3ICtPqEF.png" alt=" "></p>
+</li>
+<li><p><font color='#d15252'>获取</font>当前线程<font color='#d15252'>名称</font></p>
+<ul>
+<li><p>getName()方法</p>
+<p><img src="https://i.loli.net/2021/08/12/3cdECOtSqeuy1vb.png" alt="image-20210812111038274"></p>
+</li>
+<li><p>currentThread()方法</p>
+<ul>
+<li>返回对当前正在执行的对象的引用</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/12/lQSzR98PrCTkAm1.png" alt="image-20210812110957410"></p>
+</li>
+</ul>
+<ul>
+<li><p>给线程<font color='#d15252'>起名字</font></p>
+<ul>
+<li><p>setName()方法</p>
+<p><img src="https://i.loli.net/2021/08/12/C2i9ojrGXBcALJe.png" alt="image-20210812112815580"></p>
+</li>
+<li><p>带参构造</p>
+<p><img src="https://i.loli.net/2021/08/12/hI6PnxSC3L1bior.png" alt="image-20210812113153552"></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><font color='#d15252'>匿名内部类</font>的方式实现Thread多线程</p>
+<ul>
+<li><p>自定义类</p>
+<ul>
+<li>当run方法中的线程业务复杂，或者需要多次使用该线程类时</li>
+</ul>
+</li>
+<li><p>匿名内部类</p>
+<ul>
+<li>当run方法中的线程业务只需要使用一次时</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/12/2ZDSdaAEcXPyCOL.png" alt="image-20210812113425179"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、Runnable接口"><a href="#四、Runnable接口" class="headerlink" title="四、Runnable接口"></a>四、Runnable接口</h3><ul>
+<li>实现多线程的第二种方法</li>
+</ul>
+<h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li><p>接口不能直接使用，需要通过子类实现</p>
+</li>
+<li><p>必须重写run方法</p>
+<ul>
+<li>run方法 — &gt; 线程业务</li>
+</ul>
+</li>
+<li><p>通过查API可知，Thread是Runnable接口的已知实现类</p>
+<ul>
+<li>Thread类的带参构造方法中，可以传递一个实现Runnable接口对象参数</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/12/wheKM691QbXLU3Y.png" alt="image-20210812135021782"></p>
+</li>
+<li><p>因为不支持多继承，所以如果我们定义的类要继承其他类的功能时，又需要具备多线程的功能</p>
+<ul>
+<li>这时就不能用继承了，可以用Runnable接口</li>
+</ul>
+</li>
+<li><p>包：java.lang包下</p>
+<ul>
+<li>不用导包就能使用 </li>
+</ul>
+</li>
+</ul>
+<h4 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><ul>
+<li>接口无构造方法</li>
+</ul>
+<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><ul>
+<li>run()方法 —-&gt; 实现类重写</li>
+</ul>
+<h4 id="4-使用"><a href="#4-使用" class="headerlink" title="4.使用"></a>4.使用</h4><ul>
+<li><p>创建自定义类，实现接口Runnable</p>
+</li>
+<li><p>重写run()方法</p>
+<p><img src="https://i.loli.net/2021/08/12/rRNX34PlcbgZK2F.png" alt="image-20210812135657924"></p>
+</li>
+<li><p>创建自定义类对象</p>
+</li>
+<li><p>调用Thread的构造方法（参数为Runnable）创建对象</p>
+</li>
+<li><p>start方法启动流</p>
+<ul>
+<li><img src="https://i.loli.net/2021/08/12/xejV7gKSTIidDah.png" alt="image-20210812135754014"></li>
+</ul>
+</li>
+</ul>
+<h4 id="5-Thread和Runnable的区别"><a href="#5-Thread和Runnable的区别" class="headerlink" title="5.Thread和Runnable的区别"></a>5.Thread和Runnable的区别</h4><ul>
+<li>实现了数据的共享</li>
+<li>避免了单继承的局限性</li>
+</ul>
+<h4 id="6-起名和获取名字"><a href="#6-起名和获取名字" class="headerlink" title="6.起名和获取名字"></a>6.起名和获取名字</h4><ul>
+<li>和Thread基本一样<ul>
+<li>SetName()设置名字</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="五、线程的特性"><a href="#五、线程的特性" class="headerlink" title="五、线程的特性"></a>五、线程的特性</h3><h4 id="1-线程的状态"><a href="#1-线程的状态" class="headerlink" title="1.线程的状态"></a>1.线程的<font color='#d15252'>状态</font></h4><h5 id="Ⅰ-新建-new"><a href="#Ⅰ-新建-new" class="headerlink" title="Ⅰ.新建(new)"></a>Ⅰ.新建(new)</h5><ul>
+<li>创建对象时，线程处于new状态</li>
+</ul>
+<h5 id="Ⅱ-可运行-Runnable"><a href="#Ⅱ-可运行-Runnable" class="headerlink" title="Ⅱ.可运行(Runnable)"></a>Ⅱ.可运行(Runnable)</h5><ul>
+<li>当调用start()方法时，进入Runnable状态<ul>
+<li>（正在执行）</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅲ-阻塞-Blocked"><a href="#Ⅲ-阻塞-Blocked" class="headerlink" title="Ⅲ.阻塞(Blocked)"></a>Ⅲ.阻塞(Blocked)</h5><ul>
+<li><p>线程暂时停下就是 Blocaked状态</p>
+<ul>
+<li><p>可能造成线程堵塞状态</p>
+<ul>
+<li><p>IO流</p>
+<ul>
+<li>read()方法</li>
+</ul>
+</li>
+<li><p>Scanner</p>
+<p><img src="https://i.loli.net/2021/08/12/3zqxRUYo9Sj4Esd.png" alt="image-20210812154345259"></p>
+</li>
+</ul>
+</li>
+<li><p>提供造成阻塞状态的方法</p>
+<ul>
+<li>join()</li>
+<li>wait()<ul>
+<li>需要用try-catch处理异常</li>
+<li>父类没有声明式抛出异常，子类就不能抛</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>notify()和notifyall()可以从阻塞状态返回正在执行Runnable状态</p>
+</li>
+</ul>
+<h5 id="Ⅳ-等待-Waiting"><a href="#Ⅳ-等待-Waiting" class="headerlink" title="Ⅳ.等待(Waiting)"></a>Ⅳ.<font color='#d15252'>等待</font>(Waiting)</h5><ul>
+<li><p>没有时间限制的等待</p>
+</li>
+<li><p>等另一个线程执行完后再执行</p>
+</li>
+</ul>
+<h5 id="Ⅴ-休眠状态-Timed-Waiting"><a href="#Ⅴ-休眠状态-Timed-Waiting" class="headerlink" title="Ⅴ.休眠状态(Timed_Waiting)"></a>Ⅴ.<font color='#d15252'>休眠状态</font>(Timed_Waiting)</h5><ul>
+<li>休眠状态<ul>
+<li>sleep()</li>
+</ul>
+</li>
+<li>达到指定时间线程再进行运行</li>
+</ul>
+<h5 id="Ⅵ-终止-Dead"><a href="#Ⅵ-终止-Dead" class="headerlink" title="Ⅵ.终止(Dead)"></a>Ⅵ.终止(Dead)</h5><ul>
+<li>当线程运行完后自动结束<ul>
+<li>Thread提供了stop()方法，但是已经<font color='#d15252'>弃用</font>了</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>什么是多线程？<ul>
+<li>程序的除了main方法外，还有很多个分支</li>
+</ul>
+</li>
+<li>实现多线程的两种方式？<ul>
+<li>Thread/Runable  </li>
+<li>区别：数据共享</li>
+</ul>
+</li>
+<li>生命周期<ul>
+<li>等待 wait join    </li>
+<li>休眠 sleep join()</li>
+<li>通过API提供的方法让线程声明周期的某个阶段，达到可控状态</li>
 </ul>
 </li>
 </ul>
@@ -3570,8 +3395,7 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>异常</tag>
-        <tag>迭代器</tag>
+        <tag>多线程</tag>
       </tags>
   </entry>
   <entry>
@@ -3796,6 +3620,182 @@
       </tags>
   </entry>
   <entry>
+    <title>异常和迭代器</title>
+    <url>/2021/08/25/%E5%BC%82%E5%B8%B8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
+    <content><![CDATA[<h3 id="一、迭代器"><a href="#一、迭代器" class="headerlink" title="一、迭代器"></a>一、迭代器</h3><h4 id="1-next"><a href="#1-next" class="headerlink" title="1.next()"></a>1.next()</h4><ul>
+<li>取数</li>
+<li>先下一个</li>
+<li>一次性</li>
+</ul>
+<h4 id="2-并发修改异常ConcurrentModificationException"><a href="#2-并发修改异常ConcurrentModificationException" class="headerlink" title="2.并发修改异常ConcurrentModificationException"></a>2.并发修改异常ConcurrentModificationException</h4><ul>
+<li>当我们使用迭代器做遍历的时候，不能破坏集合的内部结构<ul>
+<li>一旦有<font color='#d15252'>破坏集合内部结构的操作就会报错</font></li>
+</ul>
+</li>
+</ul>
+<h4 id="3-练习题：斗地主"><a href="#3-练习题：斗地主" class="headerlink" title="3.练习题：斗地主"></a>3.练习题：斗地主</h4><ul>
+<li>做四个容器<ul>
+<li>分别存玩家和底牌</li>
+</ul>
+</li>
+<li>再做一个容器，存所有扑克牌</li>
+</ul>
+<h4 id="3-静态导入"><a href="#3-静态导入" class="headerlink" title="3.静态导入"></a>3.静态导入</h4><ul>
+<li>在导包过程中，我们可以直接导入静态部分，这样的话某个类的静态成员就可以直接使用了<ul>
+<li>看别人的源码时用的比较多</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/05/TdlWUHFeZVRAPLj.png" alt="image-20210805135205026"></p>
+<h3 id="二、异常"><a href="#二、异常" class="headerlink" title="二、异常"></a>二、<font color='#d15252'>异常</font></h3><h4 id="1-什么是异常"><a href="#1-什么是异常" class="headerlink" title="1.什么是异常"></a>1.什么是异常</h4><ul>
+<li>异常就是程序出现了不正常的现象</li>
+</ul>
+<h4 id="2-Java如何形容异常？"><a href="#2-Java如何形容异常？" class="headerlink" title="2.Java如何形容异常？"></a>2.Java如何形容异常？</h4><p>但凡涉及到Java内的内容，都要用类来处理，所以异常最顶层的类</p>
+<ul>
+<li><font color='#d15252'><strong>Throwable</strong></font>类<ul>
+<li>是Java语言中所有错误和异常的超类</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-Throwable类"><a href="#3-Throwable类" class="headerlink" title="3.Throwable类"></a>3.Throwable类</h4><ul>
+<li><p><font color='#d15252'>Throwable</font></p>
+<ul>
+<li>error（错误）一般不会遇到，因为它表示严重的问题</li>
+<li>exception（异常）<ul>
+<li>编译时异常<ul>
+<li>其他类都是编译时异常</li>
+</ul>
+</li>
+<li>运行时异常<ul>
+<li>RuntimeException在运行时</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/05/1BUKNkQWzOFSgA7.png" alt="image-20210805141331385"></p>
+</li>
+<li><p><code>RuntimeException</code>是在Java虚拟机的正常操作期间可以抛出的异常的超类。 </p>
+</li>
+</ul>
+<h4 id="4-编译时异常和运行时异常"><a href="#4-编译时异常和运行时异常" class="headerlink" title="4.编译时异常和运行时异常"></a>4.编译时异常和运行时异常</h4><h5 id="Ⅰ-编译时异常"><a href="#Ⅰ-编译时异常" class="headerlink" title="Ⅰ.编译时异常"></a>Ⅰ.编译时异常</h5><ul>
+<li>编译时异常都是Exception的子类，程序卡在编译阶段</li>
+<li>出现这类的异常，必须<font color='#d15252'>显示处理</font>（调试代码），否则程序就会出现问题，无法编译</li>
+</ul>
+<h5 id="Ⅱ-运行时异常"><a href="#Ⅱ-运行时异常" class="headerlink" title="Ⅱ.运行时异常"></a>Ⅱ.运行时异常</h5><ul>
+<li>都是RuntimeException的子类，卡在了程序的运行时</li>
+<li>必须得修改代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//运行时异常</span></span><br><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">System.out.println(arr[<span class="number">100</span>]);</span><br><span class="line"><span class="comment">//以上代码可知，编译时是没有错误的</span></span><br><span class="line"><span class="comment">//但运行时报错 : java.lang.ArrayIndexOutOfBoundsException:</span></span><br><span class="line"><span class="comment">//由查看API可知，则异常是RuntimeException下的异常，所以确定它是运行时异常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//编译时异常演示</span></span><br><span class="line">      SimpleDateFormat sim = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy年MM月dd日&quot;</span>);</span><br><span class="line">      Date date = sim.parse(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line"><span class="comment">//由以上代码可知，在编译时期就会抛出异常</span></span><br><span class="line"><span class="comment">//Demo2.java:16: 错误: 未报告的异常错误ParseException; 必须对其进行捕获或声明以便抛出</span></span><br><span class="line"><span class="comment">//并且此异常在Throwable 包下，与runtimeException无关。所以时运行时异常</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-异常的处理机制"><a href="#5-异常的处理机制" class="headerlink" title="5.异常的处理机制"></a>5.异常的处理机制</h4><h5 id="Ⅰ-默认处理机制（面试问）"><a href="#Ⅰ-默认处理机制（面试问）" class="headerlink" title="Ⅰ.默认处理机制（面试问）"></a>Ⅰ.<font color='#d15252'>默认处理机制</font>（面试问）</h5><ul>
+<li>当程序遇到异常时<ul>
+<li>将异常抛给调用者（jvm)<ul>
+<li>一层一层的抛，最后抛给jvm</li>
+</ul>
+</li>
+<li>jvm会默认的去做相应的处理<ul>
+<li><font color='#d15252'>new 异常对象</font> ，产生异常名称、原因，以及出现的位置等信息输出在控制台</li>
+<li>停掉程序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-throws-声明式-方式处理异常"><a href="#Ⅱ-throws-声明式-方式处理异常" class="headerlink" title="Ⅱ.throws(声明式)方式处理异常"></a>Ⅱ.throws(声明式)方式处理异常</h5><ul>
+<li><p>写在方法的声明部分()</p>
+<ul>
+<li><p>```java<br>public void method()throws 异常类名</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="bullet">-</span> 给开发者看的，一般也不用</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 特点</span><br><span class="line"></span><br><span class="line"><span class="bullet">  -</span> 处理机制（还是默认的处理机制）</span><br><span class="line"><span class="bullet">  -</span> 为了给以后的调用者看（开发角度）</span><br><span class="line"><span class="bullet">  -</span> <span class="strong">**<span class="xml"><span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">&#x27;#d15252&#x27;</span>&gt;</span></span>运行时异常可以不用声明，编译时异常必须写<span class="xml"><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span>**</span>（面试）</span><br><span class="line"></span><br><span class="line"><span class="section">##### Ⅲ.throw抛异常</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> throw new 异常类 ：方法内</span><br><span class="line"><span class="bullet">  -</span> 如果是运行时异常，不用在方法上去声明异常</span><br><span class="line"><span class="bullet">  -</span> 如果是编译时异常，必须要在方法上声明</span><br><span class="line"><span class="bullet">  -</span> 从结果上看，和默认机制是一样的，原理是不一样的，throw是自己将异常抛出(直接到控制台上)</span><br><span class="line"><span class="bullet">  -</span> 没有交给jvm，直接自己就抛出异常</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; Ⅱ.throws声明式异常和Ⅲ.throw抛异常	适用于开发者的角度</span></span><br><span class="line"><span class="quote">&gt;</span></span><br><span class="line"><span class="quote">&gt; throw</span></span><br><span class="line"><span class="quote">&gt;</span></span><br><span class="line"><span class="quote">&gt; - 编译时：有声明不一定有抛出，但是有抛出必须有声明</span></span><br><span class="line"><span class="quote">&gt; - 运行时：声明，抛出</span></span><br><span class="line"></span><br><span class="line">![<span class="string">image-20210805170703594</span>](<span class="link">https://i.loli.net/2021/08/05/smAEunHvaFqhJkS.png</span>)</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 格式： throw new 异常类型（）；</span><br><span class="line"></span><br><span class="line"><span class="section">##### Ⅳ.try...catch处理异常机制</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 格式</span><br><span class="line"></span><br><span class="line">  <span class="code">```java</span></span><br><span class="line"><span class="code">  try&#123;</span></span><br><span class="line"><span class="code">  	可能出现异常的语句</span></span><br><span class="line"><span class="code">  &#125;catch(异常类类型 变量名)&#123;</span></span><br><span class="line"><span class="code">      异常的处理</span></span><br><span class="line"><span class="code">  &#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>以后做开发使用或测试的时候，有异常建议使用(throw/throws)</p>
+</li>
+<li><p>在调用方法时遇到异常，建议使用try catch</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">       <span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">       <span class="keyword">int</span> b =i/<span class="number">0</span>;</span><br><span class="line">        System.out.println(<span class="number">111</span>);	<span class="comment">//没有执行，异常跳入catch执行完，结束</span></span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;除数为0了&quot;</span>);</span><br><span class="line">        <span class="comment">//输出异常信息</span></span><br><span class="line">        System.out.println(e.getMessage());</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">        一定会执行的代码</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>当一个程序有多个错误时</p>
+<ul>
+<li>catch可以写多个，但要注意异常类型，小的放上面的catch，大的放在下面</li>
+</ul>
+</li>
+<li><p>运行步骤：</p>
+<ul>
+<li>当进入try..catch中，先执行try()中有可能出现异常的问题</li>
+<li>如果遇到异常语句<ul>
+<li>跳入catch执行处理异常语句</li>
+<li>catch语句执行完后，执行finally内的语句</li>
+<li>结束try..catch</li>
+</ul>
+</li>
+<li>执行之后的代码</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅴ-细节问题"><a href="#Ⅴ-细节问题" class="headerlink" title="Ⅴ.细节问题"></a>Ⅴ.细节问题</h5><ul>
+<li>可以多层catch，但是大的类型一定要在最底层</li>
+<li>采用try chach，异常代码处理完成后，不影响其他代码的执行</li>
+<li>如果有finally，不管异常是否触发，一定会走（IO）</li>
+</ul>
+<h4 id="6-查看异常信息"><a href="#6-查看异常信息" class="headerlink" title="6.查看异常信息"></a>6.查看异常信息</h4><p><img src="https://i.loli.net/2021/08/05/yh1b53ZoBeH7dmE.png" alt="image-20210805144413257"></p>
+<ul>
+<li>第一行是异常的类名<ul>
+<li>第一行<code>：</code>后的信息是异常产生的原因</li>
+</ul>
+</li>
+<li>第二行是异常产生的原始位置</li>
+<li>第三行是异常产生的位置</li>
+</ul>
+<h4 id="7-Throwable的成员方法"><a href="#7-Throwable的成员方法" class="headerlink" title="7.Throwable的成员方法"></a>7.Throwable的成员方法</h4><table>
+<thead>
+<tr>
+<th>成员方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font color='#d15252'>printStackTrace()</font></td>
+<td>将此throwable和其追溯打印到标准错误流</td>
+</tr>
+<tr>
+<td>getMessage()</td>
+<td>返回此throwable的详细消息字符串</td>
+</tr>
+<tr>
+<td>toString()</td>
+<td>简短的描述信息</td>
+</tr>
+</tbody></table>
+<ul>
+<li>printStackTrace() 开发中用的比较多，因为他会对异常信息进行溯源，比较详细</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">    System.out.println(e.getMessage());</span><br><span class="line">    System.out.println(e.toString());</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="number">123</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">/ by zero	<span class="comment">//getMessage</span></span><br><span class="line">java.lang.ArithmeticException: / by zero	<span class="comment">//toString</span></span><br><span class="line"><span class="number">123</span></span><br><span class="line">java.lang.ArithmeticException: / by zero	</span><br><span class="line">	at 异常.Demo7.main(Demo7.java:<span class="number">6</span>)<span class="comment">//printStackTrace</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="8-自定义异常信息"><a href="#8-自定义异常信息" class="headerlink" title="8.自定义异常信息"></a>8.自定义异常信息</h4><ul>
+<li><p>步骤：</p>
+<ul>
+<li><p>在有可能出现异常的方法中，实现判断，如果触发异常，就使用throw new 异常类型（） 触发异常</p>
+<p><img src="https://i.loli.net/2021/08/05/3LZyG78TbpfcEth.png" alt="image-20210805171208739"></p>
+</li>
+<li><p>异常类型需要自己自定义一个类，通过继承，实现处理异常的能力</p>
+<p><img src="https://i.loli.net/2021/08/05/RgbNl7y8MALHWZX.png" alt="image-20210805171219308"></p>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>异常</tag>
+        <tag>迭代器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数组</title>
     <url>/2021/08/25/%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h3 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h3><h4 id="1-什么是数组"><a href="#1-什么是数组" class="headerlink" title="1.什么是数组"></a>1.什么是数组</h4><ul>
@@ -3921,6 +3921,68 @@
       <tags>
         <tag>数组</tag>
         <tag>二维数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数组实现数据增查删改和数据库操作</title>
+    <url>/2021/08/25/%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%A2%9E%E6%9F%A5%E5%88%A0%E6%94%B9%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h3 id="一、综合案例：实现商品菜单，数据增查删改"><a href="#一、综合案例：实现商品菜单，数据增查删改" class="headerlink" title="一、综合案例：实现商品菜单，数据增查删改"></a>一、综合案例：实现商品菜单，数据增查删改</h3><h5 id="1-创建工程，测试环境"><a href="#1-创建工程，测试环境" class="headerlink" title="1.创建工程，测试环境"></a>1.创建工程，测试环境</h5><h5 id="2-前奏：实现数据的加载"><a href="#2-前奏：实现数据的加载" class="headerlink" title="2.前奏：实现数据的加载"></a>2.前奏：实现数据的加载</h5><ul>
+<li>变量 数组 集合 数据库 （暂时用数组）<ul>
+<li>数据类型[] 变量名 = new 数据类型[空间长度]</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-需求分析："><a href="#3-需求分析：" class="headerlink" title="3.需求分析："></a>3.需求分析：</h5><ul>
+<li><p>菜单：6条输出语句</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;1.查看商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;2.修改商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;3.增加商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;4.删除商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;5.退出&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;6.请您选择1---5&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>实现交互：即键盘录入数据，使用Scanner三个步骤</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"><span class="keyword">int</span> a = sc.nextInt();</span><br></pre></td></tr></table></figure></li>
+<li><p>实现菜单可以重复选择：利用for或者while死循环</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">for</span><span class="params">(;;)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="title">while</span><span class="params">(true)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现菜单的选择：使用if判断语句，判断录入的值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(a==<span class="number">1</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现查看功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现修改功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">3</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现增加功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">4</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现删除功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">5</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;退出&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现查看功能：for循环实现遍历数组、if判断不是0再输出</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;	</span><br><span class="line">	<span class="keyword">if</span> (arr[i]!=<span class="number">0</span>)&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;商品的编号:&quot;</span>+arr[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现修改功能：用for循环查看数组，if判断选择要修改的数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr[i]==b)&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;请输入修改后的编号&quot;</span>);</span><br><span class="line">		arr[i]=sc.nextInt();</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现增加功能：用for+if，将录入数据增加到0上</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入要增加的商品编号&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> x = sc.nextInt();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr[i]==<span class="number">0</span>)&#123;</span><br><span class="line">		arr[i]=x;</span><br><span class="line">		i = arr.length; <span class="comment">//跳出循环</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现删除功能：用for+if，匹配和录入数据相同的索引，更改值为0</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入要删除的商品编号&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> g = sc.nextInt();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (arr[i]==g)&#123;</span><br><span class="line">			arr[i]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="4-代码："><a href="#4-代码：" class="headerlink" title="4.代码："></a>4.代码：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建工程并测试环境</span></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo1</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span></span><br><span class="line"><span class="function">	</span>&#123;	</span><br><span class="line">		<span class="comment">//实现交互效果，需要键盘录入数据</span></span><br><span class="line">		<span class="comment">//键盘录入数据三步，导包，加载进内存，保存录入数据</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="comment">//定义布尔类型变量，控制循环结束</span></span><br><span class="line">		<span class="keyword">boolean</span> f =<span class="keyword">true</span>;</span><br><span class="line">		<span class="comment">//数据加载</span></span><br><span class="line">		<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">		arr[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">		arr[<span class="number">1</span>]=<span class="number">2</span>;</span><br><span class="line">		arr[<span class="number">2</span>]=<span class="number">3</span>;</span><br><span class="line">		<span class="comment">//实现可以重复选择菜单</span></span><br><span class="line">		<span class="keyword">for</span> (;f; )</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> j =<span class="number">0</span>;</span><br><span class="line">		<span class="comment">//需求分析：菜单页面即输出语句</span></span><br><span class="line">		System.out.println(<span class="string">&quot;====================&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 1.查看商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 2.修改商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 3.增加商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 4.删除商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 5.退出系统     ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| (请您选择1-5)  ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;====================&quot;</span>);</span><br><span class="line">		<span class="keyword">int</span> a = sc.nextInt();</span><br><span class="line">		<span class="comment">//实现菜单的选择</span></span><br><span class="line">		<span class="keyword">if</span> (a==<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="comment">//循环输出遍历数组</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;	<span class="comment">//if语句判断不是0再输出</span></span><br><span class="line">					<span class="keyword">if</span> (arr[i]!=<span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;商品的编号:&quot;</span>+arr[i]);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				System.out.println(<span class="string">&quot;===查看成功===&quot;</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要修改的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> b = sc.nextInt();</span><br><span class="line">				<span class="comment">//for+if判断并选择到需要修改的数据</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (arr[i]==b)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;请输入修改后的编号&quot;</span>);</span><br><span class="line">						arr[i]=sc.nextInt();</span><br><span class="line">						i = arr.length;</span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i]!=b)</span><br><span class="line">					&#123;</span><br><span class="line">						j++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (arr.length==j)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;您要修改的编号不存在&quot;</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">3</span>)&#123;</span><br><span class="line">				<span class="comment">//实现增加功能</span></span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要增加的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> x = sc.nextInt();</span><br><span class="line">				<span class="comment">//for+if查询判断，将录入数据加载到0上</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="comment">//判断如果商品编号已存在，提示添加失败，跳出循环</span></span><br><span class="line">					<span class="keyword">if</span> (arr[i]==x)</span><br><span class="line">					&#123;</span><br><span class="line">					System.out.println(<span class="string">&quot;您输入的商品编号已存在&quot;</span>);</span><br><span class="line">					i=arr.length;<span class="comment">//跳出循环</span></span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i]==<span class="number">0</span>)   <span class="comment">//如果不存在，判断为0的数据，添加</span></span><br><span class="line">						&#123;</span><br><span class="line">							arr[i]=x;</span><br><span class="line">							i = arr.length; <span class="comment">//跳出循环</span></span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">4</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要删除的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> g = sc.nextInt();</span><br><span class="line">				<span class="comment">//实现删除功能</span></span><br><span class="line">				<span class="comment">//for+if判断</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (arr[i]==g)</span><br><span class="line">					&#123;</span><br><span class="line">						arr[i]=<span class="number">0</span>;</span><br><span class="line">						System.out.println(<span class="string">&quot;===删除成功===&quot;</span>);</span><br><span class="line">						i =arr.length;<span class="comment">//跳出循环</span></span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span>(arr[i]!=g)&#123;</span><br><span class="line">						j++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (arr.length==j)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;你要删除的商品编号不存在&quot;</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">5</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;您已成功退出&quot;</span>);</span><br><span class="line">				f = <span class="keyword">false</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;===输入错误，请选择1-5===&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="二、使用数据库-Mysql"><a href="#二、使用数据库-Mysql" class="headerlink" title="二、使用数据库(Mysql)"></a>二、使用数据库(Mysql)</h3><h4 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1. 创建数据库"></a>1. 创建数据库</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create database 数据库名称</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-创建表格"><a href="#2-创建表格" class="headerlink" title="2. 创建表格"></a>2. 创建表格</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">	列名 数据类型,</span><br><span class="line">	列名 数据类型,</span><br><span class="line">    ....</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-插入数据"><a href="#3-插入数据" class="headerlink" title="3. 插入数据"></a>3. 插入数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">insert into 表名 (列名,...) values(数据,数据);</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-更新数据"><a href="#4-更新数据" class="headerlink" title="4.更新数据"></a>4.更新数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">updata 表名 set 字段 = 数值;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">update 表名 set 字段 = 数值 WHERE 字段=数值（选择）;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-删除数据"><a href="#5-删除数据" class="headerlink" title="5.删除数据"></a>5.删除数据</h4><ul>
+<li><p>删除全部数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Delete From 表名;</span><br></pre></td></tr></table></figure></li>
+<li><p>删除指定数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Delete From 表名 WHERE 字段 = 数值;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="6-查询数据"><a href="#6-查询数据" class="headerlink" title="6.查询数据"></a>6.查询数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM 表名</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>增查删改</tag>
+        <tag>案例</tag>
+        <tag>数据库</tag>
+        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -4162,68 +4224,6 @@
       </tags>
   </entry>
   <entry>
-    <title>数组实现数据增查删改和数据库操作</title>
-    <url>/2021/08/25/%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%A2%9E%E6%9F%A5%E5%88%A0%E6%94%B9%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h3 id="一、综合案例：实现商品菜单，数据增查删改"><a href="#一、综合案例：实现商品菜单，数据增查删改" class="headerlink" title="一、综合案例：实现商品菜单，数据增查删改"></a>一、综合案例：实现商品菜单，数据增查删改</h3><h5 id="1-创建工程，测试环境"><a href="#1-创建工程，测试环境" class="headerlink" title="1.创建工程，测试环境"></a>1.创建工程，测试环境</h5><h5 id="2-前奏：实现数据的加载"><a href="#2-前奏：实现数据的加载" class="headerlink" title="2.前奏：实现数据的加载"></a>2.前奏：实现数据的加载</h5><ul>
-<li>变量 数组 集合 数据库 （暂时用数组）<ul>
-<li>数据类型[] 变量名 = new 数据类型[空间长度]</li>
-</ul>
-</li>
-</ul>
-<h5 id="3-需求分析："><a href="#3-需求分析：" class="headerlink" title="3.需求分析："></a>3.需求分析：</h5><ul>
-<li><p>菜单：6条输出语句</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;1.查看商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;2.修改商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;3.增加商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;4.删除商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;5.退出&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;6.请您选择1---5&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-<li><p>实现交互：即键盘录入数据，使用Scanner三个步骤</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"><span class="keyword">int</span> a = sc.nextInt();</span><br></pre></td></tr></table></figure></li>
-<li><p>实现菜单可以重复选择：利用for或者while死循环</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">for</span><span class="params">(;;)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="title">while</span><span class="params">(true)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现菜单的选择：使用if判断语句，判断录入的值</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(a==<span class="number">1</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现查看功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现修改功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">3</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现增加功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">4</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现删除功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">5</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;退出&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现查看功能：for循环实现遍历数组、if判断不是0再输出</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;	</span><br><span class="line">	<span class="keyword">if</span> (arr[i]!=<span class="number">0</span>)&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;商品的编号:&quot;</span>+arr[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现修改功能：用for循环查看数组，if判断选择要修改的数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr[i]==b)&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;请输入修改后的编号&quot;</span>);</span><br><span class="line">		arr[i]=sc.nextInt();</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现增加功能：用for+if，将录入数据增加到0上</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入要增加的商品编号&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> x = sc.nextInt();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr[i]==<span class="number">0</span>)&#123;</span><br><span class="line">		arr[i]=x;</span><br><span class="line">		i = arr.length; <span class="comment">//跳出循环</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现删除功能：用for+if，匹配和录入数据相同的索引，更改值为0</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入要删除的商品编号&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> g = sc.nextInt();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (arr[i]==g)&#123;</span><br><span class="line">			arr[i]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h4 id="4-代码："><a href="#4-代码：" class="headerlink" title="4.代码："></a>4.代码：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建工程并测试环境</span></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo1</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span></span><br><span class="line"><span class="function">	</span>&#123;	</span><br><span class="line">		<span class="comment">//实现交互效果，需要键盘录入数据</span></span><br><span class="line">		<span class="comment">//键盘录入数据三步，导包，加载进内存，保存录入数据</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="comment">//定义布尔类型变量，控制循环结束</span></span><br><span class="line">		<span class="keyword">boolean</span> f =<span class="keyword">true</span>;</span><br><span class="line">		<span class="comment">//数据加载</span></span><br><span class="line">		<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">		arr[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">		arr[<span class="number">1</span>]=<span class="number">2</span>;</span><br><span class="line">		arr[<span class="number">2</span>]=<span class="number">3</span>;</span><br><span class="line">		<span class="comment">//实现可以重复选择菜单</span></span><br><span class="line">		<span class="keyword">for</span> (;f; )</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> j =<span class="number">0</span>;</span><br><span class="line">		<span class="comment">//需求分析：菜单页面即输出语句</span></span><br><span class="line">		System.out.println(<span class="string">&quot;====================&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 1.查看商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 2.修改商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 3.增加商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 4.删除商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 5.退出系统     ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| (请您选择1-5)  ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;====================&quot;</span>);</span><br><span class="line">		<span class="keyword">int</span> a = sc.nextInt();</span><br><span class="line">		<span class="comment">//实现菜单的选择</span></span><br><span class="line">		<span class="keyword">if</span> (a==<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="comment">//循环输出遍历数组</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;	<span class="comment">//if语句判断不是0再输出</span></span><br><span class="line">					<span class="keyword">if</span> (arr[i]!=<span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;商品的编号:&quot;</span>+arr[i]);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				System.out.println(<span class="string">&quot;===查看成功===&quot;</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要修改的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> b = sc.nextInt();</span><br><span class="line">				<span class="comment">//for+if判断并选择到需要修改的数据</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (arr[i]==b)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;请输入修改后的编号&quot;</span>);</span><br><span class="line">						arr[i]=sc.nextInt();</span><br><span class="line">						i = arr.length;</span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i]!=b)</span><br><span class="line">					&#123;</span><br><span class="line">						j++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (arr.length==j)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;您要修改的编号不存在&quot;</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">3</span>)&#123;</span><br><span class="line">				<span class="comment">//实现增加功能</span></span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要增加的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> x = sc.nextInt();</span><br><span class="line">				<span class="comment">//for+if查询判断，将录入数据加载到0上</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="comment">//判断如果商品编号已存在，提示添加失败，跳出循环</span></span><br><span class="line">					<span class="keyword">if</span> (arr[i]==x)</span><br><span class="line">					&#123;</span><br><span class="line">					System.out.println(<span class="string">&quot;您输入的商品编号已存在&quot;</span>);</span><br><span class="line">					i=arr.length;<span class="comment">//跳出循环</span></span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i]==<span class="number">0</span>)   <span class="comment">//如果不存在，判断为0的数据，添加</span></span><br><span class="line">						&#123;</span><br><span class="line">							arr[i]=x;</span><br><span class="line">							i = arr.length; <span class="comment">//跳出循环</span></span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">4</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要删除的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> g = sc.nextInt();</span><br><span class="line">				<span class="comment">//实现删除功能</span></span><br><span class="line">				<span class="comment">//for+if判断</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (arr[i]==g)</span><br><span class="line">					&#123;</span><br><span class="line">						arr[i]=<span class="number">0</span>;</span><br><span class="line">						System.out.println(<span class="string">&quot;===删除成功===&quot;</span>);</span><br><span class="line">						i =arr.length;<span class="comment">//跳出循环</span></span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span>(arr[i]!=g)&#123;</span><br><span class="line">						j++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (arr.length==j)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;你要删除的商品编号不存在&quot;</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">5</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;您已成功退出&quot;</span>);</span><br><span class="line">				f = <span class="keyword">false</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;===输入错误，请选择1-5===&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="二、使用数据库-Mysql"><a href="#二、使用数据库-Mysql" class="headerlink" title="二、使用数据库(Mysql)"></a>二、使用数据库(Mysql)</h3><h4 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1. 创建数据库"></a>1. 创建数据库</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create database 数据库名称</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="2-创建表格"><a href="#2-创建表格" class="headerlink" title="2. 创建表格"></a>2. 创建表格</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">	列名 数据类型,</span><br><span class="line">	列名 数据类型,</span><br><span class="line">    ....</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-插入数据"><a href="#3-插入数据" class="headerlink" title="3. 插入数据"></a>3. 插入数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">insert into 表名 (列名,...) values(数据,数据);</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-更新数据"><a href="#4-更新数据" class="headerlink" title="4.更新数据"></a>4.更新数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">updata 表名 set 字段 = 数值;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">update 表名 set 字段 = 数值 WHERE 字段=数值（选择）;</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-删除数据"><a href="#5-删除数据" class="headerlink" title="5.删除数据"></a>5.删除数据</h4><ul>
-<li><p>删除全部数据</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Delete From 表名;</span><br></pre></td></tr></table></figure></li>
-<li><p>删除指定数据</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Delete From 表名 WHERE 字段 = 数值;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="6-查询数据"><a href="#6-查询数据" class="headerlink" title="6.查询数据"></a>6.查询数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM 表名</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>增查删改</tag>
-        <tag>案例</tag>
-        <tag>数据库</tag>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>枚举和注解</title>
     <url>/2021/08/25/%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%B3%A8%E8%A7%A3/</url>
     <content><![CDATA[<h3 id="二、枚举"><a href="#二、枚举" class="headerlink" title="二、枚举"></a>二、枚举</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
@@ -4392,162 +4392,103 @@
       </tags>
   </entry>
   <entry>
-    <title>线程的生命周期、安全隐患和通信</title>
-    <url>/2021/08/25/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E3%80%81%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E5%92%8C%E9%80%9A%E4%BF%A1/</url>
-    <content><![CDATA[<h3 id="一、线程的生命周期"><a href="#一、线程的生命周期" class="headerlink" title="一、线程的生命周期"></a>一、线程的生命周期</h3><ul>
-<li>通过API提供的方法让线程声明周期的某个阶段，达到可控状态</li>
+    <title>转换流和缓冲流</title>
+    <url>/2021/08/25/%E8%BD%AC%E6%8D%A2%E6%B5%81%E5%92%8C%E7%BC%93%E5%86%B2%E6%B5%81/</url>
+    <content><![CDATA[<h3 id="y、InputStreamReader输入转换流"><a href="#y、InputStreamReader输入转换流" class="headerlink" title="y、InputStreamReader输入转换流"></a>y、InputStreamReader输入转换流</h3><h3 id="一、InputStreamReader输入转换流"><a href="#一、InputStreamReader输入转换流" class="headerlink" title="一、InputStreamReader输入转换流"></a>一、InputStreamReader输入转换流</h3><ul>
+<li><font color='#d15252'>指定编码格式</font></li>
 </ul>
-<h4 id="1-sleep-方法"><a href="#1-sleep-方法" class="headerlink" title="1.sleep()方法"></a>1.sleep()方法</h4><ul>
-<li><p>在指定的毫秒数内让正在执行的线程休眠</p>
-</li>
-<li><p>使当前正在执行的线程停留（暂停执行）指定的毫秒数，这取决于系统定时器和调度程序的精度和准确性</p>
-</li>
+<p><img src="https://i.loli.net/2021/08/10/ayLneKBhlFmp4Xi.png" alt="image-20210810100121551"></p>
+<h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>是从字节流到字符流的桥梁：它读取字节，并使用指定的[<code>charset</code>]将其解码为字符</li>
 </ul>
-<h4 id="2-join-方法"><a href="#2-join-方法" class="headerlink" title="2.join()方法"></a>2.join()方法</h4><h5 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">join();</span><br></pre></td></tr></table></figure>
+<h4 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">InputStreamReader​(InputStream in) 创建一个使用默认字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, String charsetName) 创建一个使用命名字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, Charset cs) 创建一个使用给定字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, CharsetDecoder dec) 创建一个使用给定字符集解码器的InputStreamReader。  </span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>等待调用该方法的线程结束后才能执行<ul>
-<li>谁调用该方法，谁先执行</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">join(<span class="keyword">long</span> time)</span><br></pre></td></tr></table></figure>
-
+<li><p>带参构造需要传递一个InputStream类型的对象</p>
 <ul>
-<li>等待调用该方法的线程，最多 <code>time</code>秒，然后才执行</li>
+<li>InputStream是一个接口<ul>
+<li>通过他的已知实现子类进行创建对象<ul>
+<li>FileInputStream<ul>
+<li>又需要一个File对象</li>
 </ul>
-<p><img src="https://i.loli.net/2021/08/13/9RbLO7FyAetT2nY.png" alt="image-20210813092653883"></p>
-<h4 id="3-线程的优先级"><a href="#3-线程的优先级" class="headerlink" title="3.线程的优先级"></a>3.<font color='#d15252'>线程的优先级</font></h4><ul>
-<li><p>Fileds常量</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> MAX_PRIORITY 线程可以拥有的最大优先级。  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> MIN_PRIORITY 线程可以拥有的最小优先级。  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> NORM_PRIORITY 分配给线程的默认优先级。 </span><br></pre></td></tr></table></figure>
-
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>步骤</strong></li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/10/xg15ot7RzDypGba.png" alt="image-20210810143433304"></p>
+</li>
+</ul>
+<h3 id="二、OutputStreamReader输出转换流"><a href="#二、OutputStreamReader输出转换流" class="headerlink" title="二、OutputStreamReader输出转换流"></a>二、OutputStreamReader输出转换流</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>同InputStreamReader</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/10/e7PhMWVkZQigDLz.png" alt="image-20210810144431017"></p>
+<h3 id="缓冲流的概述"><a href="#缓冲流的概述" class="headerlink" title="缓冲流的概述"></a>缓冲流的概述</h3><ul>
+<li>效率：读写速度提高</li>
+<li>功能<ul>
+<li>字节</li>
+<li>字符</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、字节缓冲流"><a href="#三、字节缓冲流" class="headerlink" title="三、字节缓冲流"></a>三、<font color='#d15252'>字节</font>缓冲流</h3><ul>
+<li> BufferedInputStream 输入缓冲流  — &gt; 读取数据到内存</li>
+<li> BufferedOutputStream 输出缓冲流 —&gt; 写入数据到目标文件</li>
+</ul>
+<h4 id="1-概述-2"><a href="#1-概述-2" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li><p>继承体系</p>
+<p><img src="https://i.loli.net/2021/08/10/j6FOZDEUCBrnSRv.png" alt="image-20210810151303875"></p>
+</li>
+<li><p>InputStream –&gt; FilterInputStream —&gt;BufferedInputStream</p>
+</li>
+<li><p><code>BufferedInputStream</code>为另一个输入流添加了功能，即缓冲输入并支持<code>mark</code>和<code>reset</code>方法的功能</p>
 <ul>
-<li>Java为线程类提供了10个优先级</li>
-<li>优先级可以用整数1—10表示，超过范围会抛出异常<ul>
-<li>最先等级 1 </li>
-<li>默认等级 5</li>
-<li>最大等级 10</li>
+<li>  <code>mark</code>操作会记住输入流中的一个点，并且<code>reset</code>操作会导致从最近的<code>mark</code>操作读取的所有字节在从包含的输入流中取出新字节之前重新读取。 </li>
 </ul>
 </li>
-</ul>
+<li><p><code>BufferedInputStream</code>将创建一个内部缓冲区数组</p>
 </li>
-<li><p><code>getPriority()</code> 获取线程的优先级</p>
-</li>
-<li><p><code>setPriority(int b)</code> 设置线程的优先级</p>
-</li>
-<li><p>查阅main方法的优先级</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取当前线程对象并保存</span></span><br><span class="line">Thread thread = Thread.currentThread();</span><br><span class="line"><span class="comment">//调用获取优先级方法</span></span><br><span class="line">thread.getPriority();</span><br></pre></td></tr></table></figure></li>
+<li></li>
 </ul>
-<h5 id="实验：线程优先级的效果"><a href="#实验：线程优先级的效果" class="headerlink" title="实验：线程优先级的效果"></a>实验：线程优先级的效果</h5><p><img src="https://i.loli.net/2021/08/13/vQXdb257gLK9slU.png" alt="image-20210813095931549"></p>
-<h3 id="二、线程的安全隐患"><a href="#二、线程的安全隐患" class="headerlink" title="二、线程的安全隐患"></a>二、线程的安全隐患</h3><ul>
-<li>隐患：存在发生的可能性,但不一定会发生<ul>
-<li>多个线程是通过竞争CPU的时间获得运行机会</li>
-<li>多个线程什么时候获得CPU时间，占用多少</li>
-<li>一个正在运行着的线程在什么地方暂停，也是不确定的</li>
-<li><img src="https://i.loli.net/2021/08/13/KvFtIJ9CmfoXqLd.png" alt="image-20210813105351734"></li>
-</ul>
-</li>
-</ul>
-<h4 id="1-线程同步"><a href="#1-线程同步" class="headerlink" title="1.线程同步"></a>1.线程<font color='#d15252'>同步</font></h4><ul>
-<li>只允许一个线程执行</li>
-<li><font color='#d15252'>synchronized</font>同步锁</li>
-</ul>
-<h5 id="Ⅰ-同步代码块"><a href="#Ⅰ-同步代码块" class="headerlink" title="Ⅰ.同步代码块"></a>Ⅰ.同步代码块</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Synchronized(对象)&#123;</span><br><span class="line">	<span class="comment">//同步代码（上锁）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="2-构造方法-1"><a href="#2-构造方法-1" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><ul>
+<li><p>```java<br>BufferedInputStream (InputStream in) 创建一个 BufferedInputStream并保存其参数，输入流 in供以后使用。<br>BufferedInputStream (InputStream in, int size) 创建具有指定缓冲区大小的 BufferedInputStream ，并保存其参数，输入流 in供以后使用。   //指定缓冲区大小</p>
+<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">#### <span class="number">3.</span>成员方法</span><br><span class="line"></span><br><span class="line">- read() 、read(byte[] b,int off,int len)</span><br><span class="line"></span><br><span class="line">  ![image<span class="number">-20210810151911879</span>](https:<span class="comment">//i.loli.net/2021/08/10/QriGhqVKH3xywoJ.png)</span></span><br><span class="line"></span><br><span class="line">### &lt;font color=<span class="string">&#x27;#d15252&#x27;</span>&gt;作业&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">![image<span class="number">-20210810154638010</span>](https:<span class="comment">//i.loli.net/2021/08/10/hznCeU2r3oB6v4d.png)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 四、&lt;font color=<span class="string">&#x27;#d15252&#x27;</span>&gt;字符&lt;/font&gt;缓冲流 </span><br><span class="line"></span><br><span class="line">- BufferedWriter</span><br><span class="line">- BufferedReader</span><br><span class="line"></span><br><span class="line">#### <span class="number">1.</span>概述</span><br><span class="line"></span><br><span class="line">- 修饰符：public 公共的可以直接使用</span><br><span class="line">- 继承 Writer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### <span class="number">2.</span>构造方法</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">BufferedWriter (Writer out) 创建使用默认大小的输出缓冲区的缓冲字符输出流。  </span><br><span class="line">BufferedWriter (Writer out, int sz) 创建一个新的缓冲字符输出流，使用给定大小的输出缓冲区。  <span class="comment">//自定义缓冲区大小</span></span><br></pre></td></tr></table></figure></li>
+<li><p>带参构造要传递参数一个 Writer类型的变量</p>
 <ul>
-<li>需要传递一个参数</li>
+<li>Write是一个抽象类，需要通过子类实例化<ul>
+<li>使用FileWriter实例化</li>
 </ul>
-<p><img src="https://i.loli.net/2021/08/13/cPWEQwfTSdvgYZH.png"></p>
-<p><img src="https://i.loli.net/2021/08/13/sT721vdch593yGn.png" alt="image-20210813105612949"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><p><img src="https://i.loli.net/2021/08/10/1FpWNTQgoXqP6jf.png" alt="image-20210810170324088"></p>
+<p><img src="https://i.loli.net/2021/08/10/u5AIkPoKXnyYVR7.png" alt="image-20210810171553360"></p>
 <ul>
-<li>细节问题</li>
-</ul>
-<h5 id="Ⅱ-同步方法"><a href="#Ⅱ-同步方法" class="headerlink" title="Ⅱ.同步方法"></a>Ⅱ.同步方法</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span><span class="comment">//this</span></span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/13/Hbej1wsAgymIUo5.png" alt="image-20210813112929968"></p>
-<p><img src="https://i.loli.net/2021/08/13/DvtNHRj6WBdunkZ.png" alt="image-20210813114530211"></p>
-<ul>
-<li>不想加静态就用this </li>
-<li>定义一个方法专门放synchronized</li>
-</ul>
-<h4 id="2-死锁（同步代码块嵌套）"><a href="#2-死锁（同步代码块嵌套）" class="headerlink" title="2.死锁（同步代码块嵌套）"></a>2.死锁（<font color='#d15252'>同步代码块嵌套</font>）</h4><ul>
-<li><p>程序没有停止，而且线程不在执行</p>
-<ul>
-<li>当一个线程拥有A对象锁的时候，并且在等待B对象锁的时候，另一个线程拥有了B对象的锁，并在等待A锁</li>
-<li>这种情况就造成了死锁</li>
-</ul>
-</li>
-<li><p>不要嵌套！！！！！！！！！！！！！！！！！！！</p>
-</li>
-</ul>
-<h3 id="三、线程的通信"><a href="#三、线程的通信" class="headerlink" title="三、线程的通信"></a>三、线程的通信</h3><h4 id="1-两个进程之间通信案例"><a href="#1-两个进程之间通信案例" class="headerlink" title="1.两个进程之间通信案例"></a>1.两个进程之间通信案例</h4><ul>
-<li><p>在A线程执行时，别的线程不能插入，即不交出cpu执行权</p>
-<ul>
-<li>synchronized锁住</li>
-<li>必须用同一把锁</li>
-</ul>
-</li>
-<li><p>A线程执行之后，需要通知B执行，找一个中间者作为记录</p>
-</li>
-<li><p>线程1</p>
-<p><img src="https://i.loli.net/2021/08/13/uj5agEFkPDmsLVh.png" alt="image-20210813162255432"></p>
-</li>
-<li><p>线程2</p>
-<p><img src="https://i.loli.net/2021/08/13/RnHIzLrvfaiJEAc.png" alt="image-20210813162312051"></p>
-</li>
-</ul>
-<h4 id="2-三个进程间通信案例"><a href="#2-三个进程间通信案例" class="headerlink" title="2.三个进程间通信案例"></a>2.三个进程间通信案例</h4><ul>
-<li>while循环实现重复输出</li>
-<li>实现同步代码块，确保一个线程执行时不会被抢走执行权<ul>
-<li>synchronized 加同步锁</li>
-</ul>
-</li>
-<li>三个线程要用一个锁对象<ul>
-<li>public <font color='#d15252'>static </font>Object obj = new Object();</li>
-<li>因为main方法是静态的，所以锁对象也要静态</li>
-<li>锁对象很灵活，用什么都可以</li>
-</ul>
-</li>
-<li>需要有记录员，记录线程之间通信的情况<ul>
-<li>定义一个变量，记录是谁在发消息<ul>
-<li>int a = 1;</li>
+<li><h5 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h5><ul>
+<li>字符缓冲流和字符流一样，不能操作文件的复制粘贴（乱码），只能操作纯文本文件</li>
 </ul>
 </li>
 </ul>
+<h3 id="五、所有流总结"><a href="#五、所有流总结" class="headerlink" title="五、所有流总结"></a>五、所有流总结</h3><h4 id="1-继承关系"><a href="#1-继承关系" class="headerlink" title="1.继承关系"></a>1.继承关系</h4><ul>
+<li><p>字节流</p>
+<p><img src="https://i.loli.net/2021/08/10/CTaUoeyz9tsu4R6.png"></p>
 </li>
-<li><font color='#d15252'>线程1</font><ul>
-<li>当a==1时，发送消息；并将a=2；唤醒所有线程</li>
-<li>当a!=1时，处于等待状态</li>
-</ul>
-</li>
-<li>线程2<ul>
-<li>当a==2时，发送消息；并将a=3；唤醒其他所有线程</li>
-<li>当a!=2时，处于等待状态</li>
-</ul>
-</li>
-<li>线程3<ul>
-<li>当a==3时，发送消息；并将a=1；唤醒其他所有线程</li>
-<li>当a!=3时，处于等待状态</li>
-</ul>
+<li><p>字符流</p>
 </li>
 </ul>
-<p><img src="https://i.loli.net/2021/08/13/gNbj82trWxEfilB.png" alt="image-20210813164127993"></p>
-<h4 id="3-通信中用到的方法"><a href="#3-通信中用到的方法" class="headerlink" title="3.通信中用到的方法"></a>3.通信中用到的方法</h4><ul>
-<li>wait()<ul>
-<li>等待</li>
-</ul>
-</li>
-<li>notifyAll()<ul>
-<li>唤醒所有线程3</li>
-</ul>
-</li>
-</ul>
+<p><img src="https://i.loli.net/2021/08/10/gsDie8LW45RrXbI.png" alt="image-20210810194449230"></p>
+<p><img src="https://i.loli.net/2021/08/25/Qq8EsATcXZpzO1h.png" alt="image-20210810184044702"></p>
 ]]></content>
       <categories>
         <category>Java</category>
       </categories>
       <tags>
-        <tag>多线程</tag>
+        <tag>IO流</tag>
+        <tag>转换流</tag>
+        <tag>缓冲流</tag>
       </tags>
   </entry>
   <entry>
@@ -4874,103 +4815,162 @@
       </tags>
   </entry>
   <entry>
-    <title>转换流和缓冲流</title>
-    <url>/2021/08/25/%E8%BD%AC%E6%8D%A2%E6%B5%81%E5%92%8C%E7%BC%93%E5%86%B2%E6%B5%81/</url>
-    <content><![CDATA[<h3 id="y、InputStreamReader输入转换流"><a href="#y、InputStreamReader输入转换流" class="headerlink" title="y、InputStreamReader输入转换流"></a>y、InputStreamReader输入转换流</h3><h3 id="一、InputStreamReader输入转换流"><a href="#一、InputStreamReader输入转换流" class="headerlink" title="一、InputStreamReader输入转换流"></a>一、InputStreamReader输入转换流</h3><ul>
-<li><font color='#d15252'>指定编码格式</font></li>
+    <title>线程的生命周期、安全隐患和通信</title>
+    <url>/2021/08/25/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E3%80%81%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E5%92%8C%E9%80%9A%E4%BF%A1/</url>
+    <content><![CDATA[<h3 id="一、线程的生命周期"><a href="#一、线程的生命周期" class="headerlink" title="一、线程的生命周期"></a>一、线程的生命周期</h3><ul>
+<li>通过API提供的方法让线程声明周期的某个阶段，达到可控状态</li>
 </ul>
-<p><img src="https://i.loli.net/2021/08/10/ayLneKBhlFmp4Xi.png" alt="image-20210810100121551"></p>
-<h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>是从字节流到字符流的桥梁：它读取字节，并使用指定的[<code>charset</code>]将其解码为字符</li>
+<h4 id="1-sleep-方法"><a href="#1-sleep-方法" class="headerlink" title="1.sleep()方法"></a>1.sleep()方法</h4><ul>
+<li><p>在指定的毫秒数内让正在执行的线程休眠</p>
+</li>
+<li><p>使当前正在执行的线程停留（暂停执行）指定的毫秒数，这取决于系统定时器和调度程序的精度和准确性</p>
+</li>
 </ul>
-<h4 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">InputStreamReader​(InputStream in) 创建一个使用默认字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, String charsetName) 创建一个使用命名字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, Charset cs) 创建一个使用给定字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, CharsetDecoder dec) 创建一个使用给定字符集解码器的InputStreamReader。  </span><br></pre></td></tr></table></figure>
+<h4 id="2-join-方法"><a href="#2-join-方法" class="headerlink" title="2.join()方法"></a>2.join()方法</h4><h5 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">join();</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>带参构造需要传递一个InputStream类型的对象</p>
+<li>等待调用该方法的线程结束后才能执行<ul>
+<li>谁调用该方法，谁先执行</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">join(<span class="keyword">long</span> time)</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>InputStream是一个接口<ul>
-<li>通过他的已知实现子类进行创建对象<ul>
-<li>FileInputStream<ul>
-<li>又需要一个File对象</li>
+<li>等待调用该方法的线程，最多 <code>time</code>秒，然后才执行</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>步骤</strong></li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/10/xg15ot7RzDypGba.png" alt="image-20210810143433304"></p>
-</li>
-</ul>
-<h3 id="二、OutputStreamReader输出转换流"><a href="#二、OutputStreamReader输出转换流" class="headerlink" title="二、OutputStreamReader输出转换流"></a>二、OutputStreamReader输出转换流</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>同InputStreamReader</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/10/e7PhMWVkZQigDLz.png" alt="image-20210810144431017"></p>
-<h3 id="缓冲流的概述"><a href="#缓冲流的概述" class="headerlink" title="缓冲流的概述"></a>缓冲流的概述</h3><ul>
-<li>效率：读写速度提高</li>
-<li>功能<ul>
-<li>字节</li>
-<li>字符</li>
-</ul>
-</li>
-</ul>
-<h3 id="三、字节缓冲流"><a href="#三、字节缓冲流" class="headerlink" title="三、字节缓冲流"></a>三、<font color='#d15252'>字节</font>缓冲流</h3><ul>
-<li> BufferedInputStream 输入缓冲流  — &gt; 读取数据到内存</li>
-<li> BufferedOutputStream 输出缓冲流 —&gt; 写入数据到目标文件</li>
-</ul>
-<h4 id="1-概述-2"><a href="#1-概述-2" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li><p>继承体系</p>
-<p><img src="https://i.loli.net/2021/08/10/j6FOZDEUCBrnSRv.png" alt="image-20210810151303875"></p>
-</li>
-<li><p>InputStream –&gt; FilterInputStream —&gt;BufferedInputStream</p>
-</li>
-<li><p><code>BufferedInputStream</code>为另一个输入流添加了功能，即缓冲输入并支持<code>mark</code>和<code>reset</code>方法的功能</p>
+<p><img src="https://i.loli.net/2021/08/13/9RbLO7FyAetT2nY.png" alt="image-20210813092653883"></p>
+<h4 id="3-线程的优先级"><a href="#3-线程的优先级" class="headerlink" title="3.线程的优先级"></a>3.<font color='#d15252'>线程的优先级</font></h4><ul>
+<li><p>Fileds常量</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> MAX_PRIORITY 线程可以拥有的最大优先级。  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> MIN_PRIORITY 线程可以拥有的最小优先级。  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> NORM_PRIORITY 分配给线程的默认优先级。 </span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>  <code>mark</code>操作会记住输入流中的一个点，并且<code>reset</code>操作会导致从最近的<code>mark</code>操作读取的所有字节在从包含的输入流中取出新字节之前重新读取。 </li>
+<li>Java为线程类提供了10个优先级</li>
+<li>优先级可以用整数1—10表示，超过范围会抛出异常<ul>
+<li>最先等级 1 </li>
+<li>默认等级 5</li>
+<li>最大等级 10</li>
 </ul>
 </li>
-<li><p><code>BufferedInputStream</code>将创建一个内部缓冲区数组</p>
-</li>
-<li></li>
 </ul>
-<h4 id="2-构造方法-1"><a href="#2-构造方法-1" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><ul>
-<li><p>```java<br>BufferedInputStream (InputStream in) 创建一个 BufferedInputStream并保存其参数，输入流 in供以后使用。<br>BufferedInputStream (InputStream in, int size) 创建具有指定缓冲区大小的 BufferedInputStream ，并保存其参数，输入流 in供以后使用。   //指定缓冲区大小</p>
-<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">#### <span class="number">3.</span>成员方法</span><br><span class="line"></span><br><span class="line">- read() 、read(byte[] b,int off,int len)</span><br><span class="line"></span><br><span class="line">  ![image<span class="number">-20210810151911879</span>](https:<span class="comment">//i.loli.net/2021/08/10/QriGhqVKH3xywoJ.png)</span></span><br><span class="line"></span><br><span class="line">### &lt;font color=<span class="string">&#x27;#d15252&#x27;</span>&gt;作业&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">![image<span class="number">-20210810154638010</span>](https:<span class="comment">//i.loli.net/2021/08/10/hznCeU2r3oB6v4d.png)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 四、&lt;font color=<span class="string">&#x27;#d15252&#x27;</span>&gt;字符&lt;/font&gt;缓冲流 </span><br><span class="line"></span><br><span class="line">- BufferedWriter</span><br><span class="line">- BufferedReader</span><br><span class="line"></span><br><span class="line">#### <span class="number">1.</span>概述</span><br><span class="line"></span><br><span class="line">- 修饰符：public 公共的可以直接使用</span><br><span class="line">- 继承 Writer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### <span class="number">2.</span>构造方法</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">BufferedWriter (Writer out) 创建使用默认大小的输出缓冲区的缓冲字符输出流。  </span><br><span class="line">BufferedWriter (Writer out, int sz) 创建一个新的缓冲字符输出流，使用给定大小的输出缓冲区。  <span class="comment">//自定义缓冲区大小</span></span><br></pre></td></tr></table></figure></li>
-<li><p>带参构造要传递参数一个 Writer类型的变量</p>
+</li>
+<li><p><code>getPriority()</code> 获取线程的优先级</p>
+</li>
+<li><p><code>setPriority(int b)</code> 设置线程的优先级</p>
+</li>
+<li><p>查阅main方法的优先级</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取当前线程对象并保存</span></span><br><span class="line">Thread thread = Thread.currentThread();</span><br><span class="line"><span class="comment">//调用获取优先级方法</span></span><br><span class="line">thread.getPriority();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="实验：线程优先级的效果"><a href="#实验：线程优先级的效果" class="headerlink" title="实验：线程优先级的效果"></a>实验：线程优先级的效果</h5><p><img src="https://i.loli.net/2021/08/13/vQXdb257gLK9slU.png" alt="image-20210813095931549"></p>
+<h3 id="二、线程的安全隐患"><a href="#二、线程的安全隐患" class="headerlink" title="二、线程的安全隐患"></a>二、线程的安全隐患</h3><ul>
+<li>隐患：存在发生的可能性,但不一定会发生<ul>
+<li>多个线程是通过竞争CPU的时间获得运行机会</li>
+<li>多个线程什么时候获得CPU时间，占用多少</li>
+<li>一个正在运行着的线程在什么地方暂停，也是不确定的</li>
+<li><img src="https://i.loli.net/2021/08/13/KvFtIJ9CmfoXqLd.png" alt="image-20210813105351734"></li>
+</ul>
+</li>
+</ul>
+<h4 id="1-线程同步"><a href="#1-线程同步" class="headerlink" title="1.线程同步"></a>1.线程<font color='#d15252'>同步</font></h4><ul>
+<li>只允许一个线程执行</li>
+<li><font color='#d15252'>synchronized</font>同步锁</li>
+</ul>
+<h5 id="Ⅰ-同步代码块"><a href="#Ⅰ-同步代码块" class="headerlink" title="Ⅰ.同步代码块"></a>Ⅰ.同步代码块</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Synchronized(对象)&#123;</span><br><span class="line">	<span class="comment">//同步代码（上锁）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>Write是一个抽象类，需要通过子类实例化<ul>
-<li>使用FileWriter实例化</li>
+<li>需要传递一个参数</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><p><img src="https://i.loli.net/2021/08/10/1FpWNTQgoXqP6jf.png" alt="image-20210810170324088"></p>
-<p><img src="https://i.loli.net/2021/08/10/u5AIkPoKXnyYVR7.png" alt="image-20210810171553360"></p>
+<p><img src="https://i.loli.net/2021/08/13/cPWEQwfTSdvgYZH.png"></p>
+<p><img src="https://i.loli.net/2021/08/13/sT721vdch593yGn.png" alt="image-20210813105612949"></p>
 <ul>
-<li><h5 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h5><ul>
-<li>字符缓冲流和字符流一样，不能操作文件的复制粘贴（乱码），只能操作纯文本文件</li>
+<li>细节问题</li>
+</ul>
+<h5 id="Ⅱ-同步方法"><a href="#Ⅱ-同步方法" class="headerlink" title="Ⅱ.同步方法"></a>Ⅱ.同步方法</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span><span class="comment">//this</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/13/Hbej1wsAgymIUo5.png" alt="image-20210813112929968"></p>
+<p><img src="https://i.loli.net/2021/08/13/DvtNHRj6WBdunkZ.png" alt="image-20210813114530211"></p>
+<ul>
+<li>不想加静态就用this </li>
+<li>定义一个方法专门放synchronized</li>
+</ul>
+<h4 id="2-死锁（同步代码块嵌套）"><a href="#2-死锁（同步代码块嵌套）" class="headerlink" title="2.死锁（同步代码块嵌套）"></a>2.死锁（<font color='#d15252'>同步代码块嵌套</font>）</h4><ul>
+<li><p>程序没有停止，而且线程不在执行</p>
+<ul>
+<li>当一个线程拥有A对象锁的时候，并且在等待B对象锁的时候，另一个线程拥有了B对象的锁，并在等待A锁</li>
+<li>这种情况就造成了死锁</li>
+</ul>
+</li>
+<li><p>不要嵌套！！！！！！！！！！！！！！！！！！！</p>
+</li>
+</ul>
+<h3 id="三、线程的通信"><a href="#三、线程的通信" class="headerlink" title="三、线程的通信"></a>三、线程的通信</h3><h4 id="1-两个进程之间通信案例"><a href="#1-两个进程之间通信案例" class="headerlink" title="1.两个进程之间通信案例"></a>1.两个进程之间通信案例</h4><ul>
+<li><p>在A线程执行时，别的线程不能插入，即不交出cpu执行权</p>
+<ul>
+<li>synchronized锁住</li>
+<li>必须用同一把锁</li>
+</ul>
+</li>
+<li><p>A线程执行之后，需要通知B执行，找一个中间者作为记录</p>
+</li>
+<li><p>线程1</p>
+<p><img src="https://i.loli.net/2021/08/13/uj5agEFkPDmsLVh.png" alt="image-20210813162255432"></p>
+</li>
+<li><p>线程2</p>
+<p><img src="https://i.loli.net/2021/08/13/RnHIzLrvfaiJEAc.png" alt="image-20210813162312051"></p>
+</li>
+</ul>
+<h4 id="2-三个进程间通信案例"><a href="#2-三个进程间通信案例" class="headerlink" title="2.三个进程间通信案例"></a>2.三个进程间通信案例</h4><ul>
+<li>while循环实现重复输出</li>
+<li>实现同步代码块，确保一个线程执行时不会被抢走执行权<ul>
+<li>synchronized 加同步锁</li>
+</ul>
+</li>
+<li>三个线程要用一个锁对象<ul>
+<li>public <font color='#d15252'>static </font>Object obj = new Object();</li>
+<li>因为main方法是静态的，所以锁对象也要静态</li>
+<li>锁对象很灵活，用什么都可以</li>
+</ul>
+</li>
+<li>需要有记录员，记录线程之间通信的情况<ul>
+<li>定义一个变量，记录是谁在发消息<ul>
+<li>int a = 1;</li>
 </ul>
 </li>
 </ul>
-<h3 id="五、所有流总结"><a href="#五、所有流总结" class="headerlink" title="五、所有流总结"></a>五、所有流总结</h3><h4 id="1-继承关系"><a href="#1-继承关系" class="headerlink" title="1.继承关系"></a>1.继承关系</h4><ul>
-<li><p>字节流</p>
-<p><img src="https://i.loli.net/2021/08/10/CTaUoeyz9tsu4R6.png"></p>
 </li>
-<li><p>字符流</p>
+<li><font color='#d15252'>线程1</font><ul>
+<li>当a==1时，发送消息；并将a=2；唤醒所有线程</li>
+<li>当a!=1时，处于等待状态</li>
+</ul>
+</li>
+<li>线程2<ul>
+<li>当a==2时，发送消息；并将a=3；唤醒其他所有线程</li>
+<li>当a!=2时，处于等待状态</li>
+</ul>
+</li>
+<li>线程3<ul>
+<li>当a==3时，发送消息；并将a=1；唤醒其他所有线程</li>
+<li>当a!=3时，处于等待状态</li>
+</ul>
 </li>
 </ul>
-<p><img src="https://i.loli.net/2021/08/10/gsDie8LW45RrXbI.png" alt="image-20210810194449230"></p>
-<p><img src="https://i.loli.net/2021/08/25/Qq8EsATcXZpzO1h.png" alt="image-20210810184044702"></p>
+<p><img src="https://i.loli.net/2021/08/13/gNbj82trWxEfilB.png" alt="image-20210813164127993"></p>
+<h4 id="3-通信中用到的方法"><a href="#3-通信中用到的方法" class="headerlink" title="3.通信中用到的方法"></a>3.通信中用到的方法</h4><ul>
+<li>wait()<ul>
+<li>等待</li>
+</ul>
+</li>
+<li>notifyAll()<ul>
+<li>唤醒所有线程3</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>Java</category>
       </categories>
       <tags>
-        <tag>IO流</tag>
-        <tag>转换流</tag>
-        <tag>缓冲流</tag>
+        <tag>多线程</tag>
       </tags>
   </entry>
   <entry>
