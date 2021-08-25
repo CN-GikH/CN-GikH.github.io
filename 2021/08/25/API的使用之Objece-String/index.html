@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="学习API的使用方法，认识Java的顶层父类Object类和最常用的String类，学习他们的方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="API的使用之Objece\String">
+<meta property="og:url" content="http://example.com/2021/08/25/API%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B9%8BObjece-String/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="学习API的使用方法，认识Java的顶层父类Object类和最常用的String类，学习他们的方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/08/02/MKIzgrnd7OhtZHU.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/02/aKrjvFO58PQpeV1.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/02/U3b4IAxLDEKsNPd.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/02/52pfHShT4nIgZyW.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/02/65WPFmKTILZ7oXE.png">
+<meta property="article:published_time" content="2021-08-25T04:36:44.000Z">
+<meta property="article:modified_time" content="2021-08-25T04:38:30.433Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="API">
+<meta property="article:tag" content="Object">
+<meta property="article:tag" content="String">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/08/02/MKIzgrnd7OhtZHU.png">
+
+<link rel="canonical" href="http://example.com/2021/08/25/API%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B9%8BObjece-String/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>API的使用之Objece\String | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/25/API%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B9%8BObjece-String/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          API的使用之Objece\String
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-25 12:36:44 / 修改时间：12:38:30" itemprop="dateCreated datePublished" datetime="2021-08-25T12:36:44+08:00">2021-08-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/08/25/API%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B9%8BObjece-String/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/08/25/API%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B9%8BObjece-String/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">学习API的使用方法，认识Java的顶层父类Object类和最常用的String类，学习他们的方法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、Java的API"><a href="#一、Java的API" class="headerlink" title="一、Java的API"></a>一、Java的API</h3><h4 id="1-API的概念"><a href="#1-API的概念" class="headerlink" title="1.API的概念"></a>1.API的概念</h4><ul>
+<li>之前的练习题：面向对象理论知识的总结</li>
+<li>JavaApi是对面向对象知识实践的一个总结</li>
+</ul>
+<ul>
+<li><strong>API：应用程序接口 —&gt; src下的内容</strong><ul>
+<li>A：Application:应用</li>
+<li>P：Programing:程序</li>
+<li>I：interface:接口</li>
+</ul>
+</li>
+<li>是使用Java的一份说明书</li>
+</ul>
+<h4 id="2-API的优势"><a href="#2-API的优势" class="headerlink" title="2.API的优势"></a>2.API的优势</h4><ul>
+<li>将Java提供好的工具类，做了调整<ul>
+<li>详细描述</li>
+<li>构造方法</li>
+<li>成员方法</li>
+</ul>
+</li>
+<li>众多的Java工具类，学习哪个都可以，但有一个必须要学<ul>
+<li>**<font color='#d15252'>Object</font>**：Java中所有的类的父类<ul>
+<li>不管是自定义类还是Java自带的工具类，所有的类最顶层的父类，都是Object类</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、Object类"><a href="#二、Object类" class="headerlink" title="二、Object类"></a>二、Object类</h3><h4 id="1-学习Object类的步骤"><a href="#1-学习Object类的步骤" class="headerlink" title="1.学习Object类的步骤"></a>1.学习Object类的步骤</h4><ul>
+<li><p>第一步：打开API的索引，直接搜索想要的类(注意大小写)</p>
+</li>
+<li><p>第二步：查看该类所在的包（<font color='#d15252'>java.lang</font>）</p>
+<ul>
+<li>所有Java.lang包下的工具类，直接使用，<font color='orange'>不需要导包</font></li>
+</ul>
+</li>
+<li><p>第三步：查看该类的概述部分</p>
+<ul>
+<li>查看该类的修饰符</li>
+<li>查看具体功能描述</li>
+</ul>
+</li>
+<li><p>第四步：<font color='#d15252'><strong>需要看构造方法</strong></font></p>
+<ul>
+<li>查看object就是为了使用，要使用就需要创建对象new，就需要调用构造方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object o = <span class="keyword">new</span> Object();</span><br></pre></td></tr></table></figure></li>
+<li><p>第五步：<font color='#d15252'>查看该类的方法</font></p>
+<ul>
+<li>使用该类，真正意义上是使用类中提供的方法</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-Object类中的方法"><a href="#2-Object类中的方法" class="headerlink" title="2.Object类中的方法"></a>2.Object类中的方法</h4><ul>
+<li>重点：修饰符，返回值，参数</li>
+</ul>
+<h5 id="Ⅰ-clone-方法"><a href="#Ⅰ-clone-方法" class="headerlink" title="Ⅰ. clone()方法"></a>Ⅰ. clone()方法</h5><ul>
+<li>创建并返回此对象的副本。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>clone()方法默认由protected修饰，所以子类不能直接访问<ul>
+<li>需要重写该方法</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-equals-方法"><a href="#Ⅱ-equals-方法" class="headerlink" title="Ⅱ. equals()方法"></a>Ⅱ. equals()方法</h5><ul>
+<li>指示一些其他对象是否等于此.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span> <span class="params">(Object obj)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> Object o = <span class="keyword">new</span> Object();</span><br><span class="line"> Object o2 = <span class="keyword">new</span> Object();</span><br><span class="line"> <span class="keyword">boolean</span> equals = o.equals(<span class="number">02</span>);</span><br><span class="line"> System.out.println(equals);</span><br><span class="line">    </span><br><span class="line"><span class="comment">//返回结果false</span></span><br></pre></td></tr></table></figure></li>
+<li><p>默认情况下，比较的是引用类型的地址值，意义不大，所以通常要重写</p>
+</li>
+</ul>
+<h5 id="Ⅲ-toString-方法"><a href="#Ⅲ-toString-方法" class="headerlink" title="Ⅲ. toString()方法"></a>Ⅲ. toString()方法</h5><ul>
+<li>返回对象的字符串表示形式。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当我们在使用输出语句，输出对象名的时候，底层走的就是toString方法</li>
+</ul>
+<h3 id="三、String类"><a href="#三、String类" class="headerlink" title="三、String类"></a>三、String类</h3><h4 id="1-学习步骤"><a href="#1-学习步骤" class="headerlink" title="1.学习步骤"></a>1.学习步骤</h4><ul>
+<li><p>第一步：打开API索引，搜索String类</p>
+</li>
+<li><p>第二步：查看所在的包</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Object </span><br><span class="line">java.lang.String </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>lang包直接使用，不需要导包</li>
+</ul>
+</li>
+<li><p>第三步：查看该类的概述部分</p>
+<ul>
+<li><p>String用来final修饰，不能被继承</p>
+</li>
+<li><p>继承了Object，实现了三个接口</p>
+</li>
+<li><p>之前我们使用String类型时，并没有使用new关键字</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="string">&quot;abc&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实际上，底层帮我们做了一系列操作</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> data[] = &#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>&#125;;</span><br><span class="line">String str = <span class="keyword">new</span> String(data);	<span class="comment">//调用了String的有参构造</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>第四步：需要看构造方法</p>
+<ul>
+<li>```java<br>String()<br>String(byte[] bytes)<br>String(char[] value, int offset, int count)<br>String(String original)<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 第五步：方法</span><br><span class="line"></span><br><span class="line">  ```java</span><br><span class="line">  charAt​(<span class="built_in">int</span> index)</span><br><span class="line">  compareTo​(<span class="keyword">String</span> anotherString)</span><br><span class="line">  <span class="built_in">concat</span>​(<span class="keyword">String</span> <span class="built_in">str</span>)</span><br><span class="line">  endsWith​(<span class="keyword">String</span> suffix)</span><br><span class="line">  equals​(<span class="keyword">Object</span> anObject)</span><br><span class="line">  getBytes​()    </span><br><span class="line">  indexOf​(<span class="keyword">String</span> <span class="built_in">str</span>)</span><br><span class="line">  length​()    </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="2-String类中的构造方法"><a href="#2-String类中的构造方法" class="headerlink" title="2.String类中的构造方法"></a>2.String类中的构造方法</h4><h5 id="Ⅰ-String"><a href="#Ⅰ-String" class="headerlink" title="Ⅰ. String()"></a>Ⅰ. String()</h5><ul>
+<li>初始化新创建的 <code>String</code>对象，以使其表示空字符序列。 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span> <span class="params">(String original)</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Ⅱ-String-byte-bytes"><a href="#Ⅱ-String-byte-bytes" class="headerlink" title="Ⅱ. String(byte[] bytes)"></a>Ⅱ. String(byte[] bytes)</h5><ul>
+<li>通过使用平台的默认字符集解码指定的字节数组来构造新的 <code>String</code> </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span> <span class="params">(<span class="keyword">byte</span>[] bytes)</span></span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Ⅲ-String-char-value-int-offset-int-count"><a href="#Ⅲ-String-char-value-int-offset-int-count" class="headerlink" title="Ⅲ. String(char[] value, int offset, int count)"></a>Ⅲ. String(char[] value, int offset, int count)</h5><ul>
+<li>分配一个新的 <code>String</code> ，其中包含字符数组参数的子阵列中的字符。 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span> <span class="params">(<span class="keyword">int</span>[] codePoints,</span></span></span><br><span class="line"><span class="params"><span class="function">              <span class="keyword">int</span> offset,</span></span></span><br><span class="line"><span class="params"><span class="function">              <span class="keyword">int</span> count)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>offset：初始偏移量<ul>
+<li>从数组哪个位置开始取</li>
+</ul>
+</li>
+<li>count：长度、个数<ul>
+<li>取多少个数据</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅳ-String-String-original"><a href="#Ⅳ-String-String-original" class="headerlink" title="Ⅳ. String(String original)"></a>Ⅳ. String(String original)</h5><ul>
+<li>初始化新创建的<code>String</code>对象，使其表示与参数相同的字符序列;  换句话说，新创建的字符串是参数字符串的副本。 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">String</span> <span class="params">(String original)</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="3-String类中的成员方法"><a href="#3-String类中的成员方法" class="headerlink" title="3.String类中的成员方法"></a>3.String类中的成员方法</h4><h5 id="Ⅰ-charAt-int-index"><a href="#Ⅰ-charAt-int-index" class="headerlink" title="Ⅰ. charAt(int index)"></a>Ⅰ. charAt(int index)</h5><ul>
+<li>返回指定索引处的 <code>char</code>值。<ul>
+<li>返回指定索引处的<code>char</code>值。  指数范围从<code>0</code>到<code>length() - 1</code> 。  序列的第一个<code>char</code>值是索引<code>0</code> ，下一个索引为<code>1</code>  ，依此类推，就像数组索引一样。 </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">charAt</span><span class="params">(<span class="keyword">int</span> index)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">      <span class="comment">//创建一个String类型的对象，调用方法</span></span><br><span class="line">      String s = <span class="keyword">new</span> String(<span class="string">&quot;高宇航&quot;</span>);</span><br><span class="line">      System.out.println(s.charAt(<span class="number">1</span>));</span><br><span class="line"><span class="comment">//控制台输出结果：宇</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>简单来说，就是取出对应索引的char数据</li>
+<li>案例：键盘录入一串字符，计算大写小写数字个数<ul>
+<li>“12ljlfsrAEr5875”</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-compareTo-String-anotherString"><a href="#Ⅱ-compareTo-String-anotherString" class="headerlink" title="Ⅱ. compareTo(String anotherString)"></a>Ⅱ. compareTo(String anotherString)</h5><ul>
+<li>按字典顺序比较两个字符串</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span> <span class="params">(String anotherString)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">        String s = <span class="string">&quot;高宇航&quot;</span>;</span><br><span class="line">        String s1 = <span class="string">&quot;高宇航&quot;</span>;</span><br><span class="line">        <span class="comment">//测试compareTo方法</span></span><br><span class="line">        System.out.println(s.compareTo(s1));</span><br><span class="line"><span class="comment">//程序输出0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果字符串相等，结果为零</li>
+<li>如果字符串s长度大于s1时，返回的值是正数</li>
+<li>如果字符串s长度小于s1时，返回的值是负数</li>
+</ul>
+<h5 id="Ⅲ-concat-String-str"><a href="#Ⅲ-concat-String-str" class="headerlink" title="Ⅲ. concat(String str)"></a>Ⅲ. concat(String str)</h5><ul>
+<li>将指定的字符串连接到该字符串的末尾。 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">concat</span> <span class="params">(String str)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//测试String类中的concat方法</span></span><br><span class="line"><span class="comment">//将指定的字符串连接到该字符串的末尾</span></span><br><span class="line">        <span class="comment">//定义一个String对象</span></span><br><span class="line">        String s = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">        String s1 = s.concat(<span class="string">&quot;World&quot;</span>);</span><br><span class="line">        System.out.println(s1);</span><br><span class="line">        <span class="comment">//返回结果HelloWorld</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>即字符串的拼接，在先有字符串后面添加</li>
+</ul>
+<h5 id="Ⅳ-endsWith-String-suffix"><a href="#Ⅳ-endsWith-String-suffix" class="headerlink" title="Ⅳ. endsWith(String suffix)"></a>Ⅳ. endsWith(String suffix)</h5><ul>
+<li>测试此字符串是否以指定的后缀结尾。 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">endsWith</span><span class="params">(String suffix)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>suffix：后缀</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//测试String类中的endsWith(String suffix)方法</span></span><br><span class="line"><span class="comment">//创建一个字符串</span></span><br><span class="line">String s = <span class="string">&quot;abcdggg&quot;</span>;</span><br><span class="line"><span class="keyword">boolean</span> g = s.endsWith(<span class="string">&quot;g&quot;</span>);</span><br><span class="line">System.out.println(g);</span><br><span class="line"><span class="comment">//返回值true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回一个布尔类型的值，true或false</li>
+</ul>
+<h5 id="Ⅴ-equals-Object-anObject"><a href="#Ⅴ-equals-Object-anObject" class="headerlink" title="Ⅴ. equals(Object anObject)"></a>Ⅴ. equals(Object anObject)</h5><ul>
+<li>将此字符串与指定对象进行比较。 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object anObject)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//测试String类中的equals方法</span></span><br><span class="line">String s = <span class="string">&quot;abcd&quot;</span>;</span><br><span class="line">String s1 = <span class="string">&quot;abcde&quot;</span>;</span><br><span class="line"><span class="keyword">boolean</span> equals = s.equals(s1);</span><br><span class="line">System.out.println(equals);</span><br><span class="line"><span class="comment">//返回flase</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>仅当参数不是null并且字符序列相同时，返回true</li>
+<li>否则返回false</li>
+</ul>
+<h5 id="Ⅵ-getBytes"><a href="#Ⅵ-getBytes" class="headerlink" title="Ⅵ.getBytes()"></a>Ⅵ.getBytes()</h5><ul>
+<li>使用平台的默认字符集(ASCII)将该 <code>String</code>编码为一系列字节，将结果存储到新的字节数组中。 </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">byte</span>[] getBytes()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo11</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//测试String类的getBytes()</span></span><br><span class="line">        <span class="comment">//创建一个String类型对象</span></span><br><span class="line">        String s = <span class="string">&quot;abcdef&quot;</span>;</span><br><span class="line">        System.out.println(s.getBytes());   <span class="comment">//[B@10f87f48</span></span><br><span class="line">        <span class="keyword">byte</span>[] bytes = s.getBytes();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;bytes.length;i++)&#123;</span><br><span class="line">            System.out.println(bytes[i]);</span><br><span class="line">            <span class="comment">//97 98 99 100 101 102</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将该<code>String</code>编码为一系列字节，将结果存储到新的字节数组中。 </li>
+</ul>
+<h5 id="Ⅶ-indexOf-String-str"><a href="#Ⅶ-indexOf-String-str" class="headerlink" title="Ⅶ.indexOf(String str)"></a>Ⅶ.indexOf(String str)</h5><ul>
+<li>返回指定子字符串第一次出现的字符串内的索引。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">indexOf</span> <span class="params">(String str)</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"><span class="comment">//        测试main方法中的indexOf(String str)方法</span></span><br><span class="line">        <span class="comment">//创建一个String类型对象</span></span><br><span class="line">        String s = <span class="string">&quot;Hello,java&quot;</span>;</span><br><span class="line">        <span class="comment">//使用indexOf方法查找指定字符串第一次出现的索引</span></span><br><span class="line">        System.out.println( s.indexOf(<span class="string">&quot;java&quot;</span>));</span><br><span class="line">        <span class="comment">//得出结果6,在第六个索引出现java</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果没有要查找的值，则返回<code>-1</code> 。</li>
+<li>str/ch 要搜索的字符串</li>
+</ul>
+<h5 id="Ⅷ-length"><a href="#Ⅷ-length" class="headerlink" title="Ⅷ.length()"></a>Ⅷ.length()</h5><ul>
+<li>返回此字符串的长度。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">length</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//测试字符串长度</span></span><br><span class="line">    String s = <span class="string">&quot;12345678&quot;</span>;</span><br><span class="line">    System.out.println(s.length());</span><br><span class="line">    <span class="comment">//返回结果8</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回此字符串的长度。 长度等于字符串中的数字<a href="Character.html#unicode">Unicode code units</a> 。 </li>
+</ul>
+<h4 id="4-作业"><a href="#4-作业" class="headerlink" title="4.作业"></a>4.作业</h4><h5 id="Ⅰ-将字符串中，第一个字母转换成大写，其他的转换成小写。并输出。"><a href="#Ⅰ-将字符串中，第一个字母转换成大写，其他的转换成小写。并输出。" class="headerlink" title="Ⅰ. 将字符串中，第一个字母转换成大写，其他的转换成小写。并输出。"></a>Ⅰ. 将字符串中，第一个字母转换成大写，其他的转换成小写。并输出。</h5><ul>
+<li><p>aaslkASGGR</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//作业练习一：将字符串中，第一个字母转换成大写，其他的转换成小写。并输出。</span></span><br><span class="line">    <span class="comment">//aaslkASGGR</span></span><br><span class="line">    <span class="comment">//将所有String字符转为小写 public String toLowerCase​()</span></span><br><span class="line">    <span class="comment">//转换大写toUpperCase()</span></span><br><span class="line">    String s = <span class="string">&quot;aaslkASGGR&quot;</span>;</span><br><span class="line">    <span class="comment">//使用substring提取第一个字符，并转为大写</span></span><br><span class="line">    String substring = s.substring(<span class="number">0</span>, <span class="number">1</span>).toUpperCase();</span><br><span class="line">    <span class="comment">//提取剩下的字符，并转为小写</span></span><br><span class="line">    String s1 = s.substring(<span class="number">1</span>).toLowerCase();</span><br><span class="line">    <span class="comment">//将两个字符串拼接</span></span><br><span class="line">    System.out.println(substring+s1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="Ⅱ-”afjpiwqjava9javajavajsjfkaksjafjafealjava”-计算Java个数"><a href="#Ⅱ-”afjpiwqjava9javajavajsjfkaksjafjafealjava”-计算Java个数" class="headerlink" title="Ⅱ.”afjpiwqjava9javajavajsjfkaksjafjafealjava”,计算Java个数"></a>Ⅱ.”afjpiwqjava9javajavajsjfkaksjafjafealjava”,计算Java个数</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//&quot;afjpiwqjava9javajavajsjfkaksjafjafealjava&quot;,计算Java的个数</span></span><br><span class="line">    <span class="comment">//定义一个java的字符串</span></span><br><span class="line">    String str = <span class="string">&quot;afjpiwqjava9javajavajsjfkaksjafjafealjava&quot;</span>;</span><br><span class="line">    String s = <span class="string">&quot;java&quot;</span>;</span><br><span class="line">    <span class="comment">//indexOf​(int ch) 返回指定字符第一次出现的字符串内的索引。</span></span><br><span class="line">    <span class="comment">//str.indexOf(s);得出第一个java在第7个索引位置</span></span><br><span class="line">    <span class="comment">//第二次查找需要在第10个位置继续往下查找</span></span><br><span class="line">    <span class="comment">//定义一个变量保存索引</span></span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> count =<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>((index = str.indexOf(s))!=-<span class="number">1</span>)&#123;</span><br><span class="line">        count++;</span><br><span class="line">         str = str.substring(index + s.length());</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、StringBuffer类"><a href="#四、StringBuffer类" class="headerlink" title="四、StringBuffer类"></a>四、StringBuffer类</h3><h4 id="1-步骤"><a href="#1-步骤" class="headerlink" title="1.步骤"></a>1.步骤</h4><ul>
+<li><p>搜索打开StringBuffer类的API</p>
+</li>
+<li><p>查看所在包</p>
+<ul>
+<li>java.lang.StringBuffer <ul>
+<li>在lang包下，不需要导包就可以使用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>查看概述</p>
+<ul>
+<li>修饰符：final 不能被无法继承</li>
+<li>这个类已经被一个等同的类补充了，它被设计为使用一个线程， StringBuilder。<ul>
+<li>通常应该使用<code>StringBuilder</code>类，因为它支持所有相同的操作，但它更快，因为它不执行同步。 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>查看构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer​() 构造一个没有字符的字符串缓冲区，初始容量为<span class="number">16</span>个字符。  </span><br><span class="line">StringBuffer​(<span class="keyword">int</span> capacity) 构造一个没有字符的字符串缓冲区和指定的初始容量。  </span><br><span class="line">StringBuffer​(CharSequence seq) 构造一个字符串缓冲区，其中包含与指定的 CharSequence相同的字符。  </span><br><span class="line">StringBuffer​(String str) 构造一个初始化为指定字符串内容的字符串缓冲区。  </span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>使用成员方法</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">append</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/02/MKIzgrnd7OhtZHU.png" alt="image-20210802204833609"></p>
+</li>
+</ul>
+<h4 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><h5 id="Ⅰ-无参构造"><a href="#Ⅰ-无参构造" class="headerlink" title="Ⅰ.无参构造"></a>Ⅰ.无参构造</h5><ul>
+<li><p>StringBuffer()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBuffer</span> <span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>构造一个没有字符的字符串缓冲区，<font color='#d15252'>初始容量为16个字符。 </font></li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-带参一：StringBuffer-int-capacity"><a href="#Ⅱ-带参一：StringBuffer-int-capacity" class="headerlink" title="Ⅱ. 带参一：StringBuffer(int capacity)"></a>Ⅱ. 带参一：StringBuffer(int capacity)</h5><ul>
+<li>```java<br>public StringBuffer(int capacity)<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 构造一个没有字符的字符串缓冲区和&lt;font color=<span class="string">&#x27;#d15252&#x27;</span>&gt;指定的初始容量&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">##### Ⅲ.带参二、三</span><br><span class="line"></span><br><span class="line">![image<span class="number">-20210802205551809</span>](https:<span class="comment">//i.loli.net/2021/08/02/rTHljxByQSK1o8X.png)</span></span><br><span class="line"></span><br><span class="line">#### <span class="number">3.</span>成员方法</span><br><span class="line"></span><br><span class="line">##### Ⅰ.append()</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">public StringBuffer append (数据类型 变量名)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/02/aKrjvFO58PQpeV1.png" alt="image-20210802205642980"></p>
+<ul>
+<li>将xxx类型的参数的字符串表示**<font color='#d15252'>追加</font>**到序列</li>
+<li>插入使用insert方法</li>
+</ul>
+<h5 id="Ⅱ-capacity"><a href="#Ⅱ-capacity" class="headerlink" title="Ⅱ.capacity()"></a>Ⅱ.capacity()</h5><ul>
+<li><p>返回当前容量（类似于返回数组长度）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">capacity</span> <span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>容量是新插入字符可用的存储量，超过此值将进行分配。</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅲ-查找序列"><a href="#Ⅲ-查找序列" class="headerlink" title="Ⅲ.查找序列"></a>Ⅲ.查找序列</h5><p><img src="https://i.loli.net/2021/08/02/U3b4IAxLDEKsNPd.png" alt="image-20210802205941815"></p>
+<h5 id="Ⅳ-删除序列"><a href="#Ⅳ-删除序列" class="headerlink" title="Ⅳ.删除序列"></a>Ⅳ.删除序列</h5><p><img src="https://i.loli.net/2021/08/02/52pfHShT4nIgZyW.png" alt="image-20210802210033980"></p>
+<h5 id="Ⅴ-插入数据到序列"><a href="#Ⅴ-插入数据到序列" class="headerlink" title="Ⅴ.插入数据到序列"></a>Ⅴ.插入数据到序列</h5><p><img src="https://i.loli.net/2021/08/02/65WPFmKTILZ7oXE.png" alt="image-20210802210221577"></p>
+<ul>
+<li>offset - 偏移量</li>
+</ul>
+<h5 id="Ⅵ-其他方法"><a href="#Ⅵ-其他方法" class="headerlink" title="Ⅵ.其他方法"></a>Ⅵ.其他方法</h5><ul>
+<li>charAt方法同样可以使用，返回指定索引的char值</li>
+<li>indexOf方法同样可以使用，查找指定字符串第一次出现的索引</li>
+<li>length()返回长度</li>
+<li>toString()返回此顺序中的数据的字符串</li>
+<li>subString(start , end)  返回一个新的序列，当前的子序列</li>
+</ul>
+<h3 id="五、StringBuilder类"><a href="#五、StringBuilder类" class="headerlink" title="五、StringBuilder类"></a>五、StringBuilder类</h3><h4 id="1-步骤-1"><a href="#1-步骤-1" class="headerlink" title="1.步骤"></a>1.步骤</h4><ul>
+<li><p>第一步：打开API，索引搜索StringBuilder类</p>
+</li>
+<li><p>第二步：查看该类所在的包</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.StringBuilder </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>lang包下不需要导包，直接使用</li>
+</ul>
+</li>
+<li><p>第三步：查看概述部分</p>
+<ul>
+<li>一个<code>StringBuilder</code>的主要操作是<code>append</code>和<code>insert</code>方法，它们是重载的，以便接受任何类型的数据。</li>
+<li><code>append</code>方法总是在构建器的末尾添加这些字符;  <code>insert</code>方法将字符添加到指定点。 </li>
+<li><code>StringBuilder</code>实例不能安全使用多线程。 如果需要同步，那么建议使用[<code>StringBuffer</code>]</li>
+</ul>
+</li>
+<li><p>第四步：查看构造方法</p>
+</li>
+<li><p>第五步：查看成员方法（功能）</p>
+</li>
+</ul>
+<h4 id="2-构造方法-1"><a href="#2-构造方法-1" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><ul>
+<li>与StringBuffer基本相同</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder​() 构造一个没有字符的字符串构建器，初始容量为<span class="number">16</span>个字符。  </span><br><span class="line">StringBuilder​(<span class="keyword">int</span> capacity) 构造一个没有字符的字符串构建器，以及由 capacity参数指定的初始容量。  </span><br><span class="line">StringBuilder​(CharSequence seq) 构造一个字符串构建器，其中包含与指定的 CharSequence相同的字符。  </span><br><span class="line">StringBuilder​(String str) 构造一个初始化为指定字符串内容的字符串构建器。  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><ul>
+<li>与StringBuffer基本相同</li>
+<li>append（）追加字符串到序列</li>
+<li>insert（int offset , 数据类型 变量名）插入字符串到序列中</li>
+<li>capacity() 返回容量值</li>
+<li>其他一些方法也可以使用，具体看API中解释</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/08/25/API%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B9%8BObjece-String/" title="API的使用之Objece\String">http://example.com/2021/08/25/API的使用之Objece-String/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/API/" rel="tag"><i class="fa fa-tag"></i># API</a>
+              <a href="/tags/Object/" rel="tag"><i class="fa fa-tag"></i># Object</a>
+              <a href="/tags/String/" rel="tag"><i class="fa fa-tag"></i># String</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/25/%E5%8C%BF%E5%90%8D%E5%AF%B9%E8%B1%A1%E3%80%81%E5%86%85%E9%83%A8%E7%B1%BB%E3%80%81%E4%BB%A3%E7%A0%81%E5%9D%97%E3%80%81%E5%92%8C%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%AD%89/" rel="prev" title="匿名对象、内部类、代码块、和修饰符等">
+      <i class="fa fa-chevron-left"></i> 匿名对象、内部类、代码块、和修饰符等
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/25/API%E4%B9%8BStringBuffer-StringBuilder-Date-DateFormat-Calender/" rel="next" title="API之StringBuffer\StringBuilder\Date\DateFormat\Calender">
+      API之StringBuffer\StringBuilder\Date\DateFormat\Calender <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Java%E7%9A%84API"><span class="nav-number">1.</span> <span class="nav-text">一、Java的API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-API%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">1.API的概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-API%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">1.2.</span> <span class="nav-text">2.API的优势</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Object%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">二、Object类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%AD%A6%E4%B9%A0Object%E7%B1%BB%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.1.</span> <span class="nav-text">1.学习Object类的步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Object%E7%B1%BB%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">2.Object类中的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-clone-%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.1.</span> <span class="nav-text">Ⅰ. clone()方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-equals-%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.2.</span> <span class="nav-text">Ⅱ. equals()方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-toString-%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.3.</span> <span class="nav-text">Ⅲ. toString()方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81String%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text">三、String类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%AD%A6%E4%B9%A0%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.1.</span> <span class="nav-text">1.学习步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-String%E7%B1%BB%E4%B8%AD%E7%9A%84%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">2.String类中的构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-String"><span class="nav-number">3.2.1.</span> <span class="nav-text">Ⅰ. String()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-String-byte-bytes"><span class="nav-number">3.2.2.</span> <span class="nav-text">Ⅱ. String(byte[] bytes)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-String-char-value-int-offset-int-count"><span class="nav-number">3.2.3.</span> <span class="nav-text">Ⅲ. String(char[] value, int offset, int count)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-String-String-original"><span class="nav-number">3.2.4.</span> <span class="nav-text">Ⅳ. String(String original)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-String%E7%B1%BB%E4%B8%AD%E7%9A%84%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">3.String类中的成员方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-charAt-int-index"><span class="nav-number">3.3.1.</span> <span class="nav-text">Ⅰ. charAt(int index)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-compareTo-String-anotherString"><span class="nav-number">3.3.2.</span> <span class="nav-text">Ⅱ. compareTo(String anotherString)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-concat-String-str"><span class="nav-number">3.3.3.</span> <span class="nav-text">Ⅲ. concat(String str)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-endsWith-String-suffix"><span class="nav-number">3.3.4.</span> <span class="nav-text">Ⅳ. endsWith(String suffix)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A4-equals-Object-anObject"><span class="nav-number">3.3.5.</span> <span class="nav-text">Ⅴ. equals(Object anObject)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A5-getBytes"><span class="nav-number">3.3.6.</span> <span class="nav-text">Ⅵ.getBytes()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A6-indexOf-String-str"><span class="nav-number">3.3.7.</span> <span class="nav-text">Ⅶ.indexOf(String str)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A7-length"><span class="nav-number">3.3.8.</span> <span class="nav-text">Ⅷ.length()</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E4%BD%9C%E4%B8%9A"><span class="nav-number">3.4.</span> <span class="nav-text">4.作业</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%EF%BC%8C%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AF%8D%E8%BD%AC%E6%8D%A2%E6%88%90%E5%A4%A7%E5%86%99%EF%BC%8C%E5%85%B6%E4%BB%96%E7%9A%84%E8%BD%AC%E6%8D%A2%E6%88%90%E5%B0%8F%E5%86%99%E3%80%82%E5%B9%B6%E8%BE%93%E5%87%BA%E3%80%82"><span class="nav-number">3.4.1.</span> <span class="nav-text">Ⅰ. 将字符串中，第一个字母转换成大写，其他的转换成小写。并输出。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E2%80%9Dafjpiwqjava9javajavajsjfkaksjafjafealjava%E2%80%9D-%E8%AE%A1%E7%AE%97Java%E4%B8%AA%E6%95%B0"><span class="nav-number">3.4.2.</span> <span class="nav-text">Ⅱ.”afjpiwqjava9javajavajsjfkaksjafjafealjava”,计算Java个数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81StringBuffer%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">四、StringBuffer类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.1.</span> <span class="nav-text">1.步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">2.构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E6%97%A0%E5%8F%82%E6%9E%84%E9%80%A0"><span class="nav-number">4.2.1.</span> <span class="nav-text">Ⅰ.无参构造</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E5%B8%A6%E5%8F%82%E4%B8%80%EF%BC%9AStringBuffer-int-capacity"><span class="nav-number">4.2.2.</span> <span class="nav-text">Ⅱ. 带参一：StringBuffer(int capacity)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-capacity"><span class="nav-number">4.2.3.</span> <span class="nav-text">Ⅱ.capacity()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-%E6%9F%A5%E6%89%BE%E5%BA%8F%E5%88%97"><span class="nav-number">4.2.4.</span> <span class="nav-text">Ⅲ.查找序列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-%E5%88%A0%E9%99%A4%E5%BA%8F%E5%88%97"><span class="nav-number">4.2.5.</span> <span class="nav-text">Ⅳ.删除序列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A4-%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E5%88%B0%E5%BA%8F%E5%88%97"><span class="nav-number">4.2.6.</span> <span class="nav-text">Ⅴ.插入数据到序列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A5-%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="nav-number">4.2.7.</span> <span class="nav-text">Ⅵ.其他方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81StringBuilder%E7%B1%BB"><span class="nav-number">5.</span> <span class="nav-text">五、StringBuilder类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%AD%A5%E9%AA%A4-1"><span class="nav-number">5.1.</span> <span class="nav-text">1.步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95-1"><span class="nav-number">5.2.</span> <span class="nav-text">2.构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95"><span class="nav-number">5.3.</span> <span class="nav-text">3.成员方法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/nightmare_dimple" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;nightmare_dimple" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共34.6k字</span>
+</div>
+<br>
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<br>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '6uDYpax5oiwmCOvB3BcAzCt8-gzGzoHsz',
+      appKey     : 'BohVEfqjWIyJ5MzTXJJv3cNw',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

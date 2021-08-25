@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="学习Java中的文件管理类File，了解递归操作的含义、运行步骤等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="File类和递归">
+<meta property="og:url" content="http://example.com/2021/08/25/File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="学习Java中的文件管理类File，了解递归操作的含义、运行步骤等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/08/06/2GEvFzH5uYcWSmf.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/06/bTpwMFlWfIq7GLn.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/06/KYSm2TRUZ4gCMJ3.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/06/ly1JWNortYHjh86.png">
+<meta property="article:published_time" content="2021-08-25T04:48:50.000Z">
+<meta property="article:modified_time" content="2021-08-25T04:49:56.965Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="File">
+<meta property="article:tag" content="递归">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/08/06/2GEvFzH5uYcWSmf.png">
+
+<link rel="canonical" href="http://example.com/2021/08/25/File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>File类和递归 | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/25/File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          File类和递归
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-25 12:48:50 / 修改时间：12:49:56" itemprop="dateCreated datePublished" datetime="2021-08-25T12:48:50+08:00">2021-08-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/08/25/File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/08/25/File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">学习Java中的文件管理类File，了解递归操作的含义、运行步骤等</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、File"><a href="#一、File" class="headerlink" title="一、File"></a>一、File</h3><ul>
+<li>Java可以操作我们的本地硬盘<ul>
+<li>文件和目录路径名的抽象表示<ul>
+<li>文件</li>
+<li>内容</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-什么是File类"><a href="#1-什么是File类" class="headerlink" title="1.什么是File类"></a>1.什么是File类</h4><ul>
+<li>就是对我们本地文件管理的类（文件夹在java中是File）</li>
+</ul>
+<h4 id="2-使用File类"><a href="#2-使用File类" class="headerlink" title="2.使用File类"></a>2.使用File类</h4><h5 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h5><ul>
+<li><h6 id="pathSeparator（了解）"><a href="#pathSeparator（了解）" class="headerlink" title="pathSeparator（了解）"></a>pathSeparator（了解）</h6><ul>
+<li> 与系统相关的路径分隔符字符，为方便起见，表示为字符串。</li>
+<li> 直接输出可以得到一个 ”；” 分号</li>
+</ul>
+</li>
+</ul>
+<h5 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h5><h6 id="Ⅰ-File-File-parent-String-child"><a href="#Ⅰ-File-File-parent-String-child" class="headerlink" title="Ⅰ.File(File parent, String child)"></a>Ⅰ.File(File parent, String child)</h6><ul>
+<li>从父抽象路径名和子路径名字符串创建新的 File实例。</li>
+</ul>
+<h6 id="Ⅱ-File-String-pathname"><a href="#Ⅱ-File-String-pathname" class="headerlink" title="Ⅱ.File(String pathname)"></a>Ⅱ.File(String pathname)</h6><ul>
+<li>通过将给定的路径名字符串转换为抽象路径名来创建新的 File实例。  </li>
+</ul>
+<h6 id="Ⅲ-File-String-parent-String-child"><a href="#Ⅲ-File-String-parent-String-child" class="headerlink" title="Ⅲ.File(String parent, String child)"></a>Ⅲ.File(String parent, String child)</h6><ul>
+<li> 从父路径名字符串和子路径名字符串创建新的 File实例。  </li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/06/2GEvFzH5uYcWSmf.png" alt="image-20210806095327726"></p>
+<blockquote>
+<p>抽象：File表示的这个目录，可能存在也可能不存在，所以被称为是抽象的</p>
+</blockquote>
+<blockquote>
+<p>三个构造方法的区别：不要从应用层，因为我们还没有遇到这样的案例。 先单独从表层考虑</p>
+</blockquote>
+<h4 id="3-成员方法-—-File类的获取方法"><a href="#3-成员方法-—-File类的获取方法" class="headerlink" title="3.成员方法 — File类的获取方法"></a>3.成员方法 — File类的获取方法</h4><ul>
+<li>getAbsolutePath()<ul>
+<li>返回此抽象路径名的绝对路径名字符串。</li>
+<li>即返回全路径（<font color='#d15252'>绝对路径</font>）</li>
+</ul>
+</li>
+<li>getName()<ul>
+<li>返回由此抽象路径名表示的文件或目录的名称</li>
+<li>即返回最后一个路径（<font color='#d15252'>相对路径</font>）</li>
+</ul>
+</li>
+<li>getPath()<ul>
+<li>将此<strong>抽象路径名</strong>转换为路径名字符串</li>
+</ul>
+</li>
+<li>length()<ul>
+<li>返回由此抽象路径名表示的文件的长度</li>
+<li>文件的长度、字节数<ul>
+<li>但当获取文件夹的大小时，通常不够准确</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-成员方法-—-文件-文件夹的创建及删除"><a href="#4-成员方法-—-文件-文件夹的创建及删除" class="headerlink" title="4.成员方法 — 文件/文件夹的创建及删除"></a>4.成员方法 — 文件/文件夹的创建及删除</h4><ul>
+<li>createNewFile<ul>
+<li>当且仅当具有该名称的文件尚不存在时，原地创建一个由该抽象路径名命名的新的空文件<ul>
+<li>简单来说就是创建一个文件</li>
+<li>创建成功的前提条件：无此文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>mkdir()<ul>
+<li>创建目录（单层）</li>
+</ul>
+</li>
+<li>mkdirs()<ul>
+<li>创建由此抽象路径名命名的目录，包括任何必需但不存在的父目录。<ul>
+<li>简单来说就是创建文件夹</li>
+<li>可以创建多个</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>isFile()<ul>
+<li>测试此抽象路径名表示的文件是否为普通文件。</li>
+</ul>
+</li>
+<li>delete()<ul>
+<li><font color='#d15252'>删除</font>由此抽象路径名表示的文件或目录</li>
+</ul>
+</li>
+<li>isDirectory()<ul>
+<li>测试此抽象路径名表示的文件是否为目录<ul>
+<li>前提条件：目录一定要存在</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>exists()<ul>
+<li>测试此抽象路径名表示的文件或目录是否存在</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-成员方法-—-获取文件目录"><a href="#5-成员方法-—-获取文件目录" class="headerlink" title="5.成员方法 — 获取文件目录"></a>5.成员方法 — 获取文件目录</h4><h5 id="Ⅰ-list"><a href="#Ⅰ-list" class="headerlink" title="Ⅰ.list()"></a>Ⅰ.list()</h5><ul>
+<li><p>返回一个字符串数组，命名由此抽象路径名表示的目录中的文件和目录</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String[] list():获取路径中的子目录/文件</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//list方法，返回绝对路径，是String字符串类型的</span></span><br><span class="line">String[] list = f.list();</span><br><span class="line"><span class="comment">//循环遍历查看结果</span></span><br><span class="line"><span class="keyword">for</span> (String i: list)&#123;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="Ⅱ-listFiles"><a href="#Ⅱ-listFiles" class="headerlink" title="Ⅱ.listFiles()"></a>Ⅱ.<font color='#d15252'>listFiles()</font></h5><ul>
+<li><p>与list()功能一样,但返回的是File()类型的数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File[] listFiles()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//listFiles方法，返回File对象，更加灵活，可以再次进行操作</span></span><br><span class="line">File[] files = f.listFiles();</span><br><span class="line"><span class="keyword">for</span> (File i : files)&#123;</span><br><span class="line">    <span class="comment">//返回绝对路径是因为默认重写了toString方法</span></span><br><span class="line">    System.out.println(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用listFiles()更加灵活，因为返回值是File类型，可继续使用File的其他功能</p>
+</li>
+</ul>
+<h5 id="Ⅲ-listFiles-FileFilter-filter-过滤文件（用的比较多）"><a href="#Ⅲ-listFiles-FileFilter-filter-过滤文件（用的比较多）" class="headerlink" title="Ⅲ.listFiles(FileFilter filter) 过滤文件（用的比较多）"></a>Ⅲ.<strong><font color='#d15252'>listFiles(FileFilter filter) </font>过滤文件</strong>（用的比较多）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File[] listFiles(FileFilter filter) </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>同样是listFiles，表示方法的重载，传递一个FileFilter类型的参数</p>
+</li>
+<li><p><font color='#d15252'>FileFilter</font>：由API可知FilleFilter是一个接口，而且没有已知的实现类</p>
+<ul>
+<li>所以我们要使用它，必须定义一个类，implements是西安接口FileFilter</li>
+<li>并且我们需要重写接口中的类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">accept</span><span class="params">(File dir, String name)</span></span></span><br><span class="line"><span class="function"><span class="comment">//测试指定文件是否应包含在文件列表中</span></span></span><br><span class="line"><span class="function">dir - 找到该文件的目录。 </span></span><br><span class="line"><span class="function">name - 文件的名称。 </span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/06/bTpwMFlWfIq7GLn.png" alt="image-20210806140719225"></p>
+<ul>
+<li>pahthname：传过来的参数名</li>
+<li>getName()：获取内容</li>
+<li>endsWith()：String中的成员方法<ul>
+<li><code>endsWith(String suffix)</code></li>
+<li>测试此字符串是否以指定的后缀结尾。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/06/KYSm2TRUZ4gCMJ3.png" alt="image-20210806140740062"></p>
+</li>
+<li><p>也可以直接通过匿名对象使用</p>
+<p><img src="https://i.loli.net/2021/08/06/ly1JWNortYHjh86.png" alt="image-20210806145718867"></p>
+</li>
+</ul>
+<h5 id="Ⅳ-listFiles-FilenameFilter-filter-同样是过滤文件"><a href="#Ⅳ-listFiles-FilenameFilter-filter-同样是过滤文件" class="headerlink" title="Ⅳ.listFiles(FilenameFilter filter)同样是过滤文件"></a>Ⅳ.listFiles(FilenameFilter filter)同样是过滤文件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> File[] listFiles(FilenameFilter filter)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回一个抽象路径名数组，表示由此抽象路径名表示的满足指定过滤器的目录中的文件和目录，同样用方法重载的方法<ul>
+<li>返回值类型：File[]</li>
+<li>传递参数：FilenameFilter filter</li>
+</ul>
+</li>
+<li><font color='#d15252'>FilenameFilter</font> 同样是一个接口<ul>
+<li>成员方法：accept(File dir,String name)</li>
+<li>测试指定文件是否应包含在文件列表中</li>
+<li>返回boolean类型的值</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、递归"><a href="#二、递归" class="headerlink" title="二、递归"></a>二、递归</h3><h4 id="1-什么是递归"><a href="#1-什么是递归" class="headerlink" title="1.什么是递归"></a>1.什么是递归</h4><ul>
+<li>方法自己调用自己就是递归<ul>
+<li>要给自己设置出口</li>
+<li>构造方法不能使用</li>
+<li>不要过多的使用（百万以上最好不要用递归）</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-递归练习"><a href="#2-递归练习" class="headerlink" title="2.递归练习"></a>2.递归练习</h4><ul>
+<li>遍历文件</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断如果是目录就继续进入并遍历</span></span><br><span class="line"><span class="keyword">for</span> (File i : files) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i.isDirectory()) &#123;</span><br><span class="line">        find(i);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//保存文件名</span></span><br><span class="line">        String name = i.getName();</span><br><span class="line">        <span class="comment">//判断文件后缀是不是.mp4文件</span></span><br><span class="line">        <span class="keyword">if</span> (name.endsWith(<span class="string">&quot;.mp4&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/08/25/File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/" title="File类和递归">http://example.com/2021/08/25/File类和递归/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/File/" rel="tag"><i class="fa fa-tag"></i># File</a>
+              <a href="/tags/%E9%80%92%E5%BD%92/" rel="tag"><i class="fa fa-tag"></i># 递归</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/25/%E5%BC%82%E5%B8%B8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/" rel="prev" title="异常和迭代器">
+      <i class="fa fa-chevron-left"></i> 异常和迭代器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/25/IO%E6%B5%81/" rel="next" title="IO流">
+      IO流 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81File"><span class="nav-number">1.</span> <span class="nav-text">一、File</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFFile%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">1.什么是File类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8File%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">2.使用File类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">成员变量</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#pathSeparator%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">pathSeparator（了解）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E2%85%A0-File-File-parent-String-child"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Ⅰ.File(File parent, String child)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E2%85%A1-File-String-pathname"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Ⅱ.File(String pathname)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E2%85%A2-File-String-parent-String-child"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">Ⅲ.File(String parent, String child)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95-%E2%80%94-File%E7%B1%BB%E7%9A%84%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">3.成员方法 — File类的获取方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95-%E2%80%94-%E6%96%87%E4%BB%B6-%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E5%88%9B%E5%BB%BA%E5%8F%8A%E5%88%A0%E9%99%A4"><span class="nav-number">1.4.</span> <span class="nav-text">4.成员方法 — 文件&#x2F;文件夹的创建及删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95-%E2%80%94-%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="nav-number">1.5.</span> <span class="nav-text">5.成员方法 — 获取文件目录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-list"><span class="nav-number">1.5.1.</span> <span class="nav-text">Ⅰ.list()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-listFiles"><span class="nav-number">1.5.2.</span> <span class="nav-text">Ⅱ.listFiles()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-listFiles-FileFilter-filter-%E8%BF%87%E6%BB%A4%E6%96%87%E4%BB%B6%EF%BC%88%E7%94%A8%E7%9A%84%E6%AF%94%E8%BE%83%E5%A4%9A%EF%BC%89"><span class="nav-number">1.5.3.</span> <span class="nav-text">Ⅲ.listFiles(FileFilter filter) 过滤文件（用的比较多）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-listFiles-FilenameFilter-filter-%E5%90%8C%E6%A0%B7%E6%98%AF%E8%BF%87%E6%BB%A4%E6%96%87%E4%BB%B6"><span class="nav-number">1.5.4.</span> <span class="nav-text">Ⅳ.listFiles(FilenameFilter filter)同样是过滤文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%80%92%E5%BD%92"><span class="nav-number">2.</span> <span class="nav-text">二、递归</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E9%80%92%E5%BD%92"><span class="nav-number">2.1.</span> <span class="nav-text">1.什么是递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E9%80%92%E5%BD%92%E7%BB%83%E4%B9%A0"><span class="nav-number">2.2.</span> <span class="nav-text">2.递归练习</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/nightmare_dimple" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;nightmare_dimple" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共34.6k字</span>
+</div>
+<br>
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<br>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '6uDYpax5oiwmCOvB3BcAzCt8-gzGzoHsz',
+      appKey     : 'BohVEfqjWIyJ5MzTXJJv3cNw',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

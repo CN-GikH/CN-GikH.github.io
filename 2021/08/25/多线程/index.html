@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="学习Java的多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程">
+<meta property="og:url" content="http://example.com/2021/08/25/%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="学习Java的多线程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/08/12/D2KWuoqdQsXFCpH.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/12/7AS92gG3pNuYynq.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/12/asy7Dlo3ICtPqEF.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/12/3cdECOtSqeuy1vb.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/12/lQSzR98PrCTkAm1.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/12/C2i9ojrGXBcALJe.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/12/hI6PnxSC3L1bior.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/12/2ZDSdaAEcXPyCOL.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/12/wheKM691QbXLU3Y.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/12/rRNX34PlcbgZK2F.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/12/xejV7gKSTIidDah.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/12/3zqxRUYo9Sj4Esd.png">
+<meta property="article:published_time" content="2021-08-25T04:57:40.000Z">
+<meta property="article:modified_time" content="2021-08-25T04:59:15.204Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="多线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/08/12/D2KWuoqdQsXFCpH.png">
+
+<link rel="canonical" href="http://example.com/2021/08/25/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>多线程 | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/25/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          多线程
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-25 12:57:40 / 修改时间：12:59:15" itemprop="dateCreated datePublished" datetime="2021-08-25T12:57:40+08:00">2021-08-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/08/25/%E5%A4%9A%E7%BA%BF%E7%A8%8B/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/08/25/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">学习Java的多线程</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>清楚三个概念</strong></p>
+<ul>
+<li>进程</li>
+<li>线程</li>
+<li>在同一个时间点，一个cpu只能支持一个线程</li>
+</ul>
+<h3 id="一、进程"><a href="#一、进程" class="headerlink" title="一、进程"></a>一、进程</h3><h4 id="1-什么是进程"><a href="#1-什么是进程" class="headerlink" title="1.什么是进程"></a>1.什么是进程</h4><ul>
+<li>程，只是一个静态的概念（内存）</li>
+<li>程，就是一个app，exe（应用角度）</li>
+<li>进程只是一个静态概念，对于java来说就是机器上的一个.class文件，机器上的.exe文件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1:程序代码加载到代码区</span><br><span class="line">2:没有立刻执行，为进程开始做准本</span><br><span class="line">3:当jvm调用main方法时，进程开始执行</span><br><span class="line">4:真正执行的并不是进程，而是main方法</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="二、线程"><a href="#二、线程" class="headerlink" title="二、线程"></a>二、线程</h3><h4 id="1-什么是线程"><a href="#1-什么是线程" class="headerlink" title="1.什么是线程"></a>1.什么是线程</h4><ul>
+<li><p>一个进程可以有很多个分支，每一个分支就被称为线程</p>
+<ul>
+<li>Java程序，默认就有一个线程，就是main方法，也被称为main线程</li>
+</ul>
+</li>
+<li><p><strong>在同一个时间点上，一个CPU只能支持一个线程在执行</strong></p>
+<ul>
+<li>双CPU或双核，是确确实实的多线程</li>
+</ul>
+</li>
+<li><p>Java如何实现多线程(类)</p>
+<ul>
+<li><strong><font color='#d15252'>Thread类</font></strong></li>
+<li>Runnable接口</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、Thread"><a href="#三、Thread" class="headerlink" title="三、Thread"></a>三、<font color='#d15252'>Thread</font></h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>包：java.lang.Thread<ul>
+<li>不需要导包</li>
+</ul>
+</li>
+<li>实现Runnable接口</li>
+<li>修饰符：public </li>
+<li>概述：管理Java中的线程</li>
+</ul>
+<h4 id="2-实现线程的步骤"><a href="#2-实现线程的步骤" class="headerlink" title="2.实现线程的步骤"></a>2.实现线程的步骤</h4><h5 id="Ⅰ-继承"><a href="#Ⅰ-继承" class="headerlink" title="Ⅰ.继承"></a>Ⅰ.继承</h5><ul>
+<li>第一步：将一个类声明为Thread的子类</li>
+<li>第二步：这个子类应该<font color='#d15252'>重写</font>Thread类的<font color='#d15252'>run方法</font></li>
+<li>第三步：创建子类实例，调用star方法启动线程</li>
+</ul>
+<h5 id="Ⅱ-实现接口"><a href="#Ⅱ-实现接口" class="headerlink" title="Ⅱ.实现接口"></a>Ⅱ.实现接口</h5><ul>
+<li>第一步：声明一个实现Runnable接口的类</li>
+<li>第二步：实现run方法</li>
+<li>第三步：创建实例</li>
+</ul>
+<h4 id="3-构造方法"><a href="#3-构造方法" class="headerlink" title="3.构造方法"></a>3.构造方法</h4><p><img src="https://i.loli.net/2021/08/12/D2KWuoqdQsXFCpH.png" alt="image-20210812095659082"></p>
+<h5 id="①-Thread-String-name"><a href="#①-Thread-String-name" class="headerlink" title="① Thread(String name)"></a>① Thread(String name)</h5><ul>
+<li>创建线程实例时，给线程名称赋值</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/12/7AS92gG3pNuYynq.png" alt="image-20210812172035560"></p>
+<h4 id="4-成员方法"><a href="#4-成员方法" class="headerlink" title="4.成员方法"></a>4.成员方法</h4><h5 id="Ⅰ-run"><a href="#Ⅰ-run" class="headerlink" title="Ⅰ. run()"></a>Ⅰ.<font color='#d15252'> run()</font></h5><ul>
+<li><p>核心</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>线程相关的代码写在该方法中，一般需要重写</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-start"><a href="#Ⅱ-start" class="headerlink" title="Ⅱ. start()"></a>Ⅱ. start()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动线程</li>
+</ul>
+<h5 id="Ⅲ-sleep"><a href="#Ⅲ-sleep" class="headerlink" title="Ⅲ. sleep()"></a>Ⅲ. sleep()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">(<span class="keyword">long</span> m)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>让线程休眠x毫秒</li>
+</ul>
+<h5 id="Ⅳ-join"><a href="#Ⅳ-join" class="headerlink" title="Ⅳ. join()"></a>Ⅳ. join()</h5><ul>
+<li><pre><code class="java">优先执行调用jion方法的线程
+</code></pre>
+</li>
+</ul>
+<h5 id="Ⅴ-其他方法"><a href="#Ⅴ-其他方法" class="headerlink" title="Ⅴ.其他方法"></a>Ⅴ.其他方法</h5><ul>
+<li>getName（）获取名</li>
+<li>currentThread（）返回正在执行的对象</li>
+</ul>
+<h4 id="5-Thread实现多线程细节问题-名字"><a href="#5-Thread实现多线程细节问题-名字" class="headerlink" title="5.Thread实现多线程细节问题(名字)"></a>5.Thread实现多线程<font color='#d15252'>细节问题</font>(名字)</h4><ul>
+<li><p>同一个Thread实例对象，不能重复的调用start()方法</p>
+<ul>
+<li>重复开启线程，栈帧名一样，Jvm报异常</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/12/asy7Dlo3ICtPqEF.png" alt=" "></p>
+</li>
+<li><p><font color='#d15252'>获取</font>当前线程<font color='#d15252'>名称</font></p>
+<ul>
+<li><p>getName()方法</p>
+<p><img src="https://i.loli.net/2021/08/12/3cdECOtSqeuy1vb.png" alt="image-20210812111038274"></p>
+</li>
+<li><p>currentThread()方法</p>
+<ul>
+<li>返回对当前正在执行的对象的引用</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/12/lQSzR98PrCTkAm1.png" alt="image-20210812110957410"></p>
+</li>
+</ul>
+<ul>
+<li><p>给线程<font color='#d15252'>起名字</font></p>
+<ul>
+<li><p>setName()方法</p>
+<p><img src="https://i.loli.net/2021/08/12/C2i9ojrGXBcALJe.png" alt="image-20210812112815580"></p>
+</li>
+<li><p>带参构造</p>
+<p><img src="https://i.loli.net/2021/08/12/hI6PnxSC3L1bior.png" alt="image-20210812113153552"></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><font color='#d15252'>匿名内部类</font>的方式实现Thread多线程</p>
+<ul>
+<li><p>自定义类</p>
+<ul>
+<li>当run方法中的线程业务复杂，或者需要多次使用该线程类时</li>
+</ul>
+</li>
+<li><p>匿名内部类</p>
+<ul>
+<li>当run方法中的线程业务只需要使用一次时</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/12/2ZDSdaAEcXPyCOL.png" alt="image-20210812113425179"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、Runnable接口"><a href="#四、Runnable接口" class="headerlink" title="四、Runnable接口"></a>四、Runnable接口</h3><ul>
+<li>实现多线程的第二种方法</li>
+</ul>
+<h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li><p>接口不能直接使用，需要通过子类实现</p>
+</li>
+<li><p>必须重写run方法</p>
+<ul>
+<li>run方法 — &gt; 线程业务</li>
+</ul>
+</li>
+<li><p>通过查API可知，Thread是Runnable接口的已知实现类</p>
+<ul>
+<li>Thread类的带参构造方法中，可以传递一个实现Runnable接口对象参数</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/12/wheKM691QbXLU3Y.png" alt="image-20210812135021782"></p>
+</li>
+<li><p>因为不支持多继承，所以如果我们定义的类要继承其他类的功能时，又需要具备多线程的功能</p>
+<ul>
+<li>这时就不能用继承了，可以用Runnable接口</li>
+</ul>
+</li>
+<li><p>包：java.lang包下</p>
+<ul>
+<li>不用导包就能使用 </li>
+</ul>
+</li>
+</ul>
+<h4 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><ul>
+<li>接口无构造方法</li>
+</ul>
+<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><ul>
+<li>run()方法 —-&gt; 实现类重写</li>
+</ul>
+<h4 id="4-使用"><a href="#4-使用" class="headerlink" title="4.使用"></a>4.使用</h4><ul>
+<li><p>创建自定义类，实现接口Runnable</p>
+</li>
+<li><p>重写run()方法</p>
+<p><img src="https://i.loli.net/2021/08/12/rRNX34PlcbgZK2F.png" alt="image-20210812135657924"></p>
+</li>
+<li><p>创建自定义类对象</p>
+</li>
+<li><p>调用Thread的构造方法（参数为Runnable）创建对象</p>
+</li>
+<li><p>start方法启动流</p>
+<ul>
+<li><img src="https://i.loli.net/2021/08/12/xejV7gKSTIidDah.png" alt="image-20210812135754014"></li>
+</ul>
+</li>
+</ul>
+<h4 id="5-Thread和Runnable的区别"><a href="#5-Thread和Runnable的区别" class="headerlink" title="5.Thread和Runnable的区别"></a>5.Thread和Runnable的区别</h4><ul>
+<li>实现了数据的共享</li>
+<li>避免了单继承的局限性</li>
+</ul>
+<h4 id="6-起名和获取名字"><a href="#6-起名和获取名字" class="headerlink" title="6.起名和获取名字"></a>6.起名和获取名字</h4><ul>
+<li>和Thread基本一样<ul>
+<li>SetName()设置名字</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="五、线程的特性"><a href="#五、线程的特性" class="headerlink" title="五、线程的特性"></a>五、线程的特性</h3><h4 id="1-线程的状态"><a href="#1-线程的状态" class="headerlink" title="1.线程的状态"></a>1.线程的<font color='#d15252'>状态</font></h4><h5 id="Ⅰ-新建-new"><a href="#Ⅰ-新建-new" class="headerlink" title="Ⅰ.新建(new)"></a>Ⅰ.新建(new)</h5><ul>
+<li>创建对象时，线程处于new状态</li>
+</ul>
+<h5 id="Ⅱ-可运行-Runnable"><a href="#Ⅱ-可运行-Runnable" class="headerlink" title="Ⅱ.可运行(Runnable)"></a>Ⅱ.可运行(Runnable)</h5><ul>
+<li>当调用start()方法时，进入Runnable状态<ul>
+<li>（正在执行）</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅲ-阻塞-Blocked"><a href="#Ⅲ-阻塞-Blocked" class="headerlink" title="Ⅲ.阻塞(Blocked)"></a>Ⅲ.阻塞(Blocked)</h5><ul>
+<li><p>线程暂时停下就是 Blocaked状态</p>
+<ul>
+<li><p>可能造成线程堵塞状态</p>
+<ul>
+<li><p>IO流</p>
+<ul>
+<li>read()方法</li>
+</ul>
+</li>
+<li><p>Scanner</p>
+<p><img src="https://i.loli.net/2021/08/12/3zqxRUYo9Sj4Esd.png" alt="image-20210812154345259"></p>
+</li>
+</ul>
+</li>
+<li><p>提供造成阻塞状态的方法</p>
+<ul>
+<li>join()</li>
+<li>wait()<ul>
+<li>需要用try-catch处理异常</li>
+<li>父类没有声明式抛出异常，子类就不能抛</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>notify()和notifyall()可以从阻塞状态返回正在执行Runnable状态</p>
+</li>
+</ul>
+<h5 id="Ⅳ-等待-Waiting"><a href="#Ⅳ-等待-Waiting" class="headerlink" title="Ⅳ.等待(Waiting)"></a>Ⅳ.<font color='#d15252'>等待</font>(Waiting)</h5><ul>
+<li><p>没有时间限制的等待</p>
+</li>
+<li><p>等另一个线程执行完后再执行</p>
+</li>
+</ul>
+<h5 id="Ⅴ-休眠状态-Timed-Waiting"><a href="#Ⅴ-休眠状态-Timed-Waiting" class="headerlink" title="Ⅴ.休眠状态(Timed_Waiting)"></a>Ⅴ.<font color='#d15252'>休眠状态</font>(Timed_Waiting)</h5><ul>
+<li>休眠状态<ul>
+<li>sleep()</li>
+</ul>
+</li>
+<li>达到指定时间线程再进行运行</li>
+</ul>
+<h5 id="Ⅵ-终止-Dead"><a href="#Ⅵ-终止-Dead" class="headerlink" title="Ⅵ.终止(Dead)"></a>Ⅵ.终止(Dead)</h5><ul>
+<li>当线程运行完后自动结束<ul>
+<li>Thread提供了stop()方法，但是已经<font color='#d15252'>弃用</font>了</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>什么是多线程？<ul>
+<li>程序的除了main方法外，还有很多个分支</li>
+</ul>
+</li>
+<li>实现多线程的两种方式？<ul>
+<li>Thread/Runable  </li>
+<li>区别：数据共享</li>
+</ul>
+</li>
+<li>生命周期<ul>
+<li>等待 wait join    </li>
+<li>休眠 sleep join()</li>
+<li>通过API提供的方法让线程声明周期的某个阶段，达到可控状态</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/08/25/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="多线程">http://example.com/2021/08/25/多线程/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i># 多线程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/25/%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Properties%E7%B1%BB-%E7%9E%AC%E6%80%81%E5%85%B3%E9%94%AE%E5%AD%97-%E6%89%93%E5%8D%B0%E6%B5%81/" rel="prev" title="序列化和反序列化\Properties类\瞬态关键字\打印流">
+      <i class="fa fa-chevron-left"></i> 序列化和反序列化\Properties类\瞬态关键字\打印流
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/25/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E3%80%81%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E5%92%8C%E9%80%9A%E4%BF%A1/" rel="next" title="线程的生命周期、安全隐患和通信">
+      线程的生命周期、安全隐患和通信 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">一、进程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1.什么是进程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">二、线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">1.什么是线程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81Thread"><span class="nav-number">3.</span> <span class="nav-text">三、Thread</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.2.</span> <span class="nav-text">2.实现线程的步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E7%BB%A7%E6%89%BF"><span class="nav-number">3.2.1.</span> <span class="nav-text">Ⅰ.继承</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.2.2.</span> <span class="nav-text">Ⅱ.实现接口</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">3.构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%91%A0-Thread-String-name"><span class="nav-number">3.3.1.</span> <span class="nav-text">① Thread(String name)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">4.成员方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-run"><span class="nav-number">3.4.1.</span> <span class="nav-text">Ⅰ. run()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-start"><span class="nav-number">3.4.2.</span> <span class="nav-text">Ⅱ. start()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-sleep"><span class="nav-number">3.4.3.</span> <span class="nav-text">Ⅲ. sleep()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-join"><span class="nav-number">3.4.4.</span> <span class="nav-text">Ⅳ. join()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A4-%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="nav-number">3.4.5.</span> <span class="nav-text">Ⅴ.其他方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Thread%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BB%86%E8%8A%82%E9%97%AE%E9%A2%98-%E5%90%8D%E5%AD%97"><span class="nav-number">3.5.</span> <span class="nav-text">5.Thread实现多线程细节问题(名字)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Runnable%E6%8E%A5%E5%8F%A3"><span class="nav-number">4.</span> <span class="nav-text">四、Runnable接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0-1"><span class="nav-number">4.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">2.构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95"><span class="nav-number">4.3.</span> <span class="nav-text">3.成员方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E4%BD%BF%E7%94%A8"><span class="nav-number">4.4.</span> <span class="nav-text">4.使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Thread%E5%92%8CRunnable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.5.</span> <span class="nav-text">5.Thread和Runnable的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E8%B5%B7%E5%90%8D%E5%92%8C%E8%8E%B7%E5%8F%96%E5%90%8D%E5%AD%97"><span class="nav-number">4.6.</span> <span class="nav-text">6.起名和获取名字</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">五、线程的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-number">5.1.</span> <span class="nav-text">1.线程的状态</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E6%96%B0%E5%BB%BA-new"><span class="nav-number">5.1.1.</span> <span class="nav-text">Ⅰ.新建(new)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E5%8F%AF%E8%BF%90%E8%A1%8C-Runnable"><span class="nav-number">5.1.2.</span> <span class="nav-text">Ⅱ.可运行(Runnable)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-%E9%98%BB%E5%A1%9E-Blocked"><span class="nav-number">5.1.3.</span> <span class="nav-text">Ⅲ.阻塞(Blocked)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-%E7%AD%89%E5%BE%85-Waiting"><span class="nav-number">5.1.4.</span> <span class="nav-text">Ⅳ.等待(Waiting)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A4-%E4%BC%91%E7%9C%A0%E7%8A%B6%E6%80%81-Timed-Waiting"><span class="nav-number">5.1.5.</span> <span class="nav-text">Ⅴ.休眠状态(Timed_Waiting)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A5-%E7%BB%88%E6%AD%A2-Dead"><span class="nav-number">5.1.6.</span> <span class="nav-text">Ⅵ.终止(Dead)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/nightmare_dimple" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;nightmare_dimple" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共34.6k字</span>
+</div>
+<br>
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<br>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '6uDYpax5oiwmCOvB3BcAzCt8-gzGzoHsz',
+      appKey     : 'BohVEfqjWIyJ5MzTXJJv3cNw',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
