@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="学习什么是方法，如何定义方法，以及方法的调用和传参">
+<meta property="og:type" content="article">
+<meta property="og:title" content="方法">
+<meta property="og:url" content="http://example.com/2021/08/25/%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="学习什么是方法，如何定义方法，以及方法的调用和传参">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-25T00:58:24.000Z">
+<meta property="article:modified_time" content="2021-08-25T01:00:23.037Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="方法">
+<meta property="article:tag" content="函数">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/08/25/%E6%96%B9%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>方法 | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/25/%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          方法
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-25 08:58:24 / 修改时间：09:00:23" itemprop="dateCreated datePublished" datetime="2021-08-25T08:58:24+08:00">2021-08-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/08/25/%E6%96%B9%E6%B3%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/08/25/%E6%96%B9%E6%B3%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">学习什么是方法，如何定义方法，以及方法的调用和传参</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、方法-函数"><a href="#一、方法-函数" class="headerlink" title="一、方法(函数)"></a>一、<font color='#d15252'>方法</font>(函数)</h3><h4 id="1-什么是方法"><a href="#1-什么是方法" class="headerlink" title="1.什么是方法"></a>1.什么是方法</h4><ul>
+<li>就是对业务的一种封装，完成指定业务功能的代码块<ul>
+<li>封装：就是业务的容器</li>
+</ul>
+</li>
+<li>编程理论到实际</li>
+</ul>
+<h4 id="2-如何定义方法"><a href="#2-如何定义方法" class="headerlink" title="2.如何定义方法"></a>2.如何定义方法</h4><ul>
+<li><p>位置：方法与方法之间是一种并列关系</p>
+</li>
+<li><p>格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">a</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">a:方法名</span><br><span class="line"><span class="keyword">public</span>、<span class="keyword">static</span>：修饰符</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修饰符 返回值类型 方法名（参数类型 参数名,...）&#123;</span><br><span class="line">	方法体；</span><br><span class="line">	<span class="keyword">return</span>返回值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>[^修饰符]: 暂时先用public static </p>
+</li>
+</ul>
+<ul>
+<li><p>[^实际参数]: 实际参与运算的</p>
+</li>
+<li><p>[^形式参数]: 就是方法定义上的，用于接收实际参数</p>
+</li>
+</ul>
+<p>  [^return]: <font color='#d15252'>结束方法，并带回返回值给调用者</font></p>
+<ul>
+<li><p>参数传递过程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">数据的角度来看</span><br><span class="line">	-----&gt;方法和方法之间是相互独立的</span><br><span class="line">	A();---B();</span><br><span class="line">	-----&gt;在调用方法时，A方法传递数值,B方法接收数值</span><br><span class="line">	-----&gt;所以在定义B方法时，就需要将内存空间开辟好（参数类型 参数名）</span><br><span class="line">    (参数就是变量)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-方法的注意事项"><a href="#3-方法的注意事项" class="headerlink" title="3.方法的注意事项"></a>3.方法的<font color='#d15252'>注意事项</font></h4><ul>
+<li>要写一个方法，首先明确返回值类型，参数列表</li>
+<li>方法不调用不执行</li>
+<li>方法之间是平级关系，不能嵌套</li>
+<li>方法定义参数时，用“，”隔开</li>
+</ul>
+<h4 id="4-方法的调用"><a href="#4-方法的调用" class="headerlink" title="4.方法的调用"></a>4.方法的<font color='#d15252'>调用</font></h4><ul>
+<li>直接调用：<code>方法名();</code><ul>
+<li>最方便，没有返回值</li>
+</ul>
+</li>
+<li>输出调用：<code>System.out.println(方法名());</code><ul>
+<li>想要第一时间看到方法计算结果时(不推荐，因为不一定要将结果输出)<ul>
+<li>void方法不能用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>赋值调用：<code>int a = add();</code><ul>
+<li>void方法不能用</li>
+<li>比较繁琐，但是最灵活</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h4><ul>
+<li>当我们在定义方法时，如果最终的结果值，是直接输出的，返回值是void </li>
+</ul>
+<h4 id="6-练习"><a href="#6-练习" class="headerlink" title="6.练习"></a>6.练习</h4><ul>
+<li><p>1.计算所有三位数水仙花数</p>
+<ul>
+<li><p>创建项目，测试环境</p>
+</li>
+<li><p>需求分析：</p>
+<ul>
+<li>定义一个方法完成计算水仙花的业务</li>
+</ul>
+</li>
+<li><p>定义方法：</p>
+<ul>
+<li>方法位置并列</li>
+<li>修饰符：public static</li>
+<li>返回值类型：由最后代码可知，水仙花数是直接输出的，所以不需要返回值，返回值类型是void</li>
+<li>方法名：shui();</li>
+</ul>
+</li>
+<li><p>方法中完成计算水仙花数</p>
+<ul>
+<li>for循环遍历所有三位数</li>
+<li>定义三个变量，分别取模，取出个位十位百位</li>
+<li>if循环判断，三个变量的三次方相加是否等于i</li>
+<li>如果判断成功，直接输出</li>
+</ul>
+</li>
+<li><p>main方法中，直接调用shui();方法</p>
+<ul>
+<li><p>输出调用（有返回值时）    </p>
+</li>
+<li><p>赋值调用（有返回值，需要重复使用时）</p>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>2.键盘录入3个数，比较大小，输出最大的那个数</p>
+<ul>
+<li><p>创建项目，测试环境</p>
+</li>
+<li><p>需求分析</p>
+<ul>
+<li>定义一个方法，实现业务完成录入数据，比较大小，返回值或直接输出</li>
+</ul>
+</li>
+<li><p>定义方法</p>
+<ul>
+<li>方法位置并列</li>
+<li>修饰符：public static </li>
+<li>返回值类型：由最后代码决定<ul>
+<li>如果直接输出，则返回值用void</li>
+<li>如果return返回值，则在main方法中输出调用，或赋值调用，返回值类型为int</li>
+</ul>
+</li>
+<li>方法名：demo();</li>
+</ul>
+</li>
+<li><p>在方法中完成业务</p>
+<ul>
+<li><p>Scanner键盘录入三步：</p>
+<ul>
+<li>导包 <code>import java.util.Scanner;</code></li>
+<li>加载Scanner进内存 <code>Scanner sc = new Scanner(System.in);</code></li>
+<li>定义变量保存键盘录入数据 <code>int a = sc.nextInt();</code></li>
+</ul>
+</li>
+<li><p>比较键盘录入的三个数的大小</p>
+<ul>
+<li><p>三目运算符，比较三个数大小</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> max = (a&gt;b)?((a&gt;c)?a:c):((b&gt;c)?b:c);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>最后输出最大值到控制台</p>
+<ul>
+<li><p>直接调用：不设置返回值，直接在方法中System输出最大值，在main方法中直接调用方法即可</p>
+</li>
+<li><p>输出调用：设置返回值，在main方法中，System输出调用方法</p>
+</li>
+<li><p>赋值调用：设置返回值，在main方法中，定义一个变量，保存方法的返回值 <code>int max = demo();</code>，再直接输出max到控制台（数据可以重复利用）</p>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.键盘录入三个数，求平均数</p>
+<ul>
+<li>创建工程，测试环境</li>
+<li>需求分析<ul>
+<li>定义一个方法完成业务</li>
+</ul>
+</li>
+<li>定义方法<ul>
+<li>修饰符：public static </li>
+<li>返回值类型：<ul>
+<li>方法中直接输出平均数，则没有返回值，返回值类型为void</li>
+<li>方法中若设置一个变量并return返回，则返回值类型为int</li>
+</ul>
+</li>
+<li>方法名demo();</li>
+</ul>
+</li>
+<li>完成方法中的业务<ul>
+<li>Scanner键盘录入三步：导包、加载Scanner进内存，定义变量存储键盘录入数据</li>
+<li>定义一个变量，将键盘录入数据相加求平均数并保存<ul>
+<li><code>int var = (a+b+c)/3</code></li>
+</ul>
+</li>
+<li>调用<ul>
+<li>直接调用：在方法中完成输出，main方法中调用方法即可</li>
+<li>输出调用：方法中定义return返回值，main方法中，输出调用方法即可</li>
+<li>赋值调用：方法中定义return返回值，main方法中，定义变量存储返回值，（可以重复操作数据)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>  4.键盘录入三个数，并保存在数组中</p>
+<ul>
+<li>创建项目，测试环境</li>
+<li>需求分析：<ul>
+<li>创建一个方法，完成键盘录入，存入数组，并保存至数组中</li>
+</ul>
+</li>
+<li>创建方法：<ul>
+<li>位置：并列关系</li>
+<li>修饰符：public static </li>
+<li>返回值：int[]数组类型或直接调用void</li>
+</ul>
+</li>
+<li>完成方法中的业务<ul>
+<li>创建一个数组</li>
+<li>键盘录入三个数据并储存</li>
+<li>将键盘录入的数据存入数组中</li>
+<li>遍历数组</li>
+<li>调用<ul>
+<li>直接调用：<code>ar();</code> 返回值void</li>
+<li>输出调用：return arr; 返回值int[] ,调用 <code>System.out.println(ar());</code></li>
+<li>赋值调用：创建数组类型接收数据 <code>int[] arr = ar();</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-方法的传参"><a href="#7-方法的传参" class="headerlink" title="7.方法的传参"></a>7.方法的传参</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">修饰符 返回值类型 方法名（参数类型<span class="number">1</span> 参数名<span class="number">1</span>,参数类型<span class="number">2</span> 参数名<span class="number">2.</span>...）&#123;</span><br><span class="line">	方法体；</span><br><span class="line">	<span class="keyword">return</span>返回值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>调用方法时，需要在()中写入对应数据类型的值</p>
+</li>
+<li><p>创建项目，测试环境</p>
+</li>
+<li><p>创建方法</p>
+<ul>
+<li>位置：并列</li>
+<li>格式：修饰符 返回值类型 方法名（）{ }</li>
+</ul>
+</li>
+<li><p>需求分析</p>
+</li>
+<li><p>键盘录入</p>
+</li>
+<li><p>实现打印</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/08/25/%E6%96%B9%E6%B3%95/" title="方法">http://example.com/2021/08/25/方法/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%96%B9%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i># 方法</a>
+              <a href="/tags/%E5%87%BD%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i># 函数</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/25/%E5%AE%9E%E7%8E%B0%E5%89%8D%E7%AB%AF-Web-%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="prev" title="实现前端-Web-数据库">
+      <i class="fa fa-chevron-left"></i> 实现前端-Web-数据库
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%96%B9%E6%B3%95-%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">一、方法(函数)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">1.什么是方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">2.如何定义方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%96%B9%E6%B3%95%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.3.</span> <span class="nav-text">3.方法的注意事项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">4.方法的调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%80%BB%E7%BB%93"><span class="nav-number">1.5.</span> <span class="nav-text">5.总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E7%BB%83%E4%B9%A0"><span class="nav-number">1.6.</span> <span class="nav-text">6.练习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BC%A0%E5%8F%82"><span class="nav-number">1.7.</span> <span class="nav-text">7.方法的传参</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/nightmare_dimple" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;nightmare_dimple" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共11.3k字</span>
+</div>
+<br>
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<br>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '6uDYpax5oiwmCOvB3BcAzCt8-gzGzoHsz',
+      appKey     : 'BohVEfqjWIyJ5MzTXJJv3cNw',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

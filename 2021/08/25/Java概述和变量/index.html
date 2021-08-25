@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="了解Java，Java中的变量，数据类型等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java概述和变量">
+<meta property="og:url" content="http://example.com/2021/08/25/Java%E6%A6%82%E8%BF%B0%E5%92%8C%E5%8F%98%E9%87%8F/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="了解Java，Java中的变量，数据类型等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/07/19/UKrzgyR9e5xWNfj.png">
+<meta property="article:published_time" content="2021-08-25T00:32:39.000Z">
+<meta property="article:modified_time" content="2021-08-25T00:55:11.880Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="什么是Java">
+<meta property="article:tag" content="变量">
+<meta property="article:tag" content="数据类型">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/07/19/UKrzgyR9e5xWNfj.png">
+
+<link rel="canonical" href="http://example.com/2021/08/25/Java%E6%A6%82%E8%BF%B0%E5%92%8C%E5%8F%98%E9%87%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java概述和变量 | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/25/Java%E6%A6%82%E8%BF%B0%E5%92%8C%E5%8F%98%E9%87%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java概述和变量
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-25 08:32:39 / 修改时间：08:55:11" itemprop="dateCreated datePublished" datetime="2021-08-25T08:32:39+08:00">2021-08-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/08/25/Java%E6%A6%82%E8%BF%B0%E5%92%8C%E5%8F%98%E9%87%8F/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/08/25/Java%E6%A6%82%E8%BF%B0%E5%92%8C%E5%8F%98%E9%87%8F/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">了解Java，Java中的变量，数据类型等</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Java"><a href="#Java" class="headerlink" title="Java!"></a>Java!</h3><ul>
+<li><h4 id="什么是Java？"><a href="#什么是Java？" class="headerlink" title="什么是Java？"></a>什么是Java？</h4><ul>
+<li>编程语言</li>
+<li>开发平台（JVM）</li>
+</ul>
+</li>
+</ul>
+<h3 id="一、编程语言"><a href="#一、编程语言" class="headerlink" title="一、编程语言"></a>一、编程语言</h3><ul>
+<li><h4 id="布置平台"><a href="#布置平台" class="headerlink" title="布置平台"></a>布置平台</h4><ul>
+<li>官方文档解释：JavaSE是Java平台标准版<ul>
+<li>JDK</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="下载JDK"><a href="#下载JDK" class="headerlink" title="下载JDK"></a>下载JDK</h4></li>
+<li><h4 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h4><ul>
+<li>开发工具</li>
+<li>源代码</li>
+<li>JRE：JDK包含JRE</li>
+</ul>
+</li>
+<li><h4 id="使用JDK"><a href="#使用JDK" class="headerlink" title="使用JDK"></a>使用JDK</h4><ul>
+<li><p>JDK安装目录bin文件夹下</p>
+</li>
+<li><p>[^javac.exe]: 编译</p>
+</li>
+<li><p>[^java.exe]: 运行</p>
+</li>
+</ul>
+</li>
+<li><p>配置环境变量</p>
+<ul>
+<li>官网添加JDK路径到系统Path变量</li>
+<li>动态获取%JAVA_HOME%</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、编程语言"><a href="#二、编程语言" class="headerlink" title="二、编程语言"></a>二、编程语言</h3><ul>
+<li><p>基本单位</p>
+<ul>
+<li>class 类</li>
+</ul>
+</li>
+<li><p>最简单的java程序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>类名要与文件名一致，后缀为.class</li>
+</ul>
+</li>
+<li><p>main方法是程序的入口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[]args)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="三、学习Java"><a href="#三、学习Java" class="headerlink" title="三、学习Java"></a>三、学习Java</h3><ul>
+<li>java语言的核心本质是对数据的操作</li>
+<li>数据的操作最基础的是存数据和取数据</li>
+</ul>
+<h3 id="四、存取数据"><a href="#四、存取数据" class="headerlink" title="四、存取数据"></a>四、存取数据</h3><ul>
+<li><p>变量</p>
+<ul>
+<li><p>一个可以变化的量</p>
+<ul>
+<li>本质：存储一个数据</li>
+</ul>
+</li>
+<li><p>格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据类型 变量名 = 数值 ；</span><br></pre></td></tr></table></figure></li>
+<li><p>注意事项</p>
+<ul>
+<li>使用变量时需要注意变量有没有数据<ul>
+<li>没有数据时，可以完成赋值操作</li>
+<li>但是不能完成取值操</li>
+</ul>
+</li>
+<li>变量在{ }内有效，且不能定义同名变量（作用域）</li>
+<li>{ } ：代码块，独立存在，运行结束后立即释放，提高内存使用率</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、Java的数据类型"><a href="#五、Java的数据类型" class="headerlink" title="五、Java的数据类型"></a>五、Java的数据类型</h3><ul>
+<li>每一个数据类型的存储范围都不一样，为了提高内存的使用率</li>
+</ul>
+<h4 id="1-整数"><a href="#1-整数" class="headerlink" title="1.整数"></a>1.整数</h4><table>
+<thead>
+<tr>
+<th align="left">整数</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">byte</td>
+<td>8bit</td>
+</tr>
+<tr>
+<td align="left">short</td>
+<td>16bit</td>
+</tr>
+<tr>
+<td align="left"><strong>int(默认)</strong></td>
+<td>32bit</td>
+</tr>
+<tr>
+<td align="left">long</td>
+<td>64bit</td>
+</tr>
+</tbody></table>
+<ul>
+<li>在Java中，出现的所有整数，默认都是int类型</li>
+<li>byte在存整数时，如果int类型整数在byte范围内，byte会自动完成转换 int—byte</li>
+</ul>
+<h4 id="2-小数"><a href="#2-小数" class="headerlink" title="2.小数"></a>2.小数</h4><table>
+<thead>
+<tr>
+<th>小数</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>float</td>
+<td>浮点型 32bit</td>
+</tr>
+<tr>
+<td><strong>double(默认)</strong></td>
+<td>双精度 64bit</td>
+</tr>
+</tbody></table>
+<ul>
+<li>长整型long后缀使用L标记，表明是长整型</li>
+<li>单精度float后缀使用F标记，表名是单精度</li>
+</ul>
+<h4 id="3-布尔类型"><a href="#3-布尔类型" class="headerlink" title="3.布尔类型"></a>3.布尔类型</h4><ul>
+<li>ture</li>
+<li>false</li>
+</ul>
+<h3 id="六、变量补充知识点"><a href="#六、变量补充知识点" class="headerlink" title="六、变量补充知识点"></a>六、变量补充知识点</h3><ul>
+<li><p>两个整数相除，得到的是整数部分</p>
+</li>
+<li><p>数据类型之间的转换</p>
+<ul>
+<li><p>隐式转换（小的自动转大）</p>
+</li>
+<li><p>强制转换（大转小）</p>
+<ul>
+<li><p>格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">目标类型 变量名 = （目标类型）被转换数据</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="七、进制"><a href="#七、进制" class="headerlink" title="七、进制"></a>七、进制</h3><h4 id="1-什么是进制？"><a href="#1-什么是进制？" class="headerlink" title="1.什么是进制？"></a>1.什么是进制？</h4><ul>
+<li>逢几进一</li>
+</ul>
+<h4 id="2-Java常见的进制"><a href="#2-Java常见的进制" class="headerlink" title="2.Java常见的进制"></a>2.Java常见的进制</h4><ul>
+<li>二进制：0b</li>
+<li>八进制：0</li>
+<li>十进制：默认</li>
+<li>十六进制：0x</li>
+</ul>
+<h4 id="3-进制间的转换"><a href="#3-进制间的转换" class="headerlink" title="3.进制间的转换"></a>3.进制间的转换</h4><ul>
+<li><p>任意进制到十进制</p>
+<ul>
+<li><p>系数 * 基数的权次幂相加</p>
+<ul>
+<li>系数：位数是几</li>
+<li>基数：原来的进制</li>
+<li>权：从个位开始，从0向左依次增加</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x * y^z</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>十进制到任意进制</p>
+<ul>
+<li>除以基数，倒取余数</li>
+</ul>
+</li>
+<li><p>二进制 &lt;==&gt;八进制</p>
+<ul>
+<li>421码</li>
+</ul>
+</li>
+<li><p>二进制 &lt;==&gt; 十六进制</p>
+<ul>
+<li>8421码</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-源码、反码、补码"><a href="#4-源码、反码、补码" class="headerlink" title="4.源码、反码、补码"></a>4.源码、反码、补码</h4><ul>
+<li>在计算机中，二进制的运算，是以补码的形式进行的(0为正，1为负)</li>
+</ul>
+<ul>
+<li><p>正数：源码 = 反码 = 补码</p>
+</li>
+<li><p>负数：源码不变</p>
+<p>​            反码：符号位不变，其余按位取反</p>
+<p>​            补码：反码+1</p>
+</li>
+</ul>
+<h3 id="八、运算符"><a href="#八、运算符" class="headerlink" title="八、运算符"></a>八、运算符</h3><h4 id="1-什么是运算符"><a href="#1-什么是运算符" class="headerlink" title="1.什么是运算符"></a>1.什么是运算符</h4><ul>
+<li>运算符是对一个、两个或三个操作数执行特定操作，然后返回结果的特殊符号。</li>
+</ul>
+<h4 id="2-运算符的分类"><a href="#2-运算符的分类" class="headerlink" title="2.运算符的分类"></a>2.运算符的分类</h4><h5 id="①算数运算符"><a href="#①算数运算符" class="headerlink" title="①算数运算符"></a>①算数运算符</h5><table>
+<thead>
+<tr>
+<th>算数运算符</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+ 、 -</td>
+<td>加、减</td>
+</tr>
+<tr>
+<td>* 、/</td>
+<td>乘、除</td>
+</tr>
+<tr>
+<td>%</td>
+<td>取模（即取余）</td>
+</tr>
+</tbody></table>
+<h5 id="②一元运算符"><a href="#②一元运算符" class="headerlink" title="②一元运算符"></a>②一元运算符</h5><ul>
+<li>只需要一个操作数，就可以对其进行相应的操作</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>一元运算符</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>表示正值（可省略）</td>
+</tr>
+<tr>
+<td>-</td>
+<td>表示负值，即否定表达式</td>
+</tr>
+<tr>
+<td>++</td>
+<td>将值+1</td>
+</tr>
+<tr>
+<td>–</td>
+<td>将值-1</td>
+</tr>
+<tr>
+<td>!</td>
+<td>反转布尔值</td>
+</tr>
+</tbody></table>
+<p><img src="https://i.loli.net/2021/07/19/UKrzgyR9e5xWNfj.png" alt="image-20210719160154418"></p>
+<blockquote>
+<p>a++;        ++b;</p>
+<ul>
+<li>单独使用时，++即自加一，–即自减一，放在前后效果相同</li>
+</ul>
+<p>int b = a ++;    int c = –b;</p>
+<ul>
+<li>参与运算时，放在前即先++或–， 放在后面则先运算再++、–</li>
+</ul>
+</blockquote>
+<h5 id="③比较运算符"><a href="#③比较运算符" class="headerlink" title="③比较运算符"></a>③比较运算符</h5><ul>
+<li>返回布尔类型的值，即true，false</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>比较运算符</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>==</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>大于等于</td>
+</tr>
+</tbody></table>
+<h5 id="④条件运算符"><a href="#④条件运算符" class="headerlink" title="④条件运算符"></a>④条件运算符</h5><ul>
+<li>用来连接比较表达式（即布尔类型）表达式</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>逻辑运算符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;   AND(与)</td>
+<td>有false则false，两个true则true</td>
+</tr>
+<tr>
+<td>|    OR(或)</td>
+<td>有true则true，两个false则false</td>
+</tr>
+<tr>
+<td>^    XOR(异或)</td>
+<td>相同false，不同true</td>
+</tr>
+<tr>
+<td>!     NOT(非)</td>
+<td>结论相反</td>
+</tr>
+<tr>
+<td>&amp;&amp;  AND(短路)</td>
+<td>短路效果，即左边有false，右边不执行</td>
+</tr>
+<tr>
+<td>||   OR(短路)</td>
+<td>短路效果，即左边有true，右边不执行</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Java中，若要表达3&lt;x&lt;6 ，应写为 x&gt;3 &amp; x&lt;6</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/08/25/Java%E6%A6%82%E8%BF%B0%E5%92%8C%E5%8F%98%E9%87%8F/" title="Java概述和变量">http://example.com/2021/08/25/Java概述和变量/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BB%80%E4%B9%88%E6%98%AFJava/" rel="tag"><i class="fa fa-tag"></i># 什么是Java</a>
+              <a href="/tags/%E5%8F%98%E9%87%8F/" rel="tag"><i class="fa fa-tag"></i># 变量</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag"><i class="fa fa-tag"></i># 数据类型</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/24/XML/" rel="prev" title="XML">
+      <i class="fa fa-chevron-left"></i> XML
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/25/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%92%8C%E9%94%AE%E7%9B%98%E5%BD%95%E5%85%A5/" rel="next" title="流程控制和键盘录入">
+      流程控制和键盘录入 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java"><span class="nav-number">1.</span> <span class="nav-text">Java!</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFJava%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">什么是Java？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">一、编程语言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%83%E7%BD%AE%E5%B9%B3%E5%8F%B0"><span class="nav-number">2.1.</span> <span class="nav-text">布置平台</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDJDK"><span class="nav-number">2.2.</span> <span class="nav-text">下载JDK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85JDK"><span class="nav-number">2.3.</span> <span class="nav-text">安装JDK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8JDK"><span class="nav-number">2.4.</span> <span class="nav-text">使用JDK</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80"><span class="nav-number">3.</span> <span class="nav-text">二、编程语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AD%A6%E4%B9%A0Java"><span class="nav-number">4.</span> <span class="nav-text">三、学习Java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AD%98%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">5.</span> <span class="nav-text">四、存取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81Java%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">6.</span> <span class="nav-text">五、Java的数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%95%B4%E6%95%B0"><span class="nav-number">6.1.</span> <span class="nav-text">1.整数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%B0%8F%E6%95%B0"><span class="nav-number">6.2.</span> <span class="nav-text">2.小数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B"><span class="nav-number">6.3.</span> <span class="nav-text">3.布尔类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%8F%98%E9%87%8F%E8%A1%A5%E5%85%85%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">7.</span> <span class="nav-text">六、变量补充知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E8%BF%9B%E5%88%B6"><span class="nav-number">8.</span> <span class="nav-text">七、进制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%9B%E5%88%B6%EF%BC%9F"><span class="nav-number">8.1.</span> <span class="nav-text">1.什么是进制？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Java%E5%B8%B8%E8%A7%81%E7%9A%84%E8%BF%9B%E5%88%B6"><span class="nav-number">8.2.</span> <span class="nav-text">2.Java常见的进制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E8%BF%9B%E5%88%B6%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">8.3.</span> <span class="nav-text">3.进制间的转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%BA%90%E7%A0%81%E3%80%81%E5%8F%8D%E7%A0%81%E3%80%81%E8%A1%A5%E7%A0%81"><span class="nav-number">8.4.</span> <span class="nav-text">4.源码、反码、补码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.</span> <span class="nav-text">八、运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.1.</span> <span class="nav-text">1.什么是运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">9.2.</span> <span class="nav-text">2.运算符的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%91%A0%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.2.1.</span> <span class="nav-text">①算数运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%91%A1%E4%B8%80%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.2.2.</span> <span class="nav-text">②一元运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%91%A2%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.2.3.</span> <span class="nav-text">③比较运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%91%A3%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">9.2.4.</span> <span class="nav-text">④条件运算符</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/nightmare_dimple" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;nightmare_dimple" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共11.3k字</span>
+</div>
+<br>
+
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<br>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '6uDYpax5oiwmCOvB3BcAzCt8-gzGzoHsz',
+      appKey     : 'BohVEfqjWIyJ5MzTXJJv3cNw',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
