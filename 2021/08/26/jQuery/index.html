@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="有关JS中计时器的补充知识点，以及jQuery的学习使用，jQuery 是一个 JavaScript 库,核心是选择器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery">
+<meta property="og:url" content="http://example.com/2021/08/26/jQuery/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="有关JS中计时器的补充知识点，以及jQuery的学习使用，jQuery 是一个 JavaScript 库,核心是选择器">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/UuaWB15QjhgtrLN.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/BfQmUd5DpkuTScY.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/MZ2diS5m7BK1Tyk.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/4ceDWOnXLvubGyK.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/P8ucCBRZpDwALMv.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/z5VygrflkNGPeTm.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/E5zLOsX7ID3Cbvd.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/oGJYIHpRWAKFPgs.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/kl4NPpSM6TZmznD.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/PNps9d5cGOIu8FJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/2TDKSrA1H6wBn9x.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/26/mJk3lZ76VpLRdtX.png">
+<meta property="article:published_time" content="2021-08-26T09:08:18.000Z">
+<meta property="article:modified_time" content="2021-08-26T09:10:13.481Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="jQuery">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/08/26/UuaWB15QjhgtrLN.png">
+
+<link rel="canonical" href="http://example.com/2021/08/26/jQuery/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>jQuery | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/26/jQuery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          jQuery
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-26 17:08:18 / 修改时间：17:10:13" itemprop="dateCreated datePublished" datetime="2021-08-26T17:08:18+08:00">2021-08-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index"><span itemprop="name">jQuery</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/08/26/jQuery/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/08/26/jQuery/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">12k</span> -->
+			  <span title="本文字数">
+                  1.1k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">有关JS中计时器的补充知识点，以及jQuery的学习使用，jQuery 是一个 JavaScript 库,核心是选择器</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="一、计时器"><a href="#一、计时器" class="headerlink" title="一、计时器"></a>一、计时器</h2><h4 id="1-setTimeout"><a href="#1-setTimeout" class="headerlink" title="1. setTimeout()"></a>1. setTimeout()</h4><ul>
+<li>用于在指定的毫秒数后调用函数（只调用一次）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(code,millisec)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>code：必需，要调用的函数或代码</li>
+<li>millisec：必需，在执行代码前等待的<font color='#d15252'>毫秒数</font></li>
+</ul>
+<h4 id="2-setInterval"><a href="#2-setInterval" class="headerlink" title="2. setInterval()"></a>2. setInterval()</h4><ul>
+<li>方法可按照指定的周期（以毫秒计）来调用函数或计算表达式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(code,millisec[,<span class="string">&quot;lang&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>code：必需，要调用的函数或代码</li>
+<li>millisec：必须，周期性执行或调用代码之间的间隔</li>
+</ul>
+<h4 id="3-补充知识"><a href="#3-补充知识" class="headerlink" title="3.补充知识"></a>3.补充知识</h4><ul>
+<li>onload()事件，当页面或图像被加载完成后触发事件</li>
+</ul>
+<h3 id="二、Jquery"><a href="#二、Jquery" class="headerlink" title="二、Jquery"></a>二、Jquery</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>jQuery 是一个 JavaScript 库</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./JQuery/jquery-3.3.1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>导入Jquery</li>
+</ul>
+<h4 id="2-jQuery语法"><a href="#2-jQuery语法" class="headerlink" title="2.jQuery语法"></a>2.jQuery语法</h4><ul>
+<li><p>基础语法 <code>$(selector).action()</code></p>
+<ul>
+<li>jQuery的核心就是选择器</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/UuaWB15QjhgtrLN.png" alt="image-20210826134720754"></p>
+</li>
+</ul>
+<h4 id="3-基本选择器"><a href="#3-基本选择器" class="headerlink" title="3.基本选择器"></a>3.基本选择器</h4><ul>
+<li>id选择器</li>
+<li>类选择器</li>
+<li>元素选择器</li>
+<li>*</li>
+</ul>
+<h4 id="4-层级选择器"><a href="#4-层级选择器" class="headerlink" title="4.层级选择器"></a>4.层级选择器</h4><h5 id="Ⅰ-ancestor-descendant"><a href="#Ⅰ-ancestor-descendant" class="headerlink" title="Ⅰ. ancestor descendant"></a>Ⅰ. ancestor descendant</h5><ul>
+<li><p>即<font color='#d15252'>后代选择器</font>，忽略层级</p>
+</li>
+<li><p>在给定的祖先元素下匹配所有的后代元素</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ancestor：选择器</span><br><span class="line">descendant：有效选择器</span><br></pre></td></tr></table></figure>
+
+<h5 id="Ⅱ-parent-gt-child"><a href="#Ⅱ-parent-gt-child" class="headerlink" title="Ⅱ. parent &gt; child"></a>Ⅱ. parent &gt; child</h5><ul>
+<li>即子代选择器，只负责子级</li>
+</ul>
+<h5 id="Ⅲ-prev-next"><a href="#Ⅲ-prev-next" class="headerlink" title="Ⅲ. prev + next"></a>Ⅲ. prev + next</h5><ul>
+<li>相邻元素选择器，下一个紧邻的兄弟</li>
+</ul>
+<h5 id="Ⅳ-prev-siblings"><a href="#Ⅳ-prev-siblings" class="headerlink" title="Ⅳ. prev ~ siblings"></a>Ⅳ. prev ~ siblings</h5><ul>
+<li>同辈选择器，下面的所有兄弟</li>
+</ul>
+<blockquote>
+<p><font color='#d15252'>其他选择器</font>有：基本筛选器、内容选择器，可见性选择器、属性选择器、子元素选择器、表单选择器、表单对象选择器等等</p>
+<p>详细使用请查阅JqueryAPI</p>
+</blockquote>
+<h4 id="5-基本筛选器"><a href="#5-基本筛选器" class="headerlink" title="5.基本筛选器"></a>5.基本<font color='#d15252'>筛选器</font></h4><h5 id="Ⅰ-first"><a href="#Ⅰ-first" class="headerlink" title="Ⅰ.  :first"></a>Ⅰ.  :first</h5><ul>
+<li>获取匹配的第一个元素</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;li:first&#x27;</span>);</span><br><span class="line"><span class="comment">//[ &lt;li&gt;list item 1&lt;/li&gt; ]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅱ-not-selector"><a href="#Ⅱ-not-selector" class="headerlink" title="Ⅱ. :not(selector)"></a>Ⅱ. :not(selector)</h5><ul>
+<li>去除所有与给定选择器匹配的元素</li>
+<li>selector：用于筛选的选择器</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/BfQmUd5DpkuTScY.png" alt="image-20210826144537086"></p>
+<h5 id="Ⅲ-even"><a href="#Ⅲ-even" class="headerlink" title="Ⅲ. :even"></a>Ⅲ. :even</h5><ul>
+<li><p>匹配所有索引值为<font color='#d15252'>偶数</font>的元素，从 0 开始计数</p>
+<p><img src="https://i.loli.net/2021/08/26/MZ2diS5m7BK1Tyk.png" alt="image-20210826144616263"></p>
+</li>
+</ul>
+<h5 id="Ⅳ-odd"><a href="#Ⅳ-odd" class="headerlink" title="Ⅳ. :odd"></a>Ⅳ. :odd</h5><ul>
+<li>匹配所有索引值为<font color='#d15252'>奇数</font>的元素，从 0 开始计数</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/4ceDWOnXLvubGyK.png" alt="image-20210826144853759"></p>
+<h5 id="Ⅴ-last"><a href="#Ⅴ-last" class="headerlink" title="Ⅴ.:last()"></a>Ⅴ.:last()</h5><ul>
+<li>获取最后一个元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/P8ucCBRZpDwALMv.png" alt="image-20210826145735703"></p>
+<h5 id="Ⅵ-gt-index"><a href="#Ⅵ-gt-index" class="headerlink" title="Ⅵ. :gt(index)"></a>Ⅵ. :gt(index)</h5><ul>
+<li>匹配所有大于给定索引值的元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/z5VygrflkNGPeTm.png" alt="image-20210826145258834"></p>
+<h5 id="Ⅶ-lt-index"><a href="#Ⅶ-lt-index" class="headerlink" title="Ⅶ.  :lt(index)"></a>Ⅶ.  :lt(index)</h5><ul>
+<li>匹配所有小于给定索引值的元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/E5zLOsX7ID3Cbvd.png" alt="image-20210826150013475"></p>
+<h5 id="Ⅷ-eq-index"><a href="#Ⅷ-eq-index" class="headerlink" title="Ⅷ. :eq(index)"></a>Ⅷ. :eq(index)</h5><ul>
+<li>匹配一个给定索引值的元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/oGJYIHpRWAKFPgs.png" alt="image-20210826145019978"></p>
+<h5 id="Ⅸ-header"><a href="#Ⅸ-header" class="headerlink" title="Ⅸ. :header"></a>Ⅸ. :header</h5><ul>
+<li>匹配如 h1, h2, h3之类的标题元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/kl4NPpSM6TZmznD.png" alt="image-20210826150052620"></p>
+<h5 id="Ⅹ-lang-language"><a href="#Ⅹ-lang-language" class="headerlink" title="Ⅹ.:lang(language)"></a>Ⅹ.:lang(language)</h5><ul>
+<li><p>选择指定语言的所有元素</p>
+</li>
+<li><p>:lang选择器,匹配有一个语言值等于所提供的语言代码，或以提供的语言代码开始，后面马上跟一个“ - ”的元素。例如，选择器$(“div:lang(en)”)将匹配<code>&lt;div lang=&quot;en&quot;&gt;</code> and <code>&lt;div lang=&quot;en-us&quot;&gt;</code>（和他们的后代<code>&lt;div&gt;</code>），但不包括<code>&lt;div lang=&quot;fr&quot;&gt;</code></p>
+</li>
+<li><p>对于HTML元素，语言值由lang属性决定，也可能由来自meta元素或HTTP头信息决定。</p>
+</li>
+</ul>
+<h5 id="其他："><a href="#其他：" class="headerlink" title="其他："></a>其他：</h5><ul>
+<li><p>:animated 匹配所有正在执行动画效果的元素</p>
+</li>
+<li><p>:focus 匹配当前获取焦点的元素</p>
+</li>
+<li><p>:target 选择由文档URI的格式化识别码表示的目标元素。</p>
+</li>
+<li><p>:root 选择该文档的根元素。</p>
+</li>
+</ul>
+<h4 id="6-html属性"><a href="#6-html属性" class="headerlink" title="6. html属性"></a>6. html属性</h4><h5 id="Ⅰ-html-val-fn"><a href="#Ⅰ-html-val-fn" class="headerlink" title="Ⅰ.html([val|fn])"></a>Ⅰ.html([val|fn])</h5><ul>
+<li>$中的.html() ===》获取值</li>
+<li>在一个 HTML 文档中, 我们可以使用 .html() 方法来获取任意一个元素的内容。 如果选择器匹配多于一个的元素，那么只有第一个匹配元素的 HTML 内容会被获取。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    alert($(<span class="string">&quot;p&quot;</span>).html());</span><br><span class="line">    alert($(<span class="string">&quot;div&quot;</span>).html());</span><br><span class="line"><span class="comment">//取出p和div中的内容</span></span><br><span class="line">$(<span class="string">&quot;p&quot;</span>).html(<span class="string">&quot;Hello &lt;b&gt;world&lt;/b&gt;!&quot;</span>);</span><br><span class="line"><span class="comment">//修改p元素中国的值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅱ-text-val-fn"><a href="#Ⅱ-text-val-fn" class="headerlink" title="Ⅱ. text([val|fn])"></a>Ⅱ. text([val|fn])</h5><ul>
+<li>取得所有匹配元素的内容</li>
+<li>结果是由所有匹配元素包含的文本内容组合起来的文本。这个方法对HTML和XML文档都有效</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;p&#x27;</span>).text();</span><br><span class="line"><span class="comment">//返回p元素的文本内容。</span></span><br><span class="line">$(<span class="string">&quot;p&quot;</span>).text(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line"><span class="comment">//设置所有 p 元素的文本内容</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅲ-val-val-fn-arr"><a href="#Ⅲ-val-val-fn-arr" class="headerlink" title="Ⅲ. val([val|fn|arr])"></a>Ⅲ. val([val|fn|arr])</h5><ul>
+<li>获得匹配元素的当前值。</li>
+<li>在 jQuery 1.2 中,可以返回任意元素的值了。包括select。如果多选，将返回一个数组，其包含所选的值。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;input&quot;</span>).val();</span><br><span class="line"><span class="comment">//获取文本框中的值</span></span><br><span class="line">$(<span class="string">&quot;input&quot;</span>).val(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"><span class="comment">//设定文本框的值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-css属性"><a href="#7-css属性" class="headerlink" title="7.css属性"></a>7.css属性</h4><ul>
+<li> css(name|pro|[,val|fn])</li>
+<li>name：要访问的属性名称</li>
+<li>properties：一个或多个CSS属性组成的一个数组</li>
+<li><code>|</code> 表示或</li>
+<li>name,value键值对形式</li>
+</ul>
+<h3 id="三、jQuery事件"><a href="#三、jQuery事件" class="headerlink" title="三、jQuery事件"></a>三、jQuery事件</h3><h4 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>与Js的事件基本相同，但前缀不带on </li>
+</ul>
+<h4 id="2-事件"><a href="#2-事件" class="headerlink" title="2.事件"></a>2.事件</h4><p><img src="https://i.loli.net/2021/08/26/PNps9d5cGOIu8FJ.png" alt="image-20210826153751867"></p>
+<p><img src="https://i.loli.net/2021/08/26/2TDKSrA1H6wBn9x.png" alt="image-20210826153755981"></p>
+<h5 id="Ⅰ-click"><a href="#Ⅰ-click" class="headerlink" title="Ⅰ. click()"></a>Ⅰ. click()</h5><ul>
+<li>  触发、或将函数绑定到指定元素的 click 事件</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/mJk3lZ76VpLRdtX.png" alt="image-20210826153649188"></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/08/26/jQuery/" title="jQuery">http://example.com/2021/08/26/jQuery/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/jQuery/" rel="tag"><i class="fa fa-tag"></i># jQuery</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/26/%E8%AE%A4%E8%AF%86JavaScript/" rel="prev" title="认识JavaScript">
+      <i class="fa fa-chevron-left"></i> 认识JavaScript
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%AE%A1%E6%97%B6%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">一、计时器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-setTimeout"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. setTimeout()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-setInterval"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. setInterval()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E8%A1%A5%E5%85%85%E7%9F%A5%E8%AF%86"><span class="nav-number">1.0.3.</span> <span class="nav-text">3.补充知识</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Jquery"><span class="nav-number">1.1.</span> <span class="nav-text">二、Jquery</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-jQuery%E8%AF%AD%E6%B3%95"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.jQuery语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%9F%BA%E6%9C%AC%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.基本选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%B1%82%E7%BA%A7%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.层级选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-ancestor-descendant"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">Ⅰ. ancestor descendant</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-parent-gt-child"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">Ⅱ. parent &gt; child</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-prev-next"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">Ⅲ. prev + next</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-prev-siblings"><span class="nav-number">1.1.4.4.</span> <span class="nav-text">Ⅳ. prev ~ siblings</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%9F%BA%E6%9C%AC%E7%AD%9B%E9%80%89%E5%99%A8"><span class="nav-number">1.1.5.</span> <span class="nav-text">5.基本筛选器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-first"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">Ⅰ.  :first</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-not-selector"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">Ⅱ. :not(selector)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-even"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">Ⅲ. :even</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-odd"><span class="nav-number">1.1.5.4.</span> <span class="nav-text">Ⅳ. :odd</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A4-last"><span class="nav-number">1.1.5.5.</span> <span class="nav-text">Ⅴ.:last()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A5-gt-index"><span class="nav-number">1.1.5.6.</span> <span class="nav-text">Ⅵ. :gt(index)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A6-lt-index"><span class="nav-number">1.1.5.7.</span> <span class="nav-text">Ⅶ.  :lt(index)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A7-eq-index"><span class="nav-number">1.1.5.8.</span> <span class="nav-text">Ⅷ. :eq(index)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A8-header"><span class="nav-number">1.1.5.9.</span> <span class="nav-text">Ⅸ. :header</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A9-lang-language"><span class="nav-number">1.1.5.10.</span> <span class="nav-text">Ⅹ.:lang(language)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%EF%BC%9A"><span class="nav-number">1.1.5.11.</span> <span class="nav-text">其他：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-html%E5%B1%9E%E6%80%A7"><span class="nav-number">1.1.6.</span> <span class="nav-text">6. html属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-html-val-fn"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">Ⅰ.html([val|fn])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-text-val-fn"><span class="nav-number">1.1.6.2.</span> <span class="nav-text">Ⅱ. text([val|fn])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-val-val-fn-arr"><span class="nav-number">1.1.6.3.</span> <span class="nav-text">Ⅲ. val([val|fn|arr])</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-css%E5%B1%9E%E6%80%A7"><span class="nav-number">1.1.7.</span> <span class="nav-text">7.css属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81jQuery%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">三、jQuery事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.事件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-click"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Ⅰ. click()</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/nightmare_dimple" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;nightmare_dimple" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+    </ul>
+  </div>
+
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">75k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:08</span>
+	<br>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+<!--
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共37.4k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : '6uDYpax5oiwmCOvB3BcAzCt8-gzGzoHsz',
+      appKey     : 'BohVEfqjWIyJ5MzTXJJv3cNw',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
