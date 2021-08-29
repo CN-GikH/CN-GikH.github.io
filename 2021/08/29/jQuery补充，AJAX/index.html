@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="jQuery知识点补充（事件、隐藏显示、淡入淡出、滑动、自定义动画、添加删除元素等内容）,AJAX的认识和学习，JSON的认识和学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery补充,AJAX,JSON">
+<meta property="og:url" content="http://example.com/2021/08/29/jQuery%E8%A1%A5%E5%85%85%EF%BC%8CAJAX/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="jQuery知识点补充（事件、隐藏显示、淡入淡出、滑动、自定义动画、添加删除元素等内容）,AJAX的认识和学习，JSON的认识和学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/08/27/o7XMlCGW2i4Bcpx.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/27/oCnkqzpaNRTSYDh.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/27/tuvyB1Twngdk538.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/27/jUOhygSQ2CZ13br.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/27/76bqz23KdYxeRui.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/27/EOr3U8CKFmbhyIl.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/27/EXparGfyxARhlHm.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/27/45JFsoLlPeXxkiC.png">
+<meta property="article:published_time" content="2021-08-29T07:34:48.000Z">
+<meta property="article:modified_time" content="2021-08-29T07:37:31.038Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="jQuery">
+<meta property="article:tag" content="AJAX">
+<meta property="article:tag" content="JSON">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/08/27/o7XMlCGW2i4Bcpx.png">
+
+<link rel="canonical" href="http://example.com/2021/08/29/jQuery%E8%A1%A5%E5%85%85%EF%BC%8CAJAX/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>jQuery补充,AJAX,JSON | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/29/jQuery%E8%A1%A5%E5%85%85%EF%BC%8CAJAX/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          jQuery补充,AJAX,JSON
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-29 15:34:48 / 修改时间：15:37:31" itemprop="dateCreated datePublished" datetime="2021-08-29T15:34:48+08:00">2021-08-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index"><span itemprop="name">jQuery</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/08/29/jQuery%E8%A1%A5%E5%85%85%EF%BC%8CAJAX/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/08/29/jQuery%E8%A1%A5%E5%85%85%EF%BC%8CAJAX/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">24k</span> -->
+			  <span title="本文字数">
+                  2.1k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>5 分钟</span>
+            </span>
+            <div class="post-description">jQuery知识点补充（事件、隐藏显示、淡入淡出、滑动、自定义动画、添加删除元素等内容）,AJAX的认识和学习，JSON的认识和学习</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、jQuery知识点补充"><a href="#一、jQuery知识点补充" class="headerlink" title="一、jQuery知识点补充"></a>一、jQuery知识点补充</h3><h4 id="1-事件"><a href="#1-事件" class="headerlink" title="1.事件"></a>1.事件</h4><ul>
+<li>页面加载事件ready(fn)</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/27/o7XMlCGW2i4Bcpx.png" alt="image-20210827091950509"></p>
+<ul>
+<li>当DOM载入就绪可以查询及操纵时绑定一个要执行的函数。</li>
+</ul>
+<h4 id="2-隐藏和显示"><a href="#2-隐藏和显示" class="headerlink" title="2.隐藏和显示"></a>2.隐藏和显示</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;button&quot;</span>).clink(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	&amp;(<span class="string">&quot;img&quot;</span>).hiden();</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//	&amp;(&quot;img&quot;).show();</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-淡入淡出"><a href="#3-淡入淡出" class="headerlink" title="3.淡入淡出"></a>3.淡入淡出</h4><h5 id="Ⅰ-fadeIn-speed-easing-fn"><a href="#Ⅰ-fadeIn-speed-easing-fn" class="headerlink" title="Ⅰ. fadeIn([speed],[easing],[fn])"></a>Ⅰ. fadeIn([speed],[easing],[fn])</h5><ul>
+<li>通过不透明度的变化来实现所有匹配元素的<font color='#d15252'>淡入</font>效果，并在动画完成后可选地触发一个回调函数。</li>
+<li>这个动画只调整元素的不透明度，也就是说所有匹配的元素的高度和宽度不会发生变化。</li>
+<li>参数：<ul>
+<li>speed：三种预定速度之一的字符串(“slow”,”normal”, or “fast”)或表示动画时长的毫秒数值</li>
+<li>easing：用来指定切换效果，默认是”swing”，可用参数”linear”</li>
+<li>fn：在动画完成时执行的函数，每个元素执行一次</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-fadeOut-speed-easing-fn"><a href="#Ⅱ-fadeOut-speed-easing-fn" class="headerlink" title="Ⅱ. fadeOut([speed],[easing],[fn])"></a>Ⅱ. fadeOut([speed],[easing],[fn])</h5><ul>
+<li><p>通过不透明度的变化来实现所有匹配元素的淡出效果，并在动画完成后可选地触发一个回调函数。</p>
+</li>
+<li><p>这个动画只调整元素的不透明度，也就是说所有匹配的元素的高度和宽度不会发生变化。</p>
+</li>
+<li><p>参数：</p>
+<ul>
+<li>speed：三种预定速度之一的字符串(“slow”,”normal”, or “fast”)或表示动画时长的毫秒数值</li>
+<li>easing：用来指定切换效果，默认是”swing”，可用参数”linear”</li>
+<li>fn：在动画完成时执行的函数，每个元素执行一次</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;p&quot;</span>).fadeOut(<span class="string">&quot;slow&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/27/oCnkqzpaNRTSYDh.png" alt="image-20210827092904700"></p>
+<p><img src="https://i.loli.net/2021/08/27/tuvyB1Twngdk538.png" alt="image-20210827092900137"></p>
+<ul>
+<li><p>实现淡入淡出</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取到盒子并调用淡出效果 并触发一个回调函数</span></span><br><span class="line">$(<span class="string">&quot;div&quot;</span>).fadeOut(<span class="number">3000</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    $(<span class="string">&quot;div&quot;</span>).fadeIn(<span class="number">3000</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-滑动效果"><a href="#3-滑动效果" class="headerlink" title="3.滑动效果"></a>3.滑动效果</h4><h5 id="Ⅰ-slideDown-speed-easing-fn"><a href="#Ⅰ-slideDown-speed-easing-fn" class="headerlink" title="Ⅰ. slideDown([speed],[easing],[fn])"></a>Ⅰ. slideDown([speed],[easing],[fn])</h5><ul>
+<li><p>通过高度变化（向下增大）来动态地显示所有匹配的元素，在显示完成后可选地触发一个回调函数。</p>
+</li>
+<li><p>这个动画效果只调整元素的高度，可以使匹配的元素以“滑动”的方式显示出来。在jQuery 1.3中，上下的padding和margin也会有动画，效果更流畅。</p>
+</li>
+<li><p>参数：</p>
+<ul>
+<li>speed：三种预定速度之一的字符串(“slow”,”normal”, or “fast”)或表示动画时长的毫秒数值(如：1000)</li>
+<li>easing：用来指定切换效果，默认是”swing”，可用参数”linear”</li>
+<li>fn：在动画完成时执行的函数，每个元素执行一次。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;.btn2&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  $(<span class="string">&quot;p&quot;</span>).slideDown();</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//以滑动方式显示隐藏的 &lt;p&gt; 元素</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅱ-slideUp-speed-easing-fn"><a href="#Ⅱ-slideUp-speed-easing-fn" class="headerlink" title="Ⅱ. slideUp([speed,[easing],[fn]])"></a>Ⅱ. slideUp([speed,[easing],[fn]])</h5><ul>
+<li>通过高度变化（向上减小）来动态地隐藏所有匹配的元素，在隐藏完成后可选地触发一个回调函数。</li>
+<li>参数：<ul>
+<li>speed：三种预定速度之一的字符串(“slow”,”normal”, or “fast”)或表示动画时长的毫秒数值(如：1000)</li>
+<li>easing：用来指定切换效果，默认是”swing”，可用参数”linear”</li>
+<li>fn：在动画完成时执行的函数，每个元素执行一次</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;p&quot;</span>).slideUp(<span class="string">&quot;slow&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/27/jUOhygSQ2CZ13br.png" alt="image-20210827094845296"></p>
+<ul>
+<li>实现滑动显示和隐藏</li>
+</ul>
+<h4 id="4-自定义动画"><a href="#4-自定义动画" class="headerlink" title="4.自定义动画"></a>4.自定义动画</h4><h5 id="Ⅰ-animate-params-speed-easing-fn"><a href="#Ⅰ-animate-params-speed-easing-fn" class="headerlink" title="Ⅰ. animate(params,[speed],[easing],[fn])"></a>Ⅰ. animate(params,[speed],[easing],[fn])</h5><ul>
+<li>用于创建自定义动画的函数</li>
+<li>参数：<ul>
+<li><font color='#d15252'>params</font>：一组包含作为动画属性和终值的样式属性和及其值的集合</li>
+<li>speed：三种预定速度之一的字符串(“slow”,”normal”, or “fast”)或表示动画时长的毫秒数值(如：1000)</li>
+<li>easing：要使用的擦除效果的名称(需要插件支持).默认jQuery提供”linear” 和 “swing</li>
+<li>fn：在动画完成时执行的函数，每个元素执行一次。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在一个动画中同时应用三种类型的效果</span></span><br><span class="line">$(<span class="string">&quot;#go&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  $(<span class="string">&quot;#block&quot;</span>).animate(&#123; </span><br><span class="line">    <span class="attr">width</span>: <span class="string">&quot;90%&quot;</span>,</span><br><span class="line">    <span class="attr">height</span>: <span class="string">&quot;100%&quot;</span>, </span><br><span class="line">    <span class="attr">fontSize</span>: <span class="string">&quot;10em&quot;</span>, </span><br><span class="line">    <span class="attr">borderWidth</span>: <span class="number">10</span></span><br><span class="line">  &#125;, <span class="number">1000</span> );</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="5-链式调用"><a href="#5-链式调用" class="headerlink" title="5.链式调用"></a>5.链式调用</h4><p><img src="https://i.loli.net/2021/08/27/76bqz23KdYxeRui.png" alt="image-20210827101902998"></p>
+<h4 id="6-获取内容和属性"><a href="#6-获取内容和属性" class="headerlink" title="6.获取内容和属性"></a>6.获取内容和属性</h4><ul>
+<li>是非常重要的部分，就是操作DOM的能力</li>
+</ul>
+<h5 id="text-、html-、以及val"><a href="#text-、html-、以及val" class="headerlink" title="text()、html()、以及val()"></a>text()、html()、以及val()</h5><ul>
+<li>text() ：设置或返回所选元素的<font color='#d15252'>文本内容</font></li>
+<li>html()：设置或返回所选元素的<font color='#d15252'>内容</font>（包括HTML标记）</li>
+<li>val()：设置或返回<font color='#d15252'>表单字段的值</font>(input)</li>
+</ul>
+<h4 id="7-添加元素和内容"><a href="#7-添加元素和内容" class="headerlink" title="7.添加元素和内容"></a>7.添加元素和内容</h4><ul>
+<li>append()：在被选元素的结尾插入内容</li>
+<li>prepend()：在被选元素的开头插入内容</li>
+<li>after()：在被选元素之后插入内容</li>
+<li>before()：在被选元素之前插入内容</li>
+</ul>
+<h4 id="8-删除元素"><a href="#8-删除元素" class="headerlink" title="8.删除元素"></a>8.删除元素</h4><p><img src="https://i.loli.net/2021/08/27/EOr3U8CKFmbhyIl.png" alt="image-20210827110535989"></p>
+<h4 id="9-属性操作"><a href="#9-属性操作" class="headerlink" title="9.属性操作"></a>9.属性操作</h4><ul>
+<li>attr：属性值；元素的属性 文档的节点属性<ul>
+<li>节点属性：必须存在的属性</li>
+</ul>
+</li>
+<li>prop：属性值；js对象</li>
+</ul>
+<h3 id="二、AJAX-（体验）"><a href="#二、AJAX-（体验）" class="headerlink" title="二、AJAX （体验）"></a>二、AJAX （体验）</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>AJAX 是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术</li>
+<li>AJAX = 异步 JavaScript 和 XML</li>
+<li>AJAX 是一种用于创建快速动态网页的技术</li>
+<li><strong>XMLHttpRequest</strong> 是AJAX的基础<ul>
+<li>XMLHttpRequest 用于在后台与服务器交换数据</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-创建XMLHttpRequest-对象"><a href="#2-创建XMLHttpRequest-对象" class="headerlink" title="2.创建XMLHttpRequest 对象"></a>2.创建XMLHttpRequest 对象</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable=<span class="keyword">new</span> XMLHttpRequest();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>老版本的 Internet Explorer （IE5 和 IE6）使用 ActiveX 对象：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">variable=<span class="keyword">new</span> ActiveXObject(<span class="string">&quot;Microsoft.XMLHTTP&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>为了应对<font color='#d15252'>所有的</font>现代浏览器，可以通过以下方式创建对象</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xmlhttp;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest)</span><br><span class="line">  &#123;<span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></span><br><span class="line">  xmlhttp=<span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  &#123;<span class="comment">// code for IE6, IE5</span></span><br><span class="line">  xmlhttp=<span class="keyword">new</span> ActiveXObject(<span class="string">&quot;Microsoft.XMLHTTP&quot;</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-XMLHttpRequest-请求（发送）"><a href="#3-XMLHttpRequest-请求（发送）" class="headerlink" title="3.XMLHttpRequest 请求（发送）"></a>3.XMLHttpRequest 请求（发送）</h4><h5 id="Ⅰ-发送数据"><a href="#Ⅰ-发送数据" class="headerlink" title="Ⅰ.发送数据"></a>Ⅰ.发送数据</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.open(<span class="string">&quot;GET&quot;</span>,<span class="string">&quot;test1.txt&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/27/EXparGfyxARhlHm.png" alt="image-20210827135601437"></p>
+<h5 id="Ⅱ-Get和Post的区别"><a href="#Ⅱ-Get和Post的区别" class="headerlink" title="Ⅱ. Get和Post的区别"></a>Ⅱ. Get和Post的区别</h5><ul>
+<li>与 POST 相比，GET 更简单也更快，并且在大部分情况下都能用</li>
+<li>在以下情况中，请使用 POST 请求：<ul>
+<li>无法使用缓存文件（更新服务器上的文件或数据库）</li>
+<li>向服务器发送大量数据（POST 没有数据量限制）</li>
+<li>发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/27/45JFsoLlPeXxkiC.png" alt="image-20210827135702792"></p>
+<h4 id="4-服务器响应"><a href="#4-服务器响应" class="headerlink" title="4.服务器响应"></a>4.服务器响应</h4><ul>
+<li>如需获得来自服务器的响应，请使用 XMLHttpRequest 对象的 responseText 或 responseXML 属性。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>responseText</td>
+<td>获得字符串形式的响应数据。</td>
+</tr>
+<tr>
+<td>responseXML</td>
+<td>获得 XML 形式的响应数据。</td>
+</tr>
+</tbody></table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xmlhttp.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (xmlhttp.readyState==<span class="number">4</span> &amp;&amp; xmlhttp.status==<span class="number">200</span>)</span><br><span class="line">    &#123;</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&quot;myDiv&quot;</span>).innerHTML=xmlhttp.responseText;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5><h3 id="三、JSON"><a href="#三、JSON" class="headerlink" title="三、JSON"></a>三、JSON</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li><strong>JavaScript 对象表示法（JavaScript Object Notation）。</strong></li>
+<li>JSON 是存储和交换文本信息的语法。类似 XML</li>
+<li>JSON 比 XML 更小、更快，更易解析</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">&quot;employees&quot;</span>: [</span><br><span class="line">&#123; <span class="attr">&quot;firstName&quot;</span>:<span class="string">&quot;Bill&quot;</span> , <span class="attr">&quot;lastName&quot;</span>:<span class="string">&quot;Gates&quot;</span> &#125;,</span><br><span class="line">&#123; <span class="attr">&quot;firstName&quot;</span>:<span class="string">&quot;George&quot;</span> , <span class="attr">&quot;lastName&quot;</span>:<span class="string">&quot;Bush&quot;</span> &#125;,</span><br><span class="line">&#123; <span class="attr">&quot;firstName&quot;</span>:<span class="string">&quot;Thomas&quot;</span> , <span class="attr">&quot;lastName&quot;</span>:<span class="string">&quot;Carter&quot;</span> &#125;</span><br><span class="line">]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-JSON语法规范"><a href="#2-JSON语法规范" class="headerlink" title="2.JSON语法规范"></a>2.JSON语法规范</h4><ul>
+<li><p>JSON 语法是 JavaScript 对象表示法语法的子集</p>
+<ul>
+<li>数据在名称/值对中</li>
+<li>数据由<font color='#d15252'>逗号</font>分隔</li>
+<li>花括号保存对象</li>
+<li>方括号保存数组</li>
+</ul>
+</li>
+<li><p>JSON<font color='#d15252'><strong>数据</strong>的书写格式</font>是：键值对</p>
+<ul>
+<li>名称/值对包括字段名称（在双引号中），后面写一个冒号，然后是值：</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;firstName&quot;</span> : <span class="string">&quot;John&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>JSON 值可以是：</p>
+<ul>
+<li>数字（整数或浮点数）</li>
+<li>字符串（在双引号中）</li>
+<li>逻辑值（true 或 false）</li>
+<li>数组（在方括号中）</li>
+<li>对象（在花括号中）</li>
+<li>null</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-赋值取值"><a href="#3-赋值取值" class="headerlink" title="3.赋值取值"></a>3.赋值取值</h4><ul>
+<li>赋值</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var j = &#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;Liyukai&quot;</span>,</span><br><span class="line">    age : <span class="number">12</span>,</span><br><span class="line">    <span class="attr">&quot;sex&quot;</span> : <span class="string">&quot;nan&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取值</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert(j.name);</span><br><span class="line">alert(j[<span class="string">&quot;name&quot;</span>]);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>嵌套赋值取值</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var j = &#123;</span><br><span class="line">    <span class="attr">&quot;j1&quot;</span> : &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;Liyukai&quot;</span>,</span><br><span class="line">        age : <span class="number">12</span>,</span><br><span class="line">        <span class="attr">&quot;sex&quot;</span> : <span class="string">&quot;nan&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;j2&quot;</span> : &#123;</span><br><span class="line">        <span class="attr">&quot;name&quot;</span>:<span class="string">&quot;Gaoyuhang&quot;</span>,</span><br><span class="line">        age : <span class="number">21</span>,</span><br><span class="line">        <span class="attr">&quot;sex&quot;</span> : <span class="string">&quot;nan&quot;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var j1 = j[<span class="string">&quot;j1&quot;</span>];</span><br><span class="line">alert(j1[<span class="string">&quot;name&quot;</span>]);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>forin方法嵌套取值</li>
+</ul>
+<h4 id="4-JSON解析"><a href="#4-JSON解析" class="headerlink" title="4.JSON解析"></a>4.JSON解析</h4><ul>
+<li><p>第一步：创建XMLHTTP对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xmlhttp;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest)</span><br><span class="line">      &#123;<span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></span><br><span class="line">          xmlhttp=<span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;<span class="comment">// code for IE6, IE5</span></span><br><span class="line">          xmlhttp=<span class="keyword">new</span> ActiveXObject(<span class="string">&quot;Microsoft.XMLHTTP&quot;</span>);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>第二步：发送请求到服务器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//发送请求</span></span><br><span class="line">xmlhttp.open(<span class="string">&quot;GET&quot;</span>,<span class="string">&quot;s.json&quot;</span>,<span class="literal">true</span>);</span><br><span class="line">xmlhttp.send();</span><br></pre></td></tr></table></figure></li>
+<li><p>第三步：接收服务器响应</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//接收响应</span></span><br><span class="line">  </span><br><span class="line">      xmlhttp.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">      </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (xmlhttp.readyState==<span class="number">4</span> &amp;&amp; xmlhttp.status==<span class="number">200</span>)</span><br><span class="line">          &#123;</span><br><span class="line">              <span class="keyword">var</span> rt = xmlhttp.responseText;</span><br><span class="line">              <span class="keyword">var</span> jso = <span class="built_in">JSON</span>.parse(rt);</span><br><span class="line">              <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;jso.length;i++)&#123;</span><br><span class="line">                  <span class="comment">// alert(jso[i].name);</span></span><br><span class="line">                  <span class="comment">// var name = jso[i].name;</span></span><br><span class="line">                  <span class="comment">// alert(jso[i].age);</span></span><br><span class="line">                  $(<span class="string">&quot;#mes&quot;</span>).append(<span class="string">&quot;&lt;tr&gt;&lt;td&gt;&quot;</span>+jso[i].id+<span class="string">&quot;&lt;/td&gt;&lt;td&gt;&quot;</span>+jso[i].name+<span class="string">&quot;&lt;/td&gt;&lt;td&gt;&quot;</span>+jso[i].age+<span class="string">&quot;&lt;/td&gt;&lt;/tr&gt;&quot;</span>);</span><br><span class="line">                  <span class="comment">// $(&quot;#mes&quot;).append(&quot;&lt;td&gt;&quot;+jso[i].age+&quot;&lt;/td&gt;&lt;/tr&gt;&quot;);</span></span><br><span class="line">                  <span class="comment">// $(&quot;#name&quot;).append(&quot;&lt;td&gt;&quot;+jso[i].age+&quot;&lt;/td&gt;&quot;);</span></span><br><span class="line">                  <span class="comment">// $(&quot;#age&quot;).append(&quot;&lt;td&gt;&quot;+age+&quot;&lt;/td&gt;&quot;);</span></span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>xmlhttp.responseText获取到服务器响应的数据</li>
+</ul>
+</li>
+<li><p>第四步：解析数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">JSON</span>.parse解析服务器响应的数据</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/08/29/jQuery%E8%A1%A5%E5%85%85%EF%BC%8CAJAX/" title="jQuery补充,AJAX,JSON">http://example.com/2021/08/29/jQuery补充，AJAX/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/jQuery/" rel="tag"><i class="fa fa-tag"></i># jQuery</a>
+              <a href="/tags/AJAX/" rel="tag"><i class="fa fa-tag"></i># AJAX</a>
+              <a href="/tags/JSON/" rel="tag"><i class="fa fa-tag"></i># JSON</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/26/jQuery/" rel="prev" title="jQuery">
+      <i class="fa fa-chevron-left"></i> jQuery
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81jQuery%E7%9F%A5%E8%AF%86%E7%82%B9%E8%A1%A5%E5%85%85"><span class="nav-number">1.</span> <span class="nav-text">一、jQuery知识点补充</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">1.事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E9%9A%90%E8%97%8F%E5%92%8C%E6%98%BE%E7%A4%BA"><span class="nav-number">1.2.</span> <span class="nav-text">2.隐藏和显示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%B7%A1%E5%85%A5%E6%B7%A1%E5%87%BA"><span class="nav-number">1.3.</span> <span class="nav-text">3.淡入淡出</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-fadeIn-speed-easing-fn"><span class="nav-number">1.3.1.</span> <span class="nav-text">Ⅰ. fadeIn([speed],[easing],[fn])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-fadeOut-speed-easing-fn"><span class="nav-number">1.3.2.</span> <span class="nav-text">Ⅱ. fadeOut([speed],[easing],[fn])</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%BB%91%E5%8A%A8%E6%95%88%E6%9E%9C"><span class="nav-number">1.4.</span> <span class="nav-text">3.滑动效果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-slideDown-speed-easing-fn"><span class="nav-number">1.4.1.</span> <span class="nav-text">Ⅰ. slideDown([speed],[easing],[fn])</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-slideUp-speed-easing-fn"><span class="nav-number">1.4.2.</span> <span class="nav-text">Ⅱ. slideUp([speed,[easing],[fn]])</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8A%A8%E7%94%BB"><span class="nav-number">1.5.</span> <span class="nav-text">4.自定义动画</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-animate-params-speed-easing-fn"><span class="nav-number">1.5.1.</span> <span class="nav-text">Ⅰ. animate(params,[speed],[easing],[fn])</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="nav-number">1.6.</span> <span class="nav-text">5.链式调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E8%8E%B7%E5%8F%96%E5%86%85%E5%AE%B9%E5%92%8C%E5%B1%9E%E6%80%A7"><span class="nav-number">1.7.</span> <span class="nav-text">6.获取内容和属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#text-%E3%80%81html-%E3%80%81%E4%BB%A5%E5%8F%8Aval"><span class="nav-number">1.7.1.</span> <span class="nav-text">text()、html()、以及val()</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0%E5%92%8C%E5%86%85%E5%AE%B9"><span class="nav-number">1.8.</span> <span class="nav-text">7.添加元素和内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="nav-number">1.9.</span> <span class="nav-text">8.删除元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="nav-number">1.10.</span> <span class="nav-text">9.属性操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81AJAX-%EF%BC%88%E4%BD%93%E9%AA%8C%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">二、AJAX （体验）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BAXMLHttpRequest-%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.2.</span> <span class="nav-text">2.创建XMLHttpRequest 对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-XMLHttpRequest-%E8%AF%B7%E6%B1%82%EF%BC%88%E5%8F%91%E9%80%81%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">3.XMLHttpRequest 请求（发送）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE"><span class="nav-number">2.3.1.</span> <span class="nav-text">Ⅰ.发送数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-Get%E5%92%8CPost%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.2.</span> <span class="nav-text">Ⅱ. Get和Post的区别</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%93%8D%E5%BA%94"><span class="nav-number">2.4.</span> <span class="nav-text">4.服务器响应</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">2.4.1.</span> <span class="nav-text"></span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81JSON"><span class="nav-number">3.</span> <span class="nav-text">三、JSON</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0-1"><span class="nav-number">3.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-JSON%E8%AF%AD%E6%B3%95%E8%A7%84%E8%8C%83"><span class="nav-number">3.2.</span> <span class="nav-text">2.JSON语法规范</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E8%B5%8B%E5%80%BC%E5%8F%96%E5%80%BC"><span class="nav-number">3.3.</span> <span class="nav-text">3.赋值取值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-JSON%E8%A7%A3%E6%9E%90"><span class="nav-number">3.4.</span> <span class="nav-text">4.JSON解析</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/nightmare_dimple" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;nightmare_dimple" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+    </ul>
+  </div>
+
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">81k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:14</span>
+	<br>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+<!--
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共39.5k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : true,
+      appId      : '6uDYpax5oiwmCOvB3BcAzCt8-gzGzoHsz',
+      appKey     : 'BohVEfqjWIyJ5MzTXJJv3cNw',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
