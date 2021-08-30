@@ -655,6 +655,147 @@
       </tags>
   </entry>
   <entry>
+    <title>ArrayList集合和方法练习</title>
+    <url>/2021/08/25/ArrayList%E9%9B%86%E5%90%88%E5%92%8C%E6%96%B9%E6%B3%95%E7%BB%83%E4%B9%A0/</url>
+    <content><![CDATA[<h3 id="一、练习"><a href="#一、练习" class="headerlink" title="一、练习"></a>一、练习</h3><h4 id="1-编写思路"><a href="#1-编写思路" class="headerlink" title="1.编写思路"></a>1.编写思路</h4><ul>
+<li>创建项目，测试环境</li>
+<li>需求分析</li>
+<li>先实现菜单<ul>
+<li>创建菜单方法<ul>
+<li>方法位置：并列</li>
+<li>格式：修饰符 返回值类型 方法名（）{  }</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实现菜单的选择<ul>
+<li>创建判断键盘录入选择的方法</li>
+<li>调用menu方法，实现每次选择时，展示菜单</li>
+<li>Scanner  三个步骤，录入键盘数据</li>
+<li>调用加载数据的方法，并创建一个数组名保存</li>
+<li>if+else if 实现键盘录入数据的判断</li>
+<li>设置死循环，实现菜单的重复选择</li>
+<li>当a=5时，退出，break;</li>
+</ul>
+</li>
+<li>实现加载数据<ul>
+<li>创建加载数据方法</li>
+<li>定义一个数组并初始化数据</li>
+<li>return返回值arr数组，返回值类型int[]</li>
+</ul>
+</li>
+<li>实现具体的选择项的功能（查看）<ul>
+<li>当choose方法中录入键盘数据为1时</li>
+<li>调用show方法，并传递参数arr</li>
+</ul>
+</li>
+<li>实现查看功能<ul>
+<li>定义方法</li>
+<li>定义一个数组参数，用于接收数据</li>
+<li>用for循环遍历数组</li>
+<li>if判断不是0再输出</li>
+</ul>
+</li>
+<li>实现修改功能<ul>
+<li>定义方法</li>
+<li>键盘录入要修改的id</li>
+<li>for循环遍历数组，IF查找有没有匹配的id<ul>
+<li>在方法定义中，添加参数int[] arr ，用于接收数组</li>
+</ul>
+</li>
+<li>在choose方法中，当选择2时，调用修改方法，并且传递参数–数组</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-内存图"><a href="#2-内存图" class="headerlink" title="2.内存图"></a>2.内存图</h4><img src="https://i.loli.net/2021/07/23/8KSZyjmXNIGYVeT.png" alt="image-20210723153545299" style="zoom:200%;" />
+
+
+
+<h3 id="二、ArrayList集合"><a href="#二、ArrayList集合" class="headerlink" title="二、ArrayList集合"></a>二、<font color='#d15252'>ArrayList</font>集合</h3><ul>
+<li>变量：存一个数</li>
+<li>数组：多个数，但长度固定</li>
+<li>集合ArrayList</li>
+</ul>
+<h4 id="1-ArrayList的概念"><a href="#1-ArrayList的概念" class="headerlink" title="1.ArrayList的概念"></a>1.ArrayList的概念</h4><ul>
+<li>什么是ArrayList?<ul>
+<li>是一个容器，<font color='#d15252'>长度不固定</font></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-ArrayList的使用"><a href="#2-ArrayList的使用" class="headerlink" title="2.ArrayList的使用"></a>2.ArrayList的使用</h4><h5 id="①使用前的准备"><a href="#①使用前的准备" class="headerlink" title="①使用前的准备"></a>①使用前的准备</h5><ul>
+<li><p>导包</p>
+</li>
+<li><p><code>import java.util.ArrayList;</code></p>
+</li>
+<li><p>加载进内存</p>
+<ul>
+<li><code>ArrayList&lt;数据类型&gt;变量名 = new ArrayList();</code><ul>
+<li>数据类型：不能用int ，而是要用 <code>Integer</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="②具体使用"><a href="#②具体使用" class="headerlink" title="②具体使用"></a>②具体使用</h5><ul>
+<li><p>添加</p>
+<ul>
+<li>使用 <code>add();</code> 方法<ul>
+<li><code>例：list.add(12); -----&gt;存入12进集合</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>删除</p>
+<ul>
+<li>使用 <code>remove();</code> 方法<ul>
+<li><code>例：list.remove(1); ----&gt;删除索引为1的数据</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>获取</p>
+<ul>
+<li><p>使用 <code>get(索引);</code> 方法</p>
+<ul>
+<li><p>单独调用（无意义）</p>
+<ul>
+<li><code>例：list.get(1); ----&gt;取出索引为1的数据</code></li>
+</ul>
+</li>
+<li><p>输出调用</p>
+<ul>
+<li><code>例：System.out.println(list.get(2))---&gt;直接输出索引2数据</code></li>
+</ul>
+</li>
+<li><p>赋值调用</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = list.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(a);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>长度</p>
+<ul>
+<li>使用 <code>size();</code> 方法</li>
+</ul>
+</li>
+<li><p>更新</p>
+<ul>
+<li><p>使用 <code>set();</code>方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">id.set(索引，新的数值);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>ArrayList</tag>
+        <tag>方法</tag>
+        <tag>增查删改</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>File类和递归</title>
     <url>/2021/08/25/File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/</url>
     <content><![CDATA[<h3 id="一、File"><a href="#一、File" class="headerlink" title="一、File"></a>一、File</h3><ul>
@@ -837,147 +978,6 @@
       <tags>
         <tag>File</tag>
         <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ArrayList集合和方法练习</title>
-    <url>/2021/08/25/ArrayList%E9%9B%86%E5%90%88%E5%92%8C%E6%96%B9%E6%B3%95%E7%BB%83%E4%B9%A0/</url>
-    <content><![CDATA[<h3 id="一、练习"><a href="#一、练习" class="headerlink" title="一、练习"></a>一、练习</h3><h4 id="1-编写思路"><a href="#1-编写思路" class="headerlink" title="1.编写思路"></a>1.编写思路</h4><ul>
-<li>创建项目，测试环境</li>
-<li>需求分析</li>
-<li>先实现菜单<ul>
-<li>创建菜单方法<ul>
-<li>方法位置：并列</li>
-<li>格式：修饰符 返回值类型 方法名（）{  }</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>实现菜单的选择<ul>
-<li>创建判断键盘录入选择的方法</li>
-<li>调用menu方法，实现每次选择时，展示菜单</li>
-<li>Scanner  三个步骤，录入键盘数据</li>
-<li>调用加载数据的方法，并创建一个数组名保存</li>
-<li>if+else if 实现键盘录入数据的判断</li>
-<li>设置死循环，实现菜单的重复选择</li>
-<li>当a=5时，退出，break;</li>
-</ul>
-</li>
-<li>实现加载数据<ul>
-<li>创建加载数据方法</li>
-<li>定义一个数组并初始化数据</li>
-<li>return返回值arr数组，返回值类型int[]</li>
-</ul>
-</li>
-<li>实现具体的选择项的功能（查看）<ul>
-<li>当choose方法中录入键盘数据为1时</li>
-<li>调用show方法，并传递参数arr</li>
-</ul>
-</li>
-<li>实现查看功能<ul>
-<li>定义方法</li>
-<li>定义一个数组参数，用于接收数据</li>
-<li>用for循环遍历数组</li>
-<li>if判断不是0再输出</li>
-</ul>
-</li>
-<li>实现修改功能<ul>
-<li>定义方法</li>
-<li>键盘录入要修改的id</li>
-<li>for循环遍历数组，IF查找有没有匹配的id<ul>
-<li>在方法定义中，添加参数int[] arr ，用于接收数组</li>
-</ul>
-</li>
-<li>在choose方法中，当选择2时，调用修改方法，并且传递参数–数组</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-内存图"><a href="#2-内存图" class="headerlink" title="2.内存图"></a>2.内存图</h4><img src="https://i.loli.net/2021/07/23/8KSZyjmXNIGYVeT.png" alt="image-20210723153545299" style="zoom:200%;" />
-
-
-
-<h3 id="二、ArrayList集合"><a href="#二、ArrayList集合" class="headerlink" title="二、ArrayList集合"></a>二、<font color='#d15252'>ArrayList</font>集合</h3><ul>
-<li>变量：存一个数</li>
-<li>数组：多个数，但长度固定</li>
-<li>集合ArrayList</li>
-</ul>
-<h4 id="1-ArrayList的概念"><a href="#1-ArrayList的概念" class="headerlink" title="1.ArrayList的概念"></a>1.ArrayList的概念</h4><ul>
-<li>什么是ArrayList?<ul>
-<li>是一个容器，<font color='#d15252'>长度不固定</font></li>
-</ul>
-</li>
-</ul>
-<h4 id="2-ArrayList的使用"><a href="#2-ArrayList的使用" class="headerlink" title="2.ArrayList的使用"></a>2.ArrayList的使用</h4><h5 id="①使用前的准备"><a href="#①使用前的准备" class="headerlink" title="①使用前的准备"></a>①使用前的准备</h5><ul>
-<li><p>导包</p>
-</li>
-<li><p><code>import java.util.ArrayList;</code></p>
-</li>
-<li><p>加载进内存</p>
-<ul>
-<li><code>ArrayList&lt;数据类型&gt;变量名 = new ArrayList();</code><ul>
-<li>数据类型：不能用int ，而是要用 <code>Integer</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="②具体使用"><a href="#②具体使用" class="headerlink" title="②具体使用"></a>②具体使用</h5><ul>
-<li><p>添加</p>
-<ul>
-<li>使用 <code>add();</code> 方法<ul>
-<li><code>例：list.add(12); -----&gt;存入12进集合</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>删除</p>
-<ul>
-<li>使用 <code>remove();</code> 方法<ul>
-<li><code>例：list.remove(1); ----&gt;删除索引为1的数据</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>获取</p>
-<ul>
-<li><p>使用 <code>get(索引);</code> 方法</p>
-<ul>
-<li><p>单独调用（无意义）</p>
-<ul>
-<li><code>例：list.get(1); ----&gt;取出索引为1的数据</code></li>
-</ul>
-</li>
-<li><p>输出调用</p>
-<ul>
-<li><code>例：System.out.println(list.get(2))---&gt;直接输出索引2数据</code></li>
-</ul>
-</li>
-<li><p>赋值调用</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = list.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(a);</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>长度</p>
-<ul>
-<li>使用 <code>size();</code> 方法</li>
-</ul>
-</li>
-<li><p>更新</p>
-<ul>
-<li><p>使用 <code>set();</code>方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">id.set(索引，新的数值);</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>ArrayList</tag>
-        <tag>方法</tag>
-        <tag>增查删改</tag>
       </tags>
   </entry>
   <entry>
@@ -1192,114 +1192,6 @@
       </categories>
       <tags>
         <tag>IO流</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java链接数据库</title>
-    <url>/2021/08/25/Java%E9%93%BE%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h3 id="一、Java链接数据库（Mysql）步骤"><a href="#一、Java链接数据库（Mysql）步骤" class="headerlink" title="一、Java链接数据库（Mysql）步骤"></a>一、Java链接数据库（Mysql）步骤</h3><h4 id="1-第一步：创建项目，并进行测试"><a href="#1-第一步：创建项目，并进行测试" class="headerlink" title="1.第一步：创建项目，并进行测试"></a>1.第一步：创建项目，并进行测试</h4><h4 id="2-第二步：找公司（jar）压缩包-jar"><a href="#2-第二步：找公司（jar）压缩包-jar" class="headerlink" title="2.第二步：找公司（jar）压缩包.jar"></a>2.第二步：找公司（jar）压缩包.jar</h4><ul>
-<li>项目中创建lib目录，将jar包拖入<ul>
-<li><img src="https://i.loli.net/2021/07/09/dXBtUWDkVezPFoQ.png" alt="image-20210709092306325"></li>
-</ul>
-</li>
-<li>右键jar包，解压<ul>
-<li><img src="https://i.loli.net/2021/07/09/r4peszySgwOJHYV.png" alt="image-20210709092237690"></li>
-</ul>
-</li>
-</ul>
-<h4 id="3-第三步：将Java链接mysql的相关工具类加载进内存"><a href="#3-第三步：将Java链接mysql的相关工具类加载进内存" class="headerlink" title="3.第三步：将Java链接mysql的相关工具类加载进内存"></a>3.第三步：将Java链接mysql的相关工具类加载进内存</h4><ul>
-<li><p>用try{}catch(Exception e){} 或 throws Exception 处理异常</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="4-第四步：Java链接Mysql"><a href="#4-第四步：Java链接Mysql" class="headerlink" title="4.第四步：Java链接Mysql"></a>4.第四步：Java链接Mysql</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Connection root = DriverManager.getConnection(url:<span class="string">&quot;jdbc:mysql://localhost:3306/m1&quot;</span>,</span><br><span class="line">            user:<span class="string">&quot;root&quot;</span>,</span><br><span class="line">            password:<span class="string">&quot;000909&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>去除时区异常：</p>
-<p>?serverTimezone=Asia/Shanghai&amp;useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true</p>
-</blockquote>
-<h4 id="5-第五步：获取发送sql的工具"><a href="#5-第五步：获取发送sql的工具" class="headerlink" title="5.第五步：获取发送sql的工具"></a>5.第五步：获取发送sql的工具</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Statement statement = root.createStatement();</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="6-第六步：定义一个sql语句-查询"><a href="#6-第六步：定义一个sql语句-查询" class="headerlink" title="6.第六步：定义一个sql语句(查询)"></a>6.第六步：定义一个sql语句(查询)</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String sql = <span class="string">&quot;SELECT *FROM shop&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<h4 id="7-第七步：发送sql语句-查询-，用resultSet保存返回值"><a href="#7-第七步：发送sql语句-查询-，用resultSet保存返回值" class="headerlink" title="7.第七步：发送sql语句(查询)，用resultSet保存返回值"></a>7.第七步：发送sql语句(查询)，用resultSet保存返回值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ResultSet resultSet = statement.executeQuery(sql);</span><br></pre></td></tr></table></figure>
-
-<h4 id="8-第八步：调用resuleSet的next-方法，判断是否有值"><a href="#8-第八步：调用resuleSet的next-方法，判断是否有值" class="headerlink" title="8.第八步：调用resuleSet的next()方法，判断是否有值"></a>8.第八步：调用resuleSet的next()方法，判断是否有值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (resultSet.next())</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="9-第九步：调用getInt-方法，返回int类型值"><a href="#9-第九步：调用getInt-方法，返回int类型值" class="headerlink" title="9.第九步：调用getInt()方法，返回int类型值"></a>9.第九步：调用getInt()方法，返回int类型值</h4><ul>
-<li><img src="https://i.loli.net/2021/07/09/GLfpqFbu4Qg3Cx1.png" alt="image-20210709103344911"></li>
-</ul>
-<hr>
-<h4 id="链接数据库并查询—代码："><a href="#链接数据库并查询—代码：" class="headerlink" title="链接数据库并查询—代码："></a>链接数据库并查询—代码：</h4><p><img src="https://i.loli.net/2021/07/09/m9Q42OWGNr7Io3v.png" alt="image-20210709103439844"></p>
-<hr>
-<h3 id="二、更新数据库数据"><a href="#二、更新数据库数据" class="headerlink" title="二、更新数据库数据"></a>二、更新数据库数据</h3><ul>
-<li><h5 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h5><ul>
-<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
-</li>
-<li><p>创建键盘录入数据</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">           System.out.println(<span class="string">&quot;请输入要修改的学号&quot;</span>);</span><br><span class="line">           <span class="keyword">int</span> id = sc.nextInt();</span><br><span class="line">           System.out.println(<span class="string">&quot;请输入要修改的姓名&quot;</span>);</span><br><span class="line">           String name = sc.next();</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>打包sql语句</li>
-</ul>
-<p><code>String sql = &quot;UPDATE student SET sname = &#39;&quot;+name+&quot;&#39; WHERE sid = &quot;+id;</code></p>
-<ul>
-<li>发送执行sql语句</li>
-</ul>
-<p><code>int i = statement.executeUpdate(sql);</code></p>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></li>
-</ul>
-<p><img src="https://i.loli.net/2021/06/30/fFMH28bBwjXsoSz.png" alt="image-20210630143254189"></p>
-<hr>
-<h3 id="三、添加数据库数据"><a href="#三、添加数据库数据" class="headerlink" title="三、添加数据库数据"></a>三、添加数据库数据</h3><ul>
-<li><h5 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h5><ul>
-<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
-</li>
-<li><p>创建键盘录入数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">         System.out.println(<span class="string">&quot;请输入要添加的id&quot;</span>);</span><br><span class="line">         <span class="keyword">int</span> id = sc.nextInt();</span><br><span class="line">         System.out.println(<span class="string">&quot;请输入要添加的姓名&quot;</span>);</span><br><span class="line">         String name  = sc.next();</span><br></pre></td></tr></table></figure></li>
-<li><p>打包sql语句</p>
-<p>[^sql语句]: <code>String sql = &quot;INSERT INTO student (sid,sname) VALUES (&quot;+id+&quot;,&#39;&quot;+name+&quot;&#39;)&quot;;</code></p>
-</li>
-<li><p>发送执行sql语句</p>
-<p><code>int i = statement.executeUpdate(sql);</code></p>
-</li>
-</ul>
-<p>  [^executeUpdate]: 用于添加，更新，删除数据</p>
-</li>
-<li><h5 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h5><p><img src="https://i.loli.net/2021/06/30/r93VqIyGYm1xtW8.png" alt="image-20210630140131020"></p>
-</li>
-</ul>
-<hr>
-<h3 id="四、删除数据库数据"><a href="#四、删除数据库数据" class="headerlink" title="四、删除数据库数据"></a>四、删除数据库数据</h3><ul>
-<li><h5 id="步骤：-1"><a href="#步骤：-1" class="headerlink" title="步骤："></a>步骤：</h5><ul>
-<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
-</li>
-<li><p>创建键盘录入数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">          System.out.println(<span class="string">&quot;请输入要删除的学号&quot;</span>);</span><br><span class="line">          <span class="keyword">int</span> id = sc.nextInt();</span><br></pre></td></tr></table></figure></li>
-<li><p>打包sql语句</p>
-<p><code>String sql = &quot;DELETE FROM student WHERE sid = &quot;+id;</code></p>
-</li>
-<li><p>发送执行sql语句</p>
-<p><code>int i = statement.executeUpdate(sql);</code></p>
-</li>
-</ul>
-</li>
-<li><h5 id="代码：-2"><a href="#代码：-2" class="headerlink" title="代码："></a>代码：<img src="https://i.loli.net/2021/06/30/n14xtuQb2wJVsqh.png" alt="image-20210630143508186"></h5></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>增查删改</tag>
-        <tag>案例</tag>
-        <tag>数据库</tag>
-        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -1652,6 +1544,114 @@
         <tag>什么是Java</tag>
         <tag>变量</tag>
         <tag>数据类型</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java链接数据库</title>
+    <url>/2021/08/25/Java%E9%93%BE%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h3 id="一、Java链接数据库（Mysql）步骤"><a href="#一、Java链接数据库（Mysql）步骤" class="headerlink" title="一、Java链接数据库（Mysql）步骤"></a>一、Java链接数据库（Mysql）步骤</h3><h4 id="1-第一步：创建项目，并进行测试"><a href="#1-第一步：创建项目，并进行测试" class="headerlink" title="1.第一步：创建项目，并进行测试"></a>1.第一步：创建项目，并进行测试</h4><h4 id="2-第二步：找公司（jar）压缩包-jar"><a href="#2-第二步：找公司（jar）压缩包-jar" class="headerlink" title="2.第二步：找公司（jar）压缩包.jar"></a>2.第二步：找公司（jar）压缩包.jar</h4><ul>
+<li>项目中创建lib目录，将jar包拖入<ul>
+<li><img src="https://i.loli.net/2021/07/09/dXBtUWDkVezPFoQ.png" alt="image-20210709092306325"></li>
+</ul>
+</li>
+<li>右键jar包，解压<ul>
+<li><img src="https://i.loli.net/2021/07/09/r4peszySgwOJHYV.png" alt="image-20210709092237690"></li>
+</ul>
+</li>
+</ul>
+<h4 id="3-第三步：将Java链接mysql的相关工具类加载进内存"><a href="#3-第三步：将Java链接mysql的相关工具类加载进内存" class="headerlink" title="3.第三步：将Java链接mysql的相关工具类加载进内存"></a>3.第三步：将Java链接mysql的相关工具类加载进内存</h4><ul>
+<li><p>用try{}catch(Exception e){} 或 throws Exception 处理异常</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="4-第四步：Java链接Mysql"><a href="#4-第四步：Java链接Mysql" class="headerlink" title="4.第四步：Java链接Mysql"></a>4.第四步：Java链接Mysql</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Connection root = DriverManager.getConnection(url:<span class="string">&quot;jdbc:mysql://localhost:3306/m1&quot;</span>,</span><br><span class="line">            user:<span class="string">&quot;root&quot;</span>,</span><br><span class="line">            password:<span class="string">&quot;000909&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>去除时区异常：</p>
+<p>?serverTimezone=Asia/Shanghai&amp;useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true</p>
+</blockquote>
+<h4 id="5-第五步：获取发送sql的工具"><a href="#5-第五步：获取发送sql的工具" class="headerlink" title="5.第五步：获取发送sql的工具"></a>5.第五步：获取发送sql的工具</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Statement statement = root.createStatement();</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-第六步：定义一个sql语句-查询"><a href="#6-第六步：定义一个sql语句-查询" class="headerlink" title="6.第六步：定义一个sql语句(查询)"></a>6.第六步：定义一个sql语句(查询)</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String sql = <span class="string">&quot;SELECT *FROM shop&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-第七步：发送sql语句-查询-，用resultSet保存返回值"><a href="#7-第七步：发送sql语句-查询-，用resultSet保存返回值" class="headerlink" title="7.第七步：发送sql语句(查询)，用resultSet保存返回值"></a>7.第七步：发送sql语句(查询)，用resultSet保存返回值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ResultSet resultSet = statement.executeQuery(sql);</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-第八步：调用resuleSet的next-方法，判断是否有值"><a href="#8-第八步：调用resuleSet的next-方法，判断是否有值" class="headerlink" title="8.第八步：调用resuleSet的next()方法，判断是否有值"></a>8.第八步：调用resuleSet的next()方法，判断是否有值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (resultSet.next())</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="9-第九步：调用getInt-方法，返回int类型值"><a href="#9-第九步：调用getInt-方法，返回int类型值" class="headerlink" title="9.第九步：调用getInt()方法，返回int类型值"></a>9.第九步：调用getInt()方法，返回int类型值</h4><ul>
+<li><img src="https://i.loli.net/2021/07/09/GLfpqFbu4Qg3Cx1.png" alt="image-20210709103344911"></li>
+</ul>
+<hr>
+<h4 id="链接数据库并查询—代码："><a href="#链接数据库并查询—代码：" class="headerlink" title="链接数据库并查询—代码："></a>链接数据库并查询—代码：</h4><p><img src="https://i.loli.net/2021/07/09/m9Q42OWGNr7Io3v.png" alt="image-20210709103439844"></p>
+<hr>
+<h3 id="二、更新数据库数据"><a href="#二、更新数据库数据" class="headerlink" title="二、更新数据库数据"></a>二、更新数据库数据</h3><ul>
+<li><h5 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h5><ul>
+<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
+</li>
+<li><p>创建键盘录入数据</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">           System.out.println(<span class="string">&quot;请输入要修改的学号&quot;</span>);</span><br><span class="line">           <span class="keyword">int</span> id = sc.nextInt();</span><br><span class="line">           System.out.println(<span class="string">&quot;请输入要修改的姓名&quot;</span>);</span><br><span class="line">           String name = sc.next();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>打包sql语句</li>
+</ul>
+<p><code>String sql = &quot;UPDATE student SET sname = &#39;&quot;+name+&quot;&#39; WHERE sid = &quot;+id;</code></p>
+<ul>
+<li>发送执行sql语句</li>
+</ul>
+<p><code>int i = statement.executeUpdate(sql);</code></p>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/30/fFMH28bBwjXsoSz.png" alt="image-20210630143254189"></p>
+<hr>
+<h3 id="三、添加数据库数据"><a href="#三、添加数据库数据" class="headerlink" title="三、添加数据库数据"></a>三、添加数据库数据</h3><ul>
+<li><h5 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h5><ul>
+<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
+</li>
+<li><p>创建键盘录入数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">         System.out.println(<span class="string">&quot;请输入要添加的id&quot;</span>);</span><br><span class="line">         <span class="keyword">int</span> id = sc.nextInt();</span><br><span class="line">         System.out.println(<span class="string">&quot;请输入要添加的姓名&quot;</span>);</span><br><span class="line">         String name  = sc.next();</span><br></pre></td></tr></table></figure></li>
+<li><p>打包sql语句</p>
+<p>[^sql语句]: <code>String sql = &quot;INSERT INTO student (sid,sname) VALUES (&quot;+id+&quot;,&#39;&quot;+name+&quot;&#39;)&quot;;</code></p>
+</li>
+<li><p>发送执行sql语句</p>
+<p><code>int i = statement.executeUpdate(sql);</code></p>
+</li>
+</ul>
+<p>  [^executeUpdate]: 用于添加，更新，删除数据</p>
+</li>
+<li><h5 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h5><p><img src="https://i.loli.net/2021/06/30/r93VqIyGYm1xtW8.png" alt="image-20210630140131020"></p>
+</li>
+</ul>
+<hr>
+<h3 id="四、删除数据库数据"><a href="#四、删除数据库数据" class="headerlink" title="四、删除数据库数据"></a>四、删除数据库数据</h3><ul>
+<li><h5 id="步骤：-1"><a href="#步骤：-1" class="headerlink" title="步骤："></a>步骤：</h5><ul>
+<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
+</li>
+<li><p>创建键盘录入数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">          System.out.println(<span class="string">&quot;请输入要删除的学号&quot;</span>);</span><br><span class="line">          <span class="keyword">int</span> id = sc.nextInt();</span><br></pre></td></tr></table></figure></li>
+<li><p>打包sql语句</p>
+<p><code>String sql = &quot;DELETE FROM student WHERE sid = &quot;+id;</code></p>
+</li>
+<li><p>发送执行sql语句</p>
+<p><code>int i = statement.executeUpdate(sql);</code></p>
+</li>
+</ul>
+</li>
+<li><h5 id="代码：-2"><a href="#代码：-2" class="headerlink" title="代码："></a>代码：<img src="https://i.loli.net/2021/06/30/n14xtuQb2wJVsqh.png" alt="image-20210630143508186"></h5></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>增查删改</tag>
+        <tag>案例</tag>
+        <tag>数据库</tag>
+        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -4406,6 +4406,244 @@
       </tags>
   </entry>
   <entry>
+    <title>方法</title>
+    <url>/2021/08/25/%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="一、方法-函数"><a href="#一、方法-函数" class="headerlink" title="一、方法(函数)"></a>一、<font color='#d15252'>方法</font>(函数)</h3><h4 id="1-什么是方法"><a href="#1-什么是方法" class="headerlink" title="1.什么是方法"></a>1.什么是方法</h4><ul>
+<li>就是对业务的一种封装，完成指定业务功能的代码块<ul>
+<li>封装：就是业务的容器</li>
+</ul>
+</li>
+<li>编程理论到实际</li>
+</ul>
+<h4 id="2-如何定义方法"><a href="#2-如何定义方法" class="headerlink" title="2.如何定义方法"></a>2.如何定义方法</h4><ul>
+<li><p>位置：方法与方法之间是一种并列关系</p>
+</li>
+<li><p>格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">a</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">a:方法名</span><br><span class="line"><span class="keyword">public</span>、<span class="keyword">static</span>：修饰符</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">修饰符 返回值类型 方法名（参数类型 参数名,...）&#123;</span><br><span class="line">	方法体；</span><br><span class="line">	<span class="keyword">return</span>返回值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>[^修饰符]: 暂时先用public static </p>
+</li>
+</ul>
+<ul>
+<li><p>[^实际参数]: 实际参与运算的</p>
+</li>
+<li><p>[^形式参数]: 就是方法定义上的，用于接收实际参数</p>
+</li>
+</ul>
+<p>  [^return]: <font color='#d15252'>结束方法，并带回返回值给调用者</font></p>
+<ul>
+<li><p>参数传递过程</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据的角度来看</span><br><span class="line">	-----&gt;方法和方法之间是相互独立的</span><br><span class="line">	A();---B();</span><br><span class="line">	-----&gt;在调用方法时，A方法传递数值,B方法接收数值</span><br><span class="line">	-----&gt;所以在定义B方法时，就需要将内存空间开辟好（参数类型 参数名）</span><br><span class="line">    (参数就是变量)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-方法的注意事项"><a href="#3-方法的注意事项" class="headerlink" title="3.方法的注意事项"></a>3.方法的<font color='#d15252'>注意事项</font></h4><ul>
+<li>要写一个方法，首先明确返回值类型，参数列表</li>
+<li>方法不调用不执行</li>
+<li>方法之间是平级关系，不能嵌套</li>
+<li>方法定义参数时，用“，”隔开</li>
+</ul>
+<h4 id="4-方法的调用"><a href="#4-方法的调用" class="headerlink" title="4.方法的调用"></a>4.方法的<font color='#d15252'>调用</font></h4><ul>
+<li>直接调用：<code>方法名();</code><ul>
+<li>最方便，没有返回值</li>
+</ul>
+</li>
+<li>输出调用：<code>System.out.println(方法名());</code><ul>
+<li>想要第一时间看到方法计算结果时(不推荐，因为不一定要将结果输出)<ul>
+<li>void方法不能用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>赋值调用：<code>int a = add();</code><ul>
+<li>void方法不能用</li>
+<li>比较繁琐，但是最灵活</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h4><ul>
+<li>当我们在定义方法时，如果最终的结果值，是直接输出的，返回值是void </li>
+</ul>
+<h4 id="6-练习"><a href="#6-练习" class="headerlink" title="6.练习"></a>6.练习</h4><ul>
+<li><p>1.计算所有三位数水仙花数</p>
+<ul>
+<li><p>创建项目，测试环境</p>
+</li>
+<li><p>需求分析：</p>
+<ul>
+<li>定义一个方法完成计算水仙花的业务</li>
+</ul>
+</li>
+<li><p>定义方法：</p>
+<ul>
+<li>方法位置并列</li>
+<li>修饰符：public static</li>
+<li>返回值类型：由最后代码可知，水仙花数是直接输出的，所以不需要返回值，返回值类型是void</li>
+<li>方法名：shui();</li>
+</ul>
+</li>
+<li><p>方法中完成计算水仙花数</p>
+<ul>
+<li>for循环遍历所有三位数</li>
+<li>定义三个变量，分别取模，取出个位十位百位</li>
+<li>if循环判断，三个变量的三次方相加是否等于i</li>
+<li>如果判断成功，直接输出</li>
+</ul>
+</li>
+<li><p>main方法中，直接调用shui();方法</p>
+<ul>
+<li><p>输出调用（有返回值时）    </p>
+</li>
+<li><p>赋值调用（有返回值，需要重复使用时）</p>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>2.键盘录入3个数，比较大小，输出最大的那个数</p>
+<ul>
+<li><p>创建项目，测试环境</p>
+</li>
+<li><p>需求分析</p>
+<ul>
+<li>定义一个方法，实现业务完成录入数据，比较大小，返回值或直接输出</li>
+</ul>
+</li>
+<li><p>定义方法</p>
+<ul>
+<li>方法位置并列</li>
+<li>修饰符：public static </li>
+<li>返回值类型：由最后代码决定<ul>
+<li>如果直接输出，则返回值用void</li>
+<li>如果return返回值，则在main方法中输出调用，或赋值调用，返回值类型为int</li>
+</ul>
+</li>
+<li>方法名：demo();</li>
+</ul>
+</li>
+<li><p>在方法中完成业务</p>
+<ul>
+<li><p>Scanner键盘录入三步：</p>
+<ul>
+<li>导包 <code>import java.util.Scanner;</code></li>
+<li>加载Scanner进内存 <code>Scanner sc = new Scanner(System.in);</code></li>
+<li>定义变量保存键盘录入数据 <code>int a = sc.nextInt();</code></li>
+</ul>
+</li>
+<li><p>比较键盘录入的三个数的大小</p>
+<ul>
+<li><p>三目运算符，比较三个数大小</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> max = (a&gt;b)?((a&gt;c)?a:c):((b&gt;c)?b:c);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>最后输出最大值到控制台</p>
+<ul>
+<li><p>直接调用：不设置返回值，直接在方法中System输出最大值，在main方法中直接调用方法即可</p>
+</li>
+<li><p>输出调用：设置返回值，在main方法中，System输出调用方法</p>
+</li>
+<li><p>赋值调用：设置返回值，在main方法中，定义一个变量，保存方法的返回值 <code>int max = demo();</code>，再直接输出max到控制台（数据可以重复利用）</p>
+<hr>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.键盘录入三个数，求平均数</p>
+<ul>
+<li>创建工程，测试环境</li>
+<li>需求分析<ul>
+<li>定义一个方法完成业务</li>
+</ul>
+</li>
+<li>定义方法<ul>
+<li>修饰符：public static </li>
+<li>返回值类型：<ul>
+<li>方法中直接输出平均数，则没有返回值，返回值类型为void</li>
+<li>方法中若设置一个变量并return返回，则返回值类型为int</li>
+</ul>
+</li>
+<li>方法名demo();</li>
+</ul>
+</li>
+<li>完成方法中的业务<ul>
+<li>Scanner键盘录入三步：导包、加载Scanner进内存，定义变量存储键盘录入数据</li>
+<li>定义一个变量，将键盘录入数据相加求平均数并保存<ul>
+<li><code>int var = (a+b+c)/3</code></li>
+</ul>
+</li>
+<li>调用<ul>
+<li>直接调用：在方法中完成输出，main方法中调用方法即可</li>
+<li>输出调用：方法中定义return返回值，main方法中，输出调用方法即可</li>
+<li>赋值调用：方法中定义return返回值，main方法中，定义变量存储返回值，（可以重复操作数据)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>  4.键盘录入三个数，并保存在数组中</p>
+<ul>
+<li>创建项目，测试环境</li>
+<li>需求分析：<ul>
+<li>创建一个方法，完成键盘录入，存入数组，并保存至数组中</li>
+</ul>
+</li>
+<li>创建方法：<ul>
+<li>位置：并列关系</li>
+<li>修饰符：public static </li>
+<li>返回值：int[]数组类型或直接调用void</li>
+</ul>
+</li>
+<li>完成方法中的业务<ul>
+<li>创建一个数组</li>
+<li>键盘录入三个数据并储存</li>
+<li>将键盘录入的数据存入数组中</li>
+<li>遍历数组</li>
+<li>调用<ul>
+<li>直接调用：<code>ar();</code> 返回值void</li>
+<li>输出调用：return arr; 返回值int[] ,调用 <code>System.out.println(ar());</code></li>
+<li>赋值调用：创建数组类型接收数据 <code>int[] arr = ar();</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-方法的传参"><a href="#7-方法的传参" class="headerlink" title="7.方法的传参"></a>7.方法的传参</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">修饰符 返回值类型 方法名（参数类型<span class="number">1</span> 参数名<span class="number">1</span>,参数类型<span class="number">2</span> 参数名<span class="number">2.</span>...）&#123;</span><br><span class="line">	方法体；</span><br><span class="line">	<span class="keyword">return</span>返回值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>调用方法时，需要在()中写入对应数据类型的值</p>
+</li>
+<li><p>创建项目，测试环境</p>
+</li>
+<li><p>创建方法</p>
+<ul>
+<li>位置：并列</li>
+<li>格式：修饰符 返回值类型 方法名（）{ }</li>
+</ul>
+</li>
+<li><p>需求分析</p>
+</li>
+<li><p>键盘录入</p>
+</li>
+<li><p>实现打印</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>方法</tag>
+        <tag>函数</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>枚举和注解</title>
     <url>/2021/08/25/%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%B3%A8%E8%A7%A3/</url>
     <content><![CDATA[<h3 id="二、枚举"><a href="#二、枚举" class="headerlink" title="二、枚举"></a>二、枚举</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
@@ -4712,232 +4950,154 @@
       </tags>
   </entry>
   <entry>
-    <title>方法</title>
-    <url>/2021/08/25/%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h3 id="一、方法-函数"><a href="#一、方法-函数" class="headerlink" title="一、方法(函数)"></a>一、<font color='#d15252'>方法</font>(函数)</h3><h4 id="1-什么是方法"><a href="#1-什么是方法" class="headerlink" title="1.什么是方法"></a>1.什么是方法</h4><ul>
-<li>就是对业务的一种封装，完成指定业务功能的代码块<ul>
-<li>封装：就是业务的容器</li>
+    <title>线程的生命周期、安全隐患和通信</title>
+    <url>/2021/08/25/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E3%80%81%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E5%92%8C%E9%80%9A%E4%BF%A1/</url>
+    <content><![CDATA[<h3 id="一、线程的生命周期"><a href="#一、线程的生命周期" class="headerlink" title="一、线程的生命周期"></a>一、线程的生命周期</h3><ul>
+<li>通过API提供的方法让线程声明周期的某个阶段，达到可控状态</li>
 </ul>
+<h4 id="1-sleep-方法"><a href="#1-sleep-方法" class="headerlink" title="1.sleep()方法"></a>1.sleep()方法</h4><ul>
+<li><p>在指定的毫秒数内让正在执行的线程休眠</p>
 </li>
-<li>编程理论到实际</li>
-</ul>
-<h4 id="2-如何定义方法"><a href="#2-如何定义方法" class="headerlink" title="2.如何定义方法"></a>2.如何定义方法</h4><ul>
-<li><p>位置：方法与方法之间是一种并列关系</p>
-</li>
-<li><p>格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">a</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">a:方法名</span><br><span class="line"><span class="keyword">public</span>、<span class="keyword">static</span>：修饰符</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">修饰符 返回值类型 方法名（参数类型 参数名,...）&#123;</span><br><span class="line">	方法体；</span><br><span class="line">	<span class="keyword">return</span>返回值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>[^修饰符]: 暂时先用public static </p>
+<li><p>使当前正在执行的线程停留（暂停执行）指定的毫秒数，这取决于系统定时器和调度程序的精度和准确性</p>
 </li>
 </ul>
-<ul>
-<li><p>[^实际参数]: 实际参与运算的</p>
-</li>
-<li><p>[^形式参数]: 就是方法定义上的，用于接收实际参数</p>
-</li>
-</ul>
-<p>  [^return]: <font color='#d15252'>结束方法，并带回返回值给调用者</font></p>
-<ul>
-<li><p>参数传递过程</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据的角度来看</span><br><span class="line">	-----&gt;方法和方法之间是相互独立的</span><br><span class="line">	A();---B();</span><br><span class="line">	-----&gt;在调用方法时，A方法传递数值,B方法接收数值</span><br><span class="line">	-----&gt;所以在定义B方法时，就需要将内存空间开辟好（参数类型 参数名）</span><br><span class="line">    (参数就是变量)</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="3-方法的注意事项"><a href="#3-方法的注意事项" class="headerlink" title="3.方法的注意事项"></a>3.方法的<font color='#d15252'>注意事项</font></h4><ul>
-<li>要写一个方法，首先明确返回值类型，参数列表</li>
-<li>方法不调用不执行</li>
-<li>方法之间是平级关系，不能嵌套</li>
-<li>方法定义参数时，用“，”隔开</li>
-</ul>
-<h4 id="4-方法的调用"><a href="#4-方法的调用" class="headerlink" title="4.方法的调用"></a>4.方法的<font color='#d15252'>调用</font></h4><ul>
-<li>直接调用：<code>方法名();</code><ul>
-<li>最方便，没有返回值</li>
-</ul>
-</li>
-<li>输出调用：<code>System.out.println(方法名());</code><ul>
-<li>想要第一时间看到方法计算结果时(不推荐，因为不一定要将结果输出)<ul>
-<li>void方法不能用</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>赋值调用：<code>int a = add();</code><ul>
-<li>void方法不能用</li>
-<li>比较繁琐，但是最灵活</li>
-</ul>
-</li>
-</ul>
-<h4 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h4><ul>
-<li>当我们在定义方法时，如果最终的结果值，是直接输出的，返回值是void </li>
-</ul>
-<h4 id="6-练习"><a href="#6-练习" class="headerlink" title="6.练习"></a>6.练习</h4><ul>
-<li><p>1.计算所有三位数水仙花数</p>
-<ul>
-<li><p>创建项目，测试环境</p>
-</li>
-<li><p>需求分析：</p>
-<ul>
-<li>定义一个方法完成计算水仙花的业务</li>
-</ul>
-</li>
-<li><p>定义方法：</p>
-<ul>
-<li>方法位置并列</li>
-<li>修饰符：public static</li>
-<li>返回值类型：由最后代码可知，水仙花数是直接输出的，所以不需要返回值，返回值类型是void</li>
-<li>方法名：shui();</li>
-</ul>
-</li>
-<li><p>方法中完成计算水仙花数</p>
-<ul>
-<li>for循环遍历所有三位数</li>
-<li>定义三个变量，分别取模，取出个位十位百位</li>
-<li>if循环判断，三个变量的三次方相加是否等于i</li>
-<li>如果判断成功，直接输出</li>
-</ul>
-</li>
-<li><p>main方法中，直接调用shui();方法</p>
-<ul>
-<li><p>输出调用（有返回值时）    </p>
-</li>
-<li><p>赋值调用（有返回值，需要重复使用时）</p>
-<hr>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>2.键盘录入3个数，比较大小，输出最大的那个数</p>
-<ul>
-<li><p>创建项目，测试环境</p>
-</li>
-<li><p>需求分析</p>
-<ul>
-<li>定义一个方法，实现业务完成录入数据，比较大小，返回值或直接输出</li>
-</ul>
-</li>
-<li><p>定义方法</p>
-<ul>
-<li>方法位置并列</li>
-<li>修饰符：public static </li>
-<li>返回值类型：由最后代码决定<ul>
-<li>如果直接输出，则返回值用void</li>
-<li>如果return返回值，则在main方法中输出调用，或赋值调用，返回值类型为int</li>
-</ul>
-</li>
-<li>方法名：demo();</li>
-</ul>
-</li>
-<li><p>在方法中完成业务</p>
-<ul>
-<li><p>Scanner键盘录入三步：</p>
-<ul>
-<li>导包 <code>import java.util.Scanner;</code></li>
-<li>加载Scanner进内存 <code>Scanner sc = new Scanner(System.in);</code></li>
-<li>定义变量保存键盘录入数据 <code>int a = sc.nextInt();</code></li>
-</ul>
-</li>
-<li><p>比较键盘录入的三个数的大小</p>
-<ul>
-<li><p>三目运算符，比较三个数大小</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> max = (a&gt;b)?((a&gt;c)?a:c):((b&gt;c)?b:c);</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>最后输出最大值到控制台</p>
-<ul>
-<li><p>直接调用：不设置返回值，直接在方法中System输出最大值，在main方法中直接调用方法即可</p>
-</li>
-<li><p>输出调用：设置返回值，在main方法中，System输出调用方法</p>
-</li>
-<li><p>赋值调用：设置返回值，在main方法中，定义一个变量，保存方法的返回值 <code>int max = demo();</code>，再直接输出max到控制台（数据可以重复利用）</p>
-<hr>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>3.键盘录入三个数，求平均数</p>
-<ul>
-<li>创建工程，测试环境</li>
-<li>需求分析<ul>
-<li>定义一个方法完成业务</li>
-</ul>
-</li>
-<li>定义方法<ul>
-<li>修饰符：public static </li>
-<li>返回值类型：<ul>
-<li>方法中直接输出平均数，则没有返回值，返回值类型为void</li>
-<li>方法中若设置一个变量并return返回，则返回值类型为int</li>
-</ul>
-</li>
-<li>方法名demo();</li>
-</ul>
-</li>
-<li>完成方法中的业务<ul>
-<li>Scanner键盘录入三步：导包、加载Scanner进内存，定义变量存储键盘录入数据</li>
-<li>定义一个变量，将键盘录入数据相加求平均数并保存<ul>
-<li><code>int var = (a+b+c)/3</code></li>
-</ul>
-</li>
-<li>调用<ul>
-<li>直接调用：在方法中完成输出，main方法中调用方法即可</li>
-<li>输出调用：方法中定义return返回值，main方法中，输出调用方法即可</li>
-<li>赋值调用：方法中定义return返回值，main方法中，定义变量存储返回值，（可以重复操作数据)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>  4.键盘录入三个数，并保存在数组中</p>
-<ul>
-<li>创建项目，测试环境</li>
-<li>需求分析：<ul>
-<li>创建一个方法，完成键盘录入，存入数组，并保存至数组中</li>
-</ul>
-</li>
-<li>创建方法：<ul>
-<li>位置：并列关系</li>
-<li>修饰符：public static </li>
-<li>返回值：int[]数组类型或直接调用void</li>
-</ul>
-</li>
-<li>完成方法中的业务<ul>
-<li>创建一个数组</li>
-<li>键盘录入三个数据并储存</li>
-<li>将键盘录入的数据存入数组中</li>
-<li>遍历数组</li>
-<li>调用<ul>
-<li>直接调用：<code>ar();</code> 返回值void</li>
-<li>输出调用：return arr; 返回值int[] ,调用 <code>System.out.println(ar());</code></li>
-<li>赋值调用：创建数组类型接收数据 <code>int[] arr = ar();</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="7-方法的传参"><a href="#7-方法的传参" class="headerlink" title="7.方法的传参"></a>7.方法的传参</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">修饰符 返回值类型 方法名（参数类型<span class="number">1</span> 参数名<span class="number">1</span>,参数类型<span class="number">2</span> 参数名<span class="number">2.</span>...）&#123;</span><br><span class="line">	方法体；</span><br><span class="line">	<span class="keyword">return</span>返回值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-join-方法"><a href="#2-join-方法" class="headerlink" title="2.join()方法"></a>2.join()方法</h4><h5 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">join();</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>调用方法时，需要在()中写入对应数据类型的值</p>
-</li>
-<li><p>创建项目，测试环境</p>
-</li>
-<li><p>创建方法</p>
-<ul>
-<li>位置：并列</li>
-<li>格式：修饰符 返回值类型 方法名（）{ }</li>
+<li>等待调用该方法的线程结束后才能执行<ul>
+<li>谁调用该方法，谁先执行</li>
 </ul>
 </li>
-<li><p>需求分析</p>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">join(<span class="keyword">long</span> time)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>等待调用该方法的线程，最多 <code>time</code>秒，然后才执行</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/13/9RbLO7FyAetT2nY.png" alt="image-20210813092653883"></p>
+<h4 id="3-线程的优先级"><a href="#3-线程的优先级" class="headerlink" title="3.线程的优先级"></a>3.<font color='#d15252'>线程的优先级</font></h4><ul>
+<li><p>Fileds常量</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> MAX_PRIORITY 线程可以拥有的最大优先级。  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> MIN_PRIORITY 线程可以拥有的最小优先级。  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> NORM_PRIORITY 分配给线程的默认优先级。 </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Java为线程类提供了10个优先级</li>
+<li>优先级可以用整数1—10表示，超过范围会抛出异常<ul>
+<li>最先等级 1 </li>
+<li>默认等级 5</li>
+<li>最大等级 10</li>
+</ul>
 </li>
-<li><p>键盘录入</p>
+</ul>
 </li>
-<li><p>实现打印</p>
+<li><p><code>getPriority()</code> 获取线程的优先级</p>
+</li>
+<li><p><code>setPriority(int b)</code> 设置线程的优先级</p>
+</li>
+<li><p>查阅main方法的优先级</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取当前线程对象并保存</span></span><br><span class="line">Thread thread = Thread.currentThread();</span><br><span class="line"><span class="comment">//调用获取优先级方法</span></span><br><span class="line">thread.getPriority();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="实验：线程优先级的效果"><a href="#实验：线程优先级的效果" class="headerlink" title="实验：线程优先级的效果"></a>实验：线程优先级的效果</h5><p><img src="https://i.loli.net/2021/08/13/vQXdb257gLK9slU.png" alt="image-20210813095931549"></p>
+<h3 id="二、线程的安全隐患"><a href="#二、线程的安全隐患" class="headerlink" title="二、线程的安全隐患"></a>二、线程的安全隐患</h3><ul>
+<li>隐患：存在发生的可能性,但不一定会发生<ul>
+<li>多个线程是通过竞争CPU的时间获得运行机会</li>
+<li>多个线程什么时候获得CPU时间，占用多少</li>
+<li>一个正在运行着的线程在什么地方暂停，也是不确定的</li>
+<li><img src="https://i.loli.net/2021/08/13/KvFtIJ9CmfoXqLd.png" alt="image-20210813105351734"></li>
+</ul>
+</li>
+</ul>
+<h4 id="1-线程同步"><a href="#1-线程同步" class="headerlink" title="1.线程同步"></a>1.线程<font color='#d15252'>同步</font></h4><ul>
+<li>只允许一个线程执行</li>
+<li><font color='#d15252'>synchronized</font>同步锁</li>
+</ul>
+<h5 id="Ⅰ-同步代码块"><a href="#Ⅰ-同步代码块" class="headerlink" title="Ⅰ.同步代码块"></a>Ⅰ.同步代码块</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Synchronized(对象)&#123;</span><br><span class="line">	<span class="comment">//同步代码（上锁）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>需要传递一个参数</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/13/cPWEQwfTSdvgYZH.png"></p>
+<p><img src="https://i.loli.net/2021/08/13/sT721vdch593yGn.png" alt="image-20210813105612949"></p>
+<ul>
+<li>细节问题</li>
+</ul>
+<h5 id="Ⅱ-同步方法"><a href="#Ⅱ-同步方法" class="headerlink" title="Ⅱ.同步方法"></a>Ⅱ.同步方法</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span><span class="comment">//this</span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/13/Hbej1wsAgymIUo5.png" alt="image-20210813112929968"></p>
+<p><img src="https://i.loli.net/2021/08/13/DvtNHRj6WBdunkZ.png" alt="image-20210813114530211"></p>
+<ul>
+<li>不想加静态就用this </li>
+<li>定义一个方法专门放synchronized</li>
+</ul>
+<h4 id="2-死锁（同步代码块嵌套）"><a href="#2-死锁（同步代码块嵌套）" class="headerlink" title="2.死锁（同步代码块嵌套）"></a>2.死锁（<font color='#d15252'>同步代码块嵌套</font>）</h4><ul>
+<li><p>程序没有停止，而且线程不在执行</p>
+<ul>
+<li>当一个线程拥有A对象锁的时候，并且在等待B对象锁的时候，另一个线程拥有了B对象的锁，并在等待A锁</li>
+<li>这种情况就造成了死锁</li>
+</ul>
+</li>
+<li><p>不要嵌套！！！！！！！！！！！！！！！！！！！</p>
+</li>
+</ul>
+<h3 id="三、线程的通信"><a href="#三、线程的通信" class="headerlink" title="三、线程的通信"></a>三、线程的通信</h3><h4 id="1-两个进程之间通信案例"><a href="#1-两个进程之间通信案例" class="headerlink" title="1.两个进程之间通信案例"></a>1.两个进程之间通信案例</h4><ul>
+<li><p>在A线程执行时，别的线程不能插入，即不交出cpu执行权</p>
+<ul>
+<li>synchronized锁住</li>
+<li>必须用同一把锁</li>
+</ul>
+</li>
+<li><p>A线程执行之后，需要通知B执行，找一个中间者作为记录</p>
+</li>
+<li><p>线程1</p>
+<p><img src="https://i.loli.net/2021/08/13/uj5agEFkPDmsLVh.png" alt="image-20210813162255432"></p>
+</li>
+<li><p>线程2</p>
+<p><img src="https://i.loli.net/2021/08/13/RnHIzLrvfaiJEAc.png" alt="image-20210813162312051"></p>
+</li>
+</ul>
+<h4 id="2-三个进程间通信案例"><a href="#2-三个进程间通信案例" class="headerlink" title="2.三个进程间通信案例"></a>2.三个进程间通信案例</h4><ul>
+<li>while循环实现重复输出</li>
+<li>实现同步代码块，确保一个线程执行时不会被抢走执行权<ul>
+<li>synchronized 加同步锁</li>
+</ul>
+</li>
+<li>三个线程要用一个锁对象<ul>
+<li>public <font color='#d15252'>static </font>Object obj = new Object();</li>
+<li>因为main方法是静态的，所以锁对象也要静态</li>
+<li>锁对象很灵活，用什么都可以</li>
+</ul>
+</li>
+<li>需要有记录员，记录线程之间通信的情况<ul>
+<li>定义一个变量，记录是谁在发消息<ul>
+<li>int a = 1;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><font color='#d15252'>线程1</font><ul>
+<li>当a==1时，发送消息；并将a=2；唤醒所有线程</li>
+<li>当a!=1时，处于等待状态</li>
+</ul>
+</li>
+<li>线程2<ul>
+<li>当a==2时，发送消息；并将a=3；唤醒其他所有线程</li>
+<li>当a!=2时，处于等待状态</li>
+</ul>
+</li>
+<li>线程3<ul>
+<li>当a==3时，发送消息；并将a=1；唤醒其他所有线程</li>
+<li>当a!=3时，处于等待状态</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/13/gNbj82trWxEfilB.png" alt="image-20210813164127993"></p>
+<h4 id="3-通信中用到的方法"><a href="#3-通信中用到的方法" class="headerlink" title="3.通信中用到的方法"></a>3.通信中用到的方法</h4><ul>
+<li>wait()<ul>
+<li>等待</li>
+</ul>
+</li>
+<li>notifyAll()<ul>
+<li>唤醒所有线程3</li>
+</ul>
 </li>
 </ul>
 ]]></content>
@@ -4945,8 +5105,7 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>方法</tag>
-        <tag>函数</tag>
+        <tag>多线程</tag>
       </tags>
   </entry>
   <entry>
@@ -5132,165 +5291,6 @@
         <tag>多态</tag>
         <tag>抽象类</tag>
         <tag>接口</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>线程的生命周期、安全隐患和通信</title>
-    <url>/2021/08/25/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E3%80%81%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E5%92%8C%E9%80%9A%E4%BF%A1/</url>
-    <content><![CDATA[<h3 id="一、线程的生命周期"><a href="#一、线程的生命周期" class="headerlink" title="一、线程的生命周期"></a>一、线程的生命周期</h3><ul>
-<li>通过API提供的方法让线程声明周期的某个阶段，达到可控状态</li>
-</ul>
-<h4 id="1-sleep-方法"><a href="#1-sleep-方法" class="headerlink" title="1.sleep()方法"></a>1.sleep()方法</h4><ul>
-<li><p>在指定的毫秒数内让正在执行的线程休眠</p>
-</li>
-<li><p>使当前正在执行的线程停留（暂停执行）指定的毫秒数，这取决于系统定时器和调度程序的精度和准确性</p>
-</li>
-</ul>
-<h4 id="2-join-方法"><a href="#2-join-方法" class="headerlink" title="2.join()方法"></a>2.join()方法</h4><h5 id="方法重载"><a href="#方法重载" class="headerlink" title="方法重载"></a>方法重载</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">join();</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>等待调用该方法的线程结束后才能执行<ul>
-<li>谁调用该方法，谁先执行</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">join(<span class="keyword">long</span> time)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>等待调用该方法的线程，最多 <code>time</code>秒，然后才执行</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/13/9RbLO7FyAetT2nY.png" alt="image-20210813092653883"></p>
-<h4 id="3-线程的优先级"><a href="#3-线程的优先级" class="headerlink" title="3.线程的优先级"></a>3.<font color='#d15252'>线程的优先级</font></h4><ul>
-<li><p>Fileds常量</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> MAX_PRIORITY 线程可以拥有的最大优先级。  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> MIN_PRIORITY 线程可以拥有的最小优先级。  </span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> NORM_PRIORITY 分配给线程的默认优先级。 </span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Java为线程类提供了10个优先级</li>
-<li>优先级可以用整数1—10表示，超过范围会抛出异常<ul>
-<li>最先等级 1 </li>
-<li>默认等级 5</li>
-<li>最大等级 10</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><code>getPriority()</code> 获取线程的优先级</p>
-</li>
-<li><p><code>setPriority(int b)</code> 设置线程的优先级</p>
-</li>
-<li><p>查阅main方法的优先级</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//获取当前线程对象并保存</span></span><br><span class="line">Thread thread = Thread.currentThread();</span><br><span class="line"><span class="comment">//调用获取优先级方法</span></span><br><span class="line">thread.getPriority();</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h5 id="实验：线程优先级的效果"><a href="#实验：线程优先级的效果" class="headerlink" title="实验：线程优先级的效果"></a>实验：线程优先级的效果</h5><p><img src="https://i.loli.net/2021/08/13/vQXdb257gLK9slU.png" alt="image-20210813095931549"></p>
-<h3 id="二、线程的安全隐患"><a href="#二、线程的安全隐患" class="headerlink" title="二、线程的安全隐患"></a>二、线程的安全隐患</h3><ul>
-<li>隐患：存在发生的可能性,但不一定会发生<ul>
-<li>多个线程是通过竞争CPU的时间获得运行机会</li>
-<li>多个线程什么时候获得CPU时间，占用多少</li>
-<li>一个正在运行着的线程在什么地方暂停，也是不确定的</li>
-<li><img src="https://i.loli.net/2021/08/13/KvFtIJ9CmfoXqLd.png" alt="image-20210813105351734"></li>
-</ul>
-</li>
-</ul>
-<h4 id="1-线程同步"><a href="#1-线程同步" class="headerlink" title="1.线程同步"></a>1.线程<font color='#d15252'>同步</font></h4><ul>
-<li>只允许一个线程执行</li>
-<li><font color='#d15252'>synchronized</font>同步锁</li>
-</ul>
-<h5 id="Ⅰ-同步代码块"><a href="#Ⅰ-同步代码块" class="headerlink" title="Ⅰ.同步代码块"></a>Ⅰ.同步代码块</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Synchronized(对象)&#123;</span><br><span class="line">	<span class="comment">//同步代码（上锁）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>需要传递一个参数</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/13/cPWEQwfTSdvgYZH.png"></p>
-<p><img src="https://i.loli.net/2021/08/13/sT721vdch593yGn.png" alt="image-20210813105612949"></p>
-<ul>
-<li>细节问题</li>
-</ul>
-<h5 id="Ⅱ-同步方法"><a href="#Ⅱ-同步方法" class="headerlink" title="Ⅱ.同步方法"></a>Ⅱ.同步方法</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span><span class="comment">//this</span></span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/13/Hbej1wsAgymIUo5.png" alt="image-20210813112929968"></p>
-<p><img src="https://i.loli.net/2021/08/13/DvtNHRj6WBdunkZ.png" alt="image-20210813114530211"></p>
-<ul>
-<li>不想加静态就用this </li>
-<li>定义一个方法专门放synchronized</li>
-</ul>
-<h4 id="2-死锁（同步代码块嵌套）"><a href="#2-死锁（同步代码块嵌套）" class="headerlink" title="2.死锁（同步代码块嵌套）"></a>2.死锁（<font color='#d15252'>同步代码块嵌套</font>）</h4><ul>
-<li><p>程序没有停止，而且线程不在执行</p>
-<ul>
-<li>当一个线程拥有A对象锁的时候，并且在等待B对象锁的时候，另一个线程拥有了B对象的锁，并在等待A锁</li>
-<li>这种情况就造成了死锁</li>
-</ul>
-</li>
-<li><p>不要嵌套！！！！！！！！！！！！！！！！！！！</p>
-</li>
-</ul>
-<h3 id="三、线程的通信"><a href="#三、线程的通信" class="headerlink" title="三、线程的通信"></a>三、线程的通信</h3><h4 id="1-两个进程之间通信案例"><a href="#1-两个进程之间通信案例" class="headerlink" title="1.两个进程之间通信案例"></a>1.两个进程之间通信案例</h4><ul>
-<li><p>在A线程执行时，别的线程不能插入，即不交出cpu执行权</p>
-<ul>
-<li>synchronized锁住</li>
-<li>必须用同一把锁</li>
-</ul>
-</li>
-<li><p>A线程执行之后，需要通知B执行，找一个中间者作为记录</p>
-</li>
-<li><p>线程1</p>
-<p><img src="https://i.loli.net/2021/08/13/uj5agEFkPDmsLVh.png" alt="image-20210813162255432"></p>
-</li>
-<li><p>线程2</p>
-<p><img src="https://i.loli.net/2021/08/13/RnHIzLrvfaiJEAc.png" alt="image-20210813162312051"></p>
-</li>
-</ul>
-<h4 id="2-三个进程间通信案例"><a href="#2-三个进程间通信案例" class="headerlink" title="2.三个进程间通信案例"></a>2.三个进程间通信案例</h4><ul>
-<li>while循环实现重复输出</li>
-<li>实现同步代码块，确保一个线程执行时不会被抢走执行权<ul>
-<li>synchronized 加同步锁</li>
-</ul>
-</li>
-<li>三个线程要用一个锁对象<ul>
-<li>public <font color='#d15252'>static </font>Object obj = new Object();</li>
-<li>因为main方法是静态的，所以锁对象也要静态</li>
-<li>锁对象很灵活，用什么都可以</li>
-</ul>
-</li>
-<li>需要有记录员，记录线程之间通信的情况<ul>
-<li>定义一个变量，记录是谁在发消息<ul>
-<li>int a = 1;</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><font color='#d15252'>线程1</font><ul>
-<li>当a==1时，发送消息；并将a=2；唤醒所有线程</li>
-<li>当a!=1时，处于等待状态</li>
-</ul>
-</li>
-<li>线程2<ul>
-<li>当a==2时，发送消息；并将a=3；唤醒其他所有线程</li>
-<li>当a!=2时，处于等待状态</li>
-</ul>
-</li>
-<li>线程3<ul>
-<li>当a==3时，发送消息；并将a=1；唤醒其他所有线程</li>
-<li>当a!=3时，处于等待状态</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/13/gNbj82trWxEfilB.png" alt="image-20210813164127993"></p>
-<h4 id="3-通信中用到的方法"><a href="#3-通信中用到的方法" class="headerlink" title="3.通信中用到的方法"></a>3.通信中用到的方法</h4><ul>
-<li>wait()<ul>
-<li>等待</li>
-</ul>
-</li>
-<li>notifyAll()<ul>
-<li>唤醒所有线程3</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>多线程</tag>
       </tags>
   </entry>
   <entry>
