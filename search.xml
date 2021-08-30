@@ -3819,6 +3819,182 @@
       </tags>
   </entry>
   <entry>
+    <title>异常和迭代器</title>
+    <url>/2021/08/25/%E5%BC%82%E5%B8%B8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
+    <content><![CDATA[<h3 id="一、迭代器"><a href="#一、迭代器" class="headerlink" title="一、迭代器"></a>一、迭代器</h3><h4 id="1-next"><a href="#1-next" class="headerlink" title="1.next()"></a>1.next()</h4><ul>
+<li>取数</li>
+<li>先下一个</li>
+<li>一次性</li>
+</ul>
+<h4 id="2-并发修改异常ConcurrentModificationException"><a href="#2-并发修改异常ConcurrentModificationException" class="headerlink" title="2.并发修改异常ConcurrentModificationException"></a>2.并发修改异常ConcurrentModificationException</h4><ul>
+<li>当我们使用迭代器做遍历的时候，不能破坏集合的内部结构<ul>
+<li>一旦有<font color='#d15252'>破坏集合内部结构的操作就会报错</font></li>
+</ul>
+</li>
+</ul>
+<h4 id="3-练习题：斗地主"><a href="#3-练习题：斗地主" class="headerlink" title="3.练习题：斗地主"></a>3.练习题：斗地主</h4><ul>
+<li>做四个容器<ul>
+<li>分别存玩家和底牌</li>
+</ul>
+</li>
+<li>再做一个容器，存所有扑克牌</li>
+</ul>
+<h4 id="3-静态导入"><a href="#3-静态导入" class="headerlink" title="3.静态导入"></a>3.静态导入</h4><ul>
+<li>在导包过程中，我们可以直接导入静态部分，这样的话某个类的静态成员就可以直接使用了<ul>
+<li>看别人的源码时用的比较多</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/05/TdlWUHFeZVRAPLj.png" alt="image-20210805135205026"></p>
+<h3 id="二、异常"><a href="#二、异常" class="headerlink" title="二、异常"></a>二、<font color='#d15252'>异常</font></h3><h4 id="1-什么是异常"><a href="#1-什么是异常" class="headerlink" title="1.什么是异常"></a>1.什么是异常</h4><ul>
+<li>异常就是程序出现了不正常的现象</li>
+</ul>
+<h4 id="2-Java如何形容异常？"><a href="#2-Java如何形容异常？" class="headerlink" title="2.Java如何形容异常？"></a>2.Java如何形容异常？</h4><p>但凡涉及到Java内的内容，都要用类来处理，所以异常最顶层的类</p>
+<ul>
+<li><font color='#d15252'><strong>Throwable</strong></font>类<ul>
+<li>是Java语言中所有错误和异常的超类</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-Throwable类"><a href="#3-Throwable类" class="headerlink" title="3.Throwable类"></a>3.Throwable类</h4><ul>
+<li><p><font color='#d15252'>Throwable</font></p>
+<ul>
+<li>error（错误）一般不会遇到，因为它表示严重的问题</li>
+<li>exception（异常）<ul>
+<li>编译时异常<ul>
+<li>其他类都是编译时异常</li>
+</ul>
+</li>
+<li>运行时异常<ul>
+<li>RuntimeException在运行时</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/05/1BUKNkQWzOFSgA7.png" alt="image-20210805141331385"></p>
+</li>
+<li><p><code>RuntimeException</code>是在Java虚拟机的正常操作期间可以抛出的异常的超类。 </p>
+</li>
+</ul>
+<h4 id="4-编译时异常和运行时异常"><a href="#4-编译时异常和运行时异常" class="headerlink" title="4.编译时异常和运行时异常"></a>4.编译时异常和运行时异常</h4><h5 id="Ⅰ-编译时异常"><a href="#Ⅰ-编译时异常" class="headerlink" title="Ⅰ.编译时异常"></a>Ⅰ.编译时异常</h5><ul>
+<li>编译时异常都是Exception的子类，程序卡在编译阶段</li>
+<li>出现这类的异常，必须<font color='#d15252'>显示处理</font>（调试代码），否则程序就会出现问题，无法编译</li>
+</ul>
+<h5 id="Ⅱ-运行时异常"><a href="#Ⅱ-运行时异常" class="headerlink" title="Ⅱ.运行时异常"></a>Ⅱ.运行时异常</h5><ul>
+<li>都是RuntimeException的子类，卡在了程序的运行时</li>
+<li>必须得修改代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//运行时异常</span></span><br><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">System.out.println(arr[<span class="number">100</span>]);</span><br><span class="line"><span class="comment">//以上代码可知，编译时是没有错误的</span></span><br><span class="line"><span class="comment">//但运行时报错 : java.lang.ArrayIndexOutOfBoundsException:</span></span><br><span class="line"><span class="comment">//由查看API可知，则异常是RuntimeException下的异常，所以确定它是运行时异常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//编译时异常演示</span></span><br><span class="line">      SimpleDateFormat sim = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy年MM月dd日&quot;</span>);</span><br><span class="line">      Date date = sim.parse(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line"><span class="comment">//由以上代码可知，在编译时期就会抛出异常</span></span><br><span class="line"><span class="comment">//Demo2.java:16: 错误: 未报告的异常错误ParseException; 必须对其进行捕获或声明以便抛出</span></span><br><span class="line"><span class="comment">//并且此异常在Throwable 包下，与runtimeException无关。所以时运行时异常</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-异常的处理机制"><a href="#5-异常的处理机制" class="headerlink" title="5.异常的处理机制"></a>5.异常的处理机制</h4><h5 id="Ⅰ-默认处理机制（面试问）"><a href="#Ⅰ-默认处理机制（面试问）" class="headerlink" title="Ⅰ.默认处理机制（面试问）"></a>Ⅰ.<font color='#d15252'>默认处理机制</font>（面试问）</h5><ul>
+<li>当程序遇到异常时<ul>
+<li>将异常抛给调用者（jvm)<ul>
+<li>一层一层的抛，最后抛给jvm</li>
+</ul>
+</li>
+<li>jvm会默认的去做相应的处理<ul>
+<li><font color='#d15252'>new 异常对象</font> ，产生异常名称、原因，以及出现的位置等信息输出在控制台</li>
+<li>停掉程序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-throws-声明式-方式处理异常"><a href="#Ⅱ-throws-声明式-方式处理异常" class="headerlink" title="Ⅱ.throws(声明式)方式处理异常"></a>Ⅱ.throws(声明式)方式处理异常</h5><ul>
+<li><p>写在方法的声明部分()</p>
+<ul>
+<li><p>```java<br>public void method()throws 异常类名</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="bullet">-</span> 给开发者看的，一般也不用</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 特点</span><br><span class="line"></span><br><span class="line"><span class="bullet">  -</span> 处理机制（还是默认的处理机制）</span><br><span class="line"><span class="bullet">  -</span> 为了给以后的调用者看（开发角度）</span><br><span class="line"><span class="bullet">  -</span> <span class="strong">**<span class="xml"><span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">&#x27;#d15252&#x27;</span>&gt;</span></span>运行时异常可以不用声明，编译时异常必须写<span class="xml"><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span>**</span>（面试）</span><br><span class="line"></span><br><span class="line"><span class="section">##### Ⅲ.throw抛异常</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> throw new 异常类 ：方法内</span><br><span class="line"><span class="bullet">  -</span> 如果是运行时异常，不用在方法上去声明异常</span><br><span class="line"><span class="bullet">  -</span> 如果是编译时异常，必须要在方法上声明</span><br><span class="line"><span class="bullet">  -</span> 从结果上看，和默认机制是一样的，原理是不一样的，throw是自己将异常抛出(直接到控制台上)</span><br><span class="line"><span class="bullet">  -</span> 没有交给jvm，直接自己就抛出异常</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; Ⅱ.throws声明式异常和Ⅲ.throw抛异常	适用于开发者的角度</span></span><br><span class="line"><span class="quote">&gt;</span></span><br><span class="line"><span class="quote">&gt; throw</span></span><br><span class="line"><span class="quote">&gt;</span></span><br><span class="line"><span class="quote">&gt; - 编译时：有声明不一定有抛出，但是有抛出必须有声明</span></span><br><span class="line"><span class="quote">&gt; - 运行时：声明，抛出</span></span><br><span class="line"></span><br><span class="line">![<span class="string">image-20210805170703594</span>](<span class="link">https://i.loli.net/2021/08/05/smAEunHvaFqhJkS.png</span>)</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 格式： throw new 异常类型（）；</span><br><span class="line"></span><br><span class="line"><span class="section">##### Ⅳ.try...catch处理异常机制</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 格式</span><br><span class="line"></span><br><span class="line">  <span class="code">```java</span></span><br><span class="line"><span class="code">  try&#123;</span></span><br><span class="line"><span class="code">  	可能出现异常的语句</span></span><br><span class="line"><span class="code">  &#125;catch(异常类类型 变量名)&#123;</span></span><br><span class="line"><span class="code">      异常的处理</span></span><br><span class="line"><span class="code">  &#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>以后做开发使用或测试的时候，有异常建议使用(throw/throws)</p>
+</li>
+<li><p>在调用方法时遇到异常，建议使用try catch</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">       <span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">       <span class="keyword">int</span> b =i/<span class="number">0</span>;</span><br><span class="line">        System.out.println(<span class="number">111</span>);	<span class="comment">//没有执行，异常跳入catch执行完，结束</span></span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;除数为0了&quot;</span>);</span><br><span class="line">        <span class="comment">//输出异常信息</span></span><br><span class="line">        System.out.println(e.getMessage());</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">        一定会执行的代码</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>当一个程序有多个错误时</p>
+<ul>
+<li>catch可以写多个，但要注意异常类型，小的放上面的catch，大的放在下面</li>
+</ul>
+</li>
+<li><p>运行步骤：</p>
+<ul>
+<li>当进入try..catch中，先执行try()中有可能出现异常的问题</li>
+<li>如果遇到异常语句<ul>
+<li>跳入catch执行处理异常语句</li>
+<li>catch语句执行完后，执行finally内的语句</li>
+<li>结束try..catch</li>
+</ul>
+</li>
+<li>执行之后的代码</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅴ-细节问题"><a href="#Ⅴ-细节问题" class="headerlink" title="Ⅴ.细节问题"></a>Ⅴ.细节问题</h5><ul>
+<li>可以多层catch，但是大的类型一定要在最底层</li>
+<li>采用try chach，异常代码处理完成后，不影响其他代码的执行</li>
+<li>如果有finally，不管异常是否触发，一定会走（IO）</li>
+</ul>
+<h4 id="6-查看异常信息"><a href="#6-查看异常信息" class="headerlink" title="6.查看异常信息"></a>6.查看异常信息</h4><p><img src="https://i.loli.net/2021/08/05/yh1b53ZoBeH7dmE.png" alt="image-20210805144413257"></p>
+<ul>
+<li>第一行是异常的类名<ul>
+<li>第一行<code>：</code>后的信息是异常产生的原因</li>
+</ul>
+</li>
+<li>第二行是异常产生的原始位置</li>
+<li>第三行是异常产生的位置</li>
+</ul>
+<h4 id="7-Throwable的成员方法"><a href="#7-Throwable的成员方法" class="headerlink" title="7.Throwable的成员方法"></a>7.Throwable的成员方法</h4><table>
+<thead>
+<tr>
+<th>成员方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font color='#d15252'>printStackTrace()</font></td>
+<td>将此throwable和其追溯打印到标准错误流</td>
+</tr>
+<tr>
+<td>getMessage()</td>
+<td>返回此throwable的详细消息字符串</td>
+</tr>
+<tr>
+<td>toString()</td>
+<td>简短的描述信息</td>
+</tr>
+</tbody></table>
+<ul>
+<li>printStackTrace() 开发中用的比较多，因为他会对异常信息进行溯源，比较详细</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">    System.out.println(e.getMessage());</span><br><span class="line">    System.out.println(e.toString());</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="number">123</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">/ by zero	<span class="comment">//getMessage</span></span><br><span class="line">java.lang.ArithmeticException: / by zero	<span class="comment">//toString</span></span><br><span class="line"><span class="number">123</span></span><br><span class="line">java.lang.ArithmeticException: / by zero	</span><br><span class="line">	at 异常.Demo7.main(Demo7.java:<span class="number">6</span>)<span class="comment">//printStackTrace</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="8-自定义异常信息"><a href="#8-自定义异常信息" class="headerlink" title="8.自定义异常信息"></a>8.自定义异常信息</h4><ul>
+<li><p>步骤：</p>
+<ul>
+<li><p>在有可能出现异常的方法中，实现判断，如果触发异常，就使用throw new 异常类型（） 触发异常</p>
+<p><img src="https://i.loli.net/2021/08/05/3LZyG78TbpfcEth.png" alt="image-20210805171208739"></p>
+</li>
+<li><p>异常类型需要自己自定义一个类，通过继承，实现处理异常的能力</p>
+<p><img src="https://i.loli.net/2021/08/05/RgbNl7y8MALHWZX.png" alt="image-20210805171219308"></p>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>异常</tag>
+        <tag>迭代器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>序列化和反序列化\Properties类\瞬态关键字\打印流</title>
     <url>/2021/08/25/%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Properties%E7%B1%BB-%E7%9E%AC%E6%80%81%E5%85%B3%E9%94%AE%E5%AD%97-%E6%89%93%E5%8D%B0%E6%B5%81/</url>
     <content><![CDATA[<h3 id="一、Properties类"><a href="#一、Properties类" class="headerlink" title="一、Properties类"></a>一、Properties类</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
@@ -4040,182 +4216,6 @@
       </tags>
   </entry>
   <entry>
-    <title>异常和迭代器</title>
-    <url>/2021/08/25/%E5%BC%82%E5%B8%B8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
-    <content><![CDATA[<h3 id="一、迭代器"><a href="#一、迭代器" class="headerlink" title="一、迭代器"></a>一、迭代器</h3><h4 id="1-next"><a href="#1-next" class="headerlink" title="1.next()"></a>1.next()</h4><ul>
-<li>取数</li>
-<li>先下一个</li>
-<li>一次性</li>
-</ul>
-<h4 id="2-并发修改异常ConcurrentModificationException"><a href="#2-并发修改异常ConcurrentModificationException" class="headerlink" title="2.并发修改异常ConcurrentModificationException"></a>2.并发修改异常ConcurrentModificationException</h4><ul>
-<li>当我们使用迭代器做遍历的时候，不能破坏集合的内部结构<ul>
-<li>一旦有<font color='#d15252'>破坏集合内部结构的操作就会报错</font></li>
-</ul>
-</li>
-</ul>
-<h4 id="3-练习题：斗地主"><a href="#3-练习题：斗地主" class="headerlink" title="3.练习题：斗地主"></a>3.练习题：斗地主</h4><ul>
-<li>做四个容器<ul>
-<li>分别存玩家和底牌</li>
-</ul>
-</li>
-<li>再做一个容器，存所有扑克牌</li>
-</ul>
-<h4 id="3-静态导入"><a href="#3-静态导入" class="headerlink" title="3.静态导入"></a>3.静态导入</h4><ul>
-<li>在导包过程中，我们可以直接导入静态部分，这样的话某个类的静态成员就可以直接使用了<ul>
-<li>看别人的源码时用的比较多</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/05/TdlWUHFeZVRAPLj.png" alt="image-20210805135205026"></p>
-<h3 id="二、异常"><a href="#二、异常" class="headerlink" title="二、异常"></a>二、<font color='#d15252'>异常</font></h3><h4 id="1-什么是异常"><a href="#1-什么是异常" class="headerlink" title="1.什么是异常"></a>1.什么是异常</h4><ul>
-<li>异常就是程序出现了不正常的现象</li>
-</ul>
-<h4 id="2-Java如何形容异常？"><a href="#2-Java如何形容异常？" class="headerlink" title="2.Java如何形容异常？"></a>2.Java如何形容异常？</h4><p>但凡涉及到Java内的内容，都要用类来处理，所以异常最顶层的类</p>
-<ul>
-<li><font color='#d15252'><strong>Throwable</strong></font>类<ul>
-<li>是Java语言中所有错误和异常的超类</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-Throwable类"><a href="#3-Throwable类" class="headerlink" title="3.Throwable类"></a>3.Throwable类</h4><ul>
-<li><p><font color='#d15252'>Throwable</font></p>
-<ul>
-<li>error（错误）一般不会遇到，因为它表示严重的问题</li>
-<li>exception（异常）<ul>
-<li>编译时异常<ul>
-<li>其他类都是编译时异常</li>
-</ul>
-</li>
-<li>运行时异常<ul>
-<li>RuntimeException在运行时</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/05/1BUKNkQWzOFSgA7.png" alt="image-20210805141331385"></p>
-</li>
-<li><p><code>RuntimeException</code>是在Java虚拟机的正常操作期间可以抛出的异常的超类。 </p>
-</li>
-</ul>
-<h4 id="4-编译时异常和运行时异常"><a href="#4-编译时异常和运行时异常" class="headerlink" title="4.编译时异常和运行时异常"></a>4.编译时异常和运行时异常</h4><h5 id="Ⅰ-编译时异常"><a href="#Ⅰ-编译时异常" class="headerlink" title="Ⅰ.编译时异常"></a>Ⅰ.编译时异常</h5><ul>
-<li>编译时异常都是Exception的子类，程序卡在编译阶段</li>
-<li>出现这类的异常，必须<font color='#d15252'>显示处理</font>（调试代码），否则程序就会出现问题，无法编译</li>
-</ul>
-<h5 id="Ⅱ-运行时异常"><a href="#Ⅱ-运行时异常" class="headerlink" title="Ⅱ.运行时异常"></a>Ⅱ.运行时异常</h5><ul>
-<li>都是RuntimeException的子类，卡在了程序的运行时</li>
-<li>必须得修改代码</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//运行时异常</span></span><br><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">System.out.println(arr[<span class="number">100</span>]);</span><br><span class="line"><span class="comment">//以上代码可知，编译时是没有错误的</span></span><br><span class="line"><span class="comment">//但运行时报错 : java.lang.ArrayIndexOutOfBoundsException:</span></span><br><span class="line"><span class="comment">//由查看API可知，则异常是RuntimeException下的异常，所以确定它是运行时异常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//编译时异常演示</span></span><br><span class="line">      SimpleDateFormat sim = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy年MM月dd日&quot;</span>);</span><br><span class="line">      Date date = sim.parse(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line"><span class="comment">//由以上代码可知，在编译时期就会抛出异常</span></span><br><span class="line"><span class="comment">//Demo2.java:16: 错误: 未报告的异常错误ParseException; 必须对其进行捕获或声明以便抛出</span></span><br><span class="line"><span class="comment">//并且此异常在Throwable 包下，与runtimeException无关。所以时运行时异常</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="5-异常的处理机制"><a href="#5-异常的处理机制" class="headerlink" title="5.异常的处理机制"></a>5.异常的处理机制</h4><h5 id="Ⅰ-默认处理机制（面试问）"><a href="#Ⅰ-默认处理机制（面试问）" class="headerlink" title="Ⅰ.默认处理机制（面试问）"></a>Ⅰ.<font color='#d15252'>默认处理机制</font>（面试问）</h5><ul>
-<li>当程序遇到异常时<ul>
-<li>将异常抛给调用者（jvm)<ul>
-<li>一层一层的抛，最后抛给jvm</li>
-</ul>
-</li>
-<li>jvm会默认的去做相应的处理<ul>
-<li><font color='#d15252'>new 异常对象</font> ，产生异常名称、原因，以及出现的位置等信息输出在控制台</li>
-<li>停掉程序</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="Ⅱ-throws-声明式-方式处理异常"><a href="#Ⅱ-throws-声明式-方式处理异常" class="headerlink" title="Ⅱ.throws(声明式)方式处理异常"></a>Ⅱ.throws(声明式)方式处理异常</h5><ul>
-<li><p>写在方法的声明部分()</p>
-<ul>
-<li><p>```java<br>public void method()throws 异常类名</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="bullet">-</span> 给开发者看的，一般也不用</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 特点</span><br><span class="line"></span><br><span class="line"><span class="bullet">  -</span> 处理机制（还是默认的处理机制）</span><br><span class="line"><span class="bullet">  -</span> 为了给以后的调用者看（开发角度）</span><br><span class="line"><span class="bullet">  -</span> <span class="strong">**<span class="xml"><span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">&#x27;#d15252&#x27;</span>&gt;</span></span>运行时异常可以不用声明，编译时异常必须写<span class="xml"><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span>**</span>（面试）</span><br><span class="line"></span><br><span class="line"><span class="section">##### Ⅲ.throw抛异常</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> throw new 异常类 ：方法内</span><br><span class="line"><span class="bullet">  -</span> 如果是运行时异常，不用在方法上去声明异常</span><br><span class="line"><span class="bullet">  -</span> 如果是编译时异常，必须要在方法上声明</span><br><span class="line"><span class="bullet">  -</span> 从结果上看，和默认机制是一样的，原理是不一样的，throw是自己将异常抛出(直接到控制台上)</span><br><span class="line"><span class="bullet">  -</span> 没有交给jvm，直接自己就抛出异常</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; Ⅱ.throws声明式异常和Ⅲ.throw抛异常	适用于开发者的角度</span></span><br><span class="line"><span class="quote">&gt;</span></span><br><span class="line"><span class="quote">&gt; throw</span></span><br><span class="line"><span class="quote">&gt;</span></span><br><span class="line"><span class="quote">&gt; - 编译时：有声明不一定有抛出，但是有抛出必须有声明</span></span><br><span class="line"><span class="quote">&gt; - 运行时：声明，抛出</span></span><br><span class="line"></span><br><span class="line">![<span class="string">image-20210805170703594</span>](<span class="link">https://i.loli.net/2021/08/05/smAEunHvaFqhJkS.png</span>)</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 格式： throw new 异常类型（）；</span><br><span class="line"></span><br><span class="line"><span class="section">##### Ⅳ.try...catch处理异常机制</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 格式</span><br><span class="line"></span><br><span class="line">  <span class="code">```java</span></span><br><span class="line"><span class="code">  try&#123;</span></span><br><span class="line"><span class="code">  	可能出现异常的语句</span></span><br><span class="line"><span class="code">  &#125;catch(异常类类型 变量名)&#123;</span></span><br><span class="line"><span class="code">      异常的处理</span></span><br><span class="line"><span class="code">  &#125;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>以后做开发使用或测试的时候，有异常建议使用(throw/throws)</p>
-</li>
-<li><p>在调用方法时遇到异常，建议使用try catch</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">       <span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">       <span class="keyword">int</span> b =i/<span class="number">0</span>;</span><br><span class="line">        System.out.println(<span class="number">111</span>);	<span class="comment">//没有执行，异常跳入catch执行完，结束</span></span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;除数为0了&quot;</span>);</span><br><span class="line">        <span class="comment">//输出异常信息</span></span><br><span class="line">        System.out.println(e.getMessage());</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">        一定会执行的代码</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>当一个程序有多个错误时</p>
-<ul>
-<li>catch可以写多个，但要注意异常类型，小的放上面的catch，大的放在下面</li>
-</ul>
-</li>
-<li><p>运行步骤：</p>
-<ul>
-<li>当进入try..catch中，先执行try()中有可能出现异常的问题</li>
-<li>如果遇到异常语句<ul>
-<li>跳入catch执行处理异常语句</li>
-<li>catch语句执行完后，执行finally内的语句</li>
-<li>结束try..catch</li>
-</ul>
-</li>
-<li>执行之后的代码</li>
-</ul>
-</li>
-</ul>
-<h5 id="Ⅴ-细节问题"><a href="#Ⅴ-细节问题" class="headerlink" title="Ⅴ.细节问题"></a>Ⅴ.细节问题</h5><ul>
-<li>可以多层catch，但是大的类型一定要在最底层</li>
-<li>采用try chach，异常代码处理完成后，不影响其他代码的执行</li>
-<li>如果有finally，不管异常是否触发，一定会走（IO）</li>
-</ul>
-<h4 id="6-查看异常信息"><a href="#6-查看异常信息" class="headerlink" title="6.查看异常信息"></a>6.查看异常信息</h4><p><img src="https://i.loli.net/2021/08/05/yh1b53ZoBeH7dmE.png" alt="image-20210805144413257"></p>
-<ul>
-<li>第一行是异常的类名<ul>
-<li>第一行<code>：</code>后的信息是异常产生的原因</li>
-</ul>
-</li>
-<li>第二行是异常产生的原始位置</li>
-<li>第三行是异常产生的位置</li>
-</ul>
-<h4 id="7-Throwable的成员方法"><a href="#7-Throwable的成员方法" class="headerlink" title="7.Throwable的成员方法"></a>7.Throwable的成员方法</h4><table>
-<thead>
-<tr>
-<th>成员方法</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><font color='#d15252'>printStackTrace()</font></td>
-<td>将此throwable和其追溯打印到标准错误流</td>
-</tr>
-<tr>
-<td>getMessage()</td>
-<td>返回此throwable的详细消息字符串</td>
-</tr>
-<tr>
-<td>toString()</td>
-<td>简短的描述信息</td>
-</tr>
-</tbody></table>
-<ul>
-<li>printStackTrace() 开发中用的比较多，因为他会对异常信息进行溯源，比较详细</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">    System.out.println(e.getMessage());</span><br><span class="line">    System.out.println(e.toString());</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="number">123</span>);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">/ by zero	<span class="comment">//getMessage</span></span><br><span class="line">java.lang.ArithmeticException: / by zero	<span class="comment">//toString</span></span><br><span class="line"><span class="number">123</span></span><br><span class="line">java.lang.ArithmeticException: / by zero	</span><br><span class="line">	at 异常.Demo7.main(Demo7.java:<span class="number">6</span>)<span class="comment">//printStackTrace</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="8-自定义异常信息"><a href="#8-自定义异常信息" class="headerlink" title="8.自定义异常信息"></a>8.自定义异常信息</h4><ul>
-<li><p>步骤：</p>
-<ul>
-<li><p>在有可能出现异常的方法中，实现判断，如果触发异常，就使用throw new 异常类型（） 触发异常</p>
-<p><img src="https://i.loli.net/2021/08/05/3LZyG78TbpfcEth.png" alt="image-20210805171208739"></p>
-</li>
-<li><p>异常类型需要自己自定义一个类，通过继承，实现处理异常的能力</p>
-<p><img src="https://i.loli.net/2021/08/05/RgbNl7y8MALHWZX.png" alt="image-20210805171219308"></p>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>异常</tag>
-        <tag>迭代器</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数组</title>
     <url>/2021/08/25/%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h3 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h3><h4 id="1-什么是数组"><a href="#1-什么是数组" class="headerlink" title="1.什么是数组"></a>1.什么是数组</h4><ul>
@@ -4341,68 +4341,6 @@
       <tags>
         <tag>数组</tag>
         <tag>二维数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数组实现数据增查删改和数据库操作</title>
-    <url>/2021/08/25/%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%A2%9E%E6%9F%A5%E5%88%A0%E6%94%B9%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h3 id="一、综合案例：实现商品菜单，数据增查删改"><a href="#一、综合案例：实现商品菜单，数据增查删改" class="headerlink" title="一、综合案例：实现商品菜单，数据增查删改"></a>一、综合案例：实现商品菜单，数据增查删改</h3><h5 id="1-创建工程，测试环境"><a href="#1-创建工程，测试环境" class="headerlink" title="1.创建工程，测试环境"></a>1.创建工程，测试环境</h5><h5 id="2-前奏：实现数据的加载"><a href="#2-前奏：实现数据的加载" class="headerlink" title="2.前奏：实现数据的加载"></a>2.前奏：实现数据的加载</h5><ul>
-<li>变量 数组 集合 数据库 （暂时用数组）<ul>
-<li>数据类型[] 变量名 = new 数据类型[空间长度]</li>
-</ul>
-</li>
-</ul>
-<h5 id="3-需求分析："><a href="#3-需求分析：" class="headerlink" title="3.需求分析："></a>3.需求分析：</h5><ul>
-<li><p>菜单：6条输出语句</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;1.查看商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;2.修改商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;3.增加商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;4.删除商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;5.退出&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;6.请您选择1---5&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-<li><p>实现交互：即键盘录入数据，使用Scanner三个步骤</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"><span class="keyword">int</span> a = sc.nextInt();</span><br></pre></td></tr></table></figure></li>
-<li><p>实现菜单可以重复选择：利用for或者while死循环</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">for</span><span class="params">(;;)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="title">while</span><span class="params">(true)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现菜单的选择：使用if判断语句，判断录入的值</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(a==<span class="number">1</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现查看功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现修改功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">3</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现增加功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">4</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现删除功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">5</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;退出&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现查看功能：for循环实现遍历数组、if判断不是0再输出</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;	</span><br><span class="line">	<span class="keyword">if</span> (arr[i]!=<span class="number">0</span>)&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;商品的编号:&quot;</span>+arr[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现修改功能：用for循环查看数组，if判断选择要修改的数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr[i]==b)&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;请输入修改后的编号&quot;</span>);</span><br><span class="line">		arr[i]=sc.nextInt();</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现增加功能：用for+if，将录入数据增加到0上</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入要增加的商品编号&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> x = sc.nextInt();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr[i]==<span class="number">0</span>)&#123;</span><br><span class="line">		arr[i]=x;</span><br><span class="line">		i = arr.length; <span class="comment">//跳出循环</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>实现删除功能：用for+if，匹配和录入数据相同的索引，更改值为0</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入要删除的商品编号&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> g = sc.nextInt();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (arr[i]==g)&#123;</span><br><span class="line">			arr[i]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h4 id="4-代码："><a href="#4-代码：" class="headerlink" title="4.代码："></a>4.代码：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建工程并测试环境</span></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo1</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span></span><br><span class="line"><span class="function">	</span>&#123;	</span><br><span class="line">		<span class="comment">//实现交互效果，需要键盘录入数据</span></span><br><span class="line">		<span class="comment">//键盘录入数据三步，导包，加载进内存，保存录入数据</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="comment">//定义布尔类型变量，控制循环结束</span></span><br><span class="line">		<span class="keyword">boolean</span> f =<span class="keyword">true</span>;</span><br><span class="line">		<span class="comment">//数据加载</span></span><br><span class="line">		<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">		arr[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">		arr[<span class="number">1</span>]=<span class="number">2</span>;</span><br><span class="line">		arr[<span class="number">2</span>]=<span class="number">3</span>;</span><br><span class="line">		<span class="comment">//实现可以重复选择菜单</span></span><br><span class="line">		<span class="keyword">for</span> (;f; )</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> j =<span class="number">0</span>;</span><br><span class="line">		<span class="comment">//需求分析：菜单页面即输出语句</span></span><br><span class="line">		System.out.println(<span class="string">&quot;====================&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 1.查看商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 2.修改商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 3.增加商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 4.删除商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 5.退出系统     ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| (请您选择1-5)  ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;====================&quot;</span>);</span><br><span class="line">		<span class="keyword">int</span> a = sc.nextInt();</span><br><span class="line">		<span class="comment">//实现菜单的选择</span></span><br><span class="line">		<span class="keyword">if</span> (a==<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="comment">//循环输出遍历数组</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;	<span class="comment">//if语句判断不是0再输出</span></span><br><span class="line">					<span class="keyword">if</span> (arr[i]!=<span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;商品的编号:&quot;</span>+arr[i]);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				System.out.println(<span class="string">&quot;===查看成功===&quot;</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要修改的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> b = sc.nextInt();</span><br><span class="line">				<span class="comment">//for+if判断并选择到需要修改的数据</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (arr[i]==b)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;请输入修改后的编号&quot;</span>);</span><br><span class="line">						arr[i]=sc.nextInt();</span><br><span class="line">						i = arr.length;</span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i]!=b)</span><br><span class="line">					&#123;</span><br><span class="line">						j++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (arr.length==j)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;您要修改的编号不存在&quot;</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">3</span>)&#123;</span><br><span class="line">				<span class="comment">//实现增加功能</span></span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要增加的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> x = sc.nextInt();</span><br><span class="line">				<span class="comment">//for+if查询判断，将录入数据加载到0上</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="comment">//判断如果商品编号已存在，提示添加失败，跳出循环</span></span><br><span class="line">					<span class="keyword">if</span> (arr[i]==x)</span><br><span class="line">					&#123;</span><br><span class="line">					System.out.println(<span class="string">&quot;您输入的商品编号已存在&quot;</span>);</span><br><span class="line">					i=arr.length;<span class="comment">//跳出循环</span></span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i]==<span class="number">0</span>)   <span class="comment">//如果不存在，判断为0的数据，添加</span></span><br><span class="line">						&#123;</span><br><span class="line">							arr[i]=x;</span><br><span class="line">							i = arr.length; <span class="comment">//跳出循环</span></span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">4</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要删除的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> g = sc.nextInt();</span><br><span class="line">				<span class="comment">//实现删除功能</span></span><br><span class="line">				<span class="comment">//for+if判断</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (arr[i]==g)</span><br><span class="line">					&#123;</span><br><span class="line">						arr[i]=<span class="number">0</span>;</span><br><span class="line">						System.out.println(<span class="string">&quot;===删除成功===&quot;</span>);</span><br><span class="line">						i =arr.length;<span class="comment">//跳出循环</span></span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span>(arr[i]!=g)&#123;</span><br><span class="line">						j++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (arr.length==j)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;你要删除的商品编号不存在&quot;</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">5</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;您已成功退出&quot;</span>);</span><br><span class="line">				f = <span class="keyword">false</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;===输入错误，请选择1-5===&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="二、使用数据库-Mysql"><a href="#二、使用数据库-Mysql" class="headerlink" title="二、使用数据库(Mysql)"></a>二、使用数据库(Mysql)</h3><h4 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1. 创建数据库"></a>1. 创建数据库</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create database 数据库名称</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="2-创建表格"><a href="#2-创建表格" class="headerlink" title="2. 创建表格"></a>2. 创建表格</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">	列名 数据类型,</span><br><span class="line">	列名 数据类型,</span><br><span class="line">    ....</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-插入数据"><a href="#3-插入数据" class="headerlink" title="3. 插入数据"></a>3. 插入数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">insert into 表名 (列名,...) values(数据,数据);</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-更新数据"><a href="#4-更新数据" class="headerlink" title="4.更新数据"></a>4.更新数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">updata 表名 set 字段 = 数值;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">update 表名 set 字段 = 数值 WHERE 字段=数值（选择）;</span><br></pre></td></tr></table></figure>
-
-<h4 id="5-删除数据"><a href="#5-删除数据" class="headerlink" title="5.删除数据"></a>5.删除数据</h4><ul>
-<li><p>删除全部数据</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Delete From 表名;</span><br></pre></td></tr></table></figure></li>
-<li><p>删除指定数据</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Delete From 表名 WHERE 字段 = 数值;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="6-查询数据"><a href="#6-查询数据" class="headerlink" title="6.查询数据"></a>6.查询数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM 表名</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>增查删改</tag>
-        <tag>案例</tag>
-        <tag>数据库</tag>
-        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -4644,171 +4582,65 @@
       </tags>
   </entry>
   <entry>
-    <title>枚举和注解</title>
-    <url>/2021/08/25/%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<h3 id="二、枚举"><a href="#二、枚举" class="headerlink" title="二、枚举"></a>二、枚举</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>发开中，一些固定的值通常用常量存储<ul>
-<li>常量书写麻烦</li>
-<li>不能对其进行其他操作</li>
-</ul>
-</li>
-<li>为了间接的表示一些固定的值，Java就提供了枚举<ul>
-<li>将固定的数据，一 一 列举出来</li>
+    <title>数组实现数据增查删改和数据库操作</title>
+    <url>/2021/08/25/%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%A2%9E%E6%9F%A5%E5%88%A0%E6%94%B9%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h3 id="一、综合案例：实现商品菜单，数据增查删改"><a href="#一、综合案例：实现商品菜单，数据增查删改" class="headerlink" title="一、综合案例：实现商品菜单，数据增查删改"></a>一、综合案例：实现商品菜单，数据增查删改</h3><h5 id="1-创建工程，测试环境"><a href="#1-创建工程，测试环境" class="headerlink" title="1.创建工程，测试环境"></a>1.创建工程，测试环境</h5><h5 id="2-前奏：实现数据的加载"><a href="#2-前奏：实现数据的加载" class="headerlink" title="2.前奏：实现数据的加载"></a>2.前奏：实现数据的加载</h5><ul>
+<li>变量 数组 集合 数据库 （暂时用数组）<ul>
+<li>数据类型[] 变量名 = new 数据类型[空间长度]</li>
 </ul>
 </li>
 </ul>
-<h4 id="2-定义枚举"><a href="#2-定义枚举" class="headerlink" title="2.定义枚举"></a>2.定义枚举</h4><ul>
-<li><p>创建枚举类</p>
-<ul>
-<li><img src="https://i.loli.net/2021/08/19/okBYMgLDTay69Au.png" alt="image-20210819103354026"></li>
-<li>枚举中的数据，通常全部用大写（书写习惯）</li>
-</ul>
-</li>
-<li><p>定义枚举项</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Year</span></span>&#123;</span><br><span class="line">	枚举项一，枚举项二.....;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="3-枚举的特点"><a href="#3-枚举的特点" class="headerlink" title="3.枚举的特点"></a>3.枚举的特点</h4><ul>
-<li><p>所有的枚举都是Enum的子类</p>
-<p><img src="https://i.loli.net/2021/08/19/dR2IbYeBmw9WLXG.png" alt="image-20210819105029681"></p>
-</li>
-<li><p>我们可以通过 <font color='#d15252'>“枚举类名.枚举项名称” </font>去访问指定的枚举项</p>
-<ul>
-<li>枚举项，也是数据本身</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/19/XMFPCKsobaDYdyi.png" alt="image-20210819105149041"></p>
-</li>
-<li><p>每一个枚举项，都是该枚举的一个对象</p>
-<ul>
-<li>每个枚举项都会默认走一次构造方法</li>
-</ul>
-</li>
-<li><p>枚举本质也是一个类，可以定义成员变量</p>
-<ul>
-<li>枚举中<font color='#d15252'>第一行</font>必须是<font color='#d15252'>枚举项</font></li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/19/jXMW1nCaLtHNhsQ.png" alt="image-20210819105310021"></p>
-</li>
-<li><p>最后一个枚举项后的 <code>; </code>可以省略的，但是建议不要省略</p>
-</li>
-<li><p>枚举类可以有构造方法，但是修饰符必须是private</p>
-<ul>
-<li>不写修饰符，默认也是private</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/19/wKt6Crc8YbT3f4u.png" alt="image-20210819105350697"></p>
-</li>
-<li><p>枚举类可以有抽象方法，但是<font color='#d15252'>所有枚举项</font>必须重写该方法</p>
-<p><img src="https://i.loli.net/2021/08/19/qB4AlW2tUardCD9.png" alt="image-20210819105431838"></p>
-</li>
-</ul>
-<h4 id="4-枚举中的方法"><a href="#4-枚举中的方法" class="headerlink" title="4.枚举中的方法"></a>4.枚举中的方法</h4><h5 id="Ⅰ-ordinal"><a href="#Ⅰ-ordinal" class="headerlink" title="Ⅰ. ordinal()"></a>Ⅰ. ordinal()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ordinal</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回此枚举常数的序数（其枚举声明中的位置，其中初始常数的序数为零）。 </span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取枚举项的索引值</li>
-</ul>
-<h5 id="Ⅱ-name"><a href="#Ⅱ-name" class="headerlink" title="Ⅱ. name()"></a>Ⅱ. name()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">String <span class="title">name</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回此枚举常量的名称，与其枚举声明中声明的完全相同。  </span></span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h5 id="Ⅲ-compareTo-E-o"><a href="#Ⅲ-compareTo-E-o" class="headerlink" title="Ⅲ. compareTo(E o)"></a>Ⅲ. compareTo(E o)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(E o)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//将此枚举与指定的对象进行比较以进行订购。  </span></span></span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>通常用来比较两个枚举项</li>
-<li>返回值是索引值的差值</li>
-</ul>
-<h5 id="Ⅳ-toString"><a href="#Ⅳ-toString" class="headerlink" title="Ⅳ. toString()"></a>Ⅳ. toString()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">String <span class="title">toString</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回声明中包含的此枚举常量的名称。  </span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>返回对象的内部信息</li>
-</ul>
-<h5 id="Ⅴ-valueOf"><a href="#Ⅴ-valueOf" class="headerlink" title="Ⅴ. valueOf()"></a>Ⅴ. valueOf()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> &lt;T extends Enum&lt;T&gt;&gt;</span><br><span class="line"><span class="function">T <span class="title">valueOf</span><span class="params">(Class&lt;T&gt; enumType, String name)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回具有指定名称的指定枚举类型的枚举常量。  </span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取枚举类中<font color='#d15252'>指定名称</font>的枚举</li>
-</ul>
-<h5 id="Ⅵ-values"><a href="#Ⅵ-values" class="headerlink" title="Ⅵ.values()"></a>Ⅵ.values()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">values()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取所有的枚举项</li>
-</ul>
-<h3 id="三、注解"><a href="#三、注解" class="headerlink" title="三、注解"></a>三、注解</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li><code>@</code><ul>
-<li>对我们的程序进行标注和解释</li>
-</ul>
-</li>
-<li>注解和注释的区别：<ul>
-<li>注释是给人看的</li>
-<li>注解是给编译器看的</li>
-</ul>
-</li>
-<li>注解的优点：<ul>
-<li>更加简洁，方便</li>
-</ul>
-</li>
-<li>注解的作用：就是一个标注的作用</li>
-</ul>
-<h4 id="2-自定义注解"><a href="#2-自定义注解" class="headerlink" title="2.自定义注解"></a>2.自定义注解</h4><ul>
-<li><p>格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> 注解名称 &#123; &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>变量的格式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> 属性类型 属性名() <span class="keyword">default</span> 默认值</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>  [^属性类型]: 基本数据类型、String类型、Class类型、注解类型、枚举类型、一维数组+以上类型<br>  [^default]: 赋一个默认的初始化值</p>
-<p>  <img src="https://i.loli.net/2021/08/19/ZPHFq1m8GnVcoQt.png" alt="image-20210819140308394"></p>
-</li>
-</ul>
-<h4 id="3-练习"><a href="#3-练习" class="headerlink" title="3.练习"></a>3.练习</h4><ul>
-<li>自定义一个注解@Test，用于指定类的方法上<ul>
-<li>如果某一个类的方法上有该注解时，就执行这个方法</li>
-</ul>
-</li>
+<h5 id="3-需求分析："><a href="#3-需求分析：" class="headerlink" title="3.需求分析："></a>3.需求分析：</h5><ul>
+<li><p>菜单：6条输出语句</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;1.查看商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;2.修改商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;3.增加商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;4.删除商品编号&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;5.退出&quot;</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;6.请您选择1---5&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>实现交互：即键盘录入数据，使用Scanner三个步骤</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"><span class="keyword">int</span> a = sc.nextInt();</span><br></pre></td></tr></table></figure></li>
+<li><p>实现菜单可以重复选择：利用for或者while死循环</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">for</span><span class="params">(;;)</span></span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="title">while</span><span class="params">(true)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现菜单的选择：使用if判断语句，判断录入的值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(a==<span class="number">1</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现查看功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现修改功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">3</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现增加功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">4</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;实现删除功能&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">5</span>)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;退出&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现查看功能：for循环实现遍历数组、if判断不是0再输出</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;	</span><br><span class="line">	<span class="keyword">if</span> (arr[i]!=<span class="number">0</span>)&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;商品的编号:&quot;</span>+arr[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现修改功能：用for循环查看数组，if判断选择要修改的数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr[i]==b)&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;请输入修改后的编号&quot;</span>);</span><br><span class="line">		arr[i]=sc.nextInt();</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现增加功能：用for+if，将录入数据增加到0上</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入要增加的商品编号&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> x = sc.nextInt();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr[i]==<span class="number">0</span>)&#123;</span><br><span class="line">		arr[i]=x;</span><br><span class="line">		i = arr.length; <span class="comment">//跳出循环</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现删除功能：用for+if，匹配和录入数据相同的索引，更改值为0</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;请输入要删除的商品编号&quot;</span>);</span><br><span class="line"><span class="keyword">int</span> g = sc.nextInt();</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (arr[i]==g)&#123;</span><br><span class="line">			arr[i]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <hr>
-<h3 id="四、元注解"><a href="#四、元注解" class="headerlink" title="四、元注解"></a>四、元注解</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
-<li><p>就是描述注解的注解</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span></span><br><span class="line"><span class="meta">@Inherited()</span></span><br></pre></td></tr></table></figure></li>
-<li><p>即给注解注解的注解</p>
-<p><img src="https://i.loli.net/2021/08/19/px5RjsFJO3Ar8wa.png" alt="image-20210819145603008"></p>
-</li>
-</ul>
-<h4 id="2-三种元注解"><a href="#2-三种元注解" class="headerlink" title="2.三种元注解"></a>2.三种元注解</h4><h5 id="Ⅰ-Target"><a href="#Ⅰ-Target" class="headerlink" title="Ⅰ.@Target"></a>Ⅰ.@Target</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-代码："><a href="#4-代码：" class="headerlink" title="4.代码："></a>4.代码：</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//创建工程并测试环境</span></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo1</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span></span><br><span class="line"><span class="function">	</span>&#123;	</span><br><span class="line">		<span class="comment">//实现交互效果，需要键盘录入数据</span></span><br><span class="line">		<span class="comment">//键盘录入数据三步，导包，加载进内存，保存录入数据</span></span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="comment">//定义布尔类型变量，控制循环结束</span></span><br><span class="line">		<span class="keyword">boolean</span> f =<span class="keyword">true</span>;</span><br><span class="line">		<span class="comment">//数据加载</span></span><br><span class="line">		<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">		arr[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">		arr[<span class="number">1</span>]=<span class="number">2</span>;</span><br><span class="line">		arr[<span class="number">2</span>]=<span class="number">3</span>;</span><br><span class="line">		<span class="comment">//实现可以重复选择菜单</span></span><br><span class="line">		<span class="keyword">for</span> (;f; )</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> j =<span class="number">0</span>;</span><br><span class="line">		<span class="comment">//需求分析：菜单页面即输出语句</span></span><br><span class="line">		System.out.println(<span class="string">&quot;====================&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 1.查看商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 2.修改商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 3.增加商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 4.删除商品编号 ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| 5.退出系统     ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;|| (请您选择1-5)  ||&quot;</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;====================&quot;</span>);</span><br><span class="line">		<span class="keyword">int</span> a = sc.nextInt();</span><br><span class="line">		<span class="comment">//实现菜单的选择</span></span><br><span class="line">		<span class="keyword">if</span> (a==<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="comment">//循环输出遍历数组</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;	<span class="comment">//if语句判断不是0再输出</span></span><br><span class="line">					<span class="keyword">if</span> (arr[i]!=<span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;商品的编号:&quot;</span>+arr[i]);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				System.out.println(<span class="string">&quot;===查看成功===&quot;</span>);</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要修改的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> b = sc.nextInt();</span><br><span class="line">				<span class="comment">//for+if判断并选择到需要修改的数据</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (arr[i]==b)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;请输入修改后的编号&quot;</span>);</span><br><span class="line">						arr[i]=sc.nextInt();</span><br><span class="line">						i = arr.length;</span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i]!=b)</span><br><span class="line">					&#123;</span><br><span class="line">						j++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (arr.length==j)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;您要修改的编号不存在&quot;</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">3</span>)&#123;</span><br><span class="line">				<span class="comment">//实现增加功能</span></span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要增加的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> x = sc.nextInt();</span><br><span class="line">				<span class="comment">//for+if查询判断，将录入数据加载到0上</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="comment">//判断如果商品编号已存在，提示添加失败，跳出循环</span></span><br><span class="line">					<span class="keyword">if</span> (arr[i]==x)</span><br><span class="line">					&#123;</span><br><span class="line">					System.out.println(<span class="string">&quot;您输入的商品编号已存在&quot;</span>);</span><br><span class="line">					i=arr.length;<span class="comment">//跳出循环</span></span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> (arr[i]==<span class="number">0</span>)   <span class="comment">//如果不存在，判断为0的数据，添加</span></span><br><span class="line">						&#123;</span><br><span class="line">							arr[i]=x;</span><br><span class="line">							i = arr.length; <span class="comment">//跳出循环</span></span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">4</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;请输入要删除的商品编号&quot;</span>);</span><br><span class="line">				<span class="keyword">int</span> g = sc.nextInt();</span><br><span class="line">				<span class="comment">//实现删除功能</span></span><br><span class="line">				<span class="comment">//for+if判断</span></span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (arr[i]==g)</span><br><span class="line">					&#123;</span><br><span class="line">						arr[i]=<span class="number">0</span>;</span><br><span class="line">						System.out.println(<span class="string">&quot;===删除成功===&quot;</span>);</span><br><span class="line">						i =arr.length;<span class="comment">//跳出循环</span></span><br><span class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span>(arr[i]!=g)&#123;</span><br><span class="line">						j++;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">if</span> (arr.length==j)</span><br><span class="line">					&#123;</span><br><span class="line">						System.out.println(<span class="string">&quot;你要删除的商品编号不存在&quot;</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">5</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;您已成功退出&quot;</span>);</span><br><span class="line">				f = <span class="keyword">false</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				System.out.println(<span class="string">&quot;===输入错误，请选择1-5===&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>指定注解在哪使用</li>
-<li>默认：ANNOTATION_TYPE 在哪都可以使用</li>
-</ul>
-<h5 id="Ⅱ-Retention"><a href="#Ⅱ-Retention" class="headerlink" title="Ⅱ.@Retention"></a>Ⅱ.@Retention</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span></span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>指定该注解存活时间（编译时，运行时）</li>
+
+<h3 id="二、使用数据库-Mysql"><a href="#二、使用数据库-Mysql" class="headerlink" title="二、使用数据库(Mysql)"></a>二、使用数据库(Mysql)</h3><h4 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1. 创建数据库"></a>1. 创建数据库</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create database 数据库名称</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-创建表格"><a href="#2-创建表格" class="headerlink" title="2. 创建表格"></a>2. 创建表格</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create table 表名(</span><br><span class="line">	列名 数据类型,</span><br><span class="line">	列名 数据类型,</span><br><span class="line">    ....</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-插入数据"><a href="#3-插入数据" class="headerlink" title="3. 插入数据"></a>3. 插入数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">insert into 表名 (列名,...) values(数据,数据);</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-更新数据"><a href="#4-更新数据" class="headerlink" title="4.更新数据"></a>4.更新数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">updata 表名 set 字段 = 数值;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">update 表名 set 字段 = 数值 WHERE 字段=数值（选择）;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-删除数据"><a href="#5-删除数据" class="headerlink" title="5.删除数据"></a>5.删除数据</h4><ul>
+<li><p>删除全部数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Delete From 表名;</span><br></pre></td></tr></table></figure></li>
+<li><p>删除指定数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Delete From 表名 WHERE 字段 = 数值;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="Ⅲ-Inherited"><a href="#Ⅲ-Inherited" class="headerlink" title="Ⅲ.@Inherited"></a>Ⅲ.@Inherited</h5><ul>
-<li>表示修饰的自定义注解可以被子类继承</li>
-</ul>
-<h3 id="五、junit测试"><a href="#五、junit测试" class="headerlink" title="五、junit测试"></a>五、junit测试</h3><h4 id="1-概述-2"><a href="#1-概述-2" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>是一个第三方的jar包<ul>
-<li>可以单独的运行某一个方法</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/19/q4NlRwAB5YnFy9V.png" alt="image-20210819155411352"></p>
-<ul>
-<li>Before：在Test之前运行</li>
-<li>Test：测试这个方法</li>
-<li>After：在Test之后运行</li>
-</ul>
+<h4 id="6-查询数据"><a href="#6-查询数据" class="headerlink" title="6.查询数据"></a>6.查询数据</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM 表名</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>Java</category>
       </categories>
       <tags>
-        <tag>枚举</tag>
-        <tag>注解</tag>
-        <tag>junit</tag>
+        <tag>增查删改</tag>
+        <tag>案例</tag>
+        <tag>数据库</tag>
+        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -5641,6 +5473,174 @@
       </categories>
       <tags>
         <tag>网络编程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>枚举和注解</title>
+    <url>/2021/08/25/%E6%9E%9A%E4%B8%BE%E5%92%8C%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<h3 id="二、枚举"><a href="#二、枚举" class="headerlink" title="二、枚举"></a>二、枚举</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>发开中，一些固定的值通常用常量存储<ul>
+<li>常量书写麻烦</li>
+<li>不能对其进行其他操作</li>
+</ul>
+</li>
+<li>为了间接的表示一些固定的值，Java就提供了枚举<ul>
+<li>将固定的数据，一 一 列举出来</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-定义枚举"><a href="#2-定义枚举" class="headerlink" title="2.定义枚举"></a>2.定义枚举</h4><ul>
+<li><p>创建枚举类</p>
+<ul>
+<li><img src="https://i.loli.net/2021/08/19/okBYMgLDTay69Au.png" alt="image-20210819103354026"></li>
+<li>枚举中的数据，通常全部用大写（书写习惯）</li>
+</ul>
+</li>
+<li><p>定义枚举项</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Year</span></span>&#123;</span><br><span class="line">	枚举项一，枚举项二.....;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-枚举的特点"><a href="#3-枚举的特点" class="headerlink" title="3.枚举的特点"></a>3.枚举的特点</h4><ul>
+<li><p>所有的枚举都是Enum的子类</p>
+<p><img src="https://i.loli.net/2021/08/19/dR2IbYeBmw9WLXG.png" alt="image-20210819105029681"></p>
+</li>
+<li><p>我们可以通过 <font color='#d15252'>“枚举类名.枚举项名称” </font>去访问指定的枚举项</p>
+<ul>
+<li>枚举项，也是数据本身</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/19/XMFPCKsobaDYdyi.png" alt="image-20210819105149041"></p>
+</li>
+<li><p>每一个枚举项，都是该枚举的一个对象</p>
+<ul>
+<li>每个枚举项都会默认走一次构造方法</li>
+</ul>
+</li>
+<li><p>枚举本质也是一个类，可以定义成员变量</p>
+<ul>
+<li>枚举中<font color='#d15252'>第一行</font>必须是<font color='#d15252'>枚举项</font></li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/19/jXMW1nCaLtHNhsQ.png" alt="image-20210819105310021"></p>
+</li>
+<li><p>最后一个枚举项后的 <code>; </code>可以省略的，但是建议不要省略</p>
+</li>
+<li><p>枚举类可以有构造方法，但是修饰符必须是private</p>
+<ul>
+<li>不写修饰符，默认也是private</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/19/wKt6Crc8YbT3f4u.png" alt="image-20210819105350697"></p>
+</li>
+<li><p>枚举类可以有抽象方法，但是<font color='#d15252'>所有枚举项</font>必须重写该方法</p>
+<p><img src="https://i.loli.net/2021/08/19/qB4AlW2tUardCD9.png" alt="image-20210819105431838"></p>
+</li>
+</ul>
+<h4 id="4-枚举中的方法"><a href="#4-枚举中的方法" class="headerlink" title="4.枚举中的方法"></a>4.枚举中的方法</h4><h5 id="Ⅰ-ordinal"><a href="#Ⅰ-ordinal" class="headerlink" title="Ⅰ. ordinal()"></a>Ⅰ. ordinal()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ordinal</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回此枚举常数的序数（其枚举声明中的位置，其中初始常数的序数为零）。 </span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取枚举项的索引值</li>
+</ul>
+<h5 id="Ⅱ-name"><a href="#Ⅱ-name" class="headerlink" title="Ⅱ. name()"></a>Ⅱ. name()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">String <span class="title">name</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回此枚举常量的名称，与其枚举声明中声明的完全相同。  </span></span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="Ⅲ-compareTo-E-o"><a href="#Ⅲ-compareTo-E-o" class="headerlink" title="Ⅲ. compareTo(E o)"></a>Ⅲ. compareTo(E o)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(E o)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//将此枚举与指定的对象进行比较以进行订购。  </span></span></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>通常用来比较两个枚举项</li>
+<li>返回值是索引值的差值</li>
+</ul>
+<h5 id="Ⅳ-toString"><a href="#Ⅳ-toString" class="headerlink" title="Ⅳ. toString()"></a>Ⅳ. toString()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">String <span class="title">toString</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回声明中包含的此枚举常量的名称。  </span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回对象的内部信息</li>
+</ul>
+<h5 id="Ⅴ-valueOf"><a href="#Ⅴ-valueOf" class="headerlink" title="Ⅴ. valueOf()"></a>Ⅴ. valueOf()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> &lt;T extends Enum&lt;T&gt;&gt;</span><br><span class="line"><span class="function">T <span class="title">valueOf</span><span class="params">(Class&lt;T&gt; enumType, String name)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回具有指定名称的指定枚举类型的枚举常量。  </span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取枚举类中<font color='#d15252'>指定名称</font>的枚举</li>
+</ul>
+<h5 id="Ⅵ-values"><a href="#Ⅵ-values" class="headerlink" title="Ⅵ.values()"></a>Ⅵ.values()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">values()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取所有的枚举项</li>
+</ul>
+<h3 id="三、注解"><a href="#三、注解" class="headerlink" title="三、注解"></a>三、注解</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li><code>@</code><ul>
+<li>对我们的程序进行标注和解释</li>
+</ul>
+</li>
+<li>注解和注释的区别：<ul>
+<li>注释是给人看的</li>
+<li>注解是给编译器看的</li>
+</ul>
+</li>
+<li>注解的优点：<ul>
+<li>更加简洁，方便</li>
+</ul>
+</li>
+<li>注解的作用：就是一个标注的作用</li>
+</ul>
+<h4 id="2-自定义注解"><a href="#2-自定义注解" class="headerlink" title="2.自定义注解"></a>2.自定义注解</h4><ul>
+<li><p>格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> 注解名称 &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>变量的格式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> 属性类型 属性名() <span class="keyword">default</span> 默认值</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>  [^属性类型]: 基本数据类型、String类型、Class类型、注解类型、枚举类型、一维数组+以上类型<br>  [^default]: 赋一个默认的初始化值</p>
+<p>  <img src="https://i.loli.net/2021/08/19/ZPHFq1m8GnVcoQt.png" alt="image-20210819140308394"></p>
+</li>
+</ul>
+<h4 id="3-练习"><a href="#3-练习" class="headerlink" title="3.练习"></a>3.练习</h4><ul>
+<li>自定义一个注解@Test，用于指定类的方法上<ul>
+<li>如果某一个类的方法上有该注解时，就执行这个方法</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="四、元注解"><a href="#四、元注解" class="headerlink" title="四、元注解"></a>四、元注解</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li><p>就是描述注解的注解</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span></span><br><span class="line"><span class="meta">@Inherited()</span></span><br></pre></td></tr></table></figure></li>
+<li><p>即给注解注解的注解</p>
+<p><img src="https://i.loli.net/2021/08/19/px5RjsFJO3Ar8wa.png" alt="image-20210819145603008"></p>
+</li>
+</ul>
+<h4 id="2-三种元注解"><a href="#2-三种元注解" class="headerlink" title="2.三种元注解"></a>2.三种元注解</h4><h5 id="Ⅰ-Target"><a href="#Ⅰ-Target" class="headerlink" title="Ⅰ.@Target"></a>Ⅰ.@Target</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定注解在哪使用</li>
+<li>默认：ANNOTATION_TYPE 在哪都可以使用</li>
+</ul>
+<h5 id="Ⅱ-Retention"><a href="#Ⅱ-Retention" class="headerlink" title="Ⅱ.@Retention"></a>Ⅱ.@Retention</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定该注解存活时间（编译时，运行时）</li>
+</ul>
+<h5 id="Ⅲ-Inherited"><a href="#Ⅲ-Inherited" class="headerlink" title="Ⅲ.@Inherited"></a>Ⅲ.@Inherited</h5><ul>
+<li>表示修饰的自定义注解可以被子类继承</li>
+</ul>
+<h3 id="五、junit测试"><a href="#五、junit测试" class="headerlink" title="五、junit测试"></a>五、junit测试</h3><h4 id="1-概述-2"><a href="#1-概述-2" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>是一个第三方的jar包<ul>
+<li>可以单独的运行某一个方法</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/19/q4NlRwAB5YnFy9V.png" alt="image-20210819155411352"></p>
+<ul>
+<li>Before：在Test之前运行</li>
+<li>Test：测试这个方法</li>
+<li>After：在Test之后运行</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>枚举</tag>
+        <tag>注解</tag>
+        <tag>junit</tag>
       </tags>
   </entry>
   <entry>
