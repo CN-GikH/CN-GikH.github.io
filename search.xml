@@ -655,147 +655,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ArrayList集合和方法练习</title>
-    <url>/2021/08/25/ArrayList%E9%9B%86%E5%90%88%E5%92%8C%E6%96%B9%E6%B3%95%E7%BB%83%E4%B9%A0/</url>
-    <content><![CDATA[<h3 id="一、练习"><a href="#一、练习" class="headerlink" title="一、练习"></a>一、练习</h3><h4 id="1-编写思路"><a href="#1-编写思路" class="headerlink" title="1.编写思路"></a>1.编写思路</h4><ul>
-<li>创建项目，测试环境</li>
-<li>需求分析</li>
-<li>先实现菜单<ul>
-<li>创建菜单方法<ul>
-<li>方法位置：并列</li>
-<li>格式：修饰符 返回值类型 方法名（）{  }</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>实现菜单的选择<ul>
-<li>创建判断键盘录入选择的方法</li>
-<li>调用menu方法，实现每次选择时，展示菜单</li>
-<li>Scanner  三个步骤，录入键盘数据</li>
-<li>调用加载数据的方法，并创建一个数组名保存</li>
-<li>if+else if 实现键盘录入数据的判断</li>
-<li>设置死循环，实现菜单的重复选择</li>
-<li>当a=5时，退出，break;</li>
-</ul>
-</li>
-<li>实现加载数据<ul>
-<li>创建加载数据方法</li>
-<li>定义一个数组并初始化数据</li>
-<li>return返回值arr数组，返回值类型int[]</li>
-</ul>
-</li>
-<li>实现具体的选择项的功能（查看）<ul>
-<li>当choose方法中录入键盘数据为1时</li>
-<li>调用show方法，并传递参数arr</li>
-</ul>
-</li>
-<li>实现查看功能<ul>
-<li>定义方法</li>
-<li>定义一个数组参数，用于接收数据</li>
-<li>用for循环遍历数组</li>
-<li>if判断不是0再输出</li>
-</ul>
-</li>
-<li>实现修改功能<ul>
-<li>定义方法</li>
-<li>键盘录入要修改的id</li>
-<li>for循环遍历数组，IF查找有没有匹配的id<ul>
-<li>在方法定义中，添加参数int[] arr ，用于接收数组</li>
-</ul>
-</li>
-<li>在choose方法中，当选择2时，调用修改方法，并且传递参数–数组</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-内存图"><a href="#2-内存图" class="headerlink" title="2.内存图"></a>2.内存图</h4><img src="https://i.loli.net/2021/07/23/8KSZyjmXNIGYVeT.png" alt="image-20210723153545299" style="zoom:200%;" />
-
-
-
-<h3 id="二、ArrayList集合"><a href="#二、ArrayList集合" class="headerlink" title="二、ArrayList集合"></a>二、<font color='#d15252'>ArrayList</font>集合</h3><ul>
-<li>变量：存一个数</li>
-<li>数组：多个数，但长度固定</li>
-<li>集合ArrayList</li>
-</ul>
-<h4 id="1-ArrayList的概念"><a href="#1-ArrayList的概念" class="headerlink" title="1.ArrayList的概念"></a>1.ArrayList的概念</h4><ul>
-<li>什么是ArrayList?<ul>
-<li>是一个容器，<font color='#d15252'>长度不固定</font></li>
-</ul>
-</li>
-</ul>
-<h4 id="2-ArrayList的使用"><a href="#2-ArrayList的使用" class="headerlink" title="2.ArrayList的使用"></a>2.ArrayList的使用</h4><h5 id="①使用前的准备"><a href="#①使用前的准备" class="headerlink" title="①使用前的准备"></a>①使用前的准备</h5><ul>
-<li><p>导包</p>
-</li>
-<li><p><code>import java.util.ArrayList;</code></p>
-</li>
-<li><p>加载进内存</p>
-<ul>
-<li><code>ArrayList&lt;数据类型&gt;变量名 = new ArrayList();</code><ul>
-<li>数据类型：不能用int ，而是要用 <code>Integer</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="②具体使用"><a href="#②具体使用" class="headerlink" title="②具体使用"></a>②具体使用</h5><ul>
-<li><p>添加</p>
-<ul>
-<li>使用 <code>add();</code> 方法<ul>
-<li><code>例：list.add(12); -----&gt;存入12进集合</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>删除</p>
-<ul>
-<li>使用 <code>remove();</code> 方法<ul>
-<li><code>例：list.remove(1); ----&gt;删除索引为1的数据</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>获取</p>
-<ul>
-<li><p>使用 <code>get(索引);</code> 方法</p>
-<ul>
-<li><p>单独调用（无意义）</p>
-<ul>
-<li><code>例：list.get(1); ----&gt;取出索引为1的数据</code></li>
-</ul>
-</li>
-<li><p>输出调用</p>
-<ul>
-<li><code>例：System.out.println(list.get(2))---&gt;直接输出索引2数据</code></li>
-</ul>
-</li>
-<li><p>赋值调用</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = list.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(a);</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>长度</p>
-<ul>
-<li>使用 <code>size();</code> 方法</li>
-</ul>
-</li>
-<li><p>更新</p>
-<ul>
-<li><p>使用 <code>set();</code>方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">id.set(索引，新的数值);</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>ArrayList</tag>
-        <tag>方法</tag>
-        <tag>增查删改</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>File类和递归</title>
     <url>/2021/08/25/File%E7%B1%BB%E5%92%8C%E9%80%92%E5%BD%92/</url>
     <content><![CDATA[<h3 id="一、File"><a href="#一、File" class="headerlink" title="一、File"></a>一、File</h3><ul>
@@ -978,6 +837,255 @@
       <tags>
         <tag>File</tag>
         <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ArrayList集合和方法练习</title>
+    <url>/2021/08/25/ArrayList%E9%9B%86%E5%90%88%E5%92%8C%E6%96%B9%E6%B3%95%E7%BB%83%E4%B9%A0/</url>
+    <content><![CDATA[<h3 id="一、练习"><a href="#一、练习" class="headerlink" title="一、练习"></a>一、练习</h3><h4 id="1-编写思路"><a href="#1-编写思路" class="headerlink" title="1.编写思路"></a>1.编写思路</h4><ul>
+<li>创建项目，测试环境</li>
+<li>需求分析</li>
+<li>先实现菜单<ul>
+<li>创建菜单方法<ul>
+<li>方法位置：并列</li>
+<li>格式：修饰符 返回值类型 方法名（）{  }</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实现菜单的选择<ul>
+<li>创建判断键盘录入选择的方法</li>
+<li>调用menu方法，实现每次选择时，展示菜单</li>
+<li>Scanner  三个步骤，录入键盘数据</li>
+<li>调用加载数据的方法，并创建一个数组名保存</li>
+<li>if+else if 实现键盘录入数据的判断</li>
+<li>设置死循环，实现菜单的重复选择</li>
+<li>当a=5时，退出，break;</li>
+</ul>
+</li>
+<li>实现加载数据<ul>
+<li>创建加载数据方法</li>
+<li>定义一个数组并初始化数据</li>
+<li>return返回值arr数组，返回值类型int[]</li>
+</ul>
+</li>
+<li>实现具体的选择项的功能（查看）<ul>
+<li>当choose方法中录入键盘数据为1时</li>
+<li>调用show方法，并传递参数arr</li>
+</ul>
+</li>
+<li>实现查看功能<ul>
+<li>定义方法</li>
+<li>定义一个数组参数，用于接收数据</li>
+<li>用for循环遍历数组</li>
+<li>if判断不是0再输出</li>
+</ul>
+</li>
+<li>实现修改功能<ul>
+<li>定义方法</li>
+<li>键盘录入要修改的id</li>
+<li>for循环遍历数组，IF查找有没有匹配的id<ul>
+<li>在方法定义中，添加参数int[] arr ，用于接收数组</li>
+</ul>
+</li>
+<li>在choose方法中，当选择2时，调用修改方法，并且传递参数–数组</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-内存图"><a href="#2-内存图" class="headerlink" title="2.内存图"></a>2.内存图</h4><img src="https://i.loli.net/2021/07/23/8KSZyjmXNIGYVeT.png" alt="image-20210723153545299" style="zoom:200%;" />
+
+
+
+<h3 id="二、ArrayList集合"><a href="#二、ArrayList集合" class="headerlink" title="二、ArrayList集合"></a>二、<font color='#d15252'>ArrayList</font>集合</h3><ul>
+<li>变量：存一个数</li>
+<li>数组：多个数，但长度固定</li>
+<li>集合ArrayList</li>
+</ul>
+<h4 id="1-ArrayList的概念"><a href="#1-ArrayList的概念" class="headerlink" title="1.ArrayList的概念"></a>1.ArrayList的概念</h4><ul>
+<li>什么是ArrayList?<ul>
+<li>是一个容器，<font color='#d15252'>长度不固定</font></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-ArrayList的使用"><a href="#2-ArrayList的使用" class="headerlink" title="2.ArrayList的使用"></a>2.ArrayList的使用</h4><h5 id="①使用前的准备"><a href="#①使用前的准备" class="headerlink" title="①使用前的准备"></a>①使用前的准备</h5><ul>
+<li><p>导包</p>
+</li>
+<li><p><code>import java.util.ArrayList;</code></p>
+</li>
+<li><p>加载进内存</p>
+<ul>
+<li><code>ArrayList&lt;数据类型&gt;变量名 = new ArrayList();</code><ul>
+<li>数据类型：不能用int ，而是要用 <code>Integer</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="②具体使用"><a href="#②具体使用" class="headerlink" title="②具体使用"></a>②具体使用</h5><ul>
+<li><p>添加</p>
+<ul>
+<li>使用 <code>add();</code> 方法<ul>
+<li><code>例：list.add(12); -----&gt;存入12进集合</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>删除</p>
+<ul>
+<li>使用 <code>remove();</code> 方法<ul>
+<li><code>例：list.remove(1); ----&gt;删除索引为1的数据</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>获取</p>
+<ul>
+<li><p>使用 <code>get(索引);</code> 方法</p>
+<ul>
+<li><p>单独调用（无意义）</p>
+<ul>
+<li><code>例：list.get(1); ----&gt;取出索引为1的数据</code></li>
+</ul>
+</li>
+<li><p>输出调用</p>
+<ul>
+<li><code>例：System.out.println(list.get(2))---&gt;直接输出索引2数据</code></li>
+</ul>
+</li>
+<li><p>赋值调用</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = list.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(a);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>长度</p>
+<ul>
+<li>使用 <code>size();</code> 方法</li>
+</ul>
+</li>
+<li><p>更新</p>
+<ul>
+<li><p>使用 <code>set();</code>方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">id.set(索引，新的数值);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>ArrayList</tag>
+        <tag>方法</tag>
+        <tag>增查删改</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java链接数据库</title>
+    <url>/2021/08/25/Java%E9%93%BE%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h3 id="一、Java链接数据库（Mysql）步骤"><a href="#一、Java链接数据库（Mysql）步骤" class="headerlink" title="一、Java链接数据库（Mysql）步骤"></a>一、Java链接数据库（Mysql）步骤</h3><h4 id="1-第一步：创建项目，并进行测试"><a href="#1-第一步：创建项目，并进行测试" class="headerlink" title="1.第一步：创建项目，并进行测试"></a>1.第一步：创建项目，并进行测试</h4><h4 id="2-第二步：找公司（jar）压缩包-jar"><a href="#2-第二步：找公司（jar）压缩包-jar" class="headerlink" title="2.第二步：找公司（jar）压缩包.jar"></a>2.第二步：找公司（jar）压缩包.jar</h4><ul>
+<li>项目中创建lib目录，将jar包拖入<ul>
+<li><img src="https://i.loli.net/2021/07/09/dXBtUWDkVezPFoQ.png" alt="image-20210709092306325"></li>
+</ul>
+</li>
+<li>右键jar包，解压<ul>
+<li><img src="https://i.loli.net/2021/07/09/r4peszySgwOJHYV.png" alt="image-20210709092237690"></li>
+</ul>
+</li>
+</ul>
+<h4 id="3-第三步：将Java链接mysql的相关工具类加载进内存"><a href="#3-第三步：将Java链接mysql的相关工具类加载进内存" class="headerlink" title="3.第三步：将Java链接mysql的相关工具类加载进内存"></a>3.第三步：将Java链接mysql的相关工具类加载进内存</h4><ul>
+<li><p>用try{}catch(Exception e){} 或 throws Exception 处理异常</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="4-第四步：Java链接Mysql"><a href="#4-第四步：Java链接Mysql" class="headerlink" title="4.第四步：Java链接Mysql"></a>4.第四步：Java链接Mysql</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Connection root = DriverManager.getConnection(url:<span class="string">&quot;jdbc:mysql://localhost:3306/m1&quot;</span>,</span><br><span class="line">            user:<span class="string">&quot;root&quot;</span>,</span><br><span class="line">            password:<span class="string">&quot;000909&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>去除时区异常：</p>
+<p>?serverTimezone=Asia/Shanghai&amp;useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true</p>
+</blockquote>
+<h4 id="5-第五步：获取发送sql的工具"><a href="#5-第五步：获取发送sql的工具" class="headerlink" title="5.第五步：获取发送sql的工具"></a>5.第五步：获取发送sql的工具</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Statement statement = root.createStatement();</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-第六步：定义一个sql语句-查询"><a href="#6-第六步：定义一个sql语句-查询" class="headerlink" title="6.第六步：定义一个sql语句(查询)"></a>6.第六步：定义一个sql语句(查询)</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String sql = <span class="string">&quot;SELECT *FROM shop&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-第七步：发送sql语句-查询-，用resultSet保存返回值"><a href="#7-第七步：发送sql语句-查询-，用resultSet保存返回值" class="headerlink" title="7.第七步：发送sql语句(查询)，用resultSet保存返回值"></a>7.第七步：发送sql语句(查询)，用resultSet保存返回值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ResultSet resultSet = statement.executeQuery(sql);</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-第八步：调用resuleSet的next-方法，判断是否有值"><a href="#8-第八步：调用resuleSet的next-方法，判断是否有值" class="headerlink" title="8.第八步：调用resuleSet的next()方法，判断是否有值"></a>8.第八步：调用resuleSet的next()方法，判断是否有值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (resultSet.next())</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="9-第九步：调用getInt-方法，返回int类型值"><a href="#9-第九步：调用getInt-方法，返回int类型值" class="headerlink" title="9.第九步：调用getInt()方法，返回int类型值"></a>9.第九步：调用getInt()方法，返回int类型值</h4><ul>
+<li><img src="https://i.loli.net/2021/07/09/GLfpqFbu4Qg3Cx1.png" alt="image-20210709103344911"></li>
+</ul>
+<hr>
+<h4 id="链接数据库并查询—代码："><a href="#链接数据库并查询—代码：" class="headerlink" title="链接数据库并查询—代码："></a>链接数据库并查询—代码：</h4><p><img src="https://i.loli.net/2021/07/09/m9Q42OWGNr7Io3v.png" alt="image-20210709103439844"></p>
+<hr>
+<h3 id="二、更新数据库数据"><a href="#二、更新数据库数据" class="headerlink" title="二、更新数据库数据"></a>二、更新数据库数据</h3><ul>
+<li><h5 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h5><ul>
+<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
+</li>
+<li><p>创建键盘录入数据</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">           System.out.println(<span class="string">&quot;请输入要修改的学号&quot;</span>);</span><br><span class="line">           <span class="keyword">int</span> id = sc.nextInt();</span><br><span class="line">           System.out.println(<span class="string">&quot;请输入要修改的姓名&quot;</span>);</span><br><span class="line">           String name = sc.next();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>打包sql语句</li>
+</ul>
+<p><code>String sql = &quot;UPDATE student SET sname = &#39;&quot;+name+&quot;&#39; WHERE sid = &quot;+id;</code></p>
+<ul>
+<li>发送执行sql语句</li>
+</ul>
+<p><code>int i = statement.executeUpdate(sql);</code></p>
+<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></li>
+</ul>
+<p><img src="https://i.loli.net/2021/06/30/fFMH28bBwjXsoSz.png" alt="image-20210630143254189"></p>
+<hr>
+<h3 id="三、添加数据库数据"><a href="#三、添加数据库数据" class="headerlink" title="三、添加数据库数据"></a>三、添加数据库数据</h3><ul>
+<li><h5 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h5><ul>
+<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
+</li>
+<li><p>创建键盘录入数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">         System.out.println(<span class="string">&quot;请输入要添加的id&quot;</span>);</span><br><span class="line">         <span class="keyword">int</span> id = sc.nextInt();</span><br><span class="line">         System.out.println(<span class="string">&quot;请输入要添加的姓名&quot;</span>);</span><br><span class="line">         String name  = sc.next();</span><br></pre></td></tr></table></figure></li>
+<li><p>打包sql语句</p>
+<p>[^sql语句]: <code>String sql = &quot;INSERT INTO student (sid,sname) VALUES (&quot;+id+&quot;,&#39;&quot;+name+&quot;&#39;)&quot;;</code></p>
+</li>
+<li><p>发送执行sql语句</p>
+<p><code>int i = statement.executeUpdate(sql);</code></p>
+</li>
+</ul>
+<p>  [^executeUpdate]: 用于添加，更新，删除数据</p>
+</li>
+<li><h5 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h5><p><img src="https://i.loli.net/2021/06/30/r93VqIyGYm1xtW8.png" alt="image-20210630140131020"></p>
+</li>
+</ul>
+<hr>
+<h3 id="四、删除数据库数据"><a href="#四、删除数据库数据" class="headerlink" title="四、删除数据库数据"></a>四、删除数据库数据</h3><ul>
+<li><h5 id="步骤：-1"><a href="#步骤：-1" class="headerlink" title="步骤："></a>步骤：</h5><ul>
+<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
+</li>
+<li><p>创建键盘录入数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">          System.out.println(<span class="string">&quot;请输入要删除的学号&quot;</span>);</span><br><span class="line">          <span class="keyword">int</span> id = sc.nextInt();</span><br></pre></td></tr></table></figure></li>
+<li><p>打包sql语句</p>
+<p><code>String sql = &quot;DELETE FROM student WHERE sid = &quot;+id;</code></p>
+</li>
+<li><p>发送执行sql语句</p>
+<p><code>int i = statement.executeUpdate(sql);</code></p>
+</li>
+</ul>
+</li>
+<li><h5 id="代码：-2"><a href="#代码：-2" class="headerlink" title="代码："></a>代码：<img src="https://i.loli.net/2021/06/30/n14xtuQb2wJVsqh.png" alt="image-20210630143508186"></h5></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>增查删改</tag>
+        <tag>案例</tag>
+        <tag>数据库</tag>
+        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -1547,111 +1655,357 @@
       </tags>
   </entry>
   <entry>
-    <title>Java链接数据库</title>
-    <url>/2021/08/25/Java%E9%93%BE%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h3 id="一、Java链接数据库（Mysql）步骤"><a href="#一、Java链接数据库（Mysql）步骤" class="headerlink" title="一、Java链接数据库（Mysql）步骤"></a>一、Java链接数据库（Mysql）步骤</h3><h4 id="1-第一步：创建项目，并进行测试"><a href="#1-第一步：创建项目，并进行测试" class="headerlink" title="1.第一步：创建项目，并进行测试"></a>1.第一步：创建项目，并进行测试</h4><h4 id="2-第二步：找公司（jar）压缩包-jar"><a href="#2-第二步：找公司（jar）压缩包-jar" class="headerlink" title="2.第二步：找公司（jar）压缩包.jar"></a>2.第二步：找公司（jar）压缩包.jar</h4><ul>
-<li>项目中创建lib目录，将jar包拖入<ul>
-<li><img src="https://i.loli.net/2021/07/09/dXBtUWDkVezPFoQ.png" alt="image-20210709092306325"></li>
+    <title>Servlet、HTTP协议、Tomcat</title>
+    <url>/2021/08/31/Servlet%E3%80%81HTTP%E5%8D%8F%E8%AE%AE%E3%80%81Tomcat/</url>
+    <content><![CDATA[<h3 id="一、HTTP协议"><a href="#一、HTTP协议" class="headerlink" title="一、HTTP协议"></a>一、HTTP协议</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>HTTP是网络传输协议</li>
+</ul>
+<h4 id="2-HTTP的两个组成部分"><a href="#2-HTTP的两个组成部分" class="headerlink" title="2.HTTP的两个组成部分"></a>2.HTTP的两个组成部分</h4><ul>
+<li><p><strong>请求体</strong></p>
+<ul>
+<li><p>请求头</p>
+<ul>
+<li>一堆键值对</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/31/c41juIBdN7qsehR.png" alt="image-20210831091440715"></p>
+</li>
+<li><p>请求空行</p>
+<ul>
+<li>一堆空格</li>
 </ul>
 </li>
-<li>右键jar包，解压<ul>
-<li><img src="https://i.loli.net/2021/07/09/r4peszySgwOJHYV.png" alt="image-20210709092237690"></li>
+<li><p><font color='#d15252'>请求体</font></p>
+<ul>
+<li>请求提交的数据</li>
 </ul>
 </li>
+<li><p>请求行</p>
+<ul>
+<li>包含请求的地址，请求的方式(get,post)，请求的状态</li>
 </ul>
-<h4 id="3-第三步：将Java链接mysql的相关工具类加载进内存"><a href="#3-第三步：将Java链接mysql的相关工具类加载进内存" class="headerlink" title="3.第三步：将Java链接mysql的相关工具类加载进内存"></a>3.第三步：将Java链接mysql的相关工具类加载进内存</h4><ul>
-<li><p>用try{}catch(Exception e){} 或 throws Exception 处理异常</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<p><img src="https://i.loli.net/2021/08/31/c41juIBdN7qsehR.png"></p>
+</li>
 </ul>
-<h4 id="4-第四步：Java链接Mysql"><a href="#4-第四步：Java链接Mysql" class="headerlink" title="4.第四步：Java链接Mysql"></a>4.第四步：Java链接Mysql</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Connection root = DriverManager.getConnection(url:<span class="string">&quot;jdbc:mysql://localhost:3306/m1&quot;</span>,</span><br><span class="line">            user:<span class="string">&quot;root&quot;</span>,</span><br><span class="line">            password:<span class="string">&quot;000909&quot;</span>);</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>去除时区异常：</p>
-<p>?serverTimezone=Asia/Shanghai&amp;useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true</p>
+<p>不携带数据（?携带数据）</p>
 </blockquote>
-<h4 id="5-第五步：获取发送sql的工具"><a href="#5-第五步：获取发送sql的工具" class="headerlink" title="5.第五步：获取发送sql的工具"></a>5.第五步：获取发送sql的工具</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Statement statement = root.createStatement();</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="6-第六步：定义一个sql语句-查询"><a href="#6-第六步：定义一个sql语句-查询" class="headerlink" title="6.第六步：定义一个sql语句(查询)"></a>6.第六步：定义一个sql语句(查询)</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String sql = <span class="string">&quot;SELECT *FROM shop&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<h4 id="7-第七步：发送sql语句-查询-，用resultSet保存返回值"><a href="#7-第七步：发送sql语句-查询-，用resultSet保存返回值" class="headerlink" title="7.第七步：发送sql语句(查询)，用resultSet保存返回值"></a>7.第七步：发送sql语句(查询)，用resultSet保存返回值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ResultSet resultSet = statement.executeQuery(sql);</span><br></pre></td></tr></table></figure>
-
-<h4 id="8-第八步：调用resuleSet的next-方法，判断是否有值"><a href="#8-第八步：调用resuleSet的next-方法，判断是否有值" class="headerlink" title="8.第八步：调用resuleSet的next()方法，判断是否有值"></a>8.第八步：调用resuleSet的next()方法，判断是否有值</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (resultSet.next())</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="9-第九步：调用getInt-方法，返回int类型值"><a href="#9-第九步：调用getInt-方法，返回int类型值" class="headerlink" title="9.第九步：调用getInt()方法，返回int类型值"></a>9.第九步：调用getInt()方法，返回int类型值</h4><ul>
-<li><img src="https://i.loli.net/2021/07/09/GLfpqFbu4Qg3Cx1.png" alt="image-20210709103344911"></li>
-</ul>
-<hr>
-<h4 id="链接数据库并查询—代码："><a href="#链接数据库并查询—代码：" class="headerlink" title="链接数据库并查询—代码："></a>链接数据库并查询—代码：</h4><p><img src="https://i.loli.net/2021/07/09/m9Q42OWGNr7Io3v.png" alt="image-20210709103439844"></p>
-<hr>
-<h3 id="二、更新数据库数据"><a href="#二、更新数据库数据" class="headerlink" title="二、更新数据库数据"></a>二、更新数据库数据</h3><ul>
-<li><h5 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h5><ul>
-<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
 </li>
-<li><p>创建键盘录入数据</p>
+<li><p><strong>响应体</strong></p>
+<ul>
+<li><p>响应头</p>
+<ul>
+<li>一堆键值对</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/31/ZatSpuyVl9xNgJr.png" alt="image-20210831091829347"></p>
+<ul>
+<li>需要注意的键值对：<ul>
+<li><font color='#d15252'>Content-Type</font>: text/html;charset= utf - 8<ul>
+<li>设置编码格式</li>
+</ul>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">           System.out.println(<span class="string">&quot;请输入要修改的学号&quot;</span>);</span><br><span class="line">           <span class="keyword">int</span> id = sc.nextInt();</span><br><span class="line">           System.out.println(<span class="string">&quot;请输入要修改的姓名&quot;</span>);</span><br><span class="line">           String name = sc.next();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>响应行</p>
+<ul>
+<li>响应的地址，响应的状态</li>
+</ul>
+</li>
+<li><p>响应空行</p>
+<ul>
+<li>其实就是一堆空格</li>
+</ul>
+</li>
+<li><p><font color='#d15252'>响应体</font></p>
+<ul>
+<li>服务器返回来的数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、服务器软件"><a href="#二、服务器软件" class="headerlink" title="二、服务器软件"></a>二、服务器软件</h3><ul>
+<li>Tomcat</li>
+</ul>
+<h4 id="1-Tomcat下载安装"><a href="#1-Tomcat下载安装" class="headerlink" title="1.Tomcat下载安装"></a>1.Tomcat下载安装</h4><p><img src="https://i.loli.net/2021/08/31/K8ku64HbPOoIDSL.png" alt="image-20210831093130771"></p>
+<ul>
+<li><p>tar.gz：LINUX系统版本</p>
+</li>
+<li><p>zip免安装版会闪退，需要配置环境变量等</p>
+</li>
+<li><p>建议安装版</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/31/mwjl69eMNB18zZE.png" alt="image-20210831093221283"></p>
+<p>建议不要填写默认的-1 ，肯会出现问题，随便写个数</p>
+<ul>
+<li>选择jre时，可以直接选择jdk路径，因为jdk中包含jre</li>
+</ul>
+<h4 id="2-Tomcat目录"><a href="#2-Tomcat目录" class="headerlink" title="2.Tomcat目录"></a>2.Tomcat目录</h4><ul>
+<li><p>bin目录：二进制的执行文件</p>
+</li>
+<li><p>cof目录：配置信息（端口号，默认的环境部署位置）</p>
+</li>
+<li><p>lib目录：第三方jar包</p>
+</li>
+<li><p>logs目录：日志信息</p>
+</li>
+<li><p>temp：临时文件（上传/下载的中转）</p>
+</li>
+<li><p><font color='#d15252'>webapps</font>：tomcat上部署项目默认访问路径</p>
+</li>
+<li><p>work：存放jsp的</p>
+</li>
+</ul>
+<h4 id="3-Tomcat注意事项"><a href="#3-Tomcat注意事项" class="headerlink" title="3.Tomcat注意事项"></a>3.Tomcat注意事项</h4><ul>
+<li>任何项目，默认打开index.html / index.jsp 文件</li>
+<li>如果没有部署项目，默认打开webapps中的root目录的index.jsp文件</li>
+</ul>
+<h4 id="4-结解决乱码为题"><a href="#4-结解决乱码为题" class="headerlink" title="4.结解决乱码为题"></a>4.结解决乱码为题</h4><ul>
+<li><p>找到 <code>C:\Program Files\Apache Software Foundation\Tomcat 9.0\conf</code>下的 <code>logging.properties</code></p>
+</li>
+<li><p>更改代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.util.logging.ConsoleHandler.level = FINE</span><br><span class="line">java.util.logging.ConsoleHandler.formatter = org.apache.juli.OneLineFormatter</span><br><span class="line">java.util.logging.ConsoleHandler.encoding = GBK</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="5-拓展知识"><a href="#5-拓展知识" class="headerlink" title="5.拓展知识"></a>5.拓展知识</h4><ul>
+<li>JavaSE和JavaEE<ul>
+<li>JavaSE<ul>
+<li>只能操作本地内容</li>
+</ul>
+</li>
+<li>JavaEE<ul>
+<li>JavaEE可以处理HTTP请求和响应</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、idea集成Tomcat"><a href="#三、idea集成Tomcat" class="headerlink" title="三、idea集成Tomcat"></a>三、idea集成Tomcat</h3><h3 id="四、JavaEE概述"><a href="#四、JavaEE概述" class="headerlink" title="四、JavaEE概述"></a>四、JavaEE概述</h3><ul>
+<li>java前端开发（jsp）<ul>
+<li><font color='#d15252'>Servlet+ jsp</font>（核心）</li>
+</ul>
+</li>
+<li>Java后端开发（服务器端开发，获取数据（crud = 增删改查））</li>
+</ul>
+<h3 id="五、Servlet"><a href="#五、Servlet" class="headerlink" title="五、Servlet"></a>五、Servlet</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>是一个接口<ul>
+<li>必须实现所有的方法</li>
+</ul>
+</li>
+<li>该类想要运行，必需要有Web服务器</li>
+<li>是一个小型Java应用程序</li>
+<li>可以处理请求和响应<ul>
+<li>还有其他两种处理请求和响应的方式<ul>
+<li>GenericServlet</li>
+<li>HttpServlet</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>需要导包</li>
+</ul>
+<h4 id="2-入门"><a href="#2-入门" class="headerlink" title="2.入门"></a>2.入门</h4><ul>
+<li><p>out目录下的东西放在web服务器中</p>
+<ul>
+<li>该目录底下的内容，只有tomcat有访问权限，<font color='#d15252'>http协议</font>没有访问权限</li>
+</ul>
+</li>
+<li><p>设置http协议访问权限</p>
+<ul>
+<li>在web.xml中添加配置语句</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/31/zQCH7ESqmwrptIj.png" alt="image-20210831114153199"></p>
+<p><img src="https://i.loli.net/2021/08/31/FJuwAZ38dvEzhG5.png" alt="image-20210831114253478"></p>
+</li>
+</ul>
+<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><h5 id="Ⅰ-init"><a href="#Ⅰ-init" class="headerlink" title="Ⅰ. init()"></a>Ⅰ. init()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig config)</span><span class="keyword">throws</span> ServletException</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>打包sql语句</li>
+<li>提示将servlet放入容器</li>
+<li><font color='#d15252'>自动实例化</font>一个ServletConfig对象，并将该值估值给参数(servletConfig)</li>
 </ul>
-<p><code>String sql = &quot;UPDATE student SET sname = &#39;&quot;+name+&quot;&#39; WHERE sid = &quot;+id;</code></p>
+<p><img src="https://i.loli.net/2021/08/31/bVT2sJKwudMQfEW.png" alt="image-20210831143955227"></p>
+<h5 id="Ⅱ-getServletConfig"><a href="#Ⅱ-getServletConfig" class="headerlink" title="Ⅱ. getServletConfig()"></a>Ⅱ. getServletConfig()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ServletConfig <span class="title">getServletConfig</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>发送执行sql语句</li>
+<li>该方法只要有请求过来，容器（Servlet）会自动帮我们调用Service方法</li>
 </ul>
-<p><code>int i = statement.executeUpdate(sql);</code></p>
-<h5 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h5></li>
+<h5 id="Ⅲ-service"><a href="#Ⅲ-service" class="headerlink" title="Ⅲ. service()"></a>Ⅲ. <font color='#d15252'>service</font>()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse)</span> </span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> ServletException, IOException </span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅳ-getServletInfo"><a href="#Ⅳ-getServletInfo" class="headerlink" title="Ⅳ. getServletInfo()"></a>Ⅳ. getServletInfo()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getServletInfo</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回有关 servlet 的信息，比如作者、版本和版权</li>
 </ul>
-<p><img src="https://i.loli.net/2021/06/30/fFMH28bBwjXsoSz.png" alt="image-20210630143254189"></p>
-<hr>
-<h3 id="三、添加数据库数据"><a href="#三、添加数据库数据" class="headerlink" title="三、添加数据库数据"></a>三、添加数据库数据</h3><ul>
-<li><h5 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h5><ul>
-<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
+<h5 id="Ⅴ-destroy"><a href="#Ⅴ-destroy" class="headerlink" title="Ⅴ. destroy()"></a>Ⅴ. destroy()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>由容器自己调用，告知容器Servlet已经被销毁</li>
+</ul>
+<h3 id="六、ServletConfig"><a href="#六、ServletConfig" class="headerlink" title="六、ServletConfig"></a>六、ServletConfig</h3><ul>
+<li>servlet 容器使用的 servlet 配置对象，该对象在初始化期间将信息传递给 servlet</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>返回值类型</th>
+<th>方法</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String</td>
+<td>getInitParameter(String name)</td>
+<td>取出指定name的值</td>
+</tr>
+<tr>
+<td>Enumeration</td>
+<td>getaInitParameterNames()</td>
+<td>取出所有的name，并以枚举形式存储</td>
+</tr>
+<tr>
+<td>ServletContext</td>
+<td>getServletContext()</td>
+<td>获取Context对象</td>
+</tr>
+<tr>
+<td>String</td>
+<td>getServletName()</td>
+<td>取出servletConfig的名字</td>
+</tr>
+</tbody></table>
+<ul>
+<li>补充Enumeration中的方法<ul>
+<li>hasMoreElements（）<ul>
+<li>判断下一个有没有值</li>
+</ul>
 </li>
-<li><p>创建键盘录入数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">         System.out.println(<span class="string">&quot;请输入要添加的id&quot;</span>);</span><br><span class="line">         <span class="keyword">int</span> id = sc.nextInt();</span><br><span class="line">         System.out.println(<span class="string">&quot;请输入要添加的姓名&quot;</span>);</span><br><span class="line">         String name  = sc.next();</span><br></pre></td></tr></table></figure></li>
-<li><p>打包sql语句</p>
-<p>[^sql语句]: <code>String sql = &quot;INSERT INTO student (sid,sname) VALUES (&quot;+id+&quot;,&#39;&quot;+name+&quot;&#39;)&quot;;</code></p>
-</li>
-<li><p>发送执行sql语句</p>
-<p><code>int i = statement.executeUpdate(sql);</code></p>
+<li>nextElement()<ul>
+<li>依次取值</li>
+</ul>
 </li>
 </ul>
-<p>  [^executeUpdate]: 用于添加，更新，删除数据</p>
-</li>
-<li><h5 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h5><p><img src="https://i.loli.net/2021/06/30/r93VqIyGYm1xtW8.png" alt="image-20210630140131020"></p>
 </li>
 </ul>
-<hr>
-<h3 id="四、删除数据库数据"><a href="#四、删除数据库数据" class="headerlink" title="四、删除数据库数据"></a>四、删除数据库数据</h3><ul>
-<li><h5 id="步骤：-1"><a href="#步骤：-1" class="headerlink" title="步骤："></a>步骤：</h5><ul>
-<li><p>链接mysql数据库、try解决异常、获取链接（通道）、获取发送sql语句工具类</p>
+<p><img src="https://i.loli.net/2021/08/31/ucaSM1zCIlqHBRe.png" alt="image-20210831152055449"></p>
+<p><img src="https://i.loli.net/2021/08/31/dJq5mQnNoHSaA9k.png" alt="image-20210831164750694"></p>
+<h3 id="七、ServletContext"><a href="#七、ServletContext" class="headerlink" title="七、ServletContext"></a>七、ServletContext</h3><ul>
+<li><p>代表的是整个Java程序（由很多个Servlet组成）</p>
 </li>
-<li><p>创建键盘录入数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">          System.out.println(<span class="string">&quot;请输入要删除的学号&quot;</span>);</span><br><span class="line">          <span class="keyword">int</span> id = sc.nextInt();</span><br></pre></td></tr></table></figure></li>
-<li><p>打包sql语句</p>
-<p><code>String sql = &quot;DELETE FROM student WHERE sid = &quot;+id;</code></p>
-</li>
-<li><p>发送执行sql语句</p>
-<p><code>int i = statement.executeUpdate(sql);</code></p>
+<li><p>servlet 使用这些方法与其他 servlet 容器进行通信</p>
 </li>
 </ul>
+<h5 id="Ⅰ-getContextPath"><a href="#Ⅰ-getContextPath" class="headerlink" title="Ⅰ. getContextPath()"></a>Ⅰ. getContextPath()</h5><p><img src="https://i.loli.net/2021/08/31/CVMfhzwtgsp76nc.png" alt="image-20210831173949987"></p>
+<h5 id="Ⅱ-getInitParameter"><a href="#Ⅱ-getInitParameter" class="headerlink" title="Ⅱ. getInitParameter()"></a>Ⅱ. getInitParameter()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getInitParameter</span><span class="params">(String name)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取指定name的value</li>
+<li>**<font color='#d15252'>注意</font>**：因为Context面对的是全局，所以，写在servlet中的param不能使用，需要在&lt; servlet &gt;外设置数据</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/31/SsQJhAwN82LZFH4.png" alt="image-20210831174608458"></p>
+<ul>
+<li>因为设置了全局的，所以可以实现两个程序间的通信<ul>
+<li>即一个set一个get</li>
+</ul>
 </li>
-<li><h5 id="代码：-2"><a href="#代码：-2" class="headerlink" title="代码："></a>代码：<img src="https://i.loli.net/2021/06/30/n14xtuQb2wJVsqh.png" alt="image-20210630143508186"></h5></li>
+<li>获取全局数据</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/31/GX6k5STstnQ2NUE.png" alt="image-20210831174941224"></p>
+<h5 id="Ⅲ-setAttribute"><a href="#Ⅲ-setAttribute" class="headerlink" title="Ⅲ. setAttribute()"></a>Ⅲ. setAttribute()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String name, Object object)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将对象绑定到此 servlet 上下文中的给定属性名称。如果已将指定名称用于某个属性，则此方法将使用新属性替换具有该名称的属性</li>
+</ul>
+<h5 id="Ⅳ-getAttribute"><a href="#Ⅳ-getAttribute" class="headerlink" title="Ⅳ. getAttribute()"></a>Ⅳ. getAttribute()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getAttribute</span><span class="params">(String name)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回具有给定名称的 servlet 容器属性，如果不具有该名称的属性，则返回 <code>null</code></li>
+</ul>
+<h5 id="Ⅴ-getServerInfo"><a href="#Ⅴ-getServerInfo" class="headerlink" title="Ⅴ. getServerInfo()"></a>Ⅴ. getServerInfo()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getServerInfo</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回正在其上运行 servlet 的 servlet 容器的名称和版本</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/31/AfD5OC62vU1JjHN.png" alt="image-20210831182019984"></p>
+<h3 id="八、Service：处理请求和响应"><a href="#八、Service：处理请求和响应" class="headerlink" title="八、Service：处理请求和响应"></a>八、Service：处理请求和响应</h3><ul>
+<li><p>该方法只要有请求过来，容器（Servlet）会自动帮我们调用Service方法</p>
+</li>
+<li><p>处理请求</p>
+<ul>
+<li>自动创建ServletRequest对象，并将该实例赋值给变量</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-处理请求"><a href="#1-处理请求" class="headerlink" title="1.处理请求"></a>1.处理请求</h4><ul>
+<li>请求行、请求头、请求体、请求空行</li>
+<li>ServletRequest 处理请求 ，是一个接口</li>
+</ul>
+<h4 id="2-ServletRequest"><a href="#2-ServletRequest" class="headerlink" title="2.ServletRequest"></a>2.ServletRequest</h4><ul>
+<li>定义将客户端请求信息提供给某个 servlet 的对象。servlet 容器创建 <code>ServletRequest</code>  对象，并将该对象作为参数传递给该 servlet 的 <code>service</code> 方法</li>
+<li><code>ServletRequest</code> 对象提供包括参数名称、参数值、属性和输入流的数据</li>
+</ul>
+<h4 id="3-ServletRequest方法"><a href="#3-ServletRequest方法" class="headerlink" title="3.ServletRequest方法"></a>3.ServletRequest方法</h4><h5 id="Ⅰ-getCharacterEncoding"><a href="#Ⅰ-getCharacterEncoding" class="headerlink" title="Ⅰ. getCharacterEncoding()"></a>Ⅰ. getCharacterEncoding()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getCharacterEncoding</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回此<font color='cornflowerblue'>请求正文</font>中使用的<font color='#d15252'>字符编码</font>的名称。如果该请求未指定字符编码，则此方法返回 <code>null</code> </li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/31/kZJXOrCQlMweW18.png" alt="image-20210831185235951"></p>
+<ul>
+<li>请求正文 = 请求体 = 传递的数据</li>
+</ul>
+<h5 id="Ⅱ-getParameter-String-name"><a href="#Ⅱ-getParameter-String-name" class="headerlink" title="Ⅱ. getParameter(String name)"></a>Ⅱ. <font color='#d15252'>getParameter</font>(String name)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getParameter</span><span class="params">(String name)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>以 <code>String</code> 形式返回请求参数的值，如果该参数不存在，则返回  <code>null</code>。请求参数是与请求一起发送的额外信息。对于 HTTP servlet，参数包含在查询字符串或发送的表单数据中。</li>
+<li>获取的参数是<font color='#d15252'>请求时传递的数据</font>，如果没有返回null</li>
+</ul>
+<h5 id="Ⅲ-getServerPort"><a href="#Ⅲ-getServerPort" class="headerlink" title="Ⅲ. getServerPort()"></a>Ⅲ. getServerPort()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getServerPort</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getServerName</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回请求被发送到的端口号</li>
+<li>返回请求被发送到服务器的主机名</li>
+</ul>
+<h5 id="Ⅳ-setAttribute-String-name-Object-o"><a href="#Ⅳ-setAttribute-String-name-Object-o" class="headerlink" title="Ⅳ. setAttribute(String name, Object o)"></a>Ⅳ. setAttribute(String name, Object o)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String name, Object o)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>存储此请求中的属性。在请求之间重置属性。此方法常常与 [<code>RequestDispatcher</code>]一起使用</li>
+<li>get</li>
+<li><font color='#d15252'>必须在同一个请求中</font></li>
+</ul>
+<h5 id="Ⅴ-getAttribute-String-name"><a href="#Ⅴ-getAttribute-String-name" class="headerlink" title="Ⅴ. getAttribute(String name)"></a>Ⅴ. getAttribute(String name)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getAttribute</span><span class="params">(String name)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>以 <code>Object</code> 形式返回指定属性的值，如果不存在给定名称的属性，则返回 <code>null</code></li>
+<li><font color='#d15252'>必须在同一个请求中</font></li>
+</ul>
+<h5 id="Ⅵ-其他方法"><a href="#Ⅵ-其他方法" class="headerlink" title="Ⅵ.其他方法"></a>Ⅵ.其他方法</h5><p><img src="https://i.loli.net/2021/08/31/qSmV4lAyvGNHn3O.png" alt="image-20210831185504385"></p>
+<ul>
+<li>获取请求体长度</li>
+<li>获取请求体</li>
+<li>获取请求的输入字节流</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/31/YqHkhb8xO6iwJQ2.png" alt="image-20210831191204421"></p>
+<ul>
+<li>设置请求体的编码格式</li>
+<li>设置请求体的参数名称</li>
+</ul>
+<h5 id="Ⅶ-getRequestDispatcher-String-path"><a href="#Ⅶ-getRequestDispatcher-String-path" class="headerlink" title="Ⅶ. getRequestDispatcher(String path)"></a>Ⅶ. getRequestDispatcher(String path)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> RequestDispatcher <span class="title">getRequestDispatcher</span><span class="params">(String path)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回一个 [<code>RequestDispatcher</code>]对象，它充当位于给定路径上的资源的包装器。可以使用 <code>RequestDispatcher</code>  对象将请求转发给资源，或者在响应中包含资源。资源可以是动态的，也可以是静态的</li>
+<li>简单来说就是打包发送请求</li>
 </ul>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>JavaWeb</category>
       </categories>
       <tags>
-        <tag>增查删改</tag>
-        <tag>案例</tag>
-        <tag>数据库</tag>
-        <tag>Mysql</tag>
+        <tag>Servlet</tag>
+        <tag>HTTP协议</tag>
+        <tag>Tomcat</tag>
       </tags>
   </entry>
   <entry>
@@ -1926,6 +2280,182 @@
       </tags>
   </entry>
   <entry>
+    <title>jQuery</title>
+    <url>/2021/08/26/jQuery/</url>
+    <content><![CDATA[<h2 id="一、计时器"><a href="#一、计时器" class="headerlink" title="一、计时器"></a>一、计时器</h2><h4 id="1-setTimeout"><a href="#1-setTimeout" class="headerlink" title="1. setTimeout()"></a>1. setTimeout()</h4><ul>
+<li>用于在指定的毫秒数后调用函数（只调用一次）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(code,millisec)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>code：必需，要调用的函数或代码</li>
+<li>millisec：必需，在执行代码前等待的<font color='#d15252'>毫秒数</font></li>
+</ul>
+<h4 id="2-setInterval"><a href="#2-setInterval" class="headerlink" title="2. setInterval()"></a>2. setInterval()</h4><ul>
+<li>方法可按照指定的周期（以毫秒计）来调用函数或计算表达式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(code,millisec[,<span class="string">&quot;lang&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>code：必需，要调用的函数或代码</li>
+<li>millisec：必须，周期性执行或调用代码之间的间隔</li>
+</ul>
+<h4 id="3-补充知识"><a href="#3-补充知识" class="headerlink" title="3.补充知识"></a>3.补充知识</h4><ul>
+<li>onload()事件，当页面或图像被加载完成后触发事件</li>
+</ul>
+<h3 id="二、Jquery"><a href="#二、Jquery" class="headerlink" title="二、Jquery"></a>二、Jquery</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>jQuery 是一个 JavaScript 库</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./JQuery/jquery-3.3.1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>导入Jquery</li>
+</ul>
+<h4 id="2-jQuery语法"><a href="#2-jQuery语法" class="headerlink" title="2.jQuery语法"></a>2.jQuery语法</h4><ul>
+<li><p>基础语法 <code>$(selector).action()</code></p>
+<ul>
+<li>jQuery的核心就是选择器</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/UuaWB15QjhgtrLN.png" alt="image-20210826134720754"></p>
+</li>
+</ul>
+<h4 id="3-基本选择器"><a href="#3-基本选择器" class="headerlink" title="3.基本选择器"></a>3.基本选择器</h4><ul>
+<li>id选择器</li>
+<li>类选择器</li>
+<li>元素选择器</li>
+<li>*</li>
+</ul>
+<h4 id="4-层级选择器"><a href="#4-层级选择器" class="headerlink" title="4.层级选择器"></a>4.层级选择器</h4><h5 id="Ⅰ-ancestor-descendant"><a href="#Ⅰ-ancestor-descendant" class="headerlink" title="Ⅰ. ancestor descendant"></a>Ⅰ. ancestor descendant</h5><ul>
+<li><p>即<font color='#d15252'>后代选择器</font>，忽略层级</p>
+</li>
+<li><p>在给定的祖先元素下匹配所有的后代元素</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">ancestor：选择器</span><br><span class="line">descendant：有效选择器</span><br></pre></td></tr></table></figure>
+
+<h5 id="Ⅱ-parent-gt-child"><a href="#Ⅱ-parent-gt-child" class="headerlink" title="Ⅱ. parent &gt; child"></a>Ⅱ. parent &gt; child</h5><ul>
+<li>即子代选择器，只负责子级</li>
+</ul>
+<h5 id="Ⅲ-prev-next"><a href="#Ⅲ-prev-next" class="headerlink" title="Ⅲ. prev + next"></a>Ⅲ. prev + next</h5><ul>
+<li>相邻元素选择器，下一个紧邻的兄弟</li>
+</ul>
+<h5 id="Ⅳ-prev-siblings"><a href="#Ⅳ-prev-siblings" class="headerlink" title="Ⅳ. prev ~ siblings"></a>Ⅳ. prev ~ siblings</h5><ul>
+<li>同辈选择器，下面的所有兄弟</li>
+</ul>
+<blockquote>
+<p><font color='#d15252'>其他选择器</font>有：基本筛选器、内容选择器，可见性选择器、属性选择器、子元素选择器、表单选择器、表单对象选择器等等</p>
+<p>详细使用请查阅JqueryAPI</p>
+</blockquote>
+<h4 id="5-基本筛选器"><a href="#5-基本筛选器" class="headerlink" title="5.基本筛选器"></a>5.基本<font color='#d15252'>筛选器</font></h4><h5 id="Ⅰ-first"><a href="#Ⅰ-first" class="headerlink" title="Ⅰ.  :first"></a>Ⅰ.  :first</h5><ul>
+<li>获取匹配的第一个元素</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&#x27;li:first&#x27;</span>);</span><br><span class="line"><span class="comment">//[ &lt;li&gt;list item 1&lt;/li&gt; ]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅱ-not-selector"><a href="#Ⅱ-not-selector" class="headerlink" title="Ⅱ. :not(selector)"></a>Ⅱ. :not(selector)</h5><ul>
+<li>去除所有与给定选择器匹配的元素</li>
+<li>selector：用于筛选的选择器</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/BfQmUd5DpkuTScY.png" alt="image-20210826144537086"></p>
+<h5 id="Ⅲ-even"><a href="#Ⅲ-even" class="headerlink" title="Ⅲ. :even"></a>Ⅲ. :even</h5><ul>
+<li><p>匹配所有索引值为<font color='#d15252'>偶数</font>的元素，从 0 开始计数</p>
+<p><img src="https://i.loli.net/2021/08/26/MZ2diS5m7BK1Tyk.png" alt="image-20210826144616263"></p>
+</li>
+</ul>
+<h5 id="Ⅳ-odd"><a href="#Ⅳ-odd" class="headerlink" title="Ⅳ. :odd"></a>Ⅳ. :odd</h5><ul>
+<li>匹配所有索引值为<font color='#d15252'>奇数</font>的元素，从 0 开始计数</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/4ceDWOnXLvubGyK.png" alt="image-20210826144853759"></p>
+<h5 id="Ⅴ-last"><a href="#Ⅴ-last" class="headerlink" title="Ⅴ.:last()"></a>Ⅴ.:last()</h5><ul>
+<li>获取最后一个元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/P8ucCBRZpDwALMv.png" alt="image-20210826145735703"></p>
+<h5 id="Ⅵ-gt-index"><a href="#Ⅵ-gt-index" class="headerlink" title="Ⅵ. :gt(index)"></a>Ⅵ. :gt(index)</h5><ul>
+<li>匹配所有大于给定索引值的元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/z5VygrflkNGPeTm.png" alt="image-20210826145258834"></p>
+<h5 id="Ⅶ-lt-index"><a href="#Ⅶ-lt-index" class="headerlink" title="Ⅶ.  :lt(index)"></a>Ⅶ.  :lt(index)</h5><ul>
+<li>匹配所有小于给定索引值的元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/E5zLOsX7ID3Cbvd.png" alt="image-20210826150013475"></p>
+<h5 id="Ⅷ-eq-index"><a href="#Ⅷ-eq-index" class="headerlink" title="Ⅷ. :eq(index)"></a>Ⅷ. :eq(index)</h5><ul>
+<li>匹配一个给定索引值的元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/oGJYIHpRWAKFPgs.png" alt="image-20210826145019978"></p>
+<h5 id="Ⅸ-header"><a href="#Ⅸ-header" class="headerlink" title="Ⅸ. :header"></a>Ⅸ. :header</h5><ul>
+<li>匹配如 h1, h2, h3之类的标题元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/kl4NPpSM6TZmznD.png" alt="image-20210826150052620"></p>
+<h5 id="Ⅹ-lang-language"><a href="#Ⅹ-lang-language" class="headerlink" title="Ⅹ.:lang(language)"></a>Ⅹ.:lang(language)</h5><ul>
+<li><p>选择指定语言的所有元素</p>
+</li>
+<li><p>:lang选择器,匹配有一个语言值等于所提供的语言代码，或以提供的语言代码开始，后面马上跟一个“ - ”的元素。例如，选择器$(“div:lang(en)”)将匹配<code>&lt;div lang=&quot;en&quot;&gt;</code> and <code>&lt;div lang=&quot;en-us&quot;&gt;</code>（和他们的后代<code>&lt;div&gt;</code>），但不包括<code>&lt;div lang=&quot;fr&quot;&gt;</code></p>
+</li>
+<li><p>对于HTML元素，语言值由lang属性决定，也可能由来自meta元素或HTTP头信息决定。</p>
+</li>
+</ul>
+<h5 id="其他："><a href="#其他：" class="headerlink" title="其他："></a>其他：</h5><ul>
+<li><p>:animated 匹配所有正在执行动画效果的元素</p>
+</li>
+<li><p>:focus 匹配当前获取焦点的元素</p>
+</li>
+<li><p>:target 选择由文档URI的格式化识别码表示的目标元素。</p>
+</li>
+<li><p>:root 选择该文档的根元素。</p>
+</li>
+</ul>
+<h4 id="6-html属性"><a href="#6-html属性" class="headerlink" title="6. html属性"></a>6. html属性</h4><h5 id="Ⅰ-html-val-fn"><a href="#Ⅰ-html-val-fn" class="headerlink" title="Ⅰ.html([val|fn])"></a>Ⅰ.html([val|fn])</h5><ul>
+<li>$中的.html() ===》获取值</li>
+<li>在一个 HTML 文档中, 我们可以使用 .html() 方法来获取任意一个元素的内容。 如果选择器匹配多于一个的元素，那么只有第一个匹配元素的 HTML 内容会被获取。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">    alert($(<span class="string">&quot;p&quot;</span>).html());</span><br><span class="line">    alert($(<span class="string">&quot;div&quot;</span>).html());</span><br><span class="line"><span class="comment">//取出p和div中的内容</span></span><br><span class="line">$(<span class="string">&quot;p&quot;</span>).html(<span class="string">&quot;Hello &lt;b&gt;world&lt;/b&gt;!&quot;</span>);</span><br><span class="line"><span class="comment">//修改p元素中国的值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅱ-text-val-fn"><a href="#Ⅱ-text-val-fn" class="headerlink" title="Ⅱ. text([val|fn])"></a>Ⅱ. text([val|fn])</h5><ul>
+<li>取得所有匹配元素的内容</li>
+<li>结果是由所有匹配元素包含的文本内容组合起来的文本。这个方法对HTML和XML文档都有效</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&#x27;p&#x27;</span>).text();</span><br><span class="line"><span class="comment">//返回p元素的文本内容。</span></span><br><span class="line">$(<span class="string">&quot;p&quot;</span>).text(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line"><span class="comment">//设置所有 p 元素的文本内容</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅲ-val-val-fn-arr"><a href="#Ⅲ-val-val-fn-arr" class="headerlink" title="Ⅲ. val([val|fn|arr])"></a>Ⅲ. val([val|fn|arr])</h5><ul>
+<li>获得匹配元素的当前值。</li>
+<li>在 jQuery 1.2 中,可以返回任意元素的值了。包括select。如果多选，将返回一个数组，其包含所选的值。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;input&quot;</span>).val();</span><br><span class="line"><span class="comment">//获取文本框中的值</span></span><br><span class="line">$(<span class="string">&quot;input&quot;</span>).val(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"><span class="comment">//设定文本框的值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-css属性"><a href="#7-css属性" class="headerlink" title="7.css属性"></a>7.css属性</h4><ul>
+<li> css(name|pro|[,val|fn])</li>
+<li>name：要访问的属性名称</li>
+<li>properties：一个或多个CSS属性组成的一个数组</li>
+<li><code>|</code> 表示或</li>
+<li>name,value键值对形式</li>
+</ul>
+<h3 id="三、jQuery事件"><a href="#三、jQuery事件" class="headerlink" title="三、jQuery事件"></a>三、jQuery事件</h3><h4 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>与Js的事件基本相同，但前缀不带on </li>
+</ul>
+<h4 id="2-事件"><a href="#2-事件" class="headerlink" title="2.事件"></a>2.事件</h4><p><img src="https://i.loli.net/2021/08/26/PNps9d5cGOIu8FJ.png" alt="image-20210826153751867"></p>
+<p><img src="https://i.loli.net/2021/08/26/2TDKSrA1H6wBn9x.png" alt="image-20210826153755981"></p>
+<h5 id="Ⅰ-click"><a href="#Ⅰ-click" class="headerlink" title="Ⅰ. click()"></a>Ⅰ. click()</h5><ul>
+<li>  触发、或将函数绑定到指定元素的 click 事件</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/mJk3lZ76VpLRdtX.png" alt="image-20210826153649188"></p>
+]]></content>
+      <categories>
+        <category>jQuery</category>
+      </categories>
+      <tags>
+        <tag>jQuery</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>class中的内容</title>
     <url>/2021/08/25/class%E4%B8%AD%E7%9A%84%E5%86%85%E5%AE%B9/</url>
     <content><![CDATA[<h3 id="一、自定义的数据类型：引用类型"><a href="#一、自定义的数据类型：引用类型" class="headerlink" title="一、自定义的数据类型：引用类型"></a>一、自定义的数据类型：引用类型</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 数据类型 </span>&#123;</span><br><span class="line">	<span class="comment">//成员变量</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2128,182 +2658,6 @@
         <tag>成员变量</tag>
         <tag>成员方法</tag>
         <tag>构造方法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>jQuery</title>
-    <url>/2021/08/26/jQuery/</url>
-    <content><![CDATA[<h2 id="一、计时器"><a href="#一、计时器" class="headerlink" title="一、计时器"></a>一、计时器</h2><h4 id="1-setTimeout"><a href="#1-setTimeout" class="headerlink" title="1. setTimeout()"></a>1. setTimeout()</h4><ul>
-<li>用于在指定的毫秒数后调用函数（只调用一次）</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(code,millisec)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>code：必需，要调用的函数或代码</li>
-<li>millisec：必需，在执行代码前等待的<font color='#d15252'>毫秒数</font></li>
-</ul>
-<h4 id="2-setInterval"><a href="#2-setInterval" class="headerlink" title="2. setInterval()"></a>2. setInterval()</h4><ul>
-<li>方法可按照指定的周期（以毫秒计）来调用函数或计算表达式</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(code,millisec[,<span class="string">&quot;lang&quot;</span>])</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>code：必需，要调用的函数或代码</li>
-<li>millisec：必须，周期性执行或调用代码之间的间隔</li>
-</ul>
-<h4 id="3-补充知识"><a href="#3-补充知识" class="headerlink" title="3.补充知识"></a>3.补充知识</h4><ul>
-<li>onload()事件，当页面或图像被加载完成后触发事件</li>
-</ul>
-<h3 id="二、Jquery"><a href="#二、Jquery" class="headerlink" title="二、Jquery"></a>二、Jquery</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
-<li>jQuery 是一个 JavaScript 库</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./JQuery/jquery-3.3.1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>导入Jquery</li>
-</ul>
-<h4 id="2-jQuery语法"><a href="#2-jQuery语法" class="headerlink" title="2.jQuery语法"></a>2.jQuery语法</h4><ul>
-<li><p>基础语法 <code>$(selector).action()</code></p>
-<ul>
-<li>jQuery的核心就是选择器</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/UuaWB15QjhgtrLN.png" alt="image-20210826134720754"></p>
-</li>
-</ul>
-<h4 id="3-基本选择器"><a href="#3-基本选择器" class="headerlink" title="3.基本选择器"></a>3.基本选择器</h4><ul>
-<li>id选择器</li>
-<li>类选择器</li>
-<li>元素选择器</li>
-<li>*</li>
-</ul>
-<h4 id="4-层级选择器"><a href="#4-层级选择器" class="headerlink" title="4.层级选择器"></a>4.层级选择器</h4><h5 id="Ⅰ-ancestor-descendant"><a href="#Ⅰ-ancestor-descendant" class="headerlink" title="Ⅰ. ancestor descendant"></a>Ⅰ. ancestor descendant</h5><ul>
-<li><p>即<font color='#d15252'>后代选择器</font>，忽略层级</p>
-</li>
-<li><p>在给定的祖先元素下匹配所有的后代元素</p>
-</li>
-</ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">ancestor：选择器</span><br><span class="line">descendant：有效选择器</span><br></pre></td></tr></table></figure>
-
-<h5 id="Ⅱ-parent-gt-child"><a href="#Ⅱ-parent-gt-child" class="headerlink" title="Ⅱ. parent &gt; child"></a>Ⅱ. parent &gt; child</h5><ul>
-<li>即子代选择器，只负责子级</li>
-</ul>
-<h5 id="Ⅲ-prev-next"><a href="#Ⅲ-prev-next" class="headerlink" title="Ⅲ. prev + next"></a>Ⅲ. prev + next</h5><ul>
-<li>相邻元素选择器，下一个紧邻的兄弟</li>
-</ul>
-<h5 id="Ⅳ-prev-siblings"><a href="#Ⅳ-prev-siblings" class="headerlink" title="Ⅳ. prev ~ siblings"></a>Ⅳ. prev ~ siblings</h5><ul>
-<li>同辈选择器，下面的所有兄弟</li>
-</ul>
-<blockquote>
-<p><font color='#d15252'>其他选择器</font>有：基本筛选器、内容选择器，可见性选择器、属性选择器、子元素选择器、表单选择器、表单对象选择器等等</p>
-<p>详细使用请查阅JqueryAPI</p>
-</blockquote>
-<h4 id="5-基本筛选器"><a href="#5-基本筛选器" class="headerlink" title="5.基本筛选器"></a>5.基本<font color='#d15252'>筛选器</font></h4><h5 id="Ⅰ-first"><a href="#Ⅰ-first" class="headerlink" title="Ⅰ.  :first"></a>Ⅰ.  :first</h5><ul>
-<li>获取匹配的第一个元素</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&#x27;li:first&#x27;</span>);</span><br><span class="line"><span class="comment">//[ &lt;li&gt;list item 1&lt;/li&gt; ]</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="Ⅱ-not-selector"><a href="#Ⅱ-not-selector" class="headerlink" title="Ⅱ. :not(selector)"></a>Ⅱ. :not(selector)</h5><ul>
-<li>去除所有与给定选择器匹配的元素</li>
-<li>selector：用于筛选的选择器</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/BfQmUd5DpkuTScY.png" alt="image-20210826144537086"></p>
-<h5 id="Ⅲ-even"><a href="#Ⅲ-even" class="headerlink" title="Ⅲ. :even"></a>Ⅲ. :even</h5><ul>
-<li><p>匹配所有索引值为<font color='#d15252'>偶数</font>的元素，从 0 开始计数</p>
-<p><img src="https://i.loli.net/2021/08/26/MZ2diS5m7BK1Tyk.png" alt="image-20210826144616263"></p>
-</li>
-</ul>
-<h5 id="Ⅳ-odd"><a href="#Ⅳ-odd" class="headerlink" title="Ⅳ. :odd"></a>Ⅳ. :odd</h5><ul>
-<li>匹配所有索引值为<font color='#d15252'>奇数</font>的元素，从 0 开始计数</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/4ceDWOnXLvubGyK.png" alt="image-20210826144853759"></p>
-<h5 id="Ⅴ-last"><a href="#Ⅴ-last" class="headerlink" title="Ⅴ.:last()"></a>Ⅴ.:last()</h5><ul>
-<li>获取最后一个元素</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/P8ucCBRZpDwALMv.png" alt="image-20210826145735703"></p>
-<h5 id="Ⅵ-gt-index"><a href="#Ⅵ-gt-index" class="headerlink" title="Ⅵ. :gt(index)"></a>Ⅵ. :gt(index)</h5><ul>
-<li>匹配所有大于给定索引值的元素</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/z5VygrflkNGPeTm.png" alt="image-20210826145258834"></p>
-<h5 id="Ⅶ-lt-index"><a href="#Ⅶ-lt-index" class="headerlink" title="Ⅶ.  :lt(index)"></a>Ⅶ.  :lt(index)</h5><ul>
-<li>匹配所有小于给定索引值的元素</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/E5zLOsX7ID3Cbvd.png" alt="image-20210826150013475"></p>
-<h5 id="Ⅷ-eq-index"><a href="#Ⅷ-eq-index" class="headerlink" title="Ⅷ. :eq(index)"></a>Ⅷ. :eq(index)</h5><ul>
-<li>匹配一个给定索引值的元素</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/oGJYIHpRWAKFPgs.png" alt="image-20210826145019978"></p>
-<h5 id="Ⅸ-header"><a href="#Ⅸ-header" class="headerlink" title="Ⅸ. :header"></a>Ⅸ. :header</h5><ul>
-<li>匹配如 h1, h2, h3之类的标题元素</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/kl4NPpSM6TZmznD.png" alt="image-20210826150052620"></p>
-<h5 id="Ⅹ-lang-language"><a href="#Ⅹ-lang-language" class="headerlink" title="Ⅹ.:lang(language)"></a>Ⅹ.:lang(language)</h5><ul>
-<li><p>选择指定语言的所有元素</p>
-</li>
-<li><p>:lang选择器,匹配有一个语言值等于所提供的语言代码，或以提供的语言代码开始，后面马上跟一个“ - ”的元素。例如，选择器$(“div:lang(en)”)将匹配<code>&lt;div lang=&quot;en&quot;&gt;</code> and <code>&lt;div lang=&quot;en-us&quot;&gt;</code>（和他们的后代<code>&lt;div&gt;</code>），但不包括<code>&lt;div lang=&quot;fr&quot;&gt;</code></p>
-</li>
-<li><p>对于HTML元素，语言值由lang属性决定，也可能由来自meta元素或HTTP头信息决定。</p>
-</li>
-</ul>
-<h5 id="其他："><a href="#其他：" class="headerlink" title="其他："></a>其他：</h5><ul>
-<li><p>:animated 匹配所有正在执行动画效果的元素</p>
-</li>
-<li><p>:focus 匹配当前获取焦点的元素</p>
-</li>
-<li><p>:target 选择由文档URI的格式化识别码表示的目标元素。</p>
-</li>
-<li><p>:root 选择该文档的根元素。</p>
-</li>
-</ul>
-<h4 id="6-html属性"><a href="#6-html属性" class="headerlink" title="6. html属性"></a>6. html属性</h4><h5 id="Ⅰ-html-val-fn"><a href="#Ⅰ-html-val-fn" class="headerlink" title="Ⅰ.html([val|fn])"></a>Ⅰ.html([val|fn])</h5><ul>
-<li>$中的.html() ===》获取值</li>
-<li>在一个 HTML 文档中, 我们可以使用 .html() 方法来获取任意一个元素的内容。 如果选择器匹配多于一个的元素，那么只有第一个匹配元素的 HTML 内容会被获取。</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">    alert($(<span class="string">&quot;p&quot;</span>).html());</span><br><span class="line">    alert($(<span class="string">&quot;div&quot;</span>).html());</span><br><span class="line"><span class="comment">//取出p和div中的内容</span></span><br><span class="line">$(<span class="string">&quot;p&quot;</span>).html(<span class="string">&quot;Hello &lt;b&gt;world&lt;/b&gt;!&quot;</span>);</span><br><span class="line"><span class="comment">//修改p元素中国的值</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="Ⅱ-text-val-fn"><a href="#Ⅱ-text-val-fn" class="headerlink" title="Ⅱ. text([val|fn])"></a>Ⅱ. text([val|fn])</h5><ul>
-<li>取得所有匹配元素的内容</li>
-<li>结果是由所有匹配元素包含的文本内容组合起来的文本。这个方法对HTML和XML文档都有效</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&#x27;p&#x27;</span>).text();</span><br><span class="line"><span class="comment">//返回p元素的文本内容。</span></span><br><span class="line">$(<span class="string">&quot;p&quot;</span>).text(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line"><span class="comment">//设置所有 p 元素的文本内容</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="Ⅲ-val-val-fn-arr"><a href="#Ⅲ-val-val-fn-arr" class="headerlink" title="Ⅲ. val([val|fn|arr])"></a>Ⅲ. val([val|fn|arr])</h5><ul>
-<li>获得匹配元素的当前值。</li>
-<li>在 jQuery 1.2 中,可以返回任意元素的值了。包括select。如果多选，将返回一个数组，其包含所选的值。</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;input&quot;</span>).val();</span><br><span class="line"><span class="comment">//获取文本框中的值</span></span><br><span class="line">$(<span class="string">&quot;input&quot;</span>).val(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"><span class="comment">//设定文本框的值</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="7-css属性"><a href="#7-css属性" class="headerlink" title="7.css属性"></a>7.css属性</h4><ul>
-<li> css(name|pro|[,val|fn])</li>
-<li>name：要访问的属性名称</li>
-<li>properties：一个或多个CSS属性组成的一个数组</li>
-<li><code>|</code> 表示或</li>
-<li>name,value键值对形式</li>
-</ul>
-<h3 id="三、jQuery事件"><a href="#三、jQuery事件" class="headerlink" title="三、jQuery事件"></a>三、jQuery事件</h3><h4 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
-<li>与Js的事件基本相同，但前缀不带on </li>
-</ul>
-<h4 id="2-事件"><a href="#2-事件" class="headerlink" title="2.事件"></a>2.事件</h4><p><img src="https://i.loli.net/2021/08/26/PNps9d5cGOIu8FJ.png" alt="image-20210826153751867"></p>
-<p><img src="https://i.loli.net/2021/08/26/2TDKSrA1H6wBn9x.png" alt="image-20210826153755981"></p>
-<h5 id="Ⅰ-click"><a href="#Ⅰ-click" class="headerlink" title="Ⅰ. click()"></a>Ⅰ. click()</h5><ul>
-<li>  触发、或将函数绑定到指定元素的 click 事件</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/mJk3lZ76VpLRdtX.png" alt="image-20210826153649188"></p>
-]]></content>
-      <categories>
-        <category>jQuery</category>
-      </categories>
-      <tags>
-        <tag>jQuery</tag>
       </tags>
   </entry>
   <entry>
@@ -2551,6 +2905,155 @@
       </tags>
   </entry>
   <entry>
+    <title>private关键字和get/set方法</title>
+    <url>/2021/08/25/private%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8Cget-set%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="一、权限修饰符—Private"><a href="#一、权限修饰符—Private" class="headerlink" title="一、权限修饰符—Private"></a>一、权限修饰符—<font color='#d15252'>Private</font></h3><h4 id="1-作用："><a href="#1-作用：" class="headerlink" title="1.作用："></a>1.作用：</h4><ul>
+<li><p>private所修饰的内容，使用的时候，只能在本类中使用</p>
+</li>
+<li><p>private：私有的</p>
+<ul>
+<li><p>只能在本类中，操作private修饰的内容</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Demo1.java:7: 错误: id 在 stu 中是 private 访问控制</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-开发中，所有的成员变量都要加private"><a href="#2-开发中，所有的成员变量都要加private" class="headerlink" title="2.开发中，所有的成员变量都要加private"></a>2.开发中，所有的成员变量都要加private</h4><ul>
+<li><font color='#d15252'><strong>逻辑使用</strong></font>比较灵活</li>
+</ul>
+<h5 id="衍生问题：set-get方法"><a href="#衍生问题：set-get方法" class="headerlink" title="衍生问题：set/get方法"></a>衍生问题：set/get方法</h5><h3 id="二、get-set-方法"><a href="#二、get-set-方法" class="headerlink" title="二、get / set 方法"></a>二、get / set 方法</h3><ul>
+<li><p><font color='orange'><strong>赋值</strong></font>(set方法)：成员变量加上private后，其他方法（比如main方法）不能给成员变量赋值</p>
+<ul>
+<li>但是自己的方法能访问自己的私有成员变量，其他类可以访问本类的成员方法<ul>
+<li>所以用其他类访问成员方法，成员方法给成员变量修改值</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//定义一个由private修饰的成员变量</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">	<span class="comment">//完成给age的赋值功能</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.age=age;</span><br><span class="line">	&#125;</span><br><span class="line">======================================</span><br><span class="line">    <span class="comment">//在主方法中创建相应对象，调用赋值方法即可</span></span><br><span class="line">    	<span class="comment">//赋值</span></span><br><span class="line">		s.m(<span class="number">20</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p><strong><font color='orange'>取值</font></strong>(get方法)：创建成员方法，通过return带回返回值给调用方法</p>
+<ul>
+<li>使用return原因：更加灵活，数据可以重复利用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//完成取值功能</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//使用return取值更加灵活</span></span><br><span class="line">	<span class="keyword">return</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-private修饰成员变量细节优化"><a href="#3-private修饰成员变量细节优化" class="headerlink" title="3.private修饰成员变量细节优化"></a>3.private修饰成员变量<font color='cornflowerblue'>细节优化</font></h4><ul>
+<li>如果没有特殊的需求，在给成员变量赋值的时候，直接赋值即可</li>
+<li>给访问private修饰的成员方法<font color='#d15252'>命名规范</font><ul>
+<li>set变量名<ul>
+<li>变量名首字母大写</li>
+</ul>
+</li>
+<li>get变量名<ul>
+<li>变量名首字母大写</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="作业："><a href="#作业：" class="headerlink" title="作业："></a>作业：</h5><ul>
+<li>定义学生类<ul>
+<li>有参和空参构造</li>
+<li>private</li>
+<li>学号</li>
+<li>姓名</li>
+</ul>
+</li>
+<li>添加到数组中，并做打印</li>
+</ul>
+<h5 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h5><ul>
+<li><p>创建项目并进行测试</p>
+</li>
+<li><p>需求分析</p>
+</li>
+<li><p>创建自定义的学生类</p>
+<ul>
+<li><p>class Student</p>
+</li>
+<li><p>属性 = 成员变量 </p>
+<ul>
+<li>定义成员变量<ul>
+<li>private int id;</li>
+<li>private String name;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>定义无参、有参构造方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义无参构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="comment">//定义带参构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(<span class="keyword">int</span> id,String name)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>定义相应的get/set方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义相应的get/set方法	=== 学号</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>创建存储学生的数组方法</p>
+<ul>
+<li>public static Student[] init(){}</li>
+<li>return返回创建的数组</li>
+</ul>
+<p><img src="https://i.loli.net/2021/07/28/r1f3Z2gm9Odok7I.png" alt="image-20210728103752639"></p>
+</li>
+<li><p>创建遍历数组学生对象的方法</p>
+<p><img src="https://i.loli.net/2021/07/28/PaCGI3pbHENkK8x.png" alt="image-20210728103827836"></p>
+<ul>
+<li>用到get方法，取出学生对象的属性</li>
+</ul>
+</li>
+<li><p>在main方法中</p>
+<ul>
+<li><p>第一步：调用init获取创建的数组</p>
+</li>
+<li><p>第二步：创建Student的无参对象，带参对象</p>
+<ul>
+<li>无参：通过.set()方法给属性赋值</li>
+<li>带参：直接在初始化值时赋值</li>
+</ul>
+</li>
+<li><p>第三步：将创建的学生对象存入数组</p>
+</li>
+<li><p>第四步：调用遍历数组学生对象的方法</p>
+<p><img src="https://i.loli.net/2021/07/28/EIKidPcfUSOTqtr.png" alt="image-20210728104038704"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、Java的编程规范"><a href="#三、Java的编程规范" class="headerlink" title="三、Java的编程规范"></a>三、Java的编程规范</h3><ul>
+<li>见名知意</li>
+<li>确保功能的唯一性</li>
+<li>确保逻辑的灵活性</li>
+<li>规则和代码没有关系。规则语法</li>
+</ul>
+<h3 id="四、main方法和可变参"><a href="#四、main方法和可变参" class="headerlink" title="四、main方法和可变参"></a>四、main方法和可变参</h3><h4 id="1-main方法"><a href="#1-main方法" class="headerlink" title="1.main方法"></a>1.main方法</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-可变参"><a href="#2-可变参" class="headerlink" title="2.可变参"></a>2.可变参</h4><ul>
+<li>格式：<code>数据类型 ... 变量名</code> </li>
+<li>参数最终会变为数组</li>
+<li>固定参和可变参在一起时，可变参必须写在末尾</li>
+</ul>
+<h3 id="五、方法的重载"><a href="#五、方法的重载" class="headerlink" title="五、方法的重载"></a>五、方法的重载</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><ul>
+<li><font color='#d15252'>在同一个类中</font>，方法名相同<ul>
+<li>与返回值无关，只看方法名和参数列表</li>
+<li>参数<ul>
+<li>参数个数    </li>
+<li>参数类型</li>
+</ul>
+</li>
+<li>修饰符同级</li>
+</ul>
+</li>
+<li>在调用时，Jvm通过区别参数列表的不同，调用相应的方法</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>成员方法</tag>
+        <tag>private</tag>
+        <tag>get/set</tag>
+        <tag>修饰符</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>匿名对象、内部类、代码块、和修饰符等</title>
     <url>/2021/08/25/%E5%8C%BF%E5%90%8D%E5%AF%B9%E8%B1%A1%E3%80%81%E5%86%85%E9%83%A8%E7%B1%BB%E3%80%81%E4%BB%A3%E7%A0%81%E5%9D%97%E3%80%81%E5%92%8C%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%AD%89/</url>
     <content><![CDATA[<h3 id="一、匿名对象"><a href="#一、匿名对象" class="headerlink" title="一、匿名对象"></a>一、匿名对象</h3><h4 id="1-什么是匿名对象"><a href="#1-什么是匿名对象" class="headerlink" title="1.什么是匿名对象"></a>1.什么是匿名对象</h4><ul>
@@ -2725,341 +3228,6 @@
         <tag>代码块</tag>
         <tag>包</tag>
         <tag>四种权限修饰符</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>private关键字和get/set方法</title>
-    <url>/2021/08/25/private%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8Cget-set%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h3 id="一、权限修饰符—Private"><a href="#一、权限修饰符—Private" class="headerlink" title="一、权限修饰符—Private"></a>一、权限修饰符—<font color='#d15252'>Private</font></h3><h4 id="1-作用："><a href="#1-作用：" class="headerlink" title="1.作用："></a>1.作用：</h4><ul>
-<li><p>private所修饰的内容，使用的时候，只能在本类中使用</p>
-</li>
-<li><p>private：私有的</p>
-<ul>
-<li><p>只能在本类中，操作private修饰的内容</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Demo1.java:7: 错误: id 在 stu 中是 private 访问控制</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h4 id="2-开发中，所有的成员变量都要加private"><a href="#2-开发中，所有的成员变量都要加private" class="headerlink" title="2.开发中，所有的成员变量都要加private"></a>2.开发中，所有的成员变量都要加private</h4><ul>
-<li><font color='#d15252'><strong>逻辑使用</strong></font>比较灵活</li>
-</ul>
-<h5 id="衍生问题：set-get方法"><a href="#衍生问题：set-get方法" class="headerlink" title="衍生问题：set/get方法"></a>衍生问题：set/get方法</h5><h3 id="二、get-set-方法"><a href="#二、get-set-方法" class="headerlink" title="二、get / set 方法"></a>二、get / set 方法</h3><ul>
-<li><p><font color='orange'><strong>赋值</strong></font>(set方法)：成员变量加上private后，其他方法（比如main方法）不能给成员变量赋值</p>
-<ul>
-<li>但是自己的方法能访问自己的私有成员变量，其他类可以访问本类的成员方法<ul>
-<li>所以用其他类访问成员方法，成员方法给成员变量修改值</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//定义一个由private修饰的成员变量</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">	<span class="comment">//完成给age的赋值功能</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.age=age;</span><br><span class="line">	&#125;</span><br><span class="line">======================================</span><br><span class="line">    <span class="comment">//在主方法中创建相应对象，调用赋值方法即可</span></span><br><span class="line">    	<span class="comment">//赋值</span></span><br><span class="line">		s.m(<span class="number">20</span>);</span><br></pre></td></tr></table></figure></li>
-<li><p><strong><font color='orange'>取值</font></strong>(get方法)：创建成员方法，通过return带回返回值给调用方法</p>
-<ul>
-<li>使用return原因：更加灵活，数据可以重复利用</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//完成取值功能</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//使用return取值更加灵活</span></span><br><span class="line">	<span class="keyword">return</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="3-private修饰成员变量细节优化"><a href="#3-private修饰成员变量细节优化" class="headerlink" title="3.private修饰成员变量细节优化"></a>3.private修饰成员变量<font color='cornflowerblue'>细节优化</font></h4><ul>
-<li>如果没有特殊的需求，在给成员变量赋值的时候，直接赋值即可</li>
-<li>给访问private修饰的成员方法<font color='#d15252'>命名规范</font><ul>
-<li>set变量名<ul>
-<li>变量名首字母大写</li>
-</ul>
-</li>
-<li>get变量名<ul>
-<li>变量名首字母大写</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="作业："><a href="#作业：" class="headerlink" title="作业："></a>作业：</h5><ul>
-<li>定义学生类<ul>
-<li>有参和空参构造</li>
-<li>private</li>
-<li>学号</li>
-<li>姓名</li>
-</ul>
-</li>
-<li>添加到数组中，并做打印</li>
-</ul>
-<h5 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h5><ul>
-<li><p>创建项目并进行测试</p>
-</li>
-<li><p>需求分析</p>
-</li>
-<li><p>创建自定义的学生类</p>
-<ul>
-<li><p>class Student</p>
-</li>
-<li><p>属性 = 成员变量 </p>
-<ul>
-<li>定义成员变量<ul>
-<li>private int id;</li>
-<li>private String name;</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>定义无参、有参构造方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义无参构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="comment">//定义带参构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(<span class="keyword">int</span> id,String name)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>定义相应的get/set方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义相应的get/set方法	=== 学号</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>创建存储学生的数组方法</p>
-<ul>
-<li>public static Student[] init(){}</li>
-<li>return返回创建的数组</li>
-</ul>
-<p><img src="https://i.loli.net/2021/07/28/r1f3Z2gm9Odok7I.png" alt="image-20210728103752639"></p>
-</li>
-<li><p>创建遍历数组学生对象的方法</p>
-<p><img src="https://i.loli.net/2021/07/28/PaCGI3pbHENkK8x.png" alt="image-20210728103827836"></p>
-<ul>
-<li>用到get方法，取出学生对象的属性</li>
-</ul>
-</li>
-<li><p>在main方法中</p>
-<ul>
-<li><p>第一步：调用init获取创建的数组</p>
-</li>
-<li><p>第二步：创建Student的无参对象，带参对象</p>
-<ul>
-<li>无参：通过.set()方法给属性赋值</li>
-<li>带参：直接在初始化值时赋值</li>
-</ul>
-</li>
-<li><p>第三步：将创建的学生对象存入数组</p>
-</li>
-<li><p>第四步：调用遍历数组学生对象的方法</p>
-<p><img src="https://i.loli.net/2021/07/28/EIKidPcfUSOTqtr.png" alt="image-20210728104038704"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="三、Java的编程规范"><a href="#三、Java的编程规范" class="headerlink" title="三、Java的编程规范"></a>三、Java的编程规范</h3><ul>
-<li>见名知意</li>
-<li>确保功能的唯一性</li>
-<li>确保逻辑的灵活性</li>
-<li>规则和代码没有关系。规则语法</li>
-</ul>
-<h3 id="四、main方法和可变参"><a href="#四、main方法和可变参" class="headerlink" title="四、main方法和可变参"></a>四、main方法和可变参</h3><h4 id="1-main方法"><a href="#1-main方法" class="headerlink" title="1.main方法"></a>1.main方法</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-可变参"><a href="#2-可变参" class="headerlink" title="2.可变参"></a>2.可变参</h4><ul>
-<li>格式：<code>数据类型 ... 变量名</code> </li>
-<li>参数最终会变为数组</li>
-<li>固定参和可变参在一起时，可变参必须写在末尾</li>
-</ul>
-<h3 id="五、方法的重载"><a href="#五、方法的重载" class="headerlink" title="五、方法的重载"></a>五、方法的重载</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><ul>
-<li><font color='#d15252'>在同一个类中</font>，方法名相同<ul>
-<li>与返回值无关，只看方法名和参数列表</li>
-<li>参数<ul>
-<li>参数个数    </li>
-<li>参数类型</li>
-</ul>
-</li>
-<li>修饰符同级</li>
-</ul>
-</li>
-<li>在调用时，Jvm通过区别参数列表的不同，调用相应的方法</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>成员方法</tag>
-        <tag>private</tag>
-        <tag>get/set</tag>
-        <tag>修饰符</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>反射</title>
-    <url>/2021/08/23/%E5%8F%8D%E5%B0%84/</url>
-    <content><![CDATA[<h3 id="一、反射"><a href="#一、反射" class="headerlink" title="一、反射"></a>一、反射</h3><h4 id="什么是反射？"><a href="#什么是反射？" class="headerlink" title="什么是反射？"></a>什么是反射？</h4><ul>
-<li><p>利用代码区中的数据（.class文件），去创建对象；<font color='#d15252'>省略new</font></p>
-<ul>
-<li>构造方法</li>
-<li>成员变量</li>
-<li>成员方法</li>
-</ul>
-</li>
-<li><p>在代码区中存储的class并不是真正的class文件(物理)，而是一个虚拟的对象</p>
-<ul>
-<li><strong><font color='#d15252'>Class类</font></strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="二、Class"><a href="#二、Class" class="headerlink" title="二、Class"></a>二、Class</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>泛型<ul>
-<li>class类型很多，不固定</li>
-</ul>
-</li>
-<li>修饰符：final <ul>
-<li>不能被继承</li>
-</ul>
-</li>
-<li>Class的实例表示正在运行的类和接口</li>
-<li>管理class文件对象</li>
-</ul>
-<h4 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><p>无</p>
-<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><ul>
-<li><p>获取class文件对象的三种方式</p>
-<ul>
-<li><p>```java<br>方式一：通过Object类中的getClass()方法</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  ![image-<span class="number">20210817110933068</span>](https:<span class="regexp">//i</span>.loli.net<span class="regexp">/2021/</span><span class="number">08</span><span class="regexp">/17/m</span>1nypAo43bJFBIC.png)</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  方式二：类名.class获取到字节码文件对象(任意数据类型都具有静态的class属性)</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/17/23EShKfXxMYZW5y.png" alt="image-20210817111023597"></p>
-</li>
-<li><p>```java<br>方式三：forName(“String s”)</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    - <span class="string">&quot; s &quot;</span> : 类的全路径</span><br><span class="line"></span><br><span class="line">    ![image-<span class="number">20210817111128606</span>](https:<span class="regexp">//i</span>.loli.net<span class="regexp">/2021/</span><span class="number">08</span><span class="regexp">/17/</span>M2Be6PaLC7wJEpH.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">##### Ⅰ.forName()</span></span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">static Class&lt;?&gt; forName(String className) </span><br><span class="line"><span class="regexp">//</span>返回与给定字符串名称的类或接口相关联的 Class对象。  </span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>className : 类的全路径</p>
-</li>
-<li><p>static 静态的，可以通过类名调用</p>
-</li>
-<li><p>Class&lt;?&gt;泛型</p>
-</li>
-</ul>
-<h4 id="4-Class文件的内部成员"><a href="#4-Class文件的内部成员" class="headerlink" title="4.Class文件的内部成员"></a>4.<font color='#d15252'>Class文件</font>的内部成员</h4><ul>
-<li>构造方法：Constructor</li>
-<li>成员方法：Method</li>
-<li>成员变量：Filed</li>
-</ul>
-<hr>
-<h3 id="三、Constructor"><a href="#三、Constructor" class="headerlink" title="三、Constructor"></a>三、Constructor</h3><h4 id="1-获取Class构造方法"><a href="#1-获取Class构造方法" class="headerlink" title="1.获取Class构造方法"></a>1.获取Class构造方法</h4><h5 id="Ⅰ-getConstructors"><a href="#Ⅰ-getConstructors" class="headerlink" title="Ⅰ.getConstructors()"></a>Ⅰ.getConstructors()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Constructor&lt;?&gt;[] getConstructors() </span><br><span class="line"><span class="comment">//返回一个包含 Constructor对象的数组， Constructor对象反映了由该 Class对象表示的类的所有公共构造函数。  </span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>返回值类型Constructor</li>
-<li>只能获取到<font color='#d15252'>public修饰</font>的的构造方法</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/17/w7yi4ZhWfLXmFd9.png" alt="image-20210817135511279"></p>
-<h5 id="Ⅱ-getDeclaredConstructors"><a href="#Ⅱ-getDeclaredConstructors" class="headerlink" title="Ⅱ.getDeclaredConstructors()"></a>Ⅱ.getDeclaredConstructors()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Constructor&lt;?&gt;[] getDeclaredConstructors() </span><br><span class="line"><span class="comment">//返回反映由该 Class对象表示的类声明的所有构造函数的 Constructor对象的数组。  </span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取<font color='#d15252'>所有的</font>构造方法</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/17/u6dkrP9piQjFRSE.png" alt="image-20210817135520975"></p>
-<h5 id="Ⅲ-getConstructor"><a href="#Ⅲ-getConstructor" class="headerlink" title="Ⅲ.getConstructor()"></a>Ⅲ.getConstructor()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Constructor&lt;T&gt; <span class="title">getConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回一个 Constructor对象，该对象反映由该 Class对象表示的类的指定公共构造函数。  </span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>返回指定的构造方法（获取不到private修饰的）</p>
-<p><img src="https://i.loli.net/2021/08/17/srX71Oml6BIaCoH.png" alt="image-20210817140725698"></p>
-</li>
-</ul>
-<h5 id="Ⅳ-getDeclaredConstructor"><a href="#Ⅳ-getDeclaredConstructor" class="headerlink" title="Ⅳ. getDeclaredConstructor()"></a>Ⅳ. getDeclaredConstructor()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Constructor&lt;T&gt; getDeclaredConstructor​*(Class&lt;?&gt;... parameterTypes) </span><br><span class="line"><span class="comment">//返回一个 Constructor对象，该对象反映由此 Class对象表示的类或接口的指定构造函数。  </span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取指定的构造方法，private修饰的也可以获取</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/17/ERUN6MXepbT4OfQ.png" alt="image-20210817140901110"></p>
-<h4 id="2-利用构造方法创建Class实例"><a href="#2-利用构造方法创建Class实例" class="headerlink" title="2.利用构造方法创建Class实例"></a>2.利用构造方法<font color='#d15252'>创建Class实例</font></h4><h5 id="Ⅰ-newInstance-Object…-initargs"><a href="#Ⅰ-newInstance-Object…-initargs" class="headerlink" title="Ⅰ.newInstance(Object… initargs)"></a>Ⅰ.newInstance(Object… initargs)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">T <span class="title">newInstance</span><span class="params">(Object... initargs)</span></span></span><br><span class="line"><span class="function"><span class="comment">//使用由此 Constructor对象表示的构造函数，使用指定的初始化参数来创建和初始化构造函数的声明类的新实例。  </span></span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/17/MVLpE5fQs8InJxm.png" alt="image-20210817204522820"></p>
-<ul>
-<li><p>带参传递一要取出的构造方法的参数类型，根据方法的重载，选择对应的构造方法</p>
-</li>
-<li><p>使用newInstance方法时，根据使用的构造方法进行传值</p>
-</li>
-<li><p>如果不重写toString()方法，则创建的实例化对象直接输出是一个地址值</p>
-</li>
-</ul>
-<h3 id="四、Field"><a href="#四、Field" class="headerlink" title="四、Field"></a>四、Field</h3><h4 id="1-获取Class成员变量"><a href="#1-获取Class成员变量" class="headerlink" title="1.获取Class成员变量"></a>1.获取Class<font color='#d15252'>成员变量</font></h4><h5 id="Ⅰ-getFields"><a href="#Ⅰ-getFields" class="headerlink" title="Ⅰ.getFields()"></a>Ⅰ.getFields()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Field[] getFields() </span><br><span class="line"><span class="comment">//返回包含一个数组 Field对象反射由此表示的类或接口的所有可访问的公共字段 类对象。  </span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>取出所有Public修饰的成员变量</li>
-</ul>
-<h5 id="Ⅱ-getDeclaredFields"><a href="#Ⅱ-getDeclaredFields" class="headerlink" title="Ⅱ.getDeclaredFields()"></a>Ⅱ.getDeclaredFields()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Field[] getDeclaredFields() </span><br><span class="line"><span class="comment">//返回的数组 Field对象反映此表示的类或接口声明的所有字段 类对象 </span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>取出所有成员变量，包括private修饰的</li>
-</ul>
-<h5 id="Ⅲ-getField-String-name"><a href="#Ⅲ-getField-String-name" class="headerlink" title="Ⅲ.getField(String name)"></a>Ⅲ.getField(String name)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Field <span class="title">getField</span><span class="params">(String name)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回一个 Field对象，它反映此表示的类或接口的指定公共成员字段类对象 </span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>取出指定的public修饰的成员变量</li>
-</ul>
-<h5 id="Ⅳ-getDeclaredField-String-name"><a href="#Ⅳ-getDeclaredField-String-name" class="headerlink" title="Ⅳ.getDeclaredField(String name)"></a>Ⅳ.getDeclaredField(String name)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Field <span class="title">getDeclaredField</span><span class="params">(String name)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回一个 Field对象，它反映此表示的类或接口的指定已声明字段类对象。  </span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取指定的成员变量，private也可以取出</li>
-</ul>
-<h4 id="4-给Class成员变量赋值"><a href="#4-给Class成员变量赋值" class="headerlink" title="4.给Class成员变量赋值"></a>4.给Class成员变量<font color='#d15252'>赋值</font></h4><h5 id="Ⅰ-set-Object-obj-Object-value"><a href="#Ⅰ-set-Object-obj-Object-value" class="headerlink" title="Ⅰ.set(Object obj, Object value)"></a>Ⅰ.set(Object obj, Object value)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">set</span><span class="params">(Object obj, Object value)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//将指定的对象参数中由此 Field对象表示的字段设置为指定的新值。  </span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取公共的成员变量</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/17/eo1Hp9LraVjMuOP.png" alt="image-20210817153600751"></p>
-<ul>
-<li>获取私有的成员变量</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/17/Hk8viMBxhaSXRAE.png" alt="image-20210817181152287"></p>
-<ul>
-<li>私有的成员变量赋值时需要暴力破解</li>
-</ul>
-<hr>
-<h3 id="五、Method"><a href="#五、Method" class="headerlink" title="五、Method"></a>五、Method</h3><h4 id="1-获取Class成员方法"><a href="#1-获取Class成员方法" class="headerlink" title="1.获取Class成员方法"></a>1.获取Class成员方法</h4><h5 id="Ⅰ-getMethods"><a href="#Ⅰ-getMethods" class="headerlink" title="Ⅰ.getMethods()"></a>Ⅰ.getMethods()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Method[] getMethods() </span><br><span class="line"><span class="comment">//返回一个包含 方法对象的数组， 方法对象反映由该 Class对象表示的类或接口的所有公共方法，包括由类或接口声明的对象以及从超类和超级接口继承的类。  </span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>取出class中的所有<font color='#d15252'>Public修饰的</font>成员方法</p>
-</li>
-<li><p>会取出包括父类中继承的方法</p>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/17/oniWLADSya2NE4e.png" alt="image-20210817155232292"></p>
-<h5 id="Ⅱ-getDeclaredMethods"><a href="#Ⅱ-getDeclaredMethods" class="headerlink" title="Ⅱ.getDeclaredMethods()"></a>Ⅱ.getDeclaredMethods()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Methods[] getDeclaredMethods() </span><br><span class="line"><span class="comment">//返回一个包含 方法对象的数组， 方法对象反映由 Class对象表示的类或接口的所有声明方法，包括public，protected，default（package）访问和私有方法，但不包括继承方法。 </span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>取出class中的所有成员方法，包括private修饰的</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/17/8GmaHKep6rk35Bn.png" alt="image-20210817155435479"></p>
-<h5 id="Ⅲ-getMethod-String-name-Class-lt-gt-…-parameterTypes"><a href="#Ⅲ-getMethod-String-name-Class-lt-gt-…-parameterTypes" class="headerlink" title="Ⅲ.getMethod(String name, Class&lt;?&gt;… parameterTypes)"></a>Ⅲ.getMethod(String name, Class&lt;?&gt;… parameterTypes)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Methods <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回一个 方法对象，该对象反映由该 Class对象表示的类或接口的指定公共成员方法。 </span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>取出class中的指定的Public修饰的成员方法</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/17/T5awcy9gsUKBGt2.png" alt="image-20210817155835845"></p>
-<h5 id="Ⅳ-getDeclaredMethod-String-name-Class-lt-gt-…-parameterTypes"><a href="#Ⅳ-getDeclaredMethod-String-name-Class-lt-gt-…-parameterTypes" class="headerlink" title="Ⅳ.getDeclaredMethod(String name, Class&lt;?&gt;… parameterTypes)"></a>Ⅳ.getDeclaredMethod(String name, Class&lt;?&gt;… parameterTypes)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Methods <span class="title">getDeclaredMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span> <span class="comment">//返回一个 方法对象，它反映此表示的类或接口的指定声明的方法 Class对象。  </span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>取出指定的成员方法</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/17/Rs8FvogtaNVdhib.png" alt="image-20210817160013845"></p>
-<h4 id="2-使用成员方法"><a href="#2-使用成员方法" class="headerlink" title="2.使用成员方法"></a>2.使用成员方法</h4><h5 id="Ⅰ-invoke-Object-obj-Object…-args"><a href="#Ⅰ-invoke-Object-obj-Object…-args" class="headerlink" title="Ⅰ.invoke(Object obj, Object… args)"></a>Ⅰ.invoke(Object obj, Object… args)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Object <span class="title">invoke</span><span class="params">(Object obj, Object... args)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//在具有指定参数的指定对象上调用此 方法对象表示的基础方法。  </span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>将取出的<font color='#d15252'><strong>方法和对象绑定</strong></font></li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/17/bv7ZaMqpmjufntk.png" alt="image-20210817212251329"></p>
-<hr>
-<h3 id="六、AccessibleObject"><a href="#六、AccessibleObject" class="headerlink" title="六、AccessibleObject"></a>六、AccessibleObject</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>AccessibleObject是 Field、Constructor、Method的父类</li>
-<li>作用：看你是否除了public修饰 （安全检查机制）</li>
-</ul>
-<h4 id="2-成员方法"><a href="#2-成员方法" class="headerlink" title="2.成员方法"></a>2.成员方法</h4><h5 id="Ⅰ-setAccessible-boolean-f-暴力破解"><a href="#Ⅰ-setAccessible-boolean-f-暴力破解" class="headerlink" title="Ⅰ.setAccessible(boolean f) 暴力破解"></a>Ⅰ.setAccessible(boolean f) 暴力破解</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAccessible</span><span class="params">(<span class="keyword">boolean</span> flag)</span> </span></span><br><span class="line"><span class="function">    <span class="comment">//将此反射对象的 accessible标志设置为指示的布尔值。  </span></span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/08/17/foUpWaY9lqKbHv1.png" alt="image-20210817143740180"></p>
-<h3 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h3><h4 id="1-泛型擦除"><a href="#1-泛型擦除" class="headerlink" title="1.泛型擦除"></a>1.泛型擦除</h4><ul>
-<li><img src="https://i.loli.net/2021/08/17/3xXvCpmNDtfj4F2.png" alt="image-20210817171924074"></li>
-</ul>
-<h4 id="2-获取当前src目录"><a href="#2-获取当前src目录" class="headerlink" title="2.获取当前src目录"></a>2.获取当前src目录<img src="https://i.loli.net/2021/08/18/FBsTqWeIxmafXlR.png" alt="image-20210818093158387"></h4><ul>
-<li><p>获取当前src目录</p>
-</li>
-<li><p>会出现取出字符串带双引号，forName无法识别的问题</p>
-</li>
-</ul>
-<p><img src="C:\Users\GikH\AppData\Roaming\Typora\typora-user-images\image-20210818104512010.png" alt="image-20210818104512010"></p>
-<p><img src="https://i.loli.net/2021/08/18/ToLq5lAhDfyrCRY.png" alt="image-20210818104515650"></p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>反射</tag>
       </tags>
   </entry>
   <entry>
@@ -3342,6 +3510,192 @@
       </categories>
       <tags>
         <tag>多线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>反射</title>
+    <url>/2021/08/23/%E5%8F%8D%E5%B0%84/</url>
+    <content><![CDATA[<h3 id="一、反射"><a href="#一、反射" class="headerlink" title="一、反射"></a>一、反射</h3><h4 id="什么是反射？"><a href="#什么是反射？" class="headerlink" title="什么是反射？"></a>什么是反射？</h4><ul>
+<li><p>利用代码区中的数据（.class文件），去创建对象；<font color='#d15252'>省略new</font></p>
+<ul>
+<li>构造方法</li>
+<li>成员变量</li>
+<li>成员方法</li>
+</ul>
+</li>
+<li><p>在代码区中存储的class并不是真正的class文件(物理)，而是一个虚拟的对象</p>
+<ul>
+<li><strong><font color='#d15252'>Class类</font></strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="二、Class"><a href="#二、Class" class="headerlink" title="二、Class"></a>二、Class</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>泛型<ul>
+<li>class类型很多，不固定</li>
+</ul>
+</li>
+<li>修饰符：final <ul>
+<li>不能被继承</li>
+</ul>
+</li>
+<li>Class的实例表示正在运行的类和接口</li>
+<li>管理class文件对象</li>
+</ul>
+<h4 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><p>无</p>
+<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><ul>
+<li><p>获取class文件对象的三种方式</p>
+<ul>
+<li><p>```java<br>方式一：通过Object类中的getClass()方法</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  ![image-<span class="number">20210817110933068</span>](https:<span class="regexp">//i</span>.loli.net<span class="regexp">/2021/</span><span class="number">08</span><span class="regexp">/17/m</span>1nypAo43bJFBIC.png)</span><br><span class="line"></span><br><span class="line">- ```java</span><br><span class="line">  方式二：类名.class获取到字节码文件对象(任意数据类型都具有静态的class属性)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/17/23EShKfXxMYZW5y.png" alt="image-20210817111023597"></p>
+</li>
+<li><p>```java<br>方式三：forName(“String s”)</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">    - <span class="string">&quot; s &quot;</span> : 类的全路径</span><br><span class="line"></span><br><span class="line">    ![image-<span class="number">20210817111128606</span>](https:<span class="regexp">//i</span>.loli.net<span class="regexp">/2021/</span><span class="number">08</span><span class="regexp">/17/</span>M2Be6PaLC7wJEpH.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">##### Ⅰ.forName()</span></span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">static Class&lt;?&gt; forName(String className) </span><br><span class="line"><span class="regexp">//</span>返回与给定字符串名称的类或接口相关联的 Class对象。  </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>className : 类的全路径</p>
+</li>
+<li><p>static 静态的，可以通过类名调用</p>
+</li>
+<li><p>Class&lt;?&gt;泛型</p>
+</li>
+</ul>
+<h4 id="4-Class文件的内部成员"><a href="#4-Class文件的内部成员" class="headerlink" title="4.Class文件的内部成员"></a>4.<font color='#d15252'>Class文件</font>的内部成员</h4><ul>
+<li>构造方法：Constructor</li>
+<li>成员方法：Method</li>
+<li>成员变量：Filed</li>
+</ul>
+<hr>
+<h3 id="三、Constructor"><a href="#三、Constructor" class="headerlink" title="三、Constructor"></a>三、Constructor</h3><h4 id="1-获取Class构造方法"><a href="#1-获取Class构造方法" class="headerlink" title="1.获取Class构造方法"></a>1.获取Class构造方法</h4><h5 id="Ⅰ-getConstructors"><a href="#Ⅰ-getConstructors" class="headerlink" title="Ⅰ.getConstructors()"></a>Ⅰ.getConstructors()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Constructor&lt;?&gt;[] getConstructors() </span><br><span class="line"><span class="comment">//返回一个包含 Constructor对象的数组， Constructor对象反映了由该 Class对象表示的类的所有公共构造函数。  </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回值类型Constructor</li>
+<li>只能获取到<font color='#d15252'>public修饰</font>的的构造方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/17/w7yi4ZhWfLXmFd9.png" alt="image-20210817135511279"></p>
+<h5 id="Ⅱ-getDeclaredConstructors"><a href="#Ⅱ-getDeclaredConstructors" class="headerlink" title="Ⅱ.getDeclaredConstructors()"></a>Ⅱ.getDeclaredConstructors()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Constructor&lt;?&gt;[] getDeclaredConstructors() </span><br><span class="line"><span class="comment">//返回反映由该 Class对象表示的类声明的所有构造函数的 Constructor对象的数组。  </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取<font color='#d15252'>所有的</font>构造方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/17/u6dkrP9piQjFRSE.png" alt="image-20210817135520975"></p>
+<h5 id="Ⅲ-getConstructor"><a href="#Ⅲ-getConstructor" class="headerlink" title="Ⅲ.getConstructor()"></a>Ⅲ.getConstructor()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Constructor&lt;T&gt; <span class="title">getConstructor</span><span class="params">(Class&lt;?&gt;... parameterTypes)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回一个 Constructor对象，该对象反映由该 Class对象表示的类的指定公共构造函数。  </span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>返回指定的构造方法（获取不到private修饰的）</p>
+<p><img src="https://i.loli.net/2021/08/17/srX71Oml6BIaCoH.png" alt="image-20210817140725698"></p>
+</li>
+</ul>
+<h5 id="Ⅳ-getDeclaredConstructor"><a href="#Ⅳ-getDeclaredConstructor" class="headerlink" title="Ⅳ. getDeclaredConstructor()"></a>Ⅳ. getDeclaredConstructor()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Constructor&lt;T&gt; getDeclaredConstructor​*(Class&lt;?&gt;... parameterTypes) </span><br><span class="line"><span class="comment">//返回一个 Constructor对象，该对象反映由此 Class对象表示的类或接口的指定构造函数。  </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取指定的构造方法，private修饰的也可以获取</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/17/ERUN6MXepbT4OfQ.png" alt="image-20210817140901110"></p>
+<h4 id="2-利用构造方法创建Class实例"><a href="#2-利用构造方法创建Class实例" class="headerlink" title="2.利用构造方法创建Class实例"></a>2.利用构造方法<font color='#d15252'>创建Class实例</font></h4><h5 id="Ⅰ-newInstance-Object…-initargs"><a href="#Ⅰ-newInstance-Object…-initargs" class="headerlink" title="Ⅰ.newInstance(Object… initargs)"></a>Ⅰ.newInstance(Object… initargs)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">T <span class="title">newInstance</span><span class="params">(Object... initargs)</span></span></span><br><span class="line"><span class="function"><span class="comment">//使用由此 Constructor对象表示的构造函数，使用指定的初始化参数来创建和初始化构造函数的声明类的新实例。  </span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/17/MVLpE5fQs8InJxm.png" alt="image-20210817204522820"></p>
+<ul>
+<li><p>带参传递一要取出的构造方法的参数类型，根据方法的重载，选择对应的构造方法</p>
+</li>
+<li><p>使用newInstance方法时，根据使用的构造方法进行传值</p>
+</li>
+<li><p>如果不重写toString()方法，则创建的实例化对象直接输出是一个地址值</p>
+</li>
+</ul>
+<h3 id="四、Field"><a href="#四、Field" class="headerlink" title="四、Field"></a>四、Field</h3><h4 id="1-获取Class成员变量"><a href="#1-获取Class成员变量" class="headerlink" title="1.获取Class成员变量"></a>1.获取Class<font color='#d15252'>成员变量</font></h4><h5 id="Ⅰ-getFields"><a href="#Ⅰ-getFields" class="headerlink" title="Ⅰ.getFields()"></a>Ⅰ.getFields()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Field[] getFields() </span><br><span class="line"><span class="comment">//返回包含一个数组 Field对象反射由此表示的类或接口的所有可访问的公共字段 类对象。  </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取出所有Public修饰的成员变量</li>
+</ul>
+<h5 id="Ⅱ-getDeclaredFields"><a href="#Ⅱ-getDeclaredFields" class="headerlink" title="Ⅱ.getDeclaredFields()"></a>Ⅱ.getDeclaredFields()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Field[] getDeclaredFields() </span><br><span class="line"><span class="comment">//返回的数组 Field对象反映此表示的类或接口声明的所有字段 类对象 </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取出所有成员变量，包括private修饰的</li>
+</ul>
+<h5 id="Ⅲ-getField-String-name"><a href="#Ⅲ-getField-String-name" class="headerlink" title="Ⅲ.getField(String name)"></a>Ⅲ.getField(String name)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Field <span class="title">getField</span><span class="params">(String name)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回一个 Field对象，它反映此表示的类或接口的指定公共成员字段类对象 </span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取出指定的public修饰的成员变量</li>
+</ul>
+<h5 id="Ⅳ-getDeclaredField-String-name"><a href="#Ⅳ-getDeclaredField-String-name" class="headerlink" title="Ⅳ.getDeclaredField(String name)"></a>Ⅳ.getDeclaredField(String name)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Field <span class="title">getDeclaredField</span><span class="params">(String name)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回一个 Field对象，它反映此表示的类或接口的指定已声明字段类对象。  </span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取指定的成员变量，private也可以取出</li>
+</ul>
+<h4 id="4-给Class成员变量赋值"><a href="#4-给Class成员变量赋值" class="headerlink" title="4.给Class成员变量赋值"></a>4.给Class成员变量<font color='#d15252'>赋值</font></h4><h5 id="Ⅰ-set-Object-obj-Object-value"><a href="#Ⅰ-set-Object-obj-Object-value" class="headerlink" title="Ⅰ.set(Object obj, Object value)"></a>Ⅰ.set(Object obj, Object value)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">set</span><span class="params">(Object obj, Object value)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//将指定的对象参数中由此 Field对象表示的字段设置为指定的新值。  </span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取公共的成员变量</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/17/eo1Hp9LraVjMuOP.png" alt="image-20210817153600751"></p>
+<ul>
+<li>获取私有的成员变量</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/17/Hk8viMBxhaSXRAE.png" alt="image-20210817181152287"></p>
+<ul>
+<li>私有的成员变量赋值时需要暴力破解</li>
+</ul>
+<hr>
+<h3 id="五、Method"><a href="#五、Method" class="headerlink" title="五、Method"></a>五、Method</h3><h4 id="1-获取Class成员方法"><a href="#1-获取Class成员方法" class="headerlink" title="1.获取Class成员方法"></a>1.获取Class成员方法</h4><h5 id="Ⅰ-getMethods"><a href="#Ⅰ-getMethods" class="headerlink" title="Ⅰ.getMethods()"></a>Ⅰ.getMethods()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Method[] getMethods() </span><br><span class="line"><span class="comment">//返回一个包含 方法对象的数组， 方法对象反映由该 Class对象表示的类或接口的所有公共方法，包括由类或接口声明的对象以及从超类和超级接口继承的类。  </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>取出class中的所有<font color='#d15252'>Public修饰的</font>成员方法</p>
+</li>
+<li><p>会取出包括父类中继承的方法</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/17/oniWLADSya2NE4e.png" alt="image-20210817155232292"></p>
+<h5 id="Ⅱ-getDeclaredMethods"><a href="#Ⅱ-getDeclaredMethods" class="headerlink" title="Ⅱ.getDeclaredMethods()"></a>Ⅱ.getDeclaredMethods()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Methods[] getDeclaredMethods() </span><br><span class="line"><span class="comment">//返回一个包含 方法对象的数组， 方法对象反映由 Class对象表示的类或接口的所有声明方法，包括public，protected，default（package）访问和私有方法，但不包括继承方法。 </span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取出class中的所有成员方法，包括private修饰的</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/17/8GmaHKep6rk35Bn.png" alt="image-20210817155435479"></p>
+<h5 id="Ⅲ-getMethod-String-name-Class-lt-gt-…-parameterTypes"><a href="#Ⅲ-getMethod-String-name-Class-lt-gt-…-parameterTypes" class="headerlink" title="Ⅲ.getMethod(String name, Class&lt;?&gt;… parameterTypes)"></a>Ⅲ.getMethod(String name, Class&lt;?&gt;… parameterTypes)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Methods <span class="title">getMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//返回一个 方法对象，该对象反映由该 Class对象表示的类或接口的指定公共成员方法。 </span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取出class中的指定的Public修饰的成员方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/17/T5awcy9gsUKBGt2.png" alt="image-20210817155835845"></p>
+<h5 id="Ⅳ-getDeclaredMethod-String-name-Class-lt-gt-…-parameterTypes"><a href="#Ⅳ-getDeclaredMethod-String-name-Class-lt-gt-…-parameterTypes" class="headerlink" title="Ⅳ.getDeclaredMethod(String name, Class&lt;?&gt;… parameterTypes)"></a>Ⅳ.getDeclaredMethod(String name, Class&lt;?&gt;… parameterTypes)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Methods <span class="title">getDeclaredMethod</span><span class="params">(String name, Class&lt;?&gt;... parameterTypes)</span> <span class="comment">//返回一个 方法对象，它反映此表示的类或接口的指定声明的方法 Class对象。  </span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取出指定的成员方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/17/Rs8FvogtaNVdhib.png" alt="image-20210817160013845"></p>
+<h4 id="2-使用成员方法"><a href="#2-使用成员方法" class="headerlink" title="2.使用成员方法"></a>2.使用成员方法</h4><h5 id="Ⅰ-invoke-Object-obj-Object…-args"><a href="#Ⅰ-invoke-Object-obj-Object…-args" class="headerlink" title="Ⅰ.invoke(Object obj, Object… args)"></a>Ⅰ.invoke(Object obj, Object… args)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Object <span class="title">invoke</span><span class="params">(Object obj, Object... args)</span> </span></span><br><span class="line"><span class="function"><span class="comment">//在具有指定参数的指定对象上调用此 方法对象表示的基础方法。  </span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将取出的<font color='#d15252'><strong>方法和对象绑定</strong></font></li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/17/bv7ZaMqpmjufntk.png" alt="image-20210817212251329"></p>
+<hr>
+<h3 id="六、AccessibleObject"><a href="#六、AccessibleObject" class="headerlink" title="六、AccessibleObject"></a>六、AccessibleObject</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>AccessibleObject是 Field、Constructor、Method的父类</li>
+<li>作用：看你是否除了public修饰 （安全检查机制）</li>
+</ul>
+<h4 id="2-成员方法"><a href="#2-成员方法" class="headerlink" title="2.成员方法"></a>2.成员方法</h4><h5 id="Ⅰ-setAccessible-boolean-f-暴力破解"><a href="#Ⅰ-setAccessible-boolean-f-暴力破解" class="headerlink" title="Ⅰ.setAccessible(boolean f) 暴力破解"></a>Ⅰ.setAccessible(boolean f) 暴力破解</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAccessible</span><span class="params">(<span class="keyword">boolean</span> flag)</span> </span></span><br><span class="line"><span class="function">    <span class="comment">//将此反射对象的 accessible标志设置为指示的布尔值。  </span></span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/08/17/foUpWaY9lqKbHv1.png" alt="image-20210817143740180"></p>
+<h3 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h3><h4 id="1-泛型擦除"><a href="#1-泛型擦除" class="headerlink" title="1.泛型擦除"></a>1.泛型擦除</h4><ul>
+<li><img src="https://i.loli.net/2021/08/17/3xXvCpmNDtfj4F2.png" alt="image-20210817171924074"></li>
+</ul>
+<h4 id="2-获取当前src目录"><a href="#2-获取当前src目录" class="headerlink" title="2.获取当前src目录"></a>2.获取当前src目录<img src="https://i.loli.net/2021/08/18/FBsTqWeIxmafXlR.png" alt="image-20210818093158387"></h4><ul>
+<li><p>获取当前src目录</p>
+</li>
+<li><p>会出现取出字符串带双引号，forName无法识别的问题</p>
+</li>
+</ul>
+<p><img src="C:\Users\GikH\AppData\Roaming\Typora\typora-user-images\image-20210818104512010.png" alt="image-20210818104512010"></p>
+<p><img src="https://i.loli.net/2021/08/18/ToLq5lAhDfyrCRY.png" alt="image-20210818104515650"></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>反射</tag>
       </tags>
   </entry>
   <entry>
@@ -4040,6 +4394,134 @@
       </tags>
   </entry>
   <entry>
+    <title>数组</title>
+    <url>/2021/08/25/%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h3 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h3><h4 id="1-什么是数组"><a href="#1-什么是数组" class="headerlink" title="1.什么是数组"></a>1.什么是数组</h4><ul>
+<li>概念：数组是存储多个变量的容器（数据类型要一致）<ul>
+<li>数组可以存储基本数据类型也可以存储引用数据类型</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-定义数组"><a href="#2-定义数组" class="headerlink" title="2.定义数组"></a>2.定义数组</h4><ul>
+<li><p>第一种格式：</p>
+<ul>
+<li><p>数据类型 数组名[] ；</p>
+<p>例：<code>int arr1[]</code>；</p>
+</li>
+</ul>
+</li>
+<li><p>第二种格式：</p>
+<ul>
+<li><p>数据类型[] 数组名</p>
+<p>例：<code>int[] arr2</code>;</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-数组的定义和初始化格式"><a href="#3-数组的定义和初始化格式" class="headerlink" title="3.数组的定义和初始化格式"></a>3.数组的定义和初始化格式</h4><h5 id="①-概念："><a href="#①-概念：" class="headerlink" title="① 概念："></a>① 概念：</h5><ul>
+<li>从内存的原来看，数组是一组存储变量的容器<ul>
+<li>并且内存中，堆内存是空闲的，所以我们可以在堆内存中定义一个数组存储数据<ul>
+<li>要想在堆内存中创建数组，必须要将Cpu的执行权由栈区交给堆区<font color='#d15252'>（new）</font>关键字</li>
+</ul>
+</li>
+<li>在堆区中，开辟内存的目的是数据，而开辟内存空间，就需要用到数组类型</li>
+</ul>
+</li>
+<li>以上两步可知，在堆区创建数组  <code>new int[];</code></li>
+<li>创建数组后，需要在栈区创建一个变量，存储堆区数组的地址值，用来使用数组</li>
+</ul>
+<h5 id="②动态初始化：只指定长度，初始值默认"><a href="#②动态初始化：只指定长度，初始值默认" class="headerlink" title="②动态初始化：只指定长度，初始值默认"></a>②<font color='#d15252'>动态初始化</font>：只指定长度，初始值默认</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = <span class="keyword">new</span> <span class="keyword">int</span>[数组长度]；</span><br><span class="line"></span><br><span class="line">例：<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>系统初始默认值，int是0 ，String是null</li>
+</ul>
+<h5 id="③静态初始化：指定初始值，系统默认长度"><a href="#③静态初始化：指定初始值，系统默认长度" class="headerlink" title="③静态初始化：指定初始值，系统默认长度"></a>③静态初始化：指定初始值，系统默认长度</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-数组的数据操作"><a href="#4-数组的数据操作" class="headerlink" title="4.数组的数据操作"></a>4.数组的数据操作</h4><h5 id="Ⅰ-赋值操作"><a href="#Ⅰ-赋值操作" class="headerlink" title="Ⅰ.赋值操作"></a>Ⅰ.赋值操作</h5><ul>
+<li><code>数组名[索引] = 数组；</code></li>
+</ul>
+<h5 id="Ⅱ-取值操作"><a href="#Ⅱ-取值操作" class="headerlink" title="Ⅱ.取值操作"></a>Ⅱ.取值操作</h5><p>通过数组自带的索引取值</p>
+<ul>
+<li>直接取值<ul>
+<li>直接打印到控制台，比较方便，但无法对数据继续进行操作</li>
+</ul>
+</li>
+<li><font color='#d15252'>赋值取值</font><ul>
+<li>创建一个变量保存数据<ul>
+<li><code>变量名 = 数组名[索引]</code></li>
+<li>比较繁琐，但可以对数据进行多次操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅲ-数组的特性"><a href="#Ⅲ-数组的特性" class="headerlink" title="Ⅲ.数组的特性"></a>Ⅲ.数组的特性</h5><ul>
+<li>length表示数组的长度<ul>
+<li><code>arr.length    </code></li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅳ-练习"><a href="#Ⅳ-练习" class="headerlink" title="Ⅳ.练习"></a>Ⅳ.练习</h5><ul>
+<li>数组中存5个整数，求和，以及求平均数</li>
+<li>数组中存5个数，找出最大、最小的两个数</li>
+<li>冒泡排序：从第一个数开始，依次和后一个数比较，小的放前，大的放后</li>
+</ul>
+<h5 id="Ⅴ-数组常见异常"><a href="#Ⅴ-数组常见异常" class="headerlink" title="Ⅴ.数组常见异常"></a>Ⅴ.数组常见异常</h5><ul>
+<li><p>索引超出范围，索引越界</p>
+<ul>
+<li><code> java.lang.ArrayIndexOutOfBoundsException:</code></li>
+</ul>
+</li>
+<li><p>空指针异常</p>
+<ul>
+<li><code>java.lang.NullPointerException</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="二、二维数组"><a href="#二、二维数组" class="headerlink" title="二、二维数组"></a>二、二维数组</h3><h4 id="1-二维数组的概念"><a href="#1-二维数组的概念" class="headerlink" title="1.二维数组的概念"></a>1.二维数组的概念</h4><ul>
+<li>二维数组就是一个元素为一维数组的数组</li>
+</ul>
+<h4 id="2-二维数组的定义格式"><a href="#2-二维数组的定义格式" class="headerlink" title="2.二维数组的定义格式"></a>2.二维数组的定义格式</h4><h5 id="①动态初始化"><a href="#①动态初始化" class="headerlink" title="①动态初始化"></a>①动态初始化</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[][] 变量名 = <span class="keyword">new</span> 数据类型[m][n];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>arr[m] [n] 表示第m+1个一维数组的第n+1个数</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[][] 变量名 = <span class="keyword">new</span> 数据类型[m][];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>没有给出一维数组的元素个数，可以动态给出</p>
+</blockquote>
+<h5 id="②静态初始化"><a href="#②静态初始化" class="headerlink" title="②静态初始化"></a>②静态初始化</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[][] 变量名 = <span class="keyword">new</span> 数据类型[][]&#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;......&#125;;</span><br><span class="line"></span><br><span class="line">简化：</span><br><span class="line">    数据类型[][] 变量名 = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;...&#125;;</span><br><span class="line">例如：<span class="keyword">int</span>[][] arr = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;,&#123;<span class="number">6</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-二维数组的数据操作"><a href="#3-二维数组的数据操作" class="headerlink" title="3.二维数组的数据操作"></a>3.二维数组的数据操作</h4><h5 id="Ⅰ-取数据"><a href="#Ⅰ-取数据" class="headerlink" title="Ⅰ.取数据"></a>Ⅰ.取数据</h5><ul>
+<li><p>直接取出</p>
+<ul>
+<li>用双层嵌套循环，第一层循环取出一维数组，第二层循环取出一维数组里的数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义一个二维数组</span></span><br><span class="line"><span class="keyword">int</span>[][] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][<span class="number">4</span>];</span><br><span class="line"><span class="comment">//外层循环取出一位数组</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">    <span class="comment">//内存循环遍历一维数组</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;arr[i].length;j++)&#123;</span><br><span class="line">		System.out.println(arr[i][j]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>赋值取</p>
+<ul>
+<li><code>int a = arr[0][1];</code>取出第一个一维数组的第二个数</li>
+</ul>
+</li>
+</ul>
+<h5 id="②赋值"><a href="#②赋值" class="headerlink" title="②赋值"></a>②赋值</h5><ul>
+<li>格式：<code>变量名[索引第几个数组][索引第几个数] = 数据</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+        <tag>二维数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>异常和迭代器</title>
     <url>/2021/08/25/%E5%BC%82%E5%B8%B8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
     <content><![CDATA[<h3 id="一、迭代器"><a href="#一、迭代器" class="headerlink" title="一、迭代器"></a>一、迭代器</h3><h4 id="1-next"><a href="#1-next" class="headerlink" title="1.next()"></a>1.next()</h4><ul>
@@ -4213,134 +4695,6 @@
       <tags>
         <tag>异常</tag>
         <tag>迭代器</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数组</title>
-    <url>/2021/08/25/%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h3 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h3><h4 id="1-什么是数组"><a href="#1-什么是数组" class="headerlink" title="1.什么是数组"></a>1.什么是数组</h4><ul>
-<li>概念：数组是存储多个变量的容器（数据类型要一致）<ul>
-<li>数组可以存储基本数据类型也可以存储引用数据类型</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-定义数组"><a href="#2-定义数组" class="headerlink" title="2.定义数组"></a>2.定义数组</h4><ul>
-<li><p>第一种格式：</p>
-<ul>
-<li><p>数据类型 数组名[] ；</p>
-<p>例：<code>int arr1[]</code>；</p>
-</li>
-</ul>
-</li>
-<li><p>第二种格式：</p>
-<ul>
-<li><p>数据类型[] 数组名</p>
-<p>例：<code>int[] arr2</code>;</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-数组的定义和初始化格式"><a href="#3-数组的定义和初始化格式" class="headerlink" title="3.数组的定义和初始化格式"></a>3.数组的定义和初始化格式</h4><h5 id="①-概念："><a href="#①-概念：" class="headerlink" title="① 概念："></a>① 概念：</h5><ul>
-<li>从内存的原来看，数组是一组存储变量的容器<ul>
-<li>并且内存中，堆内存是空闲的，所以我们可以在堆内存中定义一个数组存储数据<ul>
-<li>要想在堆内存中创建数组，必须要将Cpu的执行权由栈区交给堆区<font color='#d15252'>（new）</font>关键字</li>
-</ul>
-</li>
-<li>在堆区中，开辟内存的目的是数据，而开辟内存空间，就需要用到数组类型</li>
-</ul>
-</li>
-<li>以上两步可知，在堆区创建数组  <code>new int[];</code></li>
-<li>创建数组后，需要在栈区创建一个变量，存储堆区数组的地址值，用来使用数组</li>
-</ul>
-<h5 id="②动态初始化：只指定长度，初始值默认"><a href="#②动态初始化：只指定长度，初始值默认" class="headerlink" title="②动态初始化：只指定长度，初始值默认"></a>②<font color='#d15252'>动态初始化</font>：只指定长度，初始值默认</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = <span class="keyword">new</span> <span class="keyword">int</span>[数组长度]；</span><br><span class="line"></span><br><span class="line">例：<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>系统初始默认值，int是0 ，String是null</li>
-</ul>
-<h5 id="③静态初始化：指定初始值，系统默认长度"><a href="#③静态初始化：指定初始值，系统默认长度" class="headerlink" title="③静态初始化：指定初始值，系统默认长度"></a>③静态初始化：指定初始值，系统默认长度</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[] 数组名 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="4-数组的数据操作"><a href="#4-数组的数据操作" class="headerlink" title="4.数组的数据操作"></a>4.数组的数据操作</h4><h5 id="Ⅰ-赋值操作"><a href="#Ⅰ-赋值操作" class="headerlink" title="Ⅰ.赋值操作"></a>Ⅰ.赋值操作</h5><ul>
-<li><code>数组名[索引] = 数组；</code></li>
-</ul>
-<h5 id="Ⅱ-取值操作"><a href="#Ⅱ-取值操作" class="headerlink" title="Ⅱ.取值操作"></a>Ⅱ.取值操作</h5><p>通过数组自带的索引取值</p>
-<ul>
-<li>直接取值<ul>
-<li>直接打印到控制台，比较方便，但无法对数据继续进行操作</li>
-</ul>
-</li>
-<li><font color='#d15252'>赋值取值</font><ul>
-<li>创建一个变量保存数据<ul>
-<li><code>变量名 = 数组名[索引]</code></li>
-<li>比较繁琐，但可以对数据进行多次操作</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="Ⅲ-数组的特性"><a href="#Ⅲ-数组的特性" class="headerlink" title="Ⅲ.数组的特性"></a>Ⅲ.数组的特性</h5><ul>
-<li>length表示数组的长度<ul>
-<li><code>arr.length    </code></li>
-</ul>
-</li>
-</ul>
-<h5 id="Ⅳ-练习"><a href="#Ⅳ-练习" class="headerlink" title="Ⅳ.练习"></a>Ⅳ.练习</h5><ul>
-<li>数组中存5个整数，求和，以及求平均数</li>
-<li>数组中存5个数，找出最大、最小的两个数</li>
-<li>冒泡排序：从第一个数开始，依次和后一个数比较，小的放前，大的放后</li>
-</ul>
-<h5 id="Ⅴ-数组常见异常"><a href="#Ⅴ-数组常见异常" class="headerlink" title="Ⅴ.数组常见异常"></a>Ⅴ.数组常见异常</h5><ul>
-<li><p>索引超出范围，索引越界</p>
-<ul>
-<li><code> java.lang.ArrayIndexOutOfBoundsException:</code></li>
-</ul>
-</li>
-<li><p>空指针异常</p>
-<ul>
-<li><code>java.lang.NullPointerException</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="二、二维数组"><a href="#二、二维数组" class="headerlink" title="二、二维数组"></a>二、二维数组</h3><h4 id="1-二维数组的概念"><a href="#1-二维数组的概念" class="headerlink" title="1.二维数组的概念"></a>1.二维数组的概念</h4><ul>
-<li>二维数组就是一个元素为一维数组的数组</li>
-</ul>
-<h4 id="2-二维数组的定义格式"><a href="#2-二维数组的定义格式" class="headerlink" title="2.二维数组的定义格式"></a>2.二维数组的定义格式</h4><h5 id="①动态初始化"><a href="#①动态初始化" class="headerlink" title="①动态初始化"></a>①动态初始化</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[][] 变量名 = <span class="keyword">new</span> 数据类型[m][n];</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>arr[m] [n] 表示第m+1个一维数组的第n+1个数</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[][] 变量名 = <span class="keyword">new</span> 数据类型[m][];</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>没有给出一维数组的元素个数，可以动态给出</p>
-</blockquote>
-<h5 id="②静态初始化"><a href="#②静态初始化" class="headerlink" title="②静态初始化"></a>②静态初始化</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">数据类型[][] 变量名 = <span class="keyword">new</span> 数据类型[][]&#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;......&#125;;</span><br><span class="line"></span><br><span class="line">简化：</span><br><span class="line">    数据类型[][] 变量名 = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;...&#125;;</span><br><span class="line">例如：<span class="keyword">int</span>[][] arr = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;,&#123;<span class="number">6</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="3-二维数组的数据操作"><a href="#3-二维数组的数据操作" class="headerlink" title="3.二维数组的数据操作"></a>3.二维数组的数据操作</h4><h5 id="Ⅰ-取数据"><a href="#Ⅰ-取数据" class="headerlink" title="Ⅰ.取数据"></a>Ⅰ.取数据</h5><ul>
-<li><p>直接取出</p>
-<ul>
-<li>用双层嵌套循环，第一层循环取出一维数组，第二层循环取出一维数组里的数</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义一个二维数组</span></span><br><span class="line"><span class="keyword">int</span>[][] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][<span class="number">4</span>];</span><br><span class="line"><span class="comment">//外层循环取出一位数组</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">    <span class="comment">//内存循环遍历一维数组</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;arr[i].length;j++)&#123;</span><br><span class="line">		System.out.println(arr[i][j]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>赋值取</p>
-<ul>
-<li><code>int a = arr[0][1];</code>取出第一个一维数组的第二个数</li>
-</ul>
-</li>
-</ul>
-<h5 id="②赋值"><a href="#②赋值" class="headerlink" title="②赋值"></a>②赋值</h5><ul>
-<li>格式：<code>变量名[索引第几个数组][索引第几个数] = 数据</code></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-        <tag>二维数组</tag>
       </tags>
   </entry>
   <entry>
@@ -4812,144 +5166,6 @@
       </tags>
   </entry>
   <entry>
-    <title>流程控制和键盘录入</title>
-    <url>/2021/08/25/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%92%8C%E9%94%AE%E7%9B%98%E5%BD%95%E5%85%A5/</url>
-    <content><![CDATA[<h3 id="一、表达式、语句体、块"><a href="#一、表达式、语句体、块" class="headerlink" title="一、表达式、语句体、块"></a>一、表达式、语句体、块</h3><h4 id="1-什么是表达式？"><a href="#1-什么是表达式？" class="headerlink" title="1.什么是表达式？"></a>1.什么是表达式？</h4><ul>
-<li>一个变量、运算符、或者方法构成的一个新的构建体（一条符合Java语言的代码）</li>
-<li>最终的结果是单个值</li>
-</ul>
-<h4 id="2-什么是语句体"><a href="#2-什么是语句体" class="headerlink" title="2.什么是语句体"></a>2.什么是语句体</h4><ul>
-<li>一条语句构成了一个完整的执行单元</li>
-<li>java语句中，节点是：结束</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a =  <span class="number">5</span>; <span class="comment">//语句体</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3-块"><a href="#3-块" class="headerlink" title="3.块"></a>3.块</h4><ul>
-<li>{  }</li>
-</ul>
-<h3 id="二、控制流程语句"><a href="#二、控制流程语句" class="headerlink" title="二、控制流程语句"></a>二、控制流程语句</h3><h4 id="1-顺序结构"><a href="#1-顺序结构" class="headerlink" title="1.顺序结构"></a>1.顺序结构</h4><ul>
-<li>按照代码边学顺序，自上而下运行</li>
-</ul>
-<h4 id="2-选择结构"><a href="#2-选择结构" class="headerlink" title="2.选择结构"></a>2.选择结构</h4><h5 id="①-IF-语句"><a href="#①-IF-语句" class="headerlink" title="① IF 语句"></a>① IF 语句</h5><ul>
-<li><p>格式一 </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (比较表达式)&#123;</span><br><span class="line">    <span class="comment">//比较表达式的值为boolean类型 ture或false</span></span><br><span class="line">	执行代码块;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>格式二</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(比较表达式)&#123;</span><br><span class="line">    代码体    <span class="comment">//(ture)执行</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    代码体	   <span class="comment">//(false)执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>格式三</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(比较表达式)&#123;</span><br><span class="line">    ....</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(比较表达式<span class="number">2</span>)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(比较表达式<span class="number">3</span>)&#123;	<span class="comment">//一旦有true即运行相应代码并结束</span></span><br><span class="line">    ...</span><br><span class="line">&#125;   ....</span><br><span class="line">    ....</span><br><span class="line">    <span class="keyword">else</span>&#123;		<span class="comment">//如果全是false，则执行else内的内容</span></span><br><span class="line">        ..</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<blockquote>
-<p>所有三目运算符都可以转换为if语句表达</p>
-</blockquote>
-<h5 id="②switch-语句"><a href="#②switch-语句" class="headerlink" title="②switch 语句"></a>②switch 语句</h5><ul>
-<li><p>格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>:</span><br><span class="line">		语句体<span class="number">1</span>；</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>:</span><br><span class="line">		语句体<span class="number">2</span></span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	......		......</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		语句体n+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<blockquote>
-<p>注意事项：① case后面只能跟常量，不能是变量</p>
-<p>​                   ②多个case的值不能相同</p>
-<p>case击穿：如果不写break关键字，则case匹配时，依次执行后面所有case语句体</p>
-</blockquote>
-<h5 id="③-If-和-Switch-的区别"><a href="#③-If-和-Switch-的区别" class="headerlink" title="③ If 和 Switch 的区别"></a>③ If 和 Switch 的区别</h5><ul>
-<li>if<ul>
-<li>针对结果是boolean类型的判断</li>
-<li>针对一个范围的判断</li>
-<li>针对几个常量的判断</li>
-</ul>
-</li>
-<li>switch<ul>
-<li>针对几个常量的判断</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-循环结构"><a href="#3-循环结构" class="headerlink" title="3.循环结构"></a>3.循环结构</h4><h5 id="①-while循环语句"><a href="#①-while循环语句" class="headerlink" title="① while循环语句"></a>① while循环语句</h5><ul>
-<li><p>格式一</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">初始化语句;</span><br><span class="line"><span class="keyword">while</span>(比较表达式)&#123;</span><br><span class="line">	语句体；</span><br><span class="line">    (控制条件);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>格式二：do…while</p>
-<ul>
-<li>最少执行一次代码，然后再进行判断循环</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	循环体语句；</span><br><span class="line">    (控制条件);</span><br><span class="line">&#125;<span class="keyword">while</span>(判断条件语句);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>while语句可以和for循环等价转换</p>
-</blockquote>
-</li>
-</ul>
-<h5 id="②for循环语句"><a href="#②for循环语句" class="headerlink" title="②for循环语句"></a>②for循环语句</h5><ul>
-<li><p>格式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(初始化语句；判断条件语句；控制条件语句)&#123;</span><br><span class="line">	循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>for循环的执行流程：</p>
-<ul>
-<li>执行初始化语句</li>
-<li>执行判断条件语句，看结果是true还是false(true进入循环，false结束)</li>
-<li>执行循环体语句</li>
-<li>执行控制条件语句</li>
-<li>返回第二步</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>水仙花数：指一个数(最少三位)，其各位的三次方相加等于这个数</p>
-<p>例如：157    370   371</p>
-</blockquote>
-<h5 id="③补充知识点"><a href="#③补充知识点" class="headerlink" title="③补充知识点"></a>③补充知识点</h5><ul>
-<li><p>最简单的死循环</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">	循环体;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>( ; ; )&#123;</span><br><span class="line">    循环体;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>输出语句不换行</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.print<span class="literal">()</span>;  <span class="comment">//不写ln</span></span><br></pre></td></tr></table></figure></li>
-<li><p>循环嵌套时，外循环控制行数，内循环控制列数</p>
-</li>
-</ul>
-<h4 id="4-分支结构—跳转控制语句"><a href="#4-分支结构—跳转控制语句" class="headerlink" title="4.分支结构—跳转控制语句"></a>4.分支结构—跳转控制语句</h4><ul>
-<li>三种关键字都有终止的效果，但是作用域不一样</li>
-</ul>
-<h5 id="①-break-中断"><a href="#①-break-中断" class="headerlink" title="① break 中断"></a>① break 中断</h5><ul>
-<li>存在与switch或循环语句中，离开这两个环境时，无意义</li>
-<li>作用：<ul>
-<li>跳出单层循环（无标签）</li>
-<li>跳出多层循环（带标签）<ul>
-<li>格式：<code>标签名：循环体语句</code></li>
-<li>标签名要符合Java的命名规则</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="②-continue-继续"><a href="#②-continue-继续" class="headerlink" title="② continue 继续"></a>② continue 继续</h5><ul>
-<li>存在与循环语句中，离开循环无意义</li>
-<li>作用：<ul>
-<li>break退出当前循环</li>
-<li>continue退出本次循环，继续下一次循环</li>
-<li>也可以带标签使用</li>
-</ul>
-</li>
-</ul>
-<h5 id="③-return-返回"><a href="#③-return-返回" class="headerlink" title="③ return 返回"></a>③ return 返回</h5><ul>
-<li>return不是为了跳出循环，而是为了结束方法</li>
-<li>return后面的语句全部不执行</li>
-</ul>
-<h3 id="三、键盘录入数据"><a href="#三、键盘录入数据" class="headerlink" title="三、键盘录入数据"></a>三、键盘录入数据</h3><h5 id="第一步：导包（java封装好的Scanner方法）"><a href="#第一步：导包（java封装好的Scanner方法）" class="headerlink" title="第一步：导包（java封装好的Scanner方法）"></a>第一步：导包（java封装好的Scanner方法）</h5><p><code>import java.util.Scanner;</code></p>
-<h5 id="第二步：Scanner加载进内存"><a href="#第二步：Scanner加载进内存" class="headerlink" title="第二步：Scanner加载进内存"></a>第二步：Scanner加载进内存</h5><p><code>Scanner sc = new Scanner(System.in);</code></p>
-<blockquote>
-<p>new关键字将栈区的CPU执行权交给堆区，堆区运行完后交还给栈区</p>
-</blockquote>
-<h5 id="第三步：捕获键盘录入数据并保存"><a href="#第三步：捕获键盘录入数据并保存" class="headerlink" title="第三步：捕获键盘录入数据并保存"></a>第三步：捕获键盘录入数据并保存</h5><p><code>int a = sc.nextInt();</code></p>
-<blockquote>
-<p>nextInt()录入int类型 / next()字符串类型</p>
-</blockquote>
-<p><img src="https://i.loli.net/2021/07/06/lvw8Aca4Kk2MRPJ.png" alt="image-20210706121609079"></p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>流程控制</tag>
-        <tag>Scanner</tag>
-        <tag>If</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>线程的生命周期、安全隐患和通信</title>
     <url>/2021/08/25/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E3%80%81%E5%AE%89%E5%85%A8%E9%9A%90%E6%82%A3%E5%92%8C%E9%80%9A%E4%BF%A1/</url>
     <content><![CDATA[<h3 id="一、线程的生命周期"><a href="#一、线程的生命周期" class="headerlink" title="一、线程的生命周期"></a>一、线程的生命周期</h3><ul>
@@ -5106,6 +5322,144 @@
       </categories>
       <tags>
         <tag>多线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>流程控制和键盘录入</title>
+    <url>/2021/08/25/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%92%8C%E9%94%AE%E7%9B%98%E5%BD%95%E5%85%A5/</url>
+    <content><![CDATA[<h3 id="一、表达式、语句体、块"><a href="#一、表达式、语句体、块" class="headerlink" title="一、表达式、语句体、块"></a>一、表达式、语句体、块</h3><h4 id="1-什么是表达式？"><a href="#1-什么是表达式？" class="headerlink" title="1.什么是表达式？"></a>1.什么是表达式？</h4><ul>
+<li>一个变量、运算符、或者方法构成的一个新的构建体（一条符合Java语言的代码）</li>
+<li>最终的结果是单个值</li>
+</ul>
+<h4 id="2-什么是语句体"><a href="#2-什么是语句体" class="headerlink" title="2.什么是语句体"></a>2.什么是语句体</h4><ul>
+<li>一条语句构成了一个完整的执行单元</li>
+<li>java语句中，节点是：结束</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a =  <span class="number">5</span>; <span class="comment">//语句体</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-块"><a href="#3-块" class="headerlink" title="3.块"></a>3.块</h4><ul>
+<li>{  }</li>
+</ul>
+<h3 id="二、控制流程语句"><a href="#二、控制流程语句" class="headerlink" title="二、控制流程语句"></a>二、控制流程语句</h3><h4 id="1-顺序结构"><a href="#1-顺序结构" class="headerlink" title="1.顺序结构"></a>1.顺序结构</h4><ul>
+<li>按照代码边学顺序，自上而下运行</li>
+</ul>
+<h4 id="2-选择结构"><a href="#2-选择结构" class="headerlink" title="2.选择结构"></a>2.选择结构</h4><h5 id="①-IF-语句"><a href="#①-IF-语句" class="headerlink" title="① IF 语句"></a>① IF 语句</h5><ul>
+<li><p>格式一 </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (比较表达式)&#123;</span><br><span class="line">    <span class="comment">//比较表达式的值为boolean类型 ture或false</span></span><br><span class="line">	执行代码块;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>格式二</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(比较表达式)&#123;</span><br><span class="line">    代码体    <span class="comment">//(ture)执行</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    代码体	   <span class="comment">//(false)执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>格式三</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(比较表达式)&#123;</span><br><span class="line">    ....</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(比较表达式<span class="number">2</span>)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(比较表达式<span class="number">3</span>)&#123;	<span class="comment">//一旦有true即运行相应代码并结束</span></span><br><span class="line">    ...</span><br><span class="line">&#125;   ....</span><br><span class="line">    ....</span><br><span class="line">    <span class="keyword">else</span>&#123;		<span class="comment">//如果全是false，则执行else内的内容</span></span><br><span class="line">        ..</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>所有三目运算符都可以转换为if语句表达</p>
+</blockquote>
+<h5 id="②switch-语句"><a href="#②switch-语句" class="headerlink" title="②switch 语句"></a>②switch 语句</h5><ul>
+<li><p>格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">1</span>:</span><br><span class="line">		语句体<span class="number">1</span>；</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> 值<span class="number">2</span>:</span><br><span class="line">		语句体<span class="number">2</span></span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	......		......</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		语句体n+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>注意事项：① case后面只能跟常量，不能是变量</p>
+<p>​                   ②多个case的值不能相同</p>
+<p>case击穿：如果不写break关键字，则case匹配时，依次执行后面所有case语句体</p>
+</blockquote>
+<h5 id="③-If-和-Switch-的区别"><a href="#③-If-和-Switch-的区别" class="headerlink" title="③ If 和 Switch 的区别"></a>③ If 和 Switch 的区别</h5><ul>
+<li>if<ul>
+<li>针对结果是boolean类型的判断</li>
+<li>针对一个范围的判断</li>
+<li>针对几个常量的判断</li>
+</ul>
+</li>
+<li>switch<ul>
+<li>针对几个常量的判断</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-循环结构"><a href="#3-循环结构" class="headerlink" title="3.循环结构"></a>3.循环结构</h4><h5 id="①-while循环语句"><a href="#①-while循环语句" class="headerlink" title="① while循环语句"></a>① while循环语句</h5><ul>
+<li><p>格式一</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">初始化语句;</span><br><span class="line"><span class="keyword">while</span>(比较表达式)&#123;</span><br><span class="line">	语句体；</span><br><span class="line">    (控制条件);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>格式二：do…while</p>
+<ul>
+<li>最少执行一次代码，然后再进行判断循环</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	循环体语句；</span><br><span class="line">    (控制条件);</span><br><span class="line">&#125;<span class="keyword">while</span>(判断条件语句);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>while语句可以和for循环等价转换</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="②for循环语句"><a href="#②for循环语句" class="headerlink" title="②for循环语句"></a>②for循环语句</h5><ul>
+<li><p>格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(初始化语句；判断条件语句；控制条件语句)&#123;</span><br><span class="line">	循环体；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>for循环的执行流程：</p>
+<ul>
+<li>执行初始化语句</li>
+<li>执行判断条件语句，看结果是true还是false(true进入循环，false结束)</li>
+<li>执行循环体语句</li>
+<li>执行控制条件语句</li>
+<li>返回第二步</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>水仙花数：指一个数(最少三位)，其各位的三次方相加等于这个数</p>
+<p>例如：157    370   371</p>
+</blockquote>
+<h5 id="③补充知识点"><a href="#③补充知识点" class="headerlink" title="③补充知识点"></a>③补充知识点</h5><ul>
+<li><p>最简单的死循环</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">	循环体;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>( ; ; )&#123;</span><br><span class="line">    循环体;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>输出语句不换行</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">System</span>.</span></span>out.print<span class="literal">()</span>;  <span class="comment">//不写ln</span></span><br></pre></td></tr></table></figure></li>
+<li><p>循环嵌套时，外循环控制行数，内循环控制列数</p>
+</li>
+</ul>
+<h4 id="4-分支结构—跳转控制语句"><a href="#4-分支结构—跳转控制语句" class="headerlink" title="4.分支结构—跳转控制语句"></a>4.分支结构—跳转控制语句</h4><ul>
+<li>三种关键字都有终止的效果，但是作用域不一样</li>
+</ul>
+<h5 id="①-break-中断"><a href="#①-break-中断" class="headerlink" title="① break 中断"></a>① break 中断</h5><ul>
+<li>存在与switch或循环语句中，离开这两个环境时，无意义</li>
+<li>作用：<ul>
+<li>跳出单层循环（无标签）</li>
+<li>跳出多层循环（带标签）<ul>
+<li>格式：<code>标签名：循环体语句</code></li>
+<li>标签名要符合Java的命名规则</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="②-continue-继续"><a href="#②-continue-继续" class="headerlink" title="② continue 继续"></a>② continue 继续</h5><ul>
+<li>存在与循环语句中，离开循环无意义</li>
+<li>作用：<ul>
+<li>break退出当前循环</li>
+<li>continue退出本次循环，继续下一次循环</li>
+<li>也可以带标签使用</li>
+</ul>
+</li>
+</ul>
+<h5 id="③-return-返回"><a href="#③-return-返回" class="headerlink" title="③ return 返回"></a>③ return 返回</h5><ul>
+<li>return不是为了跳出循环，而是为了结束方法</li>
+<li>return后面的语句全部不执行</li>
+</ul>
+<h3 id="三、键盘录入数据"><a href="#三、键盘录入数据" class="headerlink" title="三、键盘录入数据"></a>三、键盘录入数据</h3><h5 id="第一步：导包（java封装好的Scanner方法）"><a href="#第一步：导包（java封装好的Scanner方法）" class="headerlink" title="第一步：导包（java封装好的Scanner方法）"></a>第一步：导包（java封装好的Scanner方法）</h5><p><code>import java.util.Scanner;</code></p>
+<h5 id="第二步：Scanner加载进内存"><a href="#第二步：Scanner加载进内存" class="headerlink" title="第二步：Scanner加载进内存"></a>第二步：Scanner加载进内存</h5><p><code>Scanner sc = new Scanner(System.in);</code></p>
+<blockquote>
+<p>new关键字将栈区的CPU执行权交给堆区，堆区运行完后交还给栈区</p>
+</blockquote>
+<h5 id="第三步：捕获键盘录入数据并保存"><a href="#第三步：捕获键盘录入数据并保存" class="headerlink" title="第三步：捕获键盘录入数据并保存"></a>第三步：捕获键盘录入数据并保存</h5><p><code>int a = sc.nextInt();</code></p>
+<blockquote>
+<p>nextInt()录入int类型 / next()字符串类型</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/07/06/lvw8Aca4Kk2MRPJ.png" alt="image-20210706121609079"></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>流程控制</tag>
+        <tag>Scanner</tag>
+        <tag>If</tag>
       </tags>
   </entry>
   <entry>
@@ -6371,360 +6725,6 @@
         <tag>IO流</tag>
         <tag>转换流</tag>
         <tag>缓冲流</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Servlet、HTTP协议、Tomcat</title>
-    <url>/2021/08/31/Servlet%E3%80%81HTTP%E5%8D%8F%E8%AE%AE%E3%80%81Tomcat/</url>
-    <content><![CDATA[<h3 id="一、HTTP协议"><a href="#一、HTTP协议" class="headerlink" title="一、HTTP协议"></a>一、HTTP协议</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>HTTP是网络传输协议</li>
-</ul>
-<h4 id="2-HTTP的两个组成部分"><a href="#2-HTTP的两个组成部分" class="headerlink" title="2.HTTP的两个组成部分"></a>2.HTTP的两个组成部分</h4><ul>
-<li><p><strong>请求体</strong></p>
-<ul>
-<li><p>请求头</p>
-<ul>
-<li>一堆键值对</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/31/c41juIBdN7qsehR.png" alt="image-20210831091440715"></p>
-</li>
-<li><p>请求空行</p>
-<ul>
-<li>一堆空格</li>
-</ul>
-</li>
-<li><p><font color='#d15252'>请求体</font></p>
-<ul>
-<li>请求提交的数据</li>
-</ul>
-</li>
-<li><p>请求行</p>
-<ul>
-<li>包含请求的地址，请求的方式(get,post)，请求的状态</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/31/c41juIBdN7qsehR.png"></p>
-</li>
-</ul>
-<blockquote>
-<p>不携带数据（?携带数据）</p>
-</blockquote>
-</li>
-<li><p><strong>响应体</strong></p>
-<ul>
-<li><p>响应头</p>
-<ul>
-<li>一堆键值对</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/31/ZatSpuyVl9xNgJr.png" alt="image-20210831091829347"></p>
-<ul>
-<li>需要注意的键值对：<ul>
-<li><font color='#d15252'>Content-Type</font>: text/html;charset= utf - 8<ul>
-<li>设置编码格式</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>响应行</p>
-<ul>
-<li>响应的地址，响应的状态</li>
-</ul>
-</li>
-<li><p>响应空行</p>
-<ul>
-<li>其实就是一堆空格</li>
-</ul>
-</li>
-<li><p><font color='#d15252'>响应体</font></p>
-<ul>
-<li>服务器返回来的数据</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="二、服务器软件"><a href="#二、服务器软件" class="headerlink" title="二、服务器软件"></a>二、服务器软件</h3><ul>
-<li>Tomcat</li>
-</ul>
-<h4 id="1-Tomcat下载安装"><a href="#1-Tomcat下载安装" class="headerlink" title="1.Tomcat下载安装"></a>1.Tomcat下载安装</h4><p><img src="https://i.loli.net/2021/08/31/K8ku64HbPOoIDSL.png" alt="image-20210831093130771"></p>
-<ul>
-<li><p>tar.gz：LINUX系统版本</p>
-</li>
-<li><p>zip免安装版会闪退，需要配置环境变量等</p>
-</li>
-<li><p>建议安装版</p>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/31/mwjl69eMNB18zZE.png" alt="image-20210831093221283"></p>
-<p>建议不要填写默认的-1 ，肯会出现问题，随便写个数</p>
-<ul>
-<li>选择jre时，可以直接选择jdk路径，因为jdk中包含jre</li>
-</ul>
-<h4 id="2-Tomcat目录"><a href="#2-Tomcat目录" class="headerlink" title="2.Tomcat目录"></a>2.Tomcat目录</h4><ul>
-<li><p>bin目录：二进制的执行文件</p>
-</li>
-<li><p>cof目录：配置信息（端口号，默认的环境部署位置）</p>
-</li>
-<li><p>lib目录：第三方jar包</p>
-</li>
-<li><p>logs目录：日志信息</p>
-</li>
-<li><p>temp：临时文件（上传/下载的中转）</p>
-</li>
-<li><p><font color='#d15252'>webapps</font>：tomcat上部署项目默认访问路径</p>
-</li>
-<li><p>work：存放jsp的</p>
-</li>
-</ul>
-<h4 id="3-Tomcat注意事项"><a href="#3-Tomcat注意事项" class="headerlink" title="3.Tomcat注意事项"></a>3.Tomcat注意事项</h4><ul>
-<li>任何项目，默认打开index.html / index.jsp 文件</li>
-<li>如果没有部署项目，默认打开webapps中的root目录的index.jsp文件</li>
-</ul>
-<h4 id="4-结解决乱码为题"><a href="#4-结解决乱码为题" class="headerlink" title="4.结解决乱码为题"></a>4.结解决乱码为题</h4><ul>
-<li><p>找到 <code>C:\Program Files\Apache Software Foundation\Tomcat 9.0\conf</code>下的 <code>logging.properties</code></p>
-</li>
-<li><p>更改代码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.util.logging.ConsoleHandler.level = FINE</span><br><span class="line">java.util.logging.ConsoleHandler.formatter = org.apache.juli.OneLineFormatter</span><br><span class="line">java.util.logging.ConsoleHandler.encoding = GBK</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="5-拓展知识"><a href="#5-拓展知识" class="headerlink" title="5.拓展知识"></a>5.拓展知识</h4><ul>
-<li>JavaSE和JavaEE<ul>
-<li>JavaSE<ul>
-<li>只能操作本地内容</li>
-</ul>
-</li>
-<li>JavaEE<ul>
-<li>JavaEE可以处理HTTP请求和响应</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="三、idea集成Tomcat"><a href="#三、idea集成Tomcat" class="headerlink" title="三、idea集成Tomcat"></a>三、idea集成Tomcat</h3><h3 id="四、JavaEE概述"><a href="#四、JavaEE概述" class="headerlink" title="四、JavaEE概述"></a>四、JavaEE概述</h3><ul>
-<li>java前端开发（jsp）<ul>
-<li><font color='#d15252'>Servlet+ jsp</font>（核心）</li>
-</ul>
-</li>
-<li>Java后端开发（服务器端开发，获取数据（crud = 增删改查））</li>
-</ul>
-<h3 id="五、Servlet"><a href="#五、Servlet" class="headerlink" title="五、Servlet"></a>五、Servlet</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>是一个接口<ul>
-<li>必须实现所有的方法</li>
-</ul>
-</li>
-<li>该类想要运行，必需要有Web服务器</li>
-<li>是一个小型Java应用程序</li>
-<li>可以处理请求和响应<ul>
-<li>还有其他两种处理请求和响应的方式<ul>
-<li>GenericServlet</li>
-<li>HttpServlet</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>需要导包</li>
-</ul>
-<h4 id="2-入门"><a href="#2-入门" class="headerlink" title="2.入门"></a>2.入门</h4><ul>
-<li><p>out目录下的东西放在web服务器中</p>
-<ul>
-<li>该目录底下的内容，只有tomcat有访问权限，<font color='#d15252'>http协议</font>没有访问权限</li>
-</ul>
-</li>
-<li><p>设置http协议访问权限</p>
-<ul>
-<li>在web.xml中添加配置语句</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/31/zQCH7ESqmwrptIj.png" alt="image-20210831114153199"></p>
-<p><img src="https://i.loli.net/2021/08/31/FJuwAZ38dvEzhG5.png" alt="image-20210831114253478"></p>
-</li>
-</ul>
-<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><h5 id="Ⅰ-init"><a href="#Ⅰ-init" class="headerlink" title="Ⅰ. init()"></a>Ⅰ. init()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig config)</span><span class="keyword">throws</span> ServletException</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>提示将servlet放入容器</li>
-<li><font color='#d15252'>自动实例化</font>一个ServletConfig对象，并将该值估值给参数(servletConfig)</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/31/bVT2sJKwudMQfEW.png" alt="image-20210831143955227"></p>
-<h5 id="Ⅱ-getServletConfig"><a href="#Ⅱ-getServletConfig" class="headerlink" title="Ⅱ. getServletConfig()"></a>Ⅱ. getServletConfig()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ServletConfig <span class="title">getServletConfig</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>该方法只要有请求过来，容器（Servlet）会自动帮我们调用Service方法</li>
-</ul>
-<h5 id="Ⅲ-service"><a href="#Ⅲ-service" class="headerlink" title="Ⅲ. service()"></a>Ⅲ. <font color='#d15252'>service</font>()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse)</span> </span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> ServletException, IOException </span></span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="Ⅳ-getServletInfo"><a href="#Ⅳ-getServletInfo" class="headerlink" title="Ⅳ. getServletInfo()"></a>Ⅳ. getServletInfo()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getServletInfo</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>返回有关 servlet 的信息，比如作者、版本和版权</li>
-</ul>
-<h5 id="Ⅴ-destroy"><a href="#Ⅴ-destroy" class="headerlink" title="Ⅴ. destroy()"></a>Ⅴ. destroy()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>由容器自己调用，告知容器Servlet已经被销毁</li>
-</ul>
-<h3 id="六、ServletConfig"><a href="#六、ServletConfig" class="headerlink" title="六、ServletConfig"></a>六、ServletConfig</h3><ul>
-<li>servlet 容器使用的 servlet 配置对象，该对象在初始化期间将信息传递给 servlet</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>返回值类型</th>
-<th>方法</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>String</td>
-<td>getInitParameter(String name)</td>
-<td>取出指定name的值</td>
-</tr>
-<tr>
-<td>Enumeration</td>
-<td>getaInitParameterNames()</td>
-<td>取出所有的name，并以枚举形式存储</td>
-</tr>
-<tr>
-<td>ServletContext</td>
-<td>getServletContext()</td>
-<td>获取Context对象</td>
-</tr>
-<tr>
-<td>String</td>
-<td>getServletName()</td>
-<td>取出servletConfig的名字</td>
-</tr>
-</tbody></table>
-<ul>
-<li>补充Enumeration中的方法<ul>
-<li>hasMoreElements（）<ul>
-<li>判断下一个有没有值</li>
-</ul>
-</li>
-<li>nextElement()<ul>
-<li>依次取值</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/31/ucaSM1zCIlqHBRe.png" alt="image-20210831152055449"></p>
-<p><img src="https://i.loli.net/2021/08/31/dJq5mQnNoHSaA9k.png" alt="image-20210831164750694"></p>
-<h3 id="七、ServletContext"><a href="#七、ServletContext" class="headerlink" title="七、ServletContext"></a>七、ServletContext</h3><ul>
-<li><p>代表的是整个Java程序（由很多个Servlet组成）</p>
-</li>
-<li><p>servlet 使用这些方法与其他 servlet 容器进行通信</p>
-</li>
-</ul>
-<h5 id="Ⅰ-getContextPath"><a href="#Ⅰ-getContextPath" class="headerlink" title="Ⅰ. getContextPath()"></a>Ⅰ. getContextPath()</h5><p><img src="https://i.loli.net/2021/08/31/CVMfhzwtgsp76nc.png" alt="image-20210831173949987"></p>
-<h5 id="Ⅱ-getInitParameter"><a href="#Ⅱ-getInitParameter" class="headerlink" title="Ⅱ. getInitParameter()"></a>Ⅱ. getInitParameter()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getInitParameter</span><span class="params">(String name)</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>获取指定name的value</li>
-<li>**<font color='#d15252'>注意</font>**：因为Context面对的是全局，所以，写在servlet中的param不能使用，需要在&lt; servlet &gt;外设置数据</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/31/SsQJhAwN82LZFH4.png" alt="image-20210831174608458"></p>
-<ul>
-<li>因为设置了全局的，所以可以实现两个程序间的通信<ul>
-<li>即一个set一个get</li>
-</ul>
-</li>
-<li>获取全局数据</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/31/GX6k5STstnQ2NUE.png" alt="image-20210831174941224"></p>
-<h5 id="Ⅲ-setAttribute"><a href="#Ⅲ-setAttribute" class="headerlink" title="Ⅲ. setAttribute()"></a>Ⅲ. setAttribute()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String name, Object object)</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>将对象绑定到此 servlet 上下文中的给定属性名称。如果已将指定名称用于某个属性，则此方法将使用新属性替换具有该名称的属性</li>
-</ul>
-<h5 id="Ⅳ-getAttribute"><a href="#Ⅳ-getAttribute" class="headerlink" title="Ⅳ. getAttribute()"></a>Ⅳ. getAttribute()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getAttribute</span><span class="params">(String name)</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>返回具有给定名称的 servlet 容器属性，如果不具有该名称的属性，则返回 <code>null</code></li>
-</ul>
-<h5 id="Ⅴ-getServerInfo"><a href="#Ⅴ-getServerInfo" class="headerlink" title="Ⅴ. getServerInfo()"></a>Ⅴ. getServerInfo()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getServerInfo</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>返回正在其上运行 servlet 的 servlet 容器的名称和版本</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/31/AfD5OC62vU1JjHN.png" alt="image-20210831182019984"></p>
-<h3 id="八、Service：处理请求和响应"><a href="#八、Service：处理请求和响应" class="headerlink" title="八、Service：处理请求和响应"></a>八、Service：处理请求和响应</h3><ul>
-<li><p>该方法只要有请求过来，容器（Servlet）会自动帮我们调用Service方法</p>
-</li>
-<li><p>处理请求</p>
-<ul>
-<li>自动创建ServletRequest对象，并将该实例赋值给变量</li>
-</ul>
-</li>
-</ul>
-<h4 id="1-处理请求"><a href="#1-处理请求" class="headerlink" title="1.处理请求"></a>1.处理请求</h4><ul>
-<li>请求行、请求头、请求体、请求空行</li>
-<li>ServletRequest 处理请求 ，是一个接口</li>
-</ul>
-<h4 id="2-ServletRequest"><a href="#2-ServletRequest" class="headerlink" title="2.ServletRequest"></a>2.ServletRequest</h4><ul>
-<li>定义将客户端请求信息提供给某个 servlet 的对象。servlet 容器创建 <code>ServletRequest</code>  对象，并将该对象作为参数传递给该 servlet 的 <code>service</code> 方法</li>
-<li><code>ServletRequest</code> 对象提供包括参数名称、参数值、属性和输入流的数据</li>
-</ul>
-<h4 id="3-ServletRequest方法"><a href="#3-ServletRequest方法" class="headerlink" title="3.ServletRequest方法"></a>3.ServletRequest方法</h4><h5 id="Ⅰ-getCharacterEncoding"><a href="#Ⅰ-getCharacterEncoding" class="headerlink" title="Ⅰ. getCharacterEncoding()"></a>Ⅰ. getCharacterEncoding()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getCharacterEncoding</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>返回此<font color='cornflowerblue'>请求正文</font>中使用的<font color='#d15252'>字符编码</font>的名称。如果该请求未指定字符编码，则此方法返回 <code>null</code> </li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/31/kZJXOrCQlMweW18.png" alt="image-20210831185235951"></p>
-<ul>
-<li>请求正文 = 请求体 = 传递的数据</li>
-</ul>
-<h5 id="Ⅱ-getParameter-String-name"><a href="#Ⅱ-getParameter-String-name" class="headerlink" title="Ⅱ. getParameter(String name)"></a>Ⅱ. <font color='#d15252'>getParameter</font>(String name)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getParameter</span><span class="params">(String name)</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>以 <code>String</code> 形式返回请求参数的值，如果该参数不存在，则返回  <code>null</code>。请求参数是与请求一起发送的额外信息。对于 HTTP servlet，参数包含在查询字符串或发送的表单数据中。</li>
-<li>获取的参数是<font color='#d15252'>请求时传递的数据</font>，如果没有返回null</li>
-</ul>
-<h5 id="Ⅲ-getServerPort"><a href="#Ⅲ-getServerPort" class="headerlink" title="Ⅲ. getServerPort()"></a>Ⅲ. getServerPort()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getServerPort</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getServerName</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>返回请求被发送到的端口号</li>
-<li>返回请求被发送到服务器的主机名</li>
-</ul>
-<h5 id="Ⅳ-setAttribute-String-name-Object-o"><a href="#Ⅳ-setAttribute-String-name-Object-o" class="headerlink" title="Ⅳ. setAttribute(String name, Object o)"></a>Ⅳ. setAttribute(String name, Object o)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String name, Object o)</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>存储此请求中的属性。在请求之间重置属性。此方法常常与 [<code>RequestDispatcher</code>]一起使用</li>
-<li>get</li>
-<li><font color='#d15252'>必须在同一个请求中</font></li>
-</ul>
-<h5 id="Ⅴ-getAttribute-String-name"><a href="#Ⅴ-getAttribute-String-name" class="headerlink" title="Ⅴ. getAttribute(String name)"></a>Ⅴ. getAttribute(String name)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getAttribute</span><span class="params">(String name)</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>以 <code>Object</code> 形式返回指定属性的值，如果不存在给定名称的属性，则返回 <code>null</code></li>
-<li><font color='#d15252'>必须在同一个请求中</font></li>
-</ul>
-<h5 id="Ⅵ-其他方法"><a href="#Ⅵ-其他方法" class="headerlink" title="Ⅵ.其他方法"></a>Ⅵ.其他方法</h5><p><img src="https://i.loli.net/2021/08/31/qSmV4lAyvGNHn3O.png" alt="image-20210831185504385"></p>
-<ul>
-<li>获取请求体长度</li>
-<li>获取请求体</li>
-<li>获取请求的输入字节流</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/31/YqHkhb8xO6iwJQ2.png" alt="image-20210831191204421"></p>
-<ul>
-<li>设置请求体的编码格式</li>
-<li>设置请求体的参数名称</li>
-</ul>
-<h5 id="Ⅶ-getRequestDispatcher-String-path"><a href="#Ⅶ-getRequestDispatcher-String-path" class="headerlink" title="Ⅶ. getRequestDispatcher(String path)"></a>Ⅶ. getRequestDispatcher(String path)</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> RequestDispatcher <span class="title">getRequestDispatcher</span><span class="params">(String path)</span></span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>返回一个 [<code>RequestDispatcher</code>]对象，它充当位于给定路径上的资源的包装器。可以使用 <code>RequestDispatcher</code>  对象将请求转发给资源，或者在响应中包含资源。资源可以是动态的，也可以是静态的</li>
-<li>简单来说就是打包发送请求</li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaWeb</category>
-      </categories>
-      <tags>
-        <tag>Servlet</tag>
-        <tag>HTTP协议</tag>
-        <tag>Tomcat</tag>
       </tags>
   </entry>
 </search>
