@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="学习Servlet中的ServletResponse和HttpServlet，了解作用和使用方法；学习JSP文件的语法格式和应用方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet和JSP">
+<meta property="og:url" content="http://example.com/2021/09/01/Servlet%E5%92%8CJSP/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="学习Servlet中的ServletResponse和HttpServlet，了解作用和使用方法；学习JSP文件的语法格式和应用方式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/09/01/hIYkm5s2jpF8GzX.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/01/kyQOSrHBugUbZw5.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/01/JEB86fwczRAno5N.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/01/ktK9los2yviB3Nc.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/01/xQ6mZiD14VCM829.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/01/DWHlnwtOx8Kj2Xi.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/01/YZVHg25hxKIW46s.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/01/XPrLFaRnE5JUCAj.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/01/DXrBUHPFRAVlkTs.png">
+<meta property="article:published_time" content="2021-09-01T10:37:00.000Z">
+<meta property="article:modified_time" content="2021-09-01T10:48:22.498Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="Servlet">
+<meta property="article:tag" content="ServletResponse">
+<meta property="article:tag" content="HttpServlet">
+<meta property="article:tag" content="JSP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/01/hIYkm5s2jpF8GzX.png">
+
+<link rel="canonical" href="http://example.com/2021/09/01/Servlet%E5%92%8CJSP/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Servlet和JSP | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/01/Servlet%E5%92%8CJSP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Servlet和JSP
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-01 18:37:00 / 修改时间：18:48:22" itemprop="dateCreated datePublished" datetime="2021-09-01T18:37:00+08:00">2021-09-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">10k</span> -->
+			  <span title="本文字数">
+                  1.3k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">学习Servlet中的ServletResponse和HttpServlet，了解作用和使用方法；学习JSP文件的语法格式和应用方式</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、ServletResponse"><a href="#一、ServletResponse" class="headerlink" title="一、ServletResponse"></a>一、ServletResponse</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>定义辅助 servlet 将响应发送到客户端的对象<ul>
+<li>即处理响应</li>
+</ul>
+</li>
+<li>由servlet容器创建的</li>
+<li>作为参数传递给service方法</li>
+<li>给请求端响应数据<ul>
+<li>可以是二进制的字节流<ul>
+<li>getOutputStream返回的ServletOutputStream对象</li>
+</ul>
+</li>
+<li>可以是字符<ul>
+<li>getWriter返回的printWriter对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-成员方法"><a href="#2-成员方法" class="headerlink" title="2.成员方法"></a>2.成员方法</h4><h5 id="Ⅰ-getOutputSteam"><a href="#Ⅰ-getOutputSteam" class="headerlink" title="Ⅰ. getOutputSteam()"></a>Ⅰ. getOutputSteam()</h5><ul>
+<li>获得ServletOutputStream对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ServletOutputStream <span class="title">getOutputStream</span><span class="params">()</span> <span class="keyword">throws</span> java.io.IOException</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回响应二进制数据</li>
+<li>是OutputStream的子类，可以使用字节流的方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/hIYkm5s2jpF8GzX.png" alt="image-20210901094204139"></p>
+<h5 id="Ⅱ-getWriter"><a href="#Ⅱ-getWriter" class="headerlink" title="Ⅱ. getWriter()"></a>Ⅱ. getWriter()</h5><ul>
+<li>获得PrintWriter对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> java.io.<span class="function">PrintWriter <span class="title">getWriter</span><span class="params">()</span> <span class="keyword">throws</span> java.io.IOException</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回可将字符文本发送到客户端的 <code>PrintWriter</code> 对象</li>
+<li>是Writer的子类，可以使用字符流的方法</li>
+</ul>
+<h5 id="Ⅲ-setContentType"><a href="#Ⅲ-setContentType" class="headerlink" title="Ⅲ. setContentType()"></a>Ⅲ. setContentType()</h5><h5 id="setCharacterEncoding"><a href="#setCharacterEncoding" class="headerlink" title="setCharacterEncoding()"></a>setCharacterEncoding()</h5><ul>
+<li>设置编码字符集格式</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/kyQOSrHBugUbZw5.png" alt="image-20210901095248983"></p>
+<h5 id="Ⅳ-setLocale"><a href="#Ⅳ-setLocale" class="headerlink" title="Ⅳ. setLocale()"></a>Ⅳ. setLocale()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLocale</span><span class="params">(java.util.Locale loc)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置响应的语言环境</li>
+</ul>
+<h3 id="二、Servlet的生命周期"><a href="#二、Servlet的生命周期" class="headerlink" title="二、Servlet的生命周期"></a>二、Servlet的生命周期</h3><ul>
+<li><p>初始化</p>
+<ul>
+<li>init</li>
+</ul>
+</li>
+<li><p>生长部分</p>
+<ul>
+<li>service</li>
+</ul>
+</li>
+<li><p>销毁</p>
+<ul>
+<li>destory</li>
+</ul>
+</li>
+<li><p>Servlet由容器通过**<font color='#d15252'>反射</font>**进行创建</p>
+<ul>
+<li>Tomcat解析XML文件，拿到权限和路径名，加载到代码中</li>
+<li>如果将Servlet的构造方法改为private修饰，则反射创建Servlet失败，会报500错误</li>
+</ul>
+</li>
+</ul>
+<h4 id="补充知识点"><a href="#补充知识点" class="headerlink" title="补充知识点"></a>补充知识点</h4><ul>
+<li>自定义实现Servlet方式有很多弊端<ul>
+<li>请求的方式有很多种<ul>
+<li><font color='#d15252'>get</font>：请求数据（不安全，数据显示在地址栏上）</li>
+<li><font color='#d15252'>post</font>：提交数据</li>
+<li>delete：删除数据</li>
+<li>put：增加数据</li>
+</ul>
+</li>
+<li>不知道是哪个请求</li>
+<li>必须要<font color='#d15252'>重写</font>五个Servlet接口中的方法<ul>
+<li>GenericServlet （抽象类）<ul>
+<li>实现接口Servlet， ServletConfig</li>
+<li>为了解决重写所有方法</li>
+<li>使用GenericServlet 只需要重写service方法即可</li>
+</ul>
+</li>
+<li>HttpServlet<ul>
+<li>继承于GenericServlet </li>
+<li>实现接口Serializable</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、HttpServlet"><a href="#三、HttpServlet" class="headerlink" title="三、HttpServlet"></a>三、HttpServlet</h3><h4 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1.概念"></a>1.概念</h4><p><img src="https://i.loli.net/2021/09/01/JEB86fwczRAno5N.png" alt="image-20210901104233393"></p>
+<ul>
+<li><p>根据请求类型写出doGet或者doPost等方法，但通常请求不一定由哪种方法</p>
+<ul>
+<li>所以，get,post通常都写</li>
+<li>但为了防止代码的重复性，可以只在一个方法中写相关代码，其他方法进行调用，并传递req,resp即可</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/ktK9los2yviB3Nc.png" alt="image-20210901112602553"></p>
+</li>
+<li><p>底层代码运行逻辑</p>
+<ul>
+<li>请求传递后，先走GenericServlet 的service方法</li>
+<li>service方法中第一行，调用判断请求类型的方法</li>
+<li>根据不同的请求类型，执行不同的方法（doGet，doPost）<ul>
+<li>req.getmthod()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-线程安全问题：Servlet"><a href="#2-线程安全问题：Servlet" class="headerlink" title="2.线程安全问题：Servlet"></a>2.线程安全问题：Servlet</h4><ul>
+<li>当两个请求发送时撞到一起，比如线程等待时，会出现两个请求响应相同的情况</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/xQ6mZiD14VCM829.png" alt="image-20210901114442599"></p>
+<ul>
+<li>解决方案：加锁（同步代码块）<ul>
+<li>会导致加载变慢</li>
+<li>能避免就尽量避免</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/DWHlnwtOx8Kj2Xi.png" alt="image-20210901115023223"></p>
+<h4 id="2-访问路径"><a href="#2-访问路径" class="headerlink" title="2.访问路径"></a>2.访问路径</h4><ul>
+<li><p>写死</p>
+</li>
+<li><p>/路径/*</p>
+</li>
+<li><p>*.后缀</p>
+<ul>
+<li>针对多次请求</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/YZVHg25hxKIW46s.png" alt="image-20210901135848942"></p>
+</li>
+</ul>
+<h3 id="四、JSP"><a href="#四、JSP" class="headerlink" title="四、JSP"></a>四、JSP</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li><p>Java Server page</p>
+</li>
+<li><p>动态网页开发技术</p>
+</li>
+<li><p>它使用JSP标签在HTML网页中插入Java代码。标签通常以</p>
+<p><font color='#d15252'>&lt;%开头以%&gt;</font>结束</p>
+</li>
+<li><p>html+css+java代码</p>
+</li>
+</ul>
+<h4 id="2-JSP的使用和处理步骤"><a href="#2-JSP的使用和处理步骤" class="headerlink" title="2.JSP的使用和处理步骤"></a>2.JSP的使用和处理步骤</h4><ul>
+<li>安装jdk，配置环境变量</li>
+<li>安装Tomcat，配置环境变量</li>
+</ul>
+<h5 id="JSP处理步骤"><a href="#JSP处理步骤" class="headerlink" title="JSP处理步骤"></a>JSP处理步骤</h5><p><img src="https://i.loli.net/2021/09/01/XPrLFaRnE5JUCAj.png" alt="image-20210901145705890"></p>
+<h4 id="3-JSP语法"><a href="#3-JSP语法" class="headerlink" title="3.JSP语法"></a>3.JSP语法</h4><ul>
+<li>可以包含任意量的Java语句、变量、方法或表达式</li>
+</ul>
+<h5 id="Ⅰ-脚本程序语法格式"><a href="#Ⅰ-脚本程序语法格式" class="headerlink" title="Ⅰ.脚本程序语法格式"></a>Ⅰ.脚本程序语法格式</h5><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;% 代码片段 %&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>任何文本、HTML标签、JSP元素必须写在脚本程序的外面</li>
+</ul>
+<h5 id="Ⅱ-JSP声明语法格式"><a href="#Ⅱ-JSP声明语法格式" class="headerlink" title="Ⅱ.JSP声明语法格式"></a>Ⅱ.JSP声明语法格式</h5><ul>
+<li>一个声明语句可以声明一个或多个变量、方法，供后面的Java代码使用</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%! declaration; [ declaration; ]+ ... %&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>&lt;%%&gt;和&lt;%!%&gt;中都可以定义变量，但是有以下区别：</p>
+<ul>
+<li>&lt;%%&gt;中定义的是在成员位置，并且可以进行其他操作</li>
+<li>&lt;%!%&gt;中定义的在方法中，局部位置，并且不能进行其他操作</li>
+</ul>
+</blockquote>
+<h5 id="Ⅲ-JSP表达式的语法格式"><a href="#Ⅲ-JSP表达式的语法格式" class="headerlink" title="Ⅲ.JSP表达式的语法格式"></a>Ⅲ.JSP表达式的语法格式</h5><ul>
+<li>一个JSP表达式中包含的脚本语言表达式，先被转化成String，然后插入到表达式出现的地方</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= 表达式 %&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不管里面写什么，最终得到一个值即可<ul>
+<li>对象也可以</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅳ-JSP注释"><a href="#Ⅳ-JSP注释" class="headerlink" title="Ⅳ.JSP注释"></a>Ⅳ.JSP注释</h5><ul>
+<li>与Java相同</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%-- 这里可以填写 JSP 注释 --%&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-JSP的九大隐式对象"><a href="#4-JSP的九大隐式对象" class="headerlink" title="4.JSP的九大隐式对象"></a>4.JSP的九大隐式对象</h3><ul>
+<li>JSP隐式对象是JSP容器为每个页面提供的Java对象，开发者可以直接使用它们而不用显式声明</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/DXrBUHPFRAVlkTs.png" alt="image-20210901160746457"></p>
+<ul>
+<li><h5 id="request-gt-HttpServletRequest"><a href="#request-gt-HttpServletRequest" class="headerlink" title="request == &gt; HttpServletRequest"></a>request == &gt; <strong>HttpServletRequest</strong></h5><ul>
+<li>request对象提供了一系列方法来获取HTTP头信息，cookies，HTTP方法等等</li>
+<li>每当客户端请求一个JSP页面时，JSP引擎就会制造一个新的request对象来代表这个请求</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h5 id="response-gt-HttpServletResponse"><a href="#response-gt-HttpServletResponse" class="headerlink" title="response ==&gt; HttpServletResponse"></a>response ==&gt; <strong>HttpServletResponse</strong></h5><ul>
+<li>当服务器创建request对象时会同时创建用于响应这个客户端的response对象</li>
+<li>response对象也定义了处理HTTP头模块的接口，可以添加新的cookies，时间戳，HTTP状态码等等</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>out ==&gt; <strong>PrintWriter</strong><ul>
+<li>用于把结果输出至网页上</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>session ==&gt; HttpSession<ul>
+<li>session对象用来跟踪在各个客户端请求间的会话</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h5 id="application-gt-ServletContext"><a href="#application-gt-ServletContext" class="headerlink" title="application ==&gt; ServletContext"></a>application ==&gt; <strong>ServletContext</strong></h5><ul>
+<li>应用上下文，别的jsp页面也可以访问</li>
+<li>中一个重要的方法就是removeArribute()，它可接受一个或两个参数</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>config ==&gt; ServletConfig</p>
+<ul>
+<li>允许开发者访问Servlet或者JSP引擎的初始化参数，比如文件路径等</li>
+</ul>
+</li>
+<li><h5 id="pageContext-gt-PageContext"><a href="#pageContext-gt-PageContext" class="headerlink" title="pageContext ==&gt; PageContext"></a>pageContext ==&gt; <strong>PageContext</strong></h5><ul>
+<li>创建pageContext类的实例，提供对当前JSP页面的访问</li>
+</ul>
+</li>
+<li><p>page ==&gt;类似于Java中的this关键字</p>
+<ul>
+<li>这个对象就是页面实例的引用。它可以被看做是整个JSP页面的代表</li>
+</ul>
+</li>
+<li><p>Exception ==&gt;Exception</p>
+<ul>
+<li>代表发送错误的JSP页面中对应的异常对象</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/09/01/Servlet%E5%92%8CJSP/" title="Servlet和JSP">http://example.com/2021/09/01/Servlet和JSP/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Servlet/" rel="tag"><i class="fa fa-tag"></i># Servlet</a>
+              <a href="/tags/ServletResponse/" rel="tag"><i class="fa fa-tag"></i># ServletResponse</a>
+              <a href="/tags/HttpServlet/" rel="tag"><i class="fa fa-tag"></i># HttpServlet</a>
+              <a href="/tags/JSP/" rel="tag"><i class="fa fa-tag"></i># JSP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/08/31/Servlet%E3%80%81HTTP%E5%8D%8F%E8%AE%AE%E3%80%81Tomcat/" rel="prev" title="Servlet、HTTP协议、Tomcat">
+      <i class="fa fa-chevron-left"></i> Servlet、HTTP协议、Tomcat
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81ServletResponse"><span class="nav-number">1.</span> <span class="nav-text">一、ServletResponse</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">2.成员方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-getOutputSteam"><span class="nav-number">1.2.1.</span> <span class="nav-text">Ⅰ. getOutputSteam()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-getWriter"><span class="nav-number">1.2.2.</span> <span class="nav-text">Ⅱ. getWriter()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-setContentType"><span class="nav-number">1.2.3.</span> <span class="nav-text">Ⅲ. setContentType()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#setCharacterEncoding"><span class="nav-number">1.2.4.</span> <span class="nav-text">setCharacterEncoding()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-setLocale"><span class="nav-number">1.2.5.</span> <span class="nav-text">Ⅳ. setLocale()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Servlet%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">2.</span> <span class="nav-text">二、Servlet的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">补充知识点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81HttpServlet"><span class="nav-number">3.</span> <span class="nav-text">三、HttpServlet</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5-1"><span class="nav-number">3.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%EF%BC%9AServlet"><span class="nav-number">3.2.</span> <span class="nav-text">2.线程安全问题：Servlet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%AE%BF%E9%97%AE%E8%B7%AF%E5%BE%84"><span class="nav-number">3.3.</span> <span class="nav-text">2.访问路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81JSP"><span class="nav-number">4.</span> <span class="nav-text">四、JSP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">4.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-JSP%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E5%A4%84%E7%90%86%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.2.</span> <span class="nav-text">2.JSP的使用和处理步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#JSP%E5%A4%84%E7%90%86%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.2.1.</span> <span class="nav-text">JSP处理步骤</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-JSP%E8%AF%AD%E6%B3%95"><span class="nav-number">4.3.</span> <span class="nav-text">3.JSP语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E8%84%9A%E6%9C%AC%E7%A8%8B%E5%BA%8F%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.3.1.</span> <span class="nav-text">Ⅰ.脚本程序语法格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-JSP%E5%A3%B0%E6%98%8E%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.3.2.</span> <span class="nav-text">Ⅱ.JSP声明语法格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-JSP%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E8%AF%AD%E6%B3%95%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.3.3.</span> <span class="nav-text">Ⅲ.JSP表达式的语法格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-JSP%E6%B3%A8%E9%87%8A"><span class="nav-number">4.3.4.</span> <span class="nav-text">Ⅳ.JSP注释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-JSP%E7%9A%84%E4%B9%9D%E5%A4%A7%E9%9A%90%E5%BC%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.</span> <span class="nav-text">4.JSP的九大隐式对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#request-gt-HttpServletRequest"><span class="nav-number">5.0.1.</span> <span class="nav-text">request &#x3D;&#x3D; &gt; HttpServletRequest</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response-gt-HttpServletResponse"><span class="nav-number">5.0.2.</span> <span class="nav-text">response &#x3D;&#x3D;&gt; HttpServletResponse</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#application-gt-ServletContext"><span class="nav-number">5.0.3.</span> <span class="nav-text">application &#x3D;&#x3D;&gt; ServletContext</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#pageContext-gt-PageContext"><span class="nav-number">5.0.4.</span> <span class="nav-text">pageContext &#x3D;&#x3D;&gt; PageContext</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/nightmare_dimple" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;nightmare_dimple" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+    </ul>
+  </div>
+
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">87k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:19</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共42.4k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

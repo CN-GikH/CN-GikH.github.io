@@ -288,147 +288,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ArrayList集合和方法练习</title>
-    <url>/2021/08/25/ArrayList%E9%9B%86%E5%90%88%E5%92%8C%E6%96%B9%E6%B3%95%E7%BB%83%E4%B9%A0/</url>
-    <content><![CDATA[<h3 id="一、练习"><a href="#一、练习" class="headerlink" title="一、练习"></a>一、练习</h3><h4 id="1-编写思路"><a href="#1-编写思路" class="headerlink" title="1.编写思路"></a>1.编写思路</h4><ul>
-<li>创建项目，测试环境</li>
-<li>需求分析</li>
-<li>先实现菜单<ul>
-<li>创建菜单方法<ul>
-<li>方法位置：并列</li>
-<li>格式：修饰符 返回值类型 方法名（）{  }</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>实现菜单的选择<ul>
-<li>创建判断键盘录入选择的方法</li>
-<li>调用menu方法，实现每次选择时，展示菜单</li>
-<li>Scanner  三个步骤，录入键盘数据</li>
-<li>调用加载数据的方法，并创建一个数组名保存</li>
-<li>if+else if 实现键盘录入数据的判断</li>
-<li>设置死循环，实现菜单的重复选择</li>
-<li>当a=5时，退出，break;</li>
-</ul>
-</li>
-<li>实现加载数据<ul>
-<li>创建加载数据方法</li>
-<li>定义一个数组并初始化数据</li>
-<li>return返回值arr数组，返回值类型int[]</li>
-</ul>
-</li>
-<li>实现具体的选择项的功能（查看）<ul>
-<li>当choose方法中录入键盘数据为1时</li>
-<li>调用show方法，并传递参数arr</li>
-</ul>
-</li>
-<li>实现查看功能<ul>
-<li>定义方法</li>
-<li>定义一个数组参数，用于接收数据</li>
-<li>用for循环遍历数组</li>
-<li>if判断不是0再输出</li>
-</ul>
-</li>
-<li>实现修改功能<ul>
-<li>定义方法</li>
-<li>键盘录入要修改的id</li>
-<li>for循环遍历数组，IF查找有没有匹配的id<ul>
-<li>在方法定义中，添加参数int[] arr ，用于接收数组</li>
-</ul>
-</li>
-<li>在choose方法中，当选择2时，调用修改方法，并且传递参数–数组</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-内存图"><a href="#2-内存图" class="headerlink" title="2.内存图"></a>2.内存图</h4><img src="https://i.loli.net/2021/07/23/8KSZyjmXNIGYVeT.png" alt="image-20210723153545299" style="zoom:200%;" />
-
-
-
-<h3 id="二、ArrayList集合"><a href="#二、ArrayList集合" class="headerlink" title="二、ArrayList集合"></a>二、<font color='#d15252'>ArrayList</font>集合</h3><ul>
-<li>变量：存一个数</li>
-<li>数组：多个数，但长度固定</li>
-<li>集合ArrayList</li>
-</ul>
-<h4 id="1-ArrayList的概念"><a href="#1-ArrayList的概念" class="headerlink" title="1.ArrayList的概念"></a>1.ArrayList的概念</h4><ul>
-<li>什么是ArrayList?<ul>
-<li>是一个容器，<font color='#d15252'>长度不固定</font></li>
-</ul>
-</li>
-</ul>
-<h4 id="2-ArrayList的使用"><a href="#2-ArrayList的使用" class="headerlink" title="2.ArrayList的使用"></a>2.ArrayList的使用</h4><h5 id="①使用前的准备"><a href="#①使用前的准备" class="headerlink" title="①使用前的准备"></a>①使用前的准备</h5><ul>
-<li><p>导包</p>
-</li>
-<li><p><code>import java.util.ArrayList;</code></p>
-</li>
-<li><p>加载进内存</p>
-<ul>
-<li><code>ArrayList&lt;数据类型&gt;变量名 = new ArrayList();</code><ul>
-<li>数据类型：不能用int ，而是要用 <code>Integer</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="②具体使用"><a href="#②具体使用" class="headerlink" title="②具体使用"></a>②具体使用</h5><ul>
-<li><p>添加</p>
-<ul>
-<li>使用 <code>add();</code> 方法<ul>
-<li><code>例：list.add(12); -----&gt;存入12进集合</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>删除</p>
-<ul>
-<li>使用 <code>remove();</code> 方法<ul>
-<li><code>例：list.remove(1); ----&gt;删除索引为1的数据</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>获取</p>
-<ul>
-<li><p>使用 <code>get(索引);</code> 方法</p>
-<ul>
-<li><p>单独调用（无意义）</p>
-<ul>
-<li><code>例：list.get(1); ----&gt;取出索引为1的数据</code></li>
-</ul>
-</li>
-<li><p>输出调用</p>
-<ul>
-<li><code>例：System.out.println(list.get(2))---&gt;直接输出索引2数据</code></li>
-</ul>
-</li>
-<li><p>赋值调用</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = list.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(a);</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>长度</p>
-<ul>
-<li>使用 <code>size();</code> 方法</li>
-</ul>
-</li>
-<li><p>更新</p>
-<ul>
-<li><p>使用 <code>set();</code>方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">id.set(索引，新的数值);</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>ArrayList</tag>
-        <tag>方法</tag>
-        <tag>增查删改</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>API的使用之Objece\String</title>
     <url>/2021/08/25/API%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B9%8BObjece-String/</url>
     <content><![CDATA[<h3 id="一、Java的API"><a href="#一、Java的API" class="headerlink" title="一、Java的API"></a>一、Java的API</h3><h4 id="1-API的概念"><a href="#1-API的概念" class="headerlink" title="1.API的概念"></a>1.API的概念</h4><ul>
@@ -793,6 +652,147 @@
         <tag>API</tag>
         <tag>Object</tag>
         <tag>String</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ArrayList集合和方法练习</title>
+    <url>/2021/08/25/ArrayList%E9%9B%86%E5%90%88%E5%92%8C%E6%96%B9%E6%B3%95%E7%BB%83%E4%B9%A0/</url>
+    <content><![CDATA[<h3 id="一、练习"><a href="#一、练习" class="headerlink" title="一、练习"></a>一、练习</h3><h4 id="1-编写思路"><a href="#1-编写思路" class="headerlink" title="1.编写思路"></a>1.编写思路</h4><ul>
+<li>创建项目，测试环境</li>
+<li>需求分析</li>
+<li>先实现菜单<ul>
+<li>创建菜单方法<ul>
+<li>方法位置：并列</li>
+<li>格式：修饰符 返回值类型 方法名（）{  }</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实现菜单的选择<ul>
+<li>创建判断键盘录入选择的方法</li>
+<li>调用menu方法，实现每次选择时，展示菜单</li>
+<li>Scanner  三个步骤，录入键盘数据</li>
+<li>调用加载数据的方法，并创建一个数组名保存</li>
+<li>if+else if 实现键盘录入数据的判断</li>
+<li>设置死循环，实现菜单的重复选择</li>
+<li>当a=5时，退出，break;</li>
+</ul>
+</li>
+<li>实现加载数据<ul>
+<li>创建加载数据方法</li>
+<li>定义一个数组并初始化数据</li>
+<li>return返回值arr数组，返回值类型int[]</li>
+</ul>
+</li>
+<li>实现具体的选择项的功能（查看）<ul>
+<li>当choose方法中录入键盘数据为1时</li>
+<li>调用show方法，并传递参数arr</li>
+</ul>
+</li>
+<li>实现查看功能<ul>
+<li>定义方法</li>
+<li>定义一个数组参数，用于接收数据</li>
+<li>用for循环遍历数组</li>
+<li>if判断不是0再输出</li>
+</ul>
+</li>
+<li>实现修改功能<ul>
+<li>定义方法</li>
+<li>键盘录入要修改的id</li>
+<li>for循环遍历数组，IF查找有没有匹配的id<ul>
+<li>在方法定义中，添加参数int[] arr ，用于接收数组</li>
+</ul>
+</li>
+<li>在choose方法中，当选择2时，调用修改方法，并且传递参数–数组</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-内存图"><a href="#2-内存图" class="headerlink" title="2.内存图"></a>2.内存图</h4><img src="https://i.loli.net/2021/07/23/8KSZyjmXNIGYVeT.png" alt="image-20210723153545299" style="zoom:200%;" />
+
+
+
+<h3 id="二、ArrayList集合"><a href="#二、ArrayList集合" class="headerlink" title="二、ArrayList集合"></a>二、<font color='#d15252'>ArrayList</font>集合</h3><ul>
+<li>变量：存一个数</li>
+<li>数组：多个数，但长度固定</li>
+<li>集合ArrayList</li>
+</ul>
+<h4 id="1-ArrayList的概念"><a href="#1-ArrayList的概念" class="headerlink" title="1.ArrayList的概念"></a>1.ArrayList的概念</h4><ul>
+<li>什么是ArrayList?<ul>
+<li>是一个容器，<font color='#d15252'>长度不固定</font></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-ArrayList的使用"><a href="#2-ArrayList的使用" class="headerlink" title="2.ArrayList的使用"></a>2.ArrayList的使用</h4><h5 id="①使用前的准备"><a href="#①使用前的准备" class="headerlink" title="①使用前的准备"></a>①使用前的准备</h5><ul>
+<li><p>导包</p>
+</li>
+<li><p><code>import java.util.ArrayList;</code></p>
+</li>
+<li><p>加载进内存</p>
+<ul>
+<li><code>ArrayList&lt;数据类型&gt;变量名 = new ArrayList();</code><ul>
+<li>数据类型：不能用int ，而是要用 <code>Integer</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="②具体使用"><a href="#②具体使用" class="headerlink" title="②具体使用"></a>②具体使用</h5><ul>
+<li><p>添加</p>
+<ul>
+<li>使用 <code>add();</code> 方法<ul>
+<li><code>例：list.add(12); -----&gt;存入12进集合</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>删除</p>
+<ul>
+<li>使用 <code>remove();</code> 方法<ul>
+<li><code>例：list.remove(1); ----&gt;删除索引为1的数据</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>获取</p>
+<ul>
+<li><p>使用 <code>get(索引);</code> 方法</p>
+<ul>
+<li><p>单独调用（无意义）</p>
+<ul>
+<li><code>例：list.get(1); ----&gt;取出索引为1的数据</code></li>
+</ul>
+</li>
+<li><p>输出调用</p>
+<ul>
+<li><code>例：System.out.println(list.get(2))---&gt;直接输出索引2数据</code></li>
+</ul>
+</li>
+<li><p>赋值调用</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = list.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(a);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>长度</p>
+<ul>
+<li>使用 <code>size();</code> 方法</li>
+</ul>
+</li>
+<li><p>更新</p>
+<ul>
+<li><p>使用 <code>set();</code>方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">id.set(索引，新的数值);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>ArrayList</tag>
+        <tag>方法</tag>
+        <tag>增查删改</tag>
       </tags>
   </entry>
   <entry>
@@ -2280,6 +2280,275 @@
       </tags>
   </entry>
   <entry>
+    <title>Servlet和JSP</title>
+    <url>/2021/09/01/Servlet%E5%92%8CJSP/</url>
+    <content><![CDATA[<h3 id="一、ServletResponse"><a href="#一、ServletResponse" class="headerlink" title="一、ServletResponse"></a>一、ServletResponse</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>定义辅助 servlet 将响应发送到客户端的对象<ul>
+<li>即处理响应</li>
+</ul>
+</li>
+<li>由servlet容器创建的</li>
+<li>作为参数传递给service方法</li>
+<li>给请求端响应数据<ul>
+<li>可以是二进制的字节流<ul>
+<li>getOutputStream返回的ServletOutputStream对象</li>
+</ul>
+</li>
+<li>可以是字符<ul>
+<li>getWriter返回的printWriter对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-成员方法"><a href="#2-成员方法" class="headerlink" title="2.成员方法"></a>2.成员方法</h4><h5 id="Ⅰ-getOutputSteam"><a href="#Ⅰ-getOutputSteam" class="headerlink" title="Ⅰ. getOutputSteam()"></a>Ⅰ. getOutputSteam()</h5><ul>
+<li>获得ServletOutputStream对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ServletOutputStream <span class="title">getOutputStream</span><span class="params">()</span> <span class="keyword">throws</span> java.io.IOException</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回响应二进制数据</li>
+<li>是OutputStream的子类，可以使用字节流的方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/hIYkm5s2jpF8GzX.png" alt="image-20210901094204139"></p>
+<h5 id="Ⅱ-getWriter"><a href="#Ⅱ-getWriter" class="headerlink" title="Ⅱ. getWriter()"></a>Ⅱ. getWriter()</h5><ul>
+<li>获得PrintWriter对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> java.io.<span class="function">PrintWriter <span class="title">getWriter</span><span class="params">()</span> <span class="keyword">throws</span> java.io.IOException</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回可将字符文本发送到客户端的 <code>PrintWriter</code> 对象</li>
+<li>是Writer的子类，可以使用字符流的方法</li>
+</ul>
+<h5 id="Ⅲ-setContentType"><a href="#Ⅲ-setContentType" class="headerlink" title="Ⅲ. setContentType()"></a>Ⅲ. setContentType()</h5><h5 id="setCharacterEncoding"><a href="#setCharacterEncoding" class="headerlink" title="setCharacterEncoding()"></a>setCharacterEncoding()</h5><ul>
+<li>设置编码字符集格式</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/kyQOSrHBugUbZw5.png" alt="image-20210901095248983"></p>
+<h5 id="Ⅳ-setLocale"><a href="#Ⅳ-setLocale" class="headerlink" title="Ⅳ. setLocale()"></a>Ⅳ. setLocale()</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLocale</span><span class="params">(java.util.Locale loc)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置响应的语言环境</li>
+</ul>
+<h3 id="二、Servlet的生命周期"><a href="#二、Servlet的生命周期" class="headerlink" title="二、Servlet的生命周期"></a>二、Servlet的生命周期</h3><ul>
+<li><p>初始化</p>
+<ul>
+<li>init</li>
+</ul>
+</li>
+<li><p>生长部分</p>
+<ul>
+<li>service</li>
+</ul>
+</li>
+<li><p>销毁</p>
+<ul>
+<li>destory</li>
+</ul>
+</li>
+<li><p>Servlet由容器通过**<font color='#d15252'>反射</font>**进行创建</p>
+<ul>
+<li>Tomcat解析XML文件，拿到权限和路径名，加载到代码中</li>
+<li>如果将Servlet的构造方法改为private修饰，则反射创建Servlet失败，会报500错误</li>
+</ul>
+</li>
+</ul>
+<h4 id="补充知识点"><a href="#补充知识点" class="headerlink" title="补充知识点"></a>补充知识点</h4><ul>
+<li>自定义实现Servlet方式有很多弊端<ul>
+<li>请求的方式有很多种<ul>
+<li><font color='#d15252'>get</font>：请求数据（不安全，数据显示在地址栏上）</li>
+<li><font color='#d15252'>post</font>：提交数据</li>
+<li>delete：删除数据</li>
+<li>put：增加数据</li>
+</ul>
+</li>
+<li>不知道是哪个请求</li>
+<li>必须要<font color='#d15252'>重写</font>五个Servlet接口中的方法<ul>
+<li>GenericServlet （抽象类）<ul>
+<li>实现接口Servlet， ServletConfig</li>
+<li>为了解决重写所有方法</li>
+<li>使用GenericServlet 只需要重写service方法即可</li>
+</ul>
+</li>
+<li>HttpServlet<ul>
+<li>继承于GenericServlet </li>
+<li>实现接口Serializable</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、HttpServlet"><a href="#三、HttpServlet" class="headerlink" title="三、HttpServlet"></a>三、HttpServlet</h3><h4 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1.概念"></a>1.概念</h4><p><img src="https://i.loli.net/2021/09/01/JEB86fwczRAno5N.png" alt="image-20210901104233393"></p>
+<ul>
+<li><p>根据请求类型写出doGet或者doPost等方法，但通常请求不一定由哪种方法</p>
+<ul>
+<li>所以，get,post通常都写</li>
+<li>但为了防止代码的重复性，可以只在一个方法中写相关代码，其他方法进行调用，并传递req,resp即可</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/ktK9los2yviB3Nc.png" alt="image-20210901112602553"></p>
+</li>
+<li><p>底层代码运行逻辑</p>
+<ul>
+<li>请求传递后，先走GenericServlet 的service方法</li>
+<li>service方法中第一行，调用判断请求类型的方法</li>
+<li>根据不同的请求类型，执行不同的方法（doGet，doPost）<ul>
+<li>req.getmthod()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-线程安全问题：Servlet"><a href="#2-线程安全问题：Servlet" class="headerlink" title="2.线程安全问题：Servlet"></a>2.线程安全问题：Servlet</h4><ul>
+<li>当两个请求发送时撞到一起，比如线程等待时，会出现两个请求响应相同的情况</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/xQ6mZiD14VCM829.png" alt="image-20210901114442599"></p>
+<ul>
+<li>解决方案：加锁（同步代码块）<ul>
+<li>会导致加载变慢</li>
+<li>能避免就尽量避免</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/DWHlnwtOx8Kj2Xi.png" alt="image-20210901115023223"></p>
+<h4 id="2-访问路径"><a href="#2-访问路径" class="headerlink" title="2.访问路径"></a>2.访问路径</h4><ul>
+<li><p>写死</p>
+</li>
+<li><p>/路径/*</p>
+</li>
+<li><p>*.后缀</p>
+<ul>
+<li>针对多次请求</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/YZVHg25hxKIW46s.png" alt="image-20210901135848942"></p>
+</li>
+</ul>
+<h3 id="四、JSP"><a href="#四、JSP" class="headerlink" title="四、JSP"></a>四、JSP</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li><p>Java Server page</p>
+</li>
+<li><p>动态网页开发技术</p>
+</li>
+<li><p>它使用JSP标签在HTML网页中插入Java代码。标签通常以</p>
+<p><font color='#d15252'>&lt;%开头以%&gt;</font>结束</p>
+</li>
+<li><p>html+css+java代码</p>
+</li>
+</ul>
+<h4 id="2-JSP的使用和处理步骤"><a href="#2-JSP的使用和处理步骤" class="headerlink" title="2.JSP的使用和处理步骤"></a>2.JSP的使用和处理步骤</h4><ul>
+<li>安装jdk，配置环境变量</li>
+<li>安装Tomcat，配置环境变量</li>
+</ul>
+<h5 id="JSP处理步骤"><a href="#JSP处理步骤" class="headerlink" title="JSP处理步骤"></a>JSP处理步骤</h5><p><img src="https://i.loli.net/2021/09/01/XPrLFaRnE5JUCAj.png" alt="image-20210901145705890"></p>
+<h4 id="3-JSP语法"><a href="#3-JSP语法" class="headerlink" title="3.JSP语法"></a>3.JSP语法</h4><ul>
+<li>可以包含任意量的Java语句、变量、方法或表达式</li>
+</ul>
+<h5 id="Ⅰ-脚本程序语法格式"><a href="#Ⅰ-脚本程序语法格式" class="headerlink" title="Ⅰ.脚本程序语法格式"></a>Ⅰ.脚本程序语法格式</h5><figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;% 代码片段 %&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>任何文本、HTML标签、JSP元素必须写在脚本程序的外面</li>
+</ul>
+<h5 id="Ⅱ-JSP声明语法格式"><a href="#Ⅱ-JSP声明语法格式" class="headerlink" title="Ⅱ.JSP声明语法格式"></a>Ⅱ.JSP声明语法格式</h5><ul>
+<li>一个声明语句可以声明一个或多个变量、方法，供后面的Java代码使用</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;%! declaration; [ declaration; ]+ ... %&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>&lt;%%&gt;和&lt;%!%&gt;中都可以定义变量，但是有以下区别：</p>
+<ul>
+<li>&lt;%%&gt;中定义的是在成员位置，并且可以进行其他操作</li>
+<li>&lt;%!%&gt;中定义的在方法中，局部位置，并且不能进行其他操作</li>
+</ul>
+</blockquote>
+<h5 id="Ⅲ-JSP表达式的语法格式"><a href="#Ⅲ-JSP表达式的语法格式" class="headerlink" title="Ⅲ.JSP表达式的语法格式"></a>Ⅲ.JSP表达式的语法格式</h5><ul>
+<li>一个JSP表达式中包含的脚本语言表达式，先被转化成String，然后插入到表达式出现的地方</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;%= 表达式 %&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不管里面写什么，最终得到一个值即可<ul>
+<li>对象也可以</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅳ-JSP注释"><a href="#Ⅳ-JSP注释" class="headerlink" title="Ⅳ.JSP注释"></a>Ⅳ.JSP注释</h5><ul>
+<li>与Java相同</li>
+</ul>
+<figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;%-- 这里可以填写 JSP 注释 --%&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-JSP的九大隐式对象"><a href="#4-JSP的九大隐式对象" class="headerlink" title="4.JSP的九大隐式对象"></a>4.JSP的九大隐式对象</h3><ul>
+<li>JSP隐式对象是JSP容器为每个页面提供的Java对象，开发者可以直接使用它们而不用显式声明</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/01/DXrBUHPFRAVlkTs.png" alt="image-20210901160746457"></p>
+<ul>
+<li><h5 id="request-gt-HttpServletRequest"><a href="#request-gt-HttpServletRequest" class="headerlink" title="request == &gt; HttpServletRequest"></a>request == &gt; <strong>HttpServletRequest</strong></h5><ul>
+<li>request对象提供了一系列方法来获取HTTP头信息，cookies，HTTP方法等等</li>
+<li>每当客户端请求一个JSP页面时，JSP引擎就会制造一个新的request对象来代表这个请求</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h5 id="response-gt-HttpServletResponse"><a href="#response-gt-HttpServletResponse" class="headerlink" title="response ==&gt; HttpServletResponse"></a>response ==&gt; <strong>HttpServletResponse</strong></h5><ul>
+<li>当服务器创建request对象时会同时创建用于响应这个客户端的response对象</li>
+<li>response对象也定义了处理HTTP头模块的接口，可以添加新的cookies，时间戳，HTTP状态码等等</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>out ==&gt; <strong>PrintWriter</strong><ul>
+<li>用于把结果输出至网页上</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>session ==&gt; HttpSession<ul>
+<li>session对象用来跟踪在各个客户端请求间的会话</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h5 id="application-gt-ServletContext"><a href="#application-gt-ServletContext" class="headerlink" title="application ==&gt; ServletContext"></a>application ==&gt; <strong>ServletContext</strong></h5><ul>
+<li>应用上下文，别的jsp页面也可以访问</li>
+<li>中一个重要的方法就是removeArribute()，它可接受一个或两个参数</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>config ==&gt; ServletConfig</p>
+<ul>
+<li>允许开发者访问Servlet或者JSP引擎的初始化参数，比如文件路径等</li>
+</ul>
+</li>
+<li><h5 id="pageContext-gt-PageContext"><a href="#pageContext-gt-PageContext" class="headerlink" title="pageContext ==&gt; PageContext"></a>pageContext ==&gt; <strong>PageContext</strong></h5><ul>
+<li>创建pageContext类的实例，提供对当前JSP页面的访问</li>
+</ul>
+</li>
+<li><p>page ==&gt;类似于Java中的this关键字</p>
+<ul>
+<li>这个对象就是页面实例的引用。它可以被看做是整个JSP页面的代表</li>
+</ul>
+</li>
+<li><p>Exception ==&gt;Exception</p>
+<ul>
+<li>代表发送错误的JSP页面中对应的异常对象</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>Servlet</tag>
+        <tag>ServletResponse</tag>
+        <tag>HttpServlet</tag>
+        <tag>JSP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>class中的内容</title>
     <url>/2021/08/25/class%E4%B8%AD%E7%9A%84%E5%86%85%E5%AE%B9/</url>
     <content><![CDATA[<h3 id="一、自定义的数据类型：引用类型"><a href="#一、自定义的数据类型：引用类型" class="headerlink" title="一、自定义的数据类型：引用类型"></a>一、自定义的数据类型：引用类型</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 数据类型 </span>&#123;</span><br><span class="line">	<span class="comment">//成员变量</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2482,182 +2751,6 @@
         <tag>成员变量</tag>
         <tag>成员方法</tag>
         <tag>构造方法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>jQuery</title>
-    <url>/2021/08/26/jQuery/</url>
-    <content><![CDATA[<h2 id="一、计时器"><a href="#一、计时器" class="headerlink" title="一、计时器"></a>一、计时器</h2><h4 id="1-setTimeout"><a href="#1-setTimeout" class="headerlink" title="1. setTimeout()"></a>1. setTimeout()</h4><ul>
-<li>用于在指定的毫秒数后调用函数（只调用一次）</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(code,millisec)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>code：必需，要调用的函数或代码</li>
-<li>millisec：必需，在执行代码前等待的<font color='#d15252'>毫秒数</font></li>
-</ul>
-<h4 id="2-setInterval"><a href="#2-setInterval" class="headerlink" title="2. setInterval()"></a>2. setInterval()</h4><ul>
-<li>方法可按照指定的周期（以毫秒计）来调用函数或计算表达式</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(code,millisec[,<span class="string">&quot;lang&quot;</span>])</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>code：必需，要调用的函数或代码</li>
-<li>millisec：必须，周期性执行或调用代码之间的间隔</li>
-</ul>
-<h4 id="3-补充知识"><a href="#3-补充知识" class="headerlink" title="3.补充知识"></a>3.补充知识</h4><ul>
-<li>onload()事件，当页面或图像被加载完成后触发事件</li>
-</ul>
-<h3 id="二、Jquery"><a href="#二、Jquery" class="headerlink" title="二、Jquery"></a>二、Jquery</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
-<li>jQuery 是一个 JavaScript 库</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./JQuery/jquery-3.3.1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>导入Jquery</li>
-</ul>
-<h4 id="2-jQuery语法"><a href="#2-jQuery语法" class="headerlink" title="2.jQuery语法"></a>2.jQuery语法</h4><ul>
-<li><p>基础语法 <code>$(selector).action()</code></p>
-<ul>
-<li>jQuery的核心就是选择器</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/UuaWB15QjhgtrLN.png" alt="image-20210826134720754"></p>
-</li>
-</ul>
-<h4 id="3-基本选择器"><a href="#3-基本选择器" class="headerlink" title="3.基本选择器"></a>3.基本选择器</h4><ul>
-<li>id选择器</li>
-<li>类选择器</li>
-<li>元素选择器</li>
-<li>*</li>
-</ul>
-<h4 id="4-层级选择器"><a href="#4-层级选择器" class="headerlink" title="4.层级选择器"></a>4.层级选择器</h4><h5 id="Ⅰ-ancestor-descendant"><a href="#Ⅰ-ancestor-descendant" class="headerlink" title="Ⅰ. ancestor descendant"></a>Ⅰ. ancestor descendant</h5><ul>
-<li><p>即<font color='#d15252'>后代选择器</font>，忽略层级</p>
-</li>
-<li><p>在给定的祖先元素下匹配所有的后代元素</p>
-</li>
-</ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">ancestor：选择器</span><br><span class="line">descendant：有效选择器</span><br></pre></td></tr></table></figure>
-
-<h5 id="Ⅱ-parent-gt-child"><a href="#Ⅱ-parent-gt-child" class="headerlink" title="Ⅱ. parent &gt; child"></a>Ⅱ. parent &gt; child</h5><ul>
-<li>即子代选择器，只负责子级</li>
-</ul>
-<h5 id="Ⅲ-prev-next"><a href="#Ⅲ-prev-next" class="headerlink" title="Ⅲ. prev + next"></a>Ⅲ. prev + next</h5><ul>
-<li>相邻元素选择器，下一个紧邻的兄弟</li>
-</ul>
-<h5 id="Ⅳ-prev-siblings"><a href="#Ⅳ-prev-siblings" class="headerlink" title="Ⅳ. prev ~ siblings"></a>Ⅳ. prev ~ siblings</h5><ul>
-<li>同辈选择器，下面的所有兄弟</li>
-</ul>
-<blockquote>
-<p><font color='#d15252'>其他选择器</font>有：基本筛选器、内容选择器，可见性选择器、属性选择器、子元素选择器、表单选择器、表单对象选择器等等</p>
-<p>详细使用请查阅JqueryAPI</p>
-</blockquote>
-<h4 id="5-基本筛选器"><a href="#5-基本筛选器" class="headerlink" title="5.基本筛选器"></a>5.基本<font color='#d15252'>筛选器</font></h4><h5 id="Ⅰ-first"><a href="#Ⅰ-first" class="headerlink" title="Ⅰ.  :first"></a>Ⅰ.  :first</h5><ul>
-<li>获取匹配的第一个元素</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&#x27;li:first&#x27;</span>);</span><br><span class="line"><span class="comment">//[ &lt;li&gt;list item 1&lt;/li&gt; ]</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="Ⅱ-not-selector"><a href="#Ⅱ-not-selector" class="headerlink" title="Ⅱ. :not(selector)"></a>Ⅱ. :not(selector)</h5><ul>
-<li>去除所有与给定选择器匹配的元素</li>
-<li>selector：用于筛选的选择器</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/BfQmUd5DpkuTScY.png" alt="image-20210826144537086"></p>
-<h5 id="Ⅲ-even"><a href="#Ⅲ-even" class="headerlink" title="Ⅲ. :even"></a>Ⅲ. :even</h5><ul>
-<li><p>匹配所有索引值为<font color='#d15252'>偶数</font>的元素，从 0 开始计数</p>
-<p><img src="https://i.loli.net/2021/08/26/MZ2diS5m7BK1Tyk.png" alt="image-20210826144616263"></p>
-</li>
-</ul>
-<h5 id="Ⅳ-odd"><a href="#Ⅳ-odd" class="headerlink" title="Ⅳ. :odd"></a>Ⅳ. :odd</h5><ul>
-<li>匹配所有索引值为<font color='#d15252'>奇数</font>的元素，从 0 开始计数</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/4ceDWOnXLvubGyK.png" alt="image-20210826144853759"></p>
-<h5 id="Ⅴ-last"><a href="#Ⅴ-last" class="headerlink" title="Ⅴ.:last()"></a>Ⅴ.:last()</h5><ul>
-<li>获取最后一个元素</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/P8ucCBRZpDwALMv.png" alt="image-20210826145735703"></p>
-<h5 id="Ⅵ-gt-index"><a href="#Ⅵ-gt-index" class="headerlink" title="Ⅵ. :gt(index)"></a>Ⅵ. :gt(index)</h5><ul>
-<li>匹配所有大于给定索引值的元素</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/z5VygrflkNGPeTm.png" alt="image-20210826145258834"></p>
-<h5 id="Ⅶ-lt-index"><a href="#Ⅶ-lt-index" class="headerlink" title="Ⅶ.  :lt(index)"></a>Ⅶ.  :lt(index)</h5><ul>
-<li>匹配所有小于给定索引值的元素</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/E5zLOsX7ID3Cbvd.png" alt="image-20210826150013475"></p>
-<h5 id="Ⅷ-eq-index"><a href="#Ⅷ-eq-index" class="headerlink" title="Ⅷ. :eq(index)"></a>Ⅷ. :eq(index)</h5><ul>
-<li>匹配一个给定索引值的元素</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/oGJYIHpRWAKFPgs.png" alt="image-20210826145019978"></p>
-<h5 id="Ⅸ-header"><a href="#Ⅸ-header" class="headerlink" title="Ⅸ. :header"></a>Ⅸ. :header</h5><ul>
-<li>匹配如 h1, h2, h3之类的标题元素</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/kl4NPpSM6TZmznD.png" alt="image-20210826150052620"></p>
-<h5 id="Ⅹ-lang-language"><a href="#Ⅹ-lang-language" class="headerlink" title="Ⅹ.:lang(language)"></a>Ⅹ.:lang(language)</h5><ul>
-<li><p>选择指定语言的所有元素</p>
-</li>
-<li><p>:lang选择器,匹配有一个语言值等于所提供的语言代码，或以提供的语言代码开始，后面马上跟一个“ - ”的元素。例如，选择器$(“div:lang(en)”)将匹配<code>&lt;div lang=&quot;en&quot;&gt;</code> and <code>&lt;div lang=&quot;en-us&quot;&gt;</code>（和他们的后代<code>&lt;div&gt;</code>），但不包括<code>&lt;div lang=&quot;fr&quot;&gt;</code></p>
-</li>
-<li><p>对于HTML元素，语言值由lang属性决定，也可能由来自meta元素或HTTP头信息决定。</p>
-</li>
-</ul>
-<h5 id="其他："><a href="#其他：" class="headerlink" title="其他："></a>其他：</h5><ul>
-<li><p>:animated 匹配所有正在执行动画效果的元素</p>
-</li>
-<li><p>:focus 匹配当前获取焦点的元素</p>
-</li>
-<li><p>:target 选择由文档URI的格式化识别码表示的目标元素。</p>
-</li>
-<li><p>:root 选择该文档的根元素。</p>
-</li>
-</ul>
-<h4 id="6-html属性"><a href="#6-html属性" class="headerlink" title="6. html属性"></a>6. html属性</h4><h5 id="Ⅰ-html-val-fn"><a href="#Ⅰ-html-val-fn" class="headerlink" title="Ⅰ.html([val|fn])"></a>Ⅰ.html([val|fn])</h5><ul>
-<li>$中的.html() ===》获取值</li>
-<li>在一个 HTML 文档中, 我们可以使用 .html() 方法来获取任意一个元素的内容。 如果选择器匹配多于一个的元素，那么只有第一个匹配元素的 HTML 内容会被获取。</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">    alert($(<span class="string">&quot;p&quot;</span>).html());</span><br><span class="line">    alert($(<span class="string">&quot;div&quot;</span>).html());</span><br><span class="line"><span class="comment">//取出p和div中的内容</span></span><br><span class="line">$(<span class="string">&quot;p&quot;</span>).html(<span class="string">&quot;Hello &lt;b&gt;world&lt;/b&gt;!&quot;</span>);</span><br><span class="line"><span class="comment">//修改p元素中国的值</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="Ⅱ-text-val-fn"><a href="#Ⅱ-text-val-fn" class="headerlink" title="Ⅱ. text([val|fn])"></a>Ⅱ. text([val|fn])</h5><ul>
-<li>取得所有匹配元素的内容</li>
-<li>结果是由所有匹配元素包含的文本内容组合起来的文本。这个方法对HTML和XML文档都有效</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&#x27;p&#x27;</span>).text();</span><br><span class="line"><span class="comment">//返回p元素的文本内容。</span></span><br><span class="line">$(<span class="string">&quot;p&quot;</span>).text(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line"><span class="comment">//设置所有 p 元素的文本内容</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="Ⅲ-val-val-fn-arr"><a href="#Ⅲ-val-val-fn-arr" class="headerlink" title="Ⅲ. val([val|fn|arr])"></a>Ⅲ. val([val|fn|arr])</h5><ul>
-<li>获得匹配元素的当前值。</li>
-<li>在 jQuery 1.2 中,可以返回任意元素的值了。包括select。如果多选，将返回一个数组，其包含所选的值。</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;input&quot;</span>).val();</span><br><span class="line"><span class="comment">//获取文本框中的值</span></span><br><span class="line">$(<span class="string">&quot;input&quot;</span>).val(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"><span class="comment">//设定文本框的值</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="7-css属性"><a href="#7-css属性" class="headerlink" title="7.css属性"></a>7.css属性</h4><ul>
-<li> css(name|pro|[,val|fn])</li>
-<li>name：要访问的属性名称</li>
-<li>properties：一个或多个CSS属性组成的一个数组</li>
-<li><code>|</code> 表示或</li>
-<li>name,value键值对形式</li>
-</ul>
-<h3 id="三、jQuery事件"><a href="#三、jQuery事件" class="headerlink" title="三、jQuery事件"></a>三、jQuery事件</h3><h4 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
-<li>与Js的事件基本相同，但前缀不带on </li>
-</ul>
-<h4 id="2-事件"><a href="#2-事件" class="headerlink" title="2.事件"></a>2.事件</h4><p><img src="https://i.loli.net/2021/08/26/PNps9d5cGOIu8FJ.png" alt="image-20210826153751867"></p>
-<p><img src="https://i.loli.net/2021/08/26/2TDKSrA1H6wBn9x.png" alt="image-20210826153755981"></p>
-<h5 id="Ⅰ-click"><a href="#Ⅰ-click" class="headerlink" title="Ⅰ. click()"></a>Ⅰ. click()</h5><ul>
-<li>  触发、或将函数绑定到指定元素的 click 事件</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/26/mJk3lZ76VpLRdtX.png" alt="image-20210826153649188"></p>
-]]></content>
-      <categories>
-        <category>jQuery</category>
-      </categories>
-      <tags>
-        <tag>jQuery</tag>
       </tags>
   </entry>
   <entry>
@@ -2905,155 +2998,6 @@
       </tags>
   </entry>
   <entry>
-    <title>private关键字和get/set方法</title>
-    <url>/2021/08/25/private%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8Cget-set%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h3 id="一、权限修饰符—Private"><a href="#一、权限修饰符—Private" class="headerlink" title="一、权限修饰符—Private"></a>一、权限修饰符—<font color='#d15252'>Private</font></h3><h4 id="1-作用："><a href="#1-作用：" class="headerlink" title="1.作用："></a>1.作用：</h4><ul>
-<li><p>private所修饰的内容，使用的时候，只能在本类中使用</p>
-</li>
-<li><p>private：私有的</p>
-<ul>
-<li><p>只能在本类中，操作private修饰的内容</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Demo1.java:7: 错误: id 在 stu 中是 private 访问控制</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h4 id="2-开发中，所有的成员变量都要加private"><a href="#2-开发中，所有的成员变量都要加private" class="headerlink" title="2.开发中，所有的成员变量都要加private"></a>2.开发中，所有的成员变量都要加private</h4><ul>
-<li><font color='#d15252'><strong>逻辑使用</strong></font>比较灵活</li>
-</ul>
-<h5 id="衍生问题：set-get方法"><a href="#衍生问题：set-get方法" class="headerlink" title="衍生问题：set/get方法"></a>衍生问题：set/get方法</h5><h3 id="二、get-set-方法"><a href="#二、get-set-方法" class="headerlink" title="二、get / set 方法"></a>二、get / set 方法</h3><ul>
-<li><p><font color='orange'><strong>赋值</strong></font>(set方法)：成员变量加上private后，其他方法（比如main方法）不能给成员变量赋值</p>
-<ul>
-<li>但是自己的方法能访问自己的私有成员变量，其他类可以访问本类的成员方法<ul>
-<li>所以用其他类访问成员方法，成员方法给成员变量修改值</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//定义一个由private修饰的成员变量</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">	<span class="comment">//完成给age的赋值功能</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.age=age;</span><br><span class="line">	&#125;</span><br><span class="line">======================================</span><br><span class="line">    <span class="comment">//在主方法中创建相应对象，调用赋值方法即可</span></span><br><span class="line">    	<span class="comment">//赋值</span></span><br><span class="line">		s.m(<span class="number">20</span>);</span><br></pre></td></tr></table></figure></li>
-<li><p><strong><font color='orange'>取值</font></strong>(get方法)：创建成员方法，通过return带回返回值给调用方法</p>
-<ul>
-<li>使用return原因：更加灵活，数据可以重复利用</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//完成取值功能</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//使用return取值更加灵活</span></span><br><span class="line">	<span class="keyword">return</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="3-private修饰成员变量细节优化"><a href="#3-private修饰成员变量细节优化" class="headerlink" title="3.private修饰成员变量细节优化"></a>3.private修饰成员变量<font color='cornflowerblue'>细节优化</font></h4><ul>
-<li>如果没有特殊的需求，在给成员变量赋值的时候，直接赋值即可</li>
-<li>给访问private修饰的成员方法<font color='#d15252'>命名规范</font><ul>
-<li>set变量名<ul>
-<li>变量名首字母大写</li>
-</ul>
-</li>
-<li>get变量名<ul>
-<li>变量名首字母大写</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="作业："><a href="#作业：" class="headerlink" title="作业："></a>作业：</h5><ul>
-<li>定义学生类<ul>
-<li>有参和空参构造</li>
-<li>private</li>
-<li>学号</li>
-<li>姓名</li>
-</ul>
-</li>
-<li>添加到数组中，并做打印</li>
-</ul>
-<h5 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h5><ul>
-<li><p>创建项目并进行测试</p>
-</li>
-<li><p>需求分析</p>
-</li>
-<li><p>创建自定义的学生类</p>
-<ul>
-<li><p>class Student</p>
-</li>
-<li><p>属性 = 成员变量 </p>
-<ul>
-<li>定义成员变量<ul>
-<li>private int id;</li>
-<li>private String name;</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>定义无参、有参构造方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义无参构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="comment">//定义带参构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(<span class="keyword">int</span> id,String name)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>定义相应的get/set方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义相应的get/set方法	=== 学号</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>创建存储学生的数组方法</p>
-<ul>
-<li>public static Student[] init(){}</li>
-<li>return返回创建的数组</li>
-</ul>
-<p><img src="https://i.loli.net/2021/07/28/r1f3Z2gm9Odok7I.png" alt="image-20210728103752639"></p>
-</li>
-<li><p>创建遍历数组学生对象的方法</p>
-<p><img src="https://i.loli.net/2021/07/28/PaCGI3pbHENkK8x.png" alt="image-20210728103827836"></p>
-<ul>
-<li>用到get方法，取出学生对象的属性</li>
-</ul>
-</li>
-<li><p>在main方法中</p>
-<ul>
-<li><p>第一步：调用init获取创建的数组</p>
-</li>
-<li><p>第二步：创建Student的无参对象，带参对象</p>
-<ul>
-<li>无参：通过.set()方法给属性赋值</li>
-<li>带参：直接在初始化值时赋值</li>
-</ul>
-</li>
-<li><p>第三步：将创建的学生对象存入数组</p>
-</li>
-<li><p>第四步：调用遍历数组学生对象的方法</p>
-<p><img src="https://i.loli.net/2021/07/28/EIKidPcfUSOTqtr.png" alt="image-20210728104038704"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="三、Java的编程规范"><a href="#三、Java的编程规范" class="headerlink" title="三、Java的编程规范"></a>三、Java的编程规范</h3><ul>
-<li>见名知意</li>
-<li>确保功能的唯一性</li>
-<li>确保逻辑的灵活性</li>
-<li>规则和代码没有关系。规则语法</li>
-</ul>
-<h3 id="四、main方法和可变参"><a href="#四、main方法和可变参" class="headerlink" title="四、main方法和可变参"></a>四、main方法和可变参</h3><h4 id="1-main方法"><a href="#1-main方法" class="headerlink" title="1.main方法"></a>1.main方法</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-可变参"><a href="#2-可变参" class="headerlink" title="2.可变参"></a>2.可变参</h4><ul>
-<li>格式：<code>数据类型 ... 变量名</code> </li>
-<li>参数最终会变为数组</li>
-<li>固定参和可变参在一起时，可变参必须写在末尾</li>
-</ul>
-<h3 id="五、方法的重载"><a href="#五、方法的重载" class="headerlink" title="五、方法的重载"></a>五、方法的重载</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><ul>
-<li><font color='#d15252'>在同一个类中</font>，方法名相同<ul>
-<li>与返回值无关，只看方法名和参数列表</li>
-<li>参数<ul>
-<li>参数个数    </li>
-<li>参数类型</li>
-</ul>
-</li>
-<li>修饰符同级</li>
-</ul>
-</li>
-<li>在调用时，Jvm通过区别参数列表的不同，调用相应的方法</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>成员方法</tag>
-        <tag>private</tag>
-        <tag>get/set</tag>
-        <tag>修饰符</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>反射</title>
     <url>/2021/08/23/%E5%8F%8D%E5%B0%84/</url>
     <content><![CDATA[<h3 id="一、反射"><a href="#一、反射" class="headerlink" title="一、反射"></a>一、反射</h3><h4 id="什么是反射？"><a href="#什么是反射？" class="headerlink" title="什么是反射？"></a>什么是反射？</h4><ul>
@@ -3237,6 +3181,331 @@
       </categories>
       <tags>
         <tag>反射</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>jQuery</title>
+    <url>/2021/08/26/jQuery/</url>
+    <content><![CDATA[<h2 id="一、计时器"><a href="#一、计时器" class="headerlink" title="一、计时器"></a>一、计时器</h2><h4 id="1-setTimeout"><a href="#1-setTimeout" class="headerlink" title="1. setTimeout()"></a>1. setTimeout()</h4><ul>
+<li>用于在指定的毫秒数后调用函数（只调用一次）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(code,millisec)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>code：必需，要调用的函数或代码</li>
+<li>millisec：必需，在执行代码前等待的<font color='#d15252'>毫秒数</font></li>
+</ul>
+<h4 id="2-setInterval"><a href="#2-setInterval" class="headerlink" title="2. setInterval()"></a>2. setInterval()</h4><ul>
+<li>方法可按照指定的周期（以毫秒计）来调用函数或计算表达式</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(code,millisec[,<span class="string">&quot;lang&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>code：必需，要调用的函数或代码</li>
+<li>millisec：必须，周期性执行或调用代码之间的间隔</li>
+</ul>
+<h4 id="3-补充知识"><a href="#3-补充知识" class="headerlink" title="3.补充知识"></a>3.补充知识</h4><ul>
+<li>onload()事件，当页面或图像被加载完成后触发事件</li>
+</ul>
+<h3 id="二、Jquery"><a href="#二、Jquery" class="headerlink" title="二、Jquery"></a>二、Jquery</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>jQuery 是一个 JavaScript 库</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./JQuery/jquery-3.3.1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>导入Jquery</li>
+</ul>
+<h4 id="2-jQuery语法"><a href="#2-jQuery语法" class="headerlink" title="2.jQuery语法"></a>2.jQuery语法</h4><ul>
+<li><p>基础语法 <code>$(selector).action()</code></p>
+<ul>
+<li>jQuery的核心就是选择器</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/UuaWB15QjhgtrLN.png" alt="image-20210826134720754"></p>
+</li>
+</ul>
+<h4 id="3-基本选择器"><a href="#3-基本选择器" class="headerlink" title="3.基本选择器"></a>3.基本选择器</h4><ul>
+<li>id选择器</li>
+<li>类选择器</li>
+<li>元素选择器</li>
+<li>*</li>
+</ul>
+<h4 id="4-层级选择器"><a href="#4-层级选择器" class="headerlink" title="4.层级选择器"></a>4.层级选择器</h4><h5 id="Ⅰ-ancestor-descendant"><a href="#Ⅰ-ancestor-descendant" class="headerlink" title="Ⅰ. ancestor descendant"></a>Ⅰ. ancestor descendant</h5><ul>
+<li><p>即<font color='#d15252'>后代选择器</font>，忽略层级</p>
+</li>
+<li><p>在给定的祖先元素下匹配所有的后代元素</p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">ancestor：选择器</span><br><span class="line">descendant：有效选择器</span><br></pre></td></tr></table></figure>
+
+<h5 id="Ⅱ-parent-gt-child"><a href="#Ⅱ-parent-gt-child" class="headerlink" title="Ⅱ. parent &gt; child"></a>Ⅱ. parent &gt; child</h5><ul>
+<li>即子代选择器，只负责子级</li>
+</ul>
+<h5 id="Ⅲ-prev-next"><a href="#Ⅲ-prev-next" class="headerlink" title="Ⅲ. prev + next"></a>Ⅲ. prev + next</h5><ul>
+<li>相邻元素选择器，下一个紧邻的兄弟</li>
+</ul>
+<h5 id="Ⅳ-prev-siblings"><a href="#Ⅳ-prev-siblings" class="headerlink" title="Ⅳ. prev ~ siblings"></a>Ⅳ. prev ~ siblings</h5><ul>
+<li>同辈选择器，下面的所有兄弟</li>
+</ul>
+<blockquote>
+<p><font color='#d15252'>其他选择器</font>有：基本筛选器、内容选择器，可见性选择器、属性选择器、子元素选择器、表单选择器、表单对象选择器等等</p>
+<p>详细使用请查阅JqueryAPI</p>
+</blockquote>
+<h4 id="5-基本筛选器"><a href="#5-基本筛选器" class="headerlink" title="5.基本筛选器"></a>5.基本<font color='#d15252'>筛选器</font></h4><h5 id="Ⅰ-first"><a href="#Ⅰ-first" class="headerlink" title="Ⅰ.  :first"></a>Ⅰ.  :first</h5><ul>
+<li>获取匹配的第一个元素</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&#x27;li:first&#x27;</span>);</span><br><span class="line"><span class="comment">//[ &lt;li&gt;list item 1&lt;/li&gt; ]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅱ-not-selector"><a href="#Ⅱ-not-selector" class="headerlink" title="Ⅱ. :not(selector)"></a>Ⅱ. :not(selector)</h5><ul>
+<li>去除所有与给定选择器匹配的元素</li>
+<li>selector：用于筛选的选择器</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/BfQmUd5DpkuTScY.png" alt="image-20210826144537086"></p>
+<h5 id="Ⅲ-even"><a href="#Ⅲ-even" class="headerlink" title="Ⅲ. :even"></a>Ⅲ. :even</h5><ul>
+<li><p>匹配所有索引值为<font color='#d15252'>偶数</font>的元素，从 0 开始计数</p>
+<p><img src="https://i.loli.net/2021/08/26/MZ2diS5m7BK1Tyk.png" alt="image-20210826144616263"></p>
+</li>
+</ul>
+<h5 id="Ⅳ-odd"><a href="#Ⅳ-odd" class="headerlink" title="Ⅳ. :odd"></a>Ⅳ. :odd</h5><ul>
+<li>匹配所有索引值为<font color='#d15252'>奇数</font>的元素，从 0 开始计数</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/4ceDWOnXLvubGyK.png" alt="image-20210826144853759"></p>
+<h5 id="Ⅴ-last"><a href="#Ⅴ-last" class="headerlink" title="Ⅴ.:last()"></a>Ⅴ.:last()</h5><ul>
+<li>获取最后一个元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/P8ucCBRZpDwALMv.png" alt="image-20210826145735703"></p>
+<h5 id="Ⅵ-gt-index"><a href="#Ⅵ-gt-index" class="headerlink" title="Ⅵ. :gt(index)"></a>Ⅵ. :gt(index)</h5><ul>
+<li>匹配所有大于给定索引值的元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/z5VygrflkNGPeTm.png" alt="image-20210826145258834"></p>
+<h5 id="Ⅶ-lt-index"><a href="#Ⅶ-lt-index" class="headerlink" title="Ⅶ.  :lt(index)"></a>Ⅶ.  :lt(index)</h5><ul>
+<li>匹配所有小于给定索引值的元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/E5zLOsX7ID3Cbvd.png" alt="image-20210826150013475"></p>
+<h5 id="Ⅷ-eq-index"><a href="#Ⅷ-eq-index" class="headerlink" title="Ⅷ. :eq(index)"></a>Ⅷ. :eq(index)</h5><ul>
+<li>匹配一个给定索引值的元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/oGJYIHpRWAKFPgs.png" alt="image-20210826145019978"></p>
+<h5 id="Ⅸ-header"><a href="#Ⅸ-header" class="headerlink" title="Ⅸ. :header"></a>Ⅸ. :header</h5><ul>
+<li>匹配如 h1, h2, h3之类的标题元素</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/kl4NPpSM6TZmznD.png" alt="image-20210826150052620"></p>
+<h5 id="Ⅹ-lang-language"><a href="#Ⅹ-lang-language" class="headerlink" title="Ⅹ.:lang(language)"></a>Ⅹ.:lang(language)</h5><ul>
+<li><p>选择指定语言的所有元素</p>
+</li>
+<li><p>:lang选择器,匹配有一个语言值等于所提供的语言代码，或以提供的语言代码开始，后面马上跟一个“ - ”的元素。例如，选择器$(“div:lang(en)”)将匹配<code>&lt;div lang=&quot;en&quot;&gt;</code> and <code>&lt;div lang=&quot;en-us&quot;&gt;</code>（和他们的后代<code>&lt;div&gt;</code>），但不包括<code>&lt;div lang=&quot;fr&quot;&gt;</code></p>
+</li>
+<li><p>对于HTML元素，语言值由lang属性决定，也可能由来自meta元素或HTTP头信息决定。</p>
+</li>
+</ul>
+<h5 id="其他："><a href="#其他：" class="headerlink" title="其他："></a>其他：</h5><ul>
+<li><p>:animated 匹配所有正在执行动画效果的元素</p>
+</li>
+<li><p>:focus 匹配当前获取焦点的元素</p>
+</li>
+<li><p>:target 选择由文档URI的格式化识别码表示的目标元素。</p>
+</li>
+<li><p>:root 选择该文档的根元素。</p>
+</li>
+</ul>
+<h4 id="6-html属性"><a href="#6-html属性" class="headerlink" title="6. html属性"></a>6. html属性</h4><h5 id="Ⅰ-html-val-fn"><a href="#Ⅰ-html-val-fn" class="headerlink" title="Ⅰ.html([val|fn])"></a>Ⅰ.html([val|fn])</h5><ul>
+<li>$中的.html() ===》获取值</li>
+<li>在一个 HTML 文档中, 我们可以使用 .html() 方法来获取任意一个元素的内容。 如果选择器匹配多于一个的元素，那么只有第一个匹配元素的 HTML 内容会被获取。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">    alert($(<span class="string">&quot;p&quot;</span>).html());</span><br><span class="line">    alert($(<span class="string">&quot;div&quot;</span>).html());</span><br><span class="line"><span class="comment">//取出p和div中的内容</span></span><br><span class="line">$(<span class="string">&quot;p&quot;</span>).html(<span class="string">&quot;Hello &lt;b&gt;world&lt;/b&gt;!&quot;</span>);</span><br><span class="line"><span class="comment">//修改p元素中国的值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅱ-text-val-fn"><a href="#Ⅱ-text-val-fn" class="headerlink" title="Ⅱ. text([val|fn])"></a>Ⅱ. text([val|fn])</h5><ul>
+<li>取得所有匹配元素的内容</li>
+<li>结果是由所有匹配元素包含的文本内容组合起来的文本。这个方法对HTML和XML文档都有效</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&#x27;p&#x27;</span>).text();</span><br><span class="line"><span class="comment">//返回p元素的文本内容。</span></span><br><span class="line">$(<span class="string">&quot;p&quot;</span>).text(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line"><span class="comment">//设置所有 p 元素的文本内容</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅲ-val-val-fn-arr"><a href="#Ⅲ-val-val-fn-arr" class="headerlink" title="Ⅲ. val([val|fn|arr])"></a>Ⅲ. val([val|fn|arr])</h5><ul>
+<li>获得匹配元素的当前值。</li>
+<li>在 jQuery 1.2 中,可以返回任意元素的值了。包括select。如果多选，将返回一个数组，其包含所选的值。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">$(<span class="string">&quot;input&quot;</span>).val();</span><br><span class="line"><span class="comment">//获取文本框中的值</span></span><br><span class="line">$(<span class="string">&quot;input&quot;</span>).val(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"><span class="comment">//设定文本框的值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-css属性"><a href="#7-css属性" class="headerlink" title="7.css属性"></a>7.css属性</h4><ul>
+<li> css(name|pro|[,val|fn])</li>
+<li>name：要访问的属性名称</li>
+<li>properties：一个或多个CSS属性组成的一个数组</li>
+<li><code>|</code> 表示或</li>
+<li>name,value键值对形式</li>
+</ul>
+<h3 id="三、jQuery事件"><a href="#三、jQuery事件" class="headerlink" title="三、jQuery事件"></a>三、jQuery事件</h3><h4 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>与Js的事件基本相同，但前缀不带on </li>
+</ul>
+<h4 id="2-事件"><a href="#2-事件" class="headerlink" title="2.事件"></a>2.事件</h4><p><img src="https://i.loli.net/2021/08/26/PNps9d5cGOIu8FJ.png" alt="image-20210826153751867"></p>
+<p><img src="https://i.loli.net/2021/08/26/2TDKSrA1H6wBn9x.png" alt="image-20210826153755981"></p>
+<h5 id="Ⅰ-click"><a href="#Ⅰ-click" class="headerlink" title="Ⅰ. click()"></a>Ⅰ. click()</h5><ul>
+<li>  触发、或将函数绑定到指定元素的 click 事件</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/26/mJk3lZ76VpLRdtX.png" alt="image-20210826153649188"></p>
+]]></content>
+      <categories>
+        <category>jQuery</category>
+      </categories>
+      <tags>
+        <tag>jQuery</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>private关键字和get/set方法</title>
+    <url>/2021/08/25/private%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8Cget-set%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="一、权限修饰符—Private"><a href="#一、权限修饰符—Private" class="headerlink" title="一、权限修饰符—Private"></a>一、权限修饰符—<font color='#d15252'>Private</font></h3><h4 id="1-作用："><a href="#1-作用：" class="headerlink" title="1.作用："></a>1.作用：</h4><ul>
+<li><p>private所修饰的内容，使用的时候，只能在本类中使用</p>
+</li>
+<li><p>private：私有的</p>
+<ul>
+<li><p>只能在本类中，操作private修饰的内容</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Demo1.java:7: 错误: id 在 stu 中是 private 访问控制</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-开发中，所有的成员变量都要加private"><a href="#2-开发中，所有的成员变量都要加private" class="headerlink" title="2.开发中，所有的成员变量都要加private"></a>2.开发中，所有的成员变量都要加private</h4><ul>
+<li><font color='#d15252'><strong>逻辑使用</strong></font>比较灵活</li>
+</ul>
+<h5 id="衍生问题：set-get方法"><a href="#衍生问题：set-get方法" class="headerlink" title="衍生问题：set/get方法"></a>衍生问题：set/get方法</h5><h3 id="二、get-set-方法"><a href="#二、get-set-方法" class="headerlink" title="二、get / set 方法"></a>二、get / set 方法</h3><ul>
+<li><p><font color='orange'><strong>赋值</strong></font>(set方法)：成员变量加上private后，其他方法（比如main方法）不能给成员变量赋值</p>
+<ul>
+<li>但是自己的方法能访问自己的私有成员变量，其他类可以访问本类的成员方法<ul>
+<li>所以用其他类访问成员方法，成员方法给成员变量修改值</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//定义一个由private修饰的成员变量</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">	<span class="comment">//完成给age的赋值功能</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span></span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.age=age;</span><br><span class="line">	&#125;</span><br><span class="line">======================================</span><br><span class="line">    <span class="comment">//在主方法中创建相应对象，调用赋值方法即可</span></span><br><span class="line">    	<span class="comment">//赋值</span></span><br><span class="line">		s.m(<span class="number">20</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p><strong><font color='orange'>取值</font></strong>(get方法)：创建成员方法，通过return带回返回值给调用方法</p>
+<ul>
+<li>使用return原因：更加灵活，数据可以重复利用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//完成取值功能</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">//使用return取值更加灵活</span></span><br><span class="line">	<span class="keyword">return</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-private修饰成员变量细节优化"><a href="#3-private修饰成员变量细节优化" class="headerlink" title="3.private修饰成员变量细节优化"></a>3.private修饰成员变量<font color='cornflowerblue'>细节优化</font></h4><ul>
+<li>如果没有特殊的需求，在给成员变量赋值的时候，直接赋值即可</li>
+<li>给访问private修饰的成员方法<font color='#d15252'>命名规范</font><ul>
+<li>set变量名<ul>
+<li>变量名首字母大写</li>
+</ul>
+</li>
+<li>get变量名<ul>
+<li>变量名首字母大写</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="作业："><a href="#作业：" class="headerlink" title="作业："></a>作业：</h5><ul>
+<li>定义学生类<ul>
+<li>有参和空参构造</li>
+<li>private</li>
+<li>学号</li>
+<li>姓名</li>
+</ul>
+</li>
+<li>添加到数组中，并做打印</li>
+</ul>
+<h5 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h5><ul>
+<li><p>创建项目并进行测试</p>
+</li>
+<li><p>需求分析</p>
+</li>
+<li><p>创建自定义的学生类</p>
+<ul>
+<li><p>class Student</p>
+</li>
+<li><p>属性 = 成员变量 </p>
+<ul>
+<li>定义成员变量<ul>
+<li>private int id;</li>
+<li>private String name;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>定义无参、有参构造方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义无参构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"><span class="comment">//定义带参构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(<span class="keyword">int</span> id,String name)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>定义相应的get/set方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//定义相应的get/set方法	=== 学号</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.id = id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>创建存储学生的数组方法</p>
+<ul>
+<li>public static Student[] init(){}</li>
+<li>return返回创建的数组</li>
+</ul>
+<p><img src="https://i.loli.net/2021/07/28/r1f3Z2gm9Odok7I.png" alt="image-20210728103752639"></p>
+</li>
+<li><p>创建遍历数组学生对象的方法</p>
+<p><img src="https://i.loli.net/2021/07/28/PaCGI3pbHENkK8x.png" alt="image-20210728103827836"></p>
+<ul>
+<li>用到get方法，取出学生对象的属性</li>
+</ul>
+</li>
+<li><p>在main方法中</p>
+<ul>
+<li><p>第一步：调用init获取创建的数组</p>
+</li>
+<li><p>第二步：创建Student的无参对象，带参对象</p>
+<ul>
+<li>无参：通过.set()方法给属性赋值</li>
+<li>带参：直接在初始化值时赋值</li>
+</ul>
+</li>
+<li><p>第三步：将创建的学生对象存入数组</p>
+</li>
+<li><p>第四步：调用遍历数组学生对象的方法</p>
+<p><img src="https://i.loli.net/2021/07/28/EIKidPcfUSOTqtr.png" alt="image-20210728104038704"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、Java的编程规范"><a href="#三、Java的编程规范" class="headerlink" title="三、Java的编程规范"></a>三、Java的编程规范</h3><ul>
+<li>见名知意</li>
+<li>确保功能的唯一性</li>
+<li>确保逻辑的灵活性</li>
+<li>规则和代码没有关系。规则语法</li>
+</ul>
+<h3 id="四、main方法和可变参"><a href="#四、main方法和可变参" class="headerlink" title="四、main方法和可变参"></a>四、main方法和可变参</h3><h4 id="1-main方法"><a href="#1-main方法" class="headerlink" title="1.main方法"></a>1.main方法</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-可变参"><a href="#2-可变参" class="headerlink" title="2.可变参"></a>2.可变参</h4><ul>
+<li>格式：<code>数据类型 ... 变量名</code> </li>
+<li>参数最终会变为数组</li>
+<li>固定参和可变参在一起时，可变参必须写在末尾</li>
+</ul>
+<h3 id="五、方法的重载"><a href="#五、方法的重载" class="headerlink" title="五、方法的重载"></a>五、方法的重载</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><ul>
+<li><font color='#d15252'>在同一个类中</font>，方法名相同<ul>
+<li>与返回值无关，只看方法名和参数列表</li>
+<li>参数<ul>
+<li>参数个数    </li>
+<li>参数类型</li>
+</ul>
+</li>
+<li>修饰符同级</li>
+</ul>
+</li>
+<li>在调用时，Jvm通过区别参数列表的不同，调用相应的方法</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>成员方法</tag>
+        <tag>private</tag>
+        <tag>get/set</tag>
+        <tag>修饰符</tag>
       </tags>
   </entry>
   <entry>
@@ -4173,6 +4442,182 @@
       </tags>
   </entry>
   <entry>
+    <title>异常和迭代器</title>
+    <url>/2021/08/25/%E5%BC%82%E5%B8%B8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
+    <content><![CDATA[<h3 id="一、迭代器"><a href="#一、迭代器" class="headerlink" title="一、迭代器"></a>一、迭代器</h3><h4 id="1-next"><a href="#1-next" class="headerlink" title="1.next()"></a>1.next()</h4><ul>
+<li>取数</li>
+<li>先下一个</li>
+<li>一次性</li>
+</ul>
+<h4 id="2-并发修改异常ConcurrentModificationException"><a href="#2-并发修改异常ConcurrentModificationException" class="headerlink" title="2.并发修改异常ConcurrentModificationException"></a>2.并发修改异常ConcurrentModificationException</h4><ul>
+<li>当我们使用迭代器做遍历的时候，不能破坏集合的内部结构<ul>
+<li>一旦有<font color='#d15252'>破坏集合内部结构的操作就会报错</font></li>
+</ul>
+</li>
+</ul>
+<h4 id="3-练习题：斗地主"><a href="#3-练习题：斗地主" class="headerlink" title="3.练习题：斗地主"></a>3.练习题：斗地主</h4><ul>
+<li>做四个容器<ul>
+<li>分别存玩家和底牌</li>
+</ul>
+</li>
+<li>再做一个容器，存所有扑克牌</li>
+</ul>
+<h4 id="3-静态导入"><a href="#3-静态导入" class="headerlink" title="3.静态导入"></a>3.静态导入</h4><ul>
+<li>在导包过程中，我们可以直接导入静态部分，这样的话某个类的静态成员就可以直接使用了<ul>
+<li>看别人的源码时用的比较多</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/05/TdlWUHFeZVRAPLj.png" alt="image-20210805135205026"></p>
+<h3 id="二、异常"><a href="#二、异常" class="headerlink" title="二、异常"></a>二、<font color='#d15252'>异常</font></h3><h4 id="1-什么是异常"><a href="#1-什么是异常" class="headerlink" title="1.什么是异常"></a>1.什么是异常</h4><ul>
+<li>异常就是程序出现了不正常的现象</li>
+</ul>
+<h4 id="2-Java如何形容异常？"><a href="#2-Java如何形容异常？" class="headerlink" title="2.Java如何形容异常？"></a>2.Java如何形容异常？</h4><p>但凡涉及到Java内的内容，都要用类来处理，所以异常最顶层的类</p>
+<ul>
+<li><font color='#d15252'><strong>Throwable</strong></font>类<ul>
+<li>是Java语言中所有错误和异常的超类</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-Throwable类"><a href="#3-Throwable类" class="headerlink" title="3.Throwable类"></a>3.Throwable类</h4><ul>
+<li><p><font color='#d15252'>Throwable</font></p>
+<ul>
+<li>error（错误）一般不会遇到，因为它表示严重的问题</li>
+<li>exception（异常）<ul>
+<li>编译时异常<ul>
+<li>其他类都是编译时异常</li>
+</ul>
+</li>
+<li>运行时异常<ul>
+<li>RuntimeException在运行时</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/05/1BUKNkQWzOFSgA7.png" alt="image-20210805141331385"></p>
+</li>
+<li><p><code>RuntimeException</code>是在Java虚拟机的正常操作期间可以抛出的异常的超类。 </p>
+</li>
+</ul>
+<h4 id="4-编译时异常和运行时异常"><a href="#4-编译时异常和运行时异常" class="headerlink" title="4.编译时异常和运行时异常"></a>4.编译时异常和运行时异常</h4><h5 id="Ⅰ-编译时异常"><a href="#Ⅰ-编译时异常" class="headerlink" title="Ⅰ.编译时异常"></a>Ⅰ.编译时异常</h5><ul>
+<li>编译时异常都是Exception的子类，程序卡在编译阶段</li>
+<li>出现这类的异常，必须<font color='#d15252'>显示处理</font>（调试代码），否则程序就会出现问题，无法编译</li>
+</ul>
+<h5 id="Ⅱ-运行时异常"><a href="#Ⅱ-运行时异常" class="headerlink" title="Ⅱ.运行时异常"></a>Ⅱ.运行时异常</h5><ul>
+<li>都是RuntimeException的子类，卡在了程序的运行时</li>
+<li>必须得修改代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//运行时异常</span></span><br><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">System.out.println(arr[<span class="number">100</span>]);</span><br><span class="line"><span class="comment">//以上代码可知，编译时是没有错误的</span></span><br><span class="line"><span class="comment">//但运行时报错 : java.lang.ArrayIndexOutOfBoundsException:</span></span><br><span class="line"><span class="comment">//由查看API可知，则异常是RuntimeException下的异常，所以确定它是运行时异常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//编译时异常演示</span></span><br><span class="line">      SimpleDateFormat sim = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy年MM月dd日&quot;</span>);</span><br><span class="line">      Date date = sim.parse(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line"><span class="comment">//由以上代码可知，在编译时期就会抛出异常</span></span><br><span class="line"><span class="comment">//Demo2.java:16: 错误: 未报告的异常错误ParseException; 必须对其进行捕获或声明以便抛出</span></span><br><span class="line"><span class="comment">//并且此异常在Throwable 包下，与runtimeException无关。所以时运行时异常</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-异常的处理机制"><a href="#5-异常的处理机制" class="headerlink" title="5.异常的处理机制"></a>5.异常的处理机制</h4><h5 id="Ⅰ-默认处理机制（面试问）"><a href="#Ⅰ-默认处理机制（面试问）" class="headerlink" title="Ⅰ.默认处理机制（面试问）"></a>Ⅰ.<font color='#d15252'>默认处理机制</font>（面试问）</h5><ul>
+<li>当程序遇到异常时<ul>
+<li>将异常抛给调用者（jvm)<ul>
+<li>一层一层的抛，最后抛给jvm</li>
+</ul>
+</li>
+<li>jvm会默认的去做相应的处理<ul>
+<li><font color='#d15252'>new 异常对象</font> ，产生异常名称、原因，以及出现的位置等信息输出在控制台</li>
+<li>停掉程序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-throws-声明式-方式处理异常"><a href="#Ⅱ-throws-声明式-方式处理异常" class="headerlink" title="Ⅱ.throws(声明式)方式处理异常"></a>Ⅱ.throws(声明式)方式处理异常</h5><ul>
+<li><p>写在方法的声明部分()</p>
+<ul>
+<li><p>```java<br>public void method()throws 异常类名</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="bullet">-</span> 给开发者看的，一般也不用</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 特点</span><br><span class="line"></span><br><span class="line"><span class="bullet">  -</span> 处理机制（还是默认的处理机制）</span><br><span class="line"><span class="bullet">  -</span> 为了给以后的调用者看（开发角度）</span><br><span class="line"><span class="bullet">  -</span> <span class="strong">**<span class="xml"><span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">&#x27;#d15252&#x27;</span>&gt;</span></span>运行时异常可以不用声明，编译时异常必须写<span class="xml"><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span>**</span>（面试）</span><br><span class="line"></span><br><span class="line"><span class="section">##### Ⅲ.throw抛异常</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> throw new 异常类 ：方法内</span><br><span class="line"><span class="bullet">  -</span> 如果是运行时异常，不用在方法上去声明异常</span><br><span class="line"><span class="bullet">  -</span> 如果是编译时异常，必须要在方法上声明</span><br><span class="line"><span class="bullet">  -</span> 从结果上看，和默认机制是一样的，原理是不一样的，throw是自己将异常抛出(直接到控制台上)</span><br><span class="line"><span class="bullet">  -</span> 没有交给jvm，直接自己就抛出异常</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; Ⅱ.throws声明式异常和Ⅲ.throw抛异常	适用于开发者的角度</span></span><br><span class="line"><span class="quote">&gt;</span></span><br><span class="line"><span class="quote">&gt; throw</span></span><br><span class="line"><span class="quote">&gt;</span></span><br><span class="line"><span class="quote">&gt; - 编译时：有声明不一定有抛出，但是有抛出必须有声明</span></span><br><span class="line"><span class="quote">&gt; - 运行时：声明，抛出</span></span><br><span class="line"></span><br><span class="line">![<span class="string">image-20210805170703594</span>](<span class="link">https://i.loli.net/2021/08/05/smAEunHvaFqhJkS.png</span>)</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 格式： throw new 异常类型（）；</span><br><span class="line"></span><br><span class="line"><span class="section">##### Ⅳ.try...catch处理异常机制</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 格式</span><br><span class="line"></span><br><span class="line">  <span class="code">```java</span></span><br><span class="line"><span class="code">  try&#123;</span></span><br><span class="line"><span class="code">  	可能出现异常的语句</span></span><br><span class="line"><span class="code">  &#125;catch(异常类类型 变量名)&#123;</span></span><br><span class="line"><span class="code">      异常的处理</span></span><br><span class="line"><span class="code">  &#125;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>以后做开发使用或测试的时候，有异常建议使用(throw/throws)</p>
+</li>
+<li><p>在调用方法时遇到异常，建议使用try catch</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">       <span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">       <span class="keyword">int</span> b =i/<span class="number">0</span>;</span><br><span class="line">        System.out.println(<span class="number">111</span>);	<span class="comment">//没有执行，异常跳入catch执行完，结束</span></span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;除数为0了&quot;</span>);</span><br><span class="line">        <span class="comment">//输出异常信息</span></span><br><span class="line">        System.out.println(e.getMessage());</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">        一定会执行的代码</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>当一个程序有多个错误时</p>
+<ul>
+<li>catch可以写多个，但要注意异常类型，小的放上面的catch，大的放在下面</li>
+</ul>
+</li>
+<li><p>运行步骤：</p>
+<ul>
+<li>当进入try..catch中，先执行try()中有可能出现异常的问题</li>
+<li>如果遇到异常语句<ul>
+<li>跳入catch执行处理异常语句</li>
+<li>catch语句执行完后，执行finally内的语句</li>
+<li>结束try..catch</li>
+</ul>
+</li>
+<li>执行之后的代码</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅴ-细节问题"><a href="#Ⅴ-细节问题" class="headerlink" title="Ⅴ.细节问题"></a>Ⅴ.细节问题</h5><ul>
+<li>可以多层catch，但是大的类型一定要在最底层</li>
+<li>采用try chach，异常代码处理完成后，不影响其他代码的执行</li>
+<li>如果有finally，不管异常是否触发，一定会走（IO）</li>
+</ul>
+<h4 id="6-查看异常信息"><a href="#6-查看异常信息" class="headerlink" title="6.查看异常信息"></a>6.查看异常信息</h4><p><img src="https://i.loli.net/2021/08/05/yh1b53ZoBeH7dmE.png" alt="image-20210805144413257"></p>
+<ul>
+<li>第一行是异常的类名<ul>
+<li>第一行<code>：</code>后的信息是异常产生的原因</li>
+</ul>
+</li>
+<li>第二行是异常产生的原始位置</li>
+<li>第三行是异常产生的位置</li>
+</ul>
+<h4 id="7-Throwable的成员方法"><a href="#7-Throwable的成员方法" class="headerlink" title="7.Throwable的成员方法"></a>7.Throwable的成员方法</h4><table>
+<thead>
+<tr>
+<th>成员方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><font color='#d15252'>printStackTrace()</font></td>
+<td>将此throwable和其追溯打印到标准错误流</td>
+</tr>
+<tr>
+<td>getMessage()</td>
+<td>返回此throwable的详细消息字符串</td>
+</tr>
+<tr>
+<td>toString()</td>
+<td>简短的描述信息</td>
+</tr>
+</tbody></table>
+<ul>
+<li>printStackTrace() 开发中用的比较多，因为他会对异常信息进行溯源，比较详细</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">    System.out.println(e.getMessage());</span><br><span class="line">    System.out.println(e.toString());</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="number">123</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">/ by zero	<span class="comment">//getMessage</span></span><br><span class="line">java.lang.ArithmeticException: / by zero	<span class="comment">//toString</span></span><br><span class="line"><span class="number">123</span></span><br><span class="line">java.lang.ArithmeticException: / by zero	</span><br><span class="line">	at 异常.Demo7.main(Demo7.java:<span class="number">6</span>)<span class="comment">//printStackTrace</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="8-自定义异常信息"><a href="#8-自定义异常信息" class="headerlink" title="8.自定义异常信息"></a>8.自定义异常信息</h4><ul>
+<li><p>步骤：</p>
+<ul>
+<li><p>在有可能出现异常的方法中，实现判断，如果触发异常，就使用throw new 异常类型（） 触发异常</p>
+<p><img src="https://i.loli.net/2021/08/05/3LZyG78TbpfcEth.png" alt="image-20210805171208739"></p>
+</li>
+<li><p>异常类型需要自己自定义一个类，通过继承，实现处理异常的能力</p>
+<p><img src="https://i.loli.net/2021/08/05/RgbNl7y8MALHWZX.png" alt="image-20210805171219308"></p>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>异常</tag>
+        <tag>迭代器</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>序列化和反序列化\Properties类\瞬态关键字\打印流</title>
     <url>/2021/08/25/%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Properties%E7%B1%BB-%E7%9E%AC%E6%80%81%E5%85%B3%E9%94%AE%E5%AD%97-%E6%89%93%E5%8D%B0%E6%B5%81/</url>
     <content><![CDATA[<h3 id="一、Properties类"><a href="#一、Properties类" class="headerlink" title="一、Properties类"></a>一、Properties类</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
@@ -4391,182 +4836,6 @@
         <tag>Properties</tag>
         <tag>瞬态关键字</tag>
         <tag>打印流</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>异常和迭代器</title>
-    <url>/2021/08/25/%E5%BC%82%E5%B8%B8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/</url>
-    <content><![CDATA[<h3 id="一、迭代器"><a href="#一、迭代器" class="headerlink" title="一、迭代器"></a>一、迭代器</h3><h4 id="1-next"><a href="#1-next" class="headerlink" title="1.next()"></a>1.next()</h4><ul>
-<li>取数</li>
-<li>先下一个</li>
-<li>一次性</li>
-</ul>
-<h4 id="2-并发修改异常ConcurrentModificationException"><a href="#2-并发修改异常ConcurrentModificationException" class="headerlink" title="2.并发修改异常ConcurrentModificationException"></a>2.并发修改异常ConcurrentModificationException</h4><ul>
-<li>当我们使用迭代器做遍历的时候，不能破坏集合的内部结构<ul>
-<li>一旦有<font color='#d15252'>破坏集合内部结构的操作就会报错</font></li>
-</ul>
-</li>
-</ul>
-<h4 id="3-练习题：斗地主"><a href="#3-练习题：斗地主" class="headerlink" title="3.练习题：斗地主"></a>3.练习题：斗地主</h4><ul>
-<li>做四个容器<ul>
-<li>分别存玩家和底牌</li>
-</ul>
-</li>
-<li>再做一个容器，存所有扑克牌</li>
-</ul>
-<h4 id="3-静态导入"><a href="#3-静态导入" class="headerlink" title="3.静态导入"></a>3.静态导入</h4><ul>
-<li>在导包过程中，我们可以直接导入静态部分，这样的话某个类的静态成员就可以直接使用了<ul>
-<li>看别人的源码时用的比较多</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/05/TdlWUHFeZVRAPLj.png" alt="image-20210805135205026"></p>
-<h3 id="二、异常"><a href="#二、异常" class="headerlink" title="二、异常"></a>二、<font color='#d15252'>异常</font></h3><h4 id="1-什么是异常"><a href="#1-什么是异常" class="headerlink" title="1.什么是异常"></a>1.什么是异常</h4><ul>
-<li>异常就是程序出现了不正常的现象</li>
-</ul>
-<h4 id="2-Java如何形容异常？"><a href="#2-Java如何形容异常？" class="headerlink" title="2.Java如何形容异常？"></a>2.Java如何形容异常？</h4><p>但凡涉及到Java内的内容，都要用类来处理，所以异常最顶层的类</p>
-<ul>
-<li><font color='#d15252'><strong>Throwable</strong></font>类<ul>
-<li>是Java语言中所有错误和异常的超类</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-Throwable类"><a href="#3-Throwable类" class="headerlink" title="3.Throwable类"></a>3.Throwable类</h4><ul>
-<li><p><font color='#d15252'>Throwable</font></p>
-<ul>
-<li>error（错误）一般不会遇到，因为它表示严重的问题</li>
-<li>exception（异常）<ul>
-<li>编译时异常<ul>
-<li>其他类都是编译时异常</li>
-</ul>
-</li>
-<li>运行时异常<ul>
-<li>RuntimeException在运行时</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/05/1BUKNkQWzOFSgA7.png" alt="image-20210805141331385"></p>
-</li>
-<li><p><code>RuntimeException</code>是在Java虚拟机的正常操作期间可以抛出的异常的超类。 </p>
-</li>
-</ul>
-<h4 id="4-编译时异常和运行时异常"><a href="#4-编译时异常和运行时异常" class="headerlink" title="4.编译时异常和运行时异常"></a>4.编译时异常和运行时异常</h4><h5 id="Ⅰ-编译时异常"><a href="#Ⅰ-编译时异常" class="headerlink" title="Ⅰ.编译时异常"></a>Ⅰ.编译时异常</h5><ul>
-<li>编译时异常都是Exception的子类，程序卡在编译阶段</li>
-<li>出现这类的异常，必须<font color='#d15252'>显示处理</font>（调试代码），否则程序就会出现问题，无法编译</li>
-</ul>
-<h5 id="Ⅱ-运行时异常"><a href="#Ⅱ-运行时异常" class="headerlink" title="Ⅱ.运行时异常"></a>Ⅱ.运行时异常</h5><ul>
-<li>都是RuntimeException的子类，卡在了程序的运行时</li>
-<li>必须得修改代码</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">	<span class="comment">//运行时异常</span></span><br><span class="line"><span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">System.out.println(arr[<span class="number">100</span>]);</span><br><span class="line"><span class="comment">//以上代码可知，编译时是没有错误的</span></span><br><span class="line"><span class="comment">//但运行时报错 : java.lang.ArrayIndexOutOfBoundsException:</span></span><br><span class="line"><span class="comment">//由查看API可知，则异常是RuntimeException下的异常，所以确定它是运行时异常</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//编译时异常演示</span></span><br><span class="line">      SimpleDateFormat sim = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy年MM月dd日&quot;</span>);</span><br><span class="line">      Date date = sim.parse(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line"><span class="comment">//由以上代码可知，在编译时期就会抛出异常</span></span><br><span class="line"><span class="comment">//Demo2.java:16: 错误: 未报告的异常错误ParseException; 必须对其进行捕获或声明以便抛出</span></span><br><span class="line"><span class="comment">//并且此异常在Throwable 包下，与runtimeException无关。所以时运行时异常</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="5-异常的处理机制"><a href="#5-异常的处理机制" class="headerlink" title="5.异常的处理机制"></a>5.异常的处理机制</h4><h5 id="Ⅰ-默认处理机制（面试问）"><a href="#Ⅰ-默认处理机制（面试问）" class="headerlink" title="Ⅰ.默认处理机制（面试问）"></a>Ⅰ.<font color='#d15252'>默认处理机制</font>（面试问）</h5><ul>
-<li>当程序遇到异常时<ul>
-<li>将异常抛给调用者（jvm)<ul>
-<li>一层一层的抛，最后抛给jvm</li>
-</ul>
-</li>
-<li>jvm会默认的去做相应的处理<ul>
-<li><font color='#d15252'>new 异常对象</font> ，产生异常名称、原因，以及出现的位置等信息输出在控制台</li>
-<li>停掉程序</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="Ⅱ-throws-声明式-方式处理异常"><a href="#Ⅱ-throws-声明式-方式处理异常" class="headerlink" title="Ⅱ.throws(声明式)方式处理异常"></a>Ⅱ.throws(声明式)方式处理异常</h5><ul>
-<li><p>写在方法的声明部分()</p>
-<ul>
-<li><p>```java<br>public void method()throws 异常类名</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="bullet">-</span> 给开发者看的，一般也不用</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 特点</span><br><span class="line"></span><br><span class="line"><span class="bullet">  -</span> 处理机制（还是默认的处理机制）</span><br><span class="line"><span class="bullet">  -</span> 为了给以后的调用者看（开发角度）</span><br><span class="line"><span class="bullet">  -</span> <span class="strong">**<span class="xml"><span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">&#x27;#d15252&#x27;</span>&gt;</span></span>运行时异常可以不用声明，编译时异常必须写<span class="xml"><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span>**</span>（面试）</span><br><span class="line"></span><br><span class="line"><span class="section">##### Ⅲ.throw抛异常</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> throw new 异常类 ：方法内</span><br><span class="line"><span class="bullet">  -</span> 如果是运行时异常，不用在方法上去声明异常</span><br><span class="line"><span class="bullet">  -</span> 如果是编译时异常，必须要在方法上声明</span><br><span class="line"><span class="bullet">  -</span> 从结果上看，和默认机制是一样的，原理是不一样的，throw是自己将异常抛出(直接到控制台上)</span><br><span class="line"><span class="bullet">  -</span> 没有交给jvm，直接自己就抛出异常</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; Ⅱ.throws声明式异常和Ⅲ.throw抛异常	适用于开发者的角度</span></span><br><span class="line"><span class="quote">&gt;</span></span><br><span class="line"><span class="quote">&gt; throw</span></span><br><span class="line"><span class="quote">&gt;</span></span><br><span class="line"><span class="quote">&gt; - 编译时：有声明不一定有抛出，但是有抛出必须有声明</span></span><br><span class="line"><span class="quote">&gt; - 运行时：声明，抛出</span></span><br><span class="line"></span><br><span class="line">![<span class="string">image-20210805170703594</span>](<span class="link">https://i.loli.net/2021/08/05/smAEunHvaFqhJkS.png</span>)</span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 格式： throw new 异常类型（）；</span><br><span class="line"></span><br><span class="line"><span class="section">##### Ⅳ.try...catch处理异常机制</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 格式</span><br><span class="line"></span><br><span class="line">  <span class="code">```java</span></span><br><span class="line"><span class="code">  try&#123;</span></span><br><span class="line"><span class="code">  	可能出现异常的语句</span></span><br><span class="line"><span class="code">  &#125;catch(异常类类型 变量名)&#123;</span></span><br><span class="line"><span class="code">      异常的处理</span></span><br><span class="line"><span class="code">  &#125;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>以后做开发使用或测试的时候，有异常建议使用(throw/throws)</p>
-</li>
-<li><p>在调用方法时遇到异常，建议使用try catch</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">       <span class="keyword">int</span> i=<span class="number">1</span>;</span><br><span class="line">       <span class="keyword">int</span> b =i/<span class="number">0</span>;</span><br><span class="line">        System.out.println(<span class="number">111</span>);	<span class="comment">//没有执行，异常跳入catch执行完，结束</span></span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;除数为0了&quot;</span>);</span><br><span class="line">        <span class="comment">//输出异常信息</span></span><br><span class="line">        System.out.println(e.getMessage());</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">        一定会执行的代码</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>当一个程序有多个错误时</p>
-<ul>
-<li>catch可以写多个，但要注意异常类型，小的放上面的catch，大的放在下面</li>
-</ul>
-</li>
-<li><p>运行步骤：</p>
-<ul>
-<li>当进入try..catch中，先执行try()中有可能出现异常的问题</li>
-<li>如果遇到异常语句<ul>
-<li>跳入catch执行处理异常语句</li>
-<li>catch语句执行完后，执行finally内的语句</li>
-<li>结束try..catch</li>
-</ul>
-</li>
-<li>执行之后的代码</li>
-</ul>
-</li>
-</ul>
-<h5 id="Ⅴ-细节问题"><a href="#Ⅴ-细节问题" class="headerlink" title="Ⅴ.细节问题"></a>Ⅴ.细节问题</h5><ul>
-<li>可以多层catch，但是大的类型一定要在最底层</li>
-<li>采用try chach，异常代码处理完成后，不影响其他代码的执行</li>
-<li>如果有finally，不管异常是否触发，一定会走（IO）</li>
-</ul>
-<h4 id="6-查看异常信息"><a href="#6-查看异常信息" class="headerlink" title="6.查看异常信息"></a>6.查看异常信息</h4><p><img src="https://i.loli.net/2021/08/05/yh1b53ZoBeH7dmE.png" alt="image-20210805144413257"></p>
-<ul>
-<li>第一行是异常的类名<ul>
-<li>第一行<code>：</code>后的信息是异常产生的原因</li>
-</ul>
-</li>
-<li>第二行是异常产生的原始位置</li>
-<li>第三行是异常产生的位置</li>
-</ul>
-<h4 id="7-Throwable的成员方法"><a href="#7-Throwable的成员方法" class="headerlink" title="7.Throwable的成员方法"></a>7.Throwable的成员方法</h4><table>
-<thead>
-<tr>
-<th>成员方法</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><font color='#d15252'>printStackTrace()</font></td>
-<td>将此throwable和其追溯打印到标准错误流</td>
-</tr>
-<tr>
-<td>getMessage()</td>
-<td>返回此throwable的详细消息字符串</td>
-</tr>
-<tr>
-<td>toString()</td>
-<td>简短的描述信息</td>
-</tr>
-</tbody></table>
-<ul>
-<li>printStackTrace() 开发中用的比较多，因为他会对异常信息进行溯源，比较详细</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">1</span>/<span class="number">0</span>;</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">    System.out.println(e.getMessage());</span><br><span class="line">    System.out.println(e.toString());</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(<span class="number">123</span>);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">/ by zero	<span class="comment">//getMessage</span></span><br><span class="line">java.lang.ArithmeticException: / by zero	<span class="comment">//toString</span></span><br><span class="line"><span class="number">123</span></span><br><span class="line">java.lang.ArithmeticException: / by zero	</span><br><span class="line">	at 异常.Demo7.main(Demo7.java:<span class="number">6</span>)<span class="comment">//printStackTrace</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="8-自定义异常信息"><a href="#8-自定义异常信息" class="headerlink" title="8.自定义异常信息"></a>8.自定义异常信息</h4><ul>
-<li><p>步骤：</p>
-<ul>
-<li><p>在有可能出现异常的方法中，实现判断，如果触发异常，就使用throw new 异常类型（） 触发异常</p>
-<p><img src="https://i.loli.net/2021/08/05/3LZyG78TbpfcEth.png" alt="image-20210805171208739"></p>
-</li>
-<li><p>异常类型需要自己自定义一个类，通过继承，实现处理异常的能力</p>
-<p><img src="https://i.loli.net/2021/08/05/RgbNl7y8MALHWZX.png" alt="image-20210805171219308"></p>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>异常</tag>
-        <tag>迭代器</tag>
       </tags>
   </entry>
   <entry>
@@ -5463,191 +5732,6 @@
       </tags>
   </entry>
   <entry>
-    <title>继承、多态、抽象类和接口</title>
-    <url>/2021/08/25/%E7%BB%A7%E6%89%BF%E3%80%81%E5%A4%9A%E6%80%81%E3%80%81%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/</url>
-    <content><![CDATA[<h3 id="一、继承"><a href="#一、继承" class="headerlink" title="一、继承"></a>一、继承</h3><h4 id="1-什么是继承？"><a href="#1-什么是继承？" class="headerlink" title="1.什么是继承？"></a>1.什么是继承？</h4><ul>
-<li><p>Java中继承</p>
-<ul>
-<li>第一步：找到重复代码</li>
-<li>第二步：找到封装重复代码的工具</li>
-<li>第三步：其他类和公共类没有联系<ul>
-<li>使用 <code>extends</code>继承</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>继承的格式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 子类名 <span class="keyword">extends</span> 父类名</span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="2-继承解决了代码的重复性"><a href="#2-继承解决了代码的重复性" class="headerlink" title="2.继承解决了代码的重复性"></a>2.继承解决了代码的重复性</h4><h5 id="开发原则：低耦合，高内聚"><a href="#开发原则：低耦合，高内聚" class="headerlink" title="开发原则：低耦合，高内聚"></a>开发原则：低耦合，高内聚</h5><ul>
-<li>耦合：类与类之间的关系</li>
-<li>内聚：自己完成某件事的能力</li>
-</ul>
-<h4 id="3-继承的构造方法之间的关系"><a href="#3-继承的构造方法之间的关系" class="headerlink" title="3.继承的构造方法之间的关系"></a>3.继承的构造方法之间的关系</h4><ul>
-<li><p>父类与子类的构造方法不会继承</p>
-</li>
-<li><p>创建子类对象时，会先运行父类的构造方法（初始化夫），然后运行子类的构造方法</p>
-<ul>
-<li><p>因为在继承时，子类构造方法有隐藏的super()</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Zi</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//隐藏super</span></span><br><span class="line">		<span class="keyword">super</span>(<span class="number">10</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;子类的无参构造&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h4 id="4-继承的成员变量关系"><a href="#4-继承的成员变量关系" class="headerlink" title="4.继承的成员变量关系"></a>4.继承的成员变量关系</h4><ul>
-<li><p>私有的是无法被继承的</p>
-<ul>
-<li>实际上是可以继承的，但是不能访问</li>
-</ul>
-</li>
-<li><p>继承</p>
-<ul>
-<li>子类被赋予了访问super内存空间的权限</li>
-</ul>
-<p><img src="https://i.loli.net/2021/07/29/Q3zvmHiLqKWcJaS.png" alt="image-20210729103202135"></p>
-</li>
-</ul>
-<h4 id="5-继承的方法关系"><a href="#5-继承的方法关系" class="headerlink" title="5.继承的方法关系"></a>5.继承的方法关系</h4><ul>
-<li>方法可以被继承</li>
-</ul>
-<h5 id="Ⅰ-方法重写："><a href="#Ⅰ-方法重写：" class="headerlink" title="Ⅰ.方法重写："></a>Ⅰ.<font color='#d15252'>方法重写</font>：</h5><ul>
-<li>概念：子类和父类中的方法声明一模一样，就是方法重写<ul>
-<li>方法体可以不一样</li>
-</ul>
-</li>
-<li>子类对象调用方法的<font color='orange'>特点</font><ul>
-<li>若方法名不相同，则调用对应名称的方法</li>
-<li>若方法名相同，则调用子类自己的</li>
-</ul>
-</li>
-<li>子类重写父类方法时，访问权限不能更低</li>
-</ul>
-<h4 id="6-继承的总结"><a href="#6-继承的总结" class="headerlink" title="6.继承的总结"></a>6.继承的总结</h4><ul>
-<li>Java中只支持单继承，不支持多继承。但是支持多层继承<ul>
-<li>即 一个类只能有一个爸爸 ，但是可以有一个爷爷，一个祖爷爷</li>
-<li><font color='#d15252'>但多层继承打破了封装性，功能唯一性</font></li>
-</ul>
-</li>
-<li>子类只能继承父类的非私有成员（成员变量、成员方法）</li>
-<li>子类不会继承父类的构造方法，但可以通过super()访问</li>
-</ul>
-<hr>
-<h3 id="二、多态"><a href="#二、多态" class="headerlink" title="二、多态"></a>二、多态</h3><h4 id="1-概念："><a href="#1-概念：" class="headerlink" title="1.概念："></a>1.概念：</h4><ul>
-<li>某一事物，不同时刻不同状态（扯淡）</li>
-<li><font color='#d15252'>赋予父类访问子类的权限</font><ul>
-<li>父类要有与子类相同的方法，不然过不了编译</li>
-<li>因为对象进实体找方法从上到下</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-结论："><a href="#2-结论：" class="headerlink" title="2.结论："></a>2.结论：</h4><ul>
-<li>成员变量：<ul>
-<li>编译看左边，运行看左边 （就近原则）</li>
-</ul>
-</li>
-<li>成员方法：<ul>
-<li>编译看左边，运行看右边（方法重写）</li>
-</ul>
-</li>
-<li>构造方法：<ul>
-<li>创建子类对象，先初始化父类</li>
-</ul>
-</li>
-<li>静态方法：<ul>
-<li>编译看左边，运行看左边（静态和类相关，不是重写）</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-实现多态"><a href="#3-实现多态" class="headerlink" title="3.实现多态"></a>3.<font color='#d15252'>实现多态</font></h4><ul>
-<li>要有继承关系<ul>
-<li>要有方法的重写</li>
-</ul>
-</li>
-<li>父类引用指向子类对象</li>
-</ul>
-<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><ul>
-<li><p>instanceof</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">if</span><span class="params">(x instanceof y)</span></span>&#123;</span><br><span class="line">	<span class="comment">//判断x是否是y的一种</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<h3 id="三、抽象类"><a href="#三、抽象类" class="headerlink" title="三、抽象类"></a>三、抽象类</h3><p><strong><font color='#d15252'>abstract</font></strong></p>
-<h4 id="1-什么是抽象类？"><a href="#1-什么是抽象类？" class="headerlink" title="1.什么是抽象类？"></a>1.什么是抽象类？</h4><ul>
-<li>为了让父类能够调用子类的方法<ul>
-<li>而父类必须有一个一样的方法<ul>
-<li>并且父类方法中不需要写方法体<ul>
-<li>但不写方法体会报错，需要抽象</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>一个<font color='#d15252'>没有方法体</font>的方法应定义为<font color='#d15252'>抽象方法</font></li>
-<li>如果一个类中有抽象方法，则该类<font color='#d15252'>必须定义为抽象类</font></li>
-</ul>
-<h4 id="2-定义抽象类格式"><a href="#2-定义抽象类格式" class="headerlink" title="2.定义抽象类格式"></a>2.定义抽象类格式</h4><ul>
-<li><p>抽象类和抽象方法的定义，必须用abstract来修饰</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> 类名</span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="3-抽象类的使用"><a href="#3-抽象类的使用" class="headerlink" title="3.抽象类的使用"></a>3.抽象类的使用</h4><ul>
-<li>抽象类无法直接<font color='#d15252'><strong>实例化</strong></font></li>
-</ul>
-<h4 id="4-抽象类的组成"><a href="#4-抽象类的组成" class="headerlink" title="4.抽象类的组成"></a>4.抽象类的组成</h4><ul>
-<li>构造方法</li>
-<li>成员变量</li>
-<li>成员方法<ul>
-<li>是否包含非抽象方法</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="四、接口"><a href="#四、接口" class="headerlink" title="四、接口"></a>四、接口</h3><h4 id="1-接口的定义："><a href="#1-接口的定义：" class="headerlink" title="1.接口的定义："></a>1.接口的定义：</h4><ul>
-<li>当我们有额外的业务（功能）时，需要用接口区封装业务</li>
-<li>接口体现了扩展性</li>
-</ul>
-<h4 id="2-接口的格式"><a href="#2-接口的格式" class="headerlink" title="2.接口的格式"></a>2.接口的格式</h4><ul>
-<li><p>接口用关键字interface表示</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">格式：<span class="class"><span class="keyword">interface</span> 接口名</span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>类实现接口用implements表示</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">格式：<span class="class"><span class="keyword">class</span> 类名 <span class="keyword">implements</span> 接口名 </span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="3-接口的组成"><a href="#3-接口的组成" class="headerlink" title="3.接口的组成"></a>3.接口的组成</h4><ul>
-<li>构造方法：没有构造方法<ul>
-<li>不能实例化</li>
-</ul>
-</li>
-<li>变量：没有变量，只能有常量</li>
-<li>方法：只能是抽象方法</li>
-</ul>
-<h4 id="4-接口的实例化"><a href="#4-接口的实例化" class="headerlink" title="4.接口的实例化"></a>4.接口的实例化</h4><ul>
-<li>同抽象方法一样</li>
-</ul>
-<h5 id="练习："><a href="#练习：" class="headerlink" title="练习："></a>练习：</h5><ul>
-<li>举重：<ul>
-<li>教练：姓名 年龄    吃馒头</li>
-<li>运动员： 姓名 年龄 吃牛肉</li>
-</ul>
-</li>
-<li>乒乓球： <ul>
-<li>教练：姓名 年龄  吃驴肉</li>
-<li>教练：姓名 年龄  吃驴肉</li>
-</ul>
-</li>
-</ul>
-<p>和乒乓球相关的，都会说英语</p>
-<p>和举重相关的，都会说日语</p>
-<p>say：输出信息</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>继承</tag>
-        <tag>多态</tag>
-        <tag>抽象类</tag>
-        <tag>接口</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网络编程</title>
     <url>/2021/08/24/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<h3 id="一、网络编程"><a href="#一、网络编程" class="headerlink" title="一、网络编程"></a>一、网络编程</h3><h4 id="1-网络编程的概念"><a href="#1-网络编程的概念" class="headerlink" title="1.网络编程的概念"></a>1.网络编程的概念</h4><ul>
@@ -5998,6 +6082,191 @@
       </tags>
   </entry>
   <entry>
+    <title>继承、多态、抽象类和接口</title>
+    <url>/2021/08/25/%E7%BB%A7%E6%89%BF%E3%80%81%E5%A4%9A%E6%80%81%E3%80%81%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/</url>
+    <content><![CDATA[<h3 id="一、继承"><a href="#一、继承" class="headerlink" title="一、继承"></a>一、继承</h3><h4 id="1-什么是继承？"><a href="#1-什么是继承？" class="headerlink" title="1.什么是继承？"></a>1.什么是继承？</h4><ul>
+<li><p>Java中继承</p>
+<ul>
+<li>第一步：找到重复代码</li>
+<li>第二步：找到封装重复代码的工具</li>
+<li>第三步：其他类和公共类没有联系<ul>
+<li>使用 <code>extends</code>继承</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>继承的格式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 子类名 <span class="keyword">extends</span> 父类名</span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="2-继承解决了代码的重复性"><a href="#2-继承解决了代码的重复性" class="headerlink" title="2.继承解决了代码的重复性"></a>2.继承解决了代码的重复性</h4><h5 id="开发原则：低耦合，高内聚"><a href="#开发原则：低耦合，高内聚" class="headerlink" title="开发原则：低耦合，高内聚"></a>开发原则：低耦合，高内聚</h5><ul>
+<li>耦合：类与类之间的关系</li>
+<li>内聚：自己完成某件事的能力</li>
+</ul>
+<h4 id="3-继承的构造方法之间的关系"><a href="#3-继承的构造方法之间的关系" class="headerlink" title="3.继承的构造方法之间的关系"></a>3.继承的构造方法之间的关系</h4><ul>
+<li><p>父类与子类的构造方法不会继承</p>
+</li>
+<li><p>创建子类对象时，会先运行父类的构造方法（初始化夫），然后运行子类的构造方法</p>
+<ul>
+<li><p>因为在继承时，子类构造方法有隐藏的super()</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Zi</span> <span class="keyword">extends</span> <span class="title">Fu</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Zi</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//隐藏super</span></span><br><span class="line">		<span class="keyword">super</span>(<span class="number">10</span>);</span><br><span class="line">		System.out.println(<span class="string">&quot;子类的无参构造&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="4-继承的成员变量关系"><a href="#4-继承的成员变量关系" class="headerlink" title="4.继承的成员变量关系"></a>4.继承的成员变量关系</h4><ul>
+<li><p>私有的是无法被继承的</p>
+<ul>
+<li>实际上是可以继承的，但是不能访问</li>
+</ul>
+</li>
+<li><p>继承</p>
+<ul>
+<li>子类被赋予了访问super内存空间的权限</li>
+</ul>
+<p><img src="https://i.loli.net/2021/07/29/Q3zvmHiLqKWcJaS.png" alt="image-20210729103202135"></p>
+</li>
+</ul>
+<h4 id="5-继承的方法关系"><a href="#5-继承的方法关系" class="headerlink" title="5.继承的方法关系"></a>5.继承的方法关系</h4><ul>
+<li>方法可以被继承</li>
+</ul>
+<h5 id="Ⅰ-方法重写："><a href="#Ⅰ-方法重写：" class="headerlink" title="Ⅰ.方法重写："></a>Ⅰ.<font color='#d15252'>方法重写</font>：</h5><ul>
+<li>概念：子类和父类中的方法声明一模一样，就是方法重写<ul>
+<li>方法体可以不一样</li>
+</ul>
+</li>
+<li>子类对象调用方法的<font color='orange'>特点</font><ul>
+<li>若方法名不相同，则调用对应名称的方法</li>
+<li>若方法名相同，则调用子类自己的</li>
+</ul>
+</li>
+<li>子类重写父类方法时，访问权限不能更低</li>
+</ul>
+<h4 id="6-继承的总结"><a href="#6-继承的总结" class="headerlink" title="6.继承的总结"></a>6.继承的总结</h4><ul>
+<li>Java中只支持单继承，不支持多继承。但是支持多层继承<ul>
+<li>即 一个类只能有一个爸爸 ，但是可以有一个爷爷，一个祖爷爷</li>
+<li><font color='#d15252'>但多层继承打破了封装性，功能唯一性</font></li>
+</ul>
+</li>
+<li>子类只能继承父类的非私有成员（成员变量、成员方法）</li>
+<li>子类不会继承父类的构造方法，但可以通过super()访问</li>
+</ul>
+<hr>
+<h3 id="二、多态"><a href="#二、多态" class="headerlink" title="二、多态"></a>二、多态</h3><h4 id="1-概念："><a href="#1-概念：" class="headerlink" title="1.概念："></a>1.概念：</h4><ul>
+<li>某一事物，不同时刻不同状态（扯淡）</li>
+<li><font color='#d15252'>赋予父类访问子类的权限</font><ul>
+<li>父类要有与子类相同的方法，不然过不了编译</li>
+<li>因为对象进实体找方法从上到下</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-结论："><a href="#2-结论：" class="headerlink" title="2.结论："></a>2.结论：</h4><ul>
+<li>成员变量：<ul>
+<li>编译看左边，运行看左边 （就近原则）</li>
+</ul>
+</li>
+<li>成员方法：<ul>
+<li>编译看左边，运行看右边（方法重写）</li>
+</ul>
+</li>
+<li>构造方法：<ul>
+<li>创建子类对象，先初始化父类</li>
+</ul>
+</li>
+<li>静态方法：<ul>
+<li>编译看左边，运行看左边（静态和类相关，不是重写）</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-实现多态"><a href="#3-实现多态" class="headerlink" title="3.实现多态"></a>3.<font color='#d15252'>实现多态</font></h4><ul>
+<li>要有继承关系<ul>
+<li>要有方法的重写</li>
+</ul>
+</li>
+<li>父类引用指向子类对象</li>
+</ul>
+<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><ul>
+<li><p>instanceof</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">if</span><span class="params">(x instanceof y)</span></span>&#123;</span><br><span class="line">	<span class="comment">//判断x是否是y的一种</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="三、抽象类"><a href="#三、抽象类" class="headerlink" title="三、抽象类"></a>三、抽象类</h3><p><strong><font color='#d15252'>abstract</font></strong></p>
+<h4 id="1-什么是抽象类？"><a href="#1-什么是抽象类？" class="headerlink" title="1.什么是抽象类？"></a>1.什么是抽象类？</h4><ul>
+<li>为了让父类能够调用子类的方法<ul>
+<li>而父类必须有一个一样的方法<ul>
+<li>并且父类方法中不需要写方法体<ul>
+<li>但不写方法体会报错，需要抽象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>一个<font color='#d15252'>没有方法体</font>的方法应定义为<font color='#d15252'>抽象方法</font></li>
+<li>如果一个类中有抽象方法，则该类<font color='#d15252'>必须定义为抽象类</font></li>
+</ul>
+<h4 id="2-定义抽象类格式"><a href="#2-定义抽象类格式" class="headerlink" title="2.定义抽象类格式"></a>2.定义抽象类格式</h4><ul>
+<li><p>抽象类和抽象方法的定义，必须用abstract来修饰</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> 类名</span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-抽象类的使用"><a href="#3-抽象类的使用" class="headerlink" title="3.抽象类的使用"></a>3.抽象类的使用</h4><ul>
+<li>抽象类无法直接<font color='#d15252'><strong>实例化</strong></font></li>
+</ul>
+<h4 id="4-抽象类的组成"><a href="#4-抽象类的组成" class="headerlink" title="4.抽象类的组成"></a>4.抽象类的组成</h4><ul>
+<li>构造方法</li>
+<li>成员变量</li>
+<li>成员方法<ul>
+<li>是否包含非抽象方法</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="四、接口"><a href="#四、接口" class="headerlink" title="四、接口"></a>四、接口</h3><h4 id="1-接口的定义："><a href="#1-接口的定义：" class="headerlink" title="1.接口的定义："></a>1.接口的定义：</h4><ul>
+<li>当我们有额外的业务（功能）时，需要用接口区封装业务</li>
+<li>接口体现了扩展性</li>
+</ul>
+<h4 id="2-接口的格式"><a href="#2-接口的格式" class="headerlink" title="2.接口的格式"></a>2.接口的格式</h4><ul>
+<li><p>接口用关键字interface表示</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">格式：<span class="class"><span class="keyword">interface</span> 接口名</span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>类实现接口用implements表示</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">格式：<span class="class"><span class="keyword">class</span> 类名 <span class="keyword">implements</span> 接口名 </span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-接口的组成"><a href="#3-接口的组成" class="headerlink" title="3.接口的组成"></a>3.接口的组成</h4><ul>
+<li>构造方法：没有构造方法<ul>
+<li>不能实例化</li>
+</ul>
+</li>
+<li>变量：没有变量，只能有常量</li>
+<li>方法：只能是抽象方法</li>
+</ul>
+<h4 id="4-接口的实例化"><a href="#4-接口的实例化" class="headerlink" title="4.接口的实例化"></a>4.接口的实例化</h4><ul>
+<li>同抽象方法一样</li>
+</ul>
+<h5 id="练习："><a href="#练习：" class="headerlink" title="练习："></a>练习：</h5><ul>
+<li>举重：<ul>
+<li>教练：姓名 年龄    吃馒头</li>
+<li>运动员： 姓名 年龄 吃牛肉</li>
+</ul>
+</li>
+<li>乒乓球： <ul>
+<li>教练：姓名 年龄  吃驴肉</li>
+<li>教练：姓名 年龄  吃驴肉</li>
+</ul>
+</li>
+</ul>
+<p>和乒乓球相关的，都会说英语</p>
+<p>和举重相关的，都会说日语</p>
+<p>say：输出信息</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>继承</tag>
+        <tag>多态</tag>
+        <tag>抽象类</tag>
+        <tag>接口</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>认识JavaScript</title>
     <url>/2021/08/26/%E8%AE%A4%E8%AF%86JavaScript/</url>
     <content><![CDATA[<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><h3 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h3><ul>
@@ -6292,106 +6561,6 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>转换流和缓冲流</title>
-    <url>/2021/08/25/%E8%BD%AC%E6%8D%A2%E6%B5%81%E5%92%8C%E7%BC%93%E5%86%B2%E6%B5%81/</url>
-    <content><![CDATA[<h3 id="y、InputStreamReader输入转换流"><a href="#y、InputStreamReader输入转换流" class="headerlink" title="y、InputStreamReader输入转换流"></a>y、InputStreamReader输入转换流</h3><h3 id="一、InputStreamReader输入转换流"><a href="#一、InputStreamReader输入转换流" class="headerlink" title="一、InputStreamReader输入转换流"></a>一、InputStreamReader输入转换流</h3><ul>
-<li><font color='#d15252'>指定编码格式</font></li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/10/ayLneKBhlFmp4Xi.png" alt="image-20210810100121551"></p>
-<h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>是从字节流到字符流的桥梁：它读取字节，并使用指定的[<code>charset</code>]将其解码为字符</li>
-</ul>
-<h4 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">InputStreamReader​(InputStream in) 创建一个使用默认字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, String charsetName) 创建一个使用命名字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, Charset cs) 创建一个使用给定字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, CharsetDecoder dec) 创建一个使用给定字符集解码器的InputStreamReader。  </span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>带参构造需要传递一个InputStream类型的对象</p>
-<ul>
-<li>InputStream是一个接口<ul>
-<li>通过他的已知实现子类进行创建对象<ul>
-<li>FileInputStream<ul>
-<li>又需要一个File对象</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>步骤</strong></li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/10/xg15ot7RzDypGba.png" alt="image-20210810143433304"></p>
-</li>
-</ul>
-<h3 id="二、OutputStreamReader输出转换流"><a href="#二、OutputStreamReader输出转换流" class="headerlink" title="二、OutputStreamReader输出转换流"></a>二、OutputStreamReader输出转换流</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>同InputStreamReader</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/10/e7PhMWVkZQigDLz.png" alt="image-20210810144431017"></p>
-<h3 id="缓冲流的概述"><a href="#缓冲流的概述" class="headerlink" title="缓冲流的概述"></a>缓冲流的概述</h3><ul>
-<li>效率：读写速度提高</li>
-<li>功能<ul>
-<li>字节</li>
-<li>字符</li>
-</ul>
-</li>
-</ul>
-<h3 id="三、字节缓冲流"><a href="#三、字节缓冲流" class="headerlink" title="三、字节缓冲流"></a>三、<font color='#d15252'>字节</font>缓冲流</h3><ul>
-<li> BufferedInputStream 输入缓冲流  — &gt; 读取数据到内存</li>
-<li> BufferedOutputStream 输出缓冲流 —&gt; 写入数据到目标文件</li>
-</ul>
-<h4 id="1-概述-2"><a href="#1-概述-2" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li><p>继承体系</p>
-<p><img src="https://i.loli.net/2021/08/10/j6FOZDEUCBrnSRv.png" alt="image-20210810151303875"></p>
-</li>
-<li><p>InputStream –&gt; FilterInputStream —&gt;BufferedInputStream</p>
-</li>
-<li><p><code>BufferedInputStream</code>为另一个输入流添加了功能，即缓冲输入并支持<code>mark</code>和<code>reset</code>方法的功能</p>
-<ul>
-<li>  <code>mark</code>操作会记住输入流中的一个点，并且<code>reset</code>操作会导致从最近的<code>mark</code>操作读取的所有字节在从包含的输入流中取出新字节之前重新读取。 </li>
-</ul>
-</li>
-<li><p><code>BufferedInputStream</code>将创建一个内部缓冲区数组</p>
-</li>
-<li></li>
-</ul>
-<h4 id="2-构造方法-1"><a href="#2-构造方法-1" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><ul>
-<li><p>```java<br>BufferedInputStream (InputStream in) 创建一个 BufferedInputStream并保存其参数，输入流 in供以后使用。<br>BufferedInputStream (InputStream in, int size) 创建具有指定缓冲区大小的 BufferedInputStream ，并保存其参数，输入流 in供以后使用。   //指定缓冲区大小</p>
-<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">#### <span class="number">3.</span>成员方法</span><br><span class="line"></span><br><span class="line">- read() 、read(byte[] b,int off,int len)</span><br><span class="line"></span><br><span class="line">  ![image<span class="number">-20210810151911879</span>](https:<span class="comment">//i.loli.net/2021/08/10/QriGhqVKH3xywoJ.png)</span></span><br><span class="line"></span><br><span class="line">### &lt;font color=<span class="string">&#x27;#d15252&#x27;</span>&gt;作业&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">![image<span class="number">-20210810154638010</span>](https:<span class="comment">//i.loli.net/2021/08/10/hznCeU2r3oB6v4d.png)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 四、&lt;font color=<span class="string">&#x27;#d15252&#x27;</span>&gt;字符&lt;/font&gt;缓冲流 </span><br><span class="line"></span><br><span class="line">- BufferedWriter</span><br><span class="line">- BufferedReader</span><br><span class="line"></span><br><span class="line">#### <span class="number">1.</span>概述</span><br><span class="line"></span><br><span class="line">- 修饰符：public 公共的可以直接使用</span><br><span class="line">- 继承 Writer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### <span class="number">2.</span>构造方法</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">BufferedWriter (Writer out) 创建使用默认大小的输出缓冲区的缓冲字符输出流。  </span><br><span class="line">BufferedWriter (Writer out, int sz) 创建一个新的缓冲字符输出流，使用给定大小的输出缓冲区。  <span class="comment">//自定义缓冲区大小</span></span><br></pre></td></tr></table></figure></li>
-<li><p>带参构造要传递参数一个 Writer类型的变量</p>
-<ul>
-<li>Write是一个抽象类，需要通过子类实例化<ul>
-<li>使用FileWriter实例化</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><p><img src="https://i.loli.net/2021/08/10/1FpWNTQgoXqP6jf.png" alt="image-20210810170324088"></p>
-<p><img src="https://i.loli.net/2021/08/10/u5AIkPoKXnyYVR7.png" alt="image-20210810171553360"></p>
-<ul>
-<li><h5 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h5><ul>
-<li>字符缓冲流和字符流一样，不能操作文件的复制粘贴（乱码），只能操作纯文本文件</li>
-</ul>
-</li>
-</ul>
-<h3 id="五、所有流总结"><a href="#五、所有流总结" class="headerlink" title="五、所有流总结"></a>五、所有流总结</h3><h4 id="1-继承关系"><a href="#1-继承关系" class="headerlink" title="1.继承关系"></a>1.继承关系</h4><ul>
-<li><p>字节流</p>
-<p><img src="https://i.loli.net/2021/08/10/CTaUoeyz9tsu4R6.png"></p>
-</li>
-<li><p>字符流</p>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/10/gsDie8LW45RrXbI.png" alt="image-20210810194449230"></p>
-<p><img src="https://i.loli.net/2021/08/25/Qq8EsATcXZpzO1h.png" alt="image-20210810184044702"></p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>IO流</tag>
-        <tag>转换流</tag>
-        <tag>缓冲流</tag>
       </tags>
   </entry>
   <entry>
@@ -6725,6 +6894,106 @@
         <tag>集合</tag>
         <tag>单列集合</tag>
         <tag>双列集合</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>转换流和缓冲流</title>
+    <url>/2021/08/25/%E8%BD%AC%E6%8D%A2%E6%B5%81%E5%92%8C%E7%BC%93%E5%86%B2%E6%B5%81/</url>
+    <content><![CDATA[<h3 id="y、InputStreamReader输入转换流"><a href="#y、InputStreamReader输入转换流" class="headerlink" title="y、InputStreamReader输入转换流"></a>y、InputStreamReader输入转换流</h3><h3 id="一、InputStreamReader输入转换流"><a href="#一、InputStreamReader输入转换流" class="headerlink" title="一、InputStreamReader输入转换流"></a>一、InputStreamReader输入转换流</h3><ul>
+<li><font color='#d15252'>指定编码格式</font></li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/10/ayLneKBhlFmp4Xi.png" alt="image-20210810100121551"></p>
+<h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>是从字节流到字符流的桥梁：它读取字节，并使用指定的[<code>charset</code>]将其解码为字符</li>
+</ul>
+<h4 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">InputStreamReader​(InputStream in) 创建一个使用默认字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, String charsetName) 创建一个使用命名字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, Charset cs) 创建一个使用给定字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, CharsetDecoder dec) 创建一个使用给定字符集解码器的InputStreamReader。  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>带参构造需要传递一个InputStream类型的对象</p>
+<ul>
+<li>InputStream是一个接口<ul>
+<li>通过他的已知实现子类进行创建对象<ul>
+<li>FileInputStream<ul>
+<li>又需要一个File对象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>步骤</strong></li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/10/xg15ot7RzDypGba.png" alt="image-20210810143433304"></p>
+</li>
+</ul>
+<h3 id="二、OutputStreamReader输出转换流"><a href="#二、OutputStreamReader输出转换流" class="headerlink" title="二、OutputStreamReader输出转换流"></a>二、OutputStreamReader输出转换流</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>同InputStreamReader</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/10/e7PhMWVkZQigDLz.png" alt="image-20210810144431017"></p>
+<h3 id="缓冲流的概述"><a href="#缓冲流的概述" class="headerlink" title="缓冲流的概述"></a>缓冲流的概述</h3><ul>
+<li>效率：读写速度提高</li>
+<li>功能<ul>
+<li>字节</li>
+<li>字符</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、字节缓冲流"><a href="#三、字节缓冲流" class="headerlink" title="三、字节缓冲流"></a>三、<font color='#d15252'>字节</font>缓冲流</h3><ul>
+<li> BufferedInputStream 输入缓冲流  — &gt; 读取数据到内存</li>
+<li> BufferedOutputStream 输出缓冲流 —&gt; 写入数据到目标文件</li>
+</ul>
+<h4 id="1-概述-2"><a href="#1-概述-2" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li><p>继承体系</p>
+<p><img src="https://i.loli.net/2021/08/10/j6FOZDEUCBrnSRv.png" alt="image-20210810151303875"></p>
+</li>
+<li><p>InputStream –&gt; FilterInputStream —&gt;BufferedInputStream</p>
+</li>
+<li><p><code>BufferedInputStream</code>为另一个输入流添加了功能，即缓冲输入并支持<code>mark</code>和<code>reset</code>方法的功能</p>
+<ul>
+<li>  <code>mark</code>操作会记住输入流中的一个点，并且<code>reset</code>操作会导致从最近的<code>mark</code>操作读取的所有字节在从包含的输入流中取出新字节之前重新读取。 </li>
+</ul>
+</li>
+<li><p><code>BufferedInputStream</code>将创建一个内部缓冲区数组</p>
+</li>
+<li></li>
+</ul>
+<h4 id="2-构造方法-1"><a href="#2-构造方法-1" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><ul>
+<li><p>```java<br>BufferedInputStream (InputStream in) 创建一个 BufferedInputStream并保存其参数，输入流 in供以后使用。<br>BufferedInputStream (InputStream in, int size) 创建具有指定缓冲区大小的 BufferedInputStream ，并保存其参数，输入流 in供以后使用。   //指定缓冲区大小</p>
+<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">#### <span class="number">3.</span>成员方法</span><br><span class="line"></span><br><span class="line">- read() 、read(byte[] b,int off,int len)</span><br><span class="line"></span><br><span class="line">  ![image<span class="number">-20210810151911879</span>](https:<span class="comment">//i.loli.net/2021/08/10/QriGhqVKH3xywoJ.png)</span></span><br><span class="line"></span><br><span class="line">### &lt;font color=<span class="string">&#x27;#d15252&#x27;</span>&gt;作业&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">![image<span class="number">-20210810154638010</span>](https:<span class="comment">//i.loli.net/2021/08/10/hznCeU2r3oB6v4d.png)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 四、&lt;font color=<span class="string">&#x27;#d15252&#x27;</span>&gt;字符&lt;/font&gt;缓冲流 </span><br><span class="line"></span><br><span class="line">- BufferedWriter</span><br><span class="line">- BufferedReader</span><br><span class="line"></span><br><span class="line">#### <span class="number">1.</span>概述</span><br><span class="line"></span><br><span class="line">- 修饰符：public 公共的可以直接使用</span><br><span class="line">- 继承 Writer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### <span class="number">2.</span>构造方法</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">BufferedWriter (Writer out) 创建使用默认大小的输出缓冲区的缓冲字符输出流。  </span><br><span class="line">BufferedWriter (Writer out, int sz) 创建一个新的缓冲字符输出流，使用给定大小的输出缓冲区。  <span class="comment">//自定义缓冲区大小</span></span><br></pre></td></tr></table></figure></li>
+<li><p>带参构造要传递参数一个 Writer类型的变量</p>
+<ul>
+<li>Write是一个抽象类，需要通过子类实例化<ul>
+<li>使用FileWriter实例化</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><p><img src="https://i.loli.net/2021/08/10/1FpWNTQgoXqP6jf.png" alt="image-20210810170324088"></p>
+<p><img src="https://i.loli.net/2021/08/10/u5AIkPoKXnyYVR7.png" alt="image-20210810171553360"></p>
+<ul>
+<li><h5 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h5><ul>
+<li>字符缓冲流和字符流一样，不能操作文件的复制粘贴（乱码），只能操作纯文本文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、所有流总结"><a href="#五、所有流总结" class="headerlink" title="五、所有流总结"></a>五、所有流总结</h3><h4 id="1-继承关系"><a href="#1-继承关系" class="headerlink" title="1.继承关系"></a>1.继承关系</h4><ul>
+<li><p>字节流</p>
+<p><img src="https://i.loli.net/2021/08/10/CTaUoeyz9tsu4R6.png"></p>
+</li>
+<li><p>字符流</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/08/10/gsDie8LW45RrXbI.png" alt="image-20210810194449230"></p>
+<p><img src="https://i.loli.net/2021/08/25/Qq8EsATcXZpzO1h.png" alt="image-20210810184044702"></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>IO流</tag>
+        <tag>转换流</tag>
+        <tag>缓冲流</tag>
       </tags>
   </entry>
 </search>
