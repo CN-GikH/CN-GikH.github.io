@@ -6996,4 +6996,210 @@
         <tag>双列集合</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Cookie、Session、JSP</title>
+    <url>/2021/09/03/Cookie%E3%80%81Session%E3%80%81JSP/</url>
+    <content><![CDATA[<h3 id="一、状态管理"><a href="#一、状态管理" class="headerlink" title="一、状态管理"></a>一、状态管理</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li><p>学习cookie和session必须先了解什么是状态管理</p>
+</li>
+<li><p>Web应用程序开发 离不开 http协议是”无状态的”</p>
+<ul>
+<li>一旦服务器响应完成后，就会断开链接<ul>
+<li>一旦有新的用户创建链接，之前的就断开了</li>
+</ul>
+</li>
+<li>如果解决？<ul>
+<li>让服务器判断多次的请求是否为同一个用户</li>
+<li>将浏览器和服务器之间的多次交互作为一个整体，并且将多次交互的数据保存起来</li>
+</ul>
+</li>
+<li>该解决手段就称为<font color='#d15252'>状态管理</font></li>
+</ul>
+</li>
+<li><p><font color='#d15252'>状态管理</font>（会话）</p>
+<ul>
+<li>键值对</li>
+<li>用来存储数据<ul>
+<li>客户端存储（客户端状态管理） ==&gt; cookie<ul>
+<li>Cookie类：把状态保存在本地</li>
+</ul>
+</li>
+<li>服务器端存储 ==&gt; session技术</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、Cookie-客户端状态"><a href="#二、Cookie-客户端状态" class="headerlink" title="二、Cookie 客户端状态"></a>二、Cookie 客户端状态</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li><p>包：Javax</p>
+<ul>
+<li>是扩展包</li>
+</ul>
+</li>
+<li><p>cookie 是<font color='#d15252'> servlet 发送</font>到 Web 浏览器的<font color='#d15252'>少量</font>信息，</p>
+<ul>
+<li><p>唯一的标识客户端</p>
+</li>
+<li><p>使用HttpServletResponse类中的<font color='orange'>addCookie </font>方法</p>
+</li>
+<li><p>添加到http的响应头</p>
+</li>
+</ul>
+</li>
+<li><p>这些信息由浏览器保存，然后<font color='#d15252'>发送回</font>服务器</p>
+<ul>
+<li> 使用HttpServletRequest中的getCookies方法</li>
+<li> 一些 cookie 可能有相同的名称，但却有不同的路径属性</li>
+<li> <font color='orange'>getCookies</font>()获取到所有的cookie并存入Cookie[]数组</li>
+</ul>
+</li>
+<li><p>一个 cookie 拥有一个名称、一个值和一些可选属性，比如注释、路径和域限定符、最大生存时间和版本号 （成员变量）</p>
+</li>
+<li><p>每个cookie的大小不能超过4kb</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/02/bZSUlJA5xcgiBOu.png" alt="image-20210902101102499"></p>
+<h4 id="2-构造方法创建cookie"><a href="#2-构造方法创建cookie" class="headerlink" title="2.构造方法创建cookie"></a>2.构造方法创建cookie</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">cookie(String name,String value)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><h5 id="Ⅰ-getName-getValue"><a href="#Ⅰ-getName-getValue" class="headerlink" title="Ⅰ. getName() / getValue()"></a>Ⅰ. getName() / getValue()</h5><ul>
+<li>获取键和值</li>
+<li>由req调用</li>
+</ul>
+<h5 id="Ⅱ-setValue"><a href="#Ⅱ-setValue" class="headerlink" title="Ⅱ.  setValue()"></a>Ⅱ.  setValue()</h5><ul>
+<li>设置值</li>
+<li>由一个Cookie对象调用</li>
+</ul>
+<h5 id="Ⅲ-setPath-String-url"><a href="#Ⅲ-setPath-String-url" class="headerlink" title="Ⅲ.setPath(String url)"></a>Ⅲ.setPath(String url)</h5><ul>
+<li><p>cookie默认路径是当前项目下</p>
+<ul>
+<li>req.getContextPath()<ul>
+<li>获取项目名称路径</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>设置路径只有本servlet和设置路径可以获取到cookie</p>
+</li>
+</ul>
+<h5 id="Ⅴ-equalsIgnoreCase"><a href="#Ⅴ-equalsIgnoreCase" class="headerlink" title="Ⅴ. equalsIgnoreCase()"></a>Ⅴ. equalsIgnoreCase()</h5><ul>
+<li>比较String类型数据，不分大小写</li>
+</ul>
+<h4 id="4-修改cookie的值"><a href="#4-修改cookie的值" class="headerlink" title="4.修改cookie的值"></a>4.修改cookie的值</h4><p><img src="https://i.loli.net/2021/09/02/P3WGiTNfCkIu9DE.png" alt="image-20210902103628528"></p>
+<h4 id="5-生命周期"><a href="#5-生命周期" class="headerlink" title="5.生命周期"></a>5.生命周期</h4><ul>
+<li>设置生命周期的两个方法</li>
+<li>setMaxAge(int a)<ul>
+<li>设置cookie的最大生存时间，以秒为单位</li>
+<li>可以是正值，也可以是负值<ul>
+<li>正值：xx秒后被删除</li>
+<li>负值：意味不会持久存储，在退出浏览器时删除</li>
+<li>0：立即删除</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>getMaxAge()<ul>
+<li>返回以秒为单位指定的 cookie 的最大生存时间</li>
+<li><code>-1</code> 指示该 cookie 将保留到浏览器关闭为止</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-Cookie特点"><a href="#6-Cookie特点" class="headerlink" title="6.Cookie特点"></a>6.Cookie特点</h4><ul>
+<li>Cookie不适合存储所有的数据，程序员只用来存储少量的，非敏感的数据<ul>
+<li>状态数据保存在浏览器端，不安全的</li>
+<li>保存是有限制的，不能超过4kb</li>
+<li>只能存字符串类型数据</li>
+<li>可以通过浏览器关闭cookie</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、Session"><a href="#三、Session" class="headerlink" title="三、Session"></a>三、Session</h3><h4 id="1-概述-2"><a href="#1-概述-2" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>是一个接口</li>
+<li>用来维护客户端和服务器关联的一种技术</li>
+<li>当浏览器访问服务器的时候，服务器会为每一个浏览器在服务器端的内存中开辟一块内存空间<ul>
+<li>用来创建保存session对象，该对象有一个ID且是<font color='#d15252'>唯一</font>的</li>
+<li>Session就会以Cookie的方式带回到浏览器存储</li>
+</ul>
+</li>
+<li>保存多个页面请求和标识用户并存储用户的相关信息</li>
+<li><code>HttpSessionBindingListener</code><ul>
+<li>是否绑定通知</li>
+<li>通知在绑定完成或会话过期后发送的</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-成员方法"><a href="#2-成员方法" class="headerlink" title="2.成员方法"></a>2.成员方法</h4><h5 id="Ⅰ-getCreationTime"><a href="#Ⅰ-getCreationTime" class="headerlink" title="Ⅰ. getCreationTime()"></a>Ⅰ. getCreationTime()</h5><ul>
+<li>返回创建此会话的时间</li>
+</ul>
+<h5 id="Ⅱ-getId"><a href="#Ⅱ-getId" class="headerlink" title="Ⅱ. getId()"></a>Ⅱ. getId()</h5><ul>
+<li>返回此会话的唯一标识符的字符串，由Servlet分配</li>
+</ul>
+<h5 id="Ⅲ-getAttribute-setAttribute"><a href="#Ⅲ-getAttribute-setAttribute" class="headerlink" title="Ⅲ. getAttribute() /setAttribute()"></a>Ⅲ. <font color='#d15252'>getAttribute() /setAttribute()</font></h5><ul>
+<li>返回会话中指定名称绑定的对象</li>
+<li>绑定对象到会话</li>
+</ul>
+<h5 id="Ⅳ-getAttributeNames"><a href="#Ⅳ-getAttributeNames" class="headerlink" title="Ⅳ. getAttributeNames()"></a>Ⅳ. getAttributeNames()</h5><ul>
+<li>返回绑定到此对话的所有对象名称</li>
+</ul>
+<h5 id="Ⅴ-removeAttribute-String-name"><a href="#Ⅴ-removeAttribute-String-name" class="headerlink" title="Ⅴ.  removeAttribute(String name)"></a>Ⅴ.  <strong>removeAttribute</strong>(String name)</h5><ul>
+<li>从会话中移除与指定名称绑定在一起的对象</li>
+</ul>
+<h4 id="3-Session生命周期"><a href="#3-Session生命周期" class="headerlink" title="3.Session生命周期"></a>3.Session生命周期</h4><ul>
+<li><p>设置最大存活时间</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMaxInactiveInterval</span><span class="params">(<span class="keyword">int</span> interval)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定在 servlet 容器使此会话失效之前客户端请求之间的时间间隔，以秒为单位。负数时间指示会话永远不会超时</li>
+</ul>
+</li>
+<li><p>立即失效</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">invalidate</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li> 使此会话无效，然后取消对任何绑定到它的对象的绑定</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/02/tShcEZUKMm47YJT.png" alt="image-20210902144108425"></p>
+<h3 id="四、JSP组件"><a href="#四、JSP组件" class="headerlink" title="四、JSP组件"></a>四、JSP组件</h3><p><img src="https://i.loli.net/2021/09/02/nOkmQB346K7xjGa.png" alt="image-20210902145647200"></p>
+<ul>
+<li>JavaBean创建对象  ==&gt; jsp:useBean<ul>
+<li>零散数据的封装 ===&gt; 对象 （JavaBean）</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/02/t6HdP5T3M1wBuCL.png" alt="image-20210902151008567"></p>
+<ul>
+<li>给对象赋值 jsp:setProperty</li>
+<li>获取对象的值 jsp:getProperty</li>
+</ul>
+<h3 id="五、MVC设计模式"><a href="#五、MVC设计模式" class="headerlink" title="五、MVC设计模式"></a>五、MVC设计模式</h3><ul>
+<li><p>M：Model模型</p>
+<ul>
+<li>封装业务数据层 （JavaBean），业务逻辑层，访问数据库的<font color='#d15252'>Dao对象</font></li>
+</ul>
+</li>
+<li><p>V：view视窗</p>
+<ul>
+<li>Jsp和Html</li>
+</ul>
+</li>
+<li><p>C：controller：控制器</p>
+<ul>
+<li>流程控制和页面的跳转，通常由Servlet完成</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>cookie</tag>
+        <tag>session</tag>
+        <tag>jsp:javabeen</tag>
+        <tag>MVC</tag>
+      </tags>
+  </entry>
 </search>

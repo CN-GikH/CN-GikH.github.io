@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="学习cookie和session，解什么是状态管理，了解什么是MVC设计模式，了解JSO组件的使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cookie、Session、JSP">
+<meta property="og:url" content="http://example.com/2021/09/03/Cookie%E3%80%81Session%E3%80%81JSP/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="学习cookie和session，解什么是状态管理，了解什么是MVC设计模式，了解JSO组件的使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/09/02/bZSUlJA5xcgiBOu.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/02/P3WGiTNfCkIu9DE.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/02/tShcEZUKMm47YJT.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/02/nOkmQB346K7xjGa.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/02/t6HdP5T3M1wBuCL.png">
+<meta property="article:published_time" content="2021-09-03T00:31:46.000Z">
+<meta property="article:modified_time" content="2021-09-03T00:33:58.747Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="cookie">
+<meta property="article:tag" content="session">
+<meta property="article:tag" content="jsp:javabeen">
+<meta property="article:tag" content="MVC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/02/bZSUlJA5xcgiBOu.png">
+
+<link rel="canonical" href="http://example.com/2021/09/03/Cookie%E3%80%81Session%E3%80%81JSP/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Cookie、Session、JSP | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/03/Cookie%E3%80%81Session%E3%80%81JSP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Cookie、Session、JSP
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-03 08:31:46 / 修改时间：08:33:58" itemprop="dateCreated datePublished" datetime="2021-09-03T08:31:46+08:00">2021-09-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">7.4k</span> -->
+			  <span title="本文字数">
+                  1.1k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">学习cookie和session，解什么是状态管理，了解什么是MVC设计模式，了解JSO组件的使用</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、状态管理"><a href="#一、状态管理" class="headerlink" title="一、状态管理"></a>一、状态管理</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li><p>学习cookie和session必须先了解什么是状态管理</p>
+</li>
+<li><p>Web应用程序开发 离不开 http协议是”无状态的”</p>
+<ul>
+<li>一旦服务器响应完成后，就会断开链接<ul>
+<li>一旦有新的用户创建链接，之前的就断开了</li>
+</ul>
+</li>
+<li>如果解决？<ul>
+<li>让服务器判断多次的请求是否为同一个用户</li>
+<li>将浏览器和服务器之间的多次交互作为一个整体，并且将多次交互的数据保存起来</li>
+</ul>
+</li>
+<li>该解决手段就称为<font color='#d15252'>状态管理</font></li>
+</ul>
+</li>
+<li><p><font color='#d15252'>状态管理</font>（会话）</p>
+<ul>
+<li>键值对</li>
+<li>用来存储数据<ul>
+<li>客户端存储（客户端状态管理） ==&gt; cookie<ul>
+<li>Cookie类：把状态保存在本地</li>
+</ul>
+</li>
+<li>服务器端存储 ==&gt; session技术</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、Cookie-客户端状态"><a href="#二、Cookie-客户端状态" class="headerlink" title="二、Cookie 客户端状态"></a>二、Cookie 客户端状态</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li><p>包：Javax</p>
+<ul>
+<li>是扩展包</li>
+</ul>
+</li>
+<li><p>cookie 是<font color='#d15252'> servlet 发送</font>到 Web 浏览器的<font color='#d15252'>少量</font>信息，</p>
+<ul>
+<li><p>唯一的标识客户端</p>
+</li>
+<li><p>使用HttpServletResponse类中的<font color='orange'>addCookie </font>方法</p>
+</li>
+<li><p>添加到http的响应头</p>
+</li>
+</ul>
+</li>
+<li><p>这些信息由浏览器保存，然后<font color='#d15252'>发送回</font>服务器</p>
+<ul>
+<li> 使用HttpServletRequest中的getCookies方法</li>
+<li> 一些 cookie 可能有相同的名称，但却有不同的路径属性</li>
+<li> <font color='orange'>getCookies</font>()获取到所有的cookie并存入Cookie[]数组</li>
+</ul>
+</li>
+<li><p>一个 cookie 拥有一个名称、一个值和一些可选属性，比如注释、路径和域限定符、最大生存时间和版本号 （成员变量）</p>
+</li>
+<li><p>每个cookie的大小不能超过4kb</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/02/bZSUlJA5xcgiBOu.png" alt="image-20210902101102499"></p>
+<h4 id="2-构造方法创建cookie"><a href="#2-构造方法创建cookie" class="headerlink" title="2.构造方法创建cookie"></a>2.构造方法创建cookie</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookie(String name,String value)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><h5 id="Ⅰ-getName-getValue"><a href="#Ⅰ-getName-getValue" class="headerlink" title="Ⅰ. getName() / getValue()"></a>Ⅰ. getName() / getValue()</h5><ul>
+<li>获取键和值</li>
+<li>由req调用</li>
+</ul>
+<h5 id="Ⅱ-setValue"><a href="#Ⅱ-setValue" class="headerlink" title="Ⅱ.  setValue()"></a>Ⅱ.  setValue()</h5><ul>
+<li>设置值</li>
+<li>由一个Cookie对象调用</li>
+</ul>
+<h5 id="Ⅲ-setPath-String-url"><a href="#Ⅲ-setPath-String-url" class="headerlink" title="Ⅲ.setPath(String url)"></a>Ⅲ.setPath(String url)</h5><ul>
+<li><p>cookie默认路径是当前项目下</p>
+<ul>
+<li>req.getContextPath()<ul>
+<li>获取项目名称路径</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>设置路径只有本servlet和设置路径可以获取到cookie</p>
+</li>
+</ul>
+<h5 id="Ⅴ-equalsIgnoreCase"><a href="#Ⅴ-equalsIgnoreCase" class="headerlink" title="Ⅴ. equalsIgnoreCase()"></a>Ⅴ. equalsIgnoreCase()</h5><ul>
+<li>比较String类型数据，不分大小写</li>
+</ul>
+<h4 id="4-修改cookie的值"><a href="#4-修改cookie的值" class="headerlink" title="4.修改cookie的值"></a>4.修改cookie的值</h4><p><img src="https://i.loli.net/2021/09/02/P3WGiTNfCkIu9DE.png" alt="image-20210902103628528"></p>
+<h4 id="5-生命周期"><a href="#5-生命周期" class="headerlink" title="5.生命周期"></a>5.生命周期</h4><ul>
+<li>设置生命周期的两个方法</li>
+<li>setMaxAge(int a)<ul>
+<li>设置cookie的最大生存时间，以秒为单位</li>
+<li>可以是正值，也可以是负值<ul>
+<li>正值：xx秒后被删除</li>
+<li>负值：意味不会持久存储，在退出浏览器时删除</li>
+<li>0：立即删除</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>getMaxAge()<ul>
+<li>返回以秒为单位指定的 cookie 的最大生存时间</li>
+<li><code>-1</code> 指示该 cookie 将保留到浏览器关闭为止</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-Cookie特点"><a href="#6-Cookie特点" class="headerlink" title="6.Cookie特点"></a>6.Cookie特点</h4><ul>
+<li>Cookie不适合存储所有的数据，程序员只用来存储少量的，非敏感的数据<ul>
+<li>状态数据保存在浏览器端，不安全的</li>
+<li>保存是有限制的，不能超过4kb</li>
+<li>只能存字符串类型数据</li>
+<li>可以通过浏览器关闭cookie</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、Session"><a href="#三、Session" class="headerlink" title="三、Session"></a>三、Session</h3><h4 id="1-概述-2"><a href="#1-概述-2" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>是一个接口</li>
+<li>用来维护客户端和服务器关联的一种技术</li>
+<li>当浏览器访问服务器的时候，服务器会为每一个浏览器在服务器端的内存中开辟一块内存空间<ul>
+<li>用来创建保存session对象，该对象有一个ID且是<font color='#d15252'>唯一</font>的</li>
+<li>Session就会以Cookie的方式带回到浏览器存储</li>
+</ul>
+</li>
+<li>保存多个页面请求和标识用户并存储用户的相关信息</li>
+<li><code>HttpSessionBindingListener</code><ul>
+<li>是否绑定通知</li>
+<li>通知在绑定完成或会话过期后发送的</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-成员方法"><a href="#2-成员方法" class="headerlink" title="2.成员方法"></a>2.成员方法</h4><h5 id="Ⅰ-getCreationTime"><a href="#Ⅰ-getCreationTime" class="headerlink" title="Ⅰ. getCreationTime()"></a>Ⅰ. getCreationTime()</h5><ul>
+<li>返回创建此会话的时间</li>
+</ul>
+<h5 id="Ⅱ-getId"><a href="#Ⅱ-getId" class="headerlink" title="Ⅱ. getId()"></a>Ⅱ. getId()</h5><ul>
+<li>返回此会话的唯一标识符的字符串，由Servlet分配</li>
+</ul>
+<h5 id="Ⅲ-getAttribute-setAttribute"><a href="#Ⅲ-getAttribute-setAttribute" class="headerlink" title="Ⅲ. getAttribute() /setAttribute()"></a>Ⅲ. <font color='#d15252'>getAttribute() /setAttribute()</font></h5><ul>
+<li>返回会话中指定名称绑定的对象</li>
+<li>绑定对象到会话</li>
+</ul>
+<h5 id="Ⅳ-getAttributeNames"><a href="#Ⅳ-getAttributeNames" class="headerlink" title="Ⅳ. getAttributeNames()"></a>Ⅳ. getAttributeNames()</h5><ul>
+<li>返回绑定到此对话的所有对象名称</li>
+</ul>
+<h5 id="Ⅴ-removeAttribute-String-name"><a href="#Ⅴ-removeAttribute-String-name" class="headerlink" title="Ⅴ.  removeAttribute(String name)"></a>Ⅴ.  <strong>removeAttribute</strong>(String name)</h5><ul>
+<li>从会话中移除与指定名称绑定在一起的对象</li>
+</ul>
+<h4 id="3-Session生命周期"><a href="#3-Session生命周期" class="headerlink" title="3.Session生命周期"></a>3.Session生命周期</h4><ul>
+<li><p>设置最大存活时间</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMaxInactiveInterval</span><span class="params">(<span class="keyword">int</span> interval)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定在 servlet 容器使此会话失效之前客户端请求之间的时间间隔，以秒为单位。负数时间指示会话永远不会超时</li>
+</ul>
+</li>
+<li><p>立即失效</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">invalidate</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li> 使此会话无效，然后取消对任何绑定到它的对象的绑定</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/02/tShcEZUKMm47YJT.png" alt="image-20210902144108425"></p>
+<h3 id="四、JSP组件"><a href="#四、JSP组件" class="headerlink" title="四、JSP组件"></a>四、JSP组件</h3><p><img src="https://i.loli.net/2021/09/02/nOkmQB346K7xjGa.png" alt="image-20210902145647200"></p>
+<ul>
+<li>JavaBean创建对象  ==&gt; jsp:useBean<ul>
+<li>零散数据的封装 ===&gt; 对象 （JavaBean）</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/02/t6HdP5T3M1wBuCL.png" alt="image-20210902151008567"></p>
+<ul>
+<li>给对象赋值 jsp:setProperty</li>
+<li>获取对象的值 jsp:getProperty</li>
+</ul>
+<h3 id="五、MVC设计模式"><a href="#五、MVC设计模式" class="headerlink" title="五、MVC设计模式"></a>五、MVC设计模式</h3><ul>
+<li><p>M：Model模型</p>
+<ul>
+<li>封装业务数据层 （JavaBean），业务逻辑层，访问数据库的<font color='#d15252'>Dao对象</font></li>
+</ul>
+</li>
+<li><p>V：view视窗</p>
+<ul>
+<li>Jsp和Html</li>
+</ul>
+</li>
+<li><p>C：controller：控制器</p>
+<ul>
+<li>流程控制和页面的跳转，通常由Servlet完成</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/09/03/Cookie%E3%80%81Session%E3%80%81JSP/" title="Cookie、Session、JSP">http://example.com/2021/09/03/Cookie、Session、JSP/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cookie/" rel="tag"><i class="fa fa-tag"></i># cookie</a>
+              <a href="/tags/session/" rel="tag"><i class="fa fa-tag"></i># session</a>
+              <a href="/tags/jsp-javabeen/" rel="tag"><i class="fa fa-tag"></i># jsp:javabeen</a>
+              <a href="/tags/MVC/" rel="tag"><i class="fa fa-tag"></i># MVC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/01/Servlet%E5%92%8CJSP/" rel="prev" title="Servlet和JSP">
+      <i class="fa fa-chevron-left"></i> Servlet和JSP
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">一、状态管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">1.概述</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Cookie-%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%8A%B6%E6%80%81"><span class="nav-number">2.</span> <span class="nav-text">二、Cookie 客户端状态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0-1"><span class="nav-number">2.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E5%88%9B%E5%BB%BAcookie"><span class="nav-number">2.2.</span> <span class="nav-text">2.构造方法创建cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">3.成员方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-getName-getValue"><span class="nav-number">2.3.1.</span> <span class="nav-text">Ⅰ. getName() &#x2F; getValue()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-setValue"><span class="nav-number">2.3.2.</span> <span class="nav-text">Ⅱ.  setValue()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-setPath-String-url"><span class="nav-number">2.3.3.</span> <span class="nav-text">Ⅲ.setPath(String url)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A4-equalsIgnoreCase"><span class="nav-number">2.3.4.</span> <span class="nav-text">Ⅴ. equalsIgnoreCase()</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E4%BF%AE%E6%94%B9cookie%E7%9A%84%E5%80%BC"><span class="nav-number">2.4.</span> <span class="nav-text">4.修改cookie的值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">2.5.</span> <span class="nav-text">5.生命周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Cookie%E7%89%B9%E7%82%B9"><span class="nav-number">2.6.</span> <span class="nav-text">6.Cookie特点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81Session"><span class="nav-number">3.</span> <span class="nav-text">三、Session</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0-2"><span class="nav-number">3.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">2.成员方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-getCreationTime"><span class="nav-number">3.2.1.</span> <span class="nav-text">Ⅰ. getCreationTime()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-getId"><span class="nav-number">3.2.2.</span> <span class="nav-text">Ⅱ. getId()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-getAttribute-setAttribute"><span class="nav-number">3.2.3.</span> <span class="nav-text">Ⅲ. getAttribute() &#x2F;setAttribute()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-getAttributeNames"><span class="nav-number">3.2.4.</span> <span class="nav-text">Ⅳ. getAttributeNames()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A4-removeAttribute-String-name"><span class="nav-number">3.2.5.</span> <span class="nav-text">Ⅴ.  removeAttribute(String name)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Session%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">3.3.</span> <span class="nav-text">3.Session生命周期</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81JSP%E7%BB%84%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">四、JSP组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81MVC%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">五、MVC设计模式</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">89k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:21</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共43.5k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
