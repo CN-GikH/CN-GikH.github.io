@@ -24,32 +24,35 @@
   </script>
 
 
-  <meta name="description" content="学习Java中的转换流（将字节--&gt;字符），以及字节字符的缓冲流（更快速）">
+  <meta name="description" content="学习EL表达式的运用，类似于JS和Jquery之间的关系，学习JSTL标签库的使用，简化JSP文件的代码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="转换流和缓冲流">
-<meta property="og:url" content="http://example.com/2021/08/25/%E8%BD%AC%E6%8D%A2%E6%B5%81%E5%92%8C%E7%BC%93%E5%86%B2%E6%B5%81/index.html">
+<meta property="og:title" content="EL表达式和JSTL">
+<meta property="og:url" content="http://example.com/2021/09/06/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8CJSTL/index.html">
 <meta property="og:site_name" content="楚楚超可爱">
-<meta property="og:description" content="学习Java中的转换流（将字节--&gt;字符），以及字节字符的缓冲流（更快速）">
+<meta property="og:description" content="学习EL表达式的运用，类似于JS和Jquery之间的关系，学习JSTL标签库的使用，简化JSP文件的代码">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.loli.net/2021/08/10/ayLneKBhlFmp4Xi.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/10/xg15ot7RzDypGba.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/10/e7PhMWVkZQigDLz.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/10/j6FOZDEUCBrnSRv.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/10/1FpWNTQgoXqP6jf.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/10/u5AIkPoKXnyYVR7.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/10/CTaUoeyz9tsu4R6.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/10/gsDie8LW45RrXbI.png">
-<meta property="og:image" content="https://i.loli.net/2021/08/25/Qq8EsATcXZpzO1h.png">
-<meta property="article:published_time" content="2021-08-25T04:52:46.000Z">
-<meta property="article:modified_time" content="2021-08-25T04:54:57.235Z">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/Cnx3JDBw7ATsSci.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/tTPyYKwLNJu8j1s.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/uNWqdD8sOnzcj9k.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/pzcMw4jFBUIVXiq.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/dGMRNJ8DXvBgowA.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/iTBnyGOY7L14tDU.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/vnkl6V8z1shXAYU.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/wTbV7Z2carDJosH.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/Et3TBkN2GDsH4gF.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/5eAG9VKLMQ2jb6u.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/TpoWfDxUhraNK68.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/TxmLAH4kKSM3Yvt.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/06/T4hz3HaXSsiubWD.png">
+<meta property="article:published_time" content="2021-09-06T11:21:02.000Z">
+<meta property="article:modified_time" content="2021-09-06T11:26:31.698Z">
 <meta property="article:author" content="GikH">
-<meta property="article:tag" content="IO流">
-<meta property="article:tag" content="转换流">
-<meta property="article:tag" content="缓冲流">
+<meta property="article:tag" content="EL">
+<meta property="article:tag" content="FSTL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2021/08/10/ayLneKBhlFmp4Xi.png">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/06/Cnx3JDBw7ATsSci.png">
 
-<link rel="canonical" href="http://example.com/2021/08/25/%E8%BD%AC%E6%8D%A2%E6%B5%81%E5%92%8C%E7%BC%93%E5%86%B2%E6%B5%81/">
+<link rel="canonical" href="http://example.com/2021/09/06/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8CJSTL/">
 
 
 <script id="page-configurations">
@@ -62,7 +65,7 @@
   };
 </script>
 
-  <title>转换流和缓冲流 | 楚楚超可爱</title>
+  <title>EL表达式和JSTL | 楚楚超可爱</title>
   
 
 
@@ -210,7 +213,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/25/%E8%BD%AC%E6%8D%A2%E6%B5%81%E5%92%8C%E7%BC%93%E5%86%B2%E6%B5%81/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/06/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8CJSTL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
@@ -223,7 +226,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          转换流和缓冲流
+          EL表达式和JSTL
 
 
         </h1>
@@ -236,7 +239,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-08-25 12:52:46 / 修改时间：12:54:57" itemprop="dateCreated datePublished" datetime="2021-08-25T12:52:46+08:00">2021-08-25</time>
+              <time title="创建时间：2021-09-06 19:21:02 / 修改时间：19:26:31" itemprop="dateCreated datePublished" datetime="2021-09-06T19:21:02+08:00">2021-09-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,7 +247,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                  <a href="/categories/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a>
                 </span>
             </span>
 
@@ -255,9 +258,9 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <!-- <span title="本文字数">7.4k</span> -->
+                <!-- <span title="本文字数">7.7k</span> -->
 			  <span title="本文字数">
-                  673字 &nbsp;&nbsp;&nbsp;
+                  653字 &nbsp;&nbsp;&nbsp;
                 </span>
               
             <span class="post-meta-item" title="阅读时长">
@@ -265,9 +268,9 @@
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 :</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
-            <div class="post-description">学习Java中的转换流（将字节-->字符），以及字节字符的缓冲流（更快速）</div>
+            <div class="post-description">学习EL表达式的运用，类似于JS和Jquery之间的关系，学习JSTL标签库的使用，简化JSP文件的代码</div>
 
         </div>
       </header>
@@ -278,93 +281,118 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="y、InputStreamReader输入转换流"><a href="#y、InputStreamReader输入转换流" class="headerlink" title="y、InputStreamReader输入转换流"></a>y、InputStreamReader输入转换流</h3><h3 id="一、InputStreamReader输入转换流"><a href="#一、InputStreamReader输入转换流" class="headerlink" title="一、InputStreamReader输入转换流"></a>一、InputStreamReader输入转换流</h3><ul>
-<li><font color='#d15252'>指定编码格式</font></li>
+        <h3 id="一、EL表达式"><a href="#一、EL表达式" class="headerlink" title="一、EL表达式"></a>一、EL表达式</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>EL表达式：<ul>
+<li>E：Expression</li>
+<li>L：Language</li>
+<li>用于简化jsp的表达式，类似于js和jquery的关系</li>
 </ul>
-<p><img src="https://i.loli.net/2021/08/10/ayLneKBhlFmp4Xi.png" alt="image-20210810100121551"></p>
-<h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>是从字节流到字符流的桥梁：它读取字节，并使用指定的[<code>charset</code>]将其解码为字符</li>
+</li>
+<li>EL表达式的作用<ul>
+<li>能够依次访问pageContext，request，session，application，从中存取值</li>
+<li>获取请求的参数</li>
+<li>访问JavaBean对象</li>
+<li>访问集合中的属性</li>
+<li>输出简单的运算结果</li>
 </ul>
-<h4 id="2-构造方法"><a href="#2-构造方法" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">InputStreamReader​(InputStream in) 创建一个使用默认字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, String charsetName) 创建一个使用命名字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, Charset cs) 创建一个使用给定字符集的InputStreamReader。  </span><br><span class="line">InputStreamReader​(InputStream in, CharsetDecoder dec) 创建一个使用给定字符集解码器的InputStreamReader。  </span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-EL表达式访问值"><a href="#2-EL表达式访问值" class="headerlink" title="2.EL表达式访问值"></a>2.EL表达式访问值</h4><p><img src="https://i.loli.net/2021/09/06/Cnx3JDBw7ATsSci.png" alt="image-20210906101600278"></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--    EL表达式取值--%&gt;</span><br><span class="line">    pageContext：$&#123;id1&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-EL表达式获取请求的参数"><a href="#3-EL表达式获取请求的参数" class="headerlink" title="3.EL表达式获取请求的参数"></a>3.EL表达式获取请求的参数</h4><ul>
+<li><p>取单个的</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;param.name&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>取所有的</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;paramvalues.name[]&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/06/tTPyYKwLNJu8j1s.png" alt="image-20210906103502994"></p>
+<h4 id="4-访问JavaBean属性"><a href="#4-访问JavaBean属性" class="headerlink" title="4.访问JavaBean属性"></a>4.访问JavaBean属性</h4><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;对象名.属性&#125;</span><br><span class="line">$&#123;对象名[<span class="string">&quot;属性名&quot;</span>]&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>带参构造需要传递一个InputStream类型的对象</p>
+<li>对象名：指的是name值</li>
+<li>会自动使用get方法取值，如果没有Set方法会报500错误</li>
+<li>第二种取值方式是为了防止，当属性出现其他特殊符号时可以使用</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/06/uNWqdD8sOnzcj9k.png" alt="image-20210906105326649"></p>
+<h4 id="5-访问集合属性"><a href="#5-访问集合属性" class="headerlink" title="5.访问集合属性"></a>5.访问集合属性</h4><p><img src="https://i.loli.net/2021/09/06/pzcMw4jFBUIVXiq.png" alt="image-20210906113411452"></p>
+<h4 id="6-EL隐式对象"><a href="#6-EL隐式对象" class="headerlink" title="6.EL隐式对象"></a>6.EL隐式对象</h4><p><img src="https://i.loli.net/2021/09/06/dGMRNJ8DXvBgowA.png" alt="image-20210906113918214"></p>
+<h4 id="7-EL常用运算符"><a href="#7-EL常用运算符" class="headerlink" title="7.EL常用运算符"></a>7.EL常用运算符</h4><p><img src="https://i.loli.net/2021/09/06/iTBnyGOY7L14tDU.png" alt="image-20210906135619112"></p>
+<p><img src="https://i.loli.net/2021/09/06/vnkl6V8z1shXAYU.png" alt="image-20210906141900996"></p>
 <ul>
-<li>InputStream是一个接口<ul>
-<li>通过他的已知实现子类进行创建对象<ul>
-<li>FileInputStream<ul>
-<li>又需要一个File对象</li>
+<li>EL表达式是没有空指针异常和数组索引越界的</li>
 </ul>
+<h3 id="二、JSTL"><a href="#二、JSTL" class="headerlink" title="二、JSTL"></a>二、JSTL</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li><p>标签库，简化一些java代码</p>
 </li>
+<li><p>核心库，引用语法</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib prefix=<span class="string">&quot;c&quot;</span>         uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> %&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
-</li>
+<h4 id="2-核心标签库"><a href="#2-核心标签库" class="headerlink" title="2.核心标签库"></a>2.核心标签库</h4><ul>
+<li><p>核心标签库的<font color='#d15252'>引用语法</font></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/core&quot;</span> prefix=<span class="string">&quot;c&quot;</span> %&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
-</li>
-<li><strong>步骤</strong></li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/10/xg15ot7RzDypGba.png" alt="image-20210810143433304"></p>
-</li>
-</ul>
-<h3 id="二、OutputStreamReader输出转换流"><a href="#二、OutputStreamReader输出转换流" class="headerlink" title="二、OutputStreamReader输出转换流"></a>二、OutputStreamReader输出转换流</h3><h4 id="1-概述-1"><a href="#1-概述-1" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>同InputStreamReader</li>
-</ul>
-<p><img src="https://i.loli.net/2021/08/10/e7PhMWVkZQigDLz.png" alt="image-20210810144431017"></p>
-<h3 id="缓冲流的概述"><a href="#缓冲流的概述" class="headerlink" title="缓冲流的概述"></a>缓冲流的概述</h3><ul>
-<li>效率：读写速度提高</li>
-<li>功能<ul>
-<li>字节</li>
-<li>字符</li>
-</ul>
-</li>
-</ul>
-<h3 id="三、字节缓冲流"><a href="#三、字节缓冲流" class="headerlink" title="三、字节缓冲流"></a>三、<font color='#d15252'>字节</font>缓冲流</h3><ul>
-<li> BufferedInputStream 输入缓冲流  — &gt; 读取数据到内存</li>
-<li> BufferedOutputStream 输出缓冲流 —&gt; 写入数据到目标文件</li>
-</ul>
-<h4 id="1-概述-2"><a href="#1-概述-2" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li><p>继承体系</p>
-<p><img src="https://i.loli.net/2021/08/10/j6FOZDEUCBrnSRv.png" alt="image-20210810151303875"></p>
-</li>
-<li><p>InputStream –&gt; FilterInputStream —&gt;BufferedInputStream</p>
-</li>
-<li><p><code>BufferedInputStream</code>为另一个输入流添加了功能，即缓冲输入并支持<code>mark</code>和<code>reset</code>方法的功能</p>
+<p><img src="https://i.loli.net/2021/09/06/wTbV7Z2carDJosH.png" alt="image-20210906150130163"></p>
 <ul>
-<li>  <code>mark</code>操作会记住输入流中的一个点，并且<code>reset</code>操作会导致从最近的<code>mark</code>操作读取的所有字节在从包含的输入流中取出新字节之前重新读取。 </li>
+<li>&lt; c:out &gt;：用于在JSP中显示数据，就像&lt;%= … &gt;</li>
+<li>&lt; c:set &gt;：用于保存数据</li>
+<li>&lt; c:remove&gt;：用于删除数据</li>
 </ul>
-</li>
-<li><p><code>BufferedInputStream</code>将创建一个内部缓冲区数组</p>
-</li>
-<li></li>
-</ul>
-<h4 id="2-构造方法-1"><a href="#2-构造方法-1" class="headerlink" title="2.构造方法"></a>2.构造方法</h4><ul>
-<li><p>```java<br>BufferedInputStream (InputStream in) 创建一个 BufferedInputStream并保存其参数，输入流 in供以后使用。<br>BufferedInputStream (InputStream in, int size) 创建具有指定缓冲区大小的 BufferedInputStream ，并保存其参数，输入流 in供以后使用。   //指定缓冲区大小</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">#### <span class="number">3.</span>成员方法</span><br><span class="line"></span><br><span class="line">- read() 、read(byte[] b,int off,int len)</span><br><span class="line"></span><br><span class="line">  ![image<span class="number">-20210810151911879</span>](https:<span class="comment">//i.loli.net/2021/08/10/QriGhqVKH3xywoJ.png)</span></span><br><span class="line"></span><br><span class="line">### &lt;font color=<span class="string">&#x27;#d15252&#x27;</span>&gt;作业&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">![image<span class="number">-20210810154638010</span>](https:<span class="comment">//i.loli.net/2021/08/10/hznCeU2r3oB6v4d.png)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 四、&lt;font color=<span class="string">&#x27;#d15252&#x27;</span>&gt;字符&lt;/font&gt;缓冲流 </span><br><span class="line"></span><br><span class="line">- BufferedWriter</span><br><span class="line">- BufferedReader</span><br><span class="line"></span><br><span class="line">#### <span class="number">1.</span>概述</span><br><span class="line"></span><br><span class="line">- 修饰符：public 公共的可以直接使用</span><br><span class="line">- 继承 Writer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### <span class="number">2.</span>构造方法</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">BufferedWriter (Writer out) 创建使用默认大小的输出缓冲区的缓冲字符输出流。  </span><br><span class="line">BufferedWriter (Writer out, int sz) 创建一个新的缓冲字符输出流，使用给定大小的输出缓冲区。  <span class="comment">//自定义缓冲区大小</span></span><br></pre></td></tr></table></figure></li>
-<li><p>带参构造要传递参数一个 Writer类型的变量</p>
 <ul>
-<li>Write是一个抽象类，需要通过子类实例化<ul>
-<li>使用FileWriter实例化</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-成员方法"><a href="#3-成员方法" class="headerlink" title="3.成员方法"></a>3.成员方法</h4><p><img src="https://i.loli.net/2021/08/10/1FpWNTQgoXqP6jf.png" alt="image-20210810170324088"></p>
-<p><img src="https://i.loli.net/2021/08/10/u5AIkPoKXnyYVR7.png" alt="image-20210810171553360"></p>
+<li><p>&lt; c:if &gt;：与我们在一般程序中用的if一样 （<font color='#d15252'>单次判断</font>）</p>
+<p><img src="https://i.loli.net/2021/09/06/Et3TBkN2GDsH4gF.png" alt="image-20210906151016783"></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:set <span class="keyword">var</span>=<span class="string">&quot;salary&quot;</span> scope=<span class="string">&quot;session&quot;</span> value=<span class="string">&quot;$&#123;2000*2&#125;&quot;</span>/&gt;</span><br><span class="line">&lt;c:<span class="keyword">if</span> test=<span class="string">&quot;$&#123;salary &gt; 2000&#125;&quot;</span>&gt;</span><br><span class="line"> &lt;p&gt;My salary is: &lt;c:out value=<span class="string">&quot;$&#123;salary&#125;&quot;</span>/&gt;&lt;p&gt;</span><br><span class="line">&lt;/c:<span class="keyword">if</span>&gt;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><h5 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h5><ul>
-<li>字符缓冲流和字符流一样，不能操作文件的复制粘贴（乱码），只能操作纯文本文件</li>
+<li>需要注意的是，test条件必须写一个EL表达式，不然就是一个普通的字符串</li>
 </ul>
 </li>
 </ul>
-<h3 id="五、所有流总结"><a href="#五、所有流总结" class="headerlink" title="五、所有流总结"></a>五、所有流总结</h3><h4 id="1-继承关系"><a href="#1-继承关系" class="headerlink" title="1.继承关系"></a>1.继承关系</h4><ul>
-<li><p>字节流</p>
-<p><img src="https://i.loli.net/2021/08/10/CTaUoeyz9tsu4R6.png"></p>
-</li>
-<li><p>字符流</p>
+<ul>
+<li><p>&lt;c:choose &gt;, &lt;c:when &gt;, &lt;c:otherwise &gt; 标签</p>
+<ul>
+<li><font color='#d15252'>多次判断</font></li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/06/5eAG9VKLMQ2jb6u.png" alt="image-20210906151747419"></p>
 </li>
 </ul>
-<p><img src="https://i.loli.net/2021/08/10/gsDie8LW45RrXbI.png" alt="image-20210810194449230"></p>
-<p><img src="https://i.loli.net/2021/08/25/Qq8EsATcXZpzO1h.png" alt="image-20210810184044702"></p>
+<ul>
+<li><p>&lt;c:forEach &gt;, &lt;c:forTokens &gt;<font color='#d15252'> 循环标签</font></p>
+<p><img src="https://i.loli.net/2021/09/06/TpoWfDxUhraNK68.png" alt="image-20210906152237828"></p>
+<p><img src="https://i.loli.net/2021/09/06/TxmLAH4kKSM3Yvt.png" alt="image-20210906152916051"></p>
+<ul>
+<li>注意事项：<ul>
+<li>begin：默认值0，不用写EL表达式</li>
+<li>end：默认最后一个元素</li>
+</ul>
+</li>
+<li>forEach类似于Java中的增强for，因此变量i可以直接使用</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-格式化标签库"><a href="#3-格式化标签库" class="headerlink" title="3.格式化标签库"></a>3.格式化标签库</h4><ul>
+<li><p>格式化引用格式</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib prefix=<span class="string">&quot;fmt&quot;</span> uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/fmt&quot;</span> %&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>&lt;fmt:formatDate &gt; 使用不同的方式格式化日期</p>
+</li>
+</ul>
+<h4 id="4-JSTL函数标签库"><a href="#4-JSTL函数标签库" class="headerlink" title="4.JSTL函数标签库"></a>4.JSTL函数标签库</h4><ul>
+<li><p>导入JSTL函数</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib prefix=<span class="string">&quot;fn&quot;</span>         uri=<span class="string">&quot;http://java.sun.com/jsp/jstl/functions&quot;</span> %&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>fn:contains()函数：用于确定一个字符串是否包含指定的子串</p>
+<ul>
+<li><p>语法格式：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(String, String)</span></span></span><br></pre></td></tr></table></figure></li>
+<li><p>例：</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/06/T4hz3HaXSsiubWD.png" alt="image-20210906155320302"></p>
+</li>
+</ul>
 
     </div>
 
@@ -380,7 +408,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/2021/08/25/%E8%BD%AC%E6%8D%A2%E6%B5%81%E5%92%8C%E7%BC%93%E5%86%B2%E6%B5%81/" title="转换流和缓冲流">http://example.com/2021/08/25/转换流和缓冲流/</a>
+    <a href="http://example.com/2021/09/06/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8CJSTL/" title="EL表达式和JSTL">http://example.com/2021/09/06/EL表达式和JSTL/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -391,9 +419,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/IO%E6%B5%81/" rel="tag"><i class="fa fa-tag"></i># IO流</a>
-              <a href="/tags/%E8%BD%AC%E6%8D%A2%E6%B5%81/" rel="tag"><i class="fa fa-tag"></i># 转换流</a>
-              <a href="/tags/%E7%BC%93%E5%86%B2%E6%B5%81/" rel="tag"><i class="fa fa-tag"></i># 缓冲流</a>
+              <a href="/tags/EL/" rel="tag"><i class="fa fa-tag"></i># EL</a>
+              <a href="/tags/FSTL/" rel="tag"><i class="fa fa-tag"></i># FSTL</a>
           </div>
 
         
@@ -402,13 +429,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/08/25/IO%E6%B5%81/" rel="prev" title="IO流">
-      <i class="fa fa-chevron-left"></i> IO流
+    <a href="/2021/09/03/Cookie%E3%80%81Session%E3%80%81JSP/" rel="prev" title="Cookie、Session、JSP">
+      <i class="fa fa-chevron-left"></i> Cookie、Session、JSP
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/08/25/%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Properties%E7%B1%BB-%E7%9E%AC%E6%80%81%E5%85%B3%E9%94%AE%E5%AD%97-%E6%89%93%E5%8D%B0%E6%B5%81/" rel="next" title="序列化和反序列化\Properties类\瞬态关键字\打印流">
-      序列化和反序列化\Properties类\瞬态关键字\打印流 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -472,7 +496,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#y%E3%80%81InputStreamReader%E8%BE%93%E5%85%A5%E8%BD%AC%E6%8D%A2%E6%B5%81"><span class="nav-number">1.</span> <span class="nav-text">y、InputStreamReader输入转换流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81InputStreamReader%E8%BE%93%E5%85%A5%E8%BD%AC%E6%8D%A2%E6%B5%81"><span class="nav-number">2.</span> <span class="nav-text">一、InputStreamReader输入转换流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">2.构造方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81OutputStreamReader%E8%BE%93%E5%87%BA%E8%BD%AC%E6%8D%A2%E6%B5%81"><span class="nav-number">3.</span> <span class="nav-text">二、OutputStreamReader输出转换流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0-1"><span class="nav-number">3.1.</span> <span class="nav-text">1.概述</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%86%B2%E6%B5%81%E7%9A%84%E6%A6%82%E8%BF%B0"><span class="nav-number">4.</span> <span class="nav-text">缓冲流的概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AD%97%E8%8A%82%E7%BC%93%E5%86%B2%E6%B5%81"><span class="nav-number">5.</span> <span class="nav-text">三、字节缓冲流</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0-2"><span class="nav-number">5.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95-1"><span class="nav-number">5.2.</span> <span class="nav-text">2.构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95"><span class="nav-number">5.3.</span> <span class="nav-text">3.成员方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">5.3.1.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%89%80%E6%9C%89%E6%B5%81%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">五、所有流总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB"><span class="nav-number">6.1.</span> <span class="nav-text">1.继承关系</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81EL%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">一、EL表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">1.概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-EL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AE%BF%E9%97%AE%E5%80%BC"><span class="nav-number">1.2.</span> <span class="nav-text">2.EL表达式访问值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-EL%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%8E%B7%E5%8F%96%E8%AF%B7%E6%B1%82%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">3.EL表达式获取请求的参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E8%AE%BF%E9%97%AEJavaBean%E5%B1%9E%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">4.访问JavaBean属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E8%AE%BF%E9%97%AE%E9%9B%86%E5%90%88%E5%B1%9E%E6%80%A7"><span class="nav-number">1.5.</span> <span class="nav-text">5.访问集合属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-EL%E9%9A%90%E5%BC%8F%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.6.</span> <span class="nav-text">6.EL隐式对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-EL%E5%B8%B8%E7%94%A8%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.7.</span> <span class="nav-text">7.EL常用运算符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81JSTL"><span class="nav-number">2.</span> <span class="nav-text">二、JSTL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E6%A0%87%E7%AD%BE%E5%BA%93"><span class="nav-number">2.2.</span> <span class="nav-text">2.核心标签库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A0%87%E7%AD%BE%E5%BA%93"><span class="nav-number">2.3.</span> <span class="nav-text">3.格式化标签库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-JSTL%E5%87%BD%E6%95%B0%E6%A0%87%E7%AD%BE%E5%BA%93"><span class="nav-number">2.4.</span> <span class="nav-text">4.JSTL函数标签库</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
