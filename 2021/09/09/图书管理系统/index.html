@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="实现图书管理系统的前后端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图书管理系统">
+<meta property="og:url" content="http://example.com/2021/09/09/%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="实现图书管理系统的前后端">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/iVhA1s7bIm5YXr8.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/oJSaH6OF57lDIB2.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/BhZ1IXkSdA4spcM.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/fb7eEuhIsTktcwB.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/5tAIQoWMUmiEe7z.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/anlVpmYLN5SMKgb.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/ic8nvEjTH5aJ9VZ.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/7jIsLez5rVncqCO.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/6nj4pCdolc8YiIt.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/TWpDclahLzUMSyq.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/2tW93p8TyuFiZh1.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/Q3GUm5fw6H7vNyz.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/vizqa61RyVh2gIW.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/uWHvRVDEXgo5LJS.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/SxUFf1wT3QJjROG.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/zmWeb5OUPEFZBTJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/QJmH3RT98tXaDgr.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/BrGlCLAxbz83qXS.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/LQcfobiGr3lHTAw.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/q8A1KZ4SFCnbyhu.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/LZGOPx1f8QsAh9z.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/PTztAIVRxk9cpso.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/JrHl5goQVxRLOPK.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/S3wTeqcBPAZgDXp.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/bEgQ2Hd8vLTprF3.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/uLvCqZTYUJdSiIN.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/FIk6DMqUcejQsKy.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/09/V6Zhpfz3TUtgIPy.png">
+<meta property="article:published_time" content="2021-09-09T01:28:57.000Z">
+<meta property="article:modified_time" content="2021-09-09T04:46:38.580Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="网络编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/09/iVhA1s7bIm5YXr8.png">
+
+<link rel="canonical" href="http://example.com/2021/09/09/%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>图书管理系统 | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/09/%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图书管理系统
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-09 09:28:57 / 修改时间：12:46:38" itemprop="dateCreated datePublished" datetime="2021-09-09T09:28:57+08:00">2021-09-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%88%E4%BE%8B/" itemprop="url" rel="index"><span itemprop="name">案例</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">58k</span> -->
+			  <span title="本文字数">
+                  4.6k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>13 分钟</span>
+            </span>
+            <div class="post-description">实现图书管理系统的前后端</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="图书管理系统"><a href="#图书管理系统" class="headerlink" title="图书管理系统"></a>图书管理系统</h2><h3 id="一、项目准备"><a href="#一、项目准备" class="headerlink" title="一、项目准备"></a>一、项目准备</h3><ul>
+<li><p>创建项目并测试环境</p>
+<ul>
+<li>创建JavaWeb项目</li>
+</ul>
+</li>
+<li><p>配置Tomcat</p>
+<ul>
+<li>修改端口号</li>
+<li>更改Deployment项目路径</li>
+</ul>
+</li>
+<li><p>在WEB-INF下新建libs包，导入相关Jar包</p>
+<p><img src="https://i.loli.net/2021/09/09/iVhA1s7bIm5YXr8.png" alt="image-20210909093228809"></p>
+<ul>
+<li>连接数据库Jar包、EL表达式等Jar包</li>
+</ul>
+</li>
+<li><p>创建数据库数据</p>
+<p><img src="https://i.loli.net/2021/09/09/oJSaH6OF57lDIB2.png" alt="image-20210909093404006"></p>
+</li>
+<li><p>导入前端页面文件</p>
+<p><img src="https://i.loli.net/2021/09/09/BhZ1IXkSdA4spcM.png" alt="image-20210909093441541"></p>
+</li>
+</ul>
+<h3 id="二、实现登录功能"><a href="#二、实现登录功能" class="headerlink" title="二、实现登录功能"></a>二、实现登录功能</h3><p><img src="https://i.loli.net/2021/09/09/fb7eEuhIsTktcwB.png" alt="image-20210909102014866"></p>
+<h4 id="1-前端"><a href="#1-前端" class="headerlink" title="1.前端"></a>1.前端</h4><ul>
+<li><p>通过查看login登录页面前端代码得到以下信息</p>
+<p><img src="https://i.loli.net/2021/09/09/5tAIQoWMUmiEe7z.png" alt="image-20210909093623925"></p>
+<ul>
+<li>登录表单提交数据到Login程序中</li>
+<li>前端提交数据中，用户名-username，密码-password，以及登录的类型-type</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-Servlet层"><a href="#2-Servlet层" class="headerlink" title="2.Servlet层"></a>2.Servlet层</h4><ul>
+<li><p>新建Web程序，继承HttpServlet类，重写doGet，doPost方法，起名为login</p>
+</li>
+<li><p>接收前端提交的用户名和密码以及登录类型</p>
+<p><img src="https://i.loli.net/2021/09/09/anlVpmYLN5SMKgb.png" alt="image-20210909094328375"></p>
+</li>
+<li><p>将接收的数据传给Service层进行判断处理</p>
+<p><img src="https://i.loli.net/2021/09/09/ic8nvEjTH5aJ9VZ.png" alt="image-20210909094338664"></p>
+<ul>
+<li>如果登录成功，Service层会返回一个对象，并封装了用户的相关参数</li>
+</ul>
+</li>
+<li><p>登录成功后根据登录的类型，将对象存入Session域中</p>
+<p><img src="https://i.loli.net/2021/09/09/7jIsLez5rVncqCO.png" alt="image-20210909094354695"></p>
+<ul>
+<li>普通用户登录成功后，跳转到/show展示index页面数据的程序</li>
+<li>管理员用户登录成功后，跳转到admin显示管理员的页面数据程序</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-Service层"><a href="#3-Service层" class="headerlink" title="3.Service层"></a>3.Service层</h4><ul>
+<li><p>LibraryService接口中，创建登录方法</p>
+<p><img src="https://i.loli.net/2021/09/09/6nj4pCdolc8YiIt.png" alt="image-20210909094504024"></p>
+<ul>
+<li>接收Servlet传递的参数</li>
+</ul>
+</li>
+<li><p>Service实现类中重写login登入方法</p>
+<ul>
+<li>判断登入用户是普通用户还是管理员</li>
+<li>根据用户类型调用Dao层方法，获取不同的表数据（user/admin）</li>
+<li>循环遍历数据库取出的数据，与登入提交的数据进行比较，如果有匹配数据，即登录成功</li>
+<li>否则登录失败，返回null，Servlet判断返回控制，重写刷新login页面</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/09/TWpDclahLzUMSyq.png" alt="image-20210909094858303"></p>
+</li>
+</ul>
+<h4 id="4-Dao层"><a href="#4-Dao层" class="headerlink" title="4.Dao层"></a>4.Dao层</h4><ul>
+<li><p>Dao层接口新建普通用户表查询和管理员表查询方法</p>
+<p><img src="https://i.loli.net/2021/09/09/2tW93p8TyuFiZh1.png" alt="image-20210909094948232"></p>
+</li>
+<li><p>Dao层重写普通用户登录方法</p>
+<ul>
+<li>获取数据库连接</li>
+<li>执行sql查询语句</li>
+<li>将查询数据封装到对象中，并存入集合</li>
+<li>返回集合</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/09/Q3GUm5fw6H7vNyz.png" alt="image-20210909095044999"></p>
+</li>
+<li><p>管理员用户登录</p>
+<p><img src="https://i.loli.net/2021/09/09/vizqa61RyVh2gIW.png" alt="image-20210909095113759"></p>
+</li>
+</ul>
+<h4 id="5-JavaBeean"><a href="#5-JavaBeean" class="headerlink" title="5.JavaBeean"></a>5.JavaBeean</h4><ul>
+<li><p>新建User(Reader)实体类</p>
+<ul>
+<li><p>成员变量如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line"><span class="comment">//账号</span></span><br><span class="line"><span class="keyword">private</span> String username;</span><br><span class="line"><span class="comment">//密码</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> password;</span><br><span class="line"><span class="comment">//实名</span></span><br><span class="line"><span class="keyword">private</span> String name;</span><br><span class="line"><span class="comment">//电话</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> tel;</span><br><span class="line"><span class="comment">//卡号</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> cardid;</span><br><span class="line"><span class="comment">//性别</span></span><br><span class="line"><span class="keyword">private</span> String gender;</span><br></pre></td></tr></table></figure></li>
+<li><p>重写构造方法，get/set方法，toString方法，equal和hascode方法</p>
+</li>
+</ul>
+</li>
+<li><p>新建Admin实体类</p>
+<ul>
+<li><p>成员变量如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line"><span class="keyword">private</span> String username;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> password;</span><br></pre></td></tr></table></figure></li>
+<li><p>重写构造方法，get/set方法，toString方法，equal和hascode方法</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、实现index页面数据显示"><a href="#三、实现index页面数据显示" class="headerlink" title="三、实现index页面数据显示"></a>三、实现index页面数据显示</h3><p><img src="https://i.loli.net/2021/09/09/uWHvRVDEXgo5LJS.png" alt="image-20210909102037166"></p>
+<h4 id="1-Servlet层"><a href="#1-Servlet层" class="headerlink" title="1.Servlet层"></a>1.Servlet层</h4><ul>
+<li>新建showBook类，重写doGet，doPost</li>
+<li>获取数据库数据，将数据存入requset域中<ul>
+<li>前端通过request获取域中的数据，并将数据展示</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">      String current = req.getParameter(<span class="string">&quot;page&quot;</span>); <span class="comment">//获取当前页</span></span><br><span class="line">      <span class="comment">//获取书籍数据</span></span><br><span class="line">      ArrayList&lt;Book&gt; books = <span class="keyword">new</span> LibraryDaoImp().showBook();</span><br><span class="line">      Page page = <span class="keyword">new</span> LibraryServiceImp().getPage(current,books); <span class="comment">//调用方法获取page对象</span></span><br><span class="line">      req.setAttribute(<span class="string">&quot;page&quot;</span>, page);<span class="comment">//将page对象存入域中</span></span><br><span class="line">      <span class="comment">//获取集合</span></span><br><span class="line">      List&lt;Book&gt; list = (List&lt;Book&gt;) page.getList();</span><br><span class="line">      <span class="comment">//将书籍存入域中</span></span><br><span class="line">      req.setAttribute(<span class="string">&quot;books&quot;</span>,list);</span><br><span class="line">      <span class="comment">//跳转页面</span></span><br><span class="line">      req.getRequestDispatcher(<span class="string">&quot;index.jsp&quot;</span>).forward(req,resp);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>代码中包含了后期添加的分页功能，后面在详细解释</p>
+</blockquote>
+<h4 id="2-Service层"><a href="#2-Service层" class="headerlink" title="2.Service层"></a>2.Service层</h4><ul>
+<li><p>创建showBook类，返回值rrayList&lt; Book &gt; 类型</p>
+<p><img src="https://i.loli.net/2021/09/09/SxUFf1wT3QJjROG.png" alt="image-20210909101230979"></p>
+</li>
+<li><p>实现类重写方法</p>
+<ul>
+<li>创建Dao层对象，调用查询数据表的方法，获取数据数据集合，并return带回给Servlet层</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>   <span class="comment">//展示书籍</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;Book&gt; <span class="title">showBook</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="comment">//获取数据集合</span></span><br><span class="line">      <span class="comment">//将集合返回给Servlet程序，发送给前端</span></span><br><span class="line">	ArrayList&lt;Book&gt; books = <span class="keyword">new</span> LibraryDaoImp().showBook();</span><br><span class="line">        <span class="keyword">return</span> books;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-Dao层"><a href="#3-Dao层" class="headerlink" title="3.Dao层"></a>3.Dao层</h4><ul>
+<li><p>Dao层接口中定义查询书籍信息的方法</p>
+<p><img src="https://i.loli.net/2021/09/09/zmWeb5OUPEFZBTJ.png" alt="image-20210909101635514"></p>
+</li>
+<li><p>Dao层实现类重写方法，并将取出的数据封装成Book对象，存入集合中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;Book&gt; <span class="title">showBook</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//连接数据库</span></span><br><span class="line">    Connection connect = ConnectTool.getConnect();</span><br><span class="line">    ArrayList&lt;Book&gt; books = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//获取工具</span></span><br><span class="line">        Statement statement = connect.createStatement();</span><br><span class="line">        <span class="comment">//执行查询语句</span></span><br><span class="line">        ResultSet resultSet = statement.executeQuery(<span class="string">&quot;SELECT * FROM book&quot;</span>);</span><br><span class="line">        <span class="comment">//存入集合</span></span><br><span class="line">        <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">            books.add(<span class="keyword">new</span> Book(</span><br><span class="line">                    resultSet.getInt(<span class="string">&quot;id&quot;</span>),</span><br><span class="line">                    resultSet.getString(<span class="string">&quot;name&quot;</span>),</span><br><span class="line">                    resultSet.getString(<span class="string">&quot;author&quot;</span>),</span><br><span class="line">                    resultSet.getString(<span class="string">&quot;publish&quot;</span>),</span><br><span class="line">                    resultSet.getInt(<span class="string">&quot;pages&quot;</span>),</span><br><span class="line">                    resultSet.getInt(<span class="string">&quot;price&quot;</span>),</span><br><span class="line">                    resultSet.getInt(<span class="string">&quot;bookcaseid&quot;</span>),</span><br><span class="line">                    resultSet.getInt(<span class="string">&quot;abled&quot;</span>)</span><br><span class="line">            ));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//关闭连接</span></span><br><span class="line">        ConnectTool.closeConnect(connect, resultSet, statement);</span><br><span class="line">        <span class="keyword">return</span> books;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException throwables) &#123;</span><br><span class="line">        throwables.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> books;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="4-JavaBeen"><a href="#4-JavaBeen" class="headerlink" title="4.JavaBeen"></a>4.JavaBeen</h4><ul>
+<li><p>新建Book实体类</p>
+<ul>
+<li><p>成员变量如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line"><span class="keyword">private</span> String name;</span><br><span class="line"><span class="keyword">private</span> String author;</span><br><span class="line"><span class="comment">//出版社</span></span><br><span class="line"><span class="keyword">private</span> String publish;</span><br><span class="line"><span class="comment">//页数</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> pages;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> price;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> bookcaseid;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> abled;</span><br></pre></td></tr></table></figure></li>
+<li><p>重写构造方法，get/set方法，toString方法，equal和hascode方法</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、实现用户借阅以及借阅页面的查询"><a href="#四、实现用户借阅以及借阅页面的查询" class="headerlink" title="四、实现用户借阅以及借阅页面的查询"></a>四、实现用户借阅以及借阅页面的查询</h3><p><img src="https://i.loli.net/2021/09/09/QJmH3RT98tXaDgr.png" alt="image-20210909102054614"></p>
+<h4 id="1-前端-1"><a href="#1-前端-1" class="headerlink" title="1.前端"></a>1.前端</h4><p><img src="https://i.loli.net/2021/09/09/BrGlCLAxbz83qXS.png" alt="image-20210909102134615"></p>
+<ul>
+<li>当在index页面点击用户名时，跳转到/book程序</li>
+<li>并get方式传递参数method=findAllBorrow<ul>
+<li>以及page=1(后面数据分页使用，暂不提)</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/09/LQcfobiGr3lHTAw.png" alt="image-20210909102425486"></p>
+<ul>
+<li>当用户点击index页面数据信息后的<font color='#d15252'>借阅</font>按钮时，跳转到/book程序</li>
+<li>并get方式传递参数method=addAllBorrow<ul>
+<li>以及携带参数bookid（当前点击借阅的书籍id）</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-Servlet层-1"><a href="#2-Servlet层-1" class="headerlink" title="2.Servlet层"></a>2.Servlet层</h4><ul>
+<li><p>新建book程序，重写doGet，doPost方法，接收前端数据method以及bookid</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String method = req.getParameter(<span class="string">&quot;method&quot;</span>);</span><br><span class="line">String bookid = req.getParameter(<span class="string">&quot;bookid&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>判断method是addBorrow还是findAllBorrow</p>
+<ul>
+<li>如果是add则是添加借阅的图书</li>
+<li>如果是find则是显示所有借阅的图书</li>
+</ul>
+</li>
+<li><p>addBorrow</p>
+<ul>
+<li>通过req获取Session对象，获取当前登录用户的对象（信息）</li>
+<li>调用Service层的addBorrow方法，将用户对象及书籍id传递过去<ul>
+<li>Service层进行一系列添加操作</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//添加借阅</span></span><br><span class="line"><span class="keyword">if</span> (<span class="string">&quot;addBorrow&quot;</span>.equals(method))&#123;</span><br><span class="line">    User u =(User) req.getSession().getAttribute(<span class="string">&quot;reader&quot;</span>);</span><br><span class="line">    <span class="keyword">new</span> LibraryServiceImp().addBorrow(bookid,u);</span><br><span class="line">    req.getRequestDispatcher(<span class="string">&quot;/show&quot;</span>).forward(req,resp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>findAllBorrow</p>
+<ul>
+<li>通过req获取Session对象，获取当前登录用户的对象（信息）</li>
+<li>调用Service层中的查询借阅，获取返回值集合</li>
+<li>将集合存入域中，跳转页面</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询借阅</span></span><br><span class="line"><span class="keyword">if</span> (<span class="string">&quot;findAllBorrow&quot;</span>.equals(method))&#123;</span><br><span class="line">    User u =(User) req.getSession().getAttribute(<span class="string">&quot;reader&quot;</span>);</span><br><span class="line">    ArrayList&lt;Borrow&gt; allBorrow = <span class="keyword">new</span> LibraryServiceImp().findAllBorrow(u);</span><br><span class="line">    <span class="comment">//执行分页</span></span><br><span class="line">    String current = req.getParameter(<span class="string">&quot;page&quot;</span>); <span class="comment">//获取当前页</span></span><br><span class="line">    Page page = <span class="keyword">new</span> LibraryServiceImp().getPage(current,allBorrow); <span class="comment">//调用方法获取page对象</span></span><br><span class="line">    req.setAttribute(<span class="string">&quot;page&quot;</span>, page);<span class="comment">//将page对象存入域中</span></span><br><span class="line">    <span class="comment">//获取集合</span></span><br><span class="line">    List&lt;Book&gt; list = (List&lt;Book&gt;) page.getList();</span><br><span class="line">    req.setAttribute(<span class="string">&quot;list&quot;</span>,list);</span><br><span class="line">    <span class="comment">//跳转页面</span></span><br><span class="line">    req.getRequestDispatcher(<span class="string">&quot;borrow.jsp&quot;</span>).forward(req,resp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>因为是显示数据页面，所以同样需要添加分页</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="3-Service层-1"><a href="#3-Service层-1" class="headerlink" title="3.Service层"></a>3.Service层</h4><ul>
+<li><p>Service层接口中定义添加借阅和显示借阅的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addBorrow</span><span class="params">(String bookid,User u)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;Borrow&gt; <span class="title">findAllBorrow</span><span class="params">(User u)</span></span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="Ⅰ-添加借阅"><a href="#Ⅰ-添加借阅" class="headerlink" title="Ⅰ.添加借阅"></a>Ⅰ.<font color='#d15252'>添加</font>借阅</h5><ul>
+<li><p>Service实现类中重写add方法</p>
+</li>
+<li><p>通过前端页面和数据库，整合我们需要添加的数据</p>
+<p><img src="https://i.loli.net/2021/09/09/q8A1KZ4SFCnbyhu.png" alt="image-20210909103153228"></p>
+<p><img src="https://i.loli.net/2021/09/09/LZGOPx1f8QsAh9z.png" alt="image-20210909103204279"></p>
+</li>
+<li><p>通过Date获取当前系统时间，通过Calendar在当前时间的基础上添加xx天，作为还书时间</p>
+</li>
+<li><p>通过传递的当前用户对象，获取读者id,读者编号等信息，并定义初始化审核状态state为0</p>
+</li>
+<li><p>将所有信息封装为Borrow对象，并调用Dao层的addBorrow方法，向数据库Borrow表添加数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>   <span class="comment">//添加借阅</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addBorrow</span><span class="params">(String bookid,User user)</span></span>&#123;</span><br><span class="line">    <span class="comment">//获取当前系统时间</span></span><br><span class="line">    Date date = <span class="keyword">new</span> Date();</span><br><span class="line">    SimpleDateFormat sf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd&quot;</span>);</span><br><span class="line">    String format = sf.format(date);</span><br><span class="line">    Date parse = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">         parse = sf.parse(format);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ParseException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    Calendar rightrow = Calendar.getInstance();</span><br><span class="line">    rightrow.setTime(parse);</span><br><span class="line">    rightrow.add(Calendar.MONTH,<span class="number">1</span>);</span><br><span class="line">    Date time = rightrow.getTime();</span><br><span class="line">    String endformat = sf.format(time);</span><br><span class="line">    <span class="comment">//获取借阅ID</span></span><br><span class="line">    <span class="keyword">int</span> id = (<span class="keyword">new</span> LibraryDaoImp().maxId())+<span class="number">1</span>;</span><br><span class="line">    <span class="comment">//获取书籍id</span></span><br><span class="line">    <span class="keyword">int</span> bookidd = Integer.parseInt(bookid);</span><br><span class="line">    <span class="comment">//获取读者Id</span></span><br><span class="line">    <span class="keyword">int</span> readerid = user.getId();</span><br><span class="line">    <span class="keyword">int</span> adminid = user.getCardid();</span><br><span class="line">    <span class="keyword">int</span> state = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">new</span> LibraryDaoImp().addBorrow(<span class="keyword">new</span> Borrow(id,bookidd,readerid,format,endformat,adminid,state));</span><br><span class="line">    System.out.println(<span class="string">&quot;创建借阅请求成功&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="Ⅱ-查询借阅"><a href="#Ⅱ-查询借阅" class="headerlink" title="Ⅱ.查询借阅"></a>Ⅱ.<font color='#d15252'>查询</font>借阅</h5><ul>
+<li>创建Dao层对象，调用查询Borrow表数据，返回集合</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>   <span class="comment">//查询借阅</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;Borrow&gt; <span class="title">findAllBorrow</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">    ArrayList&lt;Borrow&gt; allBorrow = <span class="keyword">new</span> LibraryDaoImp().findAllBorrow(user);</span><br><span class="line">    <span class="keyword">return</span> allBorrow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-Dao层-1"><a href="#4-Dao层-1" class="headerlink" title="4.Dao层"></a>4.Dao层</h4><ul>
+<li>Dao层接口中添加查询借阅和添加借阅的方法</li>
+</ul>
+<h5 id="Ⅰ-添加借阅-1"><a href="#Ⅰ-添加借阅-1" class="headerlink" title="Ⅰ.添加借阅"></a>Ⅰ.添加借阅</h5><ul>
+<li>获取连接及工具</li>
+<li>执行添加sql语句<ul>
+<li>数据是Service传递的Borrow对象中</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>   <span class="comment">//添加借阅</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addBorrow</span><span class="params">(Borrow borrow)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//拿到前端数据，将数据存入数据库</span></span><br><span class="line">    <span class="comment">//获取连接</span></span><br><span class="line">    Connection connect = ConnectTool.getConnect();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//获取工具</span></span><br><span class="line">        Statement statement = connect.createStatement();</span><br><span class="line">        <span class="comment">//执行sql语句</span></span><br><span class="line">        <span class="comment">//INSERT INTO borrow  (id,bookid,readerid,borrowtime,returntime,adminid,state) VALUES (2,1,1,2017,2018,0,0)</span></span><br><span class="line">        String sql = <span class="string">&quot;INSERT INTO borrow(id,bookid,readerid,borrowtime,returntime,adminid,state) VALUES (&quot;</span> + borrow.getId() + <span class="string">&quot;,&quot;</span> + borrow.getBookid() + <span class="string">&quot;,&quot;</span> + borrow.getReaderid() + <span class="string">&quot;,&#x27;&quot;</span> + borrow.getBorrowtime() + <span class="string">&quot;&#x27;,&#x27;&quot;</span> + borrow.getReturntime() + <span class="string">&quot;&#x27;,&quot;</span> + borrow.getAdminid() + <span class="string">&quot;,&quot;</span> + borrow.getState() + <span class="string">&quot;)&quot;</span>;</span><br><span class="line">        statement.executeUpdate(sql);</span><br><span class="line">        System.out.println(<span class="string">&quot;添加借阅请求成功&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException throwables) &#123;</span><br><span class="line">        throwables.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅱ-查询借阅-1"><a href="#Ⅱ-查询借阅-1" class="headerlink" title="Ⅱ.查询借阅"></a>Ⅱ.<font color='#d15252'>查询</font>借阅</h5><ul>
+<li><p>由前端页面和数据库可以得出</p>
+<p><img src="https://i.loli.net/2021/09/09/PTztAIVRxk9cpso.png" alt="image-20210909103825418"></p>
+</li>
+<li><p>查询已借阅的图书，需要查询book表以及borrow表</p>
+<ul>
+<li>用到双表查询</li>
+</ul>
+</li>
+<li><p>查询book表和borrow表，书籍id相同的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> book,borrow <span class="keyword">WHERE</span> book.`id`<span class="operator">=</span> borrow.`bookid`</span><br></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>   <span class="comment">//查询所有借阅</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;Borrow&gt; <span class="title">findAllBorrow</span><span class="params">(User u)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//获取连接</span></span><br><span class="line">    Connection connect = ConnectTool.getConnect();</span><br><span class="line">    ArrayList&lt;Borrow&gt; borrows = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//加载工具</span></span><br><span class="line">        Statement statement = connect.createStatement();</span><br><span class="line">        <span class="comment">//执行查询语句</span></span><br><span class="line">        ResultSet resultSet = statement.executeQuery(<span class="string">&quot;SELECT * FROM book,borrow WHERE book.`id`= borrow.`bookid`&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> cardid = u.getCardid();</span><br><span class="line">        <span class="comment">//循环存入集合</span></span><br><span class="line">        <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">            <span class="keyword">int</span> adminid = resultSet.getInt(<span class="string">&quot;adminid&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (adminid == cardid) &#123;</span><br><span class="line">                <span class="keyword">int</span> id = resultSet.getInt(<span class="string">&quot;id&quot;</span>);</span><br><span class="line">                <span class="comment">//有问题ID ，重名</span></span><br><span class="line">                <span class="keyword">int</span> bookid = resultSet.getInt(<span class="string">&quot;bookid&quot;</span>);</span><br><span class="line">                <span class="keyword">int</span> readerid = resultSet.getInt(<span class="string">&quot;readerid&quot;</span>);</span><br><span class="line">                String borrowtime = resultSet.getString(<span class="string">&quot;borrowtime&quot;</span>);</span><br><span class="line">                String returntime = resultSet.getString(<span class="string">&quot;returntime&quot;</span>);</span><br><span class="line">                <span class="keyword">int</span> state = resultSet.getInt(<span class="string">&quot;state&quot;</span>);</span><br><span class="line">                String name = resultSet.getString(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">                String author = resultSet.getString(<span class="string">&quot;author&quot;</span>);</span><br><span class="line">                String publish = resultSet.getString(<span class="string">&quot;publish&quot;</span>);</span><br><span class="line">                Book book = <span class="keyword">new</span> Book(name, author, publish);</span><br><span class="line">                User user = <span class="keyword">new</span> User(u.getName(), u.getTel(), u.getCardid());</span><br><span class="line">                Borrow borrow = <span class="keyword">new</span> Borrow(book, user, id, bookid, readerid, borrowtime, returntime, adminid, state);</span><br><span class="line"></span><br><span class="line">                borrows.add(borrow);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> borrows;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException throwables) &#123;</span><br><span class="line">        throwables.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将数据库查询出的零散数据，封装到Borrow对象中（其中包含了一个User对象，一个Book对象），并存入集合</li>
+</ul>
+<h4 id="5-JavaBean"><a href="#5-JavaBean" class="headerlink" title="5.JavaBean"></a>5.JavaBean</h4><ul>
+<li>新建Borrow实体类</li>
+<li>成员变量：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Book b ;</span><br><span class="line"><span class="keyword">public</span> User u ;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> bookid;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> readerid;</span><br><span class="line"><span class="keyword">private</span> String borrowtime;</span><br><span class="line"><span class="keyword">private</span> String returntime;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> adminid;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> state;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重写构造方法（根据需求写不同的）</li>
+<li>重写get/set’</li>
+<li>重写toString</li>
+<li>重写equal，hashCode</li>
+</ul>
+<h3 id="五、实现管理员页面数据显示和操作"><a href="#五、实现管理员页面数据显示和操作" class="headerlink" title="五、实现管理员页面数据显示和操作"></a>五、实现管理员页面数据显示和操作</h3><ul>
+<li><p>login登录时选择管理员</p>
+<ul>
+<li>登录成功后跳转到admin程序</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/09/JrHl5goQVxRLOPK.png" alt="image-20210909111432881"></p>
+</li>
+</ul>
+<h4 id="1-Servlet层-1"><a href="#1-Servlet层-1" class="headerlink" title="1.Servlet层"></a>1.Servlet层</h4><ul>
+<li>新建admin程序，接收前端数据method<ul>
+<li>判断如果method == hadle ，则点击了操作按钮（同意借阅或拒绝借阅）<ul>
+<li>接收前端数据当前借阅请求的id以及操作的state（状态）</li>
+<li>调用管理员操作Service层的adminOperation方法，操作数据库</li>
+<li>传递数据id和state</li>
+</ul>
+</li>
+<li>调用Service层中的admin显示管理员页面数据方法，返回集合</li>
+<li>将集合存入域中，由前端取数据使用</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">    String current = req.getParameter(<span class="string">&quot;page&quot;</span>); <span class="comment">//获取当前页</span></span><br><span class="line">    <span class="comment">//接收前端数据</span></span><br><span class="line">    String method = req.getParameter(<span class="string">&quot;method&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&quot;handle&quot;</span>.equals(method))&#123;</span><br><span class="line">        <span class="keyword">int</span> id = Integer.parseInt(req.getParameter(<span class="string">&quot;id&quot;</span>));</span><br><span class="line">        <span class="keyword">int</span> state = Integer.parseInt(req.getParameter(<span class="string">&quot;state&quot;</span>));</span><br><span class="line">        <span class="keyword">new</span> LibraryServiceImp().adminOperation(id,state);</span><br><span class="line">    &#125;</span><br><span class="line">    ArrayList&lt;Borrow&gt; admin = <span class="keyword">new</span> LibraryServiceImp().admin();</span><br><span class="line">    System.out.println(admin);</span><br><span class="line">    Page page = <span class="keyword">new</span> LibraryServiceImp().getPage(current,admin); <span class="comment">//调用方法获取page对象</span></span><br><span class="line">    req.setAttribute(<span class="string">&quot;page&quot;</span>, page);<span class="comment">//将page对象存入域中</span></span><br><span class="line">    <span class="comment">//获取集合</span></span><br><span class="line">    List&lt;Book&gt; list = (List&lt;Book&gt;) page.getList();</span><br><span class="line">    <span class="comment">//将书籍存入域中</span></span><br><span class="line">    req.setAttribute(<span class="string">&quot;list&quot;</span>,list);</span><br><span class="line">    <span class="comment">//跳转页面</span></span><br><span class="line">    req.getRequestDispatcher(<span class="string">&quot;/admin.jsp&quot;</span>).forward(req,resp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-Service层-1"><a href="#2-Service层-1" class="headerlink" title="2.Service层"></a>2.Service层</h4><h5 id="Ⅰ-管理员操作"><a href="#Ⅰ-管理员操作" class="headerlink" title="Ⅰ.管理员操作"></a>Ⅰ.管理员操作</h5><ul>
+<li>创建Dao层对象，调用adminOperation方法操作数据库，传入参数id以及state</li>
+</ul>
+<h5 id="Ⅱ-管理员页面数据查询"><a href="#Ⅱ-管理员页面数据查询" class="headerlink" title="Ⅱ.管理员页面数据查询"></a>Ⅱ.管理员页面数据查询</h5><ul>
+<li>创建Dao层对象，使用admin方法，获取集合数据，由return带回给Servlet层</li>
+</ul>
+<h4 id="3-Dao层-1"><a href="#3-Dao层-1" class="headerlink" title="3.Dao层"></a>3.Dao层</h4><ul>
+<li>新建操作和查询方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/09/S3wTeqcBPAZgDXp.png" alt="image-20210909112434830"></p>
+<h5 id="Ⅰ-管理员操作-1"><a href="#Ⅰ-管理员操作-1" class="headerlink" title="Ⅰ.管理员操作"></a>Ⅰ.管理员操作</h5><ul>
+<li>获取连接，执行sql语句</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE borrow <span class="keyword">SET</span> state <span class="operator">=</span>&quot; + state + &quot; <span class="keyword">WHERE</span> bookid<span class="operator">=</span>&quot; + id</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>   <span class="comment">//管理员操作</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">adminOperation</span><span class="params">(<span class="keyword">int</span> id, <span class="keyword">int</span> state)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//获取连接</span></span><br><span class="line">    Connection connect = ConnectTool.getConnect();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//获取工具</span></span><br><span class="line">        Statement statement = connect.createStatement();</span><br><span class="line">        <span class="comment">//执行sql语句，更改state的值 UPDATE borrow SET state = 0 WHERE id = 1;</span></span><br><span class="line">        statement.executeUpdate(<span class="string">&quot;UPDATE borrow SET state =&quot;</span> + state + <span class="string">&quot; WHERE bookid=&quot;</span> + id);</span><br><span class="line">        System.out.println(<span class="string">&quot;管理员操作数据库成功&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException throwables) &#123;</span><br><span class="line">        throwables.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="Ⅱ-管理员页面数据查询-1"><a href="#Ⅱ-管理员页面数据查询-1" class="headerlink" title="Ⅱ.管理员页面数据查询"></a>Ⅱ.管理员页面数据查询</h5><ul>
+<li>获取连接，执行sql语句<ul>
+<li>由前端页面和数据库可知，管理员数据显示页面，需要使用book,borrow,以及reader三个表的数据</li>
+<li>使用多表查询以及同字段起别名的方法，取出所需要的数据</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> a.id,a.name,a.author,a.publish,r.name <span class="keyword">AS</span> readername,r.cardid,r.tel,u.borrowtime,u.returntime <span class="keyword">FROM</span> book <span class="keyword">AS</span> a,borrow <span class="keyword">AS</span> u,reader <span class="keyword">AS</span> r <span class="keyword">WHERE</span> a.`id`<span class="operator">=</span> u.`bookid` <span class="keyword">AND</span> u.`readerid`<span class="operator">=</span>r.`id` <span class="keyword">AND</span> state<span class="operator">=</span><span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将取出的零散数据，封装成borrow对象（其中包含一个book对象和一个user(reader)对象）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span>   <span class="comment">//管理员页面数据</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ArrayList&lt;Borrow&gt; <span class="title">admin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//获取连接</span></span><br><span class="line">    Connection connect = ConnectTool.getConnect();</span><br><span class="line">    ArrayList&lt;Borrow&gt; borrows = <span class="keyword">new</span> ArrayList&lt;Borrow&gt;();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//加载工具</span></span><br><span class="line">        Statement statement = connect.createStatement();</span><br><span class="line">        <span class="comment">//执行sql语句 查出所有已经被借阅的书籍信息</span></span><br><span class="line">        ResultSet resultSet = statement.executeQuery(<span class="string">&quot;SELECT a.id,a.name,a.author,a.publish,r.name AS readername,r.cardid,r.tel,u.borrowtime,u.returntime FROM book AS a,borrow AS u,reader AS r WHERE a.`id`= u.`bookid` AND u.`readerid`=r.`id` AND state=0;&quot;</span>);</span><br><span class="line">        <span class="comment">//循环存入集合</span></span><br><span class="line">        <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">            <span class="comment">//书籍名称</span></span><br><span class="line">            String name = resultSet.getString(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">            <span class="comment">//书籍编号</span></span><br><span class="line">            <span class="keyword">int</span> id = resultSet.getInt(<span class="string">&quot;id&quot;</span>);</span><br><span class="line">            <span class="comment">//作者</span></span><br><span class="line">            String author = resultSet.getString(<span class="string">&quot;author&quot;</span>);</span><br><span class="line">            <span class="comment">//读者姓名</span></span><br><span class="line">            String readername = resultSet.getString(<span class="string">&quot;readername&quot;</span>);</span><br><span class="line">            <span class="comment">//联系电话</span></span><br><span class="line">            <span class="keyword">int</span> tel = resultSet.getInt(<span class="string">&quot;tel&quot;</span>);</span><br><span class="line">            <span class="comment">//证件编号</span></span><br><span class="line">            <span class="keyword">int</span> cardid = resultSet.getInt(<span class="string">&quot;cardid&quot;</span>);</span><br><span class="line">            <span class="comment">//借书时间</span></span><br><span class="line">            String borrowtime = resultSet.getString(<span class="string">&quot;borrowtime&quot;</span>);</span><br><span class="line">            <span class="comment">//还书时间</span></span><br><span class="line">            String returntime = resultSet.getString(<span class="string">&quot;returntime&quot;</span>);</span><br><span class="line">            Book book = <span class="keyword">new</span> Book(name, author);</span><br><span class="line">            User user = <span class="keyword">new</span> User(readername, tel, cardid);</span><br><span class="line">            <span class="comment">//存入集合</span></span><br><span class="line">            borrows.add(<span class="keyword">new</span> Borrow(book, user, id, borrowtime, returntime));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> borrows;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException throwables) &#123;</span><br><span class="line">        throwables.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> borrows;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="六、实现页面数据分页"><a href="#六、实现页面数据分页" class="headerlink" title="六、实现页面数据分页"></a>六、实现页面数据<font color='#d15252'>分页</font></h3><ul>
+<li>以Index.jsp页面为例</li>
+</ul>
+<h4 id="1-思路"><a href="#1-思路" class="headerlink" title="1.思路"></a>1.思路</h4><p><img src="https://i.loli.net/2021/09/09/bEgQ2Hd8vLTprF3.png" alt="image-20210909113047554"></p>
+<p><img src="https://i.loli.net/2021/09/09/uLvCqZTYUJdSiIN.png" alt="image-20210909113113931"></p>
+<ul>
+<li>由前端页面可知，分页按钮分别触发自己的JS事件，向book程序（查询书籍数据信息的web程序）发送请求，并携带参数page<ul>
+<li>由于我将查询书籍书籍信息功能单独取出，封装在了showbook程序中</li>
+<li>所以，我将按钮点击触发事件中的请求改为向show程序发送请求</li>
+</ul>
+</li>
+<li>参数page<ul>
+<li>代表当前页面</li>
+<li>在点击事件中，当点击上一页时，触发-1；点击下一页时，触发+1，这些都不需要更改，只要了解到</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2.步骤"></a>2.步骤</h4><ul>
+<li><p>首先在JavaBean层中，创建一个Page实体类，用于存储封装所有分页相关的信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Integer currentPage; <span class="comment">//当前页</span></span><br><span class="line"><span class="keyword">private</span> Integer pageSize;    <span class="comment">//页大小</span></span><br><span class="line"><span class="keyword">private</span> Integer pageCount;   <span class="comment">//页数量</span></span><br><span class="line"><span class="keyword">private</span> Integer totalCount;  <span class="comment">//总条数</span></span><br><span class="line"><span class="keyword">private</span> List&lt;?&gt; list;   <span class="comment">//数据</span></span><br><span class="line"><span class="keyword">private</span> String  url;         <span class="comment">//参数路径</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/09/09/FIk6DMqUcejQsKy.png" alt="image-20210909113637088"></p>
+</li>
+<li><p><strong>Servlet层</strong>：我们需要在show程序中，接收page参数，获取到当前的页面（比如第一页）</p>
+<ul>
+<li>接下来我们需要正常获取所有书籍的信息，和之前一样，调用Dao层中的showbook方法，得到一个信息集合</li>
+<li>如果要实现分类，就需要对集合进行截取，并且截取的开始索引和结束索引不是固定的，但可以通过计算得出</li>
+<li>所以我们需要在Service层中新建一个方法，将集合参数和前端获取的页码传入</li>
+<li>并且我们需要Service处理完成后，返回一个处理完成后的集合，并且通过前端页面我们知道，还需要得到页面数据条数，当前页，所有页等信息，显示在网页下方</li>
+<li>所以，这些信息可以封装成一个page对象，我们只需要接收Service层处理完成的一个page对象，并存入域中，由前端页面使用即可</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/09/V6Zhpfz3TUtgIPy.png" alt="image-20210909123421224"></p>
+</li>
+<li><p>**<font color='#d15252'>Service层</font>**：在Service层中，首先我们需要<font color='#d15252'>初始化</font>一次当前页码的页码为1，并定好每页显示多少条数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> currentPage = <span class="number">1</span>; <span class="comment">// 默认为第一页</span></span><br><span class="line"><span class="keyword">int</span> pageSize    = <span class="number">10</span>; <span class="comment">// 每页显示10条记录</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>接下来，我们需要判断前端页面传递的页码参数是否为空（如果是第一次运行程序，就会为空，为空则不用前端传递的空值，我们初始化了第一页）</p>
+<ul>
+<li>如果不为空，则将currentPage（页码）改为前端页面传输过来的值</li>
+</ul>
+</li>
+<li><p>创建一个page对象，带参构造存入当前页面页码和每页显示多少条数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当前页和当前页大小创建page对象</span></span><br><span class="line">Page page = <span class="keyword">new</span> Page(currentPage, pageSize);</span><br></pre></td></tr></table></figure></li>
+<li><p>对Servlet传递过来的所以书籍数据集合判断长度，调用size()方法，就可以查出所有数据有多少个</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取总数据条数并设置</span></span><br><span class="line"><span class="keyword">int</span> booksCount = list.size();</span><br><span class="line">page.setTotalCount(booksCount);</span><br></pre></td></tr></table></figure></li>
+<li><p>计算所有的数据，需要多少页才能展示出来，即页码的数量</p>
+<ul>
+<li>用 总条数/页大小 = 页数量</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 页数量==总条数/页大小</span></span><br><span class="line"><span class="keyword">int</span> pageCount = booksCount/pageSize;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>但是，Java中除法得出的结果不会显示余数，所以我们需要再判断 总条数%页数量</li>
+<li>如果取模不为0时，则表示还有余数，页码数量还需要再加一，如果取模为1，则数据刚好被整除</li>
+<li>并将总数据存入page对象保存</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//如果整除就是该值，否则+1</span></span><br><span class="line">pageCount=booksCount%pageSize==<span class="number">0</span>?pageCount:pageCount+<span class="number">1</span>;</span><br><span class="line"> page.setPageCount(pageCount);   <span class="comment">//设置页数量</span></span><br></pre></td></tr></table></figure></li>
+<li><p>我们还需要计算截取集合的起始索引和结束索引</p>
+</li>
+<li><p>起始索引为 (当前页-1)*每页显示几条数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 起始下标为（当前页-1）*页大小</span></span><br><span class="line"><span class="keyword">int</span> startIndex = (currentPage-<span class="number">1</span>)*pageSize;</span><br></pre></td></tr></table></figure></li>
+<li><p>结束索引：结束索引因进行判断</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>((currentPage*pageSize)&lt;=booksCount)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;结束索引&quot;</span>+number);</span><br><span class="line">    List&lt;?&gt; books = list.subList(startIndex, number);</span><br><span class="line">    page.setList(books);   <span class="comment">//设置数据</span></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;结束索引&quot;</span>+booksCount);</span><br><span class="line">    List&lt;?&gt; books = list.subList(startIndex, booksCount);</span><br><span class="line">    page.setList(books);   <span class="comment">//设置数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果  a = 当前页*每页显示数据（从0–当前页最多显示多少条数据）<ul>
+<li>a&lt;= 总数据条数时，表示即使当前页面显示满10条数据，也还有剩余数据。<ul>
+<li>所以，结束索引就是当前页面*每页显示多少条数据</li>
+<li>开始索引是当前页面-1*每页显示多少条数据</li>
+</ul>
+</li>
+<li>当a&gt;总数据条数时，即表示剩余数据不能写满当前页面，结束索引是总数据的数量即可</li>
+</ul>
+</li>
+<li>将截取好的数据存入page对象中</li>
+<li>最后，返回page对象即可</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-前端"><a href="#3-前端" class="headerlink" title="3.前端"></a>3.前端</h4><ul>
+<li>在servlet向前端页面发送list集合时，从page对象中取出已经截取后的List集合，发送到前端集合</li>
+<li>前端需要显示page相关信息的地方，通过调用page的属性即可</li>
+<li></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/09/09/%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" title="图书管理系统">http://example.com/2021/09/09/图书管理系统/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i># 网络编程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/08/Filter%E8%BF%87%E6%BB%A4%E5%99%A8%E5%92%8Clistener%E7%9B%91%E5%90%AC%E5%99%A8/" rel="prev" title="Filter过滤器和listener监听器">
+      <i class="fa fa-chevron-left"></i> Filter过滤器和listener监听器
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">图书管理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">一、项目准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E7%8E%B0%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.</span> <span class="nav-text">二、实现登录功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%89%8D%E7%AB%AF"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.前端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Servlet%E5%B1%82"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.Servlet层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Service%E5%B1%82"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.Service层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Dao%E5%B1%82"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.Dao层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-JavaBeean"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.JavaBeean</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0index%E9%A1%B5%E9%9D%A2%E6%95%B0%E6%8D%AE%E6%98%BE%E7%A4%BA"><span class="nav-number">1.3.</span> <span class="nav-text">三、实现index页面数据显示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Servlet%E5%B1%82"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.Servlet层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Service%E5%B1%82"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.Service层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Dao%E5%B1%82"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.Dao层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-JavaBeen"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.JavaBeen</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E5%80%9F%E9%98%85%E4%BB%A5%E5%8F%8A%E5%80%9F%E9%98%85%E9%A1%B5%E9%9D%A2%E7%9A%84%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.4.</span> <span class="nav-text">四、实现用户借阅以及借阅页面的查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%89%8D%E7%AB%AF-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.前端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Servlet%E5%B1%82-1"><span class="nav-number">1.4.2.</span> <span class="nav-text">2.Servlet层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Service%E5%B1%82-1"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.Service层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E6%B7%BB%E5%8A%A0%E5%80%9F%E9%98%85"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">Ⅰ.添加借阅</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E6%9F%A5%E8%AF%A2%E5%80%9F%E9%98%85"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">Ⅱ.查询借阅</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Dao%E5%B1%82-1"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.Dao层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E6%B7%BB%E5%8A%A0%E5%80%9F%E9%98%85-1"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">Ⅰ.添加借阅</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E6%9F%A5%E8%AF%A2%E5%80%9F%E9%98%85-1"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">Ⅱ.查询借阅</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-JavaBean"><span class="nav-number">1.4.5.</span> <span class="nav-text">5.JavaBean</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%AE%9E%E7%8E%B0%E7%AE%A1%E7%90%86%E5%91%98%E9%A1%B5%E9%9D%A2%E6%95%B0%E6%8D%AE%E6%98%BE%E7%A4%BA%E5%92%8C%E6%93%8D%E4%BD%9C"><span class="nav-number">1.5.</span> <span class="nav-text">五、实现管理员页面数据显示和操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Servlet%E5%B1%82-1"><span class="nav-number">1.5.1.</span> <span class="nav-text">1.Servlet层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Service%E5%B1%82-1"><span class="nav-number">1.5.2.</span> <span class="nav-text">2.Service层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E7%AE%A1%E7%90%86%E5%91%98%E6%93%8D%E4%BD%9C"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">Ⅰ.管理员操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E7%AE%A1%E7%90%86%E5%91%98%E9%A1%B5%E9%9D%A2%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">Ⅱ.管理员页面数据查询</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Dao%E5%B1%82-1"><span class="nav-number">1.5.3.</span> <span class="nav-text">3.Dao层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E7%AE%A1%E7%90%86%E5%91%98%E6%93%8D%E4%BD%9C-1"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">Ⅰ.管理员操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E7%AE%A1%E7%90%86%E5%91%98%E9%A1%B5%E9%9D%A2%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2-1"><span class="nav-number">1.5.3.2.</span> <span class="nav-text">Ⅱ.管理员页面数据查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%AE%9E%E7%8E%B0%E9%A1%B5%E9%9D%A2%E6%95%B0%E6%8D%AE%E5%88%86%E9%A1%B5"><span class="nav-number">1.6.</span> <span class="nav-text">六、实现页面数据分页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%80%9D%E8%B7%AF"><span class="nav-number">1.6.1.</span> <span class="nav-text">1.思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.6.2.</span> <span class="nav-text">2.步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%89%8D%E7%AB%AF"><span class="nav-number">1.6.3.</span> <span class="nav-text">3.前端</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">105k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:36</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共49.1k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
