@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="学习Mysql数据库的基本知识，安装配置环境，学习SQL语句,DDL,DML,DQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库知识">
+<meta property="og:url" content="http://example.com/2021/09/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="学习Mysql数据库的基本知识，安装配置环境，学习SQL语句,DDL,DML,DQL">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/09/13/jMyfToBUIARxV8X.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/13/ybFKUXriT1st2ej.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/13/HpBoSRDazQP1MkO.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/13/DWg9xXTYRAScFVq.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/13/gx8H5bkco4f3JGD.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/17/boVMW71H8rivnzc.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/17/JSulW96dzwmEj14.png">
+<meta property="article:published_time" content="2021-09-17T12:29:57.000Z">
+<meta property="article:modified_time" content="2021-09-17T12:31:10.082Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Mysql">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/13/jMyfToBUIARxV8X.png">
+
+<link rel="canonical" href="http://example.com/2021/09/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据库知识 | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据库知识
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-17 20:29:57 / 修改时间：20:31:10" itemprop="dateCreated datePublished" datetime="2021-09-17T20:29:57+08:00">2021-09-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">19k</span> -->
+			  <span title="本文字数">
+                  2k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>3 分钟</span>
+            </span>
+            <div class="post-description">学习Mysql数据库的基本知识，安装配置环境，学习SQL语句,DDL,DML,DQL</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="一、数据库"><a href="#一、数据库" class="headerlink" title="一、数据库"></a>一、数据库</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li><p> 对数据进行存储和管理的一个仓库</p>
+</li>
+<li><p> 本质还是一个文件系统，以文件的形式保存在电脑上</p>
+</li>
+<li><p> 数据库真正的存储在C盘ProgramData的Mysql文件夹下</p>
+</li>
+</ul>
+<h4 id="2-为什么使用数据库"><a href="#2-为什么使用数据库" class="headerlink" title="2.为什么使用数据库"></a>2.为什么使用数据库</h4><ul>
+<li><p>存储数据的方式</p>
+<table>
+<thead>
+<tr>
+<th>存储方式</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内存</td>
+<td>速度快</td>
+<td>临时</td>
+</tr>
+<tr>
+<td>文件</td>
+<td>数据可以永久存储</td>
+<td>IO流，不方便</td>
+</tr>
+<tr>
+<td>数据库</td>
+<td>永久存储、方便管理和存储数据、统一的方式操作数据库(sql)</td>
+<td>占用资源，收费(Mysql，Oracle)</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h3 id="二、Mysql数据库的相关操作"><a href="#二、Mysql数据库的相关操作" class="headerlink" title="二、Mysql数据库的相关操作"></a>二、Mysql数据库的相关操作</h3><h4 id="1-Mysql的卸载"><a href="#1-Mysql的卸载" class="headerlink" title="1.Mysql的卸载"></a>1.Mysql的卸载</h4><ul>
+<li>删除C盘ProgramData中的Mysql文件夹即可，不需要删除注册表</li>
+</ul>
+<h4 id="2-Mysql的安装"><a href="#2-Mysql的安装" class="headerlink" title="2.Mysql的安装"></a>2.Mysql的安装</h4><p><img src="https://i.loli.net/2021/09/13/jMyfToBUIARxV8X.png" alt="image-20210913231734117"></p>
+<ul>
+<li>第三种第三种<ul>
+<li>Client only 客户端</li>
+<li>Full 所有</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/13/ybFKUXriT1st2ej.png" alt="image-20210913231959241"></p>
+<ul>
+<li>如果电脑用户名中文，勾选show….</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/13/HpBoSRDazQP1MkO.png" alt="image-20210913232058677"></p>
+<ul>
+<li>如果用户名中文，会出现乱码，在C盘创建一个.log文件，选中即可</li>
+</ul>
+<h4 id="3-配置Mysql环境变量"><a href="#3-配置Mysql环境变量" class="headerlink" title="3.配置Mysql环境变量"></a>3.配置Mysql环境变量</h4><p>需要注意的是，Mysql安装完成后会出现两个目录</p>
+<ul>
+<li>安装目录：可执行程序</li>
+<li>文件目录：保存sql文件</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/13/DWg9xXTYRAScFVq.png" alt="image-20210913232435589"></p>
+<ul>
+<li>找到Path环境变量，添加路径</li>
+</ul>
+<h4 id="4-Mysql的启动和关闭"><a href="#4-Mysql的启动和关闭" class="headerlink" title="4.Mysql的启动和关闭"></a>4.Mysql的启动和关闭</h4><ul>
+<li>方式一<ul>
+<li>win+r打开运行，输入services.msc服务管理</li>
+<li>打开Mysql服务，启动即可</li>
+</ul>
+</li>
+<li>方式二（管理员命令行）<ul>
+<li>net start 服务的名称 </li>
+<li>net stop 服务的名称</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-Mysql的登录"><a href="#5-Mysql的登录" class="headerlink" title="5.Mysql的登录"></a>5.Mysql的登录</h4><table>
+<thead>
+<tr>
+<th>mysql -u用户名 -p密码</th>
+<th>使用指定账户和密码进行登录（root）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mysql -h主机ip -u用户名 -p密码</td>
+<td>-h 指定ip（远程登录）</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Mysql的图形化管理界面<ul>
+<li>sqlyog</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/13/gx8H5bkco4f3JGD.png" alt="image-20210913233229733"></p>
+<h4 id="6-Mysql的目录结构"><a href="#6-Mysql的目录结构" class="headerlink" title="6.Mysql的目录结构"></a>6.Mysql的目录结构</h4><ul>
+<li><p>Mysql的安装目录（C:\Program Files\MySQL）</p>
+<ul>
+<li><table>
+<thead>
+<tr>
+<th>目录</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bin</td>
+<td>可执行文件</td>
+</tr>
+<tr>
+<td>docs</td>
+<td>文档</td>
+</tr>
+<tr>
+<td>include</td>
+<td>头文件</td>
+</tr>
+<tr>
+<td>lib</td>
+<td>依赖</td>
+</tr>
+<tr>
+<td>share</td>
+<td>用于存放字符集、语言等信息</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>data目录：C:\ProgramData\MySQL\MySQL Server 5.7<ul>
+<li>data:存放数据的（文件）</li>
+<li>my.ini :mysql的配置文件（建议不要更改配置文件）</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>总结<ul>
+<li>数据库：文件夹</li>
+<li>表：文件</li>
+<li>数据：文内内容</li>
+</ul>
+</li>
+</ul>
+<h3 id="三、数据库管理系统"><a href="#三、数据库管理系统" class="headerlink" title="三、数据库管理系统"></a>三、数据库管理系统</h3><h4 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>Database ManageMent System ==&gt; DBMS<ul>
+<li>指一种操作维护和管理数据库的一个大型软件</li>
+</ul>
+</li>
+<li>Mysql就是一个数据库管理系统软件，安装了Mysql软件的电脑，这台电脑就被称为数据库服务器</li>
+</ul>
+<h4 id="2-数据库管理系统的作用"><a href="#2-数据库管理系统的作用" class="headerlink" title="2.数据库管理系统的作用"></a>2.数据库管理系统的作用</h4><ul>
+<li>用于建立、使用、和维护数据库，对数据进行统一的管理</li>
+</ul>
+<h4 id="3-数据库管理系统、数据库、表之间的关系"><a href="#3-数据库管理系统、数据库、表之间的关系" class="headerlink" title="3.数据库管理系统、数据库、表之间的关系"></a>3.数据库管理系统、数据库、表之间的关系</h4><ul>
+<li>数据库管理系统：数据库软件</li>
+<li>数据库：一个应用</li>
+<li>表：不同的服务</li>
+</ul>
+<h3 id="四、表"><a href="#四、表" class="headerlink" title="四、表"></a>四、表</h3><ul>
+<li><p>数据库的基本单位就是表</p>
+</li>
+<li><p>表和Java的关系</p>
+<ul>
+<li>表的基本单位是：列<ul>
+<li>列名</li>
+<li>数据类型</li>
+</ul>
+</li>
+<li>Java的基本单位：类（对象）–&gt; 用成员变量存储数据<ul>
+<li>变量名</li>
+<li>数据类型</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>表 ——— 类</p>
+<p>行（属性） ——- 一个对象</p>
+<p>列 ———– 成员变量</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="五、sql"><a href="#五、sql" class="headerlink" title="五、sql"></a>五、sql</h3><h4 id="1-概念-2"><a href="#1-概念-2" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>什么是SQL？<ul>
+<li>Structrued query Language ：结构化查询语言，简称SQL</li>
+</ul>
+</li>
+<li>SQL的作用<ul>
+<li>所有的关系型数据库统一的操作规范</li>
+<li>不同的关系型数据库都支持sql语句</li>
+<li>可以看作一种特殊的编程语言</li>
+<li>用来<font color='#d15252'>操作数据库</font></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-SQL通用语法"><a href="#2-SQL通用语法" class="headerlink" title="2.SQL通用语法"></a>2.SQL通用语法</h4><ul>
+<li>sql语句可以写多行，也可以写单行，以 ; 结尾</li>
+<li>可以使用空格和缩进来增加语句的可读性</li>
+<li>不区分大小写，一般关键字是大写<ul>
+<li>数据库名，表名，列名 一般小写</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-SQL中的注释"><a href="#3-SQL中的注释" class="headerlink" title="3.SQL中的注释"></a>3.SQL中的注释</h4><table>
+<thead>
+<tr>
+<th>注释语法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>– 空格</td>
+<td>单行注释</td>
+</tr>
+<tr>
+<td>/**/</td>
+<td>多行注释</td>
+</tr>
+<tr>
+<td>#</td>
+<td>Mysql<strong>独有</strong>的注释方式（方言）</td>
+</tr>
+</tbody></table>
+<h4 id="4-SQL语言的分类"><a href="#4-SQL语言的分类" class="headerlink" title="4.SQL语言的分类"></a>4.SQL语言的分类</h4><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据的定义语句（DDL）</td>
+<td>用来定义数据库、表和列</td>
+</tr>
+<tr>
+<td>数据操作语句（DML）</td>
+<td>用来对数据库中的数据进行 <strong>增删改</strong> 操作</td>
+</tr>
+<tr>
+<td>数据查询语句（DQL）</td>
+<td>用来对数据库的数据进行查询</td>
+</tr>
+<tr>
+<td>数据的控制语言（DCL）</td>
+<td>用来访问的权限和安全级别</td>
+</tr>
+</tbody></table>
+<h3 id="六-DDL操作数据库"><a href="#六-DDL操作数据库" class="headerlink" title="六.DDL操作数据库"></a>六.DDL操作数据库</h3><h4 id="1-创建作数据库"><a href="#1-创建作数据库" class="headerlink" title="1.创建作数据库"></a>1.创建作数据库</h4><ul>
+<li>创建数据库</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database 数据库名</span><br><span class="line"><span class="keyword">create</span> database 数据库名 <span class="type">character</span> <span class="keyword">set</span> 字符集 u</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>指定字符集，如果指定UTF-8，只需要写u即可</p>
+</blockquote>
+<h4 id="2-查看和选择数据库"><a href="#2-查看和选择数据库" class="headerlink" title="2.查看和选择数据库"></a>2.查看和选择数据库</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>use 数据库名</td>
+<td>切换数据库</td>
+</tr>
+<tr>
+<td>select database()</td>
+<td>查看当前正在使用的数据库</td>
+</tr>
+<tr>
+<td>show databases</td>
+<td>查看所有的数据库(DBMS系统中所有的)</td>
+</tr>
+<tr>
+<td>show create database 数据库名</td>
+<td>查看数据库的定义信息</td>
+</tr>
+</tbody></table>
+<h4 id="3-修改数据库"><a href="#3-修改数据库" class="headerlink" title="3.修改数据库"></a>3.修改数据库</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>alter database 数据库名称 character set 字符集</td>
+<td>修改数据库字符集</td>
+</tr>
+</tbody></table>
+<h4 id="4-删除数据库"><a href="#4-删除数据库" class="headerlink" title="4.删除数据库"></a>4.删除数据库</h4><ul>
+<li>drop database 数据库名</li>
+</ul>
+<h3 id="七、数据类型"><a href="#七、数据类型" class="headerlink" title="七、数据类型"></a>七、数据类型</h3><h4 id="1-常用数据类型"><a href="#1-常用数据类型" class="headerlink" title="1.常用数据类型"></a>1.常用数据类型</h4><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int</td>
+<td>整型</td>
+</tr>
+<tr>
+<td>double</td>
+<td>浮点</td>
+</tr>
+<tr>
+<td>varchar</td>
+<td>字符串（可变）</td>
+</tr>
+<tr>
+<td>data</td>
+<td>日期（只要年月日，没有时分秒）</td>
+</tr>
+</tbody></table>
+<h4 id="2-varchar和char的区别"><a href="#2-varchar和char的区别" class="headerlink" title="2.varchar和char的区别"></a>2.varchar和char的区别</h4><ul>
+<li>char：固定的<ul>
+<li>相当于Java中的数组<ul>
+<li>使用char时也可以（）指定长度，但是一旦指定就是固定的</li>
+</ul>
+</li>
+<li>存账户密码时用的较多</li>
+</ul>
+</li>
+<li>varchar：可变的<ul>
+<li>相当于Java中的集合</li>
+</ul>
+</li>
+</ul>
+<h3 id="八、DDL操作表"><a href="#八、DDL操作表" class="headerlink" title="八、DDL操作表"></a>八、DDL操作表</h3><h4 id="1-创建表"><a href="#1-创建表" class="headerlink" title="1.创建表"></a>1.创建表</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">	字段名 数据类型，</span><br><span class="line">    字段名 数据类型，</span><br><span class="line">    字段名 数据类型</span><br><span class="line">    <span class="comment">-- 最后一条不需要加,</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当我们需要复制一个表时，可以使用like关键字</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名 <span class="keyword">like</span> 要复制的表名</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-查看表"><a href="#2-查看表" class="headerlink" title="2.查看表"></a>2.查看表</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>show tables</td>
+<td>查看所有的表</td>
+</tr>
+<tr>
+<td>desc 表名</td>
+<td>查看表结构</td>
+</tr>
+</tbody></table>
+<h4 id="3-删除表"><a href="#3-删除表" class="headerlink" title="3.删除表"></a>3.删除表</h4><ul>
+<li>直接删除</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> 表名</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>先判断存不存在，再删除</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> 表名</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-修改表"><a href="#4-修改表" class="headerlink" title="4.修改表"></a>4.<font color='#d15252'>修改表</font></h4><ul>
+<li>修改表名</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename <span class="keyword">table</span> 表名 <span class="keyword">TO</span> 新表名</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改字符集</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="type">character</span> <span class="keyword">set</span> 字符集</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加列</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">add</span> 列名 数据类型</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li> 修改列名</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 change 旧列名 新列名 新数据类型</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改数据类型和长度</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 MODIFY 字段名 新数据类型</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除字段</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表民 <span class="keyword">DROP</span> 字段名</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="九、DML操作（SQL语句的更新操作）"><a href="#九、DML操作（SQL语句的更新操作）" class="headerlink" title="九、DML操作（SQL语句的更新操作）"></a>九、DML操作（SQL语句的更新操作）</h3><h4 id="1-添加数据"><a href="#1-添加数据" class="headerlink" title="1.添加数据"></a>1.添加数据</h4><ul>
+<li><p>第一种</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 表名(字段名,字段..) <span class="keyword">values</span> (数值，数值,...)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果时字符串类型，需要用 ‘ ‘ 括起来</li>
+</ul>
+</li>
+<li><p>第二种</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 表名 <span class="keyword">value</span> (数值，数值,...)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可以不写字段，但是每一个数值需要对应相应的字段</li>
+</ul>
+</li>
+<li><p>第三种</p>
+<ul>
+<li>指定列添加</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 表名(字段) <span class="keyword">VALUE</span> (数值)</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>注意</p>
+<ul>
+<li>给所有的字段添加时使用VALUES</li>
+<li>字段名称和要添加的数据一一对应</li>
+<li>字符串必须使用单引号和双引号包裹</li>
+<li>不给字段添加数据时，可以不写，也可以写NULL</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-修改数据"><a href="#2-修改数据" class="headerlink" title="2.修改数据"></a>2.修改数据</h4><ul>
+<li>更改指定列的所有值</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update 表名 <span class="keyword">SET</span> 字段名 <span class="operator">=</span> 数值</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定条件修改</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update 表名 <span class="keyword">SET</span> 字段名 <span class="operator">=</span> 数值 <span class="keyword">WHERE</span> 指定字段 <span class="operator">=</span> 数值；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改多个字段<ul>
+<li>多个 字段名=数值 之间加 ，</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-删除数据"><a href="#3-删除数据" class="headerlink" title="3.删除数据"></a>3.删除数据</h4><ul>
+<li>删除指定数据</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> 表名 <span class="keyword">where</span> 指定字段 <span class="operator">=</span> 数值;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除所有（不推荐，效率低）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from 表名 </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除所有（推荐，效率高）<ul>
+<li>先删除整张表，再新建一个一模一样的表</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">truncate</span> <span class="keyword">table</span> 表名 </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="十、DQL（查询）"><a href="#十、DQL（查询）" class="headerlink" title="十、DQL（查询）"></a>十、DQL（查询）</h3><h4 id="1-简单查询"><a href="#1-简单查询" class="headerlink" title="1.简单查询"></a>1.简单查询</h4><ul>
+<li>显示所有的字段</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> 表名 </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>只显示指定字段</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 字段名,字段名 <span class="keyword">from</span> 表名</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><font color='#d15252'>起别名AS的用法</font><ul>
+<li>表和字段都可以起别名</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 字段名 <span class="keyword">AS</span> 别名,</span><br><span class="line">		字段名 <span class="keyword">AS</span> 别名</span><br><span class="line">		<span class="keyword">FROM</span> 表名 </span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-其他查询"><a href="#2-其他查询" class="headerlink" title="2.其他查询"></a>2.其他查询</h4><ul>
+<li>去重<ul>
+<li>不显示重复数据</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> 字段名 <span class="keyword">from</span> 表名</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>条件查询</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&gt; , &lt; , = , &gt;= ,&lt; = , !=</td>
+<td>大于小于….</td>
+</tr>
+<tr>
+<td>between x and x</td>
+<td>在.x…x之间</td>
+</tr>
+<tr>
+<td>IN（集合）</td>
+<td>集合表示多个值 in中的每一个数据都会作为一次条件，只要满足该条件就会显示</td>
+</tr>
+<tr>
+<td>like ‘%网%’</td>
+<td>模糊查询</td>
+</tr>
+<tr>
+<td>is null</td>
+<td>查询某一个列上为 null 的值</td>
+</tr>
+</tbody></table>
+<p><img src="https://i.loli.net/2021/09/17/boVMW71H8rivnzc.png" alt="image-20210917174204954"></p>
+<h4 id="3-模糊查询"><a href="#3-模糊查询" class="headerlink" title="3.模糊查询"></a>3.模糊查询</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">通配符</span><br><span class="line"><span class="operator">%</span> : 任意的多个</span><br><span class="line">— ：一个</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/09/17/JSulW96dzwmEj14.png" alt="image-20210917174441435"></p>
+<h4 id="4-逻辑运算符"><a href="#4-逻辑运算符" class="headerlink" title="4.逻辑运算符"></a>4.逻辑运算符</h4><table>
+<thead>
+<tr>
+<th>逻辑运算符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AND &amp;</td>
+<td>与</td>
+</tr>
+<tr>
+<td>OR ||</td>
+<td>或</td>
+</tr>
+<tr>
+<td>NOT</td>
+<td>取反</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/09/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/" title="数据库知识">http://example.com/2021/09/17/数据库知识/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"><i class="fa fa-tag"></i># 数据库</a>
+              <a href="/tags/Mysql/" rel="tag"><i class="fa fa-tag"></i># Mysql</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/09/%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" rel="prev" title="图书管理系统">
+      <i class="fa fa-chevron-left"></i> 图书管理系统
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%8C%E4%BA%8B%E5%8A%A1/" rel="next" title="数据库知识补充，事务">
+      数据库知识补充，事务 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">一、数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.2.</span> <span class="nav-text">2.为什么使用数据库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">二、Mysql数据库的相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Mysql%E7%9A%84%E5%8D%B8%E8%BD%BD"><span class="nav-number">2.1.</span> <span class="nav-text">1.Mysql的卸载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Mysql%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">2.Mysql的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AEMysql%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">2.3.</span> <span class="nav-text">3.配置Mysql环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Mysql%E7%9A%84%E5%90%AF%E5%8A%A8%E5%92%8C%E5%85%B3%E9%97%AD"><span class="nav-number">2.4.</span> <span class="nav-text">4.Mysql的启动和关闭</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Mysql%E7%9A%84%E7%99%BB%E5%BD%95"><span class="nav-number">2.5.</span> <span class="nav-text">5.Mysql的登录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Mysql%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">2.6.</span> <span class="nav-text">6.Mysql的目录结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.</span> <span class="nav-text">三、数据库管理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5-1"><span class="nav-number">3.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">2.数据库管理系统的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%81%E8%A1%A8%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.3.</span> <span class="nav-text">3.数据库管理系统、数据库、表之间的关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">四、表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81sql"><span class="nav-number">5.</span> <span class="nav-text">五、sql</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5-2"><span class="nav-number">5.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-SQL%E9%80%9A%E7%94%A8%E8%AF%AD%E6%B3%95"><span class="nav-number">5.2.</span> <span class="nav-text">2.SQL通用语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-SQL%E4%B8%AD%E7%9A%84%E6%B3%A8%E9%87%8A"><span class="nav-number">5.3.</span> <span class="nav-text">3.SQL中的注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-SQL%E8%AF%AD%E8%A8%80%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">5.4.</span> <span class="nav-text">4.SQL语言的分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD-DDL%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">6.</span> <span class="nav-text">六.DDL操作数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">6.1.</span> <span class="nav-text">1.创建作数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%9F%A5%E7%9C%8B%E5%92%8C%E9%80%89%E6%8B%A9%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">6.2.</span> <span class="nav-text">2.查看和选择数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">6.3.</span> <span class="nav-text">3.修改数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">6.4.</span> <span class="nav-text">4.删除数据库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.</span> <span class="nav-text">七、数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">7.1.</span> <span class="nav-text">1.常用数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-varchar%E5%92%8Cchar%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">7.2.</span> <span class="nav-text">2.varchar和char的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AB%E3%80%81DDL%E6%93%8D%E4%BD%9C%E8%A1%A8"><span class="nav-number">8.</span> <span class="nav-text">八、DDL操作表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E8%A1%A8"><span class="nav-number">8.1.</span> <span class="nav-text">1.创建表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%9F%A5%E7%9C%8B%E8%A1%A8"><span class="nav-number">8.2.</span> <span class="nav-text">2.查看表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%88%A0%E9%99%A4%E8%A1%A8"><span class="nav-number">8.3.</span> <span class="nav-text">3.删除表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E4%BF%AE%E6%94%B9%E8%A1%A8"><span class="nav-number">8.4.</span> <span class="nav-text">4.修改表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%9D%E3%80%81DML%E6%93%8D%E4%BD%9C%EF%BC%88SQL%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%9B%B4%E6%96%B0%E6%93%8D%E4%BD%9C%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">九、DML操作（SQL语句的更新操作）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="nav-number">9.1.</span> <span class="nav-text">1.添加数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="nav-number">9.2.</span> <span class="nav-text">2.修改数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">9.3.</span> <span class="nav-text">3.删除数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81%E3%80%81DQL%EF%BC%88%E6%9F%A5%E8%AF%A2%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">十、DQL（查询）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2"><span class="nav-number">10.1.</span> <span class="nav-text">1.简单查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%85%B6%E4%BB%96%E6%9F%A5%E8%AF%A2"><span class="nav-number">10.2.</span> <span class="nav-text">2.其他查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2"><span class="nav-number">10.3.</span> <span class="nav-text">3.模糊查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.4.</span> <span class="nav-text">4.逻辑运算符</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">114k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:44</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共54.2k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
