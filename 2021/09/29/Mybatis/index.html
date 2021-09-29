@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="学习Mybatis的使用，使用Mybatis对数据库进行增查删改，学会配置Mybati的核心配置文件,学会使用动态代理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis">
+<meta property="og:url" content="http://example.com/2021/09/29/Mybatis/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="学习Mybatis的使用，使用Mybatis对数据库进行增查删改，学会配置Mybati的核心配置文件,学会使用动态代理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/UqizoWl3S2peNVm.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/qQnCNvAt8WaXl6O.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/F67q8a1PAiJBjLy.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/scztNe4vIPHRwjn.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/AO7QgvEdPrGb5Ic.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/C8zaRt9j5L3iXkK.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/13pSihoQWdg27TZ.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/t4rkFXdVLRJU7Cb.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/BfjMNncK7OoyurV.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/O8AStHMTnKj6CIu.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/FCR6UJY5cENhzVW.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/ks4f5yE1pOIGvZP.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/2eUjpuAfF9b7mOJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/tG3PYBnJvrFWbf2.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/r9uUXfFjMHYT7aG.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/Ul9fVKYOkMhQ1A7.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/OJdSaLH4MNujFvy.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/26/rdNIL1Q3aZPSf5g.png">
+<meta property="article:published_time" content="2021-09-29T01:51:32.000Z">
+<meta property="article:modified_time" content="2021-09-29T01:52:56.978Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="Mybatis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/26/UqizoWl3S2peNVm.png">
+
+<link rel="canonical" href="http://example.com/2021/09/29/Mybatis/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Mybatis | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/29/Mybatis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mybatis
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-09-29 09:51:32 / 修改时间：09:52:56" itemprop="dateCreated datePublished" datetime="2021-09-29T09:51:32+08:00">2021-09-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">框架</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">29k</span> -->
+			  <span title="本文字数">
+                  2.7k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>7 分钟</span>
+            </span>
+            <div class="post-description">学习Mybatis的使用，使用Mybatis对数据库进行增查删改，学会配置Mybati的核心配置文件,学会使用动态代理</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>Mybatis</li>
+</ul>
+<p>[TOC]</p>
+<h3 id="一、Mybatis"><a href="#一、Mybatis" class="headerlink" title="一、Mybatis"></a>一、Mybatis</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>现在由Github托管</li>
+<li>最新版本MyBatis3 (3.5.7)</li>
+<li>Dao层（数据持久层） service（业务层） controller（表现层） <ul>
+<li><strong>Mybatis</strong>是属于三层架构中的Dao层（数据持久层）</li>
+<li>原来的数据持久层，是通过JDBC实现的，但是JDBC有很多弊端<ul>
+<li>频繁的获取连接</li>
+<li>sql语句在statement  Java代码中</li>
+</ul>
+</li>
+<li>类似于JS和JQ的关系</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-Mybatis的使用"><a href="#2-Mybatis的使用" class="headerlink" title="2.Mybatis的使用"></a>2.Mybatis的使用</h4><p>通过官方文档学习<a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/index.html">mybatis – MyBatis 3 | 简介</a></p>
+<h5 id="Ⅰ-第一步：创建项目"><a href="#Ⅰ-第一步：创建项目" class="headerlink" title="Ⅰ. 第一步：创建项目"></a>Ⅰ. 第一步：创建项目</h5><p>创建一个Maven项目，添加依赖，自动下载Jar包</p>
+<p><img src="https://i.loli.net/2021/09/26/UqizoWl3S2peNVm.png" alt="image-20210926121535802"></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>x.x.x<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意：项目不能嵌套项目，项目只能嵌套模块，所以我们创建项目的时候，最好直接创建空项目，然后添加模块</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/26/qQnCNvAt8WaXl6O.png" alt="image-20210926122015758"></p>
+<ul>
+<li>如果出现找不到类的问题，勾选此选项</li>
+</ul>
+<h5 id="Ⅱ-第二步：构建-SqlSessionFactiry"><a href="#Ⅱ-第二步：构建-SqlSessionFactiry" class="headerlink" title="Ⅱ. 第二步：构建 SqlSessionFactiry"></a>Ⅱ. 第二步：构建 SqlSessionFactiry</h5><ul>
+<li><p>通过XML文件构建<strong>SQLSessionFactiry</strong></p>
+<p><img src="https://i.loli.net/2021/09/26/F67q8a1PAiJBjLy.png" alt="image-20210926123323145"></p>
+<ul>
+<li>创建mybatis核心配置文件<ul>
+<li>创建mybatis-config.xml文件，添加相关的配置信息</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span></span></span><br><span class="line"><span class="meta">        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--核心文件的根标签：产品标签--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    配置连接数据库选项--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        具体的数据库连接管理--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;m1&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--            事务的管理，默认选择JDBC--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--            选择数据源，默认数据库连接池方式--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/m4&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;000909&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/09/26/scztNe4vIPHRwjn.png" alt="image-20210926123549881"></p>
+<p>细节问题：mybatis配置需要遵循标签的顺序</p>
+<p><img src="https://i.loli.net/2021/09/26/AO7QgvEdPrGb5Ic.png" alt="image-20210926130910720"></p>
+<ul>
+<li>mappers元素包含了一组映射器，这些映射器的xml映射文件包含了sql代码和映射定义的等信息<ul>
+<li>mappers管理所有的映射关系（JavaBean和表字段）</li>
+<li>所以单个的映射管理就被称为mapper</li>
+<li>映射关系是抽象的，我们应该想办法把抽象作为具体（mybatis是如何管理映射关系的）</li>
+<li>Mybatis是通过<font color='#d15252'>配置xml文件</font>的方式对映射关系进行管理</li>
+</ul>
+</li>
+<li>配置mapper xml 文件</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅲ-导入相关依赖"><a href="#Ⅲ-导入相关依赖" class="headerlink" title="Ⅲ. 导入相关依赖"></a>Ⅲ. 导入相关依赖</h5><ul>
+<li><p>导入相关依赖</p>
+<ul>
+<li><p>mybatis</p>
+</li>
+<li><p>mysql</p>
+</li>
+<li><p>junit </p>
+<p><img src="https://i.loli.net/2021/09/26/C8zaRt9j5L3iXkK.png" alt="image-20210926130541730"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅳ-配置mapper-xml-文件"><a href="#Ⅳ-配置mapper-xml-文件" class="headerlink" title="Ⅳ. 配置mapper xml 文件"></a>Ⅳ. 配置mapper xml 文件</h5><ul>
+<li><p>配置mapper xml 文件 </p>
+<ul>
+<li><p>用来表述映射关系</p>
+</li>
+<li><p>xml文件约束</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">  <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">  <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>mapper映射的关系类型</p>
+<p><img src="https://i.loli.net/2021/09/26/13pSihoQWdg27TZ.png" alt="image-20210926131841213"></p>
+<ul>
+<li><p>在映射配置文件中，使用四种描述映射的类型，用来描述映射的关系</p>
+<ul>
+<li>映射的关系中，写sql语句，描述映射关系中的**<font color='#d15252'>表</font>**角色</li>
+<li>在定义映射关系时，加入<font color='#d15252'><strong>resultMap</strong></font>属性，描述映射中的<font color='#d15252'>JavaBean</font>关系</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/26/t4rkFXdVLRJU7Cb.png" alt="image-20210926132541378"></p>
+</li>
+<li><p>如果，有多个表和JavaBean时，遇到了相同的映射关系名字，比如多个表查询都有findAll</p>
+<ul>
+<li>可以在mapper标签上添加namespace属性进行标识</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/26/BfjMNncK7OoyurV.png" alt="image-20210926132909376"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅴ-配置文件中加入mapper映射"><a href="#Ⅴ-配置文件中加入mapper映射" class="headerlink" title="Ⅴ. 配置文件中加入mapper映射"></a>Ⅴ. 配置文件中加入mapper映射</h5><p><img src="https://i.loli.net/2021/09/26/O8AStHMTnKj6CIu.png" alt="image-20210926133457324"></p>
+<h5 id="Ⅵ-Java使用Mybatis"><a href="#Ⅵ-Java使用Mybatis" class="headerlink" title="Ⅵ. Java使用Mybatis"></a>Ⅵ. Java使用Mybatis</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取Mybatis核心配置文件，并且将其转换为输入流</span></span><br><span class="line">InputStream inputStream = Resources.getResourceAsStream(<span class="string">&quot;mybatis-config.xml&quot;</span>);</span><br><span class="line"><span class="comment">//获取SqlSessionFactory对象，绑定Mybatis核心文件</span></span><br><span class="line">SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>首先获取Mybatis核心配置文件，并转换为输入流 </p>
+<ul>
+<li>创建SqlSessionFactory对象，并绑定核心配置文件的输入流</li>
+<li>通过SqlSessionFactory获取SqlSession对象</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/26/FCR6UJY5cENhzVW.png" alt="image-20210926134945270"></p>
+</li>
+</ul>
+<h4 id="3-Mybatis增查删改四种操作"><a href="#3-Mybatis增查删改四种操作" class="headerlink" title="3.Mybatis增查删改四种操作"></a>3.Mybatis增查删改四种操作</h4><p>注意：映射标签中的SQL语句结尾不要加 <code>;</code> ，否则会报错</p>
+<ul>
+<li>映射标签中的SQL语句中的占位符用 <code>#&#123;&#125;</code> 表示</li>
+<li>如果有更改表结构操作，需要<font color='#d15252'>手动的提交事务</font><ul>
+<li>或者在openSession时添加参数true</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅰ-查询操作"><a href="#Ⅰ-查询操作" class="headerlink" title="Ⅰ.查询操作"></a>Ⅰ.查询操作</h5><ul>
+<li><p>在mapper.xml映射文件中添加 select 标签</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findAll&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.JavaBean.Students&quot;</span>&gt;</span></span><br><span class="line">--         描述映射关系中的表角色</span><br><span class="line">        select * FROM students</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用sqlSession调用selecet方法，查询数据</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取Mybatis核心配置文件，并且将其转换为输入流</span></span><br><span class="line">InputStream inputStream = Resources.getResourceAsStream(<span class="string">&quot;mybatis-config.xml&quot;</span>);</span><br><span class="line"><span class="comment">//获取SqlSessionFactory对象，绑定Mybatis核心文件</span></span><br><span class="line">SqlSessionFactory sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line"><span class="comment">//通过工厂类获取SqlSession</span></span><br><span class="line">SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line"><span class="comment">//通过sqlSession执行sql语句</span></span><br><span class="line">List&lt;Students&gt; stu = sqlSession.selectList(<span class="string">&quot;students.findAll&quot;</span>);</span><br><span class="line">System.out.println(stu);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="Ⅱ-插入操作"><a href="#Ⅱ-插入操作" class="headerlink" title="Ⅱ.插入操作"></a>Ⅱ.插入操作</h5><ul>
+<li>在mapper.xml映射文件中添加 insert 标签</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    用来描述插入的映射关系--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;add&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;com.JavaBean.Students&quot;</span> &gt;</span></span><br><span class="line">        INSERT INTO students(uname,age) VALUES(#&#123;name&#125;,#&#123;age&#125;);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 parameterType 属性，<font color='#d15252'>传入一个对象</font><ul>
+<li>定义SQL语句时，可以直接使用这个对象的成员变量</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取SqlSessionFactory</span></span><br><span class="line">SqlSessionFactory build = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(<span class="string">&quot;mybatis-config.xml&quot;</span>));</span><br><span class="line"><span class="comment">//获取SqlSession</span></span><br><span class="line">SqlSession sqlSession = build.openSession();</span><br><span class="line"><span class="comment">//创建对象</span></span><br><span class="line">Students s = <span class="keyword">new</span> Students();</span><br><span class="line">s.setName(<span class="string">&quot;白龙马&quot;</span>);</span><br><span class="line">s.setAge(<span class="number">234</span>);</span><br><span class="line"><span class="comment">//执行sql语句</span></span><br><span class="line">sqlSession.insert(<span class="string">&quot;students.add&quot;</span>,s);</span><br><span class="line"><span class="comment">//手动提交事务</span></span><br><span class="line">sqlSession.commit();</span><br><span class="line"><span class="comment">//关流</span></span><br><span class="line">sqlSession.close();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改表结构的操作需要手动提交事务，以及关流</li>
+</ul>
+<h5 id="Ⅲ-修改操作"><a href="#Ⅲ-修改操作" class="headerlink" title="Ⅲ. 修改操作"></a>Ⅲ. 修改操作</h5><ul>
+<li><p>在映射.xml文件中添加update标签</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    用来描述修改的映射关系--&gt;</span>    <span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;update&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;com.JavaBean.Students&quot;</span>&gt;</span>--         UPDATE students SET uname=&quot;张春表&quot;,age=20 WHERE id =1 ;        UPDATE  students SET uname=#&#123;name&#125;,age=#&#123;age&#125; WHERE id =#&#123;id&#125;;    <span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取SqlSessionFactory        SqlSessionFactory build = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(&quot;mybatis-config.xml&quot;));        //获取SqlSession        SqlSession sqlSession = build.openSession();        //创建对象        Students s = new Students(1,&quot;猪八戒&quot;,20);        //执行sql语句        sqlSession.update(&quot;students.update&quot;,s);        //手动提交事务        sqlSession.commit();        //关流        sqlSession.close();</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="Ⅳ-删除操作"><a href="#Ⅳ-删除操作" class="headerlink" title="Ⅳ. 删除操作"></a>Ⅳ. 删除操作</h5><ul>
+<li><p>在映射.xml文件中添加detele标签</p>
+<ul>
+<li>使用parameterType属性，传递参数只有单个时，比如int类型，占位符中的内容可以随便写，但最好见名思意</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    用来描述删除的映射关系--&gt;</span>    <span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">&quot;delete&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;int&quot;</span>&gt;</span>--         当参数是单个的时候，占位符中的内容随便写，但是需要见名思意        DELETE FROM students where id = #&#123;id&#125;    <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取SqlSessionFactory        SqlSessionFactory build = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(&quot;mybatis-config.xml&quot;));        //获取SqlSession        SqlSession sqlSession = build.openSession();        //执行sql语句        sqlSession.delete(&quot;students.delete&quot;,6);        //手动提交事务        sqlSession.commit();        //关流        sqlSession.close();</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="4-映射配置文件详解"><a href="#4-映射配置文件详解" class="headerlink" title="4.映射配置文件详解"></a>4.映射配置文件详解</h4><ul>
+<li><p>约束</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span>        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span>        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>根标签 ： &lt; mapper namespace=”students”&gt;</p>
+<ul>
+<li>namespace 命名空间 ，和id共同组成映射关系<font color='#d15252'>唯一</font>的标识<ul>
+<li>如果有多个表，多个映射文件，ID相同，通过namespace进行标识、区分、调用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>映射关系标签</p>
+<ul>
+<li>select / insert / update / delete <ul>
+<li>paramterType：参数类型 （全限定路径名）</li>
+<li>resultType：返回值类型（对象）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>#{} ：占位符，内容填写JavaBean的成员变量即可</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/26/ks4f5yE1pOIGvZP.png" alt="image-20210926162956712"></p>
+<h4 id="5-Mybatis核心配置文件environments"><a href="#5-Mybatis核心配置文件environments" class="headerlink" title="5.Mybatis核心配置文件environments"></a>5.Mybatis核心配置文件environments</h4><ul>
+<li><p>DTD约束</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span>        <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span>        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>根标签：configuration 配置标签</p>
+</li>
+<li><p><strong><font color='#d15252'>environments 标签</font></strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;m1&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>管理所有的环境<ul>
+<li>default：默认使用的某个环境配置</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;m1&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>单个环境配置</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>事务的管理，默认JDBC<ul>
+<li>JDBC：使用JDBC的事务进行提交和回滚</li>
+<li>MANAGED：几乎没干啥，他从来不提交和回滚一个事务（连接 ），他会交给容器管理，依赖于数据源得到的连接器来管理事务，和Spring框架结合的，将Mybatis和Spring整合后，事务的管理交给了Spring框架</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用来管理数据源，常见的类型有三种<ul>
+<li>POOLED：数据源实现了“池”的概念，将JDBC的连接对象组织起来</li>
+<li>UNPOOLED：不使用数据库连接池</li>
+<li>JNDI：这个数据源实现了能够在EJB或应用服务器这类容器中去使用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-Mybatis核心配置文件properties（属性）"><a href="#6-Mybatis核心配置文件properties（属性）" class="headerlink" title="6.Mybatis核心配置文件properties（属性）"></a>6.Mybatis核心配置文件properties（属性）</h4><ul>
+<li><p>这些属性可以在外部进行配置，并可以进行动态的替换</p>
+<ul>
+<li>在 properties 元素的子元素中设置</li>
+</ul>
+</li>
+<li><p>在resources中新建一个prperties文件，用来存储属性配置</p>
+<p><img src="https://i.loli.net/2021/09/26/2eUjpuAfF9b7mOJ.png" alt="image-20210926164046439"></p>
+</li>
+<li><p>在Mybatis核心配置文件中，更改property的参数，改为动态获取</p>
+<p><img src="https://i.loli.net/2021/09/26/tG3PYBnJvrFWbf2.png" alt="image-20210926164427808"></p>
+</li>
+<li><p>在核心配置文件中，添加properties标签</p>
+<ul>
+<li>一定要注意位置，核心文件中的映射标签有严格的位置要求</li>
+<li>properties标签应该在第一个</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/26/r9uUXfFjMHYT7aG.png" alt="image-20210926164654319"></p>
+</li>
+</ul>
+<h4 id="7-Mybatis核心配置文件typeAliases（类型别名）"><a href="#7-Mybatis核心配置文件typeAliases（类型别名）" class="headerlink" title="7.Mybatis核心配置文件typeAliases（类型别名）"></a>7.Mybatis核心配置文件typeAliases（类型别名）</h4><ul>
+<li> 第二个Seting标签属性很多，一般在延迟加载时更改，暂时不说</li>
+<li>第三个  typeAliases 类型别名的作用是为复杂的类型参数设置一个缩写名称<ul>
+<li>比如映射文件中的resultType标签使用的int ,String 等，本质上是Java.lang.Integer，Mybatis为我们提供了缩写</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/26/Ul9fVKYOkMhQ1A7.png" alt="image-20210926165540257"></p>
+<ul>
+<li><p>在Mybatis核心配置文件中添加</p>
+<ul>
+<li>添加和使用时，<font color='#d15252'>不区分大小写</font></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    为Java类型设置缩写名字--&gt;</span>    <span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span>        <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">&quot;Students&quot;</span> <span class="attr">type</span>=<span class="string">&quot;com.JavaBean.Students&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">typeAlias</span>&gt;</span>    <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>alias：别名的名称</li>
+<li>thpe：要起别名的类</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-Mybatis核心配置文件mappers（映射器）"><a href="#8-Mybatis核心配置文件mappers（映射器）" class="headerlink" title="8. Mybatis核心配置文件mappers（映射器）"></a>8. Mybatis核心配置文件mappers（映射器）</h4><ul>
+<li><p>核心配置文件中的mappers中的mapper标签，可以使用四种映入方法</p>
+<ul>
+<li><p>resource</p>
+<ul>
+<li><!-- 使用相对于类路径的资源引用 --></li>
+<li>如果使用resource，该资源必须在项目当中</li>
+</ul>
+</li>
+<li><p>url</p>
+<ul>
+<li><!-- 使用完全限定资源定位符（URL） --></li>
+<li><p>该资源可以不再项目中，随便的放，但是一定要加file协议</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">url</span>=<span class="string">&quot;file:///var/mappers/PostMapper.xml&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>class</p>
+<ul>
+<li><!-- 使用映射器接口实现类的完全限定类名 -->
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.builder.PostMapper&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>name</p>
+<ul>
+<li><!-- 将包内的映射器接口实现全部注册为映射器 -->
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;org.mybatis.builder&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="9-SqlSession"><a href="#9-SqlSession" class="headerlink" title="9. SqlSession"></a>9. SqlSession</h4><ul>
+<li>SqlSessionFactoryBuilder 构建工厂类</li>
+<li>Session每次手动提交和关流时非常麻烦<ul>
+<li>我们可以在工厂类通过openSession构建SqlSession时</li>
+<li>携带一个布尔类型的参数true  </li>
+</ul>
+</li>
+</ul>
+<h4 id="10-动态代理方式"><a href="#10-动态代理方式" class="headerlink" title="10.动态代理方式"></a>10.动态代理方式</h4><ul>
+<li><p>Mybatis帮我们生成层实现类对象</p>
+</li>
+<li><p>映射配置文件必须和mapper类保持一致</p>
+<ul>
+<li>namespace 必须添加要实现的Dao层接口的<font color='#d15252'>权限路径名</font></li>
+<li>映射标签中的id，必须填写要实现的Dao层接口中的<font color='#d15252'>方法名</font></li>
+</ul>
+</li>
+<li><p>mapper类路径和映射文件的路径也要保持一致</p>
+</li>
+<li><p>mapper返回值类型要和映射关系文件中的返回值类型保持一致</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/26/OJdSaLH4MNujFvy.png" alt="image-20210926174506785"></p>
+<p><img src="https://i.loli.net/2021/09/26/rdNIL1Q3aZPSf5g.png" alt="image-20210926174838010"></p>
+<ul>
+<li>如果使用动态代理的 方式，核心类配置文件中的mapper映射应该使用class=”xxx”引入</li>
+</ul>
+<h5 id="动态代理注意事项"><a href="#动态代理注意事项" class="headerlink" title="动态代理注意事项"></a>动态代理注意事项</h5><ul>
+<li>如果mapper 使用class的方法加载时<ul>
+<li>mapper文件的名字必须和要实现的接口名相同</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用动态代理    @Test    public void find() throws IOException &#123;        SqlSessionFactory build = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(&quot;mybatis-config.xml&quot;));        SqlSession sqlSession = build.openSession(true);        //获取Mapper代理对象        StudentDao mapper = sqlSession.getMapper(StudentDao.class);        //执行查询        List&lt;Students&gt; all = mapper.findAll();        for (Students s : all)&#123;            System.out.println(s);        &#125;    &#125;</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/09/29/Mybatis/" title="Mybatis">http://example.com/2021/09/29/Mybatis/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Mybatis/" rel="tag"><i class="fa fa-tag"></i># Mybatis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/29/Maven/" rel="prev" title="Maven">
+      <i class="fa fa-chevron-left"></i> Maven
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/29/Mybatis%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2/" rel="next" title="Mybatis高级查询">
+      Mybatis高级查询 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Mybatis"><span class="nav-number">1.1.</span> <span class="nav-text">一、Mybatis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Mybatis%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.Mybatis的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Ⅰ. 第一步：创建项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E6%9E%84%E5%BB%BA-SqlSessionFactiry"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Ⅱ. 第二步：构建 SqlSessionFactiry</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-%E5%AF%BC%E5%85%A5%E7%9B%B8%E5%85%B3%E4%BE%9D%E8%B5%96"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">Ⅲ. 导入相关依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-%E9%85%8D%E7%BD%AEmapper-xml-%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">Ⅳ. 配置mapper xml 文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A4-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8A%A0%E5%85%A5mapper%E6%98%A0%E5%B0%84"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">Ⅴ. 配置文件中加入mapper映射</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A5-Java%E4%BD%BF%E7%94%A8Mybatis"><span class="nav-number">1.1.2.6.</span> <span class="nav-text">Ⅵ. Java使用Mybatis</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Mybatis%E5%A2%9E%E6%9F%A5%E5%88%A0%E6%94%B9%E5%9B%9B%E7%A7%8D%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.Mybatis增查删改四种操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">Ⅰ.查询操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">Ⅱ.插入操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-%E4%BF%AE%E6%94%B9%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">Ⅲ. 修改操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A3-%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">Ⅳ. 删除操作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E6%98%A0%E5%B0%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.映射配置文件详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Mybatis%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6environments"><span class="nav-number">1.1.5.</span> <span class="nav-text">5.Mybatis核心配置文件environments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Mybatis%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6properties%EF%BC%88%E5%B1%9E%E6%80%A7%EF%BC%89"><span class="nav-number">1.1.6.</span> <span class="nav-text">6.Mybatis核心配置文件properties（属性）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-Mybatis%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6typeAliases%EF%BC%88%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D%EF%BC%89"><span class="nav-number">1.1.7.</span> <span class="nav-text">7.Mybatis核心配置文件typeAliases（类型别名）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-Mybatis%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6mappers%EF%BC%88%E6%98%A0%E5%B0%84%E5%99%A8%EF%BC%89"><span class="nav-number">1.1.8.</span> <span class="nav-text">8. Mybatis核心配置文件mappers（映射器）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-SqlSession"><span class="nav-number">1.1.9.</span> <span class="nav-text">9. SqlSession</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.10.</span> <span class="nav-text">10.动态代理方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.1.10.1.</span> <span class="nav-text">动态代理注意事项</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">130k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:58</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共61.6k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
