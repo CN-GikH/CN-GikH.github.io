@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="学习SpringMVC中的自定义数据类型转换，学习@RequestParam注解和@RequestHeader注解，学习ModelandView，Ajax异步交互等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC自定义数据类型转换">
+<meta property="og:url" content="http://example.com/2021/10/22/SpringMVC%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="学习SpringMVC中的自定义数据类型转换，学习@RequestParam注解和@RequestHeader注解，学习ModelandView，Ajax异步交互等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/10/14/uGpTfN8kBvoCR9l.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/14/elvB96xH7mGYadF.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/14/UAapBr86ob2HRGY.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/16/d4hHLXW8TDU1tsm.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/16/ecna4pENWwsTDlV.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/16/rtcZE1amq5Xil4v.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/22/wjnYdzb7HWCuxZ4.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/16/9tZ2eiBbYcnk7sD.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/16/RzNuD6vlJUQjy4Z.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/16/8gTjYzlnmFks2PO.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/19/KacjwqL6Tt2YOyN.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/19/sxIzLNkPVhDCwqd.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/19/n24sqtMPDz9T7Wi.png">
+<meta property="article:published_time" content="2021-10-22T03:05:24.000Z">
+<meta property="article:modified_time" content="2021-10-22T03:09:53.317Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="SpringMvc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/10/14/uGpTfN8kBvoCR9l.png">
+
+<link rel="canonical" href="http://example.com/2021/10/22/SpringMVC%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SpringMVC自定义数据类型转换 | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/22/SpringMVC%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringMVC自定义数据类型转换
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-22 11:05:24 / 修改时间：11:09:53" itemprop="dateCreated datePublished" datetime="2021-10-22T11:05:24+08:00">2021-10-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Spring框架</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">11k</span> -->
+			  <span title="本文字数">
+                  892字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">学习SpringMVC中的自定义数据类型转换，学习@RequestParam注解和@RequestHeader注解，学习ModelandView，Ajax异步交互等</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>SpringMvc</li>
+</ul>
+<h3 id="一、自定义数据类型转换"><a href="#一、自定义数据类型转换" class="headerlink" title="一、自定义数据类型转换"></a>一、自定义数据类型转换</h3><h4 id="1-Converter接口"><a href="#1-Converter接口" class="headerlink" title="1.Converter接口"></a>1.Converter接口</h4><p><font color='#d15252'>Converter接口</font>实现自定义数据类型转换</p>
+<ul>
+<li>自定义类，实现Converter&lt;String, Date&gt;接口</li>
+<li>重写方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/14/uGpTfN8kBvoCR9l.png" alt="image-20211014093911112"></p>
+<ul>
+<li><p>返回值类型就是需要转换成的类型，带参String s 是要被转换的数据类型</p>
+<ul>
+<li>最后由return带回转换后的返回值</li>
+</ul>
+</li>
+<li><p>springMVC.xml配置文件中，增强映射器和适配器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    增强映射器和适配器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:annotation-driven</span> <span class="attr">conversion-service</span>=<span class="string">&quot;c&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">mvc:annotation-driven</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>自定义转换器配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    自定义转换器配置--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;c&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.context.support.ConversionServiceFactoryBean&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;converters&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;com.controller.DateConverter&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/14/elvB96xH7mGYadF.png" alt="image-20211014094226948"></p>
+</li>
+</ul>
+<h4 id="2-RequestParam注解"><a href="#2-RequestParam注解" class="headerlink" title="2.@RequestParam注解"></a>2.@RequestParam注解</h4><p><img src="https://i.loli.net/2021/10/14/UAapBr86ob2HRGY.png" alt="image-20211014101835667"></p>
+<ul>
+<li>name属性就是起名字，在get请求传参时可以用ida，也可以用id</li>
+<li>defaultValue是默认值<ul>
+<li>如果有默认值，还传入了参数，最后得到的是默认值</li>
+</ul>
+</li>
+<li>required：设置是否必须传递参数 ，默认是true<ul>
+<li>如果参数有默认值，则不会报错，会默认变为true</li>
+<li>如果没有默认值，并且设置为false，则必须传递参数，不然就会报错</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-RequestHeader注解"><a href="#3-RequestHeader注解" class="headerlink" title="3.@RequestHeader注解"></a>3.@RequestHeader注解</h4><ul>
+<li>获取请求头信息</li>
+</ul>
+<p>CookieValue注解</p>
+<h4 id="4-获取原始Servlet的API"><a href="#4-获取原始Servlet的API" class="headerlink" title="4.获取原始Servlet的API"></a>4.获取原始Servlet的API</h4><ul>
+<li>把API当作参数传递即可，MVC框架会自动将接口注入到IOC容器中</li>
+</ul>
+<h4 id="5-SpringMVC的响应"><a href="#5-SpringMVC的响应" class="headerlink" title="5.SpringMVC的响应"></a>5.SpringMVC的响应</h4><ul>
+<li><p>返回值为字符串值的逻辑视图</p>
+<ul>
+<li>返回字符串逻辑视图直接跳转</li>
+</ul>
+</li>
+<li><p>返回值为void原始ServletAPI</p>
+<ul>
+<li>可以直接打印到网页</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/16/d4hHLXW8TDU1tsm.png" alt="image-20211016194859824"></p>
+<ul>
+<li>可以通过作用域进行赋值取值</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/16/ecna4pENWwsTDlV.png" alt="image-20211016195033671"></p>
+<ul>
+<li><p>可以使用res,resp的功能</p>
+<p><img src="https://i.loli.net/2021/10/16/rtcZE1amq5Xil4v.png" alt="image-20211016195443307"></p>
+</li>
+</ul>
+</li>
+<li><p><font color='#d15252'>ModelANDViwe</font></p>
+</li>
+</ul>
+<h4 id="6-请求转发和重定向"><a href="#6-请求转发和重定向" class="headerlink" title="6.请求转发和重定向"></a>6.请求转发和重定向</h4><ul>
+<li><p>逻辑视图</p>
+<ul>
+<li><p>return “字符串”</p>
+<ul>
+<li>底层就是请求转发</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/22/wjnYdzb7HWCuxZ4.png" alt="image-20211016200515340"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-ModelandViwe响应数据"><a href="#7-ModelandViwe响应数据" class="headerlink" title="7.ModelandViwe响应数据"></a>7.ModelandViwe响应数据</h4><ul>
+<li><p>方式一：方法中new </p>
+<ul>
+<li> new ModelAndView();</li>
+<li>调用addObject()方法，设置数据模型（封装数据）<ul>
+<li>传递两个String类型的参数，一个是name，一个是value</li>
+</ul>
+</li>
+<li> 调用setViewName()方法，设置数据的视图</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/16/9tZ2eiBbYcnk7sD.png" alt="image-20211016201404553"></p>
+</li>
+<li><p>方式二：IOC自动注入，定义在参数上</p>
+<p><img src="https://i.loli.net/2021/10/16/RzNuD6vlJUQjy4Z.png" alt="image-20211016201558691"></p>
+</li>
+</ul>
+<h4 id="8-SessionAttribute注解"><a href="#8-SessionAttribute注解" class="headerlink" title="8.SessionAttribute注解"></a>8.SessionAttribute注解</h4><ul>
+<li><p>位置：在类的声明上</p>
+</li>
+<li><p>将request数据存入HttpSession域中</p>
+</li>
+</ul>
+<h4 id="8-开启静态资源的访问"><a href="#8-开启静态资源的访问" class="headerlink" title="8.开启静态资源的访问"></a>8.开启静态资源的访问</h4><h5 id="Ⅰ-什么是静态资源，为什么要开启访问？"><a href="#Ⅰ-什么是静态资源，为什么要开启访问？" class="headerlink" title="Ⅰ.什么是静态资源，为什么要开启访问？"></a>Ⅰ.什么是静态资源，为什么要开启访问？</h5><ul>
+<li><p>比如要引入jq文件，文件引入没有错误，但是网页显示jq引入失败</p>
+</li>
+<li><p>原因就是web配置文件中的前端控制器将所有请求资源拦截并交给了映射器，映射器解析路径并进行拼接，最终交给适配器</p>
+<p><img src="https://i.loli.net/2021/10/16/8gTjYzlnmFks2PO.png" alt="image-20211016203712794"></p>
+<ul>
+<li>所以我们需要开启静态资源的访问才能使用JQ文件</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-开启静态资源的方式"><a href="#Ⅱ-开启静态资源的方式" class="headerlink" title="Ⅱ.开启静态资源的方式"></a>Ⅱ.开启静态资源的方式</h5><ul>
+<li><p>方式一</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    在SpringMVC配置文件中，放行指定资源--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mvc:resources</span> <span class="attr">mapping</span>=<span class="string">&quot;/js/**&quot;</span> <span class="attr">location</span>=<span class="string">&quot;/js/&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">mvc:resources</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>方式二</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--    在SpringMVC配置文件中，开启处理静态资源 -&gt;</span></span><br><span class="line"><span class="comment"></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="9-Ajax异步交互"><a href="#9-Ajax异步交互" class="headerlink" title="9.Ajax异步交互"></a>9.Ajax异步交互</h4><ul>
+<li><p>导入依赖</p>
+<ul>
+<li>和SpringMvc有关</li>
+<li>SpringMvc默认MappingJackson2HttpMassageConverter对Json数据的转换</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--        导入Ajax所需依赖--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-annotations<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>环境搭建</p>
+<ul>
+<li><p>开启注解支持</p>
+<p><img src="https://i.loli.net/2021/10/19/KacjwqL6Tt2YOyN.png" alt="image-20211019111021334"></p>
+</li>
+</ul>
+</li>
+<li><p>定义Ajax</p>
+<p><img src="https://i.loli.net/2021/10/19/sxIzLNkPVhDCwqd.png" alt="image-20211019113948930"></p>
+<p><img src="https://i.loli.net/2021/10/19/n24sqtMPDz9T7Wi.png" alt="image-20211019114005266"></p>
+<ul>
+<li>使用注解@RequestBody使类型转换</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/10/22/SpringMVC%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" title="SpringMVC自定义数据类型转换">http://example.com/2021/10/22/SpringMVC自定义数据类型转换/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i># Spring</a>
+              <a href="/tags/SpringMvc/" rel="tag"><i class="fa fa-tag"></i># SpringMvc</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/22/SpringMVC/" rel="prev" title="SpringMVC">
+      <i class="fa fa-chevron-left"></i> SpringMVC
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/22/RestFul%E9%A3%8E%E6%A0%BC/" rel="next" title="RestFul风格">
+      RestFul风格 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">一、自定义数据类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Converter%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.Converter接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-RequestParam%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.@RequestParam注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-RequestHeader%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.@RequestHeader注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E8%8E%B7%E5%8F%96%E5%8E%9F%E5%A7%8BServlet%E7%9A%84API"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.获取原始Servlet的API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-SpringMVC%E7%9A%84%E5%93%8D%E5%BA%94"><span class="nav-number">1.1.5.</span> <span class="nav-text">5.SpringMVC的响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">1.1.6.</span> <span class="nav-text">6.请求转发和重定向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-ModelandViwe%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE"><span class="nav-number">1.1.7.</span> <span class="nav-text">7.ModelandViwe响应数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-SessionAttribute%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.1.8.</span> <span class="nav-text">8.SessionAttribute注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E5%BC%80%E5%90%AF%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="nav-number">1.1.9.</span> <span class="nav-text">8.开启静态资源的访问</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%80%E5%90%AF%E8%AE%BF%E9%97%AE%EF%BC%9F"><span class="nav-number">1.1.9.1.</span> <span class="nav-text">Ⅰ.什么是静态资源，为什么要开启访问？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E5%BC%80%E5%90%AF%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">1.1.9.2.</span> <span class="nav-text">Ⅱ.开启静态资源的方式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-Ajax%E5%BC%82%E6%AD%A5%E4%BA%A4%E4%BA%92"><span class="nav-number">1.1.10.</span> <span class="nav-text">9.Ajax异步交互</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">149k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:15</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共69k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
