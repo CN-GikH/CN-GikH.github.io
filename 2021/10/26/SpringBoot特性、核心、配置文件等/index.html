@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="学习SprinBoot框架的特性，了解SpringBoot的四大核心，学习.yml为后缀的配置文件，以及多环境配置、自定义配置等；学习SpringBoot中Mybatis的使用、事务的使用等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot特性、核心、配置文件等">
+<meta property="og:url" content="http://example.com/2021/10/26/SpringBoot%E7%89%B9%E6%80%A7%E3%80%81%E6%A0%B8%E5%BF%83%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%AD%89/index.html">
+<meta property="og:site_name" content="楚楚超可爱">
+<meta property="og:description" content="学习SprinBoot框架的特性，了解SpringBoot的四大核心，学习.yml为后缀的配置文件，以及多环境配置、自定义配置等；学习SpringBoot中Mybatis的使用、事务的使用等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/tEsONdHXD9JTq6G.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/Gl3VmkQO4Pevy7H.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/DkXoLxTCf1OYZrj.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/q7SfTQIKU4dCo6z.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/OTIlespbCSV6UMQ.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/aiJTBjheCIRl8DK.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/V1vQ5uIS6Edsfp4.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/LM2SHRpPkxfVBzl.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/wfx5zZGhAjQcmve.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/OQcd5nFreut3AgX.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/arkJKq41RDvWEhl.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/YUMOVA461TBvEfi.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/4kEbcIvTu6lARet.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/hZFz4BR9joAPfym.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/gCpDnLu3GdFUVeY.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/aQkCH4ZN35SRiYX.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/1KQJSIr3ZFkTEht.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/CDSYw4tNeRKM6hi.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/25/Q4srKakLbi9oujE.png">
+<meta property="article:published_time" content="2021-10-26T09:06:48.000Z">
+<meta property="article:modified_time" content="2021-10-26T09:07:50.938Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="SpringBoot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/10/25/tEsONdHXD9JTq6G.png">
+
+<link rel="canonical" href="http://example.com/2021/10/26/SpringBoot%E7%89%B9%E6%80%A7%E3%80%81%E6%A0%B8%E5%BF%83%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%AD%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SpringBoot特性、核心、配置文件等 | 楚楚超可爱</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">楚楚超可爱</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/26/SpringBoot%E7%89%B9%E6%80%A7%E3%80%81%E6%A0%B8%E5%BF%83%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%AD%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="楚楚超可爱">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringBoot特性、核心、配置文件等
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-26 17:06:48 / 修改时间：17:07:50" itemprop="dateCreated datePublished" datetime="2021-10-26T17:06:48+08:00">2021-10-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">16k</span> -->
+			  <span title="本文字数">
+                  1.3k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>3 分钟</span>
+            </span>
+            <div class="post-description">学习SprinBoot框架的特性，了解SpringBoot的四大核心，学习.yml为后缀的配置文件，以及多环境配置、自定义配置等；学习SpringBoot中Mybatis的使用、事务的使用等</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><h3 id="一、SpringBoot"><a href="#一、SpringBoot" class="headerlink" title="一、SpringBoot"></a>一、SpringBoot</h3><h4 id="1-SpringBoot的特性"><a href="#1-SpringBoot的特性" class="headerlink" title="1.SpringBoot的特性"></a>1.SpringBoot的特性</h4><ul>
+<li>能够快速创建一个独立的spring应用</li>
+<li>不需要配置tomcat，直接运行main方法即可</li>
+<li>使用starter场景启动器，能够自动导入很多依赖</li>
+<li>无xml配置的开发模式</li>
+<li>提供健康检查机制</li>
+</ul>
+<h4 id="2-SpringBoot的四大核心"><a href="#2-SpringBoot的四大核心" class="headerlink" title="2.SpringBoot的四大核心"></a>2.SpringBoot的<font color='#d15252'>四大核心</font></h4><ul>
+<li>自动配置<ul>
+<li>针对spring的常用功能，SpringBoot能够提供自动配置</li>
+</ul>
+</li>
+<li>起步以来<ul>
+<li>你只需要告诉SpringBoot你需要什么功能，它就能引入相关的功能</li>
+</ul>
+</li>
+<li>Actuator健康检查<ul>
+<li>可以探究SpringBoot应用程序的内部信息</li>
+</ul>
+</li>
+<li>命令行界面 <ul>
+<li>是一个可选的特性，了解即可</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-了解-yml配置文件"><a href="#3-了解-yml配置文件" class="headerlink" title="3.了解.yml配置文件"></a>3.了解.yml配置文件</h4><p><img src="https://i.loli.net/2021/10/25/tEsONdHXD9JTq6G.png" alt="image-20211025130953194"></p>
+<p><img src="https://i.loli.net/2021/10/25/Gl3VmkQO4Pevy7H.png" alt="image-20211025131248185"></p>
+<ul>
+<li><p>语法格式不同，但作用一样</p>
+</li>
+<li><p>注意需要空格</p>
+</li>
+<li><p>两种配置文件不能同时存在，后期使用yml情况居多，特别是使用码云托管时</p>
+<ul>
+<li>如果两种文件同时存在，默认执行的是第一个文件</li>
+</ul>
+</li>
+<li><p><font color='#d15252'>yml</font></p>
+<ul>
+<li>是一种yaml格式的配置文件，主要采用一定的空格</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-多环境配置"><a href="#4-多环境配置" class="headerlink" title="4.多环境配置"></a>4.多环境配置</h4><ul>
+<li><p>多环境配置操作</p>
+<ul>
+<li>新建application-dev.yml文件</li>
+<li>新建application-test.yml文件</li>
+<li>在application.yml文件中，通过添加spring-profiles-active属性，指定开发环境</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/25/DkXoLxTCf1OYZrj.png" alt="image-20211025131809745"></p>
+</li>
+</ul>
+<h4 id="5-自定义配置"><a href="#5-自定义配置" class="headerlink" title="5.自定义配置"></a>5.自定义配置</h4><h5 id="Ⅰ-自定义配置信息"><a href="#Ⅰ-自定义配置信息" class="headerlink" title="Ⅰ. 自定义配置信息"></a>Ⅰ. 自定义配置信息</h5><p>使用注解@Value注解，完成自定义配置</p>
+<ul>
+<li><p>首先在application配置文件中，添加自定义的信息</p>
+<p><img src="https://i.loli.net/2021/10/25/q7SfTQIKU4dCo6z.png" alt="image-20211025132657832"></p>
+</li>
+<li><p>在自定义类中定义变量，并添加@Value注解，赋值给出配置文件中的name</p>
+<p><img src="https://i.loli.net/2021/10/25/OTIlespbCSV6UMQ.png" alt="image-20211025132950255"></p>
+</li>
+<li><p>使用RequsetMapping注解，将信息打印到前端页面查看</p>
+<p><img src="https://i.loli.net/2021/10/25/aiJTBjheCIRl8DK.png" alt="image-20211025135855346"></p>
+</li>
+</ul>
+<h5 id="Ⅱ-将自定义配置信息映射成一个对象"><a href="#Ⅱ-将自定义配置信息映射成一个对象" class="headerlink" title="Ⅱ. 将自定义配置信息映射成一个对象"></a>Ⅱ. 将自定义配置信息映射成一个对象</h5><ul>
+<li><p>自定义一个pojo（javabean类）</p>
+<ul>
+<li><p>通过注解设置前缀</p>
+</li>
+<li><p>定义成员变量</p>
+</li>
+<li><p><font color='#d15252'>前缀+成员变量名称 = 配置文件中的name</font></p>
+</li>
+<li><p>定义构造方法，get/set方法，toSring方法</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/25/V1vQ5uIS6Edsfp4.png" alt="image-20211025141034667"></p>
+</li>
+<li><p>Controller层添加pojo类成员变量，使用get/set方法取值即可</p>
+<p><img src="https://i.loli.net/2021/10/25/LM2SHRpPkxfVBzl.png" alt="image-20211025141114059"></p>
+</li>
+</ul>
+<h4 id="6-SpringBoot使用jsp"><a href="#6-SpringBoot使用jsp" class="headerlink" title="6.SpringBoot使用jsp"></a>6.SpringBoot使用jsp</h4><ul>
+<li>添加依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- web  依赖 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">&lt;!-- servlet 依赖 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jstl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- tomcat 的支持.--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat.embed<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat-embed-jasper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在pom.xml文件中的&lt; build &gt;中添加配置</p>
+<ul>
+<li>指定编译文件夹</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">            <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--                源文件位置--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/webapp<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--                编译的目录 不可以乱写--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">targetPath</span>&gt;</span>META-INF/resources<span class="tag">&lt;/<span class="name">targetPath</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--                    **表示webapp目录以及子目录，  *.*表示所有--&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.*<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/25/wfx5zZGhAjQcmve.png" alt="image-20211025142207877"></p>
+</li>
+<li><p>在resources下新建目录webapp，并设计项目结构设置为Web</p>
+<ul>
+<li>新建index.jsp页面</li>
+</ul>
+</li>
+<li><p>在application.properties中添加指定目录</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#指定目录  --- 类似于视图解析器</span></span><br><span class="line"><span class="comment"># 前缀 ：一旦选择/就会在webapp根目录下进行选址</span></span><br><span class="line"><span class="meta">spring.mvc.view.prefix</span>=<span class="string">/</span></span><br><span class="line"><span class="comment">#后缀</span></span><br><span class="line"><span class="meta">spring.mvc.view.suffix</span>=<span class="string">.jsp</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/25/OQcd5nFreut3AgX.png" alt="image-20211025190928579"></p>
+</li>
+<li><p>开发控制器</p>
+<p><img src="https://i.loli.net/2021/10/25/arkJKq41RDvWEhl.png" alt="image-20211025191401757"></p>
+<ul>
+<li>index.jsp中使用 ${data}取值即可</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-使用SpringBoot继承Mybatis"><a href="#7-使用SpringBoot继承Mybatis" class="headerlink" title="7.使用SpringBoot继承Mybatis"></a>7.使用SpringBoot继承Mybatis</h4><ul>
+<li><p>新建项目，选择添加web模块，添加SQL中的MySQL Driver模块</p>
+</li>
+<li><p>在pom文件中添加mybatis启动器依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>默认mysql-connect版本是8. 可以手动更改</li>
+</ul>
+</li>
+<li><p>在application.properties中添加连接数据库的信息</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#数据库配置</span></span><br><span class="line"><span class="meta">spring.datasource.username</span>=<span class="string">root</span></span><br><span class="line"><span class="meta">spring.datasource.password</span>=<span class="string">000909</span></span><br><span class="line"><span class="comment">#注意驱动</span></span><br><span class="line"><span class="meta">spring.datasource.driver-class-name</span>=<span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line"><span class="meta">spring.datasource.url</span>=<span class="string">jdbc:mysql:///springboot</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/25/YUMOVA461TBvEfi.png" alt="image-20211025193216797"></p>
+</li>
+<li><p>使用反向生成工具</p>
+<p><img src="https://i.loli.net/2021/10/25/4kEbcIvTu6lARet.png" alt="image-20211025200931951"></p>
+</li>
+<li><p>mapper层添加注解@Mapper</p>
+</li>
+<li><p>添加Controller层</p>
+<p><img src="https://i.loli.net/2021/10/25/hZFz4BR9joAPfym.png" alt="image-20211025203716148"></p>
+</li>
+<li><p>添加Service层</p>
+<ul>
+<li><p>创建接口，创建实现类</p>
+<p><img src="https://i.loli.net/2021/10/25/gCpDnLu3GdFUVeY.png" alt="image-20211025201730510"></p>
+</li>
+<li><p>如果使用@Auto注解，会飘红，更改设置解决</p>
+<p><img src="https://i.loli.net/2021/10/25/aQkCH4ZN35SRiYX.png" alt="image-20211025201822480"></p>
+</li>
+</ul>
+</li>
+<li><p>pom.xml中添加resource设置，将mapper中的xml文件添加到配置中</p>
+<p><img src="https://i.loli.net/2021/10/25/1KQJSIr3ZFkTEht.png" alt="image-20211025203819161"></p>
+<ul>
+<li><p>如果将mapper中的xml文件放在resources下，包名需要一致，并且在application.properties中添加相关配置</p>
+<p><img src="https://i.loli.net/2021/10/25/CDSYw4tNeRKM6hi.png" alt="image-20211025204533961"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-事务的使用"><a href="#8-事务的使用" class="headerlink" title="8. 事务的使用"></a>8. 事务的使用</h4><p><img src="https://i.loli.net/2021/10/25/Q4srKakLbi9oujE.png" alt="image-20211025210301390"></p>
+<ul>
+<li>一个update方法中，在业务逻辑层实现类<font color='#d15252'>service</font>中更新操作执行完毕后，手动创造一个异常<ul>
+<li>发现update正常执行，执行完成后，才报异常<ul>
+<li>即没有把整个方法作为一个单元，而是顺序执行，知道报错</li>
+</ul>
+</li>
+<li>一旦我们加了<font color='#d15252'>@Transactional</font> 注解<ul>
+<li>就会将整个方法看作一个整体，如果有错误，更新操作也不会执行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="9-注解"><a href="#9-注解" class="headerlink" title="9.注解"></a>9.注解</h4><p>@Controller</p>
+<ul>
+<li>用于控制器中，表示控制器</li>
+</ul>
+<p>@RestController</p>
+<ul>
+<li>@Controller + @ResponseBody<ul>
+<li>返回值是String或json，多方法需要注意</li>
+</ul>
+</li>
+</ul>
+<p>@RequestMapping</p>
+<ul>
+<li>请求映射<ul>
+<li>代表Get请求</li>
+<li>可以通过设置属性值，支持Post请求</li>
+</ul>
+</li>
+</ul>
+<p>@GetMapping</p>
+<ul>
+<li>是RequestMapping和get请求的结合体<ul>
+<li>只能支持get请求</li>
+</ul>
+</li>
+</ul>
+<p>@PostMapping</p>
+<ul>
+<li>是RequestMapping和post请求的结合体<ul>
+<li>只能支持Post请求</li>
+</ul>
+</li>
+</ul>
+<p>@PutMapping</p>
+<ul>
+<li>是RequestMapping和put请求的结合体<ul>
+<li>只支持put请求</li>
+</ul>
+</li>
+</ul>
+<p>@DeleteMapping</p>
+<ul>
+<li>是RequestMapping和delete请求的结合体<ul>
+<li>只支持delete</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/10/26/SpringBoot%E7%89%B9%E6%80%A7%E3%80%81%E6%A0%B8%E5%BF%83%E3%80%81%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%AD%89/" title="SpringBoot特性、核心、配置文件等">http://example.com/2021/10/26/SpringBoot特性、核心、配置文件等/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SpringBoot/" rel="tag"><i class="fa fa-tag"></i># SpringBoot</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/26/SpringBoot%E5%85%A5%E9%97%A8/" rel="prev" title="SpringBoot入门">
+      <i class="fa fa-chevron-left"></i> SpringBoot入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/26/%E6%95%B4%E5%90%88jpa-Swagger-JDBCTemplate/" rel="next" title="整合jpa/Swagger/JDBCTemplate">
+      整合jpa/Swagger/JDBCTemplate <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81SpringBoot"><span class="nav-number">1.1.</span> <span class="nav-text">一、SpringBoot</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-SpringBoot%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.SpringBoot的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-SpringBoot%E7%9A%84%E5%9B%9B%E5%A4%A7%E6%A0%B8%E5%BF%83"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.SpringBoot的四大核心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E4%BA%86%E8%A7%A3-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.了解.yml配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.多环境配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.5.</span> <span class="nav-text">5.自定义配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">Ⅰ. 自定义配置信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E5%B0%86%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E6%98%A0%E5%B0%84%E6%88%90%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">Ⅱ. 将自定义配置信息映射成一个对象</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-SpringBoot%E4%BD%BF%E7%94%A8jsp"><span class="nav-number">1.1.6.</span> <span class="nav-text">6.SpringBoot使用jsp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E4%BD%BF%E7%94%A8SpringBoot%E7%BB%A7%E6%89%BFMybatis"><span class="nav-number">1.1.7.</span> <span class="nav-text">7.使用SpringBoot继承Mybatis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.8.</span> <span class="nav-text">8. 事务的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.1.9.</span> <span class="nav-text">9.注解</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">99</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">159k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:25</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共72.9k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
