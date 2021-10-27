@@ -12507,4 +12507,156 @@
         <tag>网络编程</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringBoot安全管理</title>
+    <url>/2021/10/27/SpringBoot%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[<h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>SpringBoot安全管理</li>
+</ul>
+<h3 id="一、SpringBoot安全管理"><a href="#一、SpringBoot安全管理" class="headerlink" title="一、SpringBoot安全管理"></a>一、SpringBoot安全管理</h3><p><a href="https://www.cnblogs.com/crazy-lc/p/12361118.html">SpringBoot安全管理–（一）SpringSecurity基本配置 - CrazyLL - 博客园 (cnblogs.com)</a></p>
+<h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>项目需要走严格的认证和授权</li>
+<li>java领域中实现认证和授权的框架有两个<ul>
+<li>shiro</li>
+<li>Spring security</li>
+</ul>
+</li>
+<li>shiro是一个<font color='#d15252'>轻量级</font>的框架，认证、授权、会话管理、密码管理、缓存管理</li>
+<li>Spring Security 是<font color='#d15252'>相对复杂</font>的安全管理框架，功能会比shiro强大，权限控制级别会更高</li>
+</ul>
+<h4 id="2-使用步骤"><a href="#2-使用步骤" class="headerlink" title="2.使用步骤"></a>2.使用步骤</h4><h5 id="基于内存以及默认的安全认证"><a href="#基于内存以及默认的安全认证" class="headerlink" title="基于内存以及默认的安全认证"></a>基于<font color='#d15252'>内存</font>以及默认的安全认证</h5><ul>
+<li><p>添加依赖</p>
+<p><img src="https://i.loli.net/2021/10/27/f72hdTaxwqkUE6u.png" alt="image-20211027090955554"></p>
+<ul>
+<li>也可以手动添加</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--        security安全认证依赖--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-security<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.security<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-security-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>默认用户名user，默认密码将在控制台打印</p>
+<ul>
+<li><p>可以在application.properties中配置默认的用户名和密码还有用户角色</p>
+<p><img src="https://i.loli.net/2021/10/27/S4kw5JrUe6XMn1y.png" alt="image-20211027112201652"></p>
+</li>
+<li><p>也可以自定义Config方法</p>
+</li>
+</ul>
+</li>
+<li><p>创建MyWebSecurity<font color='#d15252'>Config</font>类</p>
+<ul>
+<li><p>继承WebSecurityConfigurerAdapter类</p>
+</li>
+<li><p>添加密码编译器</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 密码的编码器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> PasswordEncoder <span class="title">passwordEncoder</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> NoOpPasswordEncoder.getInstance();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>添加基于内存的Authentication认证</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(AuthenticationManagerBuilder auth)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    auth.inMemoryAuthentication().withUser(<span class="string">&quot;root&quot;</span>).password(<span class="string">&quot;123456&quot;</span>).roles(<span class="string">&quot;DBA&quot;</span>).</span><br><span class="line">            and().</span><br><span class="line">            withUser(<span class="string">&quot;admin&quot;</span>).password(<span class="string">&quot;123456&quot;</span>).roles(<span class="string">&quot;ADMIN&quot;</span>,<span class="string">&quot;DBA&quot;</span>).and().</span><br><span class="line">            withUser(<span class="string">&quot;gikh&quot;</span>).password(<span class="string">&quot;123456&quot;</span>).roles(<span class="string">&quot;USER&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果重写了该方法，则是基于内存认证，SpringBoot<font color='#d15252'>不会再自动给出</font>默认的密码</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/27/OT6BwRbkCDSKztM.png" alt="image-20211027102246833"></p>
+</li>
+</ul>
+</li>
+<li><p>编写控制器</p>
+<p><img src="https://i.loli.net/2021/10/27/428vUGYjFTXZd3y.png" alt="image-20211027101230930"></p>
+</li>
+<li><p>启动项目，访问程序，会自动弹出登录页面</p>
+<ul>
+<li>使用用户名user和控制台给出的默认密码进行登录</li>
+</ul>
+</li>
+</ul>
+<h5 id="基于http的安全认证"><a href="#基于http的安全认证" class="headerlink" title="基于http的安全认证"></a>基于<font color='#d15252'>http</font>的安全认证</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://localhost:8081/springsecurity  ---&gt; 我用一个 # 代替</span><br><span class="line"></span><br><span class="line">   #/admin/hello  这个地址  admin访问权限的能访问</span><br><span class="line">   #/user/hello  这个地址  admin和user权限都能访问</span><br><span class="line">   #/dba/hello  这个地址   root访问权限的能访问</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/27/P6ULVtsOjGQu8ex.png" alt="image-20211027101816112"></p>
+<ul>
+<li><p>在MyWebSecurity<font color='#d15252'>Config</font>中添加</p>
+<p><img src="https://i.loli.net/2021/10/27/xdqCMSWzvj7so4Y.png" alt="image-20211027102412118"></p>
+<p><img src="https://i.loli.net/2021/10/27/wvUN24tHOFIdAbE.png" alt="image-20211027103652126"></p>
+</li>
+</ul>
+<h5 id="基于数据库的安全认证"><a href="#基于数据库的安全认证" class="headerlink" title="基于数据库的安全认证"></a>基于数据库的安全认证</h5><ul>
+<li><p>准备三张表</p>
+<ul>
+<li><p>用户表 users</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> users(</span><br><span class="line">	id <span class="type">int</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">	username <span class="type">varchar</span>(<span class="number">200</span>),</span><br><span class="line">	password <span class="type">varchar</span>(<span class="number">200</span>),</span><br><span class="line">    enabled <span class="type">int</span>,</span><br><span class="line">    locked <span class="type">int</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/27/5rU8gO9nxQTK2us.png" alt="image-20211027151938266"></p>
+</li>
+<li><p>角色表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> role(</span><br><span class="line">	id <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY AUTO_INCREMENT,</span><br><span class="line">	rname <span class="type">VARCHAR</span>(<span class="number">200</span>),</span><br><span class="line">	nameZh <span class="type">VARCHAR</span>(<span class="number">200</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/27/rqJHypIw3ozu5Rf.png" alt="image-20211027151920347"></p>
+</li>
+<li><p>用户角色关联表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--   用户和角色的关联表</span></span><br><span class="line">  <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> user_role(</span><br><span class="line">    id <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY AUTO_INCREMENT,</span><br><span class="line">	uid <span class="type">INT</span>,  <span class="comment">-- 用户的编号`role`</span></span><br><span class="line">	rid <span class="type">INT</span>  <span class="comment">-- 角色的id </span></span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/27/zLcpYdwo92q3eK8.png" alt="image-20211027151927632"></p>
+</li>
+</ul>
+</li>
+<li><p>创建用户表，角色表对应的pojo层类</p>
+<ul>
+<li><p>User用户类需要实现接口UserDetails</p>
+<ul>
+<li><p>User类中还需要一个</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//一个用户可能有多个角色</span></span><br><span class="line"><span class="keyword">private</span> List&lt;Role&gt; roles;</span><br></pre></td></tr></table></figure></li>
+<li><p>重写接口方法</p>
+<p><img src="https://i.loli.net/2021/10/27/CMiZ4u5HY3OIVwx.png" alt="image-20211027153021666"></p>
+</li>
+</ul>
+</li>
+<li><p>Role角色表实体类正常创建</p>
+</li>
+</ul>
+</li>
+<li><p>创建Mapper层</p>
+<p><img src="https://i.loli.net/2021/10/27/HnAE6RTFzpfYGth.png" alt="image-20211027162322896"></p>
+<p><img src="https://i.loli.net/2021/10/27/y34G1Ered8jUHlV.png" alt="image-20211027162332604"></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span> <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span> &gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>创建Config层</p>
+<ul>
+<li><p>和基于内存/http一样，继承自WebSecurityConfigurerAdapter</p>
+</li>
+<li><p>注入userService层对象</p>
+</li>
+<li><p>Authentication认证从数据库中获取权限</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">auth.userDetailsService(usersService);</span><br></pre></td></tr></table></figure></li>
+<li><p>基于http的安全认证，根据数据库表修改用户名权限</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                                            <span class="comment">//表示访问admin/路径的必须要  ADMIN权限</span></span><br><span class="line">    http.authorizeRequests().antMatchers(<span class="string">&quot;admin/**&quot;</span>).access(<span class="string">&quot;hasAnyRole(&#x27;admin&#x27;)&quot;</span>)</span><br><span class="line">            .antMatchers(<span class="string">&quot;/user/**&quot;</span>).access(<span class="string">&quot;hasAnyRole(&#x27;admin&#x27;,&#x27;user&#x27;)&quot;</span>)</span><br><span class="line">            .antMatchers(<span class="string">&quot;/dba/**&quot;</span>).access(<span class="string">&quot;hasAnyRole(&#x27;admin&#x27;) and hasRole(&#x27;dba&#x27;)&quot;</span>).anyRequest().authenticated().and()</span><br><span class="line">            .formLogin().loginProcessingUrl(<span class="string">&quot;/login&quot;</span>).permitAll().and().cors().disable();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/27/fSqe6XLdVaRlzgp.png" alt="image-20211027154321211"></p>
+</li>
+</ul>
+</li>
+<li><p>创建Service层</p>
+<ul>
+<li>注入UserMapper</li>
+<li>实现接口UserDetailsService<ul>
+<li>重写一个方法（检索用户是否存在）<ul>
+<li>如果存在给予授权</li>
+<li>如果不存在抛出异常</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/27/ztep45PHDjkbmFU.png" alt="image-20211027155710132"></p>
+</li>
+<li><p>创建Controller层</p>
+<p><img src="https://i.loli.net/2021/10/27/Lyhq7iXgkBt3EeF.png" alt="image-20211027155754204"></p>
+</li>
+</ul>
+<h4 id="3-补充知识点"><a href="#3-补充知识点" class="headerlink" title="3.补充知识点"></a>3.补充知识点</h4><ul>
+<li><p>明文加密代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span></span>&#123;</span><br><span class="line">    BCryptPasswordEncoder encoder = <span class="keyword">new</span> BCryptPasswordEncoder();</span><br><span class="line">    System.out.println(encoder.encode(<span class="string">&quot;123456&quot;</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Security</tag>
+      </tags>
+  </entry>
 </search>
