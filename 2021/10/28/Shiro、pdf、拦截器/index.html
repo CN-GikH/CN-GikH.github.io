@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/CZ.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/CZ.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="学习SpringBoot中如何整合Shiro安全框架，学习如何使用java返回pdf文件，学习在SpringBoot中使用拦截器和servlet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shiro、pdf、拦截器">
+<meta property="og:url" content="http://example.com/2021/10/28/Shiro%E3%80%81pdf%E3%80%81%E6%8B%A6%E6%88%AA%E5%99%A8/index.html">
+<meta property="og:site_name" content="你的储物间_">
+<meta property="og:description" content="学习SpringBoot中如何整合Shiro安全框架，学习如何使用java返回pdf文件，学习在SpringBoot中使用拦截器和servlet">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/ia2VEjZvh8PHTQo.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/jtSGhgieuLFfs8X.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/KyhsLmNkgDoi5FW.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/rLyEYoAmOCBGKJZ.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/EDmtizTYUCuoeZd.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/5E2abFu3YlItHBL.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/Awvbm4t3Psha8HJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/HSrDwtN321kqXjL.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/lx5QMpu2iGHnIU7.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/4IVKk8fWBblLCy3.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/6p2F5ZAheR43djk.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/Gw7EBFkLnqsgaSh.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/vIKWTyOu9mfnJUS.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/YPfTVhONXDiwtGx.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/BN7oHKY1QELhjTJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/Dcw5U82ygPCbE1M.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/bakZXq3wM5rgz1h.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/hHR7ZpdD2nVufoc.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/RAQFujnDGpOX1yL.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/jZrNoWVxYzwlUgf.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/t7uEhXN6lYUDowa.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/GIX8ye6N1v2THdr.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/4oJz7kUtAql5Lcf.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/zXOCbvq2FhjG5o3.png">
+<meta property="og:image" content="https://i.loli.net/2021/10/28/5HuZUiPpqKv6OhN.png">
+<meta property="article:published_time" content="2021-10-28T11:14:06.000Z">
+<meta property="article:modified_time" content="2021-10-28T11:15:28.046Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="Shiro">
+<meta property="article:tag" content="PDF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/10/28/ia2VEjZvh8PHTQo.png">
+
+<link rel="canonical" href="http://example.com/2021/10/28/Shiro%E3%80%81pdf%E3%80%81%E6%8B%A6%E6%88%AA%E5%99%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Shiro、pdf、拦截器 | 你的储物间_</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">你的储物间_</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/28/Shiro%E3%80%81pdf%E3%80%81%E6%8B%A6%E6%88%AA%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你的储物间_">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Shiro、pdf、拦截器
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-28 19:14:06 / 修改时间：19:15:28" itemprop="dateCreated datePublished" datetime="2021-10-28T19:14:06+08:00">2021-10-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">Spring框架</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">8.6k</span> -->
+			  <span title="本文字数">
+                  685字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">学习SpringBoot中如何整合Shiro安全框架，学习如何使用java返回pdf文件，学习在SpringBoot中使用拦截器和servlet</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>SpringBoot整合Shiro</li>
+</ul>
+<h3 id="一、SpringBoot整合Shiro"><a href="#一、SpringBoot整合Shiro" class="headerlink" title="一、SpringBoot整合Shiro"></a>一、SpringBoot整合Shiro</h3><h4 id="1-什么是Shiro"><a href="#1-什么是Shiro" class="headerlink" title="1.什么是Shiro"></a>1.什么是Shiro</h4><p><img src="https://i.loli.net/2021/10/28/ia2VEjZvh8PHTQo.png" alt="image-20211028090125117"></p>
+<ul>
+<li><p>Subject：主体，就是请求的”用户”</p>
+</li>
+<li><p>Security Manager：就是Shiro的心脏</p>
+<ul>
+<li>管理所有的Subject，所有的访问（交互 ）都需要通过其进行拦截和控制<ul>
+<li>对其进行认证和授权</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Authenticator：认证器，负责主体的认证</p>
+<ul>
+<li>例如确认用户是否登录成功，我们可以使用shiro的方法<ul>
+<li>也可以自定义</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Authorizer：授权器，权限授予，给Subject分类权限</p>
+</li>
+<li><p>Session Manager：会话管理，shiro自己实现的，和我们以前用的HttpSession没有关系</p>
+</li>
+<li><p>Pluggable <font color='#d15252'>Realms</font></p>
+<ul>
+<li>需要我们自己去实现的</li>
+<li>以登陆为例，我们的账号、密码需要提供</li>
+</ul>
+</li>
+<li><p>Session Dao：对Session进行crud操作的</p>
+</li>
+<li><p>Cache Manager：缓存控制器</p>
+<ul>
+<li>管理用户、角色、权限的缓存信息</li>
+</ul>
+</li>
+<li><p>Cryptography：密码模块</p>
+<ul>
+<li>shiro中提供了一些密码的加密、解密策略</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-boot中使用shiro"><a href="#2-boot中使用shiro" class="headerlink" title="2.boot中使用shiro"></a>2.boot中使用shiro</h4><ul>
+<li><p>添加依赖</p>
+<p><img src="https://i.loli.net/2021/10/28/jtSGhgieuLFfs8X.png" alt="image-20211028092023125"></p>
+<p><img src="https://i.loli.net/2021/10/28/KyhsLmNkgDoi5FW.png" alt="image-20211028092116453"></p>
+</li>
+<li><p>配置application.properties</p>
+<p><img src="https://i.loli.net/2021/10/28/rLyEYoAmOCBGKJZ.png" alt="image-20211028092754725"></p>
+</li>
+<li><p>创建shiroConfig类（shiro配置类）</p>
+<ul>
+<li><p>定义两个Bean</p>
+<ul>
+<li><p>Realm：提供账号密码的</p>
+<p><img src="https://i.loli.net/2021/10/28/EDmtizTYUCuoeZd.png" alt="image-20211028093620918"></p>
+</li>
+<li><p>ShiroDialect ：为了thymeleaf中使用shiro类</p>
+<p><img src="https://i.loli.net/2021/10/28/5E2abFu3YlItHBL.png" alt="image-20211028093833659"></p>
+</li>
+</ul>
+</li>
+<li><p>处理路径问题</p>
+<p><img src="https://i.loli.net/2021/10/28/Awvbm4t3Psha8HJ.png" alt="image-20211028094515340"></p>
+</li>
+</ul>
+</li>
+<li><p>创建WebMvcConfig类，实现WebMvcConfigurer接口</p>
+<ul>
+<li><p>重写addViewControllers方法</p>
+<p><img src="https://i.loli.net/2021/10/28/HSrDwtN321kqXjL.png" alt="image-20211028095014220"></p>
+</li>
+</ul>
+</li>
+<li><p>创建ExceptionController类</p>
+<ul>
+<li>使用注解@ControllerAdvice （控制器通知）</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/28/lx5QMpu2iGHnIU7.png" alt="image-20211028101040635"></p>
+</li>
+<li><p>创建UserController控制器类</p>
+<ul>
+<li>提供登录doLogin方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/28/4IVKk8fWBblLCy3.png" alt="image-20211028114222090"></p>
+<ul>
+<li><p>提供管理员页面跳转控制</p>
+</li>
+<li><p>提供普通用户页面跳转控制</p>
+<p><img src="https://i.loli.net/2021/10/28/6p2F5ZAheR43djk.png" alt="image-20211028125752118"></p>
+</li>
+</ul>
+</li>
+<li><p>创建idex.html页面</p>
+<p><img src="https://i.loli.net/2021/10/28/Gw7EBFkLnqsgaSh.png" alt="image-20211028103255799"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlns:shiro=&quot;http://www.pollix.at/thymeleaf/shiro&quot;</span><br></pre></td></tr></table></figure></li>
+<li><p>创建login.html页面</p>
+<p><img src="https://i.loli.net/2021/10/28/vIKWTyOu9mfnJUS.png" alt="image-20211028114454133"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlns:th=&quot;http://www.thymeleaf.org&quot;</span><br></pre></td></tr></table></figure></li>
+<li><p>创建admin.html和user.html、unautthorrized页面</p>
+</li>
+</ul>
+<h3 id="二、视图和视图解析器"><a href="#二、视图和视图解析器" class="headerlink" title="二、视图和视图解析器"></a>二、视图和视图解析器</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li><p>视图</p>
+<ul>
+<li>逻辑视图</li>
+<li>非逻辑视图</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h4 id="2-返回pdf文件步骤"><a href="#2-返回pdf文件步骤" class="headerlink" title="2.返回pdf文件步骤"></a>2.返回pdf文件步骤</h4><ul>
+<li><p>导入依赖</p>
+<p><img src="https://i.loli.net/2021/10/28/YPfTVhONXDiwtGx.png" alt="image-20211028134359269"></p>
+</li>
+<li><p>获取数据库数据，得到集合（暂时用打桩数据）</p>
+</li>
+<li><p>创建Service层</p>
+<ul>
+<li>接口</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/28/BN7oHKY1QELhjTJ.png" alt="image-20211028135040295"></p>
+</li>
+<li><p>创建实体类PdfView</p>
+<p><img src="https://i.loli.net/2021/10/28/Dcw5U82ygPCbE1M.png" alt="image-20211028135406687"></p>
+</li>
+</ul>
+<ul>
+<li><p>创建实体类User</p>
+<p><img src="https://i.loli.net/2021/10/28/bakZXq3wM5rgz1h.png" alt="image-20211028140809196"></p>
+</li>
+<li><p>创建控制器</p>
+<p><img src="https://i.loli.net/2021/10/28/hHR7ZpdD2nVufoc.png" alt="image-20211028182953624"></p>
+<p><img src="https://i.loli.net/2021/10/28/RAQFujnDGpOX1yL.png" alt="image-20211028183001116"></p>
+<p><img src="https://i.loli.net/2021/10/28/jZrNoWVxYzwlUgf.png" alt="image-20211028183016249"></p>
+<p><img src="https://i.loli.net/2021/10/28/t7uEhXN6lYUDowa.png" alt="image-20211028183030914"></p>
+</li>
+</ul>
+<h3 id="三、在SpringBoot中使用拦截器"><a href="#三、在SpringBoot中使用拦截器" class="headerlink" title="三、在SpringBoot中使用拦截器"></a>三、在SpringBoot中使用拦截器</h3><h4 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h4><ul>
+<li><p>不需要添加依赖</p>
+</li>
+<li><p>创建拦截器<font color='#d15252'>配置</font>类InterceptorConfig</p>
+<ul>
+<li>继承接口WebMvcConfigurer</li>
+<li>实现addInterceptors方法<ul>
+<li>配置需要拦截的路径，所有的请求都需要拦截</li>
+<li>配置不需要拦截的路径</li>
+<li>使用<font color='#d15252'>registry</font>注册拦截器（拦截器自己创建）</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/28/GIX8ye6N1v2THdr.png" alt="image-20211028190430361"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InterceptorConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//配置需要拦截的路径  所有的请求都需要拦截</span></span><br><span class="line">        String [] addPathPatterns=&#123;<span class="string">&quot;/**&quot;</span>&#125;;</span><br><span class="line">        <span class="comment">//不需要拦截的路径</span></span><br><span class="line">        String [] excludePathPatterns = &#123;<span class="string">&quot;/boot/get&quot;</span>,<span class="string">&quot;/boot/post&quot;</span>&#125;;</span><br><span class="line">        <span class="comment">//注册拦截器（登录的拦截器）</span></span><br><span class="line">        registry.addInterceptor(<span class="keyword">new</span> LoginInterceptor())</span><br><span class="line">                .addPathPatterns(addPathPatterns).</span><br><span class="line">                excludePathPatterns(excludePathPatterns);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>创建拦截器类LoginInterceptor</p>
+<ul>
+<li>继承接口HandlerInterceptor</li>
+<li>重写preHandle方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/28/4oJz7kUtAql5Lcf.png" alt="image-20211028190534477"></p>
+</li>
+<li><p>创建Controller类，测试拦截器是否生效</p>
+<p><img src="https://i.loli.net/2021/10/28/zXOCbvq2FhjG5o3.png" alt="image-20211028190638592"></p>
+</li>
+</ul>
+<h3 id="四、在Spring中使用servlet"><a href="#四、在Spring中使用servlet" class="headerlink" title="四、在Spring中使用servlet"></a>四、在Spring中使用servlet</h3><ul>
+<li>创建servlet包<ul>
+<li>创建Myservlet类<ul>
+<li>继承HttpServlet<ul>
+<li>添加@WebServlet注解<ul>
+<li>重写doGet、doPost方法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>直接通过注解起的value值访问即可</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/28/5HuZUiPpqKv6OhN.png" alt="image-20211028190810249"></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/10/28/Shiro%E3%80%81pdf%E3%80%81%E6%8B%A6%E6%88%AA%E5%99%A8/" title="Shiro、pdf、拦截器">http://example.com/2021/10/28/Shiro、pdf、拦截器/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SpringBoot/" rel="tag"><i class="fa fa-tag"></i># SpringBoot</a>
+              <a href="/tags/Shiro/" rel="tag"><i class="fa fa-tag"></i># Shiro</a>
+              <a href="/tags/PDF/" rel="tag"><i class="fa fa-tag"></i># PDF</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/27/SpringBoot%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86/" rel="prev" title="SpringBoot安全管理">
+      <i class="fa fa-chevron-left"></i> SpringBoot安全管理
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81SpringBoot%E6%95%B4%E5%90%88Shiro"><span class="nav-number">1.1.</span> <span class="nav-text">一、SpringBoot整合Shiro</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFShiro"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.什么是Shiro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-boot%E4%B8%AD%E4%BD%BF%E7%94%A8shiro"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.boot中使用shiro</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%A7%86%E5%9B%BE%E5%92%8C%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">二、视图和视图解析器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%BF%94%E5%9B%9Epdf%E6%96%87%E4%BB%B6%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.返回pdf文件步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%9C%A8SpringBoot%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">1.3.</span> <span class="nav-text">三、在SpringBoot中使用拦截器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="nav-number">1.3.1.</span> <span class="nav-text">拦截器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%9C%A8Spring%E4%B8%AD%E4%BD%BF%E7%94%A8servlet"><span class="nav-number">1.4.</span> <span class="nav-text">四、在Spring中使用servlet</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://z3.ax1x.com/2021/08/24/hF9Mgx.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">102</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">164k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:29</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共74.5k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
