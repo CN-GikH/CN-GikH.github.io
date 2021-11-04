@@ -888,6 +888,147 @@
       </tags>
   </entry>
   <entry>
+    <title>ArrayList集合和方法练习</title>
+    <url>/2021/08/25/ArrayList%E9%9B%86%E5%90%88%E5%92%8C%E6%96%B9%E6%B3%95%E7%BB%83%E4%B9%A0/</url>
+    <content><![CDATA[<h3 id="一、练习"><a href="#一、练习" class="headerlink" title="一、练习"></a>一、练习</h3><h4 id="1-编写思路"><a href="#1-编写思路" class="headerlink" title="1.编写思路"></a>1.编写思路</h4><ul>
+<li>创建项目，测试环境</li>
+<li>需求分析</li>
+<li>先实现菜单<ul>
+<li>创建菜单方法<ul>
+<li>方法位置：并列</li>
+<li>格式：修饰符 返回值类型 方法名（）{  }</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实现菜单的选择<ul>
+<li>创建判断键盘录入选择的方法</li>
+<li>调用menu方法，实现每次选择时，展示菜单</li>
+<li>Scanner  三个步骤，录入键盘数据</li>
+<li>调用加载数据的方法，并创建一个数组名保存</li>
+<li>if+else if 实现键盘录入数据的判断</li>
+<li>设置死循环，实现菜单的重复选择</li>
+<li>当a=5时，退出，break;</li>
+</ul>
+</li>
+<li>实现加载数据<ul>
+<li>创建加载数据方法</li>
+<li>定义一个数组并初始化数据</li>
+<li>return返回值arr数组，返回值类型int[]</li>
+</ul>
+</li>
+<li>实现具体的选择项的功能（查看）<ul>
+<li>当choose方法中录入键盘数据为1时</li>
+<li>调用show方法，并传递参数arr</li>
+</ul>
+</li>
+<li>实现查看功能<ul>
+<li>定义方法</li>
+<li>定义一个数组参数，用于接收数据</li>
+<li>用for循环遍历数组</li>
+<li>if判断不是0再输出</li>
+</ul>
+</li>
+<li>实现修改功能<ul>
+<li>定义方法</li>
+<li>键盘录入要修改的id</li>
+<li>for循环遍历数组，IF查找有没有匹配的id<ul>
+<li>在方法定义中，添加参数int[] arr ，用于接收数组</li>
+</ul>
+</li>
+<li>在choose方法中，当选择2时，调用修改方法，并且传递参数–数组</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-内存图"><a href="#2-内存图" class="headerlink" title="2.内存图"></a>2.内存图</h4><img src="https://i.loli.net/2021/07/23/8KSZyjmXNIGYVeT.png" alt="image-20210723153545299" style="zoom:200%;" />
+
+
+
+<h3 id="二、ArrayList集合"><a href="#二、ArrayList集合" class="headerlink" title="二、ArrayList集合"></a>二、<font color='#d15252'>ArrayList</font>集合</h3><ul>
+<li>变量：存一个数</li>
+<li>数组：多个数，但长度固定</li>
+<li>集合ArrayList</li>
+</ul>
+<h4 id="1-ArrayList的概念"><a href="#1-ArrayList的概念" class="headerlink" title="1.ArrayList的概念"></a>1.ArrayList的概念</h4><ul>
+<li>什么是ArrayList?<ul>
+<li>是一个容器，<font color='#d15252'>长度不固定</font></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-ArrayList的使用"><a href="#2-ArrayList的使用" class="headerlink" title="2.ArrayList的使用"></a>2.ArrayList的使用</h4><h5 id="①使用前的准备"><a href="#①使用前的准备" class="headerlink" title="①使用前的准备"></a>①使用前的准备</h5><ul>
+<li><p>导包</p>
+</li>
+<li><p><code>import java.util.ArrayList;</code></p>
+</li>
+<li><p>加载进内存</p>
+<ul>
+<li><code>ArrayList&lt;数据类型&gt;变量名 = new ArrayList();</code><ul>
+<li>数据类型：不能用int ，而是要用 <code>Integer</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="②具体使用"><a href="#②具体使用" class="headerlink" title="②具体使用"></a>②具体使用</h5><ul>
+<li><p>添加</p>
+<ul>
+<li>使用 <code>add();</code> 方法<ul>
+<li><code>例：list.add(12); -----&gt;存入12进集合</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>删除</p>
+<ul>
+<li>使用 <code>remove();</code> 方法<ul>
+<li><code>例：list.remove(1); ----&gt;删除索引为1的数据</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>获取</p>
+<ul>
+<li><p>使用 <code>get(索引);</code> 方法</p>
+<ul>
+<li><p>单独调用（无意义）</p>
+<ul>
+<li><code>例：list.get(1); ----&gt;取出索引为1的数据</code></li>
+</ul>
+</li>
+<li><p>输出调用</p>
+<ul>
+<li><code>例：System.out.println(list.get(2))---&gt;直接输出索引2数据</code></li>
+</ul>
+</li>
+<li><p>赋值调用</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = list.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(a);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>长度</p>
+<ul>
+<li>使用 <code>size();</code> 方法</li>
+</ul>
+</li>
+<li><p>更新</p>
+<ul>
+<li><p>使用 <code>set();</code>方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">id.set(索引，新的数值);</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>ArrayList</tag>
+        <tag>方法</tag>
+        <tag>增查删改</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cookie、Session、JSP</title>
     <url>/2021/09/03/Cookie%E3%80%81Session%E3%80%81JSP/</url>
     <content><![CDATA[<h3 id="一、状态管理"><a href="#一、状态管理" class="headerlink" title="一、状态管理"></a>一、状态管理</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
@@ -1091,147 +1232,6 @@
         <tag>session</tag>
         <tag>jsp:javabeen</tag>
         <tag>MVC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ArrayList集合和方法练习</title>
-    <url>/2021/08/25/ArrayList%E9%9B%86%E5%90%88%E5%92%8C%E6%96%B9%E6%B3%95%E7%BB%83%E4%B9%A0/</url>
-    <content><![CDATA[<h3 id="一、练习"><a href="#一、练习" class="headerlink" title="一、练习"></a>一、练习</h3><h4 id="1-编写思路"><a href="#1-编写思路" class="headerlink" title="1.编写思路"></a>1.编写思路</h4><ul>
-<li>创建项目，测试环境</li>
-<li>需求分析</li>
-<li>先实现菜单<ul>
-<li>创建菜单方法<ul>
-<li>方法位置：并列</li>
-<li>格式：修饰符 返回值类型 方法名（）{  }</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>实现菜单的选择<ul>
-<li>创建判断键盘录入选择的方法</li>
-<li>调用menu方法，实现每次选择时，展示菜单</li>
-<li>Scanner  三个步骤，录入键盘数据</li>
-<li>调用加载数据的方法，并创建一个数组名保存</li>
-<li>if+else if 实现键盘录入数据的判断</li>
-<li>设置死循环，实现菜单的重复选择</li>
-<li>当a=5时，退出，break;</li>
-</ul>
-</li>
-<li>实现加载数据<ul>
-<li>创建加载数据方法</li>
-<li>定义一个数组并初始化数据</li>
-<li>return返回值arr数组，返回值类型int[]</li>
-</ul>
-</li>
-<li>实现具体的选择项的功能（查看）<ul>
-<li>当choose方法中录入键盘数据为1时</li>
-<li>调用show方法，并传递参数arr</li>
-</ul>
-</li>
-<li>实现查看功能<ul>
-<li>定义方法</li>
-<li>定义一个数组参数，用于接收数据</li>
-<li>用for循环遍历数组</li>
-<li>if判断不是0再输出</li>
-</ul>
-</li>
-<li>实现修改功能<ul>
-<li>定义方法</li>
-<li>键盘录入要修改的id</li>
-<li>for循环遍历数组，IF查找有没有匹配的id<ul>
-<li>在方法定义中，添加参数int[] arr ，用于接收数组</li>
-</ul>
-</li>
-<li>在choose方法中，当选择2时，调用修改方法，并且传递参数–数组</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-内存图"><a href="#2-内存图" class="headerlink" title="2.内存图"></a>2.内存图</h4><img src="https://i.loli.net/2021/07/23/8KSZyjmXNIGYVeT.png" alt="image-20210723153545299" style="zoom:200%;" />
-
-
-
-<h3 id="二、ArrayList集合"><a href="#二、ArrayList集合" class="headerlink" title="二、ArrayList集合"></a>二、<font color='#d15252'>ArrayList</font>集合</h3><ul>
-<li>变量：存一个数</li>
-<li>数组：多个数，但长度固定</li>
-<li>集合ArrayList</li>
-</ul>
-<h4 id="1-ArrayList的概念"><a href="#1-ArrayList的概念" class="headerlink" title="1.ArrayList的概念"></a>1.ArrayList的概念</h4><ul>
-<li>什么是ArrayList?<ul>
-<li>是一个容器，<font color='#d15252'>长度不固定</font></li>
-</ul>
-</li>
-</ul>
-<h4 id="2-ArrayList的使用"><a href="#2-ArrayList的使用" class="headerlink" title="2.ArrayList的使用"></a>2.ArrayList的使用</h4><h5 id="①使用前的准备"><a href="#①使用前的准备" class="headerlink" title="①使用前的准备"></a>①使用前的准备</h5><ul>
-<li><p>导包</p>
-</li>
-<li><p><code>import java.util.ArrayList;</code></p>
-</li>
-<li><p>加载进内存</p>
-<ul>
-<li><code>ArrayList&lt;数据类型&gt;变量名 = new ArrayList();</code><ul>
-<li>数据类型：不能用int ，而是要用 <code>Integer</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="②具体使用"><a href="#②具体使用" class="headerlink" title="②具体使用"></a>②具体使用</h5><ul>
-<li><p>添加</p>
-<ul>
-<li>使用 <code>add();</code> 方法<ul>
-<li><code>例：list.add(12); -----&gt;存入12进集合</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>删除</p>
-<ul>
-<li>使用 <code>remove();</code> 方法<ul>
-<li><code>例：list.remove(1); ----&gt;删除索引为1的数据</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>获取</p>
-<ul>
-<li><p>使用 <code>get(索引);</code> 方法</p>
-<ul>
-<li><p>单独调用（无意义）</p>
-<ul>
-<li><code>例：list.get(1); ----&gt;取出索引为1的数据</code></li>
-</ul>
-</li>
-<li><p>输出调用</p>
-<ul>
-<li><code>例：System.out.println(list.get(2))---&gt;直接输出索引2数据</code></li>
-</ul>
-</li>
-<li><p>赋值调用</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = list.get(<span class="number">0</span>);</span><br><span class="line">System.out.println(a);</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>长度</p>
-<ul>
-<li>使用 <code>size();</code> 方法</li>
-</ul>
-</li>
-<li><p>更新</p>
-<ul>
-<li><p>使用 <code>set();</code>方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">id.set(索引，新的数值);</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>ArrayList</tag>
-        <tag>方法</tag>
-        <tag>增查删改</tag>
       </tags>
   </entry>
   <entry>
@@ -2786,351 +2786,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Maven</title>
-    <url>/2021/09/29/Maven/</url>
-    <content><![CDATA[<h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
-<li>Maven </li>
-</ul>
-<h3 id="一、Maven"><a href="#一、Maven" class="headerlink" title="一、Maven"></a>一、Maven</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
-<li>Apache产品</li>
-<li>Maven是一个项目管理工具，可以对Java项目进行构建、依赖管理</li>
-</ul>
-<h4 id="2-下载"><a href="#2-下载" class="headerlink" title="2.下载"></a>2.下载</h4><p><a href="https://maven.apache.org/download.cgi">Maven – Download Apache Maven</a></p>
-<h4 id="3-安装"><a href="#3-安装" class="headerlink" title="3.安装"></a>3.安装</h4><ul>
-<li><p>绿色软件</p>
-</li>
-<li><p>动态获取方式配置环境变量（必须配置好jdk的环境变量）</p>
-<ul>
-<li><p>添加MAVEN_HOMT环境变量，存放解压maven的地址</p>
-</li>
-<li><p>在PATH环境变量中添加</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%MAVEN_HOME%\bin</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/nHyf3ejgoqBM19F.png" alt="image-20210923202621165"></p>
-<h3 id="二、Maven仓库"><a href="#二、Maven仓库" class="headerlink" title="二、Maven仓库"></a>二、Maven仓库</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
-<li><p>Maven仓库是项目中依赖的第三方库</p>
-<ul>
-<li>存各种依赖（jar包）<ul>
-<li>主要是jar，还有war,zip等</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>仓库的分类</p>
-<ul>
-<li><p>本地</p>
-<p><img src="https://i.loli.net/2021/09/23/o82E6H4tTbXUCQc.png" alt="image-20210923092716648"></p>
-<ul>
-<li>第一次执行maven命令时创建</li>
-<li>maven的安装设备</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/y5IVlAFEW2LHrTz.png" alt="image-20210923092548630"></p>
-</li>
-<li><p>中央</p>
-<p><img src="https://i.loli.net/2021/09/23/SVCEct2z4YvfnZJ.png" alt="image-20210923092918607"></p>
-<ul>
-<li>由Maven社区提供的仓库，提供了一个URL，使用中央仓库</li>
-<li><a href="http://search.maven.org/#browse">http://search.maven.org/#browse</a></li>
-<li>当本地仓库找不到我们想要的依赖，需要去中央仓库下载（公司服务器）</li>
-</ul>
-</li>
-<li><p>远程</p>
-<ul>
-<li>国外</li>
-<li>阿里</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-本地仓库设置"><a href="#2-本地仓库设置" class="headerlink" title="2.本地仓库设置"></a>2.本地仓库设置</h4><ul>
-<li><p>解压maven安装包</p>
-</li>
-<li><p>在我们的本地创建一个目录为repository作为本地仓库</p>
-</li>
-<li><p>修改配置文件</p>
-<ul>
-<li><p>修改本地仓库的路径</p>
-<ul>
-<li>这里的路径填写创建repository文件的位置</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>D:\Maven\repository<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>修改mirror  –&gt; 远程仓库的路径</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span>            </span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span>          			<span class="tag">&lt;<span class="name">name</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span>       	    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span>  <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span>           <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h3 id="三、创建Maven项目"><a href="#三、创建Maven项目" class="headerlink" title="三、创建Maven项目"></a>三、创建Maven项目</h3><ul>
-<li>创建Maven项目</li>
-<li>找到seting —&gt; maven</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/SevJ6xTCO41VQPA.png" alt="image-20210923095041050"></p>
-<ul>
-<li>设置maven的安装目录（解压目录）</li>
-<li>选择maven我们修改好的配置文件</li>
-<li>选择本地仓库位置<ul>
-<li>需要注意的是，这里本地仓库的位置需要和Setting中设定的本地仓库位置一致，不然会报错</li>
-</ul>
-</li>
-</ul>
-<h3 id="四、改造Maven项目-JavaEE"><a href="#四、改造Maven项目-JavaEE" class="headerlink" title="四、改造Maven项目(JavaEE)"></a>四、改造Maven项目(JavaEE)</h3><h4 id="1-新建web项目"><a href="#1-新建web项目" class="headerlink" title="1.新建web项目"></a>1.新建web项目</h4><ul>
-<li><p>新建目录webapp</p>
-<ul>
-<li><p>选择项目结构，选择Facets，添加web工程</p>
-<p><img src="https://i.loli.net/2021/09/23/UoryOBj2Hd5WMzs.png" alt="image-20210923203110680"></p>
-</li>
-<li><p>选择在已有项目中添加</p>
-<p><img src="https://i.loli.net/2021/09/23/DScwIzvrU1mAdBC.png" alt="image-20210923203132532"></p>
-</li>
-<li><p>修改新建web项目的路径</p>
-<ul>
-<li>项目名\web项目名\WEB-INF\ <font color='#d15252'>web.xml</font><ul>
-<li>不要忘记web.xml配置文件</li>
-</ul>
-</li>
-<li>下面的路径和上方相同，选择web项目路径即可</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/guzOk5RAspGLQVy.png" alt="image-20210923203204132"></p>
-</li>
-<li><p>如果创建WEB项目时出错，不要修改，直接删除，重新创建</p>
-</li>
-</ul>
-</li>
-<li><p>添加依赖</p>
-<ul>
-<li>Jar包都是有坐标的，当使用中央仓库或远程仓库时，有很多Jar包<ul>
-<li>公司名：<ul>
-<li>依赖的名称</li>
-<li>依赖的版本号</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>在pom.xml文件中，添加需要依赖的jar包</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/VqG4iTPKpgNrbMw.png" alt="image-20210923103218412"></p>
-<ul>
-<li>添加Tomcat，暂时用传统的方式<ul>
-<li>需要添加项目结构中Artifacts中WEB应用</li>
-<li><img src="https://i.loli.net/2021/09/23/PnAyVorhUaKS9j4.png" alt="image-20210923204619333"></li>
-</ul>
-</li>
-</ul>
-<h4 id="2-修改默认项目maven地址"><a href="#2-修改默认项目maven地址" class="headerlink" title="2.修改默认项目maven地址"></a>2.修改默认项目maven地址</h4><ul>
-<li><p>修改新建项目时，默认的maven配置</p>
-<ul>
-<li>节省时间，不用每次新建项目重新配置maven项目</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/M4tlaAKBEfyoLGR.png" alt="image-20210923202937432"></p>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/1Pj8MFywphgKmlJ.png" alt="image-20210923202951508"></p>
-<h3 id="五、使用Maven模板"><a href="#五、使用Maven模板" class="headerlink" title="五、使用Maven模板"></a>五、使用Maven模板</h3><h4 id="1-步骤"><a href="#1-步骤" class="headerlink" title="1.步骤"></a>1.步骤</h4><ul>
-<li>新建Maven工程<ul>
-<li>也可以新建空项目，配置环境之后，添加Maven模块 </li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/qzAPf4R3ILZEQkb.png" alt="image-20210923205116729"></p>
-<ul>
-<li>quickstrat：创建普通项目</li>
-<li>maven-webabb：创建Web项目<ul>
-<li>cocoon-22也要webapp，不使用它</li>
-</ul>
-</li>
-</ul>
-<h3 id="六、细节"><a href="#六、细节" class="headerlink" title="六、细节"></a>六、细节</h3><h4 id="1-修剪pom文件"><a href="#1-修剪pom文件" class="headerlink" title="1.修剪pom文件"></a>1.修剪pom文件</h4><p><img src="https://i.loli.net/2021/09/23/E71VO5oyHNZQwgk.png" alt="image-20210923210337197"></p>
-<ul>
-<li>maven版本号，可要可不要</li>
-<li>下面四个必须有<ul>
-<li>packaging表示以后将其打成war包</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/vgi13dVo6NUPZz7.png" alt="image-20210923210445020"></p>
-<ul>
-<li>可以不要</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/nysqw7Al4Pi2OTx.png" alt="image-20210923210508494"></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>表示你的maven版本用的是哪一个<font color='#d15252'>jdk</font></p>
-<ul>
-<li>这里设置的jdk只对当前有效</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/gwDJ6tlbzOa1UBs.png" alt="image-20210923210559866"></p>
-<ul>
-<li>也可以删除，但是需要修改设置，改为当前你使用的jdk版本</li>
-<li>一劳永逸</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/E5YNOTKZ3AqBUfj.png" alt="image-20210923210710499"></p>
-<ul>
-<li>junit依赖，可以删除</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/qScZdukRQKB5Lx4.png" alt="image-20210923210734303"></p>
-<ul>
-<li>build依赖，暂时没学，删掉</li>
-</ul>
-<h4 id="2-pom文件"><a href="#2-pom文件" class="headerlink" title="2.pom文件"></a>2.pom文件</h4><h5 id="Ⅰ-依赖"><a href="#Ⅰ-依赖" class="headerlink" title="Ⅰ.依赖"></a>Ⅰ.依赖</h5><ul>
-<li>依赖类似于Jar包</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 在这里添加你的依赖 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ldapjdk<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  <span class="comment">&lt;!-- 库名称，也可以自定义 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ldapjdk<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>    <span class="comment">&lt;!--库名称，也可以自定义--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="comment">&lt;!--版本号--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span> <span class="comment">&lt;!--作用域--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;basedir&#125;\src\lib\ldapjdk.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span> <span class="comment">&lt;!--项目根目录下的lib文件夹下--&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>如果要添加多个依赖，在dependencies标签中添加多个dependency即可</li>
-</ul>
-<h6 id="依赖的三种导入方法"><a href="#依赖的三种导入方法" class="headerlink" title="依赖的三种导入方法"></a>依赖的三种导入方法</h6><ul>
-<li><p>maven中查找Jar包坐标</p>
-<ul>
-<li>可以百度</li>
-<li>也可以在maven官网依赖库中搜索 <a href="https://mvnrepository.com/">https://mvnrepository.com/</a></li>
-<li>idea自带，鼠标右击，选择Generate，选择Dependency<ul>
-<li>搜索想要依赖即可</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>导入新的依赖后，记得刷新Maven项目，进行下载</p>
-</li>
-</ul>
-<h5 id="Ⅱ-插件"><a href="#Ⅱ-插件" class="headerlink" title="Ⅱ.插件"></a>Ⅱ.插件</h5><ul>
-<li>插件类似于软件</li>
-</ul>
-<p>Maven提供了两种类型的插件</p>
-<ul>
-<li>Build plugins<ul>
-<li> 在构建时执行，并在 pom.xml 的 元素中配置</li>
-</ul>
-</li>
-<li>Reporting plugins<ul>
-<li>在网站生成过程中执行，并在 pom.xml 的 元素中配置</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>官网查找插件<ul>
-<li><a href="https://maven.apache.org/plugins/">Maven – Available Plugins (apache.org)</a></li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/JQtvn1BEzDY5Moj.png" alt="image-20210923211953980"></p>
-<ul>
-<li><p>在pom.xml文件中使用插件</p>
-<p><img src="https://i.loli.net/2021/09/23/3IfH4bKrJGgAQk2.png" alt="image-20210923212746432"></p>
-</li>
-</ul>
-<h3 id="七、Maven的常用命令"><a href="#七、Maven的常用命令" class="headerlink" title="七、Maven的常用命令"></a>七、Maven的常用命令</h3><h4 id="1-Maven的生命周期"><a href="#1-Maven的生命周期" class="headerlink" title="1.Maven的生命周期"></a>1.Maven的生命周期</h4><ul>
-<li>清理 — 编译 — 测试 — 报告 — 打包 — 部署</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/23/KTnW4SZY5hazivV.png" alt="image-20210923213703484"></p>
-<h4 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2.常用命令"></a>2.常用命令</h4><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>clean</td>
-<td>清理target目录</td>
-</tr>
-<tr>
-<td>compile</td>
-<td>完成编译target目录</td>
-</tr>
-<tr>
-<td>test</td>
-<td>进行测试，target下生成三个目录（测试报告）</td>
-</tr>
-<tr>
-<td>package</td>
-<td>打包项目，放在target目录下</td>
-</tr>
-<tr>
-<td>install</td>
-<td>将打包好的包安装到本地仓库中</td>
-</tr>
-</tbody></table>
-<ul>
-<li>target目录类似于Java中的Out根目录</li>
-</ul>
-<h4 id="3-依赖管理"><a href="#3-依赖管理" class="headerlink" title="3.依赖管理"></a>3.依赖管理</h4><h5 id="Ⅰ-依赖的传递性"><a href="#Ⅰ-依赖的传递性" class="headerlink" title="Ⅰ.依赖的传递性"></a>Ⅰ.依赖的<font color='#d15252'>传递性</font></h5><ul>
-<li>如果多个模块之间具有耦合性，比如一个模块需要依赖另外一个模块的Jar包<ul>
-<li>可以直接复制依赖的坐标进行使用</li>
-</ul>
-</li>
-</ul>
-<h5 id="Ⅱ-依赖的可选性"><a href="#Ⅱ-依赖的可选性" class="headerlink" title="Ⅱ.依赖的可选性"></a>Ⅱ.依赖的可选性</h5><ul>
-<li><p>即让依赖只能在本模块中使用</p>
-</li>
-<li><p>在依赖中添加</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>为依赖添加可选性，添加之后，别的模块不能通过坐标使用该依赖</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/24/MSpqWZRPgNldY4u.png" alt="image-20210924172912820"></p>
-<h5 id="Ⅲ-依赖的筛选"><a href="#Ⅲ-依赖的筛选" class="headerlink" title="Ⅲ.依赖的筛选"></a>Ⅲ.依赖的筛选</h5><ul>
-<li><p>如果不想使用模块中的其中某一个依赖，可以通过依赖筛选做到</p>
-</li>
-<li><p>在依赖中添加</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span><span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span><span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span><span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="4-依赖的范围"><a href="#4-依赖的范围" class="headerlink" title="4.依赖的范围"></a>4.依赖的范围</h4><ul>
-<li>作用域</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>scope作用域</th>
-<th>main</th>
-<th>test（测试模块）</th>
-<th>package</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>compile（默认）</td>
-<td>T</td>
-<td>T</td>
-<td>T</td>
-</tr>
-<tr>
-<td>test</td>
-<td></td>
-<td>T</td>
-<td></td>
-</tr>
-<tr>
-<td>provided</td>
-<td>T</td>
-<td>T</td>
-<td></td>
-</tr>
-<tr>
-<td>runtime</td>
-<td></td>
-<td></td>
-<td>T</td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>Maven</category>
-      </categories>
-      <tags>
-        <tag>Maven</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java链接数据库</title>
     <url>/2021/08/25/Java%E9%93%BE%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
     <content><![CDATA[<h3 id="一、Java链接数据库（Mysql）步骤"><a href="#一、Java链接数据库（Mysql）步骤" class="headerlink" title="一、Java链接数据库（Mysql）步骤"></a>一、Java链接数据库（Mysql）步骤</h3><h4 id="1-第一步：创建项目，并进行测试"><a href="#1-第一步：创建项目，并进行测试" class="headerlink" title="1.第一步：创建项目，并进行测试"></a>1.第一步：创建项目，并进行测试</h4><h4 id="2-第二步：找公司（jar）压缩包-jar"><a href="#2-第二步：找公司（jar）压缩包-jar" class="headerlink" title="2.第二步：找公司（jar）压缩包.jar"></a>2.第二步：找公司（jar）压缩包.jar</h4><ul>
@@ -3577,6 +3232,351 @@
       </categories>
       <tags>
         <tag>Mybatis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Maven</title>
+    <url>/2021/09/29/Maven/</url>
+    <content><![CDATA[<h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>Maven </li>
+</ul>
+<h3 id="一、Maven"><a href="#一、Maven" class="headerlink" title="一、Maven"></a>一、Maven</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a>1.概述</h4><ul>
+<li>Apache产品</li>
+<li>Maven是一个项目管理工具，可以对Java项目进行构建、依赖管理</li>
+</ul>
+<h4 id="2-下载"><a href="#2-下载" class="headerlink" title="2.下载"></a>2.下载</h4><p><a href="https://maven.apache.org/download.cgi">Maven – Download Apache Maven</a></p>
+<h4 id="3-安装"><a href="#3-安装" class="headerlink" title="3.安装"></a>3.安装</h4><ul>
+<li><p>绿色软件</p>
+</li>
+<li><p>动态获取方式配置环境变量（必须配置好jdk的环境变量）</p>
+<ul>
+<li><p>添加MAVEN_HOMT环境变量，存放解压maven的地址</p>
+</li>
+<li><p>在PATH环境变量中添加</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%MAVEN_HOME%\bin</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/nHyf3ejgoqBM19F.png" alt="image-20210923202621165"></p>
+<h3 id="二、Maven仓库"><a href="#二、Maven仓库" class="headerlink" title="二、Maven仓库"></a>二、Maven仓库</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li><p>Maven仓库是项目中依赖的第三方库</p>
+<ul>
+<li>存各种依赖（jar包）<ul>
+<li>主要是jar，还有war,zip等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>仓库的分类</p>
+<ul>
+<li><p>本地</p>
+<p><img src="https://i.loli.net/2021/09/23/o82E6H4tTbXUCQc.png" alt="image-20210923092716648"></p>
+<ul>
+<li>第一次执行maven命令时创建</li>
+<li>maven的安装设备</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/y5IVlAFEW2LHrTz.png" alt="image-20210923092548630"></p>
+</li>
+<li><p>中央</p>
+<p><img src="https://i.loli.net/2021/09/23/SVCEct2z4YvfnZJ.png" alt="image-20210923092918607"></p>
+<ul>
+<li>由Maven社区提供的仓库，提供了一个URL，使用中央仓库</li>
+<li><a href="http://search.maven.org/#browse">http://search.maven.org/#browse</a></li>
+<li>当本地仓库找不到我们想要的依赖，需要去中央仓库下载（公司服务器）</li>
+</ul>
+</li>
+<li><p>远程</p>
+<ul>
+<li>国外</li>
+<li>阿里</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-本地仓库设置"><a href="#2-本地仓库设置" class="headerlink" title="2.本地仓库设置"></a>2.本地仓库设置</h4><ul>
+<li><p>解压maven安装包</p>
+</li>
+<li><p>在我们的本地创建一个目录为repository作为本地仓库</p>
+</li>
+<li><p>修改配置文件</p>
+<ul>
+<li><p>修改本地仓库的路径</p>
+<ul>
+<li>这里的路径填写创建repository文件的位置</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>D:\Maven\repository<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>修改mirror  –&gt; 远程仓库的路径</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span>            </span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span>          			<span class="tag">&lt;<span class="name">name</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span>       	    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span>  <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span>           <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="三、创建Maven项目"><a href="#三、创建Maven项目" class="headerlink" title="三、创建Maven项目"></a>三、创建Maven项目</h3><ul>
+<li>创建Maven项目</li>
+<li>找到seting —&gt; maven</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/SevJ6xTCO41VQPA.png" alt="image-20210923095041050"></p>
+<ul>
+<li>设置maven的安装目录（解压目录）</li>
+<li>选择maven我们修改好的配置文件</li>
+<li>选择本地仓库位置<ul>
+<li>需要注意的是，这里本地仓库的位置需要和Setting中设定的本地仓库位置一致，不然会报错</li>
+</ul>
+</li>
+</ul>
+<h3 id="四、改造Maven项目-JavaEE"><a href="#四、改造Maven项目-JavaEE" class="headerlink" title="四、改造Maven项目(JavaEE)"></a>四、改造Maven项目(JavaEE)</h3><h4 id="1-新建web项目"><a href="#1-新建web项目" class="headerlink" title="1.新建web项目"></a>1.新建web项目</h4><ul>
+<li><p>新建目录webapp</p>
+<ul>
+<li><p>选择项目结构，选择Facets，添加web工程</p>
+<p><img src="https://i.loli.net/2021/09/23/UoryOBj2Hd5WMzs.png" alt="image-20210923203110680"></p>
+</li>
+<li><p>选择在已有项目中添加</p>
+<p><img src="https://i.loli.net/2021/09/23/DScwIzvrU1mAdBC.png" alt="image-20210923203132532"></p>
+</li>
+<li><p>修改新建web项目的路径</p>
+<ul>
+<li>项目名\web项目名\WEB-INF\ <font color='#d15252'>web.xml</font><ul>
+<li>不要忘记web.xml配置文件</li>
+</ul>
+</li>
+<li>下面的路径和上方相同，选择web项目路径即可</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/guzOk5RAspGLQVy.png" alt="image-20210923203204132"></p>
+</li>
+<li><p>如果创建WEB项目时出错，不要修改，直接删除，重新创建</p>
+</li>
+</ul>
+</li>
+<li><p>添加依赖</p>
+<ul>
+<li>Jar包都是有坐标的，当使用中央仓库或远程仓库时，有很多Jar包<ul>
+<li>公司名：<ul>
+<li>依赖的名称</li>
+<li>依赖的版本号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在pom.xml文件中，添加需要依赖的jar包</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/VqG4iTPKpgNrbMw.png" alt="image-20210923103218412"></p>
+<ul>
+<li>添加Tomcat，暂时用传统的方式<ul>
+<li>需要添加项目结构中Artifacts中WEB应用</li>
+<li><img src="https://i.loli.net/2021/09/23/PnAyVorhUaKS9j4.png" alt="image-20210923204619333"></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-修改默认项目maven地址"><a href="#2-修改默认项目maven地址" class="headerlink" title="2.修改默认项目maven地址"></a>2.修改默认项目maven地址</h4><ul>
+<li><p>修改新建项目时，默认的maven配置</p>
+<ul>
+<li>节省时间，不用每次新建项目重新配置maven项目</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/M4tlaAKBEfyoLGR.png" alt="image-20210923202937432"></p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/1Pj8MFywphgKmlJ.png" alt="image-20210923202951508"></p>
+<h3 id="五、使用Maven模板"><a href="#五、使用Maven模板" class="headerlink" title="五、使用Maven模板"></a>五、使用Maven模板</h3><h4 id="1-步骤"><a href="#1-步骤" class="headerlink" title="1.步骤"></a>1.步骤</h4><ul>
+<li>新建Maven工程<ul>
+<li>也可以新建空项目，配置环境之后，添加Maven模块 </li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/qzAPf4R3ILZEQkb.png" alt="image-20210923205116729"></p>
+<ul>
+<li>quickstrat：创建普通项目</li>
+<li>maven-webabb：创建Web项目<ul>
+<li>cocoon-22也要webapp，不使用它</li>
+</ul>
+</li>
+</ul>
+<h3 id="六、细节"><a href="#六、细节" class="headerlink" title="六、细节"></a>六、细节</h3><h4 id="1-修剪pom文件"><a href="#1-修剪pom文件" class="headerlink" title="1.修剪pom文件"></a>1.修剪pom文件</h4><p><img src="https://i.loli.net/2021/09/23/E71VO5oyHNZQwgk.png" alt="image-20210923210337197"></p>
+<ul>
+<li>maven版本号，可要可不要</li>
+<li>下面四个必须有<ul>
+<li>packaging表示以后将其打成war包</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/vgi13dVo6NUPZz7.png" alt="image-20210923210445020"></p>
+<ul>
+<li>可以不要</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/nysqw7Al4Pi2OTx.png" alt="image-20210923210508494"></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>表示你的maven版本用的是哪一个<font color='#d15252'>jdk</font></p>
+<ul>
+<li>这里设置的jdk只对当前有效</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/gwDJ6tlbzOa1UBs.png" alt="image-20210923210559866"></p>
+<ul>
+<li>也可以删除，但是需要修改设置，改为当前你使用的jdk版本</li>
+<li>一劳永逸</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/E5YNOTKZ3AqBUfj.png" alt="image-20210923210710499"></p>
+<ul>
+<li>junit依赖，可以删除</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/qScZdukRQKB5Lx4.png" alt="image-20210923210734303"></p>
+<ul>
+<li>build依赖，暂时没学，删掉</li>
+</ul>
+<h4 id="2-pom文件"><a href="#2-pom文件" class="headerlink" title="2.pom文件"></a>2.pom文件</h4><h5 id="Ⅰ-依赖"><a href="#Ⅰ-依赖" class="headerlink" title="Ⅰ.依赖"></a>Ⅰ.依赖</h5><ul>
+<li>依赖类似于Jar包</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 在这里添加你的依赖 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ldapjdk<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  <span class="comment">&lt;!-- 库名称，也可以自定义 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ldapjdk<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>    <span class="comment">&lt;!--库名称，也可以自定义--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="comment">&lt;!--版本号--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span> <span class="comment">&lt;!--作用域--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;basedir&#125;\src\lib\ldapjdk.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span> <span class="comment">&lt;!--项目根目录下的lib文件夹下--&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果要添加多个依赖，在dependencies标签中添加多个dependency即可</li>
+</ul>
+<h6 id="依赖的三种导入方法"><a href="#依赖的三种导入方法" class="headerlink" title="依赖的三种导入方法"></a>依赖的三种导入方法</h6><ul>
+<li><p>maven中查找Jar包坐标</p>
+<ul>
+<li>可以百度</li>
+<li>也可以在maven官网依赖库中搜索 <a href="https://mvnrepository.com/">https://mvnrepository.com/</a></li>
+<li>idea自带，鼠标右击，选择Generate，选择Dependency<ul>
+<li>搜索想要依赖即可</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>导入新的依赖后，记得刷新Maven项目，进行下载</p>
+</li>
+</ul>
+<h5 id="Ⅱ-插件"><a href="#Ⅱ-插件" class="headerlink" title="Ⅱ.插件"></a>Ⅱ.插件</h5><ul>
+<li>插件类似于软件</li>
+</ul>
+<p>Maven提供了两种类型的插件</p>
+<ul>
+<li>Build plugins<ul>
+<li> 在构建时执行，并在 pom.xml 的 元素中配置</li>
+</ul>
+</li>
+<li>Reporting plugins<ul>
+<li>在网站生成过程中执行，并在 pom.xml 的 元素中配置</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>官网查找插件<ul>
+<li><a href="https://maven.apache.org/plugins/">Maven – Available Plugins (apache.org)</a></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/JQtvn1BEzDY5Moj.png" alt="image-20210923211953980"></p>
+<ul>
+<li><p>在pom.xml文件中使用插件</p>
+<p><img src="https://i.loli.net/2021/09/23/3IfH4bKrJGgAQk2.png" alt="image-20210923212746432"></p>
+</li>
+</ul>
+<h3 id="七、Maven的常用命令"><a href="#七、Maven的常用命令" class="headerlink" title="七、Maven的常用命令"></a>七、Maven的常用命令</h3><h4 id="1-Maven的生命周期"><a href="#1-Maven的生命周期" class="headerlink" title="1.Maven的生命周期"></a>1.Maven的生命周期</h4><ul>
+<li>清理 — 编译 — 测试 — 报告 — 打包 — 部署</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/23/KTnW4SZY5hazivV.png" alt="image-20210923213703484"></p>
+<h4 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2.常用命令"></a>2.常用命令</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clean</td>
+<td>清理target目录</td>
+</tr>
+<tr>
+<td>compile</td>
+<td>完成编译target目录</td>
+</tr>
+<tr>
+<td>test</td>
+<td>进行测试，target下生成三个目录（测试报告）</td>
+</tr>
+<tr>
+<td>package</td>
+<td>打包项目，放在target目录下</td>
+</tr>
+<tr>
+<td>install</td>
+<td>将打包好的包安装到本地仓库中</td>
+</tr>
+</tbody></table>
+<ul>
+<li>target目录类似于Java中的Out根目录</li>
+</ul>
+<h4 id="3-依赖管理"><a href="#3-依赖管理" class="headerlink" title="3.依赖管理"></a>3.依赖管理</h4><h5 id="Ⅰ-依赖的传递性"><a href="#Ⅰ-依赖的传递性" class="headerlink" title="Ⅰ.依赖的传递性"></a>Ⅰ.依赖的<font color='#d15252'>传递性</font></h5><ul>
+<li>如果多个模块之间具有耦合性，比如一个模块需要依赖另外一个模块的Jar包<ul>
+<li>可以直接复制依赖的坐标进行使用</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-依赖的可选性"><a href="#Ⅱ-依赖的可选性" class="headerlink" title="Ⅱ.依赖的可选性"></a>Ⅱ.依赖的可选性</h5><ul>
+<li><p>即让依赖只能在本模块中使用</p>
+</li>
+<li><p>在依赖中添加</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为依赖添加可选性，添加之后，别的模块不能通过坐标使用该依赖</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/24/MSpqWZRPgNldY4u.png" alt="image-20210924172912820"></p>
+<h5 id="Ⅲ-依赖的筛选"><a href="#Ⅲ-依赖的筛选" class="headerlink" title="Ⅲ.依赖的筛选"></a>Ⅲ.依赖的筛选</h5><ul>
+<li><p>如果不想使用模块中的其中某一个依赖，可以通过依赖筛选做到</p>
+</li>
+<li><p>在依赖中添加</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span><span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span><span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span><span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="4-依赖的范围"><a href="#4-依赖的范围" class="headerlink" title="4.依赖的范围"></a>4.依赖的范围</h4><ul>
+<li>作用域</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>scope作用域</th>
+<th>main</th>
+<th>test（测试模块）</th>
+<th>package</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>compile（默认）</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>test</td>
+<td></td>
+<td>T</td>
+<td></td>
+</tr>
+<tr>
+<td>provided</td>
+<td>T</td>
+<td>T</td>
+<td></td>
+</tr>
+<tr>
+<td>runtime</td>
+<td></td>
+<td></td>
+<td>T</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>Maven</category>
+      </categories>
+      <tags>
+        <tag>Maven</tag>
       </tags>
   </entry>
   <entry>
@@ -6670,276 +6670,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Spring连接数据库</title>
-    <url>/2021/10/22/Spring%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
-<li>Spring最后一天</li>
-</ul>
-<h3 id="一、Spring-JDBC-Template"><a href="#一、Spring-JDBC-Template" class="headerlink" title="一、Spring JDBC Template"></a>一、Spring JDBC Template</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
-<li><p>Spring提供的简化JDBC api 操作</p>
-<ul>
-<li>它的功能和DBUTILS是重合的</li>
-</ul>
-</li>
-<li><p>核心类 <font color='#d15252'>JDBCTemplate</font>()</p>
-</li>
-<li><p>核心方法</p>
-<ul>
-<li>更新操作<ul>
-<li>update()</li>
-</ul>
-</li>
-<li>查询操作<ul>
-<li>查询多个<ul>
-<li>query()</li>
-</ul>
-</li>
-<li>查询单个<ul>
-<li>queryForObject</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>进行封装：BeanPropertyRowMapper</p>
-</li>
-</ul>
-<h4 id="2-Spring-JDBC-Template-入门案例"><a href="#2-Spring-JDBC-Template-入门案例" class="headerlink" title="2.Spring JDBC Template 入门案例"></a>2.Spring JDBC Template 入门案例</h4><ul>
-<li><p>导入依赖坐标</p>
-<ul>
-<li><p>spring框架依赖</p>
-</li>
-<li><p>连接数据库依赖</p>
-</li>
-<li><p>junit测试依赖</p>
-</li>
-<li><p>导入spring管理Mysql的依赖</p>
-<p><img src="https://i.loli.net/2021/10/11/oxjeIApSXgC2uZq.png" alt="image-20211011194140527"></p>
-</li>
-<li><p>导入Mysql事务依赖</p>
-<p><img src="https://i.loli.net/2021/10/11/aVU6n4twLQ5oiOe.png" alt="image-20211011194200724"></p>
-</li>
-</ul>
-</li>
-<li><p>准备Mysql数据库</p>
-<p><img src="https://i.loli.net/2021/10/11/AxWUqrbwBVCFyRg.png" alt="image-20211011195314645"></p>
-</li>
-<li><p>创建JavaBean类</p>
-<p><img src="https://i.loli.net/2021/10/11/isA3SafEMCmK7RG.png" alt="image-20211011195326729"></p>
-</li>
-<li><p>实现Dao层代码</p>
-<ul>
-<li>首先知道使用Spring操作数据库，需要Spring JDBC Template 的核心类JdbcTemplate进行操作</li>
-<li>所以我们要准备一个<font color='#d15252'>JdbcTemplate</font>成员变量进行操作</li>
-<li>使用成员变量，通过调用核心的update和query方法进行操作，根据不同的方法重载实现不同的功能</li>
-</ul>
-<p><img src="https://i.loli.net/2021/10/11/z2I3MP6qrDjavTx.png" alt="image-20211011201727732"></p>
-<ul>
-<li>参数使用？占位符，在方法重载时直接带参添加数据即可</li>
-</ul>
-<blockquote>
-<p>注意事项：</p>
-<ul>
-<li><p>query方法需要一个BeanPropertyRowMapper参数</p>
-</li>
-<li><p>成员变量需要依赖注入</p>
-</li>
-</ul>
-</blockquote>
-</li>
-<li><p>实现Service层代码</p>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/10/11/NQiDl2J5Fy9RjA8.png" alt="image-20211011202334655"></p>
-<ul>
-<li>编写Spring核心配置文件<ul>
-<li>开启注解扫描</li>
-<li>导入数据库连接池相关配置</li>
-<li>注入Spring-jdbc核心类</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/10/11/dIQse7Bik6mnc2a.png" alt="image-20211011210346911"></p>
-<ul>
-<li><p>Spring整合junit</p>
-<ul>
-<li><p>导入依赖</p>
-<p><img src="https://i.loli.net/2021/10/11/8O5TuxsAUFh79J1.png" alt="image-20211011210800876"></p>
-</li>
-<li><p>给测试类添加注解</p>
-<p><img src="https://i.loli.net/2021/10/11/S6QIBXaw8EjR5rY.png" alt="image-20211011210944974"></p>
-</li>
-<li><p>使用spring整合junit相等于使用Spring框架中自带的junit</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="二、Spring事务"><a href="#二、Spring事务" class="headerlink" title="二、Spring事务"></a>二、Spring事务</h3><h4 id="1-Spring事务中的控制方式"><a href="#1-Spring事务中的控制方式" class="headerlink" title="1.Spring事务中的控制方式"></a>1.Spring事务中的控制方式</h4><ul>
-<li><strong>编程式</strong><ul>
-<li>开发者直接把事务的代码和业务代码耦合到一起，在实际开发中不用</li>
-</ul>
-</li>
-<li><strong><font color='#d15252'>声明式</font></strong><ul>
-<li>开发者采用配置的方式来实现的事务控制，业务代码与事务代码实现解耦合，使用AOP思想</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-编程式事务控制相关对象"><a href="#2-编程式事务控制相关对象" class="headerlink" title="2.编程式事务控制相关对象"></a>2.编程式事务控制相关对象</h4><ul>
-<li>PlatfromTransactionManager接口，是spring的<font color='#d15252'>事务管理器</font>，里面提供了我们常用的操作事务的方法</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>getTransaction</td>
-<td>获取事务的状态信息</td>
-</tr>
-<tr>
-<td>commit</td>
-<td>回滚</td>
-</tr>
-<tr>
-<td>rooback</td>
-<td>提交</td>
-</tr>
-</tbody></table>
-<ul>
-<li><p>PlatfromTransactionManager是一个接口类型，不同的Dao层技术有不同的实现类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PlatformTransactionManager 是接口类型，不同的 Dao 层技术则有不同的实现类。</span><br><span class="line"></span><br><span class="line">Dao层技术是jdbcTemplate或mybatis时：</span><br><span class="line">    <span class="comment">//重点	</span></span><br><span class="line">    DataSourceTransactionManager</span><br><span class="line"></span><br><span class="line">Dao层技术是hibernate时：</span><br><span class="line">	</span><br><span class="line">    HibernateTransactionManager</span><br><span class="line"></span><br><span class="line">Dao层技术是JPA时：</span><br><span class="line">	JpaTransactionManager</span><br></pre></td></tr></table></figure></li>
-<li><p>TransactionDefinition</p>
-<ul>
-<li>TransactionDefinition接口提供事务的定义信息（事务隔离级别、事务传播行为等等）</li>
-</ul>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>int getIsolationLevel()</td>
-<td>获得事务的隔离级别</td>
-</tr>
-<tr>
-<td>int getPropogationBehavior()</td>
-<td>获得事务的传播行为</td>
-</tr>
-<tr>
-<td>int getTimeout()</td>
-<td>获得超时时间</td>
-</tr>
-<tr>
-<td>boolean isReadOnly()</td>
-<td>是否只读</td>
-</tr>
-</tbody></table>
-<ul>
-<li><p><strong>事务隔离级别</strong></p>
-<p>设置隔离级别，可以解决事务并发产生的问题，如脏读、不可重复读和虚读（幻读）。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* ISOLATION_DEFAULT				使用数据库默认</span><br><span class="line">* ISOLATION_READ_UNCOMMITTED	读未提交</span><br><span class="line">* ISOLATION_READ_COMMITTED		读已提交</span><br><span class="line">* ISOLATION_REPEATABLE_READ		可重复读</span><br><span class="line">* ISOLATION_SERIALIZABLE  		串行化</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>事务传播行为</strong></p>
-<p>事务传播行为指的就是当一个业务方法【被】另一个业务方法调用时，应该如何进行事务控制。</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>REQUIRED</strong></td>
-<td>如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到这个事务中，一般的选择（默认值）</td>
-</tr>
-<tr>
-<td><strong>SUPPORTS</strong></td>
-<td>支持当前事务，如果当前没有事务，就以非事务方式执行（没有事务）</td>
-</tr>
-<tr>
-<td>MANDATORY</td>
-<td>使用当前的事务，如果当前没有事务，就抛出异常</td>
-</tr>
-<tr>
-<td>REQUERS_NEW</td>
-<td>新建事务，如果当前在事务中，把当前事务挂起</td>
-</tr>
-<tr>
-<td>NOT_SUPPORTED</td>
-<td>以非事务方式执行操作，如果当前存在事务，就把当前事务挂起</td>
-</tr>
-<tr>
-<td>NEVER</td>
-<td>以非事务方式运行，如果当前存在事务，抛出异常</td>
-</tr>
-<tr>
-<td>NESTED</td>
-<td>如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行REQUIRED 类似的操作</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<h6 id="2-2-3-TransactionStatus"><a href="#2-2-3-TransactionStatus" class="headerlink" title="2.2.3 TransactionStatus"></a>2.2.3 TransactionStatus</h6><ul>
-<li><p>TransactionStatus 接口提供的是事务具体的运行状态。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>boolean isNewTransaction()</td>
-<td>是否是新事务</td>
-</tr>
-<tr>
-<td>boolean hasSavepoint()</td>
-<td>是否是回滚点</td>
-</tr>
-<tr>
-<td>boolean isRollbackOnly()</td>
-<td>事务是否回滚</td>
-</tr>
-<tr>
-<td>boolean isCompleted()</td>
-<td>事务是否完成</td>
-</tr>
-</tbody></table>
-<p>可以简单的理解三者的关系：<strong>事务管理器</strong>通过读取<strong>事务定义参数</strong>进行事务管理，然后会产生一系列的<strong>事</strong></p>
-<p><strong>务状态</strong>。</p>
-</li>
-</ul>
-<h6 id="2-2-4-实现代码"><a href="#2-2-4-实现代码" class="headerlink" title="2.2.4 实现代码"></a><strong>2.2.4</strong> <strong>实现代码</strong></h6><ul>
-<li><p>配置文件</p>
-<ul>
-<li>```xml<!--事务管理器交给IOC-->
-<bean id="transactionManager"     class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> <property name="dataSource" ref="dataSource"/> </bean>
-<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">* 业务层代码</span><br><span class="line"></span><br><span class="line">  * ```java</span><br><span class="line">    @Service</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> AccountServiceImpl <span class="keyword">implements</span> AccountService &#123; </span><br><span class="line">        @Autowired</span><br><span class="line">    	<span class="keyword">private</span> AccountDao accountDao;</span><br><span class="line">    	@Autowired</span><br><span class="line">    	<span class="keyword">private</span> PlatformTransactionManager transactionManager;</span><br><span class="line">    	@Override</span><br><span class="line">    	<span class="keyword">public</span> <span class="keyword">void</span> transfer(String outUser, String inUser, <span class="keyword">Double</span> money) &#123;</span><br><span class="line">    	<span class="comment">// 创建事务定义对象</span></span><br><span class="line">            DefaultTransactionDefinition <span class="keyword">def</span> = <span class="keyword">new</span> DefaultTransactionDefinition();</span><br><span class="line">            <span class="comment">// 设置是否只读，false支持事务</span></span><br><span class="line">            <span class="keyword">def</span>.setReadOnly(<span class="keyword">false</span>);</span><br><span class="line">            <span class="comment">// 设置事务隔离级别，可重复读mysql默认级别</span></span><br><span class="line">            <span class="keyword">def</span>.setIsolationLevel(TransactionDefinition.ISOLATION_REPEATABLE_READ);</span><br><span class="line">            <span class="comment">// 设置事务传播行为，必须有事务</span></span><br><span class="line">            <span class="keyword">def</span>.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);</span><br><span class="line">            <span class="comment">// 配置事务管理器</span></span><br><span class="line">            TransactionStatus status = transactionManager.getTransaction(<span class="keyword">def</span>);</span><br><span class="line">    </span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 转账</span></span><br><span class="line">            accountDao.out(outUser, money); accountDao.in(inUser, money);</span><br><span class="line">    </span><br><span class="line">            <span class="comment">// 提交事务</span></span><br><span class="line">            transactionManager.commit(status);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123; e.printStackTrace();</span><br><span class="line">            <span class="comment">// 回滚事务</span></span><br><span class="line">            transactionManager.rollback(status);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h6 id="2-2-5-知识小结"><a href="#2-2-5-知识小结" class="headerlink" title="2.2.5 知识小结"></a><strong>2.2.5</strong> <strong>知识小结</strong></h6><ul>
-<li><p>Spring中的事务控制主要就是通过这三个API实现的</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PlatformTransactionManager 负责事务的管理，它是个接口，其子类负责具体工作 TransactionDefinition 定义了事务的一些相关参数 </span><br><span class="line">TransactionStatus 代表事务运行的一个实时状态</span><br></pre></td></tr></table></figure></li>
-<li><p>理解三者的关系：<strong>事务管理器</strong>通过读取<strong>事务定义参数</strong>进行事务管理，然后会产生一系列的<strong>事务状态</strong>。</p>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Spring框架</category>
-      </categories>
-      <tags>
-        <tag>Spring</tag>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>XML</title>
     <url>/2021/08/24/XML/</url>
     <content><![CDATA[<h3 id="一、XML文件-JavaEE"><a href="#一、XML文件-JavaEE" class="headerlink" title="一、XML文件(JavaEE)"></a>一、XML文件(JavaEE)</h3><ul>
@@ -7208,6 +6938,276 @@
       </categories>
       <tags>
         <tag>XML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring连接数据库</title>
+    <url>/2021/10/22/Spring%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>Spring最后一天</li>
+</ul>
+<h3 id="一、Spring-JDBC-Template"><a href="#一、Spring-JDBC-Template" class="headerlink" title="一、Spring JDBC Template"></a>一、Spring JDBC Template</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li><p>Spring提供的简化JDBC api 操作</p>
+<ul>
+<li>它的功能和DBUTILS是重合的</li>
+</ul>
+</li>
+<li><p>核心类 <font color='#d15252'>JDBCTemplate</font>()</p>
+</li>
+<li><p>核心方法</p>
+<ul>
+<li>更新操作<ul>
+<li>update()</li>
+</ul>
+</li>
+<li>查询操作<ul>
+<li>查询多个<ul>
+<li>query()</li>
+</ul>
+</li>
+<li>查询单个<ul>
+<li>queryForObject</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>进行封装：BeanPropertyRowMapper</p>
+</li>
+</ul>
+<h4 id="2-Spring-JDBC-Template-入门案例"><a href="#2-Spring-JDBC-Template-入门案例" class="headerlink" title="2.Spring JDBC Template 入门案例"></a>2.Spring JDBC Template 入门案例</h4><ul>
+<li><p>导入依赖坐标</p>
+<ul>
+<li><p>spring框架依赖</p>
+</li>
+<li><p>连接数据库依赖</p>
+</li>
+<li><p>junit测试依赖</p>
+</li>
+<li><p>导入spring管理Mysql的依赖</p>
+<p><img src="https://i.loli.net/2021/10/11/oxjeIApSXgC2uZq.png" alt="image-20211011194140527"></p>
+</li>
+<li><p>导入Mysql事务依赖</p>
+<p><img src="https://i.loli.net/2021/10/11/aVU6n4twLQ5oiOe.png" alt="image-20211011194200724"></p>
+</li>
+</ul>
+</li>
+<li><p>准备Mysql数据库</p>
+<p><img src="https://i.loli.net/2021/10/11/AxWUqrbwBVCFyRg.png" alt="image-20211011195314645"></p>
+</li>
+<li><p>创建JavaBean类</p>
+<p><img src="https://i.loli.net/2021/10/11/isA3SafEMCmK7RG.png" alt="image-20211011195326729"></p>
+</li>
+<li><p>实现Dao层代码</p>
+<ul>
+<li>首先知道使用Spring操作数据库，需要Spring JDBC Template 的核心类JdbcTemplate进行操作</li>
+<li>所以我们要准备一个<font color='#d15252'>JdbcTemplate</font>成员变量进行操作</li>
+<li>使用成员变量，通过调用核心的update和query方法进行操作，根据不同的方法重载实现不同的功能</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/11/z2I3MP6qrDjavTx.png" alt="image-20211011201727732"></p>
+<ul>
+<li>参数使用？占位符，在方法重载时直接带参添加数据即可</li>
+</ul>
+<blockquote>
+<p>注意事项：</p>
+<ul>
+<li><p>query方法需要一个BeanPropertyRowMapper参数</p>
+</li>
+<li><p>成员变量需要依赖注入</p>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p>实现Service层代码</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/11/NQiDl2J5Fy9RjA8.png" alt="image-20211011202334655"></p>
+<ul>
+<li>编写Spring核心配置文件<ul>
+<li>开启注解扫描</li>
+<li>导入数据库连接池相关配置</li>
+<li>注入Spring-jdbc核心类</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/11/dIQse7Bik6mnc2a.png" alt="image-20211011210346911"></p>
+<ul>
+<li><p>Spring整合junit</p>
+<ul>
+<li><p>导入依赖</p>
+<p><img src="https://i.loli.net/2021/10/11/8O5TuxsAUFh79J1.png" alt="image-20211011210800876"></p>
+</li>
+<li><p>给测试类添加注解</p>
+<p><img src="https://i.loli.net/2021/10/11/S6QIBXaw8EjR5rY.png" alt="image-20211011210944974"></p>
+</li>
+<li><p>使用spring整合junit相等于使用Spring框架中自带的junit</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、Spring事务"><a href="#二、Spring事务" class="headerlink" title="二、Spring事务"></a>二、Spring事务</h3><h4 id="1-Spring事务中的控制方式"><a href="#1-Spring事务中的控制方式" class="headerlink" title="1.Spring事务中的控制方式"></a>1.Spring事务中的控制方式</h4><ul>
+<li><strong>编程式</strong><ul>
+<li>开发者直接把事务的代码和业务代码耦合到一起，在实际开发中不用</li>
+</ul>
+</li>
+<li><strong><font color='#d15252'>声明式</font></strong><ul>
+<li>开发者采用配置的方式来实现的事务控制，业务代码与事务代码实现解耦合，使用AOP思想</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-编程式事务控制相关对象"><a href="#2-编程式事务控制相关对象" class="headerlink" title="2.编程式事务控制相关对象"></a>2.编程式事务控制相关对象</h4><ul>
+<li>PlatfromTransactionManager接口，是spring的<font color='#d15252'>事务管理器</font>，里面提供了我们常用的操作事务的方法</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>getTransaction</td>
+<td>获取事务的状态信息</td>
+</tr>
+<tr>
+<td>commit</td>
+<td>回滚</td>
+</tr>
+<tr>
+<td>rooback</td>
+<td>提交</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>PlatfromTransactionManager是一个接口类型，不同的Dao层技术有不同的实现类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PlatformTransactionManager 是接口类型，不同的 Dao 层技术则有不同的实现类。</span><br><span class="line"></span><br><span class="line">Dao层技术是jdbcTemplate或mybatis时：</span><br><span class="line">    <span class="comment">//重点	</span></span><br><span class="line">    DataSourceTransactionManager</span><br><span class="line"></span><br><span class="line">Dao层技术是hibernate时：</span><br><span class="line">	</span><br><span class="line">    HibernateTransactionManager</span><br><span class="line"></span><br><span class="line">Dao层技术是JPA时：</span><br><span class="line">	JpaTransactionManager</span><br></pre></td></tr></table></figure></li>
+<li><p>TransactionDefinition</p>
+<ul>
+<li>TransactionDefinition接口提供事务的定义信息（事务隔离级别、事务传播行为等等）</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int getIsolationLevel()</td>
+<td>获得事务的隔离级别</td>
+</tr>
+<tr>
+<td>int getPropogationBehavior()</td>
+<td>获得事务的传播行为</td>
+</tr>
+<tr>
+<td>int getTimeout()</td>
+<td>获得超时时间</td>
+</tr>
+<tr>
+<td>boolean isReadOnly()</td>
+<td>是否只读</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><strong>事务隔离级别</strong></p>
+<p>设置隔离级别，可以解决事务并发产生的问题，如脏读、不可重复读和虚读（幻读）。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* ISOLATION_DEFAULT				使用数据库默认</span><br><span class="line">* ISOLATION_READ_UNCOMMITTED	读未提交</span><br><span class="line">* ISOLATION_READ_COMMITTED		读已提交</span><br><span class="line">* ISOLATION_REPEATABLE_READ		可重复读</span><br><span class="line">* ISOLATION_SERIALIZABLE  		串行化</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>事务传播行为</strong></p>
+<p>事务传播行为指的就是当一个业务方法【被】另一个业务方法调用时，应该如何进行事务控制。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>REQUIRED</strong></td>
+<td>如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到这个事务中，一般的选择（默认值）</td>
+</tr>
+<tr>
+<td><strong>SUPPORTS</strong></td>
+<td>支持当前事务，如果当前没有事务，就以非事务方式执行（没有事务）</td>
+</tr>
+<tr>
+<td>MANDATORY</td>
+<td>使用当前的事务，如果当前没有事务，就抛出异常</td>
+</tr>
+<tr>
+<td>REQUERS_NEW</td>
+<td>新建事务，如果当前在事务中，把当前事务挂起</td>
+</tr>
+<tr>
+<td>NOT_SUPPORTED</td>
+<td>以非事务方式执行操作，如果当前存在事务，就把当前事务挂起</td>
+</tr>
+<tr>
+<td>NEVER</td>
+<td>以非事务方式运行，如果当前存在事务，抛出异常</td>
+</tr>
+<tr>
+<td>NESTED</td>
+<td>如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行REQUIRED 类似的操作</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h6 id="2-2-3-TransactionStatus"><a href="#2-2-3-TransactionStatus" class="headerlink" title="2.2.3 TransactionStatus"></a>2.2.3 TransactionStatus</h6><ul>
+<li><p>TransactionStatus 接口提供的是事务具体的运行状态。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean isNewTransaction()</td>
+<td>是否是新事务</td>
+</tr>
+<tr>
+<td>boolean hasSavepoint()</td>
+<td>是否是回滚点</td>
+</tr>
+<tr>
+<td>boolean isRollbackOnly()</td>
+<td>事务是否回滚</td>
+</tr>
+<tr>
+<td>boolean isCompleted()</td>
+<td>事务是否完成</td>
+</tr>
+</tbody></table>
+<p>可以简单的理解三者的关系：<strong>事务管理器</strong>通过读取<strong>事务定义参数</strong>进行事务管理，然后会产生一系列的<strong>事</strong></p>
+<p><strong>务状态</strong>。</p>
+</li>
+</ul>
+<h6 id="2-2-4-实现代码"><a href="#2-2-4-实现代码" class="headerlink" title="2.2.4 实现代码"></a><strong>2.2.4</strong> <strong>实现代码</strong></h6><ul>
+<li><p>配置文件</p>
+<ul>
+<li>```xml<!--事务管理器交给IOC-->
+<bean id="transactionManager"     class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> <property name="dataSource" ref="dataSource"/> </bean>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">* 业务层代码</span><br><span class="line"></span><br><span class="line">  * ```java</span><br><span class="line">    @Service</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> AccountServiceImpl <span class="keyword">implements</span> AccountService &#123; </span><br><span class="line">        @Autowired</span><br><span class="line">    	<span class="keyword">private</span> AccountDao accountDao;</span><br><span class="line">    	@Autowired</span><br><span class="line">    	<span class="keyword">private</span> PlatformTransactionManager transactionManager;</span><br><span class="line">    	@Override</span><br><span class="line">    	<span class="keyword">public</span> <span class="keyword">void</span> transfer(String outUser, String inUser, <span class="keyword">Double</span> money) &#123;</span><br><span class="line">    	<span class="comment">// 创建事务定义对象</span></span><br><span class="line">            DefaultTransactionDefinition <span class="keyword">def</span> = <span class="keyword">new</span> DefaultTransactionDefinition();</span><br><span class="line">            <span class="comment">// 设置是否只读，false支持事务</span></span><br><span class="line">            <span class="keyword">def</span>.setReadOnly(<span class="keyword">false</span>);</span><br><span class="line">            <span class="comment">// 设置事务隔离级别，可重复读mysql默认级别</span></span><br><span class="line">            <span class="keyword">def</span>.setIsolationLevel(TransactionDefinition.ISOLATION_REPEATABLE_READ);</span><br><span class="line">            <span class="comment">// 设置事务传播行为，必须有事务</span></span><br><span class="line">            <span class="keyword">def</span>.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);</span><br><span class="line">            <span class="comment">// 配置事务管理器</span></span><br><span class="line">            TransactionStatus status = transactionManager.getTransaction(<span class="keyword">def</span>);</span><br><span class="line">    </span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 转账</span></span><br><span class="line">            accountDao.out(outUser, money); accountDao.in(inUser, money);</span><br><span class="line">    </span><br><span class="line">            <span class="comment">// 提交事务</span></span><br><span class="line">            transactionManager.commit(status);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123; e.printStackTrace();</span><br><span class="line">            <span class="comment">// 回滚事务</span></span><br><span class="line">            transactionManager.rollback(status);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h6 id="2-2-5-知识小结"><a href="#2-2-5-知识小结" class="headerlink" title="2.2.5 知识小结"></a><strong>2.2.5</strong> <strong>知识小结</strong></h6><ul>
+<li><p>Spring中的事务控制主要就是通过这三个API实现的</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PlatformTransactionManager 负责事务的管理，它是个接口，其子类负责具体工作 TransactionDefinition 定义了事务的一些相关参数 </span><br><span class="line">TransactionStatus 代表事务运行的一个实时状态</span><br></pre></td></tr></table></figure></li>
+<li><p>理解三者的关系：<strong>事务管理器</strong>通过读取<strong>事务定义参数</strong>进行事务管理，然后会产生一系列的<strong>事务状态</strong>。</p>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Spring框架</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -8880,165 +8880,6 @@
       </tags>
   </entry>
   <entry>
-    <title>实现前端-Web-数据库</title>
-    <url>/2021/08/25/%E5%AE%9E%E7%8E%B0%E5%89%8D%E7%AB%AF-Web-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h3 id="获取前端数据"><a href="#获取前端数据" class="headerlink" title="获取前端数据"></a>获取前端数据</h3><ul>
-<li><p>创建一个JavaWeb程序，用作链接前端、链接数据库</p>
-<p><img src="https://i.loli.net/2021/07/12/zVu7OEIBXJn6Mtd.png" alt="image-20210712161124635"></p>
-<ul>
-<li><p>继承HttpServlet类，调用doGet方法，起名</p>
-<p><img src="https://i.loli.net/2021/07/12/1F4kqTlvxRB5Ynd.png" alt="image-20210712161304640"></p>
-</li>
-<li><p>从数据库获取数据（暂时用数组定义）</p>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/07/12/XZSKOrTsQtMIRBh.png" alt="image-20210712162838029"></p>
-<p>并创建web程序和需要获取数据的前端网页的链接通道</p>
-<p><img src="https://i.loli.net/2021/07/12/ewBrSXd9Ijv2sNF.png" alt="image-20210712162849088"></p>
-<ul>
-<li><p>req调用getRequestDispatcher()方法，返回前端页面</p>
-<p><img src="https://i.loli.net/2021/07/12/EhKWv1iCNS42d9X.png"></p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>创建index.jsp文件，是前端访问后端的入口</p>
-<ul>
-<li><p><img src="https://i.loli.net/2021/07/12/nYDjNOe7TJlawCo.png" alt="image-20210712161631994"></p>
-</li>
-<li><p>跳转到web程序，获取数据，并返回前端页面</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/web&quot;</span>&gt;</span>显示数据<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>创建Demo.jsp文件，获取数据，返回前端页面</p>
-<ul>
-<li><img src="https://i.loli.net/2021/07/12/8IeLMxifDCVcnP7.png" alt="image-20210712161750078"></li>
-<li>通过request.getAttribute()通道，获取web程序发送的数据</li>
-</ul>
-<p><img src="https://i.loli.net/2021/07/12/gTBDefpUuxYHn8K.png" alt="image-20210712163113274"></p>
-<p>由于自动保存是Object类型，强制转换为int[]类型，并保存到变量</p>
-<p><img src="https://i.loli.net/2021/07/12/qOAWJZLxC5bKHh8.png" alt="image-20210712163232172"></p>
-<ul>
-<li>创建表格，for循环，输出前端页面</li>
-</ul>
-<p><img src="https://i.loli.net/2021/07/12/SW4TfJRLKYqOIPH.png" alt="image-20210712164329135"></p>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/07/12/fC7dFLh2HkmaPYI.png" alt="image-20210712221449519"></p>
-<ul>
-<li><p>前端页面使用Form表单获取并发送数据</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--    表单--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;02.html&quot;</span>&gt;</span></span><br><span class="line">        用户名:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span>&gt;</span></span><br><span class="line">        密码：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;pass&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>action：发送到xxx</p>
-<p>submit：提交按钮</p>
-<p>name ：保存数据名称用来接收    </p>
-</blockquote>
-</li>
-<li><p>web程序中用req调用getParameter方法接收数据</p>
-<ul>
-<li><img src="https://i.loli.net/2021/07/13/MypWvdFclrfzj74.png" alt="image-20210713101204523"></li>
-</ul>
-</li>
-</ul>
-<h3 id="综合案例"><a href="#综合案例" class="headerlink" title="综合案例"></a>综合案例</h3><h4 id="一、创建项目并测试环境"><a href="#一、创建项目并测试环境" class="headerlink" title="一、创建项目并测试环境"></a>一、创建项目并测试环境</h4><h4 id="二、需求分析"><a href="#二、需求分析" class="headerlink" title="二、需求分析"></a>二、需求分析</h4><h5 id="1-显示商品编号"><a href="#1-显示商品编号" class="headerlink" title="1.显示商品编号"></a>1.显示商品编号</h5><ul>
-<li><p>index.jsp中创建超链接，跳转display程序</p>
-<ul>
-<li><img src="https://i.loli.net/2021/07/13/eX8ESPiNIZmfkrH.png" alt="image-20210713110739311"></li>
-<li><img src="https://i.loli.net/2021/07/13/S1gC9lzp8FJrNti.png" alt="image-20210713110746819"></li>
-<li>发送数据到display.jsp页面，用于显示</li>
-</ul>
-</li>
-<li><p>display负责链接前端页面，链接数据库，从数据库中获取数据并存入数组</p>
-<ul>
-<li><img src="https://i.loli.net/2021/07/13/e7cY8M2DjmHURkC.png" alt="image-20210713110709710"></li>
-</ul>
-</li>
-<li><p>创建display.jsp，接收web程序发送的数据，并显示在页面</p>
-<ul>
-<li><img src="https://i.loli.net/2021/07/13/x7Sk5zpFVK8QnIb.png" alt="image-20210713110859014"></li>
-</ul>
-</li>
-</ul>
-<h5 id="2-修改商品编号"><a href="#2-修改商品编号" class="headerlink" title="2.修改商品编号"></a>2.修改商品编号</h5><ul>
-<li><p>创建update.jsp、updateWEB程序</p>
-<p>index.jsp中超链接跳转update.jsp</p>
-<p><img src="https://i.loli.net/2021/07/13/Ot94cLZMfCeDK7l.png" alt="image-20210713121412256"></p>
-</li>
-<li><p>update.jsp</p>
-<ul>
-<li><p>获创建表单，获取数据</p>
-</li>
-<li><p>由web程序update接收数据</p>
-<p><img src="https://i.loli.net/2021/07/13/Bgr5VD9fvLCwP2m.png" alt="image-20210713121547204"></p>
-</li>
-</ul>
-</li>
-<li><p>update JavaWeb程序</p>
-<ul>
-<li>链接数据库，接收前端输入数据</li>
-<li>打包sql语句，发送sql语句，执行sql语句</li>
-<li>跳转回主页面</li>
-</ul>
-<p><img src="https://i.loli.net/2021/07/13/pqMDV6YPC2NUeTa.png" alt="image-20210713121645948"></p>
-</li>
-</ul>
-<h5 id="3-增加商品编号"><a href="#3-增加商品编号" class="headerlink" title="3.增加商品编号"></a>3.增加商品编号</h5><ul>
-<li><p>创建add.jsp、addWeb程序</p>
-<p>index.jsp中跳转到add.jsp中</p>
-</li>
-<li><p>add.jsp创建表单，录入数据，发送到add程序</p>
-<ul>
-<li><img src="https://i.loli.net/2021/07/13/bgYxj3e1vXfzVDN.png" alt="image-20210713121825966"></li>
-</ul>
-</li>
-<li><p>add JavaWeb程序</p>
-<ul>
-<li><p>链接数据库，打包sql语句，发送，执行，返回首页</p>
-<p><img src="https://i.loli.net/2021/07/13/7vGfYXLIwKnt8zr.png" alt="image-20210713121946605"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="4-删除商品编号"><a href="#4-删除商品编号" class="headerlink" title="4.删除商品编号"></a>4.删除商品编号</h5><ul>
-<li><p>创建delete.jsp、delete Web程序</p>
-<p>index.jsp中跳转到delete.jsp中</p>
-</li>
-<li><p>delete.jsp创建表单，录入数据，发送到add程序</p>
-<p><img src="https://i.loli.net/2021/07/13/YFehBzTCfHp2tSm.png" alt="image-20210713122104396"></p>
-</li>
-<li><p>delete JavaWeb程序</p>
-<ul>
-<li><img src="https://i.loli.net/2021/07/13/piRLJI4vy1lKNoA.png" alt="image-20210713122155096"></li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>解决向mysql插入中文数据乱码问题</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">?<span class="attribute">useUnicode</span>=<span class="literal">true</span>&amp;characterEncoding=utf8</span><br></pre></td></tr></table></figure>
-</blockquote>
-<ul>
-<li><p>跳转页面</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">req.getRequestDispatcher(<span class="string">&quot;show.jsp&quot;</span>).forward(req,resp);</span><br></pre></td></tr></table></figure></li>
-<li><p>跳转程序</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">resp.sendRedirect(<span class="string">&quot;show&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaWeb</category>
-      </categories>
-      <tags>
-        <tag>增查删改</tag>
-        <tag>案例</tag>
-        <tag>数据库</tag>
-        <tag>Mysql</tag>
-        <tag>Web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>自定义数据类型和学生管理系统</title>
     <url>/2021/08/25/%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<h3 id="一、面向对象思想"><a href="#一、面向对象思想" class="headerlink" title="一、面向对象思想"></a>一、面向对象思想</h3><ul>
@@ -9351,6 +9192,165 @@
       <tags>
         <tag>class</tag>
         <tag>学生管理系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>实现前端-Web-数据库</title>
+    <url>/2021/08/25/%E5%AE%9E%E7%8E%B0%E5%89%8D%E7%AB%AF-Web-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h3 id="获取前端数据"><a href="#获取前端数据" class="headerlink" title="获取前端数据"></a>获取前端数据</h3><ul>
+<li><p>创建一个JavaWeb程序，用作链接前端、链接数据库</p>
+<p><img src="https://i.loli.net/2021/07/12/zVu7OEIBXJn6Mtd.png" alt="image-20210712161124635"></p>
+<ul>
+<li><p>继承HttpServlet类，调用doGet方法，起名</p>
+<p><img src="https://i.loli.net/2021/07/12/1F4kqTlvxRB5Ynd.png" alt="image-20210712161304640"></p>
+</li>
+<li><p>从数据库获取数据（暂时用数组定义）</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/07/12/XZSKOrTsQtMIRBh.png" alt="image-20210712162838029"></p>
+<p>并创建web程序和需要获取数据的前端网页的链接通道</p>
+<p><img src="https://i.loli.net/2021/07/12/ewBrSXd9Ijv2sNF.png" alt="image-20210712162849088"></p>
+<ul>
+<li><p>req调用getRequestDispatcher()方法，返回前端页面</p>
+<p><img src="https://i.loli.net/2021/07/12/EhKWv1iCNS42d9X.png"></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>创建index.jsp文件，是前端访问后端的入口</p>
+<ul>
+<li><p><img src="https://i.loli.net/2021/07/12/nYDjNOe7TJlawCo.png" alt="image-20210712161631994"></p>
+</li>
+<li><p>跳转到web程序，获取数据，并返回前端页面</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/web&quot;</span>&gt;</span>显示数据<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>创建Demo.jsp文件，获取数据，返回前端页面</p>
+<ul>
+<li><img src="https://i.loli.net/2021/07/12/8IeLMxifDCVcnP7.png" alt="image-20210712161750078"></li>
+<li>通过request.getAttribute()通道，获取web程序发送的数据</li>
+</ul>
+<p><img src="https://i.loli.net/2021/07/12/gTBDefpUuxYHn8K.png" alt="image-20210712163113274"></p>
+<p>由于自动保存是Object类型，强制转换为int[]类型，并保存到变量</p>
+<p><img src="https://i.loli.net/2021/07/12/qOAWJZLxC5bKHh8.png" alt="image-20210712163232172"></p>
+<ul>
+<li>创建表格，for循环，输出前端页面</li>
+</ul>
+<p><img src="https://i.loli.net/2021/07/12/SW4TfJRLKYqOIPH.png" alt="image-20210712164329135"></p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/07/12/fC7dFLh2HkmaPYI.png" alt="image-20210712221449519"></p>
+<ul>
+<li><p>前端页面使用Form表单获取并发送数据</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--    表单--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;02.html&quot;</span>&gt;</span></span><br><span class="line">        用户名:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span>&gt;</span></span><br><span class="line">        密码：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;pass&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>action：发送到xxx</p>
+<p>submit：提交按钮</p>
+<p>name ：保存数据名称用来接收    </p>
+</blockquote>
+</li>
+<li><p>web程序中用req调用getParameter方法接收数据</p>
+<ul>
+<li><img src="https://i.loli.net/2021/07/13/MypWvdFclrfzj74.png" alt="image-20210713101204523"></li>
+</ul>
+</li>
+</ul>
+<h3 id="综合案例"><a href="#综合案例" class="headerlink" title="综合案例"></a>综合案例</h3><h4 id="一、创建项目并测试环境"><a href="#一、创建项目并测试环境" class="headerlink" title="一、创建项目并测试环境"></a>一、创建项目并测试环境</h4><h4 id="二、需求分析"><a href="#二、需求分析" class="headerlink" title="二、需求分析"></a>二、需求分析</h4><h5 id="1-显示商品编号"><a href="#1-显示商品编号" class="headerlink" title="1.显示商品编号"></a>1.显示商品编号</h5><ul>
+<li><p>index.jsp中创建超链接，跳转display程序</p>
+<ul>
+<li><img src="https://i.loli.net/2021/07/13/eX8ESPiNIZmfkrH.png" alt="image-20210713110739311"></li>
+<li><img src="https://i.loli.net/2021/07/13/S1gC9lzp8FJrNti.png" alt="image-20210713110746819"></li>
+<li>发送数据到display.jsp页面，用于显示</li>
+</ul>
+</li>
+<li><p>display负责链接前端页面，链接数据库，从数据库中获取数据并存入数组</p>
+<ul>
+<li><img src="https://i.loli.net/2021/07/13/e7cY8M2DjmHURkC.png" alt="image-20210713110709710"></li>
+</ul>
+</li>
+<li><p>创建display.jsp，接收web程序发送的数据，并显示在页面</p>
+<ul>
+<li><img src="https://i.loli.net/2021/07/13/x7Sk5zpFVK8QnIb.png" alt="image-20210713110859014"></li>
+</ul>
+</li>
+</ul>
+<h5 id="2-修改商品编号"><a href="#2-修改商品编号" class="headerlink" title="2.修改商品编号"></a>2.修改商品编号</h5><ul>
+<li><p>创建update.jsp、updateWEB程序</p>
+<p>index.jsp中超链接跳转update.jsp</p>
+<p><img src="https://i.loli.net/2021/07/13/Ot94cLZMfCeDK7l.png" alt="image-20210713121412256"></p>
+</li>
+<li><p>update.jsp</p>
+<ul>
+<li><p>获创建表单，获取数据</p>
+</li>
+<li><p>由web程序update接收数据</p>
+<p><img src="https://i.loli.net/2021/07/13/Bgr5VD9fvLCwP2m.png" alt="image-20210713121547204"></p>
+</li>
+</ul>
+</li>
+<li><p>update JavaWeb程序</p>
+<ul>
+<li>链接数据库，接收前端输入数据</li>
+<li>打包sql语句，发送sql语句，执行sql语句</li>
+<li>跳转回主页面</li>
+</ul>
+<p><img src="https://i.loli.net/2021/07/13/pqMDV6YPC2NUeTa.png" alt="image-20210713121645948"></p>
+</li>
+</ul>
+<h5 id="3-增加商品编号"><a href="#3-增加商品编号" class="headerlink" title="3.增加商品编号"></a>3.增加商品编号</h5><ul>
+<li><p>创建add.jsp、addWeb程序</p>
+<p>index.jsp中跳转到add.jsp中</p>
+</li>
+<li><p>add.jsp创建表单，录入数据，发送到add程序</p>
+<ul>
+<li><img src="https://i.loli.net/2021/07/13/bgYxj3e1vXfzVDN.png" alt="image-20210713121825966"></li>
+</ul>
+</li>
+<li><p>add JavaWeb程序</p>
+<ul>
+<li><p>链接数据库，打包sql语句，发送，执行，返回首页</p>
+<p><img src="https://i.loli.net/2021/07/13/7vGfYXLIwKnt8zr.png" alt="image-20210713121946605"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="4-删除商品编号"><a href="#4-删除商品编号" class="headerlink" title="4.删除商品编号"></a>4.删除商品编号</h5><ul>
+<li><p>创建delete.jsp、delete Web程序</p>
+<p>index.jsp中跳转到delete.jsp中</p>
+</li>
+<li><p>delete.jsp创建表单，录入数据，发送到add程序</p>
+<p><img src="https://i.loli.net/2021/07/13/YFehBzTCfHp2tSm.png" alt="image-20210713122104396"></p>
+</li>
+<li><p>delete JavaWeb程序</p>
+<ul>
+<li><img src="https://i.loli.net/2021/07/13/piRLJI4vy1lKNoA.png" alt="image-20210713122155096"></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>解决向mysql插入中文数据乱码问题</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">?<span class="attribute">useUnicode</span>=<span class="literal">true</span>&amp;characterEncoding=utf8</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li><p>跳转页面</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">req.getRequestDispatcher(<span class="string">&quot;show.jsp&quot;</span>).forward(req,resp);</span><br></pre></td></tr></table></figure></li>
+<li><p>跳转程序</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">resp.sendRedirect(<span class="string">&quot;show&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>增查删改</tag>
+        <tag>案例</tag>
+        <tag>数据库</tag>
+        <tag>Mysql</tag>
+        <tag>Web</tag>
       </tags>
   </entry>
   <entry>
@@ -10441,359 +10441,6 @@
       </tags>
   </entry>
   <entry>
-    <title>数据库知识补充，事务</title>
-    <url>/2021/09/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%8C%E4%BA%8B%E5%8A%A1/</url>
-    <content><![CDATA[<h3 id="一、Mysql知识点补充"><a href="#一、Mysql知识点补充" class="headerlink" title="一、Mysql知识点补充"></a>一、Mysql知识点补充</h3><h4 id="1-查询某一列的数量"><a href="#1-查询某一列的数量" class="headerlink" title="1. 查询某一列的数量"></a>1. 查询某一列的数量</h4><ul>
-<li>对数据进行纵向的操作</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/14/YSgdP13anu6mzWL.png" alt="image-20210914092804332"></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查询所有的列的行数count（*/1）</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="number">1</span>) <span class="keyword">FROM</span> emp</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询员工的总数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(ename) <span class="string">&#x27;员工总数&#x27;</span> <span class="keyword">FROM</span> emp</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(eid) <span class="string">&#x27;员工总数&#x27;</span> <span class="keyword">FROM</span> emp</span><br><span class="line"><span class="comment">-- 查询员工的总薪资，最高 最低 平均</span></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">	<span class="built_in">SUM</span>(salary) &quot;总薪资&quot;,</span><br><span class="line">	<span class="built_in">MAX</span>(salary) &quot;最高&quot;,</span><br><span class="line">	<span class="built_in">MIN</span>(salary) &quot;最低&quot;,</span><br><span class="line">	<span class="built_in">AVG</span>(salary) &quot;平均&quot;</span><br><span class="line"><span class="keyword">FROM</span> emp</span><br><span class="line"><span class="comment">-- 查询员工薪资大于500的个数</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>)<span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> salary<span class="operator">&gt;</span><span class="number">500</span></span><br><span class="line"><span class="comment">-- 查询&quot;大唐&quot;部门员工的总数</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(ename) <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> edpt<span class="operator">=</span>&quot;大唐&quot;</span><br><span class="line"><span class="comment">-- 查询“大唐”部门员工的平均薪资</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(salary) <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> edpt <span class="operator">=</span> <span class="string">&#x27;大唐&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-DQL分组查询"><a href="#2-DQL分组查询" class="headerlink" title="2.DQL分组查询"></a>2.DQL分组查询</h4><ul>
-<li><p>格式：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">GROUP</span> <span class="keyword">BY</span> 字段</span><br></pre></td></tr></table></figure></li>
-<li><p>分组，只能对显示集合中的第一条数据，因此单纯的使用分组查询是没有意义的</p>
-<ul>
-<li>所以，经常使用聚合函数和分组结合使用</li>
-</ul>
-</li>
-<li><p>通过性别字段进行分组，求每组的平均薪资</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 聚合函数 <span class="keyword">FROM</span> 表名 <span class="keyword">GROUP</span> <span class="keyword">BY</span> 字段</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>根据某一个字段进行分组，并用聚合函数操作</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-练习"><a href="#3-练习" class="headerlink" title="3.练习"></a>3.练习</h4><ul>
-<li><p>查询有几个部门</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> edpt <span class="keyword">FROM</span> emp <span class="keyword">Group</span> <span class="keyword">BY</span> edpt</span><br></pre></td></tr></table></figure></li>
-<li><p>查询每个部门的平均薪资</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> edpt,<span class="built_in">AVG</span>(salary) <span class="keyword">FROM</span> emp <span class="keyword">GROUP</span> <span class="keyword">BY</span> edpt</span><br></pre></td></tr></table></figure></li>
-<li><p>查询每个部门的平均薪资，部门名称不能为null</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> edpt,<span class="built_in">AVG</span>(salary) <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> edpt <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> edpt;</span><br></pre></td></tr></table></figure></li>
-<li><p>查询平均薪资大于600的部门</p>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">  </span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li>DESC 表名 查看表结构</li>
-</ul>
-<h4 id="4-查询条件"><a href="#4-查询条件" class="headerlink" title="4.查询条件"></a>4.查询条件</h4><ul>
-<li>WHERE<ul>
-<li>进行条件判断，后面不能跟聚合函数</li>
-</ul>
-</li>
-<li>HAVING<ul>
-<li>进行条件判断，后面可以跟聚合函数</li>
-</ul>
-</li>
-</ul>
-<h4 id="5-limite关键字"><a href="#5-limite关键字" class="headerlink" title="5.limite关键字"></a>5.limite关键字</h4><ul>
-<li><p>是Mysql的方言</p>
-</li>
-<li><p>格式</p>
-<ul>
-<li> limit offset,length</li>
-<li> 起始索引 = （当前页-1）* 每页数量</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/14/YKWT7yhouUEZk2R.png" alt="image-20210914110446034"></p>
-<ul>
-<li>0-3  4-6 7-9</li>
-</ul>
-</li>
-</ul>
-<h4 id="6-SQL约束"><a href="#6-SQL约束" class="headerlink" title="6.SQL约束"></a>6.SQL约束</h4><ul>
-<li>什么是约束？<ul>
-<li>对表中的数据进行进一步的限制，用来保证数据的正确性，有效性，完整性</li>
-</ul>
-</li>
-<li>常见的约束</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>约束</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>主键</td>
-<td>primary key</td>
-</tr>
-<tr>
-<td>唯一</td>
-<td>unique</td>
-</tr>
-<tr>
-<td>非空</td>
-<td>not null</td>
-</tr>
-<tr>
-<td>外键</td>
-<td>foreign key</td>
-</tr>
-</tbody></table>
-<h5 id="Ⅰ-主键"><a href="#Ⅰ-主键" class="headerlink" title="Ⅰ.主键"></a>Ⅰ.主键</h5><ul>
-<li><p>特点</p>
-<ul>
-<li>不可重复，唯一，非空</li>
-</ul>
-</li>
-<li><p>作用：修饰字段</p>
-</li>
-<li><p>语法格式</p>
-<ul>
-<li>创建同时指定</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> s(</span><br><span class="line">	sid <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">	sname <span class="type">VARCHAR</span>(<span class="number">10</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>创建时单独指定</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> s(</span><br><span class="line">	sid <span class="type">INT</span>,</span><br><span class="line">	sname <span class="type">VARCHAR</span>(<span class="number">10</span>)</span><br><span class="line">	<span class="comment">-- 单独指定</span></span><br><span class="line">	<span class="keyword">PRIMARY</span> KEY(sid)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>创建时不指定，使用DDL设置主键</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> s <span class="keyword">ADD</span> <span class="keyword">PRIMARY</span> KEY(sid)</span><br></pre></td></tr></table></figure></li>
-<li><p>删除主键</p>
-</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> s <span class="keyword">DROP</span> <span class="keyword">PRIMARY</span> KEY</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>自动增长</p>
-<p><img src="https://i.loli.net/2021/09/14/Hcq9pnlhLB1sjbS.png" alt="image-20210914113151269"></p>
-<ul>
-<li>设置自动增长的起始数</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> s1(</span><br><span class="line">	sid <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY AUTO_INCREMENT,</span><br><span class="line">	sanme <span class="type">VARCHAR</span>(<span class="number">10</span>)</span><br><span class="line">)AUTO_INCREMENT<span class="operator">=</span><span class="number">100</span>;</span><br></pre></td></tr></table></figure></li>
-<li><p>删除操作对主键的影响</p>
-<ul>
-<li>删除表中所有数据，包括主键等操作</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> s1</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="Ⅱ-非空约束"><a href="#Ⅱ-非空约束" class="headerlink" title="Ⅱ.非空约束"></a>Ⅱ.非空约束</h5><ul>
-<li>该字段不能为空</li>
-<li>非空和主键的区别<ul>
-<li>非空约束可以重复</li>
-<li>主键约束不能重复，是唯一的</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="Ⅲ-唯一约束"><a href="#Ⅲ-唯一约束" class="headerlink" title="Ⅲ.唯一约束"></a>Ⅲ.唯一约束</h5><ul>
-<li>使用UNIQUE</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/14/5Wk3zTbPetBDVQ1.png" alt="image-20210914134717277"></p>
-<h5 id="Ⅳ-设置默认值"><a href="#Ⅳ-设置默认值" class="headerlink" title="Ⅳ. 设置默认值"></a>Ⅳ. 设置默认值</h5><ul>
-<li>使用DEFAULT+值</li>
-</ul>
-<p><img src="https://i.loli.net/2021/09/14/8fOZjVeYpm5DgJU.png" alt="image-20210914135408534"></p>
-<ul>
-<li>插入数据时，也可以使用default，使用默认值</li>
-</ul>
-<h3 id="二、事务"><a href="#二、事务" class="headerlink" title="二、事务"></a>二、事务</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
-<li>是由一条或多条sql语句组成<ul>
-<li>要么全部成功，要么全部失败（但是可以执行回滚）</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-回滚"><a href="#2-回滚" class="headerlink" title="2.回滚"></a>2.回滚</h4><ul>
-<li>在事务运行的过程中发生了某个故障，事务便不再执行下去，系统对事物中数据所有已经完成的操作全家不撤销<ul>
-<li>滚回到<font color='#d15252'>开始时</font>的状态</li>
-</ul>
-</li>
-</ul>
-<h4 id="3-事务的操作"><a href="#3-事务的操作" class="headerlink" title="3.事务的操作"></a>3.事务的操作</h4><ul>
-<li><p>手动提交事务</p>
-<ul>
-<li><p>格式：</p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>语句</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>开启事务</td>
-<td>start transation ； BEGIN</td>
-</tr>
-<tr>
-<td>提交事务</td>
-<td>commit</td>
-</tr>
-<tr>
-<td>回滚事务</td>
-<td>rollback</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-</li>
-<li><p>自动提交事务</p>
-<ul>
-<li>默认自动提交事务</li>
-</ul>
-</li>
-</ul>
-<h4 id="4-取消自动提交"><a href="#4-取消自动提交" class="headerlink" title="4.取消自动提交"></a>4.取消自动提交</h4><ul>
-<li>查看当前的提交方式<ul>
-<li>SHOW VARIABLES LIKE ‘autocommit’<ul>
-<li>on：自动</li>
-<li>off：关闭自动</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>设置提交方式<ul>
-<li>SET @@autocommint = off</li>
-</ul>
-</li>
-</ul>
-<h4 id="5-事务的四大特性（面试）"><a href="#5-事务的四大特性（面试）" class="headerlink" title="5.事务的四大特性（面试）"></a>5.事务的<font color='#d15252'>四大特性</font>（面试）</h4><table>
-<thead>
-<tr>
-<th>特性</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>原子性</td>
-<td>每一个事物都是一个整体，不可以再拆分，事务中的sql要么全部成功，要么全部失败</td>
-</tr>
-<tr>
-<td>一致性</td>
-<td>事务在执行前数据库的状态与执行后数据库的状态保持一致</td>
-</tr>
-<tr>
-<td>隔离性</td>
-<td>事务和事务之间不应该相互影响，执行时保持隔离状态</td>
-</tr>
-<tr>
-<td>持久性</td>
-<td>一旦事务执行成功，对数据库的修改时永久的。就算关机，数据也会保存下来</td>
-</tr>
-</tbody></table>
-<h4 id="6-Mysql的隔离级别（了解）"><a href="#6-Mysql的隔离级别（了解）" class="headerlink" title="6.Mysql的隔离级别（了解）"></a>6.Mysql的隔离级别（了解）</h4><ul>
-<li><p>数据的并发访问</p>
-<ul>
-<li>一个数据库可能有多个客户端在访问，这些客户端都可以并发方式访问数据库</li>
-<li>数据库的相同数据可能被多个事务同时访问</li>
-<li>如果不采用隔离，就会发生各种问题，破坏数据的完整性</li>
-</ul>
-</li>
-<li><p>数据并发访问产生的问题</p>
-<table>
-<thead>
-<tr>
-<th>产生的问题</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>脏读</td>
-<td>一个事务读取到了另一个事务的尚未提交的数据</td>
-</tr>
-<tr>
-<td>不可重复读</td>
-<td>一个事务中两次读取的数据内容不一致</td>
-</tr>
-<tr>
-<td>幻读</td>
-<td>一个事务中，某一次的Select操作结果所表现的数据状态，无法支撑后续的业务操作（也就是查询到的数据不准确）</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<h5 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h5><ul>
-<li>同一个事务中，进行查询操作，每次读取的内容是不一样的</li>
-</ul>
-<h5 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h5><ul>
-<li>Select在查询某条记录时，当记录不存在时，插入数据<ul>
-<li>但是执行insert时发现记录已经存在，无法插入</li>
-</ul>
-</li>
-</ul>
-<p><strong><font color='#d15252'>四种隔离级别</font></strong></p>
-<table>
-<thead>
-<tr>
-<th>级别</th>
-<th>名字</th>
-<th>隔离级别</th>
-<th>脏读</th>
-<th>不可重复读</th>
-<th>幻读</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>读未提交</td>
-<td>read uncommitted</td>
-<td>不能</td>
-<td>不能</td>
-<td>不能</td>
-</tr>
-<tr>
-<td>2</td>
-<td>读已提交</td>
-<td>read committed</td>
-<td>能</td>
-<td>不能</td>
-<td>不能</td>
-</tr>
-<tr>
-<td>3</td>
-<td>可重复读</td>
-<td>repeatable read</td>
-<td>能</td>
-<td>能</td>
-<td>不能</td>
-</tr>
-<tr>
-<td>4</td>
-<td>串行化</td>
-<td>serializable</td>
-<td>能</td>
-<td>能</td>
-<td>能</td>
-</tr>
-</tbody></table>
-<ul>
-<li>级别越高，安全性越高，安全性越高，性能越低<ul>
-<li>所以，需要根据情况给出相应的隔离级别</li>
-</ul>
-</li>
-</ul>
-<h5 id="查看隔离级别"><a href="#查看隔离级别" class="headerlink" title="查看隔离级别"></a>查看隔离级别</h5><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> @<span class="variable">@tx</span>_isolation</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>默认是可重复读状态</li>
-</ul>
-<h5 id="设置隔离级别"><a href="#设置隔离级别" class="headerlink" title="设置隔离级别"></a>设置隔离级别</h5><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> TRANSACTION ISOLATION LEVEL 隔离级别</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数据库知识</title>
     <url>/2021/09/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<h3 id="一、数据库"><a href="#一、数据库" class="headerlink" title="一、数据库"></a>一、数据库</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
@@ -11358,6 +11005,359 @@
       </tags>
   </entry>
   <entry>
+    <title>数据库知识补充，事务</title>
+    <url>/2021/09/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E8%A1%A5%E5%85%85%EF%BC%8C%E4%BA%8B%E5%8A%A1/</url>
+    <content><![CDATA[<h3 id="一、Mysql知识点补充"><a href="#一、Mysql知识点补充" class="headerlink" title="一、Mysql知识点补充"></a>一、Mysql知识点补充</h3><h4 id="1-查询某一列的数量"><a href="#1-查询某一列的数量" class="headerlink" title="1. 查询某一列的数量"></a>1. 查询某一列的数量</h4><ul>
+<li>对数据进行纵向的操作</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/14/YSgdP13anu6mzWL.png" alt="image-20210914092804332"></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 查询所有的列的行数count（*/1）</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="number">1</span>) <span class="keyword">FROM</span> emp</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询员工的总数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(ename) <span class="string">&#x27;员工总数&#x27;</span> <span class="keyword">FROM</span> emp</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(eid) <span class="string">&#x27;员工总数&#x27;</span> <span class="keyword">FROM</span> emp</span><br><span class="line"><span class="comment">-- 查询员工的总薪资，最高 最低 平均</span></span><br><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">	<span class="built_in">SUM</span>(salary) &quot;总薪资&quot;,</span><br><span class="line">	<span class="built_in">MAX</span>(salary) &quot;最高&quot;,</span><br><span class="line">	<span class="built_in">MIN</span>(salary) &quot;最低&quot;,</span><br><span class="line">	<span class="built_in">AVG</span>(salary) &quot;平均&quot;</span><br><span class="line"><span class="keyword">FROM</span> emp</span><br><span class="line"><span class="comment">-- 查询员工薪资大于500的个数</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>)<span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> salary<span class="operator">&gt;</span><span class="number">500</span></span><br><span class="line"><span class="comment">-- 查询&quot;大唐&quot;部门员工的总数</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(ename) <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> edpt<span class="operator">=</span>&quot;大唐&quot;</span><br><span class="line"><span class="comment">-- 查询“大唐”部门员工的平均薪资</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(salary) <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> edpt <span class="operator">=</span> <span class="string">&#x27;大唐&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-DQL分组查询"><a href="#2-DQL分组查询" class="headerlink" title="2.DQL分组查询"></a>2.DQL分组查询</h4><ul>
+<li><p>格式：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">GROUP</span> <span class="keyword">BY</span> 字段</span><br></pre></td></tr></table></figure></li>
+<li><p>分组，只能对显示集合中的第一条数据，因此单纯的使用分组查询是没有意义的</p>
+<ul>
+<li>所以，经常使用聚合函数和分组结合使用</li>
+</ul>
+</li>
+<li><p>通过性别字段进行分组，求每组的平均薪资</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 聚合函数 <span class="keyword">FROM</span> 表名 <span class="keyword">GROUP</span> <span class="keyword">BY</span> 字段</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>根据某一个字段进行分组，并用聚合函数操作</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-练习"><a href="#3-练习" class="headerlink" title="3.练习"></a>3.练习</h4><ul>
+<li><p>查询有几个部门</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> edpt <span class="keyword">FROM</span> emp <span class="keyword">Group</span> <span class="keyword">BY</span> edpt</span><br></pre></td></tr></table></figure></li>
+<li><p>查询每个部门的平均薪资</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> edpt,<span class="built_in">AVG</span>(salary) <span class="keyword">FROM</span> emp <span class="keyword">GROUP</span> <span class="keyword">BY</span> edpt</span><br></pre></td></tr></table></figure></li>
+<li><p>查询每个部门的平均薪资，部门名称不能为null</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> edpt,<span class="built_in">AVG</span>(salary) <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> edpt <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> edpt;</span><br></pre></td></tr></table></figure></li>
+<li><p>查询平均薪资大于600的部门</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">  </span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>DESC 表名 查看表结构</li>
+</ul>
+<h4 id="4-查询条件"><a href="#4-查询条件" class="headerlink" title="4.查询条件"></a>4.查询条件</h4><ul>
+<li>WHERE<ul>
+<li>进行条件判断，后面不能跟聚合函数</li>
+</ul>
+</li>
+<li>HAVING<ul>
+<li>进行条件判断，后面可以跟聚合函数</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-limite关键字"><a href="#5-limite关键字" class="headerlink" title="5.limite关键字"></a>5.limite关键字</h4><ul>
+<li><p>是Mysql的方言</p>
+</li>
+<li><p>格式</p>
+<ul>
+<li> limit offset,length</li>
+<li> 起始索引 = （当前页-1）* 每页数量</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/14/YKWT7yhouUEZk2R.png" alt="image-20210914110446034"></p>
+<ul>
+<li>0-3  4-6 7-9</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-SQL约束"><a href="#6-SQL约束" class="headerlink" title="6.SQL约束"></a>6.SQL约束</h4><ul>
+<li>什么是约束？<ul>
+<li>对表中的数据进行进一步的限制，用来保证数据的正确性，有效性，完整性</li>
+</ul>
+</li>
+<li>常见的约束</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主键</td>
+<td>primary key</td>
+</tr>
+<tr>
+<td>唯一</td>
+<td>unique</td>
+</tr>
+<tr>
+<td>非空</td>
+<td>not null</td>
+</tr>
+<tr>
+<td>外键</td>
+<td>foreign key</td>
+</tr>
+</tbody></table>
+<h5 id="Ⅰ-主键"><a href="#Ⅰ-主键" class="headerlink" title="Ⅰ.主键"></a>Ⅰ.主键</h5><ul>
+<li><p>特点</p>
+<ul>
+<li>不可重复，唯一，非空</li>
+</ul>
+</li>
+<li><p>作用：修饰字段</p>
+</li>
+<li><p>语法格式</p>
+<ul>
+<li>创建同时指定</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> s(</span><br><span class="line">	sid <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">	sname <span class="type">VARCHAR</span>(<span class="number">10</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建时单独指定</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> s(</span><br><span class="line">	sid <span class="type">INT</span>,</span><br><span class="line">	sname <span class="type">VARCHAR</span>(<span class="number">10</span>)</span><br><span class="line">	<span class="comment">-- 单独指定</span></span><br><span class="line">	<span class="keyword">PRIMARY</span> KEY(sid)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建时不指定，使用DDL设置主键</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> s <span class="keyword">ADD</span> <span class="keyword">PRIMARY</span> KEY(sid)</span><br></pre></td></tr></table></figure></li>
+<li><p>删除主键</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> s <span class="keyword">DROP</span> <span class="keyword">PRIMARY</span> KEY</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>自动增长</p>
+<p><img src="https://i.loli.net/2021/09/14/Hcq9pnlhLB1sjbS.png" alt="image-20210914113151269"></p>
+<ul>
+<li>设置自动增长的起始数</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> s1(</span><br><span class="line">	sid <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY AUTO_INCREMENT,</span><br><span class="line">	sanme <span class="type">VARCHAR</span>(<span class="number">10</span>)</span><br><span class="line">)AUTO_INCREMENT<span class="operator">=</span><span class="number">100</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>删除操作对主键的影响</p>
+<ul>
+<li>删除表中所有数据，包括主键等操作</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> s1</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅱ-非空约束"><a href="#Ⅱ-非空约束" class="headerlink" title="Ⅱ.非空约束"></a>Ⅱ.非空约束</h5><ul>
+<li>该字段不能为空</li>
+<li>非空和主键的区别<ul>
+<li>非空约束可以重复</li>
+<li>主键约束不能重复，是唯一的</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Ⅲ-唯一约束"><a href="#Ⅲ-唯一约束" class="headerlink" title="Ⅲ.唯一约束"></a>Ⅲ.唯一约束</h5><ul>
+<li>使用UNIQUE</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/14/5Wk3zTbPetBDVQ1.png" alt="image-20210914134717277"></p>
+<h5 id="Ⅳ-设置默认值"><a href="#Ⅳ-设置默认值" class="headerlink" title="Ⅳ. 设置默认值"></a>Ⅳ. 设置默认值</h5><ul>
+<li>使用DEFAULT+值</li>
+</ul>
+<p><img src="https://i.loli.net/2021/09/14/8fOZjVeYpm5DgJU.png" alt="image-20210914135408534"></p>
+<ul>
+<li>插入数据时，也可以使用default，使用默认值</li>
+</ul>
+<h3 id="二、事务"><a href="#二、事务" class="headerlink" title="二、事务"></a>二、事务</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>是由一条或多条sql语句组成<ul>
+<li>要么全部成功，要么全部失败（但是可以执行回滚）</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-回滚"><a href="#2-回滚" class="headerlink" title="2.回滚"></a>2.回滚</h4><ul>
+<li>在事务运行的过程中发生了某个故障，事务便不再执行下去，系统对事物中数据所有已经完成的操作全家不撤销<ul>
+<li>滚回到<font color='#d15252'>开始时</font>的状态</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-事务的操作"><a href="#3-事务的操作" class="headerlink" title="3.事务的操作"></a>3.事务的操作</h4><ul>
+<li><p>手动提交事务</p>
+<ul>
+<li><p>格式：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>语句</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>开启事务</td>
+<td>start transation ； BEGIN</td>
+</tr>
+<tr>
+<td>提交事务</td>
+<td>commit</td>
+</tr>
+<tr>
+<td>回滚事务</td>
+<td>rollback</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+<li><p>自动提交事务</p>
+<ul>
+<li>默认自动提交事务</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-取消自动提交"><a href="#4-取消自动提交" class="headerlink" title="4.取消自动提交"></a>4.取消自动提交</h4><ul>
+<li>查看当前的提交方式<ul>
+<li>SHOW VARIABLES LIKE ‘autocommit’<ul>
+<li>on：自动</li>
+<li>off：关闭自动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>设置提交方式<ul>
+<li>SET @@autocommint = off</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-事务的四大特性（面试）"><a href="#5-事务的四大特性（面试）" class="headerlink" title="5.事务的四大特性（面试）"></a>5.事务的<font color='#d15252'>四大特性</font>（面试）</h4><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原子性</td>
+<td>每一个事物都是一个整体，不可以再拆分，事务中的sql要么全部成功，要么全部失败</td>
+</tr>
+<tr>
+<td>一致性</td>
+<td>事务在执行前数据库的状态与执行后数据库的状态保持一致</td>
+</tr>
+<tr>
+<td>隔离性</td>
+<td>事务和事务之间不应该相互影响，执行时保持隔离状态</td>
+</tr>
+<tr>
+<td>持久性</td>
+<td>一旦事务执行成功，对数据库的修改时永久的。就算关机，数据也会保存下来</td>
+</tr>
+</tbody></table>
+<h4 id="6-Mysql的隔离级别（了解）"><a href="#6-Mysql的隔离级别（了解）" class="headerlink" title="6.Mysql的隔离级别（了解）"></a>6.Mysql的隔离级别（了解）</h4><ul>
+<li><p>数据的并发访问</p>
+<ul>
+<li>一个数据库可能有多个客户端在访问，这些客户端都可以并发方式访问数据库</li>
+<li>数据库的相同数据可能被多个事务同时访问</li>
+<li>如果不采用隔离，就会发生各种问题，破坏数据的完整性</li>
+</ul>
+</li>
+<li><p>数据并发访问产生的问题</p>
+<table>
+<thead>
+<tr>
+<th>产生的问题</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>脏读</td>
+<td>一个事务读取到了另一个事务的尚未提交的数据</td>
+</tr>
+<tr>
+<td>不可重复读</td>
+<td>一个事务中两次读取的数据内容不一致</td>
+</tr>
+<tr>
+<td>幻读</td>
+<td>一个事务中，某一次的Select操作结果所表现的数据状态，无法支撑后续的业务操作（也就是查询到的数据不准确）</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h5 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h5><ul>
+<li>同一个事务中，进行查询操作，每次读取的内容是不一样的</li>
+</ul>
+<h5 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h5><ul>
+<li>Select在查询某条记录时，当记录不存在时，插入数据<ul>
+<li>但是执行insert时发现记录已经存在，无法插入</li>
+</ul>
+</li>
+</ul>
+<p><strong><font color='#d15252'>四种隔离级别</font></strong></p>
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>名字</th>
+<th>隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>读未提交</td>
+<td>read uncommitted</td>
+<td>不能</td>
+<td>不能</td>
+<td>不能</td>
+</tr>
+<tr>
+<td>2</td>
+<td>读已提交</td>
+<td>read committed</td>
+<td>能</td>
+<td>不能</td>
+<td>不能</td>
+</tr>
+<tr>
+<td>3</td>
+<td>可重复读</td>
+<td>repeatable read</td>
+<td>能</td>
+<td>能</td>
+<td>不能</td>
+</tr>
+<tr>
+<td>4</td>
+<td>串行化</td>
+<td>serializable</td>
+<td>能</td>
+<td>能</td>
+<td>能</td>
+</tr>
+</tbody></table>
+<ul>
+<li>级别越高，安全性越高，安全性越高，性能越低<ul>
+<li>所以，需要根据情况给出相应的隔离级别</li>
+</ul>
+</li>
+</ul>
+<h5 id="查看隔离级别"><a href="#查看隔离级别" class="headerlink" title="查看隔离级别"></a>查看隔离级别</h5><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> @<span class="variable">@tx</span>_isolation</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>默认是可重复读状态</li>
+</ul>
+<h5 id="设置隔离级别"><a href="#设置隔离级别" class="headerlink" title="设置隔离级别"></a>设置隔离级别</h5><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="keyword">GLOBAL</span> TRANSACTION ISOLATION LEVEL 隔离级别</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数组</title>
     <url>/2021/08/25/%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h3 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h3><h4 id="1-什么是数组"><a href="#1-什么是数组" class="headerlink" title="1.什么是数组"></a>1.什么是数组</h4><ul>
@@ -11545,6 +11545,193 @@
         <tag>案例</tag>
         <tag>数据库</tag>
         <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>整合jpa/Swagger/JDBCTemplate</title>
+    <url>/2021/10/26/%E6%95%B4%E5%90%88jpa-Swagger-JDBCTemplate/</url>
+    <content><![CDATA[<h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><h3 id="一、Result风格"><a href="#一、Result风格" class="headerlink" title="一、Result风格"></a>一、Result风格</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li> RESTFUL是一种网络应用程序的设计风格和开发方式</li>
+<li>它是一组客户端和服务器交互的架构理念和设计原则<ul>
+<li>它能基于接口实现简洁有层次的访问</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-使用对比"><a href="#2-使用对比" class="headerlink" title="2.使用对比"></a>2.使用对比</h4><ul>
+<li><p>以前：</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span>localhost:<span class="number">8080</span><span class="regexp">/项目名/</span>xxx.action?id=<span class="number">1</span>&amp;age=<span class="number">28</span>&amp;name=小明</span><br></pre></td></tr></table></figure></li>
+<li><p>学完rest之后 ：</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span>localhost:<span class="number">8080</span><span class="regexp">/项目名/</span>xxx.action<span class="regexp">/1/</span><span class="number">28</span>/小明</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-SpringBoot开发rest"><a href="#3-SpringBoot开发rest" class="headerlink" title="3.SpringBoot开发rest"></a>3.SpringBoot开发rest</h4><ul>
+<li><p>首先要学习注解</p>
+<ul>
+<li> <font color='#d15252'>@PathVariable </font>可以获取url中的数据,它是rest中最主要的注解         </li>
+</ul>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="variable">@PostMapping</span>  接收处理post请求</span><br><span class="line"></span><br><span class="line">	 <span class="variable">@DeleteMapping</span> 接收delete请求，可以使用GetMapping注解进行替换</span><br><span class="line">	 </span><br><span class="line">	 <span class="variable">@PutMapping</span>  接收put请求，我们可以使用PostMapping进行替换</span><br><span class="line">	 </span><br><span class="line">	 <span class="variable">@GetMapping</span> 接收get方式的请求</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="4-rest的优势"><a href="#4-rest的优势" class="headerlink" title="4.rest的优势"></a>4.rest的优势</h4><ul>
+<li>轻量级的基于http协议的,可以进行 get/post/put/delete 的crud操作</li>
+<li>面向资源，一目了然</li>
+<li>描述非常简单，可以配合xml和json进行数据传输   </li>
+<li>无状态的协议,我们在调用接口.无需要管理状态，降低了复杂度</li>
+<li>简单、低耦合</li>
+</ul>
+<p>2.3 案例操作<br>   参见录像</p>
+<h3 id="二、SpringBoot整合jpa"><a href="#二、SpringBoot整合jpa" class="headerlink" title="二、SpringBoot整合jpa"></a>二、SpringBoot整合jpa</h3><h4 id="1-jpa的概念"><a href="#1-jpa的概念" class="headerlink" title="1.jpa的概念"></a>1.jpa的概念</h4><ul>
+<li>JPA是Java Persistence API的简称，中文名Java持久层API<ul>
+<li>是JDK5.0注解或XML描述对象-关系表的映射关系，并将运行期的实体对象持久化到数据库中</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2.步骤"></a>2.步骤</h4><ul>
+<li><p>添加JPA依赖</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--        jpa依赖--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在application.properties配置文件中，添加jpa配置属性</p>
+<p><img src="https://i.loli.net/2021/10/26/xzY3ZHqXkhiNpeS.png" alt="image-20211026125646091"></p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment">#jpa的配置            </span></span><br><span class="line"><span class="comment">#如果是create，会帮你新建数据库表，每次运行重新新建一个</span></span><br><span class="line"><span class="meta">spring.jpa.hibernate.ddl-auto</span>=<span class="string">update</span></span><br><span class="line"><span class="comment">#显示sql语句</span></span><br><span class="line"><span class="meta">spring.jpa.show-sql</span>=<span class="string">true</span></span><br><span class="line"><span class="comment">#格式化sql语句</span></span><br><span class="line"><span class="meta">spring.jpa.properties.hibernate.format_sql</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure></li>
+<li><p>创建entity（JavaBean类），生成数据表</p>
+<p><img src="https://i.loli.net/2021/10/26/XOfC759AaqBmKIy.png" alt="image-20211026130251675"></p>
+<ul>
+<li>使用@Entity注解</li>
+<li>使用@Table注解<ul>
+<li>生成表，name属性 = 表名</li>
+</ul>
+</li>
+<li>使用@Id注解<ul>
+<li>主键</li>
+</ul>
+</li>
+<li>使用GeneratedValue注解<ul>
+<li>主键生成的策略（Mysql、Orlce）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>创建mapper层接口，继承<font color='#d15252'>JpaRepository&lt;Users,Integer&gt;</font></p>
+<ul>
+<li>有封装好的各种增查删改方法，不需要手动写</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/26/W1fO2Dc6QMbKUim.png" alt="image-20211026125347505"></p>
+</li>
+<li><p>创建Service层，注入一个mapper层接口的成员变量，通过调用方法，实现不同的功能</p>
+<ul>
+<li>使用@Service注解</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/26/dkKgvE9eyRs7oDA.png" alt="image-20211026125443066"></p>
+</li>
+<li><p>创建Controller层，注入一个usersService层接口对象，调用方法</p>
+<ul>
+<li>使用@RestController注解</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/26/2mRoiCHr6azg7sN.png" alt="image-20211026125557237"></p>
+</li>
+</ul>
+<h3 id="三、SpringBoot整合Swagger"><a href="#三、SpringBoot整合Swagger" class="headerlink" title="三、SpringBoot整合Swagger"></a>三、SpringBoot整合Swagger</h3><h4 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li><p>实现前后端分离</p>
+<ul>
+<li><p>前端和后端人员沟通的工具</p>
+</li>
+<li><p>为了节约沟通成本，我们使用swagger</p>
+</li>
+<li><p>生成各种格式的接口文档</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://blog.csdn.net/u012702547/article/details/88775298">SpringBoot整合Swagger2，再也不用维护接口文档了！_江南一点雨的专栏-CSDN博客</a></p>
+<h4 id="2-实现步骤"><a href="#2-实现步骤" class="headerlink" title="2.实现步骤"></a>2.实现步骤</h4><ul>
+<li><p>创建springboot项目，添加swagger依赖</p>
+<p><img src="https://i.loli.net/2021/10/26/bQBxhMjmcVC8Nsk.png" alt="image-20211026133816296"></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>配置application.properties</p>
+<p><img src="https://i.loli.net/2021/10/26/48dypgRaLxQvKZN.png" alt="image-20211026140250726"></p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">server.port</span>=<span class="number">8090</span></span><br><span class="line"><span class="attr">server.servlet.context-path</span>=/bootandswagger</span><br></pre></td></tr></table></figure></li>
+<li><p>配置特殊类</p>
+<ul>
+<li>首先通过@EnableSwagger2注解启用Swagger2</li>
+<li>然后配置一个Docket Bean，这个Bean中，配置映射路径和要扫描的接口的位置</li>
+<li>在apiInfo中，主要配置一下Swagger2文档网站的信息，例如网站的title，网站的描述，联系人的信息，使用的协议等等。</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/26/IDPnZfXwbcEH9zm.png" alt="image-20211026135256898"></p>
+</li>
+<li><p>创建entity层</p>
+<p><img src="https://i.loli.net/2021/10/26/eJT2k1UZhEoq6fN.png" alt="image-20211026135531688"></p>
+</li>
+<li><p>创建Controller层</p>
+<p><img src="https://i.loli.net/2021/10/26/dsUaHeS2i3LbR6O.png" alt="image-20211026140023937"></p>
+<p><img src="https://i.loli.net/2021/10/26/UA2nBbKdjm6etYi.png" alt="image-20211026140144184"></p>
+</li>
+<li><p>最终访问swagger的地址</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span>localhost:端口号<span class="regexp">/项目名/</span>swagger-ui.html</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3-各种注解的解释"><a href="#3-各种注解的解释" class="headerlink" title="3.各种注解的解释"></a>3.各种注解的解释</h4><p>@Api</p>
+<ul>
+<li>可以用来标记当前Controller的功能</li>
+</ul>
+<p>@ApiOperation</p>
+<ul>
+<li>用来标记一个方法的作用</li>
+</ul>
+<p>@ApilmplicitParam</p>
+<ul>
+<li><p>用来描述一个参数，可以配置参数的中文含义，也可以给参数设置默认值，这样可以避免手动输入</p>
+</li>
+<li><p>如果有多个参数，则需要使用多个@ApiImplicitParam注解来描述，多个@ApiImplicitParam注解需要放在一个@ApiImplicitParams注解中</p>
+</li>
+</ul>
+<h3 id="四、SpringBoot整合持久层-JDBCTemplate"><a href="#四、SpringBoot整合持久层-JDBCTemplate" class="headerlink" title="四、SpringBoot整合持久层 JDBCTemplate"></a>四、SpringBoot整合持久层 JDBCTemplate</h3><ul>
+<li>SpringBoot整合持久层 （Mybatis、JPA 、 JDBCTemplate）</li>
+</ul>
+<h4 id="1-实现步骤"><a href="#1-实现步骤" class="headerlink" title="1.实现步骤"></a>1.实现步骤</h4><ul>
+<li><p>添加依赖</p>
+<ul>
+<li>mysql依赖添加版本号</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/26/CUw96Sd4y3cA7Fn.png" alt="image-20211026151152327"></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span>        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>配置application.properties</p>
+<p><img src="https://i.loli.net/2021/10/26/ThUNq4fczGtIpnB.png" alt="image-20211026151420837"></p>
+</li>
+<li><p>创建Dao层</p>
+<p><img src="https://i.loli.net/2021/10/26/1wu9B6mYHOEhMZr.png" alt="image-20211026151942245"></p>
+<p><img src="https://i.loli.net/2021/10/26/PMzYWLNuAI8EfGb.png" alt="image-20211026152118544"></p>
+</li>
+<li><p>创建service层</p>
+<p><img src="https://i.loli.net/2021/10/26/ig2xKUvc9pCurOs.png" alt="image-20211026165300830"></p>
+</li>
+<li><p>创建Controller层</p>
+<p><img src="https://i.loli.net/2021/10/26/G5LWxkZURbhr2a9.png" alt="image-20211026165310961"></p>
+</li>
+</ul>
+<h4 id="2-配置热部署"><a href="#2-配置热部署" class="headerlink" title="2.配置热部署"></a>2.配置热部署</h4><ul>
+<li><p>修改代码不需要重新启动项目</p>
+<ul>
+<li>项目处于运行状态</li>
+</ul>
+</li>
+<li><p>添加依赖</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/10/26/trAjWDhle6qNYXP.png" alt="image-20211026161944832"></p>
+</li>
+<li><p>在application.properties中设置热部署开关</p>
+<ul>
+<li>也可以不设置</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/10/26/5ygP7qOjwzWom9S.png" alt="image-20211026155811325"></p>
+<p><img src="https://i.loli.net/2021/10/26/qAnHlZYIxL5CNB4.png" alt="image-20211026160027063"></p>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Jpa</tag>
+        <tag>Swagger</tag>
+        <tag>JDBCTemplate</tag>
       </tags>
   </entry>
   <entry>
@@ -11783,193 +11970,6 @@
       <tags>
         <tag>方法</tag>
         <tag>函数</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>整合jpa/Swagger/JDBCTemplate</title>
-    <url>/2021/10/26/%E6%95%B4%E5%90%88jpa-Swagger-JDBCTemplate/</url>
-    <content><![CDATA[<h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><h3 id="一、Result风格"><a href="#一、Result风格" class="headerlink" title="一、Result风格"></a>一、Result风格</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
-<li> RESTFUL是一种网络应用程序的设计风格和开发方式</li>
-<li>它是一组客户端和服务器交互的架构理念和设计原则<ul>
-<li>它能基于接口实现简洁有层次的访问</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-使用对比"><a href="#2-使用对比" class="headerlink" title="2.使用对比"></a>2.使用对比</h4><ul>
-<li><p>以前：</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span>localhost:<span class="number">8080</span><span class="regexp">/项目名/</span>xxx.action?id=<span class="number">1</span>&amp;age=<span class="number">28</span>&amp;name=小明</span><br></pre></td></tr></table></figure></li>
-<li><p>学完rest之后 ：</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span>localhost:<span class="number">8080</span><span class="regexp">/项目名/</span>xxx.action<span class="regexp">/1/</span><span class="number">28</span>/小明</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="3-SpringBoot开发rest"><a href="#3-SpringBoot开发rest" class="headerlink" title="3.SpringBoot开发rest"></a>3.SpringBoot开发rest</h4><ul>
-<li><p>首先要学习注解</p>
-<ul>
-<li> <font color='#d15252'>@PathVariable </font>可以获取url中的数据,它是rest中最主要的注解         </li>
-</ul>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="variable">@PostMapping</span>  接收处理post请求</span><br><span class="line"></span><br><span class="line">	 <span class="variable">@DeleteMapping</span> 接收delete请求，可以使用GetMapping注解进行替换</span><br><span class="line">	 </span><br><span class="line">	 <span class="variable">@PutMapping</span>  接收put请求，我们可以使用PostMapping进行替换</span><br><span class="line">	 </span><br><span class="line">	 <span class="variable">@GetMapping</span> 接收get方式的请求</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="4-rest的优势"><a href="#4-rest的优势" class="headerlink" title="4.rest的优势"></a>4.rest的优势</h4><ul>
-<li>轻量级的基于http协议的,可以进行 get/post/put/delete 的crud操作</li>
-<li>面向资源，一目了然</li>
-<li>描述非常简单，可以配合xml和json进行数据传输   </li>
-<li>无状态的协议,我们在调用接口.无需要管理状态，降低了复杂度</li>
-<li>简单、低耦合</li>
-</ul>
-<p>2.3 案例操作<br>   参见录像</p>
-<h3 id="二、SpringBoot整合jpa"><a href="#二、SpringBoot整合jpa" class="headerlink" title="二、SpringBoot整合jpa"></a>二、SpringBoot整合jpa</h3><h4 id="1-jpa的概念"><a href="#1-jpa的概念" class="headerlink" title="1.jpa的概念"></a>1.jpa的概念</h4><ul>
-<li>JPA是Java Persistence API的简称，中文名Java持久层API<ul>
-<li>是JDK5.0注解或XML描述对象-关系表的映射关系，并将运行期的实体对象持久化到数据库中</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-步骤"><a href="#2-步骤" class="headerlink" title="2.步骤"></a>2.步骤</h4><ul>
-<li><p>添加JPA依赖</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--        jpa依赖--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在application.properties配置文件中，添加jpa配置属性</p>
-<p><img src="https://i.loli.net/2021/10/26/xzY3ZHqXkhiNpeS.png" alt="image-20211026125646091"></p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment">#jpa的配置            </span></span><br><span class="line"><span class="comment">#如果是create，会帮你新建数据库表，每次运行重新新建一个</span></span><br><span class="line"><span class="meta">spring.jpa.hibernate.ddl-auto</span>=<span class="string">update</span></span><br><span class="line"><span class="comment">#显示sql语句</span></span><br><span class="line"><span class="meta">spring.jpa.show-sql</span>=<span class="string">true</span></span><br><span class="line"><span class="comment">#格式化sql语句</span></span><br><span class="line"><span class="meta">spring.jpa.properties.hibernate.format_sql</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure></li>
-<li><p>创建entity（JavaBean类），生成数据表</p>
-<p><img src="https://i.loli.net/2021/10/26/XOfC759AaqBmKIy.png" alt="image-20211026130251675"></p>
-<ul>
-<li>使用@Entity注解</li>
-<li>使用@Table注解<ul>
-<li>生成表，name属性 = 表名</li>
-</ul>
-</li>
-<li>使用@Id注解<ul>
-<li>主键</li>
-</ul>
-</li>
-<li>使用GeneratedValue注解<ul>
-<li>主键生成的策略（Mysql、Orlce）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>创建mapper层接口，继承<font color='#d15252'>JpaRepository&lt;Users,Integer&gt;</font></p>
-<ul>
-<li>有封装好的各种增查删改方法，不需要手动写</li>
-</ul>
-<p><img src="https://i.loli.net/2021/10/26/W1fO2Dc6QMbKUim.png" alt="image-20211026125347505"></p>
-</li>
-<li><p>创建Service层，注入一个mapper层接口的成员变量，通过调用方法，实现不同的功能</p>
-<ul>
-<li>使用@Service注解</li>
-</ul>
-<p><img src="https://i.loli.net/2021/10/26/dkKgvE9eyRs7oDA.png" alt="image-20211026125443066"></p>
-</li>
-<li><p>创建Controller层，注入一个usersService层接口对象，调用方法</p>
-<ul>
-<li>使用@RestController注解</li>
-</ul>
-<p><img src="https://i.loli.net/2021/10/26/2mRoiCHr6azg7sN.png" alt="image-20211026125557237"></p>
-</li>
-</ul>
-<h3 id="三、SpringBoot整合Swagger"><a href="#三、SpringBoot整合Swagger" class="headerlink" title="三、SpringBoot整合Swagger"></a>三、SpringBoot整合Swagger</h3><h4 id="1-概念-1"><a href="#1-概念-1" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
-<li><p>实现前后端分离</p>
-<ul>
-<li><p>前端和后端人员沟通的工具</p>
-</li>
-<li><p>为了节约沟通成本，我们使用swagger</p>
-</li>
-<li><p>生成各种格式的接口文档</p>
-</li>
-</ul>
-</li>
-</ul>
-<p><a href="https://blog.csdn.net/u012702547/article/details/88775298">SpringBoot整合Swagger2，再也不用维护接口文档了！_江南一点雨的专栏-CSDN博客</a></p>
-<h4 id="2-实现步骤"><a href="#2-实现步骤" class="headerlink" title="2.实现步骤"></a>2.实现步骤</h4><ul>
-<li><p>创建springboot项目，添加swagger依赖</p>
-<p><img src="https://i.loli.net/2021/10/26/bQBxhMjmcVC8Nsk.png" alt="image-20211026133816296"></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>配置application.properties</p>
-<p><img src="https://i.loli.net/2021/10/26/48dypgRaLxQvKZN.png" alt="image-20211026140250726"></p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">server.port</span>=<span class="number">8090</span></span><br><span class="line"><span class="attr">server.servlet.context-path</span>=/bootandswagger</span><br></pre></td></tr></table></figure></li>
-<li><p>配置特殊类</p>
-<ul>
-<li>首先通过@EnableSwagger2注解启用Swagger2</li>
-<li>然后配置一个Docket Bean，这个Bean中，配置映射路径和要扫描的接口的位置</li>
-<li>在apiInfo中，主要配置一下Swagger2文档网站的信息，例如网站的title，网站的描述，联系人的信息，使用的协议等等。</li>
-</ul>
-<p><img src="https://i.loli.net/2021/10/26/IDPnZfXwbcEH9zm.png" alt="image-20211026135256898"></p>
-</li>
-<li><p>创建entity层</p>
-<p><img src="https://i.loli.net/2021/10/26/eJT2k1UZhEoq6fN.png" alt="image-20211026135531688"></p>
-</li>
-<li><p>创建Controller层</p>
-<p><img src="https://i.loli.net/2021/10/26/dsUaHeS2i3LbR6O.png" alt="image-20211026140023937"></p>
-<p><img src="https://i.loli.net/2021/10/26/UA2nBbKdjm6etYi.png" alt="image-20211026140144184"></p>
-</li>
-<li><p>最终访问swagger的地址</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span>localhost:端口号<span class="regexp">/项目名/</span>swagger-ui.html</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="3-各种注解的解释"><a href="#3-各种注解的解释" class="headerlink" title="3.各种注解的解释"></a>3.各种注解的解释</h4><p>@Api</p>
-<ul>
-<li>可以用来标记当前Controller的功能</li>
-</ul>
-<p>@ApiOperation</p>
-<ul>
-<li>用来标记一个方法的作用</li>
-</ul>
-<p>@ApilmplicitParam</p>
-<ul>
-<li><p>用来描述一个参数，可以配置参数的中文含义，也可以给参数设置默认值，这样可以避免手动输入</p>
-</li>
-<li><p>如果有多个参数，则需要使用多个@ApiImplicitParam注解来描述，多个@ApiImplicitParam注解需要放在一个@ApiImplicitParams注解中</p>
-</li>
-</ul>
-<h3 id="四、SpringBoot整合持久层-JDBCTemplate"><a href="#四、SpringBoot整合持久层-JDBCTemplate" class="headerlink" title="四、SpringBoot整合持久层 JDBCTemplate"></a>四、SpringBoot整合持久层 JDBCTemplate</h3><ul>
-<li>SpringBoot整合持久层 （Mybatis、JPA 、 JDBCTemplate）</li>
-</ul>
-<h4 id="1-实现步骤"><a href="#1-实现步骤" class="headerlink" title="1.实现步骤"></a>1.实现步骤</h4><ul>
-<li><p>添加依赖</p>
-<ul>
-<li>mysql依赖添加版本号</li>
-</ul>
-<p><img src="https://i.loli.net/2021/10/26/CUw96Sd4y3cA7Fn.png" alt="image-20211026151152327"></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span>        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>配置application.properties</p>
-<p><img src="https://i.loli.net/2021/10/26/ThUNq4fczGtIpnB.png" alt="image-20211026151420837"></p>
-</li>
-<li><p>创建Dao层</p>
-<p><img src="https://i.loli.net/2021/10/26/1wu9B6mYHOEhMZr.png" alt="image-20211026151942245"></p>
-<p><img src="https://i.loli.net/2021/10/26/PMzYWLNuAI8EfGb.png" alt="image-20211026152118544"></p>
-</li>
-<li><p>创建service层</p>
-<p><img src="https://i.loli.net/2021/10/26/ig2xKUvc9pCurOs.png" alt="image-20211026165300830"></p>
-</li>
-<li><p>创建Controller层</p>
-<p><img src="https://i.loli.net/2021/10/26/G5LWxkZURbhr2a9.png" alt="image-20211026165310961"></p>
-</li>
-</ul>
-<h4 id="2-配置热部署"><a href="#2-配置热部署" class="headerlink" title="2.配置热部署"></a>2.配置热部署</h4><ul>
-<li><p>修改代码不需要重新启动项目</p>
-<ul>
-<li>项目处于运行状态</li>
-</ul>
-</li>
-<li><p>添加依赖</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.loli.net/2021/10/26/trAjWDhle6qNYXP.png" alt="image-20211026161944832"></p>
-</li>
-<li><p>在application.properties中设置热部署开关</p>
-<ul>
-<li>也可以不设置</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://i.loli.net/2021/10/26/5ygP7qOjwzWom9S.png" alt="image-20211026155811325"></p>
-<p><img src="https://i.loli.net/2021/10/26/qAnHlZYIxL5CNB4.png" alt="image-20211026160027063"></p>
-]]></content>
-      <categories>
-        <category>SpringBoot</category>
-      </categories>
-      <tags>
-        <tag>SpringBoot</tag>
-        <tag>Jpa</tag>
-        <tag>Swagger</tag>
-        <tag>JDBCTemplate</tag>
       </tags>
   </entry>
   <entry>
