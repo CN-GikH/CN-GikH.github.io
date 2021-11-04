@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ZC.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ZC.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="使用SpringBoot整合Cloud、eureka、config等框架搭建秒杀项目 --- 第二部分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务秒杀项目【2】">
+<meta property="og:url" content="http://example.com/2021/11/04/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%902%E3%80%91/index.html">
+<meta property="og:site_name" content="你的储物间_">
+<meta property="og:description" content="使用SpringBoot整合Cloud、eureka、config等框架搭建秒杀项目 --- 第二部分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/vB9rKIUWmEaRYu3.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/MCUJkE3cVHXQg5G.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/CbwWtU5ko18Y3eD.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/YhjyD9otOQWg7bT.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/ycfFiuj2R1v5NSJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/u8dFV2oQwtmbXhB.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/svEm9WqNMhrJZu7.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/BSzUl9ux1eLy53t.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/KafuJqDxcO3EABk.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/3Dge6KscMHLWBRI.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/OMvNuEtHpfmb9Xn.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/8SOUuhKpMAsGn5v.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/U231GyRTWQDEoup.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/Qjc3dgFlXvS7iGr.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/BvDMO4kiZ7VeUNI.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/O912cpRuVLXPY6k.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/fakFvc7i4Zj3TqA.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/96mICtcMqL8QWvX.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/3mTxYh8XSweCGMg.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/NI8GKWMceYihBEH.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/dRegAKBfaIoQWiZ.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/OICJAurfl3bgQKd.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/1pwrkzGTKsqafcx.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/ef1myr9pk4YuNnA.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/nAI3hEXpMLZJw5K.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/ItUGqHPhc3TyFzM.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/q8idNLtXazPYpIm.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/aRKu1Me6Y3ziqH5.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/xwUhiaMTl12DAFj.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/bZupTi7V6r5KsEn.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/SNFJ8KQnphO3DBu.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/1QFOzRbWUV7rSTe.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/wtsalb1RUS5hKzj.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/CwmxyO2Vvb9qEeH.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/LpsPZJBM7KgXjyU.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/rOLze5IKnJiYPG2.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/fm8Jb5Ccl2vRhtX.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/04/Nf2cipA3C4DShrx.png">
+<meta property="article:published_time" content="2021-11-04T11:18:42.000Z">
+<meta property="article:modified_time" content="2021-11-04T11:19:07.935Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="SpringCloud">
+<meta property="article:tag" content="微服务">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/11/04/vB9rKIUWmEaRYu3.png">
+
+<link rel="canonical" href="http://example.com/2021/11/04/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%902%E3%80%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>微服务秒杀项目【2】 | 你的储物间_</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">你的储物间_</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/04/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%902%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/11/03/JO3LipquyIomGSl.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你的储物间_">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          微服务秒杀项目【2】
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-04 19:18:42 / 修改时间：19:19:07" itemprop="dateCreated datePublished" datetime="2021-11-04T19:18:42+08:00">2021-11-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%88%E4%BE%8B/" itemprop="url" rel="index"><span itemprop="name">案例</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">17k</span> -->
+			  <span title="本文字数">
+                  1.9k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>4 分钟</span>
+            </span>
+            <div class="post-description">使用SpringBoot整合Cloud、eureka、config等框架搭建秒杀项目 --- 第二部分</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>秒杀项目案例【2】</li>
+</ul>
+<h3 id="一、秒杀项目案例【2】"><a href="#一、秒杀项目案例【2】" class="headerlink" title="一、秒杀项目案例【2】"></a>一、秒杀项目案例【2】</h3><h4 id="1-关于跨域问题"><a href="#1-关于跨域问题" class="headerlink" title="1.关于跨域问题"></a>1.关于跨域问题</h4><p><img src="https://i.loli.net/2021/11/04/vB9rKIUWmEaRYu3.png" alt="image-20211104091305308"></p>
+<p><img src="https://i.loli.net/2021/11/04/MCUJkE3cVHXQg5G.png" alt="image-20211104091319820"></p>
+<ul>
+<li>预请求 — 预响应</li>
+<li>真请求 — 真响应</li>
+</ul>
+<h4 id="2-让请求通过Zuul-Server网关"><a href="#2-让请求通过Zuul-Server网关" class="headerlink" title="2.让请求通过Zuul-Server网关"></a>2.让请求通过Zuul-Server网关</h4><ul>
+<li><p>在码云中zuul-server.yml文件中添加代码</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">9000</span></span><br><span class="line"></span><br><span class="line"><span class="attr">ribbon:</span></span><br><span class="line">  <span class="attr">ReadTimeout:</span> <span class="number">6000000</span></span><br><span class="line">  <span class="attr">ConnectTimeout:</span> <span class="number">6000000</span></span><br><span class="line"></span><br><span class="line"><span class="attr">hystrix:</span></span><br><span class="line">  <span class="attr">command:</span></span><br><span class="line">    <span class="attr">default:</span></span><br><span class="line">      <span class="attr">execution:</span></span><br><span class="line">        <span class="attr">isolation:</span></span><br><span class="line">          <span class="attr">thread:</span></span><br><span class="line">            <span class="attr">timeoutInMilliseconds:</span> <span class="number">6000000</span></span><br><span class="line"><span class="attr">zuul:</span></span><br><span class="line">  <span class="attr">host:</span></span><br><span class="line">    <span class="attr">connect-timeout-millis:</span> <span class="number">600000</span></span><br><span class="line">    <span class="attr">socket-timeout-millis:</span> <span class="number">6000000</span></span><br><span class="line">  <span class="attr">force-original-query-string-encoding:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">ignored-patterns:</span> <span class="string">/*-server/**</span></span><br><span class="line">  <span class="attr">routes:</span></span><br><span class="line">    <span class="attr">member-server-route:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/member/**</span></span><br><span class="line">      <span class="attr">service-id:</span> <span class="string">member-server</span></span><br><span class="line">      <span class="attr">sensitive-headers:</span></span><br><span class="line">      <span class="attr">custom-sensitive-headers:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">ribbon:</span></span><br><span class="line">        <span class="attr">MaxAutoRetriesNextServer:</span> <span class="number">0</span></span><br><span class="line">        <span class="attr">OkToRetryOnAllOperations:</span> <span class="literal">false</span></span><br><span class="line">        <span class="attr">ConnectTimeout:</span> <span class="number">10000</span></span><br><span class="line">        <span class="attr">ReadTimeout:</span> <span class="number">10000</span></span><br><span class="line">    <span class="attr">good-server-route:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/good/**</span></span><br><span class="line">      <span class="attr">service-id:</span> <span class="string">good-server</span></span><br><span class="line">      <span class="attr">sensitive-headers:</span></span><br><span class="line">      <span class="attr">custom-sensitive-headers:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">ribbon:</span></span><br><span class="line">        <span class="attr">MaxAutoRetriesNextServer:</span> <span class="number">0</span></span><br><span class="line">        <span class="attr">OkToRetryOnAllOperations:</span> <span class="literal">false</span></span><br><span class="line">        <span class="attr">ConnectTimeout:</span> <span class="number">10000</span></span><br><span class="line">        <span class="attr">ReadTimeout:</span> <span class="number">10000</span></span><br><span class="line">    <span class="attr">seckill-server-route:</span></span><br><span class="line">      <span class="attr">path:</span> <span class="string">/seckill/**</span></span><br><span class="line">      <span class="attr">service-id:</span> <span class="string">seckill-server</span></span><br><span class="line">      <span class="attr">sensitive-headers:</span></span><br><span class="line">      <span class="attr">custom-sensitive-headers:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">ribbon:</span></span><br><span class="line">        <span class="attr">MaxAutoRetriesNextServer:</span> <span class="number">0</span></span><br><span class="line">        <span class="attr">OkToRetryOnAllOperations:</span> <span class="literal">false</span></span><br><span class="line">        <span class="attr">ConnectTimeout:</span> <span class="number">10000</span></span><br><span class="line">        <span class="attr">ReadTimeout:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/11/04/CbwWtU5ko18Y3eD.png" alt="image-20211104112214685"></p>
+<p><img src="https://i.loli.net/2021/11/04/YhjyD9otOQWg7bT.png" alt="image-20211104112634389"></p>
+</li>
+</ul>
+<h4 id="3-完善网关"><a href="#3-完善网关" class="headerlink" title="3. 完善网关"></a>3. 完善网关</h4><p><img src="https://i.loli.net/2021/11/04/ycfFiuj2R1v5NSJ.png" alt="image-20211104113336139"></p>
+<ul>
+<li>通过前端login.htm登录页面定义的ajax可知，访问路径是<font color='#d15252'>member</font>/token/login<ul>
+<li>member：从码云获取的路由路径，实际上访问的就是member-server</li>
+<li>token：代表令牌的意思，需要我们定义</li>
+<li>login：登录操作</li>
+</ul>
+</li>
+</ul>
+<h5 id="token-login定义"><a href="#token-login定义" class="headerlink" title="token/login定义"></a>token/login定义</h5><ul>
+<li><p>在member-server/Controller中新建UserController类（<font color='#d15252'>/token</font>映射）</p>
+<ul>
+<li><p>添加@RestController注解</p>
+</li>
+<li><p>创建<font color='#d15252'>/login</font>映射的login方法</p>
+<p><img src="https://i.loli.net/2021/11/04/u8dFV2oQwtmbXhB.png" alt="image-20211104113806179"></p>
+<ul>
+<li>登录之后我们需要获取用户的全部信息，因为后面需要参与秒杀，还需要对订单进行操作<ul>
+<li>所以我们login方法的返回值不能使用String，应该具有<ul>
+<li>状态码</li>
+<li>登录状态信息</li>
+<li>数据（id,name等等）</li>
+</ul>
+</li>
+<li>所以我们需要自定义一个类来保存用户登录的信息（登录成功、失败信息类）<ul>
+<li>这些信息在用户服务，秒杀服务，商品服务都都有可能使用</li>
+<li>所以我们需要把它定义在common公共微服务中（<font color='cornflowerblue'>具体操作请看目录</font>）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>在一系列的错误异常信息封装、处理等操作后，最后返回的时一个Result类型的数据，所以我们将login方法的<font color='#d15252'>返回值更改为Result&lt; String&gt;</font></p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/svEm9WqNMhrJZu7.png" alt="image-20211104132255465"></p>
+<ul>
+<li><p>通过前端页面可知，前端传递了两个参数分别是username和password</p>
+<p><img src="https://i.loli.net/2021/11/04/BSzUl9ux1eLy53t.png" alt="image-20211104132405008"></p>
+<ul>
+<li>但页面的Id分别是mobile和password，并且为了确保数据的安全性，所以直接使用username并不是最佳方案，我们需要在member-server中<font color='#d15252'>自定义一个Web/Controller/LoginVo类</font>（下面，找不到看目录）</li>
+</ul>
+</li>
+<li><p>更改login登录方法的参数列表，添加一个LoginVo对象</p>
+</li>
+<li><p>注入一个IUserService的对象，用于注册时调用方法</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/KafuJqDxcO3EABk.png" alt="image-20211104150336351"></p>
+<ul>
+<li><p>反向在IUserService中生成login登录方法</p>
+<p><img src="https://i.loli.net/2021/11/04/3Dge6KscMHLWBRI.png" alt="image-20211104150439278"></p>
+</li>
+<li><p>UserService中重写接口中新添加的login方法</p>
+<ul>
+<li><p>通过调用本类的find方法，查询数据库是否有当前输入的手机号</p>
+</li>
+<li><p>判断find获取到的user是否为空，如果为空</p>
+<ul>
+<li>如果为空，我们就需要创建一个异常信息并返回，所以我们需要<font color='#d15252'>新建一个MemberServerContreoolerAdvice异常类</font>进行操作（之前定义的BusinessException是一个异常的基类，相当于Exception和IOException的关系）（新建异常类操作在下面，找不到看目录）</li>
+<li>抛出新建的异常</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/OMvNuEtHpfmb9Xn.png" alt="image-20211104152515225"></p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>数据库中slat盐的作用：密码在进行加密算法时，通常常用的12345678等的密文都一样，如果使用穷举的方式，很容易就会破解，所以需要使用密码+salt盐 的方式</p>
+</blockquote>
+<ul>
+<li><p>为了解决密码加密的问题，我们需要在member-server/web包下新建md5s/MD5Util类，进行操作（下面，找不到看目录）</p>
+<p><img src="https://i.loli.net/2021/11/04/8SOUuhKpMAsGn5v.png" alt="image-20211104162745980"></p>
+</li>
+<li><p>还需要对提交密码是否为空进行判断</p>
+<ul>
+<li><p>使用<font color='#d15252'>JSR303</font>进行校验</p>
+<ul>
+<li>主要对JavaBean参数进行校验，即能校验是否为空，还可以校验参数是否合法</li>
+</ul>
+</li>
+<li><p>导入依赖</p>
+<p><img src="https://i.loli.net/2021/11/04/U231GyRTWQDEoup.png" alt="image-20211104184223731"></p>
+</li>
+<li><p>在LoginVo（用户提交数据的封装类）中添加注解进行使用</p>
+<ul>
+<li>@NotNull 必须时非空的</li>
+<li>@Null   必须是空</li>
+<li>@Digits  验证数字的构成是否合法</li>
+<li>@Future  验证是否在系统当前时间之后</li>
+<li>@Past  验证是否在系统当前时间之前</li>
+<li>@Max  是否比当前数值大</li>
+<li>@Min   是否比当前数值小</li>
+<li>@Pattern   验证正则表达式</li>
+<li>@Size 验证大小是否在指定的长度范围内</li>
+<li>@DecimalMax 验证值是否小于等于最大值</li>
+<li>@DecimalMin 验证值是否大于等于最小值</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>使用JSR303的前提：JavaBean被序列化</p>
+</blockquote>
+<p><img src="https://i.loli.net/2021/11/04/Qjc3dgFlXvS7iGr.png" alt="image-20211104184815843"></p>
+<ul>
+<li>还需要在UserController的login方法参数声明上添加标签<font color='#d15252'>@Valid</font>验证</li>
+<li>借助通知类进行信息展示</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/BvDMO4kiZ7VeUNI.png" alt="image-20211104185058327"></p>
+<p><img src="https://i.loli.net/2021/11/04/O912cpRuVLXPY6k.png" alt="image-20211104185311811"></p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h5 id="成功信息类定义"><a href="#成功信息类定义" class="headerlink" title="成功信息类定义"></a>成功信息类定义</h5><ul>
+<li><p><font color='#d15252'>成功信息</font>类：在common公共包中新建Result<font color='#d15252'>泛型</font>类</p>
+<p><img src="https://i.loli.net/2021/11/04/fakFvc7i4Zj3TqA.png" alt="image-20211104114323498"></p>
+<ul>
+<li><p>实体类为了方便使用lombok，给公共项目添加lombok依赖</p>
+<p><img src="https://i.loli.net/2021/11/04/96mICtcMqL8QWvX.png" alt="image-20211104114433062"></p>
+<ul>
+<li>再添加一个springweb启动依赖，后面要用</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/3mTxYh8XSweCGMg.png" alt="image-20211104131111319"></p>
+</li>
+<li><p>定义状态码、消息、数据信息（类型不确定，使用泛型）等成员变量</p>
+</li>
+<li><p>定义固定的状态码</p>
+</li>
+<li><p>添加带参构造（没截图）</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/NI8GKWMceYihBEH.png" alt="image-20211104114528881"></p>
+<ul>
+<li>还需要定义成功时的方法<ul>
+<li>分别为固定的成功状态码，只需要传递data登陆数据</li>
+<li>还有一种需要传递状态码和data数据</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/dRegAKBfaIoQWiZ.png" alt="image-20211104114736469"></p>
+<p><img src="https://i.loli.net/2021/11/04/OICJAurfl3bgQKd.png" alt="image-20211104114824214"></p>
+<ul>
+<li><p>还需要定义失败时的方法</p>
+<ul>
+<li>因为失败时所需要的返回信息和成功不同，并且错误类型比较多，无法进行预先的全局定义，所以我们还需要<font color='#d15252'>重新定义一个类</font>来封装失败信息 （<font color='cornflowerblue'>具体操作请看目录</font>）</li>
+<li>定义发生错误时的方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/1pwrkzGTKsqafcx.png" alt="image-20211104122249020"></p>
+<ul>
+<li><p>定义发生错误时的默认方法</p>
+<p><img src="https://i.loli.net/2021/11/04/ef1myr9pk4YuNnA.png" alt="image-20211104125329821"></p>
+</li>
+<li><p>判断是否存在错误</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/nAI3hEXpMLZJw5K.png" alt="image-20211104125423471"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="失败信息类定义"><a href="#失败信息类定义" class="headerlink" title="失败信息类定义"></a>失败信息类定义</h5><ul>
+<li><p><font color='#d15252'>失败信息类</font>：在common公共包中新建CodeMsg类</p>
+<p><img src="https://i.loli.net/2021/11/04/ItUGqHPhc3TyFzM.png" alt="image-20211104115601579"></p>
+<ul>
+<li>添加@Getter/@Setter注解</li>
+</ul>
+</li>
+<li><p>一旦<font color='cornflowerblue'>Service</font>出现问题，Controller层只负责调用和接收数据，无法判断</p>
+<ul>
+<li>我们需要将Service进行<font color='cornflowerblue'>RuntimeException</font>处理，并且增删改需要进行回滚操作<ul>
+<li>回滚操作：需要<font color='#d15252'>定义一个异常类</font>进行完善（在下面，<font color='cornflowerblue'>找不到请看目录</font>）</li>
+</ul>
+</li>
+<li>所以需要在失败信息封装类中预定义两个RuntimeException异常错误消息</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/q8idNLtXazPYpIm.png" alt="image-20211104125927683"></p>
+</li>
+</ul>
+<blockquote>
+<p>成功和失败信息类，应该在公共类中添加一个common包存放</p>
+<p>使用postman等类似工具时，可以越过前端页面的JS、JQ等验证进行登录</p>
+<p>但是越不过service层的业务处理，所以我们定义的RuntimeException和CodeMsg就起到<font color='orange'>二次认证</font>的作用</p>
+</blockquote>
+<h5 id="异常类定义（基类）"><a href="#异常类定义（基类）" class="headerlink" title="异常类定义（基类）"></a>异常类定义（基类）</h5><ul>
+<li><p><font color='#d15252'>异常类</font>：在common公共项目common包中新建BusinessException类</p>
+<ul>
+<li>继承RuntimeException</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/aRKu1Me6Y3ziqH5.png" alt="image-20211104130925143"></p>
+<ul>
+<li>添加@Getter/@Setter注解</li>
+</ul>
+</li>
+</ul>
+<h5 id="异常统一处理类定义"><a href="#异常统一处理类定义" class="headerlink" title="异常统一处理类定义"></a>异常统一处理类定义</h5><p>service抛异常时会抛给控制器，如果不进行处理前端页面就会报错，所以我们还需要新建一个类对所以的控制器异常进行统一处理</p>
+<ul>
+<li><p>在common公共项目common包中新建CommonControllerAdvice类</p>
+<ul>
+<li>添加@ControllerAdvice    <ul>
+<li>这个注解相当于对controller添加了try catch</li>
+</ul>
+</li>
+<li>分别创建error的异常信息和defaulterror（默认）的异常信息</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/xwUhiaMTl12DAFj.png" alt="image-20211104131745104"></p>
+<p><img src="https://i.loli.net/2021/11/04/bZupTi7V6r5KsEn.png" alt="image-20211104132030832"></p>
+</li>
+</ul>
+<blockquote>
+<p>这个类可以作为一个父级别的类，再后面的服务中可以使用到</p>
+</blockquote>
+<h5 id="LoginVo类定义"><a href="#LoginVo类定义" class="headerlink" title="LoginVo类定义"></a>LoginVo类定义</h5><p>登陆时需要的用户名和密码</p>
+<p>VO就是用于展示的数据<font color='#d15252'> Value Object</font></p>
+<ul>
+<li><p>这里见member-server中的controller放入了新建的web包下</p>
+</li>
+<li><p>并在Web报下新建vo/LoginVo</p>
+<p><img src="https://i.loli.net/2021/11/04/SNFJ8KQnphO3DBu.png" alt="image-20211104145617914"></p>
+<ul>
+<li>添加成员变量，添加Getter/Setter</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/1QFOzRbWUV7rSTe.png" alt="image-20211104145922529"></p>
+</li>
+</ul>
+<h5 id="Member-server异常类定义"><a href="#Member-server异常类定义" class="headerlink" title="Member-server异常类定义"></a>Member-server异常类定义</h5><p>用户服务异常类通知</p>
+<ul>
+<li><p>在member-server中的web包下，新建advice/MemberServerControllerAdvice异常类</p>
+<ul>
+<li>继承于CommonControllerAdvice异常统一处理类</li>
+<li>添加@ControllerAdvice注解</li>
+</ul>
+</li>
+<li><p>在member-server中的web包下，新建code/MemberCodeMsg异常类</p>
+<ul>
+<li>继承于CodeMsg，创建构造方法</li>
+<li>新建一些异常操作方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/04/wtsalb1RUS5hKzj.png" alt="image-20211104152217922"></p>
+<ul>
+<li><p>处理定义的两种固定错误外，还有可能出现按其他的情况，可以通过可变长参数+占位符来进行解决</p>
+<ul>
+<li><p>演示：</p>
+<p><img src="https://i.loli.net/2021/11/04/CwmxyO2Vvb9qEeH.png" alt="image-20211104152306325"></p>
+</li>
+</ul>
+</li>
+<li><p>定义填充可变长参数的方法</p>
+<p><img src="https://i.loli.net/2021/11/04/LpsPZJBM7KgXjyU.png" alt="image-20211104152425518"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="MD5Utilss密码加密类定义"><a href="#MD5Utilss密码加密类定义" class="headerlink" title="MD5Utilss密码加密类定义"></a>MD5Utilss密码加密类定义</h5><ul>
+<li><p>在member-server/web包下新建md5s/MD5Utilss类，进行操作</p>
+</li>
+<li><p>需要导入依赖</p>
+<p><img src="https://i.loli.net/2021/11/04/rOLze5IKnJiYPG2.png" alt="image-20211104152938444"></p>
+<p><img src="https://i.loli.net/2021/11/04/fm8Jb5Ccl2vRhtX.png" alt="image-20211104162529762"></p>
+</li>
+<li><p>新建测试方法，用于生成加密密码</p>
+<p><img src="https://i.loli.net/2021/11/04/Nf2cipA3C4DShrx.png" alt="image-20211104183730153"></p>
+<ul>
+<li>并将加密密码放入数据库</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/11/04/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%902%E3%80%91/" title="微服务秒杀项目【2】">http://example.com/2021/11/04/微服务秒杀项目【2】/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SpringCloud/" rel="tag"><i class="fa fa-tag"></i># SpringCloud</a>
+              <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag"><i class="fa fa-tag"></i># 微服务</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/04/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%901%E3%80%91/" rel="prev" title="微服务秒杀项目【1】">
+      <i class="fa fa-chevron-left"></i> 微服务秒杀项目【1】
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E6%A1%88%E4%BE%8B%E3%80%902%E3%80%91"><span class="nav-number">1.1.</span> <span class="nav-text">一、秒杀项目案例【2】</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%85%B3%E4%BA%8E%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.关于跨域问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%AE%A9%E8%AF%B7%E6%B1%82%E9%80%9A%E8%BF%87Zuul-Server%E7%BD%91%E5%85%B3"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.让请求通过Zuul-Server网关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%AE%8C%E5%96%84%E7%BD%91%E5%85%B3"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 完善网关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#token-login%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">token&#x2F;login定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%88%90%E5%8A%9F%E4%BF%A1%E6%81%AF%E7%B1%BB%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">成功信息类定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%B1%E8%B4%A5%E4%BF%A1%E6%81%AF%E7%B1%BB%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">失败信息类定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%AE%9A%E4%B9%89%EF%BC%88%E5%9F%BA%E7%B1%BB%EF%BC%89"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">异常类定义（基类）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E7%BB%9F%E4%B8%80%E5%A4%84%E7%90%86%E7%B1%BB%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.3.5.</span> <span class="nav-text">异常统一处理类定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LoginVo%E7%B1%BB%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.3.6.</span> <span class="nav-text">LoginVo类定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Member-server%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.3.7.</span> <span class="nav-text">Member-server异常类定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MD5Utilss%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86%E7%B1%BB%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.3.8.</span> <span class="nav-text">MD5Utilss密码加密类定义</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://i.loli.net/2021/11/03/JO3LipquyIomGSl.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>-->
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">179k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:42</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共81k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
