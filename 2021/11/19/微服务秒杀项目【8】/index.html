@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ZC.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ZC.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="使用SpringBoot整合Cloud、eureka、config等框架搭建秒杀项目 --- 第八部分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务秒杀项目【8】">
+<meta property="og:url" content="http://example.com/2021/11/19/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%908%E3%80%91/index.html">
+<meta property="og:site_name" content="你的储物间_">
+<meta property="og:description" content="使用SpringBoot整合Cloud、eureka、config等框架搭建秒杀项目 --- 第八部分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/7C2LBOPyhEQlX8t.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/dl82tsEXRfYzkQN.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/jmlNUMbJGpqAwTE.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/3VmqkUORThPHDFx.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/lH347MI8iGFm9YD.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/5r8CQaZdftblU6S.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/eI92ojFg1Y3Aysi.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/am2DEg5ZCGOtjsw.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/Jby3PRTcLtpwlsD.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/qgJm1ELxv6NPGla.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/Z3oQkIOzJxFPeGM.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/BRVWFYmKhMUA7aD.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/JhQyMptjWa28FnE.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/TvcD5hl7knM8bmA.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/7pOVSAoqCEe4lyM.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/otlxmYMn5ark3Hs.png">
+<meta property="og:image" content="c:/Users/GikH/AppData/Roaming/Typora/typora-user-images/image-20211112163416904.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/41oPklsjhJapUKL.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/14/D7gHTCn5cfXkMZA.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/lNo32av9ZwyEFkM.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/cqfz4B2xl6LT19Q.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/12/JpvfRWlwxuNQIoD.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/14/KBReVAvaDLQ5IZU.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/14/wAh4jlet13XvfIK.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/14/EgcICnPJ7YGbBx3.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/14/uam9UHQBG1TP6Xr.png">
+<meta property="og:image" content="c:/Users/GikH/AppData/Roaming/Typora/typora-user-images/image-20211114163753480.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/14/z41x5olimMXpAWZ.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/14/hCXqa3RKOYluDF7.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/14/UhJyef9Ns6HPiQL.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/14/sYQNnDlvcqCwi2X.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/14/uK7SPbUQECikT92.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/14/PkbSu1UdjzY5y3e.png">
+<meta property="article:published_time" content="2021-11-19T00:38:01.000Z">
+<meta property="article:modified_time" content="2021-11-19T00:39:04.459Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="SpringCloud">
+<meta property="article:tag" content="微服务">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/11/12/7C2LBOPyhEQlX8t.png">
+
+<link rel="canonical" href="http://example.com/2021/11/19/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%908%E3%80%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>微服务秒杀项目【8】 | 你的储物间_</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">你的储物间_</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/19/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%908%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/11/03/JO3LipquyIomGSl.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你的储物间_">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          微服务秒杀项目【8】
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-19 08:38:01 / 修改时间：08:39:04" itemprop="dateCreated datePublished" datetime="2021-11-19T08:38:01+08:00">2021-11-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%88%E4%BE%8B/" itemprop="url" rel="index"><span itemprop="name">案例</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">9.7k</span> -->
+			  <span title="本文字数">
+                  1.3k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">使用SpringBoot整合Cloud、eureka、config等框架搭建秒杀项目 --- 第八部分</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>秒杀项目【8】</li>
+</ul>
+<h3 id="一、微服务项目压力测试-Jmeter"><a href="#一、微服务项目压力测试-Jmeter" class="headerlink" title="一、微服务项目压力测试 Jmeter"></a>一、微服务项目压力测试 Jmeter</h3><h4 id="1-Jmeter作用"><a href="#1-Jmeter作用" class="headerlink" title="1.Jmeter作用"></a>1.Jmeter作用</h4><p><img src="https://i.loli.net/2021/11/12/7C2LBOPyhEQlX8t.png" alt="image-20211112141527763"></p>
+<ul>
+<li>TPS：<ul>
+<li>每秒传输的事务处理个数</li>
+<li>服务器每秒处理的事务数<ul>
+<li>T：事务</li>
+<li>S：秒</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>QPS：<ul>
+<li>每秒查询率</li>
+<li>对一个特定的查询服务，在规定的时间内能够处理的流量是多少<ul>
+<li>Q：Query查询</li>
+<li>S：秒</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>网站或者系统的吞吐量（承受压力的能力）和request、CPU消耗、外部的接口、IO都是密切相关的</li>
+<li>衡量系统性能的参数<ul>
+<li>QPS（TPS）：每秒钟requset/数量（事务）</li>
+<li>并发数：系统同时处理request/数量（事务）</li>
+<li>响应时间：一般都会取平均值</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-JMeter初级使用"><a href="#2-JMeter初级使用" class="headerlink" title="2.JMeter初级使用"></a>2.JMeter初级使用</h4><ul>
+<li><p>添加测试计划</p>
+<p><img src="https://i.loli.net/2021/11/12/dl82tsEXRfYzkQN.png" alt="image-20211112145117229"></p>
+</li>
+<li><p>定义线程组参数</p>
+<p><img src="https://i.loli.net/2021/11/12/jmlNUMbJGpqAwTE.png" alt="image-20211112145335321"></p>
+</li>
+<li><p>右键线程组，添加Sampler—&gt;Http请求</p>
+<p><img src="https://i.loli.net/2021/11/12/3VmqkUORThPHDFx.png" alt="image-20211112145427292"></p>
+</li>
+<li><p>访问路径</p>
+<ul>
+<li>不用网关</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/12/lH347MI8iGFm9YD.png" alt="image-20211112145833987"></p>
+</li>
+</ul>
+<ul>
+<li><p>添加聚合报告</p>
+<p><img src="https://i.loli.net/2021/11/12/5r8CQaZdftblU6S.png" alt="image-20211112150113291"></p>
+</li>
+</ul>
+<ul>
+<li><p>测试</p>
+<p><img src="https://i.loli.net/2021/11/12/eI92ojFg1Y3Aysi.png" alt="image-20211112145923430"></p>
+<p><img src="https://i.loli.net/2021/11/12/am2DEg5ZCGOtjsw.png" alt="image-20211112150534372"></p>
+<ul>
+<li>中位数：中值    一组数据中居于中间的数值</li>
+<li>重点关注吞吐量</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-JMeter单用户携带cookie访问"><a href="#3-JMeter单用户携带cookie访问" class="headerlink" title="3.JMeter单用户携带cookie访问"></a>3.JMeter单用户携带cookie访问</h4><ul>
+<li><p>使用需要获取用户信息的请求</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--- 这个是走网关的</span><br><span class="line">http:<span class="regexp">//</span>localhost:<span class="number">9000</span><span class="regexp">/member/</span>token/getCurrent</span><br><span class="line"></span><br><span class="line">--- 不走网关进行测试</span><br><span class="line">http:<span class="regexp">//</span>localhost:<span class="number">8083</span><span class="regexp">/token/g</span>etCurrent</span><br></pre></td></tr></table></figure></li>
+<li><p>使用JMeter携带Cookie信息，新建Http请求</p>
+<p><img src="https://i.loli.net/2021/11/12/Jby3PRTcLtpwlsD.png" alt="image-20211112155639235"></p>
+</li>
+<li><p>修改线程1，循环1</p>
+</li>
+<li><p>右键线程组，添加Cookie管理器</p>
+<p><img src="https://i.loli.net/2021/11/12/qgJm1ELxv6NPGla.png" alt="image-20211112155909996"></p>
+</li>
+<li><p>添加Cookie</p>
+<p><img src="https://i.loli.net/2021/11/12/Z3oQkIOzJxFPeGM.png" alt="image-20211112160128832"></p>
+</li>
+</ul>
+<h4 id="4-JMeter模拟多用户发送请求"><a href="#4-JMeter模拟多用户发送请求" class="headerlink" title="4.JMeter模拟多用户发送请求"></a>4.JMeter模拟多用户发送请求</h4><h5 id="Ⅰ-在数据表中放500个用户"><a href="#Ⅰ-在数据表中放500个用户" class="headerlink" title="Ⅰ.在数据表中放500个用户"></a>Ⅰ.在数据表中放500个用户</h5><ul>
+<li>在数据表中放500个用户</li>
+<li>500个用户要登录（redis中要存储500个cookie信息）</li>
+<li>jmeter要读取500个token信息，模拟的是多个向服务器发送的请求</li>
+</ul>
+<ul>
+<li><p>创建一个向数据库中插入测试用户数据的类</p>
+<ul>
+<li>在member-server的web包下创建jmeter/DBUtil</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/12/BRVWFYmKhMUA7aD.png" alt="image-20211112162846236"></p>
+<ul>
+<li>需要调用一个添加数据的方法，在UserControoler中创建新的方法</li>
+<li>告诉我你需要多少个用户</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/12/JhQyMptjWa28FnE.png" alt="image-20211112163020415"></p>
+<ul>
+<li>将集合的数据添加到数据库中</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/12/TvcD5hl7knM8bmA.png" alt="image-20211112163120879"></p>
+<p><img src="https://i.loli.net/2021/11/12/7pOVSAoqCEe4lyM.png" alt="image-20211112163145552"></p>
+<ul>
+<li>创建token写入到本地的记事本中，再存入redis</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/12/otlxmYMn5ark3Hs.png" alt="image-20211112163343247"></p>
+<p><img src="C:\Users\GikH\AppData\Roaming\Typora\typora-user-images\image-20211112163416904.png" alt="image-20211112163416904"></p>
+<ul>
+<li>通过浏览器可以访问的初始化方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/12/41oPklsjhJapUKL.png" alt="image-20211112163522305"></p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/14/D7gHTCn5cfXkMZA.png" alt="image-20211114134322681"></p>
+<ul>
+<li><p>com.mysql.cj.jdbc.Driver错误</p>
+<ul>
+<li>因为依赖mysql-connect版本的问题</li>
+<li>修改DBUtil</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/12/lNo32av9ZwyEFkM.png" alt="image-20211112163726372"></p>
+</li>
+<li><p>添加完成后，可以看到D盘文件中有500个token，redis服务器也有500个user登录信息</p>
+</li>
+</ul>
+<h5 id="Ⅱ-jmeter发送多用户请求"><a href="#Ⅱ-jmeter发送多用户请求" class="headerlink" title="Ⅱ. jmeter发送多用户请求"></a>Ⅱ. jmeter发送多用户请求</h5><ul>
+<li><p>需要取读取配置文件</p>
+</li>
+<li><p>右键线程组添加配置原件—&gt;CSV Data</p>
+<p><img src="https://i.loli.net/2021/11/12/cqfz4B2xl6LT19Q.png" alt="image-20211112164122017"></p>
+<p><img src="https://i.loli.net/2021/11/12/JpvfRWlwxuNQIoD.png" alt="image-20211112164504795"></p>
+<ul>
+<li><p>设置线程组500</p>
+<p><img src="https://i.loli.net/2021/11/14/KBReVAvaDLQ5IZU.png" alt="image-20211114143152241"></p>
+</li>
+<li><p>设置cookie管理</p>
+<p><img src="https://i.loli.net/2021/11/14/wAh4jlet13XvfIK.png" alt="image-20211114143743878"></p>
+</li>
+<li><p>设置http请求</p>
+<p><img src="https://i.loli.net/2021/11/14/EgcICnPJ7YGbBx3.png" alt="image-20211114163236923"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、内网穿透工具NATAPP"><a href="#二、内网穿透工具NATAPP" class="headerlink" title="二、内网穿透工具NATAPP"></a>二、内网穿透工具NATAPP</h3><h4 id="1-使用准备"><a href="#1-使用准备" class="headerlink" title="1.使用准备"></a>1.使用准备</h4><ul>
+<li><p>到NATAPP官网进行注册，实名认证</p>
+<p><img src="https://i.loli.net/2021/11/14/uam9UHQBG1TP6Xr.png" alt="image-20211114163517525"></p>
+<ul>
+<li>购买免费隧道，修改本地端口到9000</li>
+</ul>
+<p><img src="C:\Users\GikH\AppData\Roaming\Typora\typora-user-images\image-20211114163753480.png" alt="image-20211114163753480"></p>
+<ul>
+<li>下载NATAPP客户端并解压</li>
+<li>通过网站获取到authtoken，这是我们的隧道登录凭证</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>两种运行natapp的方式</p>
+<p><a target="_blank" rel="noopener" href="https://natapp.cn/article/config_ini">使用本地配置文件config.ini - NATAPP-内网穿透 基于ngrok的国内高速内网映射工具</a></p>
+<ul>
+<li>使用<font color='#d15252'>config.ini配置文件</font></li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/14/z41x5olimMXpAWZ.png" alt="image-20211114164316670"></p>
+<ul>
+<li>cmd参数方式</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/14/hCXqa3RKOYluDF7.png" alt="image-20211114164334847"></p>
+</li>
+</ul>
+<h4 id="2-使用config-ini方式"><a href="#2-使用config-ini方式" class="headerlink" title="2.使用config.ini方式"></a>2.使用config.ini方式</h4><p><img src="https://i.loli.net/2021/11/14/UhJyef9Ns6HPiQL.png" alt="image-20211114164440768"></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将本文件放置于natapp同级目录 程序将读取 [default] 段</span></span><br><span class="line"><span class="comment">#在命令行参数模式如 natapp -authtoken=xxx 等相同参数将会覆盖掉此配置</span></span><br><span class="line"><span class="comment">#命令行参数 -config= 可以指定任意config.ini文件</span></span><br><span class="line">[default]</span><br><span class="line">authtoken=                      <span class="comment">#对应一条隧道的authtoken</span></span><br><span class="line">clienttoken=                    <span class="comment">#对应客户端的clienttoken,将会忽略authtoken,若无请留空,</span></span><br><span class="line">log=none                        <span class="comment">#log 日志文件,可指定本地文件, none=不做记录,stdout=直接屏幕输出 ,默认为none</span></span><br><span class="line">loglevel=ERROR                  <span class="comment">#日志等级 DEBUG, INFO, WARNING, ERROR 默认为 DEBUG</span></span><br><span class="line">http_proxy=                     <span class="comment">#代理设置 如 http://10.123.10.10:3128 非代理上网用户请务必留空</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在natapp.exe的同级目录下，新建文件config.ini</p>
+<p><img src="https://i.loli.net/2021/11/14/sYQNnDlvcqCwi2X.png" alt="image-20211114164712288"></p>
+</li>
+<li><p>将以上代码复制并编辑</p>
+<ul>
+<li>添加自己的 authtoken</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/14/uK7SPbUQECikT92.png" alt="image-20211114165013994"></p>
+<p><img src="https://i.loli.net/2021/11/14/PkbSu1UdjzY5y3e.png" alt="image-20211114165056597"></p>
+</li>
+<li><p>开启内网穿透后，相当于域名等于我们的localhost:9000</p>
+</li>
+</ul>
+<h3 id="三、数据库中的乐观锁和悲观锁"><a href="#三、数据库中的乐观锁和悲观锁" class="headerlink" title="三、数据库中的乐观锁和悲观锁"></a>三、数据库中的乐观锁和悲观锁</h3><h4 id="1-悲观锁"><a href="#1-悲观锁" class="headerlink" title="1.悲观锁"></a>1.悲观锁</h4><ul>
+<li>是因为一种对数据修改抱有悲观的态度的并发控制，我们会认为数据修改的概率比较大，所以在修改之前需要加锁</li>
+<li>悲观锁的本质：先取锁再访问，保守策略，为了数据安全性提供了保障</li>
+</ul>
+<h4 id="2-乐观锁"><a href="#2-乐观锁" class="headerlink" title="2.乐观锁"></a>2.乐观锁</h4><ul>
+<li>相对于悲观锁而言，乐观锁假设数据一般情况下不会造成冲突，所以再数据进行更新操作的时候，才会正式的对数据冲突与否进行检测，如果发现了冲突了，返回错误信息给用户（不是真的给用户看错误），让用户决定如何去做</li>
+<li>乐观锁的本质：再对数据进行处理的时候，乐观锁并不会使用数据库提供的锁机制，一般情况下乐观锁的方式就是记录数据版本</li>
+<li>乐观锁并发控制相信事务之间的数据竞争的概率非常小，就是数据之间没有冲突，直到提交的时候才去锁定，所以不会产生任何的锁和死锁</li>
+</ul>
+<h4 id="3-如何选择锁"><a href="#3-如何选择锁" class="headerlink" title="3.如何选择锁"></a>3.如何选择锁</h4><ul>
+<li>悲观锁依赖数据库锁，效率低，更新失败的概率比较低</li>
+<li>乐观锁并没有真正的加锁，效率高</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/11/19/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%908%E3%80%91/" title="微服务秒杀项目【8】">http://example.com/2021/11/19/微服务秒杀项目【8】/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SpringCloud/" rel="tag"><i class="fa fa-tag"></i># SpringCloud</a>
+              <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag"><i class="fa fa-tag"></i># 微服务</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/19/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%907%E3%80%91/" rel="prev" title="微服务秒杀项目【7】">
+      <i class="fa fa-chevron-left"></i> 微服务秒杀项目【7】
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/19/SSM%E8%BF%9B%E9%94%80%E5%AD%98%E9%A1%B9%E7%9B%AE%E3%80%901%E3%80%91/" rel="next" title="SSM进销存项目和Eclipse基础配置">
+      SSM进销存项目和Eclipse基础配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95-Jmeter"><span class="nav-number">1.1.</span> <span class="nav-text">一、微服务项目压力测试 Jmeter</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Jmeter%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.Jmeter作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-JMeter%E5%88%9D%E7%BA%A7%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.JMeter初级使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-JMeter%E5%8D%95%E7%94%A8%E6%88%B7%E6%90%BA%E5%B8%A6cookie%E8%AE%BF%E9%97%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.JMeter单用户携带cookie访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-JMeter%E6%A8%A1%E6%8B%9F%E5%A4%9A%E7%94%A8%E6%88%B7%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.JMeter模拟多用户发送请求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E5%9C%A8%E6%95%B0%E6%8D%AE%E8%A1%A8%E4%B8%AD%E6%94%BE500%E4%B8%AA%E7%94%A8%E6%88%B7"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">Ⅰ.在数据表中放500个用户</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-jmeter%E5%8F%91%E9%80%81%E5%A4%9A%E7%94%A8%E6%88%B7%E8%AF%B7%E6%B1%82"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">Ⅱ. jmeter发送多用户请求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%B7%A5%E5%85%B7NATAPP"><span class="nav-number">1.2.</span> <span class="nav-text">二、内网穿透工具NATAPP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BD%BF%E7%94%A8%E5%87%86%E5%A4%87"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.使用准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8config-ini%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.使用config.ini方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E4%B9%90%E8%A7%82%E9%94%81%E5%92%8C%E6%82%B2%E8%A7%82%E9%94%81"><span class="nav-number">1.3.</span> <span class="nav-text">三、数据库中的乐观锁和悲观锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%82%B2%E8%A7%82%E9%94%81"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.悲观锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%B9%90%E8%A7%82%E9%94%81"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.乐观锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E9%94%81"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.如何选择锁</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://i.loli.net/2021/11/03/JO3LipquyIomGSl.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>-->
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">195k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:57</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共88.5k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

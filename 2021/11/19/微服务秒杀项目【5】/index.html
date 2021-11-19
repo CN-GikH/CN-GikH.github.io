@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ZC.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ZC.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="使用SpringBoot整合Cloud、eureka、config等框架搭建秒杀项目 --- 第五部分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务秒杀项目【5】">
+<meta property="og:url" content="http://example.com/2021/11/19/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%905%E3%80%91/index.html">
+<meta property="og:site_name" content="你的储物间_">
+<meta property="og:description" content="使用SpringBoot整合Cloud、eureka、config等框架搭建秒杀项目 --- 第五部分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/GikH/AppData/Roaming/Typora/typora-user-images/image-20211109121818904.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/ytZLWTXjA2DcsO4.png">
+<meta property="og:image" content="c:/Users/GikH/AppData/Roaming/Typora/typora-user-images/image-20211109132213930.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/GiLjC1nTHyx827g.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/TjGhzwiE6dQVbf9.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/X9YPe1qZEFIJf6H.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/Q4tJkX3zbC2dG5N.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/LPya6kCEdpVfgXn.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/tPDJWnofUX4BcHd.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/aORtNZjGXmJWVIS.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/EYdFr8wWI9Sh5cx.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/ZxFBD2CTtSoYAbc.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/94oREYjMOweahuL.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/YcIVUnvaLBh2uWr.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/C9KZnxboqrf4R8X.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/qeLK3u92Bv5mOUS.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/PkWEz6mbyAjD8xc.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/dpTjWqQ7nesI291.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/UkKwzPWgJl1aoqO.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/jZykz4WLs8u6QvO.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/cAHymIYpuqe3rL4.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/Jjsp7nu4rQ92eCm.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/YeLxqJpm769lkEw.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/9HaMS3xWYgmjU1I.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/YgjUImZ6q9dXeFJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/gW6tDyCbXzcFax5.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/KaDeJrAkUpzBGZq.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/NKC6raz1qjcZWEs.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/uBk9vZDfg7C25Vx.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/PoCeDwnhfiHcbt2.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/p2ji1tLrxBs8w3Q.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/KUk8PuIwRVvTeCH.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/eNpnqj4zWPFcQI2.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/gkZ4RUpLmuiEoaG.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/Itcpvl1QVXZ7mej.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/DbCx86HzrYi9v4f.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/1byNqH8nlYcCDew.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/PfG7wVLDtTJdeA4.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/eRYm9ytdXb8unBc.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/9W4pwcvPtInZflE.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/4ynNkgJQK7rE5f9.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/ONPwaB9i3desLfR.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/Vkq1s4KB3LUhlgn.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/w8cXDOCVus6kayb.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/09/tN2mL3KCafcyd1z.png">
+<meta property="article:published_time" content="2021-11-19T00:35:46.000Z">
+<meta property="article:modified_time" content="2021-11-19T00:36:17.133Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="SpringCloud">
+<meta property="article:tag" content="微服务">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/GikH/AppData/Roaming/Typora/typora-user-images/image-20211109121818904.png">
+
+<link rel="canonical" href="http://example.com/2021/11/19/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%905%E3%80%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>微服务秒杀项目【5】 | 你的储物间_</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">你的储物间_</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/19/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%905%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/11/03/JO3LipquyIomGSl.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你的储物间_">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          微服务秒杀项目【5】
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-19 08:35:46 / 修改时间：08:36:17" itemprop="dateCreated datePublished" datetime="2021-11-19T08:35:46+08:00">2021-11-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%88%E4%BE%8B/" itemprop="url" rel="index"><span itemprop="name">案例</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">8.1k</span> -->
+			  <span title="本文字数">
+                  666字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>1 分钟</span>
+            </span>
+            <div class="post-description">使用SpringBoot整合Cloud、eureka、config等框架搭建秒杀项目 --- 第五部分</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>秒杀项目【5】</li>
+</ul>
+<h3 id="一、秒杀商品展示"><a href="#一、秒杀商品展示" class="headerlink" title="一、秒杀商品展示"></a>一、秒杀商品展示</h3><p><img src="C:\Users\GikH\AppData\Roaming\Typora\typora-user-images\image-20211109121818904.png" alt="image-20211109121818904"></p>
+<p><img src="https://i.loli.net/2021/11/09/ytZLWTXjA2DcsO4.png" alt="image-20211109124608898"></p>
+<h4 id="1-步骤"><a href="#1-步骤" class="headerlink" title="1.步骤"></a>1.步骤</h4><ul>
+<li><p>添加@EnableFeignClients注解</p>
+<p><img src="C:\Users\GikH\AppData\Roaming\Typora\typora-user-images\image-20211109132213930.png" alt="image-20211109132213930"></p>
+<ul>
+<li><p>在zuul-server上添加</p>
+</li>
+<li><p>在seckill-server的启动类上添加</p>
+<ul>
+<li>需要添加openfeign的依赖，可以从zull中复制</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/GiLjC1nTHyx827g.png" alt="image-20211109125354383"></p>
+</li>
+<li><p>在ConfigServerApp启动类上添加注解</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>good-api添加依赖<ul>
+<li>添加shop-common公共库依赖</li>
+<li>添加openfeign依赖</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>在good-api中创建cn/shop/cloud/feign/GoodFeignApi接口</p>
+<p><img src="https://i.loli.net/2021/11/09/TjGhzwiE6dQVbf9.png" alt="image-20211109130359423"></p>
+<p>- </p>
+</li>
+</ul>
+<ul>
+<li><p>创建hystrix/GoodFeignHystrix类</p>
+<ul>
+<li>该类用于服务降级的，和我们的feign同一级别创建</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/X9YPe1qZEFIJf6H.png" alt="image-20211109125838924"></p>
+<p><img src="https://i.loli.net/2021/11/09/Q4tJkX3zbC2dG5N.png" alt="image-20211109130452747"></p>
+</li>
+</ul>
+<ul>
+<li><p>在good-server中创建mapper/goodmapper接口（操作商品的mapper）</p>
+<ul>
+<li>添加@Mapper标签</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/LPya6kCEdpVfgXn.png" alt="image-20211109130812959"></p>
+<p><img src="https://i.loli.net/2021/11/09/tPDJWnofUX4BcHd.png" alt="image-20211109130929674"></p>
+<p><img src="https://i.loli.net/2021/11/09/aORtNZjGXmJWVIS.png" alt="image-20211109130900006"></p>
+</li>
+</ul>
+<ul>
+<li><p>在good-server中创建service/IGoodService接口</p>
+<p><img src="https://i.loli.net/2021/11/09/EYdFr8wWI9Sh5cx.png" alt="image-20211109131052019"></p>
+<ul>
+<li>创建GoodService实现类</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/ZxFBD2CTtSoYAbc.png" alt="image-20211109131138978"></p>
+</li>
+</ul>
+<ul>
+<li><p>在good-server中创建web/feign/GoodFeignClient</p>
+<ul>
+<li>实现GoodFeignApi接口</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/94oREYjMOweahuL.png" alt="image-20211109131502019"></p>
+<p>- </p>
+</li>
+</ul>
+<ul>
+<li>在good-server/web中创建controller</li>
+</ul>
+<ul>
+<li><p>在seckill-server中创建msg/SeckillCodmsg </p>
+<ul>
+<li>继承CodeMsg</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/YcIVUnvaLBh2uWr.png" alt="image-20211109131730085"></p>
+</li>
+</ul>
+<ul>
+<li><p>在seckill-server中创建advice/SeckillControllerAdvice</p>
+<ul>
+<li>继承CommonControllerAdvice</li>
+<li>添加@ControllerAdvice注解</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/C9KZnxboqrf4R8X.png" alt="image-20211109131909742"></p>
+</li>
+</ul>
+<ul>
+<li><p>回到SeckillGoodService中</p>
+<p><img src="https://i.loli.net/2021/11/09/qeLK3u92Bv5mOUS.png" alt="image-20211109134805384"></p>
+<p><img src="https://i.loli.net/2021/11/09/PkWEz6mbyAjD8xc.png" alt="image-20211109135203428"></p>
+<p><img src="https://i.loli.net/2021/11/09/dpTjWqQ7nesI291.png" alt="image-20211109135307543"></p>
+<p><img src="https://i.loli.net/2021/11/09/UkKwzPWgJl1aoqO.png" alt="image-20211109135345644"></p>
+<p><img src="https://i.loli.net/2021/11/09/jZykz4WLs8u6QvO.png" alt="image-20211109135416647"></p>
+<ul>
+<li><p>最后reutrn —&gt; seckillGoodVoList</p>
+</li>
+<li><p>修改上方方法的返回值</p>
+<p><img src="https://i.loli.net/2021/11/09/cAHymIYpuqe3rL4.png" alt="image-20211109135513809"></p>
+</li>
+<li><p>添加依赖</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/Jjsp7nu4rQ92eCm.png" alt="image-20211109135050641"></p>
+<ul>
+<li><p>注入GoodFeignApi成员变量</p>
+<p><img src="https://i.loli.net/2021/11/09/YeLxqJpm769lkEw.png" alt="image-20211109135130169"></p>
+</li>
+</ul>
+</li>
+<li><p>使用继承的方式，让SecillGood不需要定义新的属性</p>
+<p><img src="https://i.loli.net/2021/11/09/9HaMS3xWYgmjU1I.png" alt="image-20211109135753576"></p>
+</li>
+<li><p>修改seckill-server中的controller层query方法的返回值</p>
+<ul>
+<li>注入server层</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/YgjUImZ6q9dXeFJ.png" alt="image-20211109140031264"></p>
+<ul>
+<li>返回值调用方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/gW6tDyCbXzcFax5.png" alt="image-20211109140055877"></p>
+</li>
+</ul>
+<ul>
+<li>启动GoodServer、启动SeckillServer</li>
+</ul>
+<h3 id="二、刷新问题"><a href="#二、刷新问题" class="headerlink" title="二、刷新问题"></a>二、刷新问题</h3><h4 id="1-问题需求"><a href="#1-问题需求" class="headerlink" title="1.问题需求"></a>1.问题需求</h4><ul>
+<li>登录页面后会有cookie存在，存活时间是30分钟，而我们的redis中的数据也是存在30分钟就失效了</li>
+<li>redis存储信息是固定的没用刷新，因此只有一个请求</li>
+<li>而秒杀列表的显示，这是另外一个请求了 query</li>
+<li>需要完善Token刷新的问题</li>
+<li>即用户再一次发起请求的时候，我们需要给redis和cookie设置新的失效时间<ul>
+<li>login和query请求都是走网关的，所以我们需要将操作写到网关内</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-解决步骤"><a href="#2-解决步骤" class="headerlink" title="2.解决步骤"></a>2.解决步骤</h4><ul>
+<li><p>将member-server中的util包下的CookieUtils移动到<font color='#d15252'>member-api</font>/util包下</p>
+<ul>
+<li>member-server中的需要删除</li>
+</ul>
+</li>
+<li><p>添加依赖</p>
+<p><img src="https://i.loli.net/2021/11/09/KaDeJrAkUpzBGZq.png" alt="image-20211109173729239"></p>
+<p><img src="https://i.loli.net/2021/11/09/NKC6raz1qjcZWEs.png" alt="image-20211109174442612"></p>
+<p><img src="https://i.loli.net/2021/11/09/uBk9vZDfg7C25Vx.png" alt="image-20211109174528619"></p>
+</li>
+<li><p>在CookieUtils中添加方法</p>
+<ul>
+<li>getCookie—&gt;获取指定名称的cookie数据值<ul>
+<li>如果没有cookie，则返回null</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/PoCeDwnhfiHcbt2.png" alt="image-20211109173839427"></p>
+<ul>
+<li>创建domain包，将User类放入</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>在member-api中创建feign/TokenFeignApi接口</p>
+<ul>
+<li>添加@FeignClient注解</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/p2ji1tLrxBs8w3Q.png" alt="image-20211109174642071"></p>
+</li>
+</ul>
+<ul>
+<li><p>在member-api中创建hystrix/TokenFeignHystrix类</p>
+<ul>
+<li>添加@Component注解</li>
+<li>实现TokenFeignApi方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/KUk8PuIwRVvTeCH.png" alt="image-20211109174756244"></p>
+</li>
+</ul>
+<ul>
+<li><p>在zuul-server项目中，添加member-api依赖</p>
+<p><img src="https://i.loli.net/2021/11/09/eNpnqj4zWPFcQI2.png" alt="image-20211109174006404"></p>
+<ul>
+<li>因为zuul网关需要用到</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>在zuul-server中创建filter/TokenRefreshFilter类</p>
+<ul>
+<li>针对token刷新问题的类</li>
+<li>继承ZuulFilter类</li>
+<li>添加@Component注解</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/gkZ4RUpLmuiEoaG.png" alt="image-20211109175028122"></p>
+<p><img src="https://i.loli.net/2021/11/09/Itcpvl1QVXZ7mej.png" alt="image-20211109181603066"></p>
+<p><img src="https://i.loli.net/2021/11/09/DbCx86HzrYi9v4f.png" alt="image-20211109181636169"></p>
+<p><img src="https://i.loli.net/2021/11/09/1byNqH8nlYcCDew.png" alt="image-20211109181740985"></p>
+<ul>
+<li><p>最后的run方法需要远程调用</p>
+<ul>
+<li>首先注入一个TokenFeignApi对象</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/PfG7wVLDtTJdeA4.png" alt="image-20211109181932911"></p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/eRYm9ytdXb8unBc.png" alt="image-20211109182004153"></p>
+<p><img src="https://i.loli.net/2021/11/09/9W4pwcvPtInZflE.png" alt="image-20211109182039504"></p>
+</li>
+</ul>
+<ul>
+<li><p>找到member-server中的IUserService接口</p>
+<ul>
+<li>添加方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/4ynNkgJQK7rE5f9.png" alt="image-20211109184301143"></p>
+<ul>
+<li>实现类中重写方法（完成token刷新问题）</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/ONPwaB9i3desLfR.png" alt="image-20211109185228986"></p>
+</li>
+</ul>
+<ul>
+<li><p>在mebmer-server的web包下创建feign/TokenFeignClient类</p>
+<ul>
+<li>添加@RestController注解</li>
+<li>实现TokenFeignApi接口</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/Vkq1s4KB3LUhlgn.png" alt="image-20211109184546730"></p>
+<ul>
+<li>注入IUserServer，重写方法，调用</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/w8cXDOCVus6kayb.png" alt="image-20211109184713023"></p>
+</li>
+</ul>
+<ul>
+<li><p>重启网关，报错</p>
+<ul>
+<li>需要重新导包</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/09/tN2mL3KCafcyd1z.png" alt="image-20211109185539837"></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/11/19/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%905%E3%80%91/" title="微服务秒杀项目【5】">http://example.com/2021/11/19/微服务秒杀项目【5】/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SpringCloud/" rel="tag"><i class="fa fa-tag"></i># SpringCloud</a>
+              <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag"><i class="fa fa-tag"></i># 微服务</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/19/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%904%E3%80%91/" rel="prev" title="秒杀项目案例【4】">
+      <i class="fa fa-chevron-left"></i> 秒杀项目案例【4】
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/19/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%906%E3%80%91/" rel="next" title="微服务秒杀项目【6】">
+      微服务秒杀项目【6】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E7%A7%92%E6%9D%80%E5%95%86%E5%93%81%E5%B1%95%E7%A4%BA"><span class="nav-number">1.1.</span> <span class="nav-text">一、秒杀商品展示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%88%B7%E6%96%B0%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">二、刷新问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E9%97%AE%E9%A2%98%E9%9C%80%E6%B1%82"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.问题需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%A7%A3%E5%86%B3%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.解决步骤</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://i.loli.net/2021/11/03/JO3LipquyIomGSl.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>-->
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">195k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:57</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共88.5k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

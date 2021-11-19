@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ZC.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ZC.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="使用Eclipse工具，使用SSM框架，服务器：Tomcat;整合搭建经销存项目 --- 第四部分（库存管理,进货退货，实现销售功能）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSM进销存项目【4】">
+<meta property="og:url" content="http://example.com/2021/11/19/SSM%E8%BF%9B%E9%94%80%E5%AD%98%E9%A1%B9%E7%9B%AE%E3%80%904%E3%80%91/index.html">
+<meta property="og:site_name" content="你的储物间_">
+<meta property="og:description" content="使用Eclipse工具，使用SSM框架，服务器：Tomcat;整合搭建经销存项目 --- 第四部分（库存管理,进货退货，实现销售功能）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/DNt8JYMTePHLboR.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/hmEenaSYwxLp79c.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/p3GqvYBZt219rEI.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/PzibJW6CvRFLg7n.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/vQAJToaNDeZVChB.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/HdEzu7gfC14J9Z8.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/kctAQeOYuLyr45N.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/sDiH4kn25SzFOKA.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/ICA7SW8QcGFfUnP.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/RmByQsFrWNcY7vd.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/FJNch1Q5px3UmIT.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/Nb8YIHXyGaTBJvV.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/FHG2UYC9aR4hTLc.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/fQqRc69Cg8yEpkF.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/4vmFhVDjslZXxAp.png">
+<meta property="og:image" content="c:/Users/GikH/AppData/Roaming/Typora/typora-user-images/image-20211118112740720.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/J5izWRme29YfSXG.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/jOWV1StHTG3yPfJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/z5UFKQAlcP8Tg3h.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/wyIxucfkOC47sXJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/32STmG8WzHcCyqN.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/O4F5Sj9bEBzY2kv.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/yeMCIxfBL1SOzmJ.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/4Aytkr5S6De831K.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/zAr3jkbsTSntpih.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/AHmzDCWTS79LjM6.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/WmxyQwFJAs84DGt.png">
+<meta property="og:image" content="c:/Users/GikH/AppData/Roaming/Typora/typora-user-images/image-20211118172256406.png">
+<meta property="og:image" content="c:/Users/GikH/AppData/Roaming/Typora/typora-user-images/image-20211118172414383.png">
+<meta property="og:image" content="c:/Users/GikH/AppData/Roaming/Typora/typora-user-images/image-20211118172430419.png">
+<meta property="og:image" content="c:/Users/GikH/AppData/Roaming/Typora/typora-user-images/image-20211118172439610.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/kqa9xJsRYV8THwX.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/RYoArZqvUhIiu9e.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/itYn9NQL4OmHfWg.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/uOjLMYfR4N31k2V.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/B2YtQaV1ObkDRhW.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/KWdc3tpOeGiqk2Q.png">
+<meta property="article:published_time" content="2021-11-19T00:47:31.000Z">
+<meta property="article:modified_time" content="2021-11-19T00:48:32.801Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="SSM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/11/18/DNt8JYMTePHLboR.png">
+
+<link rel="canonical" href="http://example.com/2021/11/19/SSM%E8%BF%9B%E9%94%80%E5%AD%98%E9%A1%B9%E7%9B%AE%E3%80%904%E3%80%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SSM进销存项目【4】 | 你的储物间_</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">你的储物间_</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/19/SSM%E8%BF%9B%E9%94%80%E5%AD%98%E9%A1%B9%E7%9B%AE%E3%80%904%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/11/03/JO3LipquyIomGSl.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你的储物间_">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SSM进销存项目【4】
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-19 08:47:31 / 修改时间：08:48:32" itemprop="dateCreated datePublished" datetime="2021-11-19T08:47:31+08:00">2021-11-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%88%E4%BE%8B/" itemprop="url" rel="index"><span itemprop="name">案例</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">6.9k</span> -->
+			  <span title="本文字数">
+                  463字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>1 分钟</span>
+            </span>
+            <div class="post-description">使用Eclipse工具，使用SSM框架，服务器：Tomcat;整合搭建经销存项目 --- 第四部分（库存管理,进货退货，实现销售功能）</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>商品存库</li>
+</ul>
+<h3 id="一、库存盘点页面完善"><a href="#一、库存盘点页面完善" class="headerlink" title="一、库存盘点页面完善"></a>一、库存盘点页面完善</h3><h4 id="1-调整库存"><a href="#1-调整库存" class="headerlink" title="1.调整库存"></a>1.调整库存</h4><ul>
+<li>完善库存管理的<font color='#d15252'>调整库存</font></li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/18/DNt8JYMTePHLboR.png" alt="image-20211118091548135"></p>
+<ul>
+<li><p>根据前端list页面，触发的函数，在StockController中添加edit的编辑方法</p>
+<p><img src="https://i.loli.net/2021/11/18/hmEenaSYwxLp79c.png" alt="image-20211118092454044"></p>
+<p><img src="https://i.loli.net/2021/11/18/p3GqvYBZt219rEI.png" alt="image-20211118092818410"></p>
+</li>
+</ul>
+<h4 id="2-删除库存记录"><a href="#2-删除库存记录" class="headerlink" title="2.删除库存记录"></a>2.删除库存记录</h4><ul>
+<li><p>根据前端list页面，触发的函数，在StockController中添加delete的编辑方法</p>
+<p><img src="https://i.loli.net/2021/11/18/PzibJW6CvRFLg7n.png" alt="image-20211118092856617"></p>
+<p><img src="https://i.loli.net/2021/11/18/vQAJToaNDeZVChB.png" alt="image-20211118093257227"></p>
+<p><img src="https://i.loli.net/2021/11/18/HdEzu7gfC14J9Z8.png" alt="image-20211118093335879"></p>
+</li>
+</ul>
+<h3 id="二、进货退货"><a href="#二、进货退货" class="headerlink" title="二、进货退货"></a>二、进货退货</h3><h4 id="1-实体类（退货单、子单）创建"><a href="#1-实体类（退货单、子单）创建" class="headerlink" title="1.实体类（退货单、子单）创建"></a>1.实体类（退货单、子单）创建</h4><ul>
+<li><p>创建OrderInRebacak实体类，复制OrderIn成员变量即可，一模一样</p>
+<p><img src="https://i.loli.net/2021/11/18/kctAQeOYuLyr45N.png" alt="image-20211118094622757"></p>
+<ul>
+<li><p>因为存在表关联，添加一个List成员变量</p>
+<p><img src="https://i.loli.net/2021/11/18/sDiH4kn25SzFOKA.png" alt="image-20211118100459166"></p>
+</li>
+</ul>
+</li>
+<li><p>创建OrderInRebackDetail实体类，复制OrderInDetail成员变量</p>
+<p><img src="https://i.loli.net/2021/11/18/ICA7SW8QcGFfUnP.png" alt="image-20211118095110303"></p>
+<ul>
+<li>OriderInId变量添加reback</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>添加注解，实现序列化接口，添加get/set/toString/构造方法</p>
+</blockquote>
+<h4 id="2-Dao层接口和mapper映射"><a href="#2-Dao层接口和mapper映射" class="headerlink" title="2.Dao层接口和mapper映射"></a>2.Dao层接口和mapper映射</h4><ul>
+<li><p>创建Dao层OrderInRebackDao接口</p>
+<ul>
+<li>添加注解</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/18/RmByQsFrWNcY7vd.png" alt="image-20211118101156244"></p>
+</li>
+</ul>
+<ul>
+<li><p>创建OrderInRebacakMapper.xml文件</p>
+<ul>
+<li>复制OrderInMapper进行修改</li>
+<li>修改命名空间</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/18/FJNch1Q5px3UmIT.png" alt="image-20211118101455017"></p>
+<ul>
+<li>修改增删改查sql语句表名以及parameterType</li>
+<li>修改addDetail中的orderInId<ul>
+<li>多处需要修改</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-Service层"><a href="#3-Service层" class="headerlink" title="3.Service层"></a>3.Service层</h4><ul>
+<li><p>创建OrderInRebackService接口</p>
+<ul>
+<li><p>复制Dao层方法</p>
+<ul>
+<li>不需要addDeteail</li>
+</ul>
+</li>
+<li><p>添加实现类</p>
+<ul>
+<li>添加注解</li>
+<li>注入Dao层对象</li>
+<li>调用方法</li>
+</ul>
+</li>
+<li><p>add方法除了添加进退货单还需要添加详情</p>
+<p><img src="https://i.loli.net/2021/11/18/Nb8YIHXyGaTBJvV.png" alt="image-20211118103218346"></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>view中新建order_in_reback文件夹，加入list.jsp页面</li>
+</ul>
+<h4 id="4-Controller层实现页面跳转和数据显示"><a href="#4-Controller层实现页面跳转和数据显示" class="headerlink" title="4.Controller层实现页面跳转和数据显示"></a>4.Controller层实现页面跳转和数据显示</h4><ul>
+<li><p>Controller层创建OrderInRebackController类</p>
+<ul>
+<li>页面跳转</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/18/FHG2UYC9aR4hTLc.png" alt="image-20211118103716617"></p>
+<ul>
+<li>数据显示</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/18/fQqRc69Cg8yEpkF.png" alt="image-20211118105445544"></p>
+<ul>
+<li>注入service层对象</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/18/4vmFhVDjslZXxAp.png" alt="image-20211118105736782"></p>
+</li>
+</ul>
+<h4 id="5-实现添加退货单功能"><a href="#5-实现添加退货单功能" class="headerlink" title="5.实现添加退货单功能"></a>5.实现添加退货单功能</h4><ul>
+<li><p>Controller中创建添加退货单的add方法</p>
+<ul>
+<li>添加退货单的同时，商品的库存需要进行减少，因为是从库存中进行退货</li>
+</ul>
+<p><img src="C:\Users\GikH\AppData\Roaming\Typora\typora-user-images\image-20211118112740720.png" alt="image-20211118112740720"></p>
+<p><img src="https://i.loli.net/2021/11/18/J5izWRme29YfSXG.png" alt="image-20211118112545144"></p>
+<p><img src="https://i.loli.net/2021/11/18/jOWV1StHTG3yPfJ.png" alt="image-20211118112807545"></p>
+<p><img src="https://i.loli.net/2021/11/18/z5UFKQAlcP8Tg3h.png" alt="image-20211118113357825"></p>
+<p><img src="https://i.loli.net/2021/11/18/wyIxucfkOC47sXJ.png" alt="image-20211118114113178"></p>
+<p><img src="https://i.loli.net/2021/11/18/32STmG8WzHcCyqN.png" alt="image-20211118163130873"></p>
+<p><img src="https://i.loli.net/2021/11/18/O4F5Sj9bEBzY2kv.png" alt="image-20211118163155862"></p>
+</li>
+</ul>
+<ul>
+<li><p>Controller中创建添加退货单的updateStock更新库存的方法</p>
+<p><img src="https://i.loli.net/2021/11/18/yeMCIxfBL1SOzmJ.png" alt="image-20211118112151541"></p>
+</li>
+</ul>
+<h4 id="6-实现退货单状态更改edit"><a href="#6-实现退货单状态更改edit" class="headerlink" title="6.实现退货单状态更改edit"></a>6.实现退货单状态更改edit</h4><ul>
+<li><p>在OrderInRebackController中添加Edit方法</p>
+<p><img src="https://i.loli.net/2021/11/18/4Aytkr5S6De831K.png" alt="image-20211118171309991"></p>
+</li>
+</ul>
+<h3 id="三、实现销售功能"><a href="#三、实现销售功能" class="headerlink" title="三、实现销售功能"></a>三、实现销售功能</h3><h4 id="1-创建实体类"><a href="#1-创建实体类" class="headerlink" title="1.创建实体类"></a>1.创建实体类</h4><ul>
+<li><p>根据数据库表，创建对应的实体类</p>
+<p><img src="https://i.loli.net/2021/11/18/zAr3jkbsTSntpih.png" alt="image-20211118171619702"></p>
+<p><img src="https://i.loli.net/2021/11/18/AHmzDCWTS79LjM6.png" alt="image-20211118171904884"></p>
+<p><img src="https://i.loli.net/2021/11/18/WmxyQwFJAs84DGt.png" alt="image-20211118172005044"></p>
+</li>
+</ul>
+<h4 id="2-创建Dao层和mapper映射"><a href="#2-创建Dao层和mapper映射" class="headerlink" title="2.创建Dao层和mapper映射"></a>2.创建Dao层和mapper映射</h4><p><img src="C:\Users\GikH\AppData\Roaming\Typora\typora-user-images\image-20211118172256406.png" alt="image-20211118172256406"></p>
+<p><img src="C:\Users\GikH\AppData\Roaming\Typora\typora-user-images\image-20211118172414383.png" alt="image-20211118172414383"></p>
+<p><img src="C:\Users\GikH\AppData\Roaming\Typora\typora-user-images\image-20211118172430419.png" alt="image-20211118172430419"></p>
+<p><img src="C:\Users\GikH\AppData\Roaming\Typora\typora-user-images\image-20211118172439610.png" alt="image-20211118172439610"></p>
+<ul>
+<li><p>创建sellMapper.xml文件</p>
+<p><img src="https://i.loli.net/2021/11/18/kqa9xJsRYV8THwX.png" alt="image-20211118172630223"></p>
+<p><img src="https://i.loli.net/2021/11/18/RYoArZqvUhIiu9e.png" alt="image-20211118173150409"></p>
+<p><img src="https://i.loli.net/2021/11/18/itYn9NQL4OmHfWg.png" alt="image-20211118173209269"></p>
+<p><img src="https://i.loli.net/2021/11/18/uOjLMYfR4N31k2V.png" alt="image-20211118174153725"></p>
+<p><img src="https://i.loli.net/2021/11/18/B2YtQaV1ObkDRhW.png" alt="image-20211118174211376"></p>
+<p><img src="https://i.loli.net/2021/11/18/KWdc3tpOeGiqk2Q.png" alt="image-20211118174223033"></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/11/19/SSM%E8%BF%9B%E9%94%80%E5%AD%98%E9%A1%B9%E7%9B%AE%E3%80%904%E3%80%91/" title="SSM进销存项目【4】">http://example.com/2021/11/19/SSM进销存项目【4】/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SSM/" rel="tag"><i class="fa fa-tag"></i># SSM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/19/SSM%E8%BF%9B%E9%94%80%E5%AD%98%E9%A1%B9%E7%9B%AE%E3%80%903%E3%80%91/" rel="prev" title="SSM进销存项目【3】">
+      <i class="fa fa-chevron-left"></i> SSM进销存项目【3】
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BA%93%E5%AD%98%E7%9B%98%E7%82%B9%E9%A1%B5%E9%9D%A2%E5%AE%8C%E5%96%84"><span class="nav-number">1.1.</span> <span class="nav-text">一、库存盘点页面完善</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E8%B0%83%E6%95%B4%E5%BA%93%E5%AD%98"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.调整库存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%88%A0%E9%99%A4%E5%BA%93%E5%AD%98%E8%AE%B0%E5%BD%95"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.删除库存记录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%BF%9B%E8%B4%A7%E9%80%80%E8%B4%A7"><span class="nav-number">1.2.</span> <span class="nav-text">二、进货退货</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%AE%9E%E4%BD%93%E7%B1%BB%EF%BC%88%E9%80%80%E8%B4%A7%E5%8D%95%E3%80%81%E5%AD%90%E5%8D%95%EF%BC%89%E5%88%9B%E5%BB%BA"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.实体类（退货单、子单）创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Dao%E5%B1%82%E6%8E%A5%E5%8F%A3%E5%92%8Cmapper%E6%98%A0%E5%B0%84"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.Dao层接口和mapper映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Service%E5%B1%82"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.Service层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Controller%E5%B1%82%E5%AE%9E%E7%8E%B0%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC%E5%92%8C%E6%95%B0%E6%8D%AE%E6%98%BE%E7%A4%BA"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.Controller层实现页面跳转和数据显示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%AE%9E%E7%8E%B0%E6%B7%BB%E5%8A%A0%E9%80%80%E8%B4%A7%E5%8D%95%E5%8A%9F%E8%83%BD"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.实现添加退货单功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E5%AE%9E%E7%8E%B0%E9%80%80%E8%B4%A7%E5%8D%95%E7%8A%B6%E6%80%81%E6%9B%B4%E6%94%B9edit"><span class="nav-number">1.2.6.</span> <span class="nav-text">6.实现退货单状态更改edit</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0%E9%94%80%E5%94%AE%E5%8A%9F%E8%83%BD"><span class="nav-number">1.3.</span> <span class="nav-text">三、实现销售功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E5%AE%9E%E4%BD%93%E7%B1%BB"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.创建实体类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BADao%E5%B1%82%E5%92%8Cmapper%E6%98%A0%E5%B0%84"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.创建Dao层和mapper映射</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://i.loli.net/2021/11/03/JO3LipquyIomGSl.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>-->
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">195k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:57</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共88.5k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
