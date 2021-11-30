@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ZC.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ZC.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="Linux的基本概念；和windows的区别；Linux的基础操作等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux基础">
+<meta property="og:url" content="http://example.com/2021/11/30/Linux%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="你的储物间_">
+<meta property="og:description" content="Linux的基本概念；和windows的区别；Linux的基础操作等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/11/23/FUvwNEnJmLG2Wsr.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/23/wpZSgHiylTQBLKm.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/23/zDkxloNZL2r9iUC.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/23/PgDUe1BpwcShLsX.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/23/D2ora6mTt13P48z.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/23/ls6ZSQnkwYPC9dt.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/23/6CViyeMcwo7mhSa.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/23/v6lSg5UopC29IBk.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/23/8pgIDLMkEVs1l9C.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/23/svW1njiRlO3zSrh.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/23/ovCjJ741iEbPANl.png">
+<meta property="article:published_time" content="2021-11-30T08:56:59.000Z">
+<meta property="article:modified_time" content="2021-11-30T08:58:09.027Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/11/23/FUvwNEnJmLG2Wsr.png">
+
+<link rel="canonical" href="http://example.com/2021/11/30/Linux%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux基础 | 你的储物间_</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">你的储物间_</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/30/Linux%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/11/03/JO3LipquyIomGSl.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你的储物间_">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux基础
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-30 16:56:59 / 修改时间：16:58:09" itemprop="dateCreated datePublished" datetime="2021-11-30T16:56:59+08:00">2021-11-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">7.8k</span> -->
+			  <span title="本文字数">
+                  1k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">Linux的基本概念；和windows的区别；Linux的基础操作等</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>Linux基础</li>
+</ul>
+<h3 id="一、Linux"><a href="#一、Linux" class="headerlink" title="一、Linux"></a>一、Linux</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>内核<ul>
+<li>只是提供操作系统的基本功能，内存管理、进程管理</li>
+</ul>
+</li>
+<li>发行版<ul>
+<li>基于linus维护linux内核，桌面应用和命令行系统应用</li>
+</ul>
+</li>
+<li>常见发行版<ul>
+<li>RedHat中国和北美地区流行</li>
+<li>CentOs 社区版本 免费</li>
+<li>乌班图Ubuntu</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-Linux和Windwos区别"><a href="#2-Linux和Windwos区别" class="headerlink" title="2.Linux和Windwos区别"></a>2.Linux和Windwos区别</h4><ul>
+<li>大小写严格区分</li>
+<li>后缀不同<ul>
+<li>安装文件exe ==&gt; rpm</li>
+<li>压缩包 zip ==&gt; tar.gz</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-使用字符界面的好处"><a href="#3-使用字符界面的好处" class="headerlink" title="3.使用字符界面的好处"></a>3.使用字符界面的好处</h4><ul>
+<li>占用系统资源非常少</li>
+</ul>
+<h4 id="4-程序员是如果使用Linux的"><a href="#4-程序员是如果使用Linux的" class="headerlink" title="4.程序员是如果使用Linux的"></a>4.程序员是如果使用Linux的</h4><p>环境分类</p>
+<ul>
+<li>开发环境：编码环境</li>
+<li>测试环境：和开发环境基本一致</li>
+<li>生产环境：给客户用的真实环境</li>
+</ul>
+<p>项目环境部署：Linux</p>
+<p>服务器类型：自建服务器，租用服务器</p>
+<ul>
+<li>使用SSH远程连接<ul>
+<li>SSH为建立在应用层基础上的安全协议。SSH是较可靠的，专为远程登录会话和其他网络服务提供安全性的协议。</li>
+</ul>
+</li>
+</ul>
+<h3 id="二、Linux基础操作"><a href="#二、Linux基础操作" class="headerlink" title="二、Linux基础操作"></a>二、Linux基础操作</h3><h4 id="1-Linux基础命令"><a href="#1-Linux基础命令" class="headerlink" title="1.Linux基础命令"></a>1.Linux基础命令</h4><ul>
+<li>linux基础目录<ul>
+<li>~表示当前所在的目录</li>
+<li>#表示的是超级用户</li>
+<li>$表示普通用户</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/23/FUvwNEnJmLG2Wsr.png" alt="image-20211123094221903"></p>
+<ul>
+<li>查看当前目录下所有文件<ul>
+<li>ls -a</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>切换目录<ul>
+<li>cd ~ 切换到家目录</li>
+<li>cd ：切换用户目录</li>
+<li>cd - ：切换到上一目录</li>
+<li>cd.. ：切换到上一个目录</li>
+<li>cd . ：切换到当前目录</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>查看路径<ul>
+<li>pwd</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>创建<font color='#d15252'>文件</font><ul>
+<li>touch 文件名</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>创建文件夹<ul>
+<li>mkdir </li>
+<li>mkdir -p xx/yy/zz <ul>
+<li>-p <font color='#d15252'>递归创建</font>多级目录</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>删除<ul>
+<li>rmdir </li>
+<li>rm <ul>
+<li>-r 递归删除目录</li>
+<li>-f 强制删除</li>
+<li>禁止使用：rm -rf /*</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>复制</p>
+<ul>
+<li>cp [选项] [原文件或目录] [目标]<ul>
+<li>-r 复制目录</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/23/wpZSgHiylTQBLKm.png" alt="image-20211123102927374"></p>
+<p><img src="https://i.loli.net/2021/11/23/zDkxloNZL2r9iUC.png" alt="image-20211123103213368"></p>
+</li>
+<li><p>剪切或改名</p>
+<ul>
+<li>mv [原文件或目录] [目标目录]</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>环境变量</p>
+<ul>
+<li>PATH echo $Path</li>
+</ul>
+</li>
+<li><p>压缩</p>
+<ul>
+<li>zip [压缩后] zip [被压缩]</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/23/PgDUe1BpwcShLsX.png" alt="image-20211123103959457"></p>
+<ul>
+<li>默认使用国外服务器进行下载</li>
+<li>yum install zip</li>
+</ul>
+</li>
+<li><p>解压</p>
+<ul>
+<li>unzip [压缩文件]</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>更换下载镜像地址为了阿里云</p>
+<p><img src="https://i.loli.net/2021/11/23/D2ora6mTt13P48z.png" alt="image-20211123110746035"></p>
+</li>
+</ul>
+<ul>
+<li>当你有大段的空闲时间并且网络稳定的情况下，执行以下命令，更新所有软件<ul>
+<li>yum -y update</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>打包<ul>
+<li>tar  -cvf<ul>
+<li>-c 打包</li>
+<li>-v 显示过程</li>
+<li>-f 指定打包后文件名</li>
+</ul>
+</li>
+<li>tar -xvf 打包文件名</li>
+<li>tar -zcvf aaa.tar.gz [要压缩的文件]  压缩文件</li>
+<li>tar -zxvf aaa.tar.gz -C ./ 解压到当前目录</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-安装rpm和yum的区别"><a href="#2-安装rpm和yum的区别" class="headerlink" title="2.安装rpm和yum的区别?"></a>2.安装rpm和yum的区别?</h4><ul>
+<li>yum是springboot的添加jar包方式</li>
+</ul>
+<h4 id="3-强制安装-rpm文件"><a href="#3-强制安装-rpm文件" class="headerlink" title="3.强制安装.rpm文件"></a>3.强制安装.rpm文件</h4><ul>
+<li><p>在user/local中创建software软件文件夹</p>
+<ul>
+<li>使用SSH工具上传tomcat和httpd以及jdk</li>
+<li>使用linux指令进行安装</li>
+</ul>
+</li>
+<li><p>强制安装 </p>
+<ul>
+<li>rpm -ivh xxx –nodeps</li>
+<li>rpm -ivh  –nodeps xxx</li>
+</ul>
+</li>
+<li><p>rpm -q httpd  能看到已安装软件</p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43309149/article/details/83551604">https://blog.csdn.net/qq_43309149/article/details/83551604</a></p>
+<h4 id="4-Linux网络管理"><a href="#4-Linux网络管理" class="headerlink" title="4.Linux网络管理"></a>4.Linux网络管理</h4><ul>
+<li>为什么要配置Linux静态IP<ul>
+<li>动态IP，可能会变更</li>
+<li>配置静态IP</li>
+</ul>
+</li>
+<li>操作步骤<ul>
+<li>进入/etc/sysconfig/network-scripts</li>
+<li>对ifcfg-ens32进行编辑</li>
+<li>使用vi 文件名的指令对文件进行编辑</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/23/ls6ZSQnkwYPC9dt.png" alt="image-20211123140408742"></p>
+<p><img src="https://i.loli.net/2021/11/23/6CViyeMcwo7mhSa.png" alt="image-20211123135427756"></p>
+<ul>
+<li>右键复制</li>
+<li>shift+:</li>
+<li>wq保存</li>
+<li>重启</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/23/v6lSg5UopC29IBk.png" alt="image-20211123135756545"></p>
+<p>​                    </p>
+<h4 id="5-安装JDK"><a href="#5-安装JDK" class="headerlink" title="5.安装JDK"></a>5.安装JDK</h4><ul>
+<li><p>进入/usr/local/software，安装JDK</p>
+</li>
+<li><p>解压JDK压缩包</p>
+</li>
+<li><p>进入local文件夹将jdk改名1.8</p>
+</li>
+<li><p>配置环境变量 </p>
+<ul>
+<li>进入etc文件夹，修改profile文件</li>
+<li>添加环境变量配置</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/usr/local/jdk1.8</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$JAVA_HOME</span>/bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/11/23/8pgIDLMkEVs1l9C.png" alt="image-20211123164107094"></p>
+</li>
+</ul>
+<h4 id="6-安装Tomcat"><a href="#6-安装Tomcat" class="headerlink" title="6.安装Tomcat"></a>6.安装Tomcat</h4><ul>
+<li><p>/usr/local/software</p>
+</li>
+<li><p>解压tomcat</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">tar</span> -zxvf apache-tomcat-<span class="number">8</span>.<span class="number">5</span>.<span class="number">73</span>.tar.gz -C /usr/local</span><br></pre></td></tr></table></figure></li>
+<li><p>启动Tomcat</p>
+<p><img src="https://i.loli.net/2021/11/23/svW1njiRlO3zSrh.png" alt="image-20211123164533763"></p>
+</li>
+</ul>
+<h4 id="7-关闭防火墙"><a href="#7-关闭防火墙" class="headerlink" title="7.关闭防火墙"></a>7.关闭防火墙</h4><ul>
+<li><p>关闭当前防火墙</p>
+<ul>
+<li>systemctl stop firewalld</li>
+</ul>
+</li>
+<li><p>永久关闭防火墙</p>
+<ul>
+<li>systemctl disable firewalld</li>
+</ul>
+</li>
+<li><p>给防火墙开口子</p>
+<ul>
+<li>firewall-cmd –zone=public –add-port=8080/tcp</li>
+<li>firewall-cmd –zone=public –add-port=80/tcp –permanent</li>
+</ul>
+</li>
+<li><p>重新加载防火墙</p>
+<ul>
+<li>firewall-cmd –reload</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-安装mysql"><a href="#8-安装mysql" class="headerlink" title="8.安装mysql"></a>8.安装mysql</h4><p><img src="https://i.loli.net/2021/11/23/ovCjJ741iEbPANl.png" alt="image-20211123170504970"></p>
+<ul>
+<li><p>上传Mysql文件</p>
+</li>
+<li><p>卸载，防止冲突</p>
+<ul>
+<li>rpm -e postfix mariadb-libs</li>
+</ul>
+</li>
+<li><p>安装mysql依赖net-tools perl</p>
+<ul>
+<li> yum -y install net-tools perl</li>
+</ul>
+</li>
+<li><p>安装mysql-common</p>
+<ul>
+<li> rpm -ivh mysql-community-common-5.7.22-1.el7.x86_64.rpm </li>
+</ul>
+</li>
+<li><p>安装mysql-libs</p>
+<ul>
+<li> rpm -ivh mysql-community-libs-5.7.22-1.el7.x86_64.rpm </li>
+</ul>
+</li>
+<li><p>安装mysql-client</p>
+<ul>
+<li> rpm -ivh mysql-community-client-5.7.22-1.el7.x86_64.rpm </li>
+</ul>
+</li>
+<li><p>安装mysql-server</p>
+<ul>
+<li>rpm -ivh mysql-community-server-5.7.22-1.el7.x86_64.rpm </li>
+</ul>
+</li>
+<li><p>设置开机自启动</p>
+<ul>
+<li>systemctl enable mysqld</li>
+</ul>
+</li>
+<li><p>启动mysql</p>
+<ul>
+<li>systemctl start mysqld</li>
+</ul>
+</li>
+<li><p>设置mysql密码</p>
+<ul>
+<li>返回根目录</li>
+<li>vi /etc/my.cnf</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/11/30/Linux%E5%9F%BA%E7%A1%80/" title="Linux基础">http://example.com/2021/11/30/Linux基础/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/30/SSM%E8%BF%9B%E9%94%80%E5%AD%98%E9%A1%B9%E7%9B%AE%E3%80%906%E3%80%91/" rel="prev" title="SSM进销存项目【6】">
+      <i class="fa fa-chevron-left"></i> SSM进销存项目【6】
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/30/Linux%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%EF%BC%8CRabbitMQ%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" rel="next" title="Linux项目部署，RabbitMQ消息队列">
+      Linux项目部署，RabbitMQ消息队列 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Linux"><span class="nav-number">1.1.</span> <span class="nav-text">一、Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Linux%E5%92%8CWindwos%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.Linux和Windwos区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E4%BD%BF%E7%94%A8%E5%AD%97%E7%AC%A6%E7%95%8C%E9%9D%A2%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.使用字符界面的好处</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E7%A8%8B%E5%BA%8F%E5%91%98%E6%98%AF%E5%A6%82%E6%9E%9C%E4%BD%BF%E7%94%A8Linux%E7%9A%84"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.程序员是如果使用Linux的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Linux%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">二、Linux基础操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.Linux基础命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85rpm%E5%92%8Cyum%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.安装rpm和yum的区别?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%BC%BA%E5%88%B6%E5%AE%89%E8%A3%85-rpm%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.强制安装.rpm文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Linux%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.Linux网络管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%AE%89%E8%A3%85JDK"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.安装JDK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E5%AE%89%E8%A3%85Tomcat"><span class="nav-number">1.2.6.</span> <span class="nav-text">6.安装Tomcat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">1.2.7.</span> <span class="nav-text">7.关闭防火墙</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E5%AE%89%E8%A3%85mysql"><span class="nav-number">1.2.8.</span> <span class="nav-text">8.安装mysql</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://i.loli.net/2021/11/03/JO3LipquyIomGSl.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>-->
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">206k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:07</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共94.6k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ZC.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ZC.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="学习Dubbo开源服务框架的使用，结合Spring框架进行实验学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dubbo">
+<meta property="og:url" content="http://example.com/2021/11/30/Dubbo/index.html">
+<meta property="og:site_name" content="你的储物间_">
+<meta property="og:description" content="学习Dubbo开源服务框架的使用，结合Spring框架进行实验学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/pFl3RmGSf2TWMhi.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/uEe3ksAjZg7arMl.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/pU9K4HcdPIsDV5F.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/FyxDVYSToJatNi3.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/lZGFvsBk1AE7cVC.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/wrt643GXifZLITs.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/TulVW6GLp8k31RY.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/lRo63bxMgkW7CO8.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/V4XjkSF92RQtzCr.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/4n3iGN6CtSO2v1c.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/LZEUQNcSGTbKOzB.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/qUbZJTPYc1L3KV6.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/mDuikJowcKlBqAp.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/lTiRhdgJx7mf8BP.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/jOMNqJGkawoTnzU.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/SjYAzv9uQGhx2de.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/30/ualokr1N5BdOSvA.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/UBXPkK9TvVA7ewE.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/zYGv78eIiEudh1q.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/TJMfyPvx1leZbtR.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/3WH9CGhLnFv1x86.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/14kydwsGnpcCX8A.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/9bDKgjNfQ4O71vE.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/B8CNI6yRS437xY1.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/ybli2pZxAoD1HLF.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/9yPMI2bFe8D74VQ.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/ESRZniygpzhcJOU.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/8cOaENPtfQyzXwF.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/5dzcQF43oCxfBqD.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/D3WNembZMgu5GHK.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/VPKvDuJgtYZ5l1H.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/6EL72RNOjcXTQZI.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/gJ5ZIjAv7yiHD3m.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/eqSjxNMbhCo6uaL.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/8P62B3NwqbdCacS.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/nbPf1q97V2wKmeW.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/jFSZB7AutY9spqT.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/j9ilBzS2JUkhWZX.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/WZIn7kRAlo8zmVT.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/e6uzVRX5EF1tO3C.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/OK2ohMUbeJTRAHQ.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/G1p6zjdVbrUOJwF.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/YjXL2fhuGnx8yvp.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/29/XcKNqC1M3FknZHs.png">
+<meta property="article:published_time" content="2021-11-30T09:03:07.000Z">
+<meta property="article:modified_time" content="2021-11-30T09:07:07.074Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="Dubbo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/11/29/pFl3RmGSf2TWMhi.png">
+
+<link rel="canonical" href="http://example.com/2021/11/30/Dubbo/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Dubbo | 你的储物间_</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">你的储物间_</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/30/Dubbo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://i.loli.net/2021/11/03/JO3LipquyIomGSl.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="熬夜的瘾 和遥远的你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你的储物间_">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Dubbo
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-30 17:03:07 / 修改时间：17:07:07" itemprop="dateCreated datePublished" datetime="2021-11-30T17:03:07+08:00">2021-11-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">10k</span> -->
+			  <span title="本文字数">
+                  1.2k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">学习Dubbo开源服务框架的使用，结合Spring框架进行实验学习</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>Dubbo</li>
+</ul>
+<h3 id="一、Dubbo"><a href="#一、Dubbo" class="headerlink" title="一、Dubbo"></a>一、Dubbo</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li><p>Apache Dubbo 是一款高性能、轻量级的开源服务框架</p>
+</li>
+<li><p>Apache Dubbo提供了六大核心能力：</p>
+<ul>
+<li><font color='#d15252'>面向接口代理的高性能RPC调用</font></li>
+<li><font color='#d15252'>智能容错和负载均衡</font></li>
+<li><font color='#d15252'>服务自动注册和发现</font></li>
+<li>高度可扩展能力</li>
+<li>运行期流量调度</li>
+<li>可视化的服务治理与运维</li>
+</ul>
+</li>
+<li><p>使得应用可通过高性能的 RPC 实现服务的输出和输入功能，可以和Spring框架无缝集成</p>
+</li>
+</ul>
+<ul>
+<li><p>RPC底层原理</p>
+<p><img src="https://i.loli.net/2021/11/29/pFl3RmGSf2TWMhi.png" alt="image-20211129094816746"></p>
+</li>
+</ul>
+<ul>
+<li><p>Dubbo工作原理</p>
+<p><img src="https://i.loli.net/2021/11/29/uEe3ksAjZg7arMl.png" alt="image-20211129095511894"></p>
+<ul>
+<li>生产者启动dubbo容器，生产服务对象</li>
+<li>生产者将服务发布到注册中心</li>
+<li>消费者向服务注册中心进行订阅，把发布的服务下载到本地（或者远程调用）</li>
+<li>当消费者需要调用服务的时候，需要按照RPC的要求，向生产者发起服务调用</li>
+<li>生产者把返回的对象交给dubbo容器进行序列化后再交给消费者</li>
+<li>消费者接收返回的数据进行反序列化</li>
+<li>监视器对服务性能进行监视统计</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-Zookeeper注册中心"><a href="#2-Zookeeper注册中心" class="headerlink" title="2.Zookeeper注册中心"></a>2.Zookeeper注册中心</h4><h4 id="3-Dubbo项目案例"><a href="#3-Dubbo项目案例" class="headerlink" title="3.Dubbo项目案例"></a>3.Dubbo项目案例</h4><h5 id="项目结构分析"><a href="#项目结构分析" class="headerlink" title="项目结构分析"></a>项目结构分析</h5><p><img src="https://i.loli.net/2021/11/29/pU9K4HcdPIsDV5F.png" alt="image-20211129101528850"></p>
+<h5 id="创建dubbo-product-api项目"><a href="#创建dubbo-product-api项目" class="headerlink" title="创建dubbo-product-api项目"></a>创建dubbo-product-api项目</h5><ul>
+<li><p>添加lombok依赖</p>
+</li>
+<li><p>创建product.domain.Product实体类</p>
+<ul>
+<li>实现序列化接口</li>
+<li>添加get/set/tostring以及构造方法</li>
+<li>添加成员变量</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/FyxDVYSToJatNi3.png" alt="image-20211129122711358"></p>
+</li>
+</ul>
+<ul>
+<li><p>创建product.service.IProductService接口</p>
+<p><img src="https://i.loli.net/2021/11/29/lZGFvsBk1AE7cVC.png" alt="image-20211129122806243"></p>
+</li>
+</ul>
+<h5 id="创建dubbo-product-server项目"><a href="#创建dubbo-product-server项目" class="headerlink" title="创建dubbo-product-server项目"></a>创建dubbo-product-server项目</h5><ul>
+<li><p>添加依赖</p>
+<p><img src="https://i.loli.net/2021/11/29/wrt643GXifZLITs.png" alt="image-20211129122950532"></p>
+<p><img src="https://i.loli.net/2021/11/29/TulVW6GLp8k31RY.png" alt="image-20211129122919973"></p>
+</li>
+</ul>
+<blockquote>
+<p>因为没有连接数据库，所以我们需要提供假数据</p>
+</blockquote>
+<ul>
+<li><p>创建product.data.ProductData</p>
+<ul>
+<li>创建静态HashMap集合</li>
+<li>使用静态代码块添加假数据</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/lRo63bxMgkW7CO8.png" alt="image-20211129123349892"></p>
+<ul>
+<li>添加获取集合（数据）的方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/V4XjkSF92RQtzCr.png" alt="image-20211129123411104"></p>
+</li>
+</ul>
+<ul>
+<li><p>创建IProductServiceImpl实现类</p>
+<ul>
+<li>实现IProductService接口，重写方法</li>
+<li>调用静态假数据，返回product对象即可</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/4n3iGN6CtSO2v1c.png" alt="image-20211129123533416"></p>
+</li>
+</ul>
+<ul>
+<li><p>在test运行类中添加代码</p>
+<blockquote>
+<p>test类中会报错，放到application中并添加@EnableDubbo注解</p>
+</blockquote>
+<ul>
+<li>创建应用配置对象，设置服务名字</li>
+<li>配置协议和接口</li>
+<li>创建注册中心对象   配置注册中心</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/LZEUQNcSGTbKOzB.png" alt="image-20211129123740306"></p>
+<p><img src="https://i.loli.net/2021/11/29/qUbZJTPYc1L3KV6.png" alt="image-20211129123758576"></p>
+<p><img src="https://i.loli.net/2021/11/29/mDuikJowcKlBqAp.png" alt="image-20211129123823359"></p>
+</li>
+</ul>
+<blockquote>
+<p>进行一次测试，启动zkCli.cmd</p>
+<ul>
+<li>随便输入命令查看相关命令</li>
+<li>使用ls /dubbo查看已启动的服务</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/lTiRhdgJx7mf8BP.png" alt="image-20211129130258771"></p>
+</blockquote>
+<ul>
+<li><p><font color='cornflowerblue'>配置</font>application.properties文件</p>
+<p><img src="https://i.loli.net/2021/11/29/jOMNqJGkawoTnzU.png" alt="image-20211129112950539"></p>
+<blockquote>
+<p>ProductServiceImpl需要添加@Service注解，是dubbo包下的</p>
+</blockquote>
+</li>
+<li><p>application运行类</p>
+<ul>
+<li><p>添加@EnableDubbo</p>
+</li>
+<li><p>注释之前的代码，添加</p>
+<p><img src="https://i.loli.net/2021/11/29/SjYAzv9uQGhx2de.png" alt="image-20211129131625545"></p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h5 id="创建dubbo-websites项目"><a href="#创建dubbo-websites项目" class="headerlink" title="创建dubbo-websites项目"></a>创建dubbo-websites项目</h5><ul>
+<li><p>添加依赖</p>
+<p><img src="https://i.loli.net/2021/11/30/ualokr1N5BdOSvA.png" alt="image-20211129130419294"></p>
+<p><img src="https://i.loli.net/2021/11/29/UBXPkK9TvVA7ewE.png" alt="image-20211129130421729"></p>
+</li>
+</ul>
+<ul>
+<li><p>在application运行类中添加</p>
+<ul>
+<li>注解@EnableDubbo启用dubbo</li>
+<li>演示在控制台打印内容需要加很多代码</li>
+<li>复制dubbo-product-server项目中的application相关操作代码进行修改</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/zYGv78eIiEudh1q.png" alt="image-20211129130701455"></p>
+<p><img src="https://i.loli.net/2021/11/29/TJMfyPvx1leZbtR.png" alt="image-20211129131008236"></p>
+<p><img src="https://i.loli.net/2021/11/29/3WH9CGhLnFv1x86.png" alt="image-20211129131105391"></p>
+<ul>
+<li>最后打印product</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>运行程序进行测试，控制台可以看见打印出来的数据</p>
+<p>但是</p>
+<p>这样的方式非常的复杂和麻烦，所以我们通过Spring进行<font color='#d15252'>配置简化</font>！！！（蓝色字体开头部分是简化）</p>
+</blockquote>
+<ul>
+<li><p><font color='cornflowerblue'>配置</font>application.properties文件</p>
+<p><img src="https://i.loli.net/2021/11/29/14kydwsGnpcCX8A.png" alt="image-20211129113321223"></p>
+</li>
+</ul>
+<ul>
+<li><p><font color='cornflowerblue'>创建</font>product.web.controller类</p>
+<ul>
+<li>添加@RestController注解<ul>
+<li>添加@RequestMapping(“/products”)</li>
+</ul>
+</li>
+<li>注入IProductService对象<ul>
+<li>这里要注意不使用@Autowired注解，因为Autowired实在本地找</li>
+<li>使用<font color='#d15252'>@Reference</font>（注意使用dubbo下的）</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/9bDKgjNfQ4O71vE.png" alt="image-20211129113750379"></p>
+<ul>
+<li>创建get方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/B8CNI6yRS437xY1.png" alt="image-20211129114211069"></p>
+</li>
+</ul>
+<ul>
+<li><p><font color='cornflowerblue'>在application</font>运行类中进行修改</p>
+<p><img src="https://i.loli.net/2021/11/29/ybli2pZxAoD1HLF.png" alt="image-20211129132024649"></p>
+</li>
+</ul>
+<blockquote>
+<p>进行测试，先运行server，在运行web</p>
+<p>如果出现端口号占用，在application中添加server.port进行修改端口号</p>
+<ul>
+<li>使用url传递参数进行测试，查看页面是否可以显示数据</li>
+</ul>
+</blockquote>
+<p><img src="https://i.loli.net/2021/11/29/9yPMI2bFe8D74VQ.png" alt="image-20211129132201250"></p>
+<hr>
+<h5 id="创建dubbo-member-api项目"><a href="#创建dubbo-member-api项目" class="headerlink" title="创建dubbo-member-api项目"></a>创建dubbo-member-api项目</h5><ul>
+<li><p>添加lombok依赖</p>
+</li>
+<li><p>创建member.domain.User实体类</p>
+<ul>
+<li>实现序列化接口</li>
+<li>添加get/set/tostring/构造注解</li>
+<li>添加成员变量</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/ESRZniygpzhcJOU.png" alt="image-20211129133719381"></p>
+</li>
+</ul>
+<ul>
+<li><p>创建member.service.IUserService接口</p>
+<ul>
+<li>添加get方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/8cOaENPtfQyzXwF.png" alt="image-20211129133819653"></p>
+</li>
+</ul>
+<h5 id="创建dubbo-member-server项目"><a href="#创建dubbo-member-server项目" class="headerlink" title="创建dubbo-member-server项目"></a>创建dubbo-member-server项目</h5><ul>
+<li><p>添加依赖</p>
+<p><img src="https://i.loli.net/2021/11/29/5dzcQF43oCxfBqD.png" alt="image-20211129134631753"></p>
+<p><img src="https://i.loli.net/2021/11/29/D3WNembZMgu5GHK.png" alt="image-20211129134051989"></p>
+<p><img src="https://i.loli.net/2021/11/29/VPKvDuJgtYZ5l1H.png" alt="image-20211129134101009"></p>
+</li>
+</ul>
+<ul>
+<li><p>创建提供打桩假数据的member.data.UserData类</p>
+<ul>
+<li><p>创建HashMap集合</p>
+</li>
+<li><p>使用静态代码块放置假数据</p>
+</li>
+<li><p>提供获取数据的方法</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/6EL72RNOjcXTQZI.png" alt="image-20211129134555394"></p>
+<p><img src="https://i.loli.net/2021/11/29/gJ5ZIjAv7yiHD3m.png" alt="image-20211129134612171"></p>
+</li>
+<li><p>配置application.properties文件</p>
+<p><img src="https://i.loli.net/2021/11/29/eqSjxNMbhCo6uaL.png" alt="image-20211129134842236"></p>
+</li>
+</ul>
+<ul>
+<li>创建service实现类 member.service.impl.UserServiceImpl<ul>
+<li>实现IUserService接口</li>
+<li>重写方法</li>
+<li>添加注解@Service（dubbo包下）</li>
+<li>直接获取打桩数据并返回即可</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>启动类中添加@EnableDubbo启用注解</li>
+</ul>
+<h5 id="补充操作"><a href="#补充操作" class="headerlink" title="补充操作"></a>补充操作</h5><ul>
+<li><p>在product-server中</p>
+<ul>
+<li><p>注入userService对象</p>
+<p><img src="https://i.loli.net/2021/11/29/8P62B3NwqbdCacS.png" alt="image-20211129135514028"></p>
+</li>
+<li><p>在Product中添加User成员变量</p>
+<ul>
+<li>需要修改Data打桩数据中的内容，添加null</li>
+</ul>
+</li>
+<li><p>在get方法中调用会员服务</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/nbPf1q97V2wKmeW.png" alt="image-20211129135924983"></p>
+</li>
+</ul>
+<h3 id="二、秒杀项目回顾"><a href="#二、秒杀项目回顾" class="headerlink" title="二、秒杀项目回顾"></a>二、秒杀项目回顾</h3><h5 id="优化秒杀场次id修改"><a href="#优化秒杀场次id修改" class="headerlink" title="优化秒杀场次id修改"></a>优化秒杀场次id修改</h5><ul>
+<li><p>修改goods页面中传递的参数</p>
+<p><img src="https://i.loli.net/2021/11/29/jFSZB7AutY9spqT.png" alt="image-20211129172836495"></p>
+<ul>
+<li>只需要传递一秒杀id即可</li>
+</ul>
+</li>
+<li><p>修改gooddetal页面</p>
+<ul>
+<li>删除获取changciId的代码</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/j9ilBzS2JUkhWZX.png" alt="image-20211129173911715"></p>
+<ul>
+<li>删除传递场次id的方法</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/WZIn7kRAlo8zmVT.png" alt="image-20211129173954507"></p>
+</li>
+<li><p>修改seckill-server的OrderInfoController中的修改场次id方法</p>
+<p><img src="https://i.loli.net/2021/11/29/e6uzVRX5EF1tO3C.png" alt="image-20211129183038166"></p>
+<ul>
+<li><p>接着删除下方所有使用场次id报错的地方</p>
+<p><img src="https://i.loli.net/2021/11/29/OK2ohMUbeJTRAHQ.png" alt="image-20211129183101270"></p>
+<p><img src="https://i.loli.net/2021/11/29/G1p6zjdVbrUOJwF.png" alt="image-20211129183306451"></p>
+<ul>
+<li>这里service接口和实现类都需要更改</li>
+</ul>
+<p><img src="https://i.loli.net/2021/11/29/YjXL2fhuGnx8yvp.png" alt="image-20211129183642249"></p>
+</li>
+<li><p>修改SeckillGoodMapper中的注解sql语句</p>
+<p><img src="https://i.loli.net/2021/11/29/XcKNqC1M3FknZHs.png" alt="image-20211129183925915"></p>
+</li>
+<li><p>还有几处需要更改，自行查找</p>
+</li>
+<li><p>更改SeckillGoodMapper中的get方法条件为id</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h2 id="解决秒杀成功页面后的商品图片不显示问题"><a href="#解决秒杀成功页面后的商品图片不显示问题" class="headerlink" title="解决秒杀成功页面后的商品图片不显示问题"></a>解决秒杀成功页面后的商品图片不显示问题</h2></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/11/30/Dubbo/" title="Dubbo">http://example.com/2021/11/30/Dubbo/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Dubbo/" rel="tag"><i class="fa fa-tag"></i># Dubbo</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/30/RabbitMQ%E9%AB%98%E7%BA%A7%E9%83%A8%E5%88%86/" rel="prev" title="RabbitMQ高级部分">
+      <i class="fa fa-chevron-left"></i> RabbitMQ高级部分
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/30/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E3%80%909%E3%80%91/" rel="next" title="微服务秒杀项目【9】">
+      微服务秒杀项目【9】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Dubbo"><span class="nav-number">1.1.</span> <span class="nav-text">一、Dubbo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Zookeeper%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.Zookeeper注册中心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Dubbo%E9%A1%B9%E7%9B%AE%E6%A1%88%E4%BE%8B"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.Dubbo项目案例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">项目结构分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAdubbo-product-api%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">创建dubbo-product-api项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAdubbo-product-server%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">创建dubbo-product-server项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAdubbo-websites%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">创建dubbo-websites项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAdubbo-member-api%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.3.5.</span> <span class="nav-text">创建dubbo-member-api项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAdubbo-member-server%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.3.6.</span> <span class="nav-text">创建dubbo-member-server项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.3.7.</span> <span class="nav-text">补充操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%A7%92%E6%9D%80%E9%A1%B9%E7%9B%AE%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.2.</span> <span class="nav-text">二、秒杀项目回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E7%A7%92%E6%9D%80%E5%9C%BA%E6%AC%A1id%E4%BF%AE%E6%94%B9"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">优化秒杀场次id修改</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E7%A7%92%E6%9D%80%E6%88%90%E5%8A%9F%E9%A1%B5%E9%9D%A2%E5%90%8E%E7%9A%84%E5%95%86%E5%93%81%E5%9B%BE%E7%89%87%E4%B8%8D%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">解决秒杀成功页面后的商品图片不显示问题</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://i.loli.net/2021/11/03/JO3LipquyIomGSl.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">熬夜的瘾 和遥远的你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>-->
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">206k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:07</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共94.6k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
