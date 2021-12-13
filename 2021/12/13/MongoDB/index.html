@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ZC.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ZC.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="MongoDB是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB">
+<meta property="og:url" content="http://example.com/2021/12/13/MongoDB/index.html">
+<meta property="og:site_name" content="你的储物间_">
+<meta property="og:description" content="MongoDB是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2021/12/12/fsJMonHTIVbgjNS.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/12/TKBtdY8A2lJcMnZ.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/12/gVfsa8kyGPWpzrN.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/12/SGXUchjiZwsxu7v.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/12/WI9b6GaftDn1kiO.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/12/iZ6W8yvbLn7cB1A.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/12/H8uIXMmQUWAfP1Z.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/12/NuZTLPcXIJyCoEz.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/12/EtVkWz9hUjfpd2K.png">
+<meta property="article:published_time" content="2021-12-13T02:49:34.000Z">
+<meta property="article:modified_time" content="2021-12-13T02:53:58.380Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="MongoDB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2021/12/12/fsJMonHTIVbgjNS.png">
+
+<link rel="canonical" href="http://example.com/2021/12/13/MongoDB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MongoDB | 你的储物间_</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">你的储物间_</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/13/MongoDB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2021/12/11/dMnbZaCPiowkEBY.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="越努力 越幸运">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你的储物间_">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-13 10:49:34 / 修改时间：10:53:58" itemprop="dateCreated datePublished" datetime="2021-12-13T10:49:34+08:00">2021-12-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MongoDB/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">21k</span> -->
+			  <span title="本文字数">
+                  1.4k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>4 分钟</span>
+            </span>
+            <div class="post-description">MongoDB是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>MangoDB</li>
+</ul>
+<h3 id="一、MangoDB"><a href="#一、MangoDB" class="headerlink" title="一、MangoDB"></a>一、MangoDB</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li><p>MongoDB是一个<font color='#d15252'>基于分布式文件存储</font>的数据库。由<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/C%2B%2B">C++</a>语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
+</li>
+<li><p>MongoDB是一个介于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93">关系数据库</a>和非关系数据库之间的产品</p>
+<ul>
+<li>是<font color='#d15252'>非关系数据库</font>当中功能最丰富，最像关系数据库的</li>
+<li>它支持的数据结构非常松散，是类似<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/json">json</a>的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/bson">bson</a>格式，因此可以存储比较复杂的数据类型</li>
+<li>Mongo最大的特点是它支持的查询语言非常强大，其语法有点类似于面向对象的查询语言，几乎可以实现类似关系数据库单表查询的绝大部分功能，而且还支持对数据建立<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%B4%A2%E5%BC%95">索引</a></li>
+<li>Mogo是面向文档存储的非关系型数据库，使用键值对存值</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-为什么要用NOSQL"><a href="#2-为什么要用NOSQL" class="headerlink" title="2.为什么要用NOSQL"></a>2.为什么要用NOSQL</h4><ul>
+<li><p>优点</p>
+<ul>
+<li><p>对数据库进行高并发的读写</p>
+</li>
+<li><p>海量数据的存储问题</p>
+</li>
+<li><p>高可用 可拓展</p>
+</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>数据库一致性，没用事务</li>
+<li>对于复杂的查询，特别是类似于多表的查询不好用</li>
+<li>读写有实时性的需求</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-安装MongoDB"><a href="#3-安装MongoDB" class="headerlink" title="3.安装MongoDB"></a>3.安装MongoDB</h4><ul>
+<li><p>在虚拟机上安装</p>
+<ul>
+<li>启用docker</li>
+<li>拉取MongoDB</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> pull mongo:latest</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2021/12/12/fsJMonHTIVbgjNS.png" alt="image-20211212125313736"></p>
+<ul>
+<li>创建和启动容器</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p <span class="number">27017</span>:<span class="number">27017</span> --name mymongo -v <span class="regexp">/usr/</span>local<span class="regexp">/docker/m</span>ongo_data:<span class="regexp">/data/</span>db --restart=always -d mongo</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重启mongo</li>
+</ul>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container <span class="keyword">update</span> <span class="comment">--restart=always mymongo</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>进入mongo<ul>
+<li>docker ps 查看容器镜像ID</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">docker</span> exec -it <span class="number">01</span>d<span class="number">76</span>ce<span class="number">4</span>a<span class="number">296</span>  bash</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用mongo命令开始使用mongodb</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-SQL和MongoDB术语区别"><a href="#4-SQL和MongoDB术语区别" class="headerlink" title="4.SQL和MongoDB术语区别"></a>4.SQL和MongoDB术语区别</h4><table>
+<thead>
+<tr>
+<th>SQL术语</th>
+<th>mogo术语</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>database</td>
+<td>database</td>
+<td>数据库</td>
+</tr>
+<tr>
+<td>table</td>
+<td>collection</td>
+<td>表（集合）</td>
+</tr>
+<tr>
+<td>row</td>
+<td>document</td>
+<td>行（文档）</td>
+</tr>
+<tr>
+<td>column</td>
+<td>field</td>
+<td>字段（域）</td>
+</tr>
+<tr>
+<td>index</td>
+<td>index</td>
+<td>索引</td>
+</tr>
+<tr>
+<td>table join</td>
+<td><font color='#d15252'>不支持</font></td>
+<td>表连接</td>
+</tr>
+<tr>
+<td>primary key</td>
+<td>primary key</td>
+<td>主键</td>
+</tr>
+</tbody></table>
+<h4 id="5-MongoDB常用命令"><a href="#5-MongoDB常用命令" class="headerlink" title="5.MongoDB常用命令"></a>5.MongoDB常用命令</h4><ul>
+<li><p>获取所有命令帮助</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">db</span>.<span class="keyword">help</span>()</span><br></pre></td></tr></table></figure></li>
+<li><p>如果没有test数据就创建test数据库 ，如果有就切换到test数据库</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="keyword">test</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看所有数据库</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> dbs</span><br></pre></td></tr></table></figure></li>
+<li><p>删除数据库</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.dropDatabase()<span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看当前使用的数据库</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.getName()<span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>显示当前数据库的状态</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.stats<span class="comment">()</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看当前DB的连接地址</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.getMongo()<span class="comment">;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看db的版本</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">db</span>.<span class="keyword">version</span>()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="6-什么是文档"><a href="#6-什么是文档" class="headerlink" title="6.什么是文档"></a>6.什么是文档</h4><ul>
+<li><p>文档是一组<font color='#d15252'>键值对</font>(key-value)，<font color='cornflowerblue'>BSON</font></p>
+<p><img src="https://s2.loli.net/2021/12/12/TKBtdY8A2lJcMnZ.png" alt="image-20211212131949869"></p>
+<ul>
+<li>由上面的概念得知</li>
+</ul>
+</li>
+<li><p>集合（以前的数据库表）</p>
+<ul>
+<li>创建表</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">db</span><span class="selector-class">.createCollection</span>(<span class="string">&quot;student&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看表</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">db</span><span class="selector-class">.getCollection</span>(<span class="string">&quot;student&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2021/12/12/gVfsa8kyGPWpzrN.png" alt="image-20211212132532224"></p>
+</li>
+</ul>
+<h4 id="7-MongoDB中的数据库类型"><a href="#7-MongoDB中的数据库类型" class="headerlink" title="7.MongoDB中的数据库类型"></a>7.MongoDB中的数据库类型</h4><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String</td>
+<td>字符串，必须是utf-8</td>
+</tr>
+<tr>
+<td>Integer</td>
+<td>整数 (Int32 Int64 你们就知道有个Int就行了,一般我们用Int32)</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>布尔值，true 或者false</td>
+</tr>
+<tr>
+<td>Double</td>
+<td>浮点数 (没有float类型,所有小数都是Double)</td>
+</tr>
+<tr>
+<td>Arrays</td>
+<td>数组或者列表，多个值存储到一个键</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>如果你学过Python的话,那么这个概念特别好理解,就是Python中的字典,这个数据类型就是字典</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>空数据类型 , 一个特殊的概念,None Null</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>时间戳   2021-12-10 00:00:00</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>存储当前日期或时间unix时间格式 (我们一般不用这个Date类型,时间戳可以秒杀一切时间类型)</td>
+</tr>
+<tr>
+<td>Object ID</td>
+<td>Documents 自生成的 _id</td>
+</tr>
+</tbody></table>
+<h4 id="8-MongoDB常用操作"><a href="#8-MongoDB常用操作" class="headerlink" title="8.MongoDB常用操作"></a>8.MongoDB常用操作</h4><ul>
+<li><p>插入数据</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db<span class="selector-class">.student</span><span class="selector-class">.save</span>(&#123;name:<span class="string">&#x27;gikh&#x27;</span>,age:<span class="number">20</span>,sex:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>查询表数据</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.student.<span class="builtin-name">find</span>()</span><br></pre></td></tr></table></figure></li>
+<li><p>根据条件查询（sql中的where）</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">select * from student where name=&#x27;jiale&#x27;</span></span><br><span class="line"><span class="section">-----------------------------</span></span><br><span class="line">db.student.find(&#123;name:<span class="emphasis">&#x27;gikh&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>投影查询</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">select name,age from student where age=20</span></span><br><span class="line"><span class="section">------------------------------</span></span><br><span class="line">db.student.find(&#123;age:20&#125;,&#123;<span class="emphasis">&#x27;name&#x27;</span>:1,<span class="emphasis">&#x27;age&#x27;</span>:1&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>排序查询</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">order</span> <span class="keyword">by</span> age</span><br><span class="line"><span class="comment">------------------------------db.student.find().sort(&#123;age:1&#125;)</span></span><br></pre></td></tr></table></figure></li>
+<li><p>分页查询</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> student <span class="keyword">limit</span> <span class="number">1</span>,<span class="number">2</span></span><br><span class="line">------------------------------db.student.find().skip(<span class="number">0</span>).<span class="keyword">limit</span>(<span class="number">2</span>)</span><br></pre></td></tr></table></figure></li>
+<li><p>区间查询</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">select * from student where age in(19,20)</span></span><br><span class="line"><span class="section">------------------------------</span></span><br><span class="line">db.student.find(&#123;age:&#123;$in:[19,20]&#125;&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>查询所有年龄大于20的数据有<font color='#d15252'>多少条</font></p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">select count(*) from student where age&gt;20</span></span><br><span class="line"><span class="section">------------------------------</span></span><br><span class="line">db.student.find(&#123;age:&#123;$gt:20&#125;&#125;).count()</span><br></pre></td></tr></table></figure></li>
+<li><p>or 或者</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">select * from student where age=19or age=20</span></span><br><span class="line"><span class="section">------------------------------</span></span><br><span class="line">db.student.find(&#123;$or:[&#123;age:19&#125;,&#123;age:20&#125;]&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>update修改数据</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">update student set age=100,sex=0 where name=&#x27;jiale&#x27;</span></span><br><span class="line"><span class="section">------------------------------</span></span><br><span class="line">db.student.update(&#123;name:<span class="emphasis">&#x27;jiale&#x27;</span>&#125;,&#123;$set:&#123;age:100,sex:0&#125;&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>移除指定的id数据</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.student.<span class="builtin-name">remove</span>(id)</span><br></pre></td></tr></table></figure></li>
+<li><p>移除所有</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">db</span><span class="selector-class">.student</span><span class="selector-class">.remove</span>(&#123;&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>如果我们需要存储非常多的数据</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sum</span><br><span class="line">  测试数据</span><br><span class="line"> db.article.<span class="keyword">insert</span>(&#123;</span><br><span class="line"> title:<span class="string">&#x27;wodeyitian&#x27;</span>,</span><br><span class="line"> desc:<span class="string">&#x27;henchongshi&#x27;</span>,</span><br><span class="line"> by_user:<span class="string">&#x27;dawei&#x27;</span>,</span><br><span class="line"> ur<span class="variable">l:</span><span class="string">&#x27;http://www.dawei.com&#x27;</span>,</span><br><span class="line"> <span class="keyword">tag</span><span class="variable">s:</span>[<span class="string">&#x27;db&#x27;</span>,<span class="string">&#x27;js&#x27;</span>,<span class="string">&#x27;vue&#x27;</span>],like<span class="variable">s:100</span>&#125;)</span><br><span class="line"> </span><br><span class="line"> db.article.<span class="keyword">insert</span>(&#123;title:<span class="string">&#x27;nideyitian&#x27;</span>,</span><br><span class="line">desc:<span class="string">&#x27;henchongshi&#x27;</span>,by_user:<span class="string">&#x27;dawei&#x27;</span>,ur<span class="variable">l:</span><span class="string">&#x27;http://www.dawei.com&#x27;</span>,<span class="keyword">tag</span><span class="variable">s:</span>[<span class="string">&#x27;db&#x27;</span>,<span class="string">&#x27;js&#x27;</span>,<span class="string">&#x27;vue&#x27;</span>],like<span class="variable">s:100</span>&#125;)</span><br><span class="line"> </span><br><span class="line"> db.article.<span class="keyword">insert</span>(&#123;title:<span class="string">&#x27;tadeyitian&#x27;</span>,desc:<span class="string">&#x27;henchongshi&#x27;</span>,by_user:<span class="string">&#x27;xiaowei&#x27;</span>,ur<span class="variable">l:</span><span class="string">&#x27;http://www.xiaoweiwei.com&#x27;</span>,<span class="keyword">tag</span><span class="variable">s:</span>[<span class="string">&#x27;db&#x27;</span>,<span class="string">&#x27;js&#x27;</span>,<span class="string">&#x27;vue&#x27;</span>],like<span class="variable">s:100</span>&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>分组查询</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">select by_user,count(*) from article group by by_user</span></span><br><span class="line"><span class="section">------------------------------</span></span><br><span class="line">db.article.aggregate([&#123;$group:&#123;_id:&quot;$by_user&quot;,total:&#123;$sum:1&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure></li>
+<li><p>其他</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.getCollection(<span class="string">&#x27;article&#x27;</span>).aggregate(&#123;<span class="string">&quot;<span class="variable">$group</span>&quot;</span>:&#123;_id: <span class="string">&#x27;avg&#x27;</span>,avg_value:&#123;<span class="string">&quot;<span class="variable">$avg</span>&quot;</span>:<span class="string">&quot;<span class="variable">$likes</span>&quot;</span>&#125;&#125;&#125;);</span><br><span class="line"></span><br><span class="line">db.getCollection(<span class="string">&#x27;article&#x27;</span>).aggregate(&#123;<span class="string">&quot;<span class="variable">$group</span>&quot;</span>:&#123;_id: <span class="string">&#x27;sum&#x27;</span>,sum_value:&#123;<span class="string">&quot;<span class="variable">$sum</span>&quot;</span>:<span class="string">&quot;<span class="variable">$likes</span>&quot;</span>&#125;&#125;&#125;);</span><br><span class="line"></span><br><span class="line">db.getCollection(<span class="string">&#x27;article&#x27;</span>).aggregate(&#123;<span class="string">&quot;<span class="variable">$group</span>&quot;</span>:&#123;_id: <span class="string">&#x27;max&#x27;</span>,max_value:&#123;<span class="string">&quot;<span class="variable">$max</span>&quot;</span>:<span class="string">&quot;<span class="variable">$likes</span>&quot;</span>&#125;&#125;&#125;);</span><br><span class="line"></span><br><span class="line">db.getCollection(<span class="string">&#x27;article&#x27;</span>).aggregate(&#123;<span class="string">&quot;<span class="variable">$group</span>&quot;</span>:&#123;_id: <span class="string">&#x27;min&#x27;</span>,min_value:&#123;<span class="string">&quot;<span class="variable">$min</span>&quot;</span>:<span class="string">&quot;<span class="variable">$likes</span>&quot;</span>&#125;&#125;&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="9-SpringBoot中集成MongoDB"><a href="#9-SpringBoot中集成MongoDB" class="headerlink" title="9.SpringBoot中集成MongoDB"></a>9.SpringBoot中集成MongoDB</h4><p>以下操作为新建springboot项目进行测试集成MongoDB</p>
+<ul>
+<li><p>第一步当然是添加依赖</p>
+<p><img src="https://s2.loli.net/2021/12/12/SGXUchjiZwsxu7v.png" alt="image-20211212142752011"></p>
+</li>
+<li><p>配置文件中对mongodb进行配置</p>
+<p><img src="https://s2.loli.net/2021/12/12/WI9b6GaftDn1kiO.png" alt="image-20211212143221073"></p>
+</li>
+<li><p>创建对应的实体类</p>
+<p><img src="https://s2.loli.net/2021/12/12/iZ6W8yvbLn7cB1A.png" alt="image-20211212143302658"></p>
+</li>
+<li><p>创建Dao层以及实现类</p>
+<p><img src="https://s2.loli.net/2021/12/12/H8uIXMmQUWAfP1Z.png" alt="image-20211212143411652"></p>
+<ul>
+<li>测试类测试插入数据和查询数据</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/12/NuZTLPcXIJyCoEz.png" alt="image-20211212143431818"></p>
+<p><img src="https://s2.loli.net/2021/12/12/EtVkWz9hUjfpd2K.png" alt="image-20211212143605133"></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/12/13/MongoDB/" title="MongoDB">http://example.com/2021/12/13/MongoDB/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MongoDB/" rel="tag"><i class="fa fa-tag"></i># MongoDB</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/13/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E3%80%903%E3%80%91/" rel="prev" title="医院管理项目【3】">
+      <i class="fa fa-chevron-left"></i> 医院管理项目【3】
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E3%80%901%E3%80%91/" rel="next" title="数据结构和算法【1】">
+      数据结构和算法【1】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81MangoDB"><span class="nav-number">1.1.</span> <span class="nav-text">一、MangoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8NOSQL"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.为什么要用NOSQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85MongoDB"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.安装MongoDB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-SQL%E5%92%8CMongoDB%E6%9C%AF%E8%AF%AD%E5%8C%BA%E5%88%AB"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.SQL和MongoDB术语区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-MongoDB%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.5.</span> <span class="nav-text">5.MongoDB常用命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E4%BB%80%E4%B9%88%E6%98%AF%E6%96%87%E6%A1%A3"><span class="nav-number">1.1.6.</span> <span class="nav-text">6.什么是文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-MongoDB%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.7.</span> <span class="nav-text">7.MongoDB中的数据库类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-MongoDB%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.8.</span> <span class="nav-text">8.MongoDB常用操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-SpringBoot%E4%B8%AD%E9%9B%86%E6%88%90MongoDB"><span class="nav-number">1.1.9.</span> <span class="nav-text">9.SpringBoot中集成MongoDB</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://s2.loli.net/2021/12/11/dMnbZaCPiowkEBY.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">越努力 越幸运</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>-->
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">229k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:28</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共104.2k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

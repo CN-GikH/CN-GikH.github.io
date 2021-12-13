@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ZC.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ZC.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="使用SpringBoot整合Cloud、eureka、config等框架搭建医院管理项目 --- 第一部分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="医院管理项目【1】">
+<meta property="og:url" content="http://example.com/2021/12/13/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E3%80%901%E3%80%91/index.html">
+<meta property="og:site_name" content="你的储物间_">
+<meta property="og:description" content="使用SpringBoot整合Cloud、eureka、config等框架搭建医院管理项目 --- 第一部分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2021/12/08/w4WrFOxMVkPS1fA.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/08/9ZGA8JVKzBrYsRE.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/yiQ8penHDvcTdqk.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/i5EbGpwtyJQNRfd.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/3cQiWKqIdnubjeG.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/S8XOm1nQUIYwcVJ.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/mZHeGhVy2k1UKuD.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/vw4UVtZaXYCusnJ.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/GnWKxJOkfBdph5u.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/za9FNqDIcieCPOV.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/IHXBD7lAT4tispZ.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/Rwg78cdiyuCabo4.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/g3xwi7a9G5TWPkb.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/LKzRGaQEANsmlf7.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/AF4m8DIKzj5xHiS.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/UK2VzQmp5eS9Hiq.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/4GZpObwvS58eYnz.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/B2yCKvzqA3YrZR7.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/j5iAXKuR9Y713mn.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/09/L2QAEk9joXmgZ7l.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/cqLPwsEFpSbdIN5.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/yelEVjaQUz5OfbR.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/QGUwJbmORTLDlFp.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/C3Vtp2T6F9WQrfj.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/1tIWvDzRep8jCqJ.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/GsQ2UoSPvYxLpJf.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/foO9cn4HZGwi5gs.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/JrTaQf3MXHFzeLh.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/6DxGgTb5EXIlL9q.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/HmdXBusSt71oEjC.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/zq7PYu4Gbs8BWy9.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/lcjSLw75d3z9DFq.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/ofi2b9zVOKCdSeh.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/cQP2VAp4DX9Tmox.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/ovFeqw2MPdLTiJE.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/1vhBIG2bLXPHRqe.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/aMcwGvkjpYC9K78.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/10/IbBuy8Swjfgt9Un.png">
+<meta property="article:published_time" content="2021-12-13T02:47:28.000Z">
+<meta property="article:modified_time" content="2021-12-13T02:48:24.064Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="SpringCloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2021/12/08/w4WrFOxMVkPS1fA.png">
+
+<link rel="canonical" href="http://example.com/2021/12/13/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E3%80%901%E3%80%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>医院管理项目【1】 | 你的储物间_</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">你的储物间_</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/13/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E3%80%901%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2021/12/11/dMnbZaCPiowkEBY.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="越努力 越幸运">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你的储物间_">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          医院管理项目【1】
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-13 10:47:28 / 修改时间：10:48:24" itemprop="dateCreated datePublished" datetime="2021-12-13T10:47:28+08:00">2021-12-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">医院管理项目</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">9.5k</span> -->
+			  <span title="本文字数">
+                  1.3k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">使用SpringBoot整合Cloud、eureka、config等框架搭建医院管理项目 --- 第一部分</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>医院项目【1】</li>
+</ul>
+<h3 id="一、医疗项目"><a href="#一、医疗项目" class="headerlink" title="一、医疗项目"></a>一、医疗项目</h3><h4 id="1-需求分析"><a href="#1-需求分析" class="headerlink" title="1.需求分析"></a>1.需求分析</h4><ul>
+<li>医疗挂号项目，首先需要创建父级项目</li>
+</ul>
+<h5 id="Ⅰ-项目结构"><a href="#Ⅰ-项目结构" class="headerlink" title="Ⅰ. 项目结构"></a>Ⅰ. 项目结构</h5><ul>
+<li>yygh-parent 父级项目<ul>
+<li>common 公共模块的父级项目<ul>
+<li>common-util 工具类公共模块</li>
+<li>rabbit-util 消息队列业务工具模块</li>
+<li>service-util 服务模块工具</li>
+</ul>
+</li>
+<li>server-gateway 网关</li>
+<li>model 实体类模块</li>
+<li>service 服务模块，即aopi接口的服务父级<ul>
+<li>service-hosp 医院的api接口</li>
+<li>service-cmn 公共的api接口</li>
+<li>service-user 用户的api接口</li>
+<li>service-order 订单api接口</li>
+<li>service-sms 短信api接口</li>
+<li>service-task 定时api接口</li>
+<li>service-statics 统计api接口</li>
+</ul>
+</li>
+<li>service-client，feign服务调用模块<ul>
+<li>service-order-client 订单</li>
+<li>service-hosp-client 医院</li>
+<li>service-cmn 公共</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-项目搭建"><a href="#2-项目搭建" class="headerlink" title="2.项目搭建"></a>2.项目搭建</h4><h5 id="Ⅰ-common公共模块搭建"><a href="#Ⅰ-common公共模块搭建" class="headerlink" title="Ⅰ. common公共模块搭建"></a>Ⅰ. common公共模块搭建</h5><ul>
+<li><p>执行sql脚本，生成数据库</p>
+<p><img src="https://s2.loli.net/2021/12/08/w4WrFOxMVkPS1fA.png" alt="image-20211208151534665"></p>
+</li>
+<li><p>使用Moven搭建父级项目</p>
+<ul>
+<li>删除父级项目的src文件夹（用不到）</li>
+<li>添加pom依赖</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/08/9ZGA8JVKzBrYsRE.png" alt="image-20211208213847162"></p>
+<ul>
+<li><p>创建common公共模块的父级项目</p>
+<ul>
+<li>添加common的pom文件</li>
+<li>删除src模块（因为是父模块，用不到）</li>
+</ul>
+</li>
+<li><p>创建common-util工具类公共模块</p>
+<ul>
+<li>导入pom文件</li>
+<li>创建自定义异常类</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/yiQ8penHDvcTdqk.png" alt="image-20211209124741604"></p>
+<blockquote>
+<p>@ApiModel()注解，用于类上，表示对类进行说明，用于参数用实体类接收</p>
+<p>@ApiModelProperty()注解，用于成员变量上，表示对属性进行说明</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li>创建service-util项目<ul>
+<li>导入pom文件依赖</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-创建model-实体类模块"><a href="#Ⅱ-创建model-实体类模块" class="headerlink" title="Ⅱ. 创建model 实体类模块"></a>Ⅱ. 创建model 实体类模块</h5><p><img src="https://s2.loli.net/2021/12/09/i5EbGpwtyJQNRfd.png" alt="image-20211209125251557"></p>
+<ul>
+<li>创建项目<ul>
+<li>引入model的pom依赖</li>
+<li>创建存放实体类的包com.gikh.yygh</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅲ-创建service服务模块"><a href="#Ⅲ-创建service服务模块" class="headerlink" title="Ⅲ. 创建service服务模块"></a>Ⅲ. 创建service服务模块</h5><p><img src="https://s2.loli.net/2021/12/09/3cQiWKqIdnubjeG.png" alt="image-20211209135153317"></p>
+<ul>
+<li><p>创建service项目</p>
+<ul>
+<li> 引入pom文件</li>
+<li> 删除父级项目src目录</li>
+</ul>
+</li>
+<li><p>到此为止，项目的基础结构搭建完毕，首先我们需要去做一下医院的设置</p>
+<ul>
+<li>service-hosp</li>
+</ul>
+</li>
+</ul>
+<h6 id="创建service-hosp医院设置模块"><a href="#创建service-hosp医院设置模块" class="headerlink" title="创建service-hosp医院设置模块"></a>创建service-hosp医院设置模块</h6><ul>
+<li><p>创建application配置文件</p>
+<ul>
+<li>添加端口号配置</li>
+<li>配置项目名</li>
+<li>配置数据库连接信息</li>
+<li>设置json时间格式以及时区</li>
+<li>因为连接数据库准备用mybatisplus，查询单表不需要sql语句，但是查询多表会有一些xml文件的问题<ul>
+<li>配置xml路径</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/S8XOm1nQUIYwcVJ.png" alt="image-20211209135931817"></p>
+<ul>
+<li>服务注册于发现中心使用nacos进行练习</li>
+<li>添加rabbitMQ消息队列的配置（后面再用）</li>
+<li>添加mongoDB的配置（也是后面再用）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>nacos：支持基于DNS和基于RPC的服务发现（可以用作SpringCloud的注册中心），动态配置服务，动态DNS服务</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2021/12/09/mZHeGhVy2k1UKuD.png" alt="image-20211209141056904"></p>
+<ul>
+<li><p>创建启动类serviceHospApp</p>
+<p><img src="https://s2.loli.net/2021/12/09/vw4UVtZaXYCusnJ.png" alt="image-20211209142355929"></p>
+<ul>
+<li>添加@SpringBootApplication注解</li>
+<li>调用run方法</li>
+</ul>
+</li>
+<li><p>mapper层</p>
+<ul>
+<li>使用mybatisplus，创建mapper.HospitalSetMapper接口</li>
+<li>继承BaseMapper接口，添加泛型HospitalSet类型</li>
+<li>添加@Mapper标签</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/GnWKxJOkfBdph5u.png" alt="image-20211209142418136"></p>
+<ul>
+<li>在同包下创建HospitalSetMapper的xml文件<ul>
+<li>如果以后有需求可以在xml文件中进行添加</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>service层</p>
+<ul>
+<li>创建service.HospitalSetService业务逻辑接口<ul>
+<li>mybatispuls不仅封装了mapper层，也封装了service，所以我们继承IService接口</li>
+<li>添加泛型HospitalSet</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/za9FNqDIcieCPOV.png" alt="image-20211209144056964"></p>
+<ul>
+<li>创建service接口的实现类<ul>
+<li>添加@Service标签</li>
+<li>继承ServiceImpl（Mybatispuls封装的）</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/IHXBD7lAT4tispZ.png" alt="image-20211209144151720"></p>
+</li>
+<li><p>controller层</p>
+<ul>
+<li>创建controller.HospitalSetController控制器</li>
+<li>添加@RestController注解</li>
+<li>添加@RequestMapper映射注解</li>
+<li>注入Service接口对象</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/Rwg78cdiyuCabo4.png" alt="image-20211209155842935"></p>
+<ul>
+<li><p>创建findAllHospitalSet<font color='#d15252'>获取所有</font>的设置方法</p>
+<p><img src="https://s2.loli.net/2021/12/09/g3xwi7a9G5TWPkb.png" alt="image-20211209160228757"></p>
+<ul>
+<li>返回值用Result（全局统一返回结果)进行封装，需要到<font color='cornflowerblue'>common-util</font>中进行定义</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/LKzRGaQEANsmlf7.png" alt="image-20211209160110546"></p>
+<ul>
+<li>构造方法添加无参，两参，全参</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/AF4m8DIKzj5xHiS.png" alt="image-20211209160137194"></p>
+<ul>
+<li><p>创建ResultCodeEnum<font color='cornflowerblue'>枚举类</font>（定义状态码）</p>
+<ul>
+<li>提供@Getter方法，不提供set</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/UK2VzQmp5eS9Hiq.png" alt="image-20211209161003733"></p>
+</li>
+<li><p>回到Result类中添加方法</p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/4GZpObwvS58eYnz.png" alt="image-20211209160503228"></p>
+<ul>
+<li>创建ok方法的result定义方法</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/B2yCKvzqA3YrZR7.png" alt="image-20211209160707660"></p>
+<ul>
+<li>设置fail失败方法的定义</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/j5iAXKuR9Y713mn.png" alt="image-20211209161022012"></p>
+<ul>
+<li>设置布尔类型返回值方法isOK</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/09/L2QAEk9joXmgZ7l.png" alt="image-20211209161307107"></p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>启动程序进行测试</p>
+<p><img src="https://s2.loli.net/2021/12/10/cqLPwsEFpSbdIN5.png" alt="image-20211210155040630"></p>
+</blockquote>
+<ul>
+<li><p>HospitalSetController除了findAll方法外，还需要添加removeHospitalSet方法<font color='#d15252'>移除</font>医院信息</p>
+<ul>
+<li>添加@DeleteMapping注解</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/10/yelEVjaQUz5OfbR.png" alt="image-20211210155715165"></p>
+<ul>
+<li>因为使用DeleteMapping注解，所以不能通过浏览器测试了，需要通过Postman或者Swagger第三方工具进行测试</li>
+</ul>
+</li>
+<li><p>使用Swagger第三方工具</p>
+<ul>
+<li>在common-util中创建config.SwaggerConfig配置类</li>
+<li>通过注解启用</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/10/QGUwJbmORTLDlFp.png" alt="image-20211210165637446"></p>
+<p><img src="https://s2.loli.net/2021/12/10/C3Vtp2T6F9WQrfj.png" alt="image-20211210160752822"></p>
+<ul>
+<li>复制两个方法，进行代码优化</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/10/1tIWvDzRep8jCqJ.png" alt="image-20211210160929504"></p>
+<p><img src="https://s2.loli.net/2021/12/10/GsQ2UoSPvYxLpJf.png" alt="image-20211210161038816"></p>
+</li>
+</ul>
+<blockquote>
+<p>启动项目进行测试</p>
+<p><img src="https://s2.loli.net/2021/12/10/foO9cn4HZGwi5gs.png" alt="image-20211210170231624"></p>
+<p>通过swagger进行测试</p>
+</blockquote>
+<ul>
+<li><p>在HospitalSetControlle再添加一个实现<font color='#d15252'>多条件组合查询</font>+分页的方法</p>
+<ul>
+<li>添加@PostMapping注解<ul>
+<li>因为多条件组合查询会用到前端下拉框、输入框等提供多条信息，所以我们可以用POST请求对数据进行封装</li>
+</ul>
+</li>
+</ul>
+<p> <img src="https://s2.loli.net/2021/12/10/JrTaQf3MXHFzeLh.png" alt="image-20211210172554700"></p>
+<p><img src="https://s2.loli.net/2021/12/10/6DxGgTb5EXIlL9q.png" alt="image-20211210174026171"></p>
+</li>
+</ul>
+<blockquote>
+<p>启动项目进行测试模糊查询功能</p>
+<p><img src="https://s2.loli.net/2021/12/10/HmdXBusSt71oEjC.png" alt="image-20211210175031219"></p>
+</blockquote>
+<ul>
+<li><p>在HospitalSetControlle再添加一个实现<font color='#d15252'>添加</font>医院设置的方法</p>
+<ul>
+<li>添加操作前端仍然需要传递许多参数，我们可以通过<font color='#d15252'>POST</font>请求进行提交，方法参数使用对象对数据进行封装</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/10/zq7PYu4Gbs8BWy9.png" alt="image-20211210175807886"></p>
+<ul>
+<li>使用MD5签名密钥对<font color='#d15252'>签名</font>进行加密（定义在公共包下）</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/10/lcjSLw75d3z9DFq.png" alt="image-20211210175650271"></p>
+</li>
+<li><p>在<font color='cornflowerblue'>common-util</font>中创建util.MD5，将MD5加密的方法代码放入即可</p>
+<ul>
+<li>使用Random生成一个随机数</li>
+<li>使用MD5的encrypt方法传入参数对签名进行加密</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/10/ofi2b9zVOKCdSeh.png" alt="image-20211210175655427"></p>
+</li>
+</ul>
+<blockquote>
+<p>启动数据进行测试</p>
+<p><img src="https://s2.loli.net/2021/12/10/cQP2VAp4DX9Tmox.png" alt="image-20211210180804281"></p>
+<p><img src="https://s2.loli.net/2021/12/10/ovFeqw2MPdLTiJE.png" alt="image-20211210180817395"></p>
+</blockquote>
+<ul>
+<li><p>在HospitalSetControlle再添加一个实现<font color='#d15252'>根据ID</font>单个查询医院的方法</p>
+<ul>
+<li>因为只需要传递一个ID属性，可以使用GET请求</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/10/1vhBIG2bLXPHRqe.png" alt="image-20211210181855775"></p>
+</li>
+<li><p>在HospitalSetControlle再添加一个实现<font color='#d15252'>修改</font>医院设置的方法</p>
+<ul>
+<li>继续使用Post请求，方法参数使用对象封装数据</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/10/aMcwGvkjpYC9K78.png" alt="image-20211210182252348"></p>
+</li>
+<li><p>在HospitalSetControlle再添加一个<font color='#d15252'>批量删除</font>的方法</p>
+<p><img src="https://s2.loli.net/2021/12/10/IbBuy8Swjfgt9Un.png" alt="image-20211210182843854"></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/12/13/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E3%80%901%E3%80%91/" title="医院管理项目【1】">http://example.com/2021/12/13/医院管理项目【1】/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SpringCloud/" rel="tag"><i class="fa fa-tag"></i># SpringCloud</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/13/Elasticsearc%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" rel="prev" title="Elasticsearc搜索引擎">
+      <i class="fa fa-chevron-left"></i> Elasticsearc搜索引擎
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/13/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E3%80%902%E3%80%91/" rel="next" title="医院管理项目【2】">
+      医院管理项目【2】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8C%BB%E7%96%97%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.</span> <span class="nav-text">一、医疗项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.需求分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Ⅰ. 项目结构</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.项目搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A0-common%E5%85%AC%E5%85%B1%E6%A8%A1%E5%9D%97%E6%90%AD%E5%BB%BA"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Ⅰ. common公共模块搭建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A1-%E5%88%9B%E5%BB%BAmodel-%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%A8%A1%E5%9D%97"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Ⅱ. 创建model 实体类模块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E2%85%A2-%E5%88%9B%E5%BB%BAservice%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">Ⅲ. 创建service服务模块</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAservice-hosp%E5%8C%BB%E9%99%A2%E8%AE%BE%E7%BD%AE%E6%A8%A1%E5%9D%97"><span class="nav-number">1.1.2.3.1.</span> <span class="nav-text">创建service-hosp医院设置模块</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://s2.loli.net/2021/12/11/dMnbZaCPiowkEBY.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">越努力 越幸运</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>-->
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">229k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:28</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共104.2k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

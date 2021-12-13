@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ZC.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ZC.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-barber-shop.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+  <meta name="description" content="使用SpringBoot整合Cloud、eureka、config等框架搭建医院管理项目 --- 第二部分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="医院管理项目【2】">
+<meta property="og:url" content="http://example.com/2021/12/13/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E3%80%902%E3%80%91/index.html">
+<meta property="og:site_name" content="你的储物间_">
+<meta property="og:description" content="使用SpringBoot整合Cloud、eureka、config等框架搭建医院管理项目 --- 第二部分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/LS8Cul6f35mqGaN.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/LTP1h6Ed3DBckvj.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/VBONbIMxvzLfshH.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/MqoYytQAf5Wmusk.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/EQkmAtwi6C2GnZY.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/CDVmbyNUf8e9dnc.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/GmNMYoCIvtVqLku.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/XuN1TAEbV7U9x84.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/2ZXcf85IHzkdew4.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/HNMAvYbTC4kJdRX.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/Ob68vKejGkTg9w4.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/8qvMg61IGx4bLtP.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/A9fQOzyFXbrGjHE.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/6rYWvk4FZ2q35wa.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/fOZrKcLpem5YWU8.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/FH8A6QfsZiJPSzM.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/ukvOMj25f3GBLmA.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/a3wJRdVDl4rjgBz.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/3JyZBPUqVNHjcEd.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/j6Ww5aL8oQOlKCS.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/7X8nzHkmZaQPoid.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/ksNQK2rvgq4CBOe.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/IabjdvnRV72xlBU.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/sxEvDpd4nmzRXub.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/8HyVK2nYM1IWQxo.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/E8wxPtWZ6QrMhjC.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/sgjw9WfVBePo8qR.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/11/TjyNseSZrdng1kp.png">
+<meta property="article:published_time" content="2021-12-13T02:48:30.000Z">
+<meta property="article:modified_time" content="2021-12-13T02:48:48.434Z">
+<meta property="article:author" content="GikH">
+<meta property="article:tag" content="SpringCloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2021/12/11/LS8Cul6f35mqGaN.png">
+
+<link rel="canonical" href="http://example.com/2021/12/13/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E3%80%902%E3%80%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>医院管理项目【2】 | 你的储物间_</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:1000;top:64px}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">你的储物间_</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/13/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E3%80%902%E3%80%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2021/12/11/dMnbZaCPiowkEBY.jpg">
+      <meta itemprop="name" content="GikH">
+      <meta itemprop="description" content="越努力 越幸运">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你的储物间_">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          医院管理项目【2】
+
+
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-13 10:48:30 / 修改时间：10:48:48" itemprop="dateCreated datePublished" datetime="2021-12-13T10:48:30+08:00">2021-12-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">医院管理项目</span></a>
+                </span>
+            </span>
+
+          <br>
+                   <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <!-- <span title="本文字数">8.8k</span> -->
+			  <span title="本文字数">
+                  1.2k字 &nbsp;&nbsp;&nbsp;
+                </span>
+              
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 :</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">使用SpringBoot整合Cloud、eureka、config等框架搭建医院管理项目 --- 第二部分</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h2><ul>
+<li>医院项目【2】</li>
+<li>医疗项目前端部署</li>
+<li>node.js</li>
+<li>医疗项目实现前后端交互</li>
+</ul>
+<h3 id="一、医疗项目前端"><a href="#一、医疗项目前端" class="headerlink" title="一、医疗项目前端"></a>一、医疗项目前端</h3><h4 id="1-前端常用技术"><a href="#1-前端常用技术" class="headerlink" title="1.前端常用技术"></a>1.前端常用技术</h4><ul>
+<li>ES6， 全称 ECMAScript 6.0 ，是 JavaScript 的下一个版本标准，2015.06 发版<ul>
+<li>ES6 主要是为了解决 ES5 的先天不足，比如 JavaScript 里并没有类的概念，但是目前浏览器的 JavaScript 是 ES5 版本，大多数高版本的浏览器也支持 ES6，不过只实现了 ES6 的部分特性和功能</li>
+</ul>
+</li>
+<li>vue.js也是前端的JS框架为了简化WEB开发</li>
+<li>axios 是一个独立的vue项目，可以用于浏览器和node.js中发送ajax请求</li>
+<li>Element-ui 网站快速成型工具</li>
+<li>Node.js</li>
+</ul>
+<h3 id="二、Node-js"><a href="#二、Node-js" class="headerlink" title="二、Node.js"></a>二、Node.js</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h4><ul>
+<li>是一个基于 Chrome V8 引擎的 JavaScript 运行环境</li>
+<li>它分为两个部分<ul>
+<li>DOM渲染引擎</li>
+<li>JavaScript解析引擎</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-什么是Node-js？"><a href="#2-什么是Node-js？" class="headerlink" title="2.什么是Node.js？"></a>2.什么是Node.js？</h4><ul>
+<li>可以脱离浏览器运行javascript，需要有javascript引擎</li>
+</ul>
+<h4 id="3-安装Node-js"><a href="#3-安装Node-js" class="headerlink" title="3.安装Node.js"></a>3.安装Node.js</h4><ul>
+<li><p>官网下载，无脑点点点，安装即可</p>
+<ul>
+<li><p>cmd 运行  code -v 查看版本</p>
+</li>
+<li><p>同时还需要查看依赖npm -v的版本</p>
+</li>
+</ul>
+</li>
+<li><p>设置npm镜像为淘宝镜像</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https:<span class="regexp">//</span>registry.npm.taobao.org</span><br></pre></td></tr></table></figure></li>
+<li><p>安装vue的脚手架</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g vue-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用vue -V查看脚手架是否正确安装</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/LS8Cul6f35mqGaN.png" alt="image-20211211131331294"></p>
+</li>
+</ul>
+<h4 id="4-医疗前端项目环境准备"><a href="#4-医疗前端项目环境准备" class="headerlink" title="4.医疗前端项目环境准备"></a>4.医疗前端项目环境准备</h4><ul>
+<li><p>将前端项目解压，并用HBuilder打开</p>
+<ul>
+<li><p>在项目文件路径下进入cmd</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="builtin-name">run</span> dev</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/LTP1h6Ed3DBckvj.png" alt="image-20211211132441222"></p>
+<ul>
+<li>我们需要安装node-sass（需要在项目路径下进行安装）</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/VBONbIMxvzLfshH.png" alt="image-20211211132756513"></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i <span class="keyword">node</span><span class="title">-sass</span> --<span class="attr">sass_binary_site=</span>https://npm.taobao.org/mirrors/<span class="keyword">node</span><span class="title">-sass</span>/</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>再次run dev项目，可以看见项目就能跑起来了</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/MqoYytQAf5Wmusk.png" alt="image-20211211133558234"></p>
+</li>
+</ul>
+<h4 id="5-实现前后端交互"><a href="#5-实现前后端交互" class="headerlink" title="5.实现前后端交互"></a>5.实现前后端交互</h4><ul>
+<li><p>现在前端项目以及跑起来了，为了让它能够和我们的后端实现连接交互，我们还需要对前端项目进行一些配置</p>
+</li>
+<li><p>找到前端的config文件夹中的dev.env.js</p>
+<ul>
+<li>对BASE_API的路径进行配置，添加端口号</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/EQkmAtwi6C2GnZY.png" alt="image-20211211133836887"></p>
+<ul>
+<li>对index.js中的proxyTable（代理表格）进行配置跨域</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/CDVmbyNUf8e9dnc.png" alt="image-20211211134559298"></p>
+<ul>
+<li> 在src/api/hosp.js等js文件中可以看见前后端请求交互传输的地址</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/GmNMYoCIvtVqLku.png" alt="image-20211211135254127"></p>
+</li>
+</ul>
+<h3 id="三、医疗项目实现前后端交互"><a href="#三、医疗项目实现前后端交互" class="headerlink" title="三、医疗项目实现前后端交互"></a>三、医疗项目实现前后端交互</h3><h4 id="1-解决跨域问题"><a href="#1-解决跨域问题" class="headerlink" title="1.解决跨域问题"></a>1.解决跨域问题</h4><ul>
+<li>Controller中添加@CrossOrigin跨域注解</li>
+</ul>
+<h4 id="2-添加分页插件"><a href="#2-添加分页插件" class="headerlink" title="2.添加分页插件"></a>2.添加分页插件</h4><p><img src="https://s2.loli.net/2021/12/11/XuN1TAEbV7U9x84.png" alt="image-20211211140349730"></p>
+<ul>
+<li>设置前端、后端跨域，设置mapping映射路径一致</li>
+</ul>
+<blockquote>
+<p>启动项目进行测试，可以查询到数据</p>
+<p><img src="https://s2.loli.net/2021/12/11/2ZXcf85IHzkdew4.png" alt="image-20211211142105729"></p>
+<p>测试医院设置列表中的功能是否正常运行</p>
+</blockquote>
+<h4 id="3-实现数据字典"><a href="#3-实现数据字典" class="headerlink" title="3.实现数据字典"></a>3.实现数据字典</h4><ul>
+<li><p>什么是数据字典？</p>
+<ul>
+<li>是管理系统常用的分类或者一些固定的数据<ul>
+<li>比如省市区三级联动、民族、行业数据、学历数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>yygh_cmn数据库作为数据字典存储数据</p>
+<p><img src="https://s2.loli.net/2021/12/11/HNMAvYbTC4kJdRX.png" alt="image-20211211152302651"></p>
+<ul>
+<li>字段有Id ，父级ID ，name ,value ，创建时间 ，修改时间 ，是否删除</li>
+<li>插入数据</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/Ob68vKejGkTg9w4.png" alt="image-20211211153523578"></p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/8qvMg61IGx4bLtP.png" alt="image-20211211153702272"></p>
+<ul>
+<li><p>在service下创建service-cmn项目</p>
+<ul>
+<li>复制一份properties配置文件过来进行修改</li>
+<li>修改项目名称，端口号，数据库连接</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/A9fQOzyFXbrGjHE.png" alt="image-20211211153933756"></p>
+<ul>
+<li>创建启动类</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/6rYWvk4FZ2q35wa.png" alt="image-20211211160949402"></p>
+<ul>
+<li><p>创建mapper.DictMapper类，操作数据库（MyRatePlan封装）</p>
+<ul>
+<li>继承BaseMapper</li>
+<li>添加Dict泛型</li>
+<li>添加@Mapper注解</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/fOZrKcLpem5YWU8.png" alt="image-20211211161242677"></p>
+<ul>
+<li>同包下创建对应的<font color='cornflowerblue'>DictMapper.xml</font>配置文件，引入约束头，以后有需要添加的业务可以进行配置</li>
+<li>创建根据ID查找子列表的方法</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/FH8A6QfsZiJPSzM.png" alt="image-20211211161755236"></p>
+</li>
+<li><p>创建service.DictService业务逻辑层接口</p>
+<ul>
+<li>继承Iservice</li>
+<li>添加Dict泛型</li>
+<li>创建<font color='cornflowerblue'>DictService</font>的实现类<ul>
+<li>添加@Service注解</li>
+<li>继承ServiceImpl<ul>
+<li>添加泛型DictMapper,Dict</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>重写父类根据ID查找子列表方法</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/ukvOMj25f3GBLmA.png" alt="image-20211211161945139"></p>
+<p><img src="https://s2.loli.net/2021/12/11/a3wJRdVDl4rjgBz.png" alt="image-20211211162155200"></p>
+<ul>
+<li>创建判断ID是否有子节点的isChilder方法</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/3JyZBPUqVNHjcEd.png" alt="image-20211211162125746"></p>
+</li>
+<li><p>创建controller.DictController控制器</p>
+<ul>
+<li>注入service对象</li>
+<li>添加@RestController注解</li>
+<li>添加@RequestMapper映射路径<ul>
+<li>打开前端api/dict.js查看前端访问的路径进行填写</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/j6Ww5aL8oQOlKCS.png" alt="image-20211211162333230"></p>
+<p><img src="https://s2.loli.net/2021/12/11/7X8nzHkmZaQPoid.png" alt="image-20211211162415042"></p>
+</li>
+</ul>
+<blockquote>
+<p>启动项目进行测试，查看数据管理中的数据字典，可以查询到数据<img src="https://s2.loli.net/2021/12/11/ksNQK2rvgq4CBOe.png" alt="image-20211211164050188"></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="4-easyexcel实现数据字典导入导出"><a href="#4-easyexcel实现数据字典导入导出" class="headerlink" title="4.easyexcel实现数据字典导入导出"></a>4.easyexcel实现数据字典导入导出</h4><h5 id="easyexcel概念"><a href="#easyexcel概念" class="headerlink" title="easyexcel概念"></a>easyexcel概念</h5><ul>
+<li>EasyExcel是阿里巴巴开源的一个excel处理框架</li>
+<li>使用简单，节省内存，</li>
+<li>EasyExcel能大大减少占用内存的主要原因是在解析Excel时没有将文件数据一次性全部加载到内存中，而是从磁盘上一行行读取数据，逐个解析。<ul>
+<li>Apache poi,jxl等，都存在一个严重的问题就是非常的耗内存，如果你的系统并发量不大的话可能还行，但是一旦并发上来后一定会OOM或者JVM频繁的full gc</li>
+</ul>
+</li>
+</ul>
+<h5 id="easyexcel使用"><a href="#easyexcel使用" class="headerlink" title="easyexcel使用"></a>easyexcel使用</h5><ul>
+<li><p>第一步当然是我们的添加依赖咯</p>
+<p><img src="https://s2.loli.net/2021/12/11/IabjdvnRV72xlBU.png" alt="image-20211211164933413"></p>
+</li>
+<li><p>使用DictEeVo实体类，在Service中添加exportData导出数据的方法</p>
+<p><img src="https://s2.loli.net/2021/12/11/sxEvDpd4nmzRXub.png" alt="image-20211211165032006"></p>
+<ul>
+<li><p>实现类中重写exportData方法，进行一些列的response响应设置</p>
+<ul>
+<li>表格拓展名改为xls</li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/11/8HyVK2nYM1IWQxo.png" alt="image-20211211165219985"></p>
+<p><img src="https://s2.loli.net/2021/12/11/E8wxPtWZ6QrMhjC.png" alt="image-20211211165306298"></p>
+<p><img src="https://s2.loli.net/2021/12/11/sgjw9WfVBePo8qR.png" alt="image-20211211165937047"></p>
+</li>
+<li><p>在controller控制器中添加点击导出时访问的方法</p>
+<p><img src="https://s2.loli.net/2021/12/11/TjyNseSZrdng1kp.png" alt="image-20211211165443998"></p>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>GikH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/12/13/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E3%80%902%E3%80%91/" title="医院管理项目【2】">http://example.com/2021/12/13/医院管理项目【2】/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SpringCloud/" rel="tag"><i class="fa fa-tag"></i># SpringCloud</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/13/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E3%80%901%E3%80%91/" rel="prev" title="医院管理项目【1】">
+      <i class="fa fa-chevron-left"></i> 医院管理项目【1】
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/13/%E5%8C%BB%E9%99%A2%E7%AE%A1%E7%90%86%E9%A1%B9%E7%9B%AE%E3%80%903%E3%80%91/" rel="next" title="医院管理项目【3】">
+      医院管理项目【3】 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NDA2NS8zMDUzNw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">今日内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8C%BB%E7%96%97%E9%A1%B9%E7%9B%AE%E5%89%8D%E7%AB%AF"><span class="nav-number">1.1.</span> <span class="nav-text">一、医疗项目前端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%89%8D%E7%AB%AF%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.前端常用技术</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Node-js"><span class="nav-number">1.2.</span> <span class="nav-text">二、Node.js</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AFNode-js%EF%BC%9F"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.什么是Node.js？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85Node-js"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.安装Node.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%8C%BB%E7%96%97%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.医疗前端项目环境准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E5%AE%9E%E7%8E%B0%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92"><span class="nav-number">1.2.5.</span> <span class="nav-text">5.实现前后端交互</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%8C%BB%E7%96%97%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92"><span class="nav-number">1.3.</span> <span class="nav-text">三、医疗项目实现前后端交互</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.解决跨域问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B7%BB%E5%8A%A0%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.添加分页插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.实现数据字典</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-easyexcel%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA"><span class="nav-number">1.3.4.</span> <span class="nav-text">4.easyexcel实现数据字典导入导出</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#easyexcel%E6%A6%82%E5%BF%B5"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">easyexcel概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#easyexcel%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">easyexcel使用</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GikH"
+      src="https://s2.loli.net/2021/12/11/dMnbZaCPiowkEBY.jpg">
+  <p class="site-author-name" itemprop="name">GikH</p>
+  <div class="site-description" itemprop="description">越努力 越幸运</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="Chatra('openChat', true);"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CN-GikH" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CN-GikH" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/qq_45172931" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_45172931" rel="noopener" target="_blank"><i class="crosshairs fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/" title="E-Mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      常用链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://fanyi.baidu.com/" title="https:&#x2F;&#x2F;fanyi.baidu.com&#x2F;" rel="noopener" target="_blank">百度翻译</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.bilibili.com/" title="https:&#x2F;&#x2F;www.bilibili.com&#x2F;" rel="noopener" target="_blank">bilibili</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.aliyun.com/" title="https:&#x2F;&#x2F;www.aliyun.com&#x2F;" rel="noopener" target="_blank">阿里云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://portal.qiniu.com/" title="https:&#x2F;&#x2F;portal.qiniu.com&#x2F;" rel="noopener" target="_blank">七牛云</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://huahuacoco.top/" title="http:&#x2F;&#x2F;huahuacoco.top&#x2F;" rel="noopener" target="_blank">花花和可可的小屋</a>
+        </li>
+    </ul>
+  </div>
+
+	<!--<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1365298417&auto=1&height=66"></iframe>-->
+      </div>
+
+    </div>
+
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GikH</span>
+
+<br>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">229k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:28</span>
+	<br>
+<!--
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+    <span id="busuanzi_container_site_pv" style='display:none'></span>
+        <i class="fa fa-eye"></i>
+        本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+
+    <span id="busuanzi_container_site_uv" style='display:none'></span>
+        次&nbsp; | &nbsp;<i class="fa fa-user-md"></i>你是第 <span id="busuanzi_value_site_uv" class="white-color"></span> 访问本站的小伙伴
+<br>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共104.2k字</span>
+</div>
+<br>
+-->
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("8/23/2021 19:30:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<br>
+<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">京ICP备2021027066号</a>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script color='' opacity='' zIndex='' count='' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+  <script>
+    (function(d, w, c) {
+      w.ChatraID = '4fydkjCaGHFv9LuEt';
+      var s = d.createElement('script');
+      w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+      };
+      s.async = true;
+      s.src = 'https://call.chatra.io/chatra.js';
+      if (d.head) d.head.appendChild(s);
+    })(document, window, 'Chatra');
+  </script>
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":true,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
