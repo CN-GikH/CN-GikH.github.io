@@ -1200,7 +1200,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #1f69ff;
+  background: #fff582;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2029,11 +2029,11 @@ pre .javascript .function {
   padding: 0.5em 1em;
 }
 .post-body p a {
-  color: #345;
+  color: #f5deb3;
   border-bottom: none;
 }
 .post-body p a:hover {
-  color: #fff;
+  color: #2f3640;
 }
 .category-all-page .category-all-title {
   text-align: center;
